@@ -8,7 +8,7 @@
   <meta name="keywords" content="Robotics, Quadruped, Whole-body Control, Whole-body Manipulation">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>
-    FlexiTac: Bridging Flexible Tactile Sensor to Robotics
+    FlexiTac: An Open-Source, Scalable Tactile Solution for Robotic Systems
   </title>
   
   <!-- Google tag (gtag.js) -->
@@ -93,7 +93,7 @@
         FlexiTac
       </h1>
       <h1 class="subtitle is-1 publication-title is-size-4-mobile" style="font-size: 4rem;">
-        Bridging Flexible Tactile Sensor to Robotics 
+        An Open-Source, Scalable Tactile Solution for Robotic Systems
       </h1>
       <h1 class="is-2 is-italic is-size-4-mobile" style="font-size: 2rem; opacity: 80%;">
         Simple but Work!
@@ -150,10 +150,9 @@
   <div class="hero-foot is-hidden-mobile">
     <nav class="tabs is-boxed is-fullwidth is-size-5">
       <ul>
-        <li><a href="#3dvitac">Visuo-Tactile Learning</a></li>
+        <li><a href="#hardware">Hardware & System</a></li>
         <li><a href="#simulation">Tactile Simulation</a></li>
         <li><a href="#datacollection">Scaling Real Tactile Data</a></li>
-        <li><a href="#hardware">Hardware & System</a></li>
         <li><a href="#qa">Q & A</a></li>
       </ul>
     </nav>
@@ -161,423 +160,622 @@
 </section>
 
 
-
-<!-- 
 <section class="section is-medium" id="overview">
   <div class="container is-max-desktop">
     <div class="columns is-centered">
       <div class="column is-four-fifths has-text-justified is-hidden-mobile">
-        <h2 class="subtitle ">
-          UMI on Legs is a framework for combining real-world human demonstrations with
-          simulation trained whole-body controllers, providing a scalable approach for manipulation skills on robot dogs
-          with arms.
-        </h2>
-        <br>
         <h2 class="subtitle">
-          <strong>The best part?</strong>
-          You can plug-and-play your existing visuomotor policies onto a quadruped, making your manipulation
-          policies mobile!
+          FlexiTac is a scalable, flexible tactile sensor designed to make touch sensing accessible for robotics.  
+          It integrates easily into diverse platforms and manipulation tasks. 
+          <br><br>
+          <strong>🎯Our Goal: Bringing Touch to Every Robot Lab.</strong>
+          We offer:
+          <br>
+          • Open-Source Hardware Tutorials<br>
+          • Simulation Support<br>
+          • System Design Sample
         </h2>
       </div>
 
       <div class="column is-four-fifths is-hidden-tablet has-text-justified-mobile">
         <p>
-          UMI on Legs is a framework for combining real-world human demonstrations with
-          simulation trained whole-body controllers, providing a scalable approach for manipulation skills on robot dogs
-          with arms.
+          FlexiTac is a flexible tactile sensing solution designed to make flexible tactile sensing accessible to the robotics community. 
+          Built with scalability and adaptability in mind, FlexiTac can be integrated into a wide range of robotic platforms and manipulation tasks.
+          <br><br>
+          We provide not only the sensor itself, but also:
+          <br>
+          • <b>Open-source hardware tutorials</b><br>
+          • <b>Simulation support across multiple platforms</b><br>
+          • <b>System design guidance</b>
+          <br>
         </p>
         <br>
-        <p>
-          <strong>The best part?</strong>
-          You can plug-and-play your existing visuomotor policies onto a quadruped, making your manipulation
-          policies mobile!
-        </p>
-      </div>
-
-
-    </div>
-  </div>
-</section>
-
-
-<section class="section" id="video">
-  <div class="container is-max-desktop">
-    <h2 class="title is-1 has-text-centered is-size-4-mobile">Technical Summary Video</h2>
-    <iframe width="100%" style="aspect-ratio: 16 / 9;" src="
-      https://www.youtube.com/embed/4Bp0q3xHTxE?si=ocAPm8KVAz-RZK59" title="UMI on Legs Technical Summary Video"
-      frameborder="0"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-      referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-  </div>
-</section>
-
-<section class="section is-small" id="umi">
-  <div class="container is-max-desktop">
-    <div class="columns is-centered">
-      <div class="column is-four-fifths">
-
-        <h2 class="title is-1 has-text-centered is-size-4-mobile">Robot Data without Robots</h2>
-        <div class="content">
-          <p>
-            Robots are the reason why it's been hard to collect a lot of robot data.
-            They are expensive 💸, tricky to control for dexterous tasks 🎾, and can punch a hole in the wall (or
-            itself) if you're not
-            careful ☠️.
-            What if we could collect robot data without robots?
-          </p>
-        </div>
-
-        <div class="content">
-          <p>
-            <a href="https://umi-gripper.github.io/">UMI</a> is a handheld gripper with a
-            GoPro attached.
-            With UMI, we can collect real-world robot demonstrations anywhere for any manipulation skill,
-            without any robots.
-            So just walk out into the wild with UMI, and start collecting data!
-          </p>
-        </div>
       </div>
     </div>
   </div>
-</section>
 
-<video autoplay muted loop playsinline width="100%">
-  <source src="./static/videos/umi-grid-small.mp4" type="video/mp4">
-</video> -->
 
-<!-- 
-  <section class="section is-small" id="umi">
+
+  <section class="section is-small" id="hardware">
     <div class="container is-max-desktop">
-
-      <h2 class="title is-1">Robot Data without Robots</h2>
-      <div class="content has-text-justified">
-        <p>
-          Robots are the reason why it's been hard to collect a lot of robot data.
-          They are expensive 💸, tricky to control for dexterous tasks 🎾, and can punch a hole in the wall (or
-          itself) if you're not
-          careful ☠️.
-          What if we could collect robot data without robots?
-        </p>
+      <div class="columns is-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-1 has-text-centered is-size-4-mobile">Hardware overview</h2>
+        </div>
       </div>
-
-      <video autoplay muted loop playsinline height="100%">
-        <source src="./static/videos/umi-website.mp4" type="video/mp4">
-      </video>
-      <div class="content has-text-justified">
-        <p>
-          <a href="https://umi-gripper.github.io/">UMI</a> is a handheld gripper with a
-          GoPro attached.
-          With UMI, we can collect real-world robot demonstrations anywhere for any manipulation skill,
-          without any robots.
-        </p>
-      </div>
-
     </div>
-  </section> -->
-
-<!-- <section class="section is-small has-background-black has-text-light" id="task-tracking">
-  <div class="container is-max-desktop">
-
-    <h2 class="title is-1 has-text-white  is-size-4-mobile">Task Tracking without Simulating Tasks</h2>
-    <div class="content has-text-justified">
-      <p>
-        The promise of simulation engines is that of infinite data.
-        However, hidden in the terms and conditions that no one reads is the painful process of acquiring assets,
-        defining dense rewards,
-        rendering diverse
-        scenes, not to mention the sim-to-real gap 🙃.
-        All these problems are side-stepped or well-studied if we only use simulation to learn
-        whole-body
-        controllers.
-      </p>
-    </div>
-
-    <div class="content has-text-justified">
-      <p>
-        In a massively parallelized simulation, our robot learns through trial-and-error how to track UMI gripper
-        movements with stability and precision.
-      </p>
-    </div>
-  </div>
-</section>
-
-<video autoplay muted loop playsinline height="100%">
-  <source src="./static/videos/sim-small.mp4" type="video/mp4">
-</video> -->
-
-
-
-
-
-
-
-<!-- <section class="section">
-  <div class="container is-max-desktop">
-    <div class="box pt-6 pb-6">
-      <div class="columns is-max-desktop is-centered ">
-        <div class="column is-four-fifths is-centered">
-          <h2 class="title is-2 has-text-centered is-size-5-mobile">Try out UMI on Legs!</h2>
-          <video autoplay muted loop playsinline width="100%">
-            <source src="./static/videos/failures-small.mp4" type="video/mp4">
-          </video>
-          <div class="content">
-            Quadruped manipulation has lots of moving parts, and any small bug can lead to a big mess 🤕
-            We've spent a lot of time figuring out the networking, operating systems, and hardware.
-            We've broken 3 quadruped legs, fried 1 Jetson, and ripped one pair of pants, so you don't have to 👖
+    <!-- <section class="Physcial"> -->
+      <div class="container">
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-full-width">
+            <h2 class="title is-3">
+              FlexiTac-V1 
+              <span style="font-size: 0.75em; color: #9e9e9e;">(Lead time: ~30 mins)</span>
+            </h2>
+            <h2 class="title is-5" style="color: #9e9e9e;">
+              (3&nbsp;mm Grid, 16×16 Resolution, $5 each sensor piece)
+            </h2>
           </div>
-          <div class="content">
+        </div>
+      </div>
+  
+      <div class="container">
+        <div class="columns is-centered has-text-centered is-align-items-center">
+          <div class="column">
+            <h2 class="title is-5"> Reproduction Resources </h2>
+            <br>
+            <div class="columns is-centered has-text-centered">
+              <div class="column content">
+                <div class="box alt" style="margin-bottom: 1em;">
+                  <div class="2u" style="font-size: 1em; line-height: 1.5em; text-align: center;">
+                    <a href="https://github.com/binghao-huang/3D-ViTac_Tactile_Hardware?tab=readme-ov-file">
+                      <span class="image fit" style="margin-bottom: 0.5em;">
+                        <img src="static/images/github_logo.svg"
+                          alt="https://github.com/binghao-huang/3D-ViTac_Tactile_Hardware?tab=readme-ov-file" />
+                      </span>
+                      Hardware <br>Codebase
+                    </a>
+                  </div>
+                </div>
+  
+              </div>
+              <div class="column content">
+                <div class="box alt" style="margin-bottom: 1em;">
+                  <div class="2u" style="font-size: 1em; line-height: 1.5em; text-align: center;">
+                    <a
+                      href="https://docs.google.com/document/d/1XGyn-iV_wzRmcMIsyS3kwcrjxbnvblZAyigwbzDsX-E/edit?tab=t.0#heading=h.ny8zu0pq9mxy">
+                      <span class="image fit" style="margin-bottom: 0.5em;">
+                        <img src="static/images/build.svg"
+                          alt="https://docs.google.com/document/d/1XGyn-iV_wzRmcMIsyS3kwcrjxbnvblZAyigwbzDsX-E/edit?tab=t.0#heading=h.ny8zu0pq9mxy" />
+                      </span>
+                      Hardware <br>Guide
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div class="column content">
+                <div class="box alt" style="margin-bottom: 1em;">
+                  <div class="2u" style="font-size: 1em; line-height: 1.5em; text-align: center;">
+                    <a
+                      href="https://docs.google.com/document/d/1auxwAbAnt88nG7HDqanr4JJreuAVkrhs1nK16VQaLpk/edit?usp=sharing">
+                      <span class="image fit" style="margin-bottom: 0.5em;">
+                        <img src="static/images/documentation.svg"
+                          alt="https://docs.google.com/document/d/1auxwAbAnt88nG7HDqanr4JJreuAVkrhs1nK16VQaLpk/edit?usp=sharing" />
+                      </span>
+                      Bill of <br>Materials
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="has-text-centered">
-            <a href="https://github.com/real-stanford/umi-on-legs">
-              <button class="button is-primary">Download Code</button>
-            </a>
+  
+  
+          <div class="column">
+            <h2 class="title is-5">
+              <a href="https://www.youtube.com/watch?v=8eTpFYgae64">
+                Sensor Fabrication and PCB Tutorial
+              </a>
+            </h2>
+            <div class="columns is-centered">
+              <div class="column content">
+                <a href="https://www.youtube.com/watch?v=8eTpFYgae64" target="_blank">
+                  <img src="static/images/COVER.png" alt="Sensor Fabrication and PCB" width="100%" style="border-radius:10px;">
+                </a>
+              </div>
+            </div>
           </div>
+  
+        </div>
+      </div>
+  
+      <div class="container">
+        <div class="columns is-centered has-text-centered">
+          <div class="column">
+            <h2 class="title is-5"> Tactile Hardware Introduction </h2>
+            <div class="columns is-centered">
+              <div class="column content">
+                <video id="teaser_video" width=99% muted autoplay controls style="border-radius:10px; ">
+                  <source src="static/videos/sensor test 1.mp4" type="video/mp4" />
+                </video>
+              </div>
+            </div>
+          </div>
+  
+          <div class="column">
+            <h2 class="title is-5"> Load Test and Flexibility </h2>
+            <div class="columns is-centered">
+              <div class="column content">
+                <video id="teaser_video" width=99% muted autoplay controls style="border-radius:10px; ">
+                  <source src="static/videos/sensor test 2.mp4" type="video/mp4" />
+                </video>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <br>
+      <br>
+      <div class="container">
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-full-width">
+            <h2 class="title is-3">FlexiTac-V2 <span style="font-size: 0.75em; color: #9e9e9e;">(Lead time: ~2 mins)</span></h2>
+            <h2 class="title is-5" style="color: #9e9e9e;">(FPCB-Based, 2&nbsp;mm Grid, 32×12 Resolution, $2.5 each sensor piece)</h2>
+          </div>
+        </div>
 
+        <div class="columns is-centered has-text-centered">
+          <span class="link-block">
+          <a href="https://docs.google.com/forms/d/189ZAlr6o0Wqd1-vItuQBkM9eyzFJMpc2Ts94zMXM8C4/edit"
+            class="external-link button is-normal is-rounded is-dark">
+            <span>Request a Sample</span>
+          </a>
+        </span>
+        </div>
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-full-width">
+            <h2 class="title is-4">Tutorial and Hardware Guide (Coming Soon)</h2>
+          </div>
+        </div>
+      </div>
+      <div class="container">
+        <div class="columns is-centered has-text-centered">
+          <div class="column">
+            <h2 class="title is-5"> Precise Force Feedback </h2>
+            <div class="columns is-centered">
+              <div class="column content">
+                <video id="teaser_video" width=99% muted autoplay controls style="border-radius:10px; ">
+                  <source src="static/videos/sensor_v2_test_1.mp4" type="video/mp4" />
+                </video>
+              </div>
+            </div>
+          </div>
+  
+          <div class="column">
+            <h2 class="title is-5"> Deformable Objects Manipulation </h2>
+            <div class="columns is-centered">
+              <div class="column content">
+                <video id="teaser_video" width=99% muted autoplay controls style="border-radius:10px; ">
+                  <source src="static/videos/sensor_v2_test_2.mp4" type="video/mp4" />
+                </video>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+  </section>
+
+  <section class="section is-small" id="simulation">
+    <div class="container">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-full-width">
+          <h2 class="title is-3">Tactile Simulation</h2> 
+          <h2 class="title is-5" style="color: rgb(189, 189, 189);">(Code Coming Soon)</h2>
+          <h2 class="title is-5" style="color: rgb(189, 189, 189);">Left: Tactile Signals in Real World &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+            Right: Tactile Signals in Simulation</h2>
         </div>
       </div>
     </div>
-  </div>
-</section> -->
+    <div class="container">
 
-
-
-<!-- <section class="section is-small">
-  <div class="container is-max-desktop">
-    <h2 class="title is-3 is-size-4-mobile">Our Team</h2>
-    <div class="container has-text-centered">
-      <div class="publication-authors is-flex justify-content is-justify-content-space-around is-hidden-mobile">
-        <div class="author-block has-text-centered has-addons-centered">
-          <figure class="image is-128x128">
-            <a href="https://huy-ha.github.io/">
-              <img class="is-rounded
-                      " src="./static/images/huy.jpg" alt="Huy Ha">
-            </a>
-          </figure>
-          <a href="https://huy-ha.github.io/">Huy Ha</a><sup>*,1,2</sup>
-        </div>
-        <div class="author-block has-text-centered has-addons-centered">
-          <figure class="image is-128x128">
-            <a href="https://yihuai-gao.github.io/">
-              <img class="is-rounded
-                      " src="./static/images/yihuai.png" alt="Yihuai Gao">
-            </a>
-          </figure>
-          <a href="https://yihuai-gao.github.io/">Yihuai Gao</a><sup>*,1</sup>
-        </div>
-        <div class="author-block has-text-centered has-addons-centered">
-          <figure class="image is-128x128">
-            <a href="https://zipengfu.github.io/">
-              <img class="is-rounded
-                      " src="./static/images/zipeng.jpg" alt="Zipeng Fu">
-            </a>
-          </figure>
-          <a href="https://zipengfu.github.io/">Zipeng Fu</a><sup>1</sup>
-        </div>
-        <div class="author-block has-text-centered has-addons-centered">
-          <figure class="image is-128x128">
-            <a href="https://www.jie-tan.net/">
-              <img class="is-rounded
-                      " src="./static/images/jie.jpg" alt="Jie Tan">
-            </a>
-          </figure>
-          <a href="https://www.jie-tan.net/">Jie Tan</a><sup>3</sup>
-        </div>
-        <div class="author-block has-text-centered has-addons-centered">
-          <figure class="image is-128x128">
-            <a href="https://shurans.github.io/">
-              <img class="is-rounded
-                      " src="./static/images/shuran.jpg" alt="Shuran Song">
-            </a>
-          </figure>
-          <a href="https://shurans.github.io/">Shuran Song</a><sup>1,2</sup>
+      <div class="columns is-centered has-text-centered">
+        <div class="column">
+          <div class="columns is-centered">
+            <div class="column content">
+              <video id="teaser_video" width=99% muted autoplay controls loop loop style="border-radius:10px; ">
+                <source src="static/videos/simulation_1.mp4" type="video/mp4" />
+              </video>
+            </div>
+          </div>
         </div>
       </div>
 
-      <div class="is-flex is-flex-direction-row is-flex-wrap-wrap is-justify-content-space-evenly is-hidden-tablet">
-        <div class="author-block has-text-centered has-addons-centered">
-          <figure class="image  is-96x96">
-            <a href="https://huy-ha.github.io/">
-              <img class="is-rounded
-                      " src="./static/images/huy.jpg" alt="Huy Ha">
-            </a>
-          </figure>
-          <a href="https://huy-ha.github.io/">Huy Ha</a><sup>*,1,2</sup>
-        </div>
-        <div class="author-block has-text-centered has-addons-centered">
-          <figure class="image  is-96x96">
-            <a href="https://yihuai-gao.github.io/">
-              <img class="is-rounded
-                      " src="./static/images/yihuai.png" alt="Yihuai Gao">
-            </a>
-          </figure>
-          <a href="https://yihuai-gao.github.io/">Yihuai Gao</a><sup>*,1</sup>
-        </div>
-        <div class="author-block has-text-centered has-addons-centered">
-          <figure class="image is-96x96">
-            <a href="https://zipengfu.github.io/">
-              <img class="is-rounded
-                      " src="./static/images/zipeng.jpg" alt="Zipeng Fu">
-            </a>
-          </figure>
-          <a href="https://zipengfu.github.io/">Zipeng Fu</a><sup>1</sup>
-        </div>
-        <div class="author-block has-text-centered has-addons-centered">
-          <figure class="image  is-96x96">
-            <a href="https://www.jie-tan.net/">
-              <img class="is-rounded
-                      " src="./static/images/jie.jpg" alt="Jie Tan">
-            </a>
-          </figure>
-          <a href="https://www.jie-tan.net/">Jie Tan</a><sup>3</sup>
-        </div>
-        <div class="author-block has-text-centered has-addons-centered">
-          <figure class="image  is-96x96">
-            <a href="https://shurans.github.io/">
-              <img class="is-rounded
-                      " src="./static/images/shuran.jpg" alt="Shuran Song">
-            </a>
-          </figure>
-          <a href="https://shurans.github.io/">Shuran Song</a><sup>1,2</sup>
+      <div class="columns is-centered has-text-centered">
+        <div class="column">
+          <div class="columns is-centered">
+            <div class="column content">
+              <video id="teaser_video" width=99% muted autoplay controls loop style="border-radius:10px; ">
+                <source src="static/videos/simulation_2.mp4" type="video/mp4" />
+              </video>
+            </div>
+          </div>
         </div>
       </div>
-
-
-
-      <div class="publication-authors">
-        <span class="author-block"><sup>1</sup>Stanford University, </span>
-        <span class="author-block"><sup>2</sup>Columbia University, </span>
-        <span class="author-block"><sup>3</sup>Google DeepMind, </span>
-        <span class="author-block">*Equal contribution</span>
-      </div>
-
 
     </div>
+
+  </section>
+
+  <section class="section" id="datacollection">
+    <div class="container">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-full-width">
+          <h2 class="title is-3">Large-Scale In-the-Wild Data Collection</h2>
+          <div class="content has-text-justified">
+            <p>
+              We collected over 2,700 demonstrations covering 43 manipulation tasks across 12 indoor and outdoor environments. This provided us with more than 2.6 million visuo-tactile pairs for Visuo-Tactile Pretraining &amp; Downstream Imitation Learning.
+            </p>
+          </div>
+  
+          <div class="video-carousel" style="position: relative; overflow: hidden; padding: 0 4rem;">
+              <button class="carousel-nav prev"
+                      style="
+                        position: absolute;
+                        top: 0;
+                        bottom: 0;
+                        left: 0;
+                        width: 3rem;
+                        background: rgba(0,0,0,0.2);
+                        border: none;
+                        border-top-right-radius: 5px;
+                        border-bottom-right-radius: 5px;
+                        cursor: pointer;
+                        z-index: 10;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                      ">
+                &#10094;&#10094;
+              </button>
+  
+            <div class="carousel-slides">
+              <!-- Slide 1 -->
+              <div class="carousel-slide" data-index="0">
+                <div class="columns is-multiline is-mobile is-centered">
+                  <!-- Videos 1–5 -->
+                  <div class="column is-one-fifth">
+                    <video width="100%" muted autoplay loop playsinline style="border-radius: 5px;">
+                      <source src="video/wild/converted/1.mp4" type="video/mp4">
+                    </video>
+                  </div>
+                  <div class="column is-one-fifth">
+                    <video width="100%" muted autoplay loop playsinline style="border-radius: 5px;">
+                      <source src="video/wild/converted/2.mp4" type="video/mp4">
+                    </video>
+                  </div>
+                  <div class="column is-one-fifth">
+                    <video width="100%" muted autoplay loop playsinline style="border-radius: 5px;">
+                      <source src="video/wild/converted/3.mp4" type="video/mp4">
+                    </video>
+                  </div>
+                  <div class="column is-one-fifth">
+                    <video width="100%" muted autoplay loop playsinline style="border-radius: 5px;">
+                      <source src="video/wild/converted/4.mp4" type="video/mp4">
+                    </video>
+                  </div>
+                  <div class="column is-one-fifth">
+                    <video width="100%" muted autoplay loop playsinline style="border-radius: 5px;">
+                      <source src="video/wild/converted/5.mp4" type="video/mp4">
+                    </video>
+                  </div>
+  
+                  <!-- Videos 6–10 -->
+                  <div class="column is-one-fifth">
+                    <video width="100%" muted autoplay loop playsinline style="border-radius: 5px;">
+                      <source src="video/wild/converted/6.mp4" type="video/mp4">
+                    </video>
+                  </div>
+                  <div class="column is-one-fifth">
+                    <video width="100%" muted autoplay loop playsinline style="border-radius: 5px;">
+                      <source src="video/wild/converted/7.mp4" type="video/mp4">
+                    </video>
+                  </div>
+                  <div class="column is-one-fifth">
+                    <video width="100%" muted autoplay loop playsinline style="border-radius: 5px;">
+                      <source src="video/wild/converted/8.mp4" type="video/mp4">
+                    </video>
+                  </div>
+                  <div class="column is-one-fifth">
+                    <video width="100%" muted autoplay loop playsinline style="border-radius: 5px;">
+                      <source src="video/wild/converted/9.mp4" type="video/mp4">
+                    </video>
+                  </div>
+                  <div class="column is-one-fifth">
+                    <video width="100%" muted autoplay loop playsinline style="border-radius: 5px;">
+                      <source src="video/wild/converted/10.mp4" type="video/mp4">
+                    </video>
+                  </div>
+                </div>
+              </div>
+  
+              <!-- Slide 2 -->
+              <div class="carousel-slide" data-index="1" style="display: none;">
+                <div class="columns is-multiline is-mobile is-centered">
+                  <!-- Videos 11–15 -->
+                  <div class="column is-one-fifth">
+                    <video width="100%" muted autoplay loop playsinline style="border-radius: 5px;">
+                      <source src="video/wild/converted/11.mp4" type="video/mp4">
+                    </video>
+                  </div>
+                  <div class="column is-one-fifth">
+                    <video width="100%" muted autoplay loop playsinline style="border-radius: 5px;">
+                      <source src="video/wild/converted/12.mp4" type="video/mp4">
+                    </video>
+                  </div>
+                  <div class="column is-one-fifth">
+                    <video width="100%" muted autoplay loop playsinline style="border-radius: 5px;">
+                      <source src="video/wild/converted/13.mp4" type="video/mp4">
+                    </video>
+                  </div>
+                  <div class="column is-one-fifth">
+                    <video width="100%" muted autoplay loop playsinline style="border-radius: 5px;">
+                      <source src="video/wild/converted/14.mp4" type="video/mp4">
+                    </video>
+                  </div>
+                  <div class="column is-one-fifth">
+                    <video width="100%" muted autoplay loop playsinline style="border-radius: 5px;">
+                      <source src="video/wild/converted/15.mp4" type="video/mp4">
+                    </video>
+                  </div>
+  
+                  <!-- Videos 16–20 -->
+                  <div class="column is-one-fifth">
+                    <video width="100%" muted autoplay loop playsinline style="border-radius: 5px;">
+                      <source src="video/wild/converted/16.mp4" type="video/mp4">
+                    </video>
+                  </div>
+                  <div class="column is-one-fifth">
+                    <video width="100%" muted autoplay loop playsinline style="border-radius: 5px;">
+                      <source src="video/wild/converted/17.mp4" type="video/mp4">
+                    </video>
+                  </div>
+                  <div class="column is-one-fifth">
+                    <video width="100%" muted autoplay loop playsinline style="border-radius: 5px;">
+                      <source src="video/wild/converted/18.mp4" type="video/mp4">
+                    </video>
+                  </div>
+                  <div class="column is-one-fifth">
+                    <video width="100%" muted autoplay loop playsinline style="border-radius: 5px;">
+                      <source src="video/wild/converted/19.mp4" type="video/mp4">
+                    </video>
+                  </div>
+                  <div class="column is-one-fifth">
+                    <video width="100%" muted autoplay loop playsinline style="border-radius: 5px;">
+                      <source src="video/wild/converted/20.mp4" type="video/mp4">
+                    </video>
+                  </div>
+                </div>
+              </div>
+  
+              <!-- Slide 3 -->
+              <div class="carousel-slide" data-index="2" style="display: none;">
+                <div class="columns is-multiline is-mobile is-centered">
+                  <!-- Videos 21–25 -->
+                  <div class="column is-one-fifth">
+                    <video width="100%" muted autoplay loop playsinline style="border-radius: 5px;">
+                      <source src="video/wild/converted/21.mp4" type="video/mp4">
+                    </video>
+                  </div>
+                  <div class="column is-one-fifth">
+                    <video width="100%" muted autoplay loop playsinline style="border-radius: 5px;">
+                      <source src="video/wild/converted/22.mp4" type="video/mp4">
+                    </video>
+                  </div>
+                  <div class="column is-one-fifth">
+                    <video width="100%" muted autoplay loop playsinline style="border-radius: 5px;">
+                      <source src="video/wild/converted/23.mp4" type="video/mp4">
+                    </video>
+                  </div>
+                  <div class="column is-one-fifth">
+                    <video width="100%" muted autoplay loop playsinline style="border-radius: 5px;">
+                      <source src="video/wild/converted/24.mp4" type="video/mp4">
+                    </video>
+                  </div>
+                  <div class="column is-one-fifth">
+                    <video width="100%" muted autoplay loop playsinline style="border-radius: 5px;">
+                      <source src="video/wild/converted/25.mp4" type="video/mp4">
+                    </video>
+                  </div>
+  
+                  <!-- Videos 26–30 -->
+                  <div class="column is-one-fifth">
+                    <video width="100%" muted autoplay loop playsinline style="border-radius: 5px;">
+                      <source src="video/wild/converted/26.mp4" type="video/mp4">
+                    </video>
+                  </div>
+                  <div class="column is-one-fifth">
+                    <video width="100%" muted autoplay loop playsinline style="border-radius: 5px;">
+                      <source src="video/wild/converted/27.mp4" type="video/mp4">
+                    </video>
+                  </div>
+                  <div class="column is-one-fifth">
+                    <video width="100%" muted autoplay loop playsinline style="border-radius: 5px;">
+                      <source src="video/wild/converted/28.mp4" type="video/mp4">
+                    </video>
+                  </div>
+                  <div class="column is-one-fifth">
+                    <video width="100%" muted autoplay loop playsinline style="border-radius: 5px;">
+                      <source src="video/wild/converted/29.mp4" type="video/mp4">
+                    </video>
+                  </div>
+                  <div class="column is-one-fifth">
+                    <video width="100%" muted autoplay loop playsinline style="border-radius: 5px;">
+                      <source src="video/wild/converted/30.mp4" type="video/mp4">
+                    </video>
+                  </div>
+                </div>
+              </div>
+            </div>
+  
+            <button class="carousel-nav next"
+                    style="
+                      position: absolute;
+                      top: 0;
+                      bottom: 0;
+                      right: 0;
+                      width: 3rem;
+                      background: rgba(0,0,0,0.2);
+                      border: none;
+                      border-top-left-radius: 5px;
+                      border-bottom-left-radius: 5px;
+                      cursor: pointer;
+                      z-index: 10;
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                    ">
+              &#10095;&#10095;
+            </button>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const slides = document.querySelectorAll('.carousel-slide');
+        let currentIndex = 0;
+        const totalSlides = slides.length;
+  
+        const showSlide = (index) => {
+          slides.forEach((slide, i) => {
+            slide.style.display = i === index ? 'block' : 'none';
+          });
+        };
+  
+        document.querySelector('.carousel-nav.next').addEventListener('click', () => {
+          currentIndex = (currentIndex + 1) % totalSlides;
+          showSlide(currentIndex);
+        });
+  
+        document.querySelector('.carousel-nav.prev').addEventListener('click', () => {
+          currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+          showSlide(currentIndex);
+        });
+      });
+    </script>
+  </section>
+
+  <section class="umi_tactile">
+    <div class="container">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-full-width">
+          <h2 class="title is-3">Visuo-Tactile Gripper Design</h2>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="columns is-centered has-text-centered is-align-items-center">
+        <div class="column">
+          <div class="columns is-centered">
+            <div class="column content">
+                <img src="static/images/visuo-tactile-gripper.png" alt="Sensor Fabrication and PCB" width="50%" style="border-radius:10px;">
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
     <br>
-    <pre class="is-hidden-mobile"><code>@inproceedings{ha2024umilegs,
-  title={{UMI} on Legs: Making Manipulation Policies Mobile with Manipulation-Centric Whole-body Controllers},
-  author={Huy Ha and Yihuai Gao and Zipeng Fu and Jie Tan and Shuran Song},
-  year={2024},
-  booktitle={Proceedings of the 2024 Conference on Robot Learning},
-}</code></pre>
-    <p>
-      If you have any questions, please contact <a href="https://huy-ha.github.io/">Huy Ha</a> and <a
-        href="https://yihuai-gao.github.io/">Yihuai Gao</a> 🐕
-    </p>
-  </div>
-</section> -->
-
-
-
-<!-- <section class="section is-small" id="qa">
-  <div class="container is-max-desktop">
-    <div class="columns is-centered ">
-      <div class="column is-four-fifths">
-        <h2 class="title is-4 has-text-centered is-size-5-mobile">Questions & Answers</h2>
-
-        <div class="block">
-          <h3 class="title is-6">
-            What can't this framework do?
-          </h3>
+    <h2 class="title is-3">Related Works</h2>
+    <article class="columns">
+      <div class="column is-3">
+        <picture class="image">
+          <img src="static/images/3d-vitac.png">
+        </picture>
+      </div>
+      <div class="column">
+        <div class="content">
           <p>
-            There is only a one-way communication from the manipulation visuo-motor policy to the whole-body
-            controller,
-            via an end-effector trajectory interface. This has two main drawbacks:<br><br>
-            <b>(1) Guarantee Reachability</b>.
-            Sometimes the manipulation policy would ask the controller to move to target poses it can't track, like
-            ones
-            that are too high or rotate the gripper by too much.
-            Ideally, the controller could communicate to the manipulation policy what the
-            hardware is capable of as well.
-            <br><br>
-            <b>(2) Track Multiple End-effectors</b>.
-            Ideally, our robots would involve their entire body in manipulation tasks, not just its gripper.
-            Towards involving the robot's feet, body, and arms in manipulation as well, the real-world data collection
-            platform,
-            manipulation-controller interface, and the whole-body controller formulation has some work to do.
-          </p>
-        </div>
+            <b>3D-ViTac: Learning Fine-Grained Manipulation with Visuo-Tactile Sensing</b><br>
+              <a href="https://binghao-huang.github.io/">Binghao Huang</a><sup>1</sup>,
+              <a href="https://wangyixuan12.github.io/">Yixuan Wang</a><sup>1</sup>,
+              <a href="">Xinyi Yang</a><sup>2</sup>,
+              <a href="https://yyueluo.com/">Yiyue Luo</a><sup>3</sup>,
+              <a href="https://yunzhuli.github.io/">Yunzhu Li</a><sup>1</sup>
 
-        <div class="block">
-          <h3 class="title is-6">
-            I want to build a foundation policy for robotics.
-            What can UMI on Legs teach me about how to go about it?
-          </h3>
-          <p>
-            Tossing was flashy, but the in-the-wild cup rearrangement task (shown below) changed my perspective on what
-            a foundation policy for robotics should look like.
-            <video autoplay muted loop playsinline width="100%">
-              <source src="./static/videos/cup-in-the-wild-small.mp4" type="video/mp4">
-            </video>
-            We were able to just plug-and-play UMI's publicly released policy onto our robot dog (seen above in 1x
-            speed)!
-            With an expressive embodiment-agnostic interface in place, I'm optimistic about a world where people can
-            separately develop ever more general
-            visuo-motor policies and ever more robust WBCs, knowing that they can be plugged-and-played together in the
-            end.
-
-          </p>
-        </div>
-
-
-        <div class="block">
-          <h3 class="title is-6">
-            Can learning to track end-effector trajectories <i>really</i> result in kettlebell pushing?
-          </h3>
-          <p>
-            Yes, and no 🙃 Let me explain.<br><br>
-            Yes, because the kettlebell does get pushed to its target zone in our experiments, which technically
-            counts
-            as a success.
-            No, because the robot's behavior was not very elegant, despite the hardware being physically capable of
-            much
-            smoother, stronger pushes.
-            We've included mass, center of mass, and other joint domain randomization during training, but additionally
-            including force-torque perturbations at the end-effector during WBC
-            training could address take us a step closer to more robust pushing behaviors.
-          </p>
-        </div>
-
-
-        <div id="visualization-qa" class="block">
-          <h3 class="title is-6">What simulator do you use? Why does it look so realistic?</h3>
-          <p>
-            In this project, I use the <a href="https://developer.nvidia.com/isaac-gym">IsaacGym simulator</a> for
-            physics, but like many of my prior works, I use <a href="https://www.blender.org/">Blender</a> for
-            rendering (e.g., <a href="https://huy-ha.github.io/scalingup/">Scaling Up</a>, <a
-              href="https://flingbot.cs.columbia.edu/">FlingBot</a>).
-          </p>
-          <br>
-          <p>
-            Also, as in my prior works, I've published instructions for importing simulations into Blender.
-            If you're using IsaacGym, you can refer to this <a
-              href="https://github.com/real-stanford/umi-on-legs">project's codebase</a>.
-            If you're using PyBullet, you can use <a href="https://github.com/huy-ha/pybullet-blender-recorder">this
-              plugin</a> I developed for my <a href="https://github.com/real-stanford/decentralized-multiarm">multi-arm
-              motion planning project</a>.
-            If you're using MuJoCo, you can refer to the visualization instructions on my <a
-              href="https://github.com/real-stanford/scalingup/blob/master/docs/visualization.md">Scaling Up</a>'s
-            codebase.
-          </p>
-        </div>
-
-
-
-        <div class="block" id="wbc-prior-works">
-          <h3 class="title is-6">
-            Isn't this just <a href="https://manipulation-locomotion.github.io/">DeepWBC</a> or <a
-              href="https://wholebody-b1.github.io/">Visual Whole-Body Control</a>?
-          </h3>
-          <p>
-            These whole-body controllers are not manipulation-centric - they do not track end-effector trajectories in
-            task-frame.
-            Instead, they track instantaneous end-effector targets in body-frame, and depend on the quadruped's base
-            command.
-            This means their controllers can't be used to deploy existing table-top visuo-motor manipulation policies.
+            
+            <br>
+            <em>Conference on Robot Learning (<b>CoRL</b>), 2024</em><br>
+            <a href="https://binghao-huang.github.io/3D-ViTac/" target="_blank">[<u>Webpage</u>]</a>
+            <a href="https://openreview.net/forum?id=bk28WlkqZn" target="_blank">[<u>Paper</u>]</a>
+            <a href="https://docs.google.com/document/d/1XGyn-iV_wzRmcMIsyS3kwcrjxbnvblZAyigwbzDsX-E/edit?tab=t.0#heading=h.ny8zu0pq9mxy" target="_blank">[<u>Hardware Tutorial</u>]</a>
+            <a href="https://www.youtube.com/watch?v=ZN3mHMNZC7Q" target="_blank">[<u>Video</u>]</a>
           </p>
         </div>
       </div>
-</section> -->
-
+    </article>
+    <article class="columns">
+      <div class="column is-3">
+        <video id="teaser_video" width=99% muted autoplay loop style="border-radius:10px; ">
+          <source src="static/videos/vtrefine.mp4" type="video/mp4" />
+        </video>
+      </div>
+      <div class="column">
+        <div class="content">
+          <p>
+            <b>VT-Refine: Learning Bimanual Assembly with
+              Visuo-Tactile Feedback via Simulation Fine-Tuning</b><br>
+                <a href="https://binghao-huang.github.io/">Binghao Huang</a><sup>1</sup>,
+                <a href="https://people.csail.mit.edu/jiex/">Jie Xu</a><sup>2</sup>,
+                <a href="https://research.nvidia.com/person/iretiayo-akinola">Iretiayo Akinola</a><sup>2</sup>,
+                <a href="https://wyang.me/">Wei Yang</a><sup>2</sup>,
+                <a href="https://balakumar-s.github.io/">Balakumar Sundaralingam</a><sup>2</sup>,
+                <a href="https://www.linkedin.com/in/rowlandoflaherty/">Rowland O'Flaherty</a><sup>2</sup>,
+                <a href="https://homes.cs.washington.edu/~fox/">Dieter Fox</a><sup>2</sup>,
+                <a href="https://xiaolonw.github.io/">Xiaolong Wang</a><sup>2,3</sup>,
+                <a href="https://cs.gmu.edu/~amousavi/">Arsalan Mousavian</a><sup>2</sup>,
+                <a href="https://research.nvidia.com/person/yu-wei-chao">Yu-Wei Chao</a><sup>2†</sup>,
+                <a href="https://yunzhuli.github.io/">Yunzhu Li</a><sup>1†</sup>
+            <br>
+            <a href="https://binghao-huang.github.io/vt_refine/" target="_blank">[<u>Webpage</u>]</a>
+            <a href="https://openreview.net/forum?id=mV3W5givYb" target="_blank">[<u>Paper</u>]</a>
+          </p>
+        </div>
+      </div>
+    </article>
+    <article class="columns">
+      <div class="column is-3">
+        <video id="teaser_video" width=99% muted autoplay loop style="border-radius:10px; ">
+          <source src="static/videos/touchinthewild.mp4" type="video/mp4" />
+        </video>
+      </div>
+      <div class="column">
+        <div class="content">
+          <p>
+            <b>Touch in the Wild:
+              Learning Fine-Grained Manipulation with a Portable Visuo-Tactile Gripper</b><br>
+              <a href="">Xinyue Zhu<sup>*</sup><sup>,</sup><sup>1</sup></a>,
+              <a href="https://binghao-huang.github.io/">Binghao Huang<sup>*</sup><sup>,</sup><sup>1</sup></a>,
+              <a href="https://yunzhuli.github.io/">Yunzhu Li</sup><sup>1</sup></a> </br>
+              <a href="https://binghao-huang.github.io/touch_in_the_wild/" target="_blank">[<u>Webpage</u>]</a>
+              <a href="https://openreview.net/forum?id=ZGqqPMQDEk" target="_blank">[<u>Paper</u>]</a> </br>
+              <font color="firebrick"><b>Best Demo Award</b></font> at <b>RSS 2025</b> Workshop on Robot Hardware-Aware Intelligence <a href="https://rss-hardware-intelligence.github.io/" target="_blank"><small>[Link]</small></a><br>
+            </p>
+          </p>
+        </div>
+      </div>
+    </article>
+    </div>
+  </section>
 
 
 <footer class="footer">
