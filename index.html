@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="description" content="FlexiTac: Bridging Flexible Tactile Sensor to Robotics">
-  <meta name="keywords" content="Robotics, Quadruped, Whole-body Control, Whole-body Manipulation">
+  <meta name="keywords" content="Robotics, Tactile Sensing, Manipulation, Robot Learning, Flexible Sensors">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>FlexiTac: An Open-Source, Scalable Tactile Solution for Robotic Systems</title>
 
@@ -30,45 +30,41 @@
 </head>
 <body>
 
-<section class="hero is-link is-fullheight video" style="overflow: hidden; position:relative;">
-  <div class="hero-video" style="height: 100%; width: 177.77777778vh; min-width: 100%;min-height: 56.25vw;">
+<!-- =========================
+     Hero
+========================= -->
+<section class="hero is-link is-fullheight video" style="overflow:hidden; position:relative;">
+  <div class="hero-video" style="height: 100%; width: 177.77777778vh; min-width: 100%; min-height: 56.25vw;">
     <video playsinline autoplay muted loop>
-      <source src=" ./static/videos/teaser_tactile.mp4" type="video/mp4">
+      <source src="./static/videos/teaser_tactile.mp4" type="video/mp4">
     </video>
   </div>
+
   <div class="hero-video is-hidden-tablet is-inline-block-mobile"
-    style="height: 154.28571428vw; width: 100%; min-width:64.81481481vh;min-height:100%;">
+       style="height: 154.28571428vw; width: 100%; min-width:64.81481481vh; min-height:100%;">
     <video playsinline autoplay muted loop>
-      <source src=" ./static/videos/teaser_tactile.mp4" type="video/mp4">
+      <source src="./static/videos/teaser_tactile.mp4" type="video/mp4">
     </video>
   </div>
+
   <div class="overlay"></div>
-  <div class="overlay"></div>
-  <!-- Hero head: will stick at the top -->
-  <div class="hero-head is-hidden-mobile">
+
+  <!-- <div class="hero-head is-hidden-mobile">
     <header class="navbar">
       <div class="container is-size-5">
-        <div class="navbar-menu">
+        <div class="navbar-menu is-active">
           <div class="navbar-end">
-            <!-- <a class="navbar-item pl-4 pr-4" href="./static/umi-on-legs.pdf">
-              <span class="icon" style="margin-right:5px;">
-                <img src="./static/images/pdf.svg" alt="PDF" />
-              </span>
-              <span>Paper</span>
-            </a>
-            <a class="navbar-item  pl-4 pr-4" href="https://arxiv.org/abs/2407.10353">
-              <span class="icon" style="margin-right:5px;">
-                <img src="./static/images/arxiv.svg" alt="ArXiv" />
-              </span>
-              <span>arXiv</span> </a>
-            <a href="https://youtu.be/4Bp0q3xHTxE" class="navbar-item  pl-4 pr-4">
-              <span class="icon" style="margin-right:5px;">
-                <img src="./static/images/youtube.svg" alt="Youtube" />
-              </span>
-              <span>Video</span> </a> -->
-            <span class="navbar-item  pl-4 pr-4">
+            <span class="navbar-item pl-4 pr-2">
+              <a href="https://github.com/FlexiTac/FlexiTac_Hardware_Repo"
+                 class="external-link button is-normal is-rounded is-light">
+                <span class="icon"><i class="fa-brands fa-github"></i></span>
+                <span>Hardware Repo</span>
+              </a>
+            </span>
+            <span class="navbar-item pl-2 pr-4">
               <a href="https://docs.google.com/forms/d/189ZAlr6o0Wqd1-vItuQBkM9eyzFJMpc2Ts94zMXM8C4/edit"
-              class="external-link button is-normal is-rounded is-light">
+                 class="external-link button is-normal is-rounded is-light">
+                <span class="icon"><i class="fa-solid fa-box-open"></i></span>
                 <span>Request a Sample</span>
               </a>
             </span>
@@ -76,592 +72,669 @@
         </div>
       </div>
     </header>
-  </div>
+  </div> -->
 
-  <!-- Hero content: will be in the middle -->
   <div class="hero-body">
     <div class="container has-text-centered">
-      <h1 class="title is-1 publication-title is-size-1-mobile" style="font-size: 12rem;">
+      <div style="margin-bottom:1rem;">
+      </div>
+
+      <h1 class="title is-1 publication-title is-size-1-mobile" style="font-size: clamp(4.8rem, 12vw, 10rem);">
         FlexiTac
       </h1>
-      <h1 class="subtitle is-1 publication-title is-size-4-mobile" style="font-size: 4rem;">
-        An Open-Source, Scalable Tactile Solution for Robotic Systems
-      </h1>
-      <h1 class="is-3 is-italic" style="font-size: clamp(1.0rem, 2.2vw, 1.4rem); opacity: 0.8;">
-        Binghao Huang<sup>1</sup>, Yunzhu Li<sup>1</sup> </br>
-        <sup>1</sup>Columbia University
-      </h1>
-      <h1 class="is-2 is-italic" style="font-size: clamp(3rem, 3.0vw, 2.0rem); opacity: 0.8;">
-        Simple but Work!
-      </h1>
 
-      <div class="column has-text-centered is-hidden-tablet">
+      <h2 class="subtitle is-1 publication-title is-size-4-mobile"
+          style="font-size: clamp(1.6rem, 3.6vw, 3.5rem); max-width: 1100px; margin: 0 auto 1rem auto; line-height:1.12;">
+        An Open-Source, Scalable Tactile Solution<br>
+        <span style="display:inline-block; margin-top:0.2rem;">for Robotic Systems</span>
+      </h2>
+
+      <h3 class="is-3 is-italic"
+          style="font-size: clamp(1.0rem, 2.2vw, 1.35rem); opacity: 0.88; line-height:1.6; margin-bottom: 1rem;">
+        Binghao Huang<sup>1</sup>, Yunzhu Li<sup>1</sup><br>
+        <sup>1</sup>Columbia University
+      </h3>
+
+      <p style="font-size: clamp(1.3rem, 2.6vw, 1.9rem); font-weight: 600; color: rgba(255,255,255,0.96); opacity: 1; max-width: 900px; margin: 0 auto 1.5rem auto; line-height: 1.45; text-shadow: 0 2px 14px rgba(0,0,0,0.25);">
+        Simple to build. Scalable to deploy.
+      </p>
+
+      <div class="buttons is-centered" style="margin-top:1.5rem;">
+        <a href="https://docs.google.com/forms/d/189ZAlr6o0Wqd1-vItuQBkM9eyzFJMpc2Ts94zMXM8C4/edit"
+          class="button is-normal is-rounded is-light">
+          <span class="icon"><i class="fa-solid fa-box-open"></i></span>
+          <span>Request a Sample</span>
+        </a>
+
+        <a href="https://github.com/FlexiTac/FlexiTac_Hardware_Repo"
+          class="button is-normal is-rounded is-light">
+          <span class="icon"><i class="fa-brands fa-github"></i></span>
+          <span>Hardware Repo</span>
+        </a>
+
+        <a href="https://docs.google.com/document/d/1bvz6AL7BUkhj4Dj7n9DFXTjnGIX4-ziN8-smiCKpVZU/edit?tab=t.0#heading=h.kk7d14qme9db"
+          class="button is-normal is-rounded is-light">
+          <span class="icon"><i class="fa-solid fa-screwdriver-wrench"></i></span>
+          <span>Hardware Tutorial</span>
+        </a>
+
+        <a href="#overview" class="button is-normal is-rounded is-light">
+          <span class="icon"><i class="fa-solid fa-arrow-down"></i></span>
+          <span>Explore</span>
+        </a>
+      </div>
+
+  <div class="columns is-centered is-variable is-4" style="margin-top:2.2rem;">
+    <div class="column is-3-desktop is-8-tablet">
+      <div class="box" style="background: rgba(255,255,255,0.12); border:1px solid rgba(255,255,255,0.18);">
+        <p style="color:white; font-weight:700; margin-bottom:0.35rem;">Open-Source Hardware</p>
+        <p style="color:rgba(255,255,255,0.82); margin:0;">Hardware tutorials, BOMs, and build resources.</p>
+      </div>
+    </div>
+    <div class="column is-3-desktop is-8-tablet">
+      <div class="box" style="background: rgba(255,255,255,0.12); border:1px solid rgba(255,255,255,0.18);">
+        <p style="color:white; font-weight:700; margin-bottom:0.35rem;">Simulation Support</p>
+        <p style="color:rgba(255,255,255,0.82); margin:0;">Tactile simulation for robot learning workflows.</p>
+      </div>
+    </div>
+    <div class="column is-3-desktop is-8-tablet">
+      <div class="box" style="background: rgba(255,255,255,0.12); border:1px solid rgba(255,255,255,0.18);">
+        <p style="color:white; font-weight:700; margin-bottom:0.35rem;">Robot Learning Pipelines</p>
+        <p style="color:rgba(255,255,255,0.82); margin:0;">From sensor integration to machine learning.</p>
+      </div>
+    </div>
+  </div>
+
+      <div class="column has-text-centered is-hidden-tablet" style="margin-top: 1rem;">
         <div class="publication-links">
           <span class="link-block">
             <a href="https://docs.google.com/forms/d/189ZAlr6o0Wqd1-vItuQBkM9eyzFJMpc2Ts94zMXM8C4/edit"
-              class="external-link button is-normal is-rounded is-dark">
+               class="external-link button is-normal is-rounded is-dark">
+              <span class="icon"><i class="fa-solid fa-box-open"></i></span>
               <span>Request a Sample</span>
             </a>
           </span>
         </div>
       </div>
     </div>
-
   </div>
 
-  <!-- Hero footer: will stick at the bottom -->
   <div class="hero-foot is-hidden-mobile">
     <nav class="tabs is-boxed is-fullwidth is-size-5">
       <ul>
-        <li><a href="#hardware">Hardware & System</a></li>
-        <li><a href="#simulation">Tactile Simulation</a></li>
-        <li><a href="#datacollection">System Design Examples</a></li>
-        <li><a href="#qa">Q & A</a></li>
+        <li><a href="#overview">Overview</a></li>
+        <li><a href="#summary-video">Summary Video</a></li>
+        <li><a href="#hardware">Hardware</a></li>
+        <li><a href="#simulation">Simulation</a></li>
+        <li><a href="#datacollection">System Designs</a></li>
+        <li><a href="#related-works">Related Works</a></li>
+        <li><a href="#qa">Q &amp; A</a></li>
       </ul>
     </nav>
   </div>
 </section>
 
-
+<!-- =========================
+     Overview
+========================= -->
 <section class="section is-medium" id="overview">
   <div class="container is-max-desktop">
     <div class="columns is-centered">
       <div class="column is-four-fifths has-text-justified is-hidden-mobile">
-        <h2 class="subtitle">
-          FlexiTac is a scalable, flexible tactile sensor designed to make touch sensing accessible for robotics.  
-          It integrates easily into diverse platforms and manipulation tasks. 
-          <br><br>
-          <strong>🎯Our Goal: Bringing Touch to Every Robot Lab.</strong>
-          We offer:
+        <span class="tag is-link is-light is-rounded" style="margin-bottom:1rem;">Overview</span>
+        <h2 class="title is-2" style="margin-bottom:1rem;">Bringing touch to every robot lab</h2>
+        </br>
+        <p class="subtitle" style="line-height:1.75;">
+          FlexiTac is a scalable, flexible tactile sensor designed to make touch sensing accessible for robotics.
+          It integrates easily into diverse platforms and manipulation tasks.
+          <strong>Our goal is to make tactile sensing simpler to build, easier to customize, and more practical to deploy.</strong>
+          <!-- <br><br>
+          We provide:
           <br>
-          • Open-Source Hardware Tutorials<br>
-          • Simulation Support<br>
-          • System Design Sample
-        </h2>
+          • Open-source hardware tutorials<br>
+          • Simulation support<br>
+          • System design examples -->
+        </p>
       </div>
 
       <div class="column is-four-fifths is-hidden-tablet has-text-justified-mobile">
+        <span class="tag is-link is-light is-rounded" style="margin-bottom:1rem;">Overview</span>
         <p>
-          FlexiTac is a flexible tactile sensing solution designed to make flexible tactile sensing accessible to the robotics community. 
+          FlexiTac is a flexible tactile sensing solution designed to make tactile sensing accessible to the robotics community.
           Built with scalability and adaptability in mind, FlexiTac can be integrated into a wide range of robotic platforms and manipulation tasks.
-          <br><br>
-          We provide not only the sensor itself, but also:
+          <!-- <br><br>
+          We provide:
           <br>
           • <b>Open-source hardware tutorials</b><br>
           • <b>Simulation support across multiple platforms</b><br>
-          • <b>System design guidance</b>
-          <br>
+          • <b>System design guidance</b> -->
         </p>
-        <br>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================
+     Summary Video
+========================= -->
+<section class="section is-small" id="summary-video">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-2 has-text-centered is-size-4-mobile">Summary Video</h2>
+        <p class="has-text-centered" style="color:#617086; max-width:760px; margin:0 auto 1.5rem auto;">
+          A short walkthrough of the tactile hardware, sensing principle, and representative robotics applications.
+        </p>
+        <div class="media-frame">
+          <video width="100%" muted autoplay controls playsinline style="border-radius:14px;">
+            <!-- <source src="./static/videos/teaser_tactile.mp4" type="video/mp4" /> -->
+          </video>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================
+     Hardware
+========================= -->
+<section class="section is-small" id="hardware">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-four-fifths has-text-centered">
+        <span class="tag is-link is-light is-rounded" style="margin-bottom:1rem;">Hardware</span>
+        <h2 class="title is-2 is-size-4-mobile">Hardware Overview</h2>
+        <p style="color:#617086; max-width:820px; margin:0 auto;">
+          Two sensor generations with different fabrication trade-offs, plus open-source resources for reproduction and deployment.
+        </p>
       </div>
     </div>
   </div>
 
-  <section class="section is-small" id="Summary Video">
-    <div class="container is-max-desktop">
-      <div class="columns is-centered">
-        <div class="column is-four-fifths">
-          <h2 class="title is-1 has-text-centered is-size-4-mobile">Summary Video</h2>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section is-small" id="hardware">
-    <div class="container is-max-desktop">
-      <div class="columns is-centered">
-        <div class="column is-four-fifths">
-          <h2 class="title is-1 has-text-centered is-size-4-mobile">Hardware overview</h2>
-        </div>
-      </div>
-    </div>
-
-    <div class="container">
+  <!-- FlexiTac V2 -->
+  <div class="container">
+    <div class="box" style="padding:2rem;">
       <div class="columns is-centered has-text-centered">
         <div class="column is-full-width">
-          <h2 class="title is-3">FlexiTac-V2 <span style="font-size: 0.75em; color: #9e9e9e;">(Fabrication time: ~3 mins)</span></h2>
-          <h2 class="title is-5" style="color: #9e9e9e;">(FPCB-Based, 2&nbsp;mm Grid, 32×12 Resolution, $2.5 each sensor piece)</h2>
+          <h3 class="title is-3">FlexiTac-V2 <span style="font-size: 0.75em; color: #9e9e9e;">(Fabrication time: ~3 mins)</span></h3>
+          <h4 class="title is-5" style="color: #9e9e9e;">FPC-Based, 2&nbsp;mm Grid, 32×12 Resolution, $2.5 per sensor piece</h4>
+        </div>
+      </div>
+      
+      <div class="container" style="margin-top:1.75rem;">
+        <div class="columns is-variable is-5 is-centered is-vcentered">
+
+          <div class="column is-4">
+            <a href="https://github.com/FlexiTac/FlexiTac_Hardware_Repo" class="resource-tile" style="display:block; height:100%;">
+              <div class="box alt"
+                  style="height:100%; min-height:220px; margin-bottom:0; display:flex; align-items:center; justify-content:center; padding:2rem 1.5rem;">
+                <div style="font-size:1em; line-height:1.5em; text-align:center;">
+                  <span class="image fit" style="margin-bottom:0.9em; display:block;">
+                    <img src="static/images/github_logo.svg"
+                        alt="GitHub Hardware Codebase"
+                        style="width:136px; height:136px; margin:0 auto;">
+                  </span>
+                  <strong style="display:block; font-size:1.35rem; margin-bottom:0.45rem;">Hardware Codebase</strong>
+                  <!-- <span style="color:#617086;">Source files and implementation resources</span> -->
+                </div>
+              </div>
+            </a>
+          </div>
+
+          <div class="column is-4">
+            <a href="https://docs.google.com/document/d/1bvz6AL7BUkhj4Dj7n9DFXTjnGIX4-ziN8-smiCKpVZU/edit?tab=t.0#heading=h.kk7d14qme9db"
+              class="resource-tile" style="display:block; height:100%;">
+              <div class="box alt"
+                  style="height:100%; min-height:220px; margin-bottom:0; display:flex; align-items:center; justify-content:center; padding:2rem 1.5rem;">
+                <div style="font-size:1em; line-height:1.5em; text-align:center;">
+                  <span class="image fit" style="margin-bottom:0.9em; display:block;">
+                    <img src="static/images/build.svg"
+                        alt="Hardware Guide"
+                        style="width:136px; height:136px; margin:0 auto;">
+                  </span>
+                  <strong style="display:block; font-size:1.35rem; margin-bottom:0.45rem;">Hardware Guide</strong>
+                  <!-- <span style="color:#617086;">Assembly and reproduction instructions</span> -->
+                </div>
+              </div>
+            </a>
+          </div>
+
+          <div class="column is-4">
+            <div class="box alt"
+                style="height:100%; min-height:220px; margin-bottom:0; padding:0.75rem; display:flex; align-items:center; justify-content:center;">
+              <img src="static/images/flexitac.jpg"
+                  alt="FlexiTac sensor"
+                  style="width:100%; height:100%; object-fit:cover; border-radius:14px;">
+            </div>
+          </div>
+
         </div>
       </div>
 
-      <div class="columns is-centered has-text-centered">
-        <span class="link-block">
-        <a href="https://docs.google.com/forms/d/189ZAlr6o0Wqd1-vItuQBkM9eyzFJMpc2Ts94zMXM8C4/edit"
-          class="external-link button is-normal is-rounded is-dark">
-          <span>Request a Sample</span>
-        </a>
-      </span>
-      </div>
-          <div class="container">
-            <div class="columns is-centered has-text-centered is-align-items-center">
-              <div class="column">
-                <!-- <h2 class="title is-5">Reproduction Resources</h2> -->
-                <div class="columns is-centered has-text-centered">
-                  <div class="column content">
-                    <div class="box alt" style="margin-bottom: 1em;">
-                      <div class="2u" style="font-size: 1em; line-height: 1.5em; text-align: center;">
-                        <a href="https://github.com/FlexiTac/FlexiTac_Hardware_Repo">
-                          <span class="image fit" style="margin-bottom: 0.5em;">
-                            <img src="static/images/github_logo.svg" alt="GitHub Hardware Codebase" />
-                          </span>
-                          Hardware <br>Codebase
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-      
-                  <div class="column content">
-                    <div class="box alt" style="margin-bottom: 1em;">
-                      <div class="2u" style="font-size: 1em; line-height: 1.5em; text-align: center;">
-                        <a href="https://docs.google.com/document/d/1bvz6AL7BUkhj4Dj7n9DFXTjnGIX4-ziN8-smiCKpVZU/edit?tab=t.0#heading=h.kk7d14qme9db">
-                          <span class="image fit" style="margin-bottom: 0.5em;">
-                            <img src="static/images/build.svg" alt="Hardware Guide" />
-                          </span>
-                          Hardware <br>Guide
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-      
-                </div>
-              </div>
-      
-              <div class="column">
-                <!-- <h2 class="title is-5">
-                    Sensor Fabrication and PCB Tutorial
-                </h2> -->
-                <div class="columns is-centered">
-                  <div class="column content">
-                    <img src="static/images/flexitac.jpg" alt="Sensor Fabrication and PCB" width="75%" style="border-radius:10px;">
-                  </div>
-                </div>
+      <div class="container" style="margin-top:1rem;">
+        <div class="columns is-centered has-text-centered">
+          <div class="column">
+            <h4 class="title is-5">Precise Force Feedback</h4>
+            <div class="columns is-centered">
+              <div class="column content">
+                <video id="teaser_video_1" width="99%" muted autoplay controls playsinline style="border-radius:14px;">
+                  <source src="static/videos/sensor_v2_test_1.mp4" type="video/mp4" />
+                </video>
               </div>
             </div>
           </div>
-    </div>
-    <div class="container">
-      <div class="columns is-centered has-text-centered">
-        <div class="column">
-          <h2 class="title is-5"> Precise Force Feedback </h2>
-          <div class="columns is-centered">
-            <div class="column content">
-              <video id="teaser_video_1" width=99% muted autoplay controls style="border-radius:10px; ">
-                <source src="static/videos/sensor_v2_test_1.mp4" type="video/mp4" />
-              </video>
-            </div>
-          </div>
-        </div>
 
-        <div class="column">
-          <h2 class="title is-5"> Deformable Objects Manipulation </h2>
-          <div class="columns is-centered">
-            <div class="column content">
-              <video id="teaser_video_2" width=99% muted autoplay controls style="border-radius:10px; ">
-                <source src="static/videos/sensor_v2_test_2.mp4" type="video/mp4" />
-              </video>
+          <div class="column">
+            <h4 class="title is-5">Deformable Objects Manipulation</h4>
+            <div class="columns is-centered">
+              <div class="column content">
+                <video id="teaser_video_2" width="99%" muted autoplay controls playsinline style="border-radius:14px;">
+                  <source src="static/videos/sensor_v2_test_2.mp4" type="video/mp4" />
+                </video>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
 
-<br>
-<br>
+    <!-- FlexiTac V1 -->
+    <div class="box" style="padding:2rem; margin-top:2rem;">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-full-width">
+          <h3 class="title is-3">
+            FlexiTac-V1
+            <span style="font-size: 0.75em; color: #9e9e9e;">(Lead time: ~30 mins)</span>
+          </h3>
+          <h4 class="title is-5" style="color: #9e9e9e;">
+            3&nbsp;mm Grid, 16×16 Resolution, $5 per sensor piece
+          </h4>
+        </div>
+      </div>
 
       <div class="container">
         <div class="columns is-centered has-text-centered">
           <div class="column is-full-width">
-            <h2 class="title is-3">
-              FlexiTac-V1 
-              <span style="font-size: 0.75em; color: #9e9e9e;">(Lead time: ~30 mins)</span>
-            </h2>
-            <h2 class="title is-5" style="color: #9e9e9e;">
-              (3&nbsp;mm Grid, 16×16 Resolution, $5 each sensor piece)
-            </h2>
-          </div>
-        </div>
-      </div>
-  
-      <div class="container">
-        <div class="columns is-centered has-text-centered">
-          <div class="column is-full-width">
-            <button class="button is-primary" onclick="toggleTactileVideos()" id="toggleButtonTactile">
+            <button class="button is-primary is-rounded" onclick="toggleTactileVideos()" id="toggleButtonTactile">
               Show FlexiTac-V1 Guides and Videos
             </button>
           </div>
         </div>
-      
-        <div id="moreVideosTactile" style="display: none;">
-      
-          <div class="container">
-            <div class="columns is-centered has-text-centered is-align-items-center">
-              <div class="column">
-                <h2 class="title is-5">Reproduction Resources</h2>
-                <br>
-                <div class="columns is-centered has-text-centered">
-                  <div class="column content">
-                    <div class="box alt" style="margin-bottom: 1em;">
-                      <div class="2u" style="font-size: 1em; line-height: 1.5em; text-align: center;">
-                        <a href="https://github.com/binghao-huang/3D-ViTac_Tactile_Hardware?tab=readme-ov-file">
-                          <span class="image fit" style="margin-bottom: 0.5em;">
-                            <img src="static/images/github_logo.svg" alt="GitHub Hardware Codebase" />
-                          </span>
-                          Hardware <br>Codebase
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-      
-                  <div class="column content">
-                    <div class="box alt" style="margin-bottom: 1em;">
-                      <div class="2u" style="font-size: 1em; line-height: 1.5em; text-align: center;">
-                        <a href="https://docs.google.com/document/d/1XGyn-iV_wzRmcMIsyS3kwcrjxbnvblZAyigwbzDsX-E/edit?tab=t.0#heading=h.ny8zu0pq9mxy">
-                          <span class="image fit" style="margin-bottom: 0.5em;">
-                            <img src="static/images/build.svg" alt="Hardware Guide" />
-                          </span>
-                          Hardware <br>Guide
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-      
-                  <div class="column content">
-                    <div class="box alt" style="margin-bottom: 1em;">
-                      <div class="2u" style="font-size: 1em; line-height: 1.5em; text-align: center;">
-                        <a href="https://docs.google.com/document/d/1auxwAbAnt88nG7HDqanr4JJreuAVkrhs1nK16VQaLpk/edit?usp=sharing">
-                          <span class="image fit" style="margin-bottom: 0.5em;">
-                            <img src="static/images/documentation.svg" alt="Bill of Materials" />
-                          </span>
-                          Bill of <br>Materials
-                        </a>
-                      </div>
-                    </div>
+
+      <div id="moreVideosTactile" style="display: none; margin-top:1.5rem;">
+
+        <div class="container" style="margin-top:1.75rem;">
+          <div class="columns is-variable is-5 is-centered is-vcentered">
+
+            <div class="column is-4">
+              <a href="https://github.com/binghao-huang/3D-ViTac_Tactile_Hardware?tab=readme-ov-file"
+                class="resource-tile" style="display:block; height:100%;">
+                <div class="box alt"
+                    style="height:100%; min-height:220px; margin-bottom:0; display:flex; align-items:center; justify-content:center; padding:2rem 1.5rem;">
+                  <div style="font-size:1em; line-height:1.5em; text-align:center;">
+                    <span class="image fit" style="margin-bottom:0.9em; display:block;">
+                      <img src="static/images/github_logo.svg"
+                          alt="GitHub Hardware Codebase"
+                          style="width:52px; height:52px; margin:0 auto;">
+                    </span>
+                    <strong style="display:block; font-size:1.2rem; margin-bottom:0.45rem;">Hardware Codebase</strong>
+                    <!-- <span style="color:#617086;">Open-source files and implementation assets</span> -->
                   </div>
                 </div>
-              </div>
-      
-              <div class="column">
-                <h2 class="title is-5">
+              </a>
+            </div>
+
+            <div class="column is-4">
+              <a href="https://docs.google.com/document/d/1XGyn-iV_wzRmcMIsyS3kwcrjxbnvblZAyigwbzDsX-E/edit?tab=t.0#heading=h.ny8zu0pq9mxy"
+                class="resource-tile" style="display:block; height:100%;">
+                <div class="box alt"
+                    style="height:100%; min-height:220px; margin-bottom:0; display:flex; align-items:center; justify-content:center; padding:2rem 1.5rem;">
+                  <div style="font-size:1em; line-height:1.5em; text-align:center;">
+                    <span class="image fit" style="margin-bottom:0.9em; display:block;">
+                      <img src="static/images/build.svg"
+                          alt="Hardware Guide"
+                          style="width:52px; height:52px; margin:0 auto;">
+                    </span>
+                    <strong style="display:block; font-size:1.2rem; margin-bottom:0.45rem;">Hardware Guide</strong>
+                    <!-- <span style="color:#617086;">Fabrication and assembly instructions</span> -->
+                  </div>
+                </div>
+              </a>
+            </div>
+
+            <div class="column is-4">
+              <a href="https://docs.google.com/document/d/1auxwAbAnt88nG7HDqanr4JJreuAVkrhs1nK16VQaLpk/edit?usp=sharing"
+                class="resource-tile" style="display:block; height:100%;">
+                <div class="box alt"
+                    style="height:100%; min-height:220px; margin-bottom:0; display:flex; align-items:center; justify-content:center; padding:2rem 1.5rem;">
+                  <div style="font-size:1em; line-height:1.5em; text-align:center;">
+                    <span class="image fit" style="margin-bottom:0.9em; display:block;">
+                      <img src="static/images/documentation.svg"
+                          alt="Bill of Materials"
+                          style="width:52px; height:52px; margin:0 auto;">
+                    </span>
+                    <strong style="display:block; font-size:1.2rem; margin-bottom:0.45rem;">Bill of Materials</strong>
+                    <!-- <span style="color:#617086;">Components and sourcing information</span> -->
+                  </div>
+                </div>
+              </a>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="container" style="margin-top:1.5rem;">
+          <div class="columns is-variable is-5 is-centered is-vcentered">
+
+            <div class="column is-6">
+              <div class="box alt"
+                  style="height:100%; margin-bottom:0; padding:1rem;">
+                <h4 class="title is-5 has-text-centered" style="margin-bottom:1rem;">
                   <a href="https://www.youtube.com/watch?v=8eTpFYgae64">
                     Sensor Fabrication and PCB Tutorial
                   </a>
-                </h2>
-                <div class="columns is-centered">
-                  <div class="column content">
-                    <a href="https://www.youtube.com/watch?v=8eTpFYgae64" target="_blank">
-                      <img src="static/images/COVER.png" alt="Sensor Fabrication and PCB" width="100%" style="border-radius:10px;">
-                    </a>
-                  </div>
-                </div>
+                </h4>
+                <a href="https://www.youtube.com/watch?v=8eTpFYgae64" target="_blank">
+                  <img src="static/images/COVER.png"
+                      alt="Sensor Fabrication and PCB"
+                      style="width:100%; border-radius:14px;">
+                </a>
               </div>
             </div>
-          </div>
-      
-          <div class="container">
-            <div class="columns is-centered has-text-centered">
-              <div class="column">
-                <h2 class="title is-5">Tactile Hardware Introduction</h2>
-                <div class="columns is-centered">
-                  <div class="column content">
-                    <video width="99%" muted autoplay controls style="border-radius:10px;">
-                      <source src="static/videos/sensor test 1.mp4" type="video/mp4" />
-                    </video>
-                  </div>
-                </div>
-              </div>
-      
-              <div class="column">
-                <h2 class="title is-5">Load Test and Flexibility</h2>
-                <div class="columns is-centered">
-                  <div class="column content">
-                    <video width="99%" muted autoplay controls style="border-radius:10px;">
-                      <source src="static/videos/sensor test 2.mp4" type="video/mp4" />
-                    </video>
-                  </div>
-                </div>
+
+            <div class="column is-6">
+              <div class="box alt"
+                  style="height:100%; margin-bottom:0; padding:1rem;">
+                <h4 class="title is-5 has-text-centered" style="margin-bottom:1rem;">
+                  Tactile Hardware Introduction
+                </h4>
+                <video width="100%" muted autoplay controls playsinline style="border-radius:14px;">
+                  <source src="static/videos/sensor test 1.mp4" type="video/mp4" />
+                </video>
               </div>
             </div>
+
           </div>
-      
         </div>
+
+        <!-- <div class="container" style="margin-top:1.5rem;">
+          <div class="columns is-variable is-5 is-centered">
+
+            <div class="column is-6">
+              <div class="box alt"
+                  style="height:100%; margin-bottom:0; padding:1rem;">
+                <h4 class="title is-5 has-text-centered" style="margin-bottom:1rem;">
+                  Load Test and Flexibility
+                </h4>
+                <video width="100%" muted autoplay controls playsinline style="border-radius:14px;">
+                  <source src="static/videos/sensor test 2.mp4" type="video/mp4" />
+                </video>
+              </div>
+            </div>
+
+            <div class="column is-6">
+              <div class="box alt"
+                  style="height:100%; margin-bottom:0; padding:1rem; display:flex; align-items:center; justify-content:center; min-height:320px;">
+                <div class="has-text-centered" style="color:#617086;">
+                  <i class="fa-solid fa-circle-info" style="font-size:1.5rem; margin-bottom:0.75rem; color:#2f6fed;"></i>
+                  <p style="margin:0; line-height:1.7;">
+                    FlexiTac-V1 remains a useful reference for earlier fabrication workflows,
+                    tutorials, and low-cost visuo-tactile hardware reproduction.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div> -->
+
       </div>
-      
-      <script>
-        function toggleTactileVideos() {
-          const moreVideos = document.getElementById("moreVideosTactile");
-          const toggleButton = document.getElementById("toggleButtonTactile");
-      
-          if (moreVideos.style.display === "none" || moreVideos.style.display === "") {
-            moreVideos.style.display = "block";
-            toggleButton.innerText = "Show FlexiTac-V1 Guides and Videos";
-          } else {
-            moreVideos.style.display = "none";
-            toggleButton.innerText = "Show FlexiTac-V1 Guides and Videos";
-          }
-        }
-      </script>
-      
+      </div>
+    </div>
+  </div>
+</section>
 
-  </section>
+<!-- =========================
+     Simulation
+========================= -->
+<section class="section is-small" id="simulation">
+  <div class="container">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-full-width">
+        <span class="tag is-link is-light is-rounded" style="margin-bottom:1rem;">Simulation</span>
+        <h2 class="title is-2 is-size-4-mobile">Tactile Simulation</h2>
+        <p style="color:#617086; max-width:820px; margin:0 auto 1.25rem auto;">
+            Penalty-based tactile simulation for different simulation platforms.
+        </p>
+      </div>
+    </div>
+  </div>
 
-  <section class="section is-small" id="simulation">
-    <div class="container">
-      <div class="columns is-centered has-text-centered">
-        <div class="column is-full-width">
-          <h2 class="title is-3">Tactile Simulation</h2> 
-        </div>
+  <div class="box" style="padding:2rem; margin-top:1.5rem;">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-full-width">
+        <h3 class="title is-4" style="margin-bottom:0.75rem;">Tactile Simulation in IssacSim</h3>
+        <p style="color:#617086; max-width:780px; margin:0 auto 1.25rem auto; line-height:1.7;">
+          A tactile simulation in IssacSim and Web-based interaction demo for data collection.
+        </p>
       </div>
     </div>
 
-    <div class="container">
-      <div class="columns is-centered has-text-centered">
-        <span class="link-block">
-          <a href="" class="external-link button is-normal is-rounded is-dark">
-              <span class="icon">
-                <i class="fa-brands fa-github"></i>
-              </span>
-            <span>Tactile Simulation in IsaacSim</span>
-          </a>
-        </span>
+    <div class="columns is-centered has-text-centered">
+      <span class="link-block">
+        <a href="https://github.com/NVlabs/vt-refine" class="external-link button is-normal is-rounded is-dark">
+          <span class="icon"><i class="fa-brands fa-github"></i></span>
+          <span>Tactile in IsaacSim Repo</span>
+        </a>
+      </span>
+    </div>
+
+    <div class="container" style="margin-top:1.75rem;">
+      <div class="columns is-variable is-5 is-centered">
+
+        <div class="column is-6">
+          <div class="box alt" style="height:100%; margin-bottom:0; padding:1rem;">
+            <h4 class="title is-5 has-text-centered" style="margin-bottom:1rem;">
+              IsaacSim Tactile Simulation Demo
+            </h4>
+            <video width="100%" muted autoplay controls loop playsinline style="border-radius:14px;">
+              <source src="" type="video/mp4" />
+            </video>
+          </div>
+        </div>
+
+        <div class="column is-6">
+          <div class="box alt" style="height:100%; margin-bottom:0; padding:1rem;">
+            <h4 class="title is-5 has-text-centered" style="margin-bottom:1rem;">
+              Web-Based Tactile Data Collection Demo
+            </h4>
+            <video width="100%" muted autoplay controls loop playsinline style="border-radius:14px;">
+              <source src="" type="video/mp4" />
+            </video>
+          </div>
+        </div>
+
       </div>
     </div>
-    </br>
-    <div class="container">
-      <div class="columns is-centered has-text-centered">
-        <span class="link-block">
-          <a href="https://github.com/NVlabs/vt-refine" class="external-link button is-normal is-rounded is-dark">
-              <span class="icon">
-                <i class="fa-brands fa-github"></i>
-              </span>
-            <span>Real-Sim-Real Pipeline in IsaacGym</span>
-          </a>
-        </span>
-      </div>
-      <div class="columns is-centered has-text-centered">
-      <h2 class="title is-5" style="color: rgb(189, 189, 189);">Left: Tactile Signals in Real World &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-        Right: Tactile Signals in Simulation</h2>
-      </div>
-      <div class="columns is-centered has-text-centered">
-        <div class="column">
-          <div class="columns is-centered">
-            <div class="column content">
-              <video id="teaser_video" width=99% muted autoplay controls loop loop style="border-radius:10px; ">
-                <source src="static/videos/simulation_1.mp4" type="video/mp4" />
-              </video>
-            </div>
-          </div>
+  </div>
+
+<div class="box" style="padding:2rem; margin-top:1.5rem;">
+  <div class="columns is-centered has-text-centered">
+    <div class="column is-full-width">
+      <h3 class="title is-4" style="margin-bottom:0.75rem;">Real-Sim-Real Tactile Pipeline</h3>
+      <p style="color:#617086; max-width:780px; margin:0 auto 1.25rem auto; line-height:1.7;">
+        Real-to-sim and sim-to-real tactile workflows for robot learning and visuo-tactile manipulation.
+      </p>
+    </div>
+  </div>
+
+  <div class="columns is-centered has-text-centered">
+    <span class="link-block">
+      <a href="https://github.com/NVlabs/vt-refine" class="external-link button is-normal is-rounded is-dark">
+        <span class="icon"><i class="fa-brands fa-github"></i></span>
+        <span>Real-Sim-Real Pipeline in IsaacGym</span>
+      </a>
+    </span>
+  </div>
+
+  <div class="container" style="margin-top:1.75rem;">
+    <div class="columns is-variable is-5 is-centered">
+
+      <div class="column is-6">
+        <div class="box alt" style="height:100%; margin-bottom:0; padding:1rem;">
+          <h4 class="title is-5 has-text-centered" style="margin-bottom:1rem;">
+            Simulation Example 1
+          </h4>
+          <video width="100%" muted autoplay controls loop playsinline style="border-radius:14px;">
+            <source src="static/videos/simulation_1.mp4" type="video/mp4" />
+          </video>
         </div>
       </div>
 
-      <div class="columns is-centered has-text-centered">
-        <div class="column">
-          <div class="columns is-centered">
-            <div class="column content">
-              <video id="teaser_video" width=99% muted autoplay controls loop style="border-radius:10px; ">
-                <source src="static/videos/simulation_2.mp4" type="video/mp4" />
-              </video>
-            </div>
-          </div>
+      <div class="column is-6">
+        <div class="box alt" style="height:100%; margin-bottom:0; padding:1rem;">
+          <h4 class="title is-5 has-text-centered" style="margin-bottom:1rem;">
+            Simulation Example 2
+          </h4>
+          <video width="100%" muted autoplay controls loop playsinline style="border-radius:14px;">
+            <source src="static/videos/simulation_2.mp4" type="video/mp4" />
+          </video>
         </div>
       </div>
 
     </div>
+  </div>
+</div>
+</section>
 
-  </section>
+<!-- =========================
+     System Design Examples
+========================= -->
+<section class="section" id="datacollection">
+  <div class="container">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-full-width">
+        <span class="tag is-link is-light is-rounded" style="margin-bottom:1rem;">System Designs</span>
+        <h2 class="title is-2 is-size-4-mobile">System Design Examples</h2>
+        <p style="color:#617086; max-width:820px; margin:0 auto 1.5rem auto;">
+          Representative design examples showing how FlexiTac can be integrated into different robotic platforms.
+        </p>
 
-  <section class="section" id="datacollection">
-    <div class="container">
-      <div class="columns is-centered has-text-centered">
-        <div class="column is-full-width">
-          <h2 class="title is-3">System Design Examples </h2>
-  
-          <div class="video-carousel" style="position: relative; overflow: hidden; padding: 0 4rem;">
-              <button class="carousel-nav prev"
-                      style="
-                        position: absolute;
-                        top: 0;
-                        bottom: 0;
-                        left: 0;
-                        width: 3rem;
-                        background: rgba(0,0,0,0.2);
-                        border: none;
-                        border-top-right-radius: 5px;
-                        border-bottom-right-radius: 5px;
-                        cursor: pointer;
-                        z-index: 10;
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                      ">
-                &#10094;&#10094;
-              </button>
-  
-            <div class="carousel-slides">
-              <!-- Slide 1 -->
-              <div class="carousel-slide" data-index="0">
-                <div class="columns is-centered is-vcentered">
-                  <!-- Left card -->
-                  <div class="column is-6">
-                    <h2 class="title is-5 has-text-centered">Visuo-Tactile Gripper Design</h2>
-                    <div class="has-text-centered">
-                      <img src="static/images/umi.png"
-                          alt="Visuo-Tactile Gripper"
-                          style="width: 100%; border-radius: 1px;">
-                    </div>
-                  </div>
+        <div class="video-carousel" style="position: relative; overflow: hidden; padding: 0 4rem;">
+          <button class="carousel-nav prev"
+                  style="position: absolute; top: 0; bottom: 0; left: 0; width: 3rem; border: none; border-top-right-radius: 5px; border-bottom-right-radius: 5px; cursor: pointer; z-index: 10; display: flex; align-items: center; justify-content: center;">
+            &#10094;&#10094;
+          </button>
 
-                  <!-- Right card -->
-                  <div class="column is-6">
-                    <h2 class="title is-5 has-text-centered">Xarm Gripper Design</h2>
-                    <div class="has-text-centered">
-                      <img src="static/images/xarm.png"
-                          alt="XArm Gripper"
-                          style="width: 100%; border-radius: 1px;">
-                    </div>
+          <div class="carousel-slides">
+            <!-- Slide 1 -->
+            <div class="carousel-slide" data-index="0">
+              <div class="columns is-centered is-vcentered">
+                <div class="column is-6">
+                  <h4 class="title is-5 has-text-centered">Visuo-Tactile Gripper Design</h4>
+                  <div class="has-text-centered">
+                    <img src="static/images/umi.png" alt="Visuo-Tactile Gripper" style="width: 100%; border-radius: 14px;">
                   </div>
                 </div>
-              </div>
-  
-              <!-- Slide 2 -->
-              <div class="carousel-slide" data-index="1" style="display: none;">
-                <div class="columns is-centered is-vcentered">
-                  <!-- Left card -->
-                  <div class="column is-6">
-                    <h2 class="title is-5 has-text-centered">Aloha Integration</h2>
-                    <div class="has-text-centered">
-                      <img src="static/images/aloha.png"
-                          alt="Aloha Gripper"
-                          style="width: 100%; border-radius: 1px;">
-                    </div>
-                  </div>
 
-                  <!-- Right card -->
-                  <div class="column is-6">
-                    <h2 class="title is-5 has-text-centered">Lerobot Integration</h2>
-                    <div class="has-text-centered">
-                      <img src="static/images/lerobot.png"
-                          alt="Lerobot Gripper"
-                          style="width: 100%; border-radius: 1px;">
-                    </div>
+                <div class="column is-6">
+                  <h4 class="title is-5 has-text-centered">Xarm Gripper Design</h4>
+                  <div class="has-text-centered">
+                    <img src="static/images/xarm.png" alt="XArm Gripper" style="width: 100%; border-radius: 14px;">
                   </div>
-                </div>
-  
-              </div>
-  
-              <!-- Slide 3 -->
-              <div class="carousel-slide" data-index="2" style="display: none;">
-                 <div class="columns is-centered is-vcentered">
-                  <!-- Left card -->
-                  <div class="column is-6">
-                    <h2 class="title is-5 has-text-centered">Franka with Tactile Skin</h2>
-                    <div class="has-text-centered">
-                      <img src="static/images/frankaskin.png"
-                          alt="Tactile Skin"
-                          style="width: 100%; border-radius: 1px;">
-                    </div>
-                  </div>
-
-                  <!-- Right card -->
-                  <div class="column is-6">
-                    <h2 class="title is-5 has-text-centered">Robotiq Gripper Integration</h2>
-                    <div class="has-text-centered">
-                      <img src="static/images/dexmate.png"
-                          alt="Robotiq Gripper"
-                          style="width: 100%; border-radius: 1px;">
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="carousel-slide" data-index="2" style="display: none;">
-                 <div class="columns is-centered is-vcentered">
-                  <!-- Left card -->
-                  <div class="column is-6">
-                    <h2 class="title is-5 has-text-centered">Tactile Glove</h2>
-                    <div class="has-text-centered">
-                      <img src="static/images/tactile hand.png"
-                          alt="Tactile Glove"
-                          style="width: 100%; border-radius: 1px;">
-                    </div>
-                  </div>
-
                 </div>
               </div>
             </div>
-  
-            <button class="carousel-nav next"
-                    style="
-                      position: absolute;
-                      top: 0;
-                      bottom: 0;
-                      right: 0;
-                      width: 3rem;
-                      background: rgba(0,0,0,0.2);
-                      border: none;
-                      border-top-left-radius: 5px;
-                      border-bottom-left-radius: 5px;
-                      cursor: pointer;
-                      z-index: 10;
-                      display: flex;
-                      align-items: center;
-                      justify-content: center;
-                    ">
-              &#10095;&#10095;
-            </button>
 
+            <!-- Slide 2 -->
+            <div class="carousel-slide" data-index="1" style="display: none;">
+              <div class="columns is-centered is-vcentered">
+                <div class="column is-6">
+                  <h4 class="title is-5 has-text-centered">Aloha Integration</h4>
+                  <div class="has-text-centered">
+                    <img src="static/images/aloha.png" alt="Aloha Gripper" style="width: 100%; border-radius: 14px;">
+                  </div>
+                </div>
+
+                <div class="column is-6">
+                  <h4 class="title is-5 has-text-centered">LeRobot Integration</h4>
+                  <div class="has-text-centered">
+                    <img src="static/images/lerobot.png" alt="LeRobot Gripper" style="width: 100%; border-radius: 14px;">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Slide 3 -->
+            <div class="carousel-slide" data-index="2" style="display: none;">
+              <div class="columns is-centered is-vcentered">
+                <div class="column is-6">
+                  <h4 class="title is-5 has-text-centered">Franka with Tactile Skin</h4>
+                  <div class="has-text-centered">
+                    <img src="static/images/frankaskin.png" alt="Tactile Skin" style="width: 100%; border-radius: 14px;">
+                  </div>
+                </div>
+
+                <div class="column is-6">
+                  <h4 class="title is-5 has-text-centered">Robotiq Gripper Integration</h4>
+                  <div class="has-text-centered">
+                    <img src="static/images/dexmate.png" alt="Robotiq Gripper" style="width: 100%; border-radius: 14px;">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Slide 4 -->
+            <div class="carousel-slide" data-index="3" style="display: none;">
+              <div class="columns is-centered is-vcentered">
+                <div class="column is-6 is-offset-3">
+                  <h4 class="title is-5 has-text-centered">Tactile Glove</h4>
+                  <div class="has-text-centered">
+                    <img src="static/images/tactile hand.png" alt="Tactile Glove" style="width: 100%; border-radius: 14px;">
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
+
+          <button class="carousel-nav next"
+                  style="position: absolute; top: 0; bottom: 0; right: 0; width: 3rem; border: none; border-top-left-radius: 5px; border-bottom-left-radius: 5px; cursor: pointer; z-index: 10; display: flex; align-items: center; justify-content: center;">
+            &#10095;&#10095;
+          </button>
         </div>
       </div>
     </div>
-  
-    <script>
-      document.addEventListener('DOMContentLoaded', () => {
-        const slides = document.querySelectorAll('.carousel-slide');
-        let currentIndex = 0;
-        const totalSlides = slides.length;
-  
-        const showSlide = (index) => {
-          slides.forEach((slide, i) => {
-            slide.style.display = i === index ? 'block' : 'none';
-          });
-        };
-  
-        document.querySelector('.carousel-nav.next').addEventListener('click', () => {
-          currentIndex = (currentIndex + 1) % totalSlides;
-          showSlide(currentIndex);
-        });
-  
-        document.querySelector('.carousel-nav.prev').addEventListener('click', () => {
-          currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
-          showSlide(currentIndex);
-        });
-      });
-    </script>
-  </section>
+  </div>
+</section>
 
+<!-- =========================
+     Related Works
+========================= -->
+<section class="section" id="related-works">
+  <div class="container">
+    <div class="has-text-centered" style="margin-bottom:1.75rem;">
+      <span class="tag is-link is-light is-rounded" style="margin-bottom:1rem;">Related Works</span>
+      <h2 class="title is-2 is-size-4-mobile">Related Projects</h2>
+      <p style="color:#617086; max-width:820px; margin:0 auto;">
+        Representative research projects that build on or connect closely to FlexiTac and visuo-tactile manipulation.
+      </p>
+    </div>
 
-
-  <section>
-    <div class="container">
-    <br>
-    <h2 class="title is-3">Related Works</h2>
-    <article class="columns">
+    <article class="columns is-vcentered">
       <div class="column is-3">
         <picture class="image">
-          <img src="static/images/3d-vitac.png">
+          <img src="static/images/3d-vitac.png" alt="3D-ViTac">
         </picture>
       </div>
       <div class="column">
         <div class="content">
           <p>
             <b>3D-ViTac: Learning Fine-Grained Manipulation with Visuo-Tactile Sensing</b><br>
-              <a href="https://binghao-huang.github.io/">Binghao Huang</a><sup>1</sup>,
-              <a href="https://wangyixuan12.github.io/">Yixuan Wang</a><sup>1</sup>,
-              <a href="">Xinyi Yang</a><sup>2</sup>,
-              <a href="https://yyueluo.com/">Yiyue Luo</a><sup>3</sup>,
-              <a href="https://yunzhuli.github.io/">Yunzhu Li</a><sup>1</sup>
-
-            
+            <a href="https://binghao-huang.github.io/">Binghao Huang</a><sup>1</sup>,
+            <a href="https://wangyixuan12.github.io/">Yixuan Wang</a><sup>1</sup>,
+            <a href="">Xinyi Yang</a><sup>2</sup>,
+            <a href="https://yyueluo.com/">Yiyue Luo</a><sup>3</sup>,
+            <a href="https://yunzhuli.github.io/">Yunzhu Li</a><sup>1</sup>
             <br>
             <em>Conference on Robot Learning (<b>CoRL</b>), 2024</em><br>
             <a href="https://binghao-huang.github.io/3D-ViTac/" target="_blank">[<u>Webpage</u>]</a>
@@ -672,28 +745,28 @@
         </div>
       </div>
     </article>
-    <article class="columns">
+
+    <article class="columns is-vcentered">
       <div class="column is-3">
-        <video id="teaser_video" width=99% muted autoplay loop style="border-radius:10px; ">
+        <video width="99%" muted autoplay loop playsinline style="border-radius:14px;">
           <source src="static/videos/vtrefine.mp4" type="video/mp4" />
         </video>
       </div>
       <div class="column">
         <div class="content">
           <p>
-            <b>VT-Refine: Learning Bimanual Assembly with
-              Visuo-Tactile Feedback via Simulation Fine-Tuning</b><br>
-                <a href="https://binghao-huang.github.io/">Binghao Huang</a><sup>1</sup>,
-                <a href="https://people.csail.mit.edu/jiex/">Jie Xu</a><sup>2</sup>,
-                <a href="https://research.nvidia.com/person/iretiayo-akinola">Iretiayo Akinola</a><sup>2</sup>,
-                <a href="https://wyang.me/">Wei Yang</a><sup>2</sup>,
-                <a href="https://balakumar-s.github.io/">Balakumar Sundaralingam</a><sup>2</sup>,
-                <a href="https://www.linkedin.com/in/rowlandoflaherty/">Rowland O'Flaherty</a><sup>2</sup>,
-                <a href="https://homes.cs.washington.edu/~fox/">Dieter Fox</a><sup>2</sup>,
-                <a href="https://xiaolonw.github.io/">Xiaolong Wang</a><sup>2,3</sup>,
-                <a href="https://cs.gmu.edu/~amousavi/">Arsalan Mousavian</a><sup>2</sup>,
-                <a href="https://research.nvidia.com/person/yu-wei-chao">Yu-Wei Chao</a><sup>2†</sup>,
-                <a href="https://yunzhuli.github.io/">Yunzhu Li</a><sup>1†</sup>
+            <b>VT-Refine: Learning Bimanual Assembly with Visuo-Tactile Feedback via Simulation Fine-Tuning</b><br>
+            <a href="https://binghao-huang.github.io/">Binghao Huang</a><sup>1</sup>,
+            <a href="https://people.csail.mit.edu/jiex/">Jie Xu</a><sup>2</sup>,
+            <a href="https://research.nvidia.com/person/iretiayo-akinola">Iretiayo Akinola</a><sup>2</sup>,
+            <a href="https://wyang.me/">Wei Yang</a><sup>2</sup>,
+            <a href="https://balakumar-s.github.io/">Balakumar Sundaralingam</a><sup>2</sup>,
+            <a href="https://www.linkedin.com/in/rowlandoflaherty/">Rowland O'Flaherty</a><sup>2</sup>,
+            <a href="https://homes.cs.washington.edu/~fox/">Dieter Fox</a><sup>2</sup>,
+            <a href="https://xiaolonw.github.io/">Xiaolong Wang</a><sup>2,3</sup>,
+            <a href="https://cs.gmu.edu/~amousavi/">Arsalan Mousavian</a><sup>2</sup>,
+            <a href="https://research.nvidia.com/person/yu-wei-chao">Yu-Wei Chao</a><sup>2†</sup>,
+            <a href="https://yunzhuli.github.io/">Yunzhu Li</a><sup>1†</sup>
             <br>
             <a href="https://binghao-huang.github.io/vt_refine/" target="_blank">[<u>Webpage</u>]</a>
             <a href="https://openreview.net/forum?id=bOVF8Rj33i#discussion" target="_blank">[<u>Paper</u>]</a>
@@ -701,66 +774,174 @@
         </div>
       </div>
     </article>
-    <article class="columns">
+
+    <article class="columns is-vcentered">
       <div class="column is-3">
-        <video id="teaser_video" width=99% muted autoplay loop style="border-radius:10px; ">
+        <video width="99%" muted autoplay loop playsinline style="border-radius:14px;">
           <source src="static/videos/touchinthewild.mp4" type="video/mp4" />
         </video>
       </div>
       <div class="column">
         <div class="content">
           <p>
-            <b>Touch in the Wild:
-              Learning Fine-Grained Manipulation with a Portable Visuo-Tactile Gripper</b><br>
-              <a href="">Xinyue Zhu<sup>*</sup><sup>,</sup><sup>1</sup></a>,
-              <a href="https://binghao-huang.github.io/">Binghao Huang<sup>*</sup><sup>,</sup><sup>1</sup></a>,
-              <a href="https://yunzhuli.github.io/">Yunzhu Li</sup><sup>1</sup></a> </br>
-              <a href="https://binghao-huang.github.io/touch_in_the_wild/" target="_blank">[<u>Webpage</u>]</a>
-              <a href="https://openreview.net/forum?id=WabVVQKTUF" target="_blank">[<u>Paper</u>]</a> </br>
-              <font color="firebrick"><b>Best Demo Award</b></font> at <b>RSS 2025</b> Workshop on Robot Hardware-Aware Intelligence <a href="https://rss-hardware-intelligence.github.io/" target="_blank"><small>[Link]</small></a><br>
-            </p>
+            <b>Touch in the Wild: Learning Fine-Grained Manipulation with a Portable Visuo-Tactile Gripper</b><br>
+            <a href="">Xinyue Zhu<sup>*</sup><sup>,</sup><sup>1</sup></a>,
+            <a href="https://binghao-huang.github.io/">Binghao Huang<sup>*</sup><sup>,</sup><sup>1</sup></a>,
+            <a href="https://yunzhuli.github.io/">Yunzhu Li<sup>1</sup></a><br>
+            <a href="https://binghao-huang.github.io/touch_in_the_wild/" target="_blank">[<u>Webpage</u>]</a>
+            <a href="https://openreview.net/forum?id=WabVVQKTUF" target="_blank">[<u>Paper</u>]</a><br>
+            <font color="firebrick"><b>Best Demo Award</b></font> at <b>RSS 2025</b> Workshop on Robot Hardware-Aware Intelligence
+            <a href="https://rss-hardware-intelligence.github.io/" target="_blank"><small>[Link]</small></a><br>
           </p>
         </div>
       </div>
     </article>
-    </div>
-  </section>
+  </div>
+</section>
 
-<section class="section">
-  <div class="container" style="text-align:center;">
-    <div id="visitor-map-wrapper" style="display: inline-block; position: relative; width: 40%;  border: 1px solid #ccc; border-radius: 10px; overflow: hidden;">
-      <script type="text/javascript" id="mapmyvisitors" src="//mapmyvisitors.com/map.js?d=-nuNZ8I8XTz0ZjebbrV73vnExjqfm7bEO1s9lZwohWM&cl=ffffff&w=a"></script>
+<!-- =========================
+     Q&A Placeholder
+========================= -->
+<section class="section" id="qa">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-four-fifths has-text-centered">
+        <span class="tag is-link is-light is-rounded" style="margin-bottom:1rem;">Q &amp; A</span>
+        <h2 class="title is-2 is-size-4-mobile">Questions?</h2>
+        <p style="color:#617086; max-width:760px; margin:0 auto 1.5rem auto;">
+          Interested in using FlexiTac in your system or reproducing the hardware? Reach out or request a sample.
+        </p>
+        <div class="buttons is-centered">
+          <a href="https://docs.google.com/forms/d/189ZAlr6o0Wqd1-vItuQBkM9eyzFJMpc2Ts94zMXM8C4/edit"
+             class="button is-rounded is-dark">
+            <span class="icon"><i class="fa-solid fa-box-open"></i></span>
+            <span>Request a Sample</span>
+          </a>
+          <a href="https://github.com/FlexiTac/FlexiTac_Hardware_Repo"
+             class="button is-rounded is-light">
+            <span class="icon"><i class="fa-brands fa-github"></i></span>
+            <span>Browse Repo</span>
+          </a>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
+<!-- =========================
+     Visitor Map
+========================= -->
+<section class="section" id="community">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-four-fifths has-text-centered">
+        <span class="tag is-link is-light is-rounded" style="margin-bottom:1rem;">Community</span>
+        <p style="color:#617086; max-width:760px; margin:0 auto 1.75rem auto; line-height:1.7;">
+          We are excited to see FlexiTac reach labs, students, and researchers around the world.
+          This map shows where visitors to the project page are coming from.
+        </p>
+
+        <div id="visitor-map-wrapper"
+             style="display:inline-block; position:relative; width:min(720px, 100%); background:#fff; border:1px solid rgba(18,32,51,0.08); border-radius:18px; overflow:hidden; box-shadow:0 10px 30px rgba(18,32,51,0.08);">
+          <div style="padding:0.9rem 1rem; border-bottom:1px solid rgba(18,32,51,0.06); background:linear-gradient(180deg, #fbfcfe 0%, #f4f7fb 100%); text-align:left; font-weight:600; color:#122033;">
+            <span style="display:inline-flex; align-items:center; gap:0.55rem;">
+              <i class="fa-solid fa-earth-americas" style="color:#2f6fed;"></i>
+              <span>FlexiTac worldwide reach</span>
+            </span>
+          </div>
+
+          <div style="padding:1rem;">
+            <script type="text/javascript" id="mapmyvisitors" src="//mapmyvisitors.com/map.js?d=-nuNZ8I8XTz0ZjebbrV73vnExjqfm7bEO1s9lZwohWM&cl=ffffff&w=a"></script>
+          </div>
+        </div>
+
+        <p style="color:#7a8699; font-size:0.95rem; margin-top:1rem;">
+          Thank you for visiting and supporting open-source tactile sensing.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- =========================
+     Footer
+========================= -->
 <footer class="footer">
   <div class="container">
     <div class="columns is-centered">
       <div class="column is-8">
         <div class="content">
           <p>
-            Website template modified from <a href="https://nerfies.github.io/">NeRFies</a> and <a
-              href="https://huy-ha.github.io/scalingup/">Scaling Up Distilling Down</a>.
+            Website template modified from <a href="https://nerfies.github.io/">NeRFies</a> and
+            <a href="https://huy-ha.github.io/scalingup/">Scaling Up Distilling Down</a>.
           </p>
           <p>
-            This website is licensed under a <a rel="license"
-              href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
-              Commons Attribution-ShareAlike 4.0 International License</a>.
+            This website is licensed under a
+            <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">
+              Creative Commons Attribution-ShareAlike 4.0 International License
+            </a>.
           </p>
           <p>
-            This means you are free to borrow and modify the <a
-              href="https://github.com/nerfies/nerfies.github.io">source
-              code</a> of this website as long as
+            This means you are free to borrow and modify the
+            <a href="https://github.com/nerfies/nerfies.github.io">source code</a> of this website as long as
             you link back to the <a href="https://nerfies.github.io/">NeRFies</a> page in the footer.
-            Please remember to remove the analytics code included in the header of the website which
-            you do not want on your website.
+            Please remember to remove the analytics code included in the header if you do not want it on your website.
           </p>
         </div>
       </div>
     </div>
   </div>
 </footer>
+
+<!-- =========================
+     Scripts
+========================= -->
+<script>
+  function toggleTactileVideos() {
+    const moreVideos = document.getElementById("moreVideosTactile");
+    const toggleButton = document.getElementById("toggleButtonTactile");
+
+    if (moreVideos.style.display === "none" || moreVideos.style.display === "") {
+      moreVideos.style.display = "block";
+      toggleButton.innerText = "Hide FlexiTac-V1 Guides and Videos";
+    } else {
+      moreVideos.style.display = "none";
+      toggleButton.innerText = "Show FlexiTac-V1 Guides and Videos";
+    }
+  }
+</script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const slides = document.querySelectorAll('.carousel-slide');
+    let currentIndex = 0;
+    const totalSlides = slides.length;
+
+    const showSlide = (index) => {
+      slides.forEach((slide, i) => {
+        slide.style.display = i === index ? 'block' : 'none';
+      });
+    };
+
+    const nextBtn = document.querySelector('.carousel-nav.next');
+    const prevBtn = document.querySelector('.carousel-nav.prev');
+
+    if (nextBtn) {
+      nextBtn.addEventListener('click', () => {
+        currentIndex = (currentIndex + 1) % totalSlides;
+        showSlide(currentIndex);
+      });
+    }
+
+    if (prevBtn) {
+      prevBtn.addEventListener('click', () => {
+        currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+        showSlide(currentIndex);
+      });
+    }
+  });
+</script>
 
 </body>
 </html>
