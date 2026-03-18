@@ -162,12 +162,12 @@
   <div class="hero-foot is-hidden-mobile">
     <nav class="tabs is-boxed is-fullwidth is-size-5">
       <ul>
-        <li><a href="#overview">Overview</a></li>
+        <!-- <li><a href="#overview">Overview</a></li> -->
         <li><a href="#summary-video">Summary Video</a></li>
         <li><a href="#hardware">Hardware</a></li>
         <li><a href="#simulation">Simulation</a></li>
         <li><a href="#datacollection">System Designs</a></li>
-        <li><a href="#related-works">Related Works</a></li>
+        <!-- <li><a href="#related-works">Related Works</a></li> -->
         <li><a href="#qa">Q &amp; A</a></li>
       </ul>
     </nav>
@@ -244,9 +244,9 @@
       <div class="column is-four-fifths has-text-centered">
         <span class="tag is-link is-light is-rounded" style="margin-bottom:1rem;">Hardware</span>
         <h2 class="title is-2 is-size-4-mobile">Hardware Overview</h2>
-        <p style="color:#617086; max-width:820px; margin:0 auto;">
+        <!-- <p style="color:#617086; max-width:820px; margin:0 auto;">
           Two sensor generations with different fabrication trade-offs, plus open-source resources for reproduction and deployment.
-        </p>
+        </p> -->
       </div>
     </div>
   </div>
@@ -546,7 +546,7 @@
         <div class="column is-6">
           <div class="box alt" style="height:100%; margin-bottom:0; padding:1rem;">
             <h4 class="title is-5 has-text-centered" style="margin-bottom:1rem;">
-              Web-Based Tactile Data Collection Demo
+              Web-Based Data Collection
             </h4>
             <video width="100%" muted autoplay controls loop playsinline style="border-radius:14px;">
               <source src="" type="video/mp4" />
@@ -746,7 +746,7 @@
       </div>
     </article>
 
-    <article class="columns is-vcentered">
+    <article class="columns">
       <div class="column is-3">
         <video width="99%" muted autoplay loop playsinline style="border-radius:14px;">
           <source src="static/videos/vtrefine.mp4" type="video/mp4" />
@@ -755,43 +755,53 @@
       <div class="column">
         <div class="content">
           <p>
-            <b>VT-Refine: Learning Bimanual Assembly with Visuo-Tactile Feedback via Simulation Fine-Tuning</b><br>
-            <a href="https://binghao-huang.github.io/">Binghao Huang</a><sup>1</sup>,
-            <a href="https://people.csail.mit.edu/jiex/">Jie Xu</a><sup>2</sup>,
-            <a href="https://research.nvidia.com/person/iretiayo-akinola">Iretiayo Akinola</a><sup>2</sup>,
-            <a href="https://wyang.me/">Wei Yang</a><sup>2</sup>,
-            <a href="https://balakumar-s.github.io/">Balakumar Sundaralingam</a><sup>2</sup>,
-            <a href="https://www.linkedin.com/in/rowlandoflaherty/">Rowland O'Flaherty</a><sup>2</sup>,
-            <a href="https://homes.cs.washington.edu/~fox/">Dieter Fox</a><sup>2</sup>,
-            <a href="https://xiaolonw.github.io/">Xiaolong Wang</a><sup>2,3</sup>,
-            <a href="https://cs.gmu.edu/~amousavi/">Arsalan Mousavian</a><sup>2</sup>,
-            <a href="https://research.nvidia.com/person/yu-wei-chao">Yu-Wei Chao</a><sup>2†</sup>,
-            <a href="https://yunzhuli.github.io/">Yunzhu Li</a><sup>1†</sup>
+            <b>VT-Refine: Learning Bimanual Assembly with
+              Visuo-Tactile Feedback via Simulation Fine-Tuning</b><br>
+                <a href="https://binghao-huang.github.io/"><b> Binghao Huang </b></a><sup>1</sup>,
+                <a href="https://people.csail.mit.edu/jiex/">Jie Xu</a><sup>2</sup>,
+                <a href="https://research.nvidia.com/person/iretiayo-akinola">Iretiayo Akinola</a><sup>2</sup>,
+                <a href="https://wyang.me/">Wei Yang</a><sup>2</sup>,
+                <a href="https://balakumar-s.github.io/">Balakumar Sundaralingam</a><sup>2</sup>,
+                <a href="https://www.linkedin.com/in/rowlandoflaherty/">Rowland O'Flaherty</a><sup>2</sup>,
+                <a href="https://homes.cs.washington.edu/~fox/">Dieter Fox</a><sup>2</sup>,
+                <a href="https://xiaolonw.github.io/">Xiaolong Wang</a><sup>2,3</sup>,
+                <a href="https://cs.gmu.edu/~amousavi/">Arsalan Mousavian</a><sup>2</sup>,
+                <a href="https://research.nvidia.com/person/yu-wei-chao">Yu-Wei Chao</a><sup>2†</sup>,
+                <a href="https://yunzhuli.github.io/">Yunzhu Li</a><sup>1†</sup>
             <br>
+            <em>Conference on Robot Learning (<b>CoRL</b>), 2025</em><br>
+            <font color="firebrick"><b>Best Paper Award</b></font> at <b>IROS 2025</b> AHFHR Workshop <a href="https://fsie-robotics.com/IROS2025-Workshop-AHFHR/" target="_blank"> [Link]</a><br>
             <a href="https://binghao-huang.github.io/vt_refine/" target="_blank">[<u>Webpage</u>]</a>
-            <a href="https://openreview.net/forum?id=bOVF8Rj33i#discussion" target="_blank">[<u>Paper</u>]</a>
+            <a href="https://openreview.net/forum?id=mV3W5givYb" target="_blank">[<u>Paper</u>]</a>
+            <a href="https://www.youtube.com/watch?v=AEt30ttJ9A8" target="_blank">[<u>Video</u>]</a>
+            <a href="https://github.com/NVlabs/vt-refine" target="_blank">[<u>Code</u>]</a>
           </p>
         </div>
       </div>
     </article>
 
-    <article class="columns is-vcentered">
+    <article class="columns">
       <div class="column is-3">
-        <video width="99%" muted autoplay loop playsinline style="border-radius:14px;">
+        <video id="teaser_video" width=99% muted autoplay loop style="border-radius:10px; ">
           <source src="static/videos/touchinthewild.mp4" type="video/mp4" />
         </video>
       </div>
       <div class="column">
         <div class="content">
           <p>
-            <b>Touch in the Wild: Learning Fine-Grained Manipulation with a Portable Visuo-Tactile Gripper</b><br>
-            <a href="">Xinyue Zhu<sup>*</sup><sup>,</sup><sup>1</sup></a>,
-            <a href="https://binghao-huang.github.io/">Binghao Huang<sup>*</sup><sup>,</sup><sup>1</sup></a>,
-            <a href="https://yunzhuli.github.io/">Yunzhu Li<sup>1</sup></a><br>
-            <a href="https://binghao-huang.github.io/touch_in_the_wild/" target="_blank">[<u>Webpage</u>]</a>
-            <a href="https://openreview.net/forum?id=WabVVQKTUF" target="_blank">[<u>Paper</u>]</a><br>
-            <font color="firebrick"><b>Best Demo Award</b></font> at <b>RSS 2025</b> Workshop on Robot Hardware-Aware Intelligence
-            <a href="https://rss-hardware-intelligence.github.io/" target="_blank"><small>[Link]</small></a><br>
+            <b>Touch in the Wild:
+              Learning Fine-Grained Manipulation with a Portable Visuo-Tactile Gripper</b><br>
+              <a href="">Xinyue Zhu<sup>*</sup><sup>,</sup><sup>1</sup></a>,
+              <a href="https://binghao-huang.github.io/"><b> Binghao Huang </b> <sup>*</sup><sup>,</sup><sup>1</sup></a>,
+              <a href="https://yunzhuli.github.io/">Yunzhu Li</sup><sup>1</sup></a> </br>
+              <a href="https://binghao-huang.github.io/touch_in_the_wild/" target="_blank">[<u>Webpage</u>]</a>
+              <a href="https://arxiv.org/abs/2507.15062v1" target="_blank">[<u>Paper</u>]</a> 
+              <a href="https://www.youtube.com/watch?v=gMoedqqJ0Rg" target="_blank">[<u>Video</u>]</a>
+              <a href="https://github.com/YolandaXinyueZhu/touch_in_the_wild" target="_blank">[<u>Code</u>]</a>
+              </br>
+              <em>Conference on Neural Information Processing Systems (<b>NeurIPS</b>), 2025</em><br>
+              <font color="firebrick"><b>Best Demo Award</b></font> at <b>RSS 2025</b> Workshop on Robot Hardware-Aware Intelligence <a href="https://rss-hardware-intelligence.github.io/" target="_blank"><small>[Link]</small></a><br>
+            </p>
           </p>
         </div>
       </div>
