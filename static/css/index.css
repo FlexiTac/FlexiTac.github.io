@@ -169,7 +169,7 @@ top: 0;
 right: 0;
 bottom: 0;
 left: 0;
-background-color: rgba(0, 0, 0, 0.4); /* 40% opacity black */
+background-color: rgba(0, 0, 0, 0.7); /* 70% opacity black */
 z-index: 1; /* Make sure it's behind the text */
 transition: opacity 1.0s;
 }
@@ -246,7 +246,12 @@ p,
 
 .hero.video .overlay {
   background:
-    linear-gradient(180deg, rgba(6, 12, 22, 0.36) 0%, rgba(6, 12, 22, 0.52) 50%, rgba(6, 12, 22, 0.72) 100%);
+    linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.65) 0%,
+      rgba(0, 0, 0, 0.72) 50%,
+      rgba(0, 0, 0, 0.82) 100%
+    );
 }
 
 .hero.video .navbar {
