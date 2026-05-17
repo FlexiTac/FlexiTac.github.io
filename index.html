@@ -20,7 +20,7 @@
   <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
   <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
-  <link rel="stylesheet" href="./static/css/index.css?v=20260517d">
+  <link rel="stylesheet" href="./static/css/index.css?v=20260517e">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -901,19 +901,17 @@
               <span>FlexiTac worldwide reach</span>
             </span>
           </div>
-
           <div style="padding:1rem;">
-            <script type="text/javascript" id="clustrmaps"
-              src="https://clustrmaps.com/map_v2.js?d=-nuNZ8I8XTz0ZjebbrV73vnExjqfm7bEO1s9lZwohWM&cl=ffffff&w=680&t=tt"></script>
+            <script type="text/javascript" id="mapmyvisitors" src="//mapmyvisitors.com/map.js?d=-nuNZ8I8XTz0ZjebbrV73vnExjqfm7bEO1s9lZwohWM&cl=ffffff&w=a"></script>
           </div>
           <div class="visitor-total-bar" aria-live="polite">
             <span class="visitor-total-icon">
               <i class="fa-solid fa-chart-simple"></i>
             </span>
             <span>
-              <span class="visitor-total-label">Total visitors</span>
-              <strong id="visitor-total-count">Loading…</strong>
-              <span id="visitor-total-period">Since March 2026</span>
+              <span class="visitor-total-label">Pageviews (last 30 days)</span>
+              <strong id="visitor-total-count">Loading...</strong>
+              <span id="visitor-total-period"></span>
             </span>
           </div>
           <div style="padding:1rem;">
@@ -930,28 +928,31 @@
         <script>
           (function () {
             var totalCount = document.getElementById('visitor-total-count');
+            var periodEl = document.getElementById('visitor-total-period');
             var tries = 0;
             var lastNumber = '';
 
-            function readNumber(el) {
+            function cleanText(el) {
               if (!el) return '';
-              var text = (el.textContent || '').replace(/ /g, ' ').trim();
-              var match = text.match(/[\d][\d,]*/);
-              return match ? match[0] : '';
+              return (el.textContent || '').replace(/ /g, ' ').trim();
             }
 
             function updateVisitorTotal() {
               var wrapper = document.getElementById('visitor-map-wrapper');
               if (!wrapper) return false;
 
-              var visitorsEl = wrapper.querySelector('.clustrmaps-visitors, .mapmyvisitors-visitors');
+              var visitorsText = cleanText(wrapper.querySelector('.mapmyvisitors-visitors'));
+              var match = visitorsText.match(/[\d][\d,]*/);
+              if (!match) return false;
 
-              var number = readNumber(visitorsEl);
-              if (!number) return false;
+              if (match[0] !== lastNumber) {
+                totalCount.textContent = match[0];
+                lastNumber = match[0];
+              }
 
-              if (number !== lastNumber) {
-                totalCount.textContent = number;
-                lastNumber = number;
+              if (periodEl) {
+                var dateText = cleanText(wrapper.querySelector('.mapmyvisitors-date'));
+                if (dateText) periodEl.textContent = dateText;
               }
               return true;
             }
