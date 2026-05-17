@@ -20,7 +20,7 @@
   <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
   <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
-  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="stylesheet" href="./static/css/index.css?v=20260517d">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -847,13 +847,13 @@
     <div class="container">
     <br>
     <h2 class="title is-3">BibTeX</h2>
-    <pre><code>@inproceedings{
-huang2026flexitac,
-title={FlexiTac: An Open-Source, Scalable Tactile Solutionfor Robotic Systems},
-author={Binghao Huang and Yunzhu Li},
-year={2026},
-url={https://flexitac.github.io/}
-}</code></pre>
+    <pre><code>@article{huang2026flexitac,
+  title={FlexiTac: A Low-Cost, Open-Source, Scalable Tactile Sensing Solution for Robotic Systems},
+  author={Huang, Binghao and Li, Yunzhu},
+  journal={arXiv preprint arXiv:2604.28156},
+  year={2026}
+}
+</code></pre>
     </div>
 </section>
 
@@ -903,7 +903,18 @@ url={https://flexitac.github.io/}
           </div>
 
           <div style="padding:1rem;">
-            <script type="text/javascript" id="mapmyvisitors" src="//mapmyvisitors.com/map.js?d=-nuNZ8I8XTz0ZjebbrV73vnExjqfm7bEO1s9lZwohWM&cl=ffffff&w=a"></script>
+            <script type="text/javascript" id="clustrmaps"
+              src="https://clustrmaps.com/map_v2.js?d=-nuNZ8I8XTz0ZjebbrV73vnExjqfm7bEO1s9lZwohWM&cl=ffffff&w=680&t=tt"></script>
+          </div>
+          <div class="visitor-total-bar" aria-live="polite">
+            <span class="visitor-total-icon">
+              <i class="fa-solid fa-chart-simple"></i>
+            </span>
+            <span>
+              <span class="visitor-total-label">Total visitors</span>
+              <strong id="visitor-total-count">Loading…</strong>
+              <span id="visitor-total-period">Since March 2026</span>
+            </span>
           </div>
           <div style="padding:1rem;">
             <img src="static/images/collaboration.jpg"
@@ -916,6 +927,44 @@ url={https://flexitac.github.io/}
           Thank you for visiting and supporting open-source tactile sensing.
         </p>
 
+        <script>
+          (function () {
+            var totalCount = document.getElementById('visitor-total-count');
+            var tries = 0;
+            var lastNumber = '';
+
+            function readNumber(el) {
+              if (!el) return '';
+              var text = (el.textContent || '').replace(/ /g, ' ').trim();
+              var match = text.match(/[\d][\d,]*/);
+              return match ? match[0] : '';
+            }
+
+            function updateVisitorTotal() {
+              var wrapper = document.getElementById('visitor-map-wrapper');
+              if (!wrapper) return false;
+
+              var visitorsEl = wrapper.querySelector('.clustrmaps-visitors, .mapmyvisitors-visitors');
+
+              var number = readNumber(visitorsEl);
+              if (!number) return false;
+
+              if (number !== lastNumber) {
+                totalCount.textContent = number;
+                lastNumber = number;
+              }
+              return true;
+            }
+
+            var visitorTotalTimer = window.setInterval(function () {
+              tries += 1;
+              var ok = updateVisitorTotal();
+              if ((ok && tries >= 6) || tries >= 60) {
+                window.clearInterval(visitorTotalTimer);
+              }
+            }, 500);
+          })();
+        </script>
 
       </div>
     </div>
