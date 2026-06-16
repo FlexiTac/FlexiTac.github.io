@@ -7,6 +7,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>FlexiTac: An Open-Source, Scalable Tactile Solution for Robotic Systems</title>
 
+  <!-- Resource hints: warm up third-party origins before they are needed -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+
+  <!-- Preload the hero poster so the first paint is instant while the video buffers -->
+  <link rel="preload" as="image" href="static/posters/teaser.jpg">
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/index.css?v=20260616a">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <!-- Academicons is only used below the fold — load it without blocking render -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css"
+        media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css"></noscript>
+
+  <!-- Analytics: async + placed after stylesheets so it never blocks render -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-QZ38WT2YPD"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -14,19 +34,6 @@
     gtag('js', new Date());
     gtag('config', 'G-QZ38WT2YPD');
   </script>
-
-  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
-  <link rel="stylesheet" href="./static/css/bulma.min.css">
-  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
-  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
-  <link rel="stylesheet" href="./static/css/index.css?v=20260517e">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="./static/js/bulma-carousel.min.js"></script>
-  <script src="./static/js/bulma-slider.min.js"></script>
-  <script src="./static/js/index.js"></script>
 </head>
 <body>
 
@@ -34,15 +41,15 @@
      Hero
 ========================= -->
 <section class="hero is-link is-fullheight video" style="overflow:hidden; position:relative;">
-  <div class="hero-video" style="height: 100%; width: 177.77777778vh; min-width: 100%; min-height: 56.25vw;">
-    <video playsinline autoplay muted loop>
+  <div class="hero-video is-hidden-mobile" style="height: 100%; width: 177.77777778vh; min-width: 100%; min-height: 56.25vw;">
+    <video playsinline autoplay muted loop preload="auto" poster="static/posters/teaser.jpg">
       <source src="./static/videos/teaser_tactile.mp4" type="video/mp4">
     </video>
   </div>
 
   <div class="hero-video is-hidden-tablet is-inline-block-mobile"
        style="height: 154.28571428vw; width: 100%; min-width:64.81481481vh; min-height:100%;">
-    <video playsinline autoplay muted loop>
+    <video playsinline autoplay muted loop preload="auto" poster="static/posters/teaser.jpg">
       <source src="./static/videos/teaser_tactile.mp4" type="video/mp4">
     </video>
   </div>
@@ -313,7 +320,7 @@
             FlexiTac-V2 Hardware
           </h4>
           <div style="flex:1; display:flex; align-items:center; justify-content:center;">
-            <img src="static/images/flexitac.jpg"
+            <img loading="lazy" decoding="async" src="static/images/flexitac.jpg"
                 alt="FlexiTac sensor"
                 style="width:100%; max-height:380px; object-fit:contain; border-radius:14px;">
           </div>
@@ -350,7 +357,7 @@
             </h4>
             <div class="columns is-centered">
               <div class="column content">
-                <video id="teaser_video_1" width="99%" muted autoplay controls playsinline style="border-radius:14px;">
+                <video preload="none" id="teaser_video_1" width="99%" muted autoplay controls playsinline style="border-radius:14px;">
                   <source src="static/videos/sensor_v2_test_1_compressed.mp4" type="video/mp4" />
                 </video>
               </div>
@@ -364,7 +371,7 @@
             </h4>
             <div class="columns is-centered">
               <div class="column content">
-                <video id="teaser_video_2" width="99%" muted autoplay controls playsinline style="border-radius:14px;">
+                <video preload="none" id="teaser_video_2" width="99%" muted autoplay controls playsinline style="border-radius:14px;">
                   <source src="static/videos/sensor_v2_test_2_compressed.mp4" type="video/mp4" />
                 </video>
               </div>
@@ -448,7 +455,7 @@
             </div>
           </div>
         <div class="12u$"><a href="https://arxiv.org/abs/2410.24091"><span class="image fit"
-              style="border: 1px solid; border-color: #888888;"><img
+              style="border: 1px solid; border-color: #888888;"><img loading="lazy" decoding="async"
                 src="static/images/3d-vitac-paper-overview.jpg" alt="" /></span></a>
         </div>
         </div>
@@ -476,7 +483,7 @@
                     style="height:100%; min-height:220px; margin-bottom:0; display:flex; align-items:center; justify-content:center; padding:2rem 1.5rem;">
                   <div style="font-size:1em; line-height:1.5em; text-align:center;">
                     <span class="image fit" style="margin-bottom:0.9em; display:block;">
-                      <img src="static/images/github_logo.svg"
+                      <img loading="lazy" decoding="async" src="static/images/github_logo.svg"
                           alt="GitHub Hardware Codebase"
                           style="width:52px; height:52px; margin:0 auto;">
                     </span>
@@ -494,7 +501,7 @@
                     style="height:100%; min-height:220px; margin-bottom:0; display:flex; align-items:center; justify-content:center; padding:2rem 1.5rem;">
                   <div style="font-size:1em; line-height:1.5em; text-align:center;">
                     <span class="image fit" style="margin-bottom:0.9em; display:block;">
-                      <img src="static/images/build.svg"
+                      <img loading="lazy" decoding="async" src="static/images/build.svg"
                           alt="Hardware Guide"
                           style="width:52px; height:52px; margin:0 auto;">
                     </span>
@@ -512,7 +519,7 @@
                     style="height:100%; min-height:220px; margin-bottom:0; display:flex; align-items:center; justify-content:center; padding:2rem 1.5rem;">
                   <div style="font-size:1em; line-height:1.5em; text-align:center;">
                     <span class="image fit" style="margin-bottom:0.9em; display:block;">
-                      <img src="static/images/documentation.svg"
+                      <img loading="lazy" decoding="async" src="static/images/documentation.svg"
                           alt="Bill of Materials"
                           style="width:52px; height:52px; margin:0 auto;">
                     </span>
@@ -538,7 +545,7 @@
                   </a>
                 </h4>
                 <a href="https://www.youtube.com/watch?v=8eTpFYgae64" target="_blank">
-                  <img src="static/images/COVER.jpg"
+                  <img loading="lazy" decoding="async" src="static/images/COVER.jpg"
                       alt="Sensor Fabrication and PCB"
                       style="width:100%; border-radius:14px;">
                 </a>
@@ -551,7 +558,7 @@
                 <h4 class="title is-5 has-text-centered" style="margin-bottom:1rem;">
                   Tactile Hardware Introduction
                 </h4>
-                <video width="100%" muted autoplay controls playsinline style="border-radius:14px;">
+                <video preload="none" width="100%" muted autoplay controls playsinline style="border-radius:14px;">
                   <source src="static/videos/sensor_test_1_compressed.mp4" type="video/mp4" />
                 </video>
               </div>
@@ -607,7 +614,7 @@
             <h4 class="title is-5 has-text-centered" style="margin-bottom:1rem;">
               Isaac Sim Tactile Simulation Demo
             </h4>
-            <video width="100%" muted autoplay controls loop playsinline style="border-radius:14px;">
+            <video preload="none" width="100%" muted autoplay controls loop playsinline style="border-radius:14px;">
               <source src="/video/isaacsim.mp4" type="video/mp4" />
             </video>
           </div>
@@ -618,8 +625,8 @@
             <h4 class="title is-5 has-text-centered" style="margin-bottom:1rem;">
               Web-Based Data Collection
             </h4>
-            <video width="100%" muted autoplay controls loop playsinline style="border-radius:14px;">
-              <source src="/video/web demo.mp4" type="video/mp4" />
+            <video preload="none" width="100%" muted autoplay controls loop playsinline style="border-radius:14px;">
+              <source src="/video/webdemo.mp4" type="video/mp4" />
             </video>
           </div>
         </div>
@@ -685,7 +692,7 @@
     </div>
   </div>
     <div class="12u$"><a href="https://binghao-huang.github.io/vt_refine/vt_refine_corl_camera_ready.pdf"><span class="image fit"
-    style="border: 1px solid; border-color: #888888;"><img
+    style="border: 1px solid; border-color: #888888;"><img loading="lazy" decoding="async"
       src="static/images/vt-refine-paper-overview.jpg" alt="" /></span></a>
   </div>
   <div class="container" style="margin-top:1.75rem;">
@@ -696,7 +703,7 @@
           <h4 class="title is-5 has-text-centered" style="margin-bottom:1rem;">
             Simulation Example 1
           </h4>
-          <video width="100%" muted autoplay controls loop playsinline style="border-radius:14px;">
+          <video preload="none" width="100%" muted autoplay controls loop playsinline style="border-radius:14px;">
             <source src="static/videos/simulation_1.mp4" type="video/mp4" />
           </video>
         </div>
@@ -707,7 +714,7 @@
           <h4 class="title is-5 has-text-centered" style="margin-bottom:1rem;">
             Simulation Example 2
           </h4>
-          <video width="100%" muted autoplay controls loop playsinline style="border-radius:14px;">
+          <video preload="none" width="100%" muted autoplay controls loop playsinline style="border-radius:14px;">
             <source src="static/videos/simulation_2.mp4" type="video/mp4" />
           </video>
         </div>
@@ -797,13 +804,13 @@
           <div class="columns is-centered is-variable is-4 is-vcentered" style="margin-bottom:0.8rem;">
             <div class="column is-5">
               <h4 class="title is-6 has-text-centered" style="margin-bottom:0.5rem;">Portable Visuo-Tactile Gripper</h4>
-              <img src="static/images/umi.jpg" alt="Portable Visuo-Tactile Gripper"
+              <img loading="lazy" decoding="async" src="static/images/umi.jpg" alt="Portable Visuo-Tactile Gripper"
                    style="width:88%; border-radius:14px; display:block; margin:0 auto;">
             </div>
 
             <div class="column is-5">
               <h4 class="title is-6 has-text-centered" style="margin-bottom:0.5rem;">xArm Integration</h4>
-              <img src="static/images/xarm.jpg" alt="xArm Integration"
+              <img loading="lazy" decoding="async" src="static/images/xarm.jpg" alt="xArm Integration"
                    style="width:88%; border-radius:14px; display:block; margin:0 auto;">
             </div>
           </div>
@@ -813,25 +820,25 @@
           <div class="columns is-variable is-3 is-mobile">
             <div class="column is-3">
               <h4 class="title is-6 has-text-centered" style="margin-bottom:0.45rem;">LeRobot</h4>
-              <img src="static/images/lerobot.jpg" alt="LeRobot Integration"
+              <img loading="lazy" decoding="async" src="static/images/lerobot.jpg" alt="LeRobot Integration"
                    style="width:100%; border-radius:12px;">
             </div>
 
             <div class="column is-3">
               <h4 class="title is-6 has-text-centered" style="margin-bottom:0.45rem;">Franka + Skin</h4>
-              <img src="static/images/frankaskin.jpg" alt="Franka with Tactile Skin"
+              <img loading="lazy" decoding="async" src="static/images/frankaskin.jpg" alt="Franka with Tactile Skin"
                    style="width:100%; border-radius:12px;">
             </div>
 
             <div class="column is-3">
               <h4 class="title is-6 has-text-centered" style="margin-bottom:0.45rem;">Robotiq</h4>
-              <img src="static/images/dexmate.jpg" alt="Robotiq Gripper Integration"
+              <img loading="lazy" decoding="async" src="static/images/dexmate.jpg" alt="Robotiq Gripper Integration"
                    style="width:100%; border-radius:12px;">
             </div>
 
             <div class="column is-3">
               <h4 class="title is-6 has-text-centered" style="margin-bottom:0.45rem;">Tactile Glove</h4>
-              <img src="static/images/tactile hand.jpg" alt="Tactile Glove"
+              <img loading="lazy" decoding="async" src="static/images/tactile hand.jpg" alt="Tactile Glove"
                    style="width:100%; border-radius:12px;">
             </div>
           </div>
@@ -915,7 +922,7 @@
             </span>
           </div>
           <div style="padding:1rem;">
-            <img src="static/images/collaboration.jpg"
+            <img loading="lazy" decoding="async" src="static/images/collaboration.jpg"
                  alt="Institutions using or exploring FlexiTac"
                  style="width:100%; border-radius:14px; display:block;">
           </div>
@@ -991,7 +998,7 @@
     <article class="columns is-vcentered">
       <div class="column is-3">
         <picture class="image">
-          <img src="static/images/3d-vitac.png" alt="3D-ViTac">
+          <img src="static/images/3d-vitac.jpg" alt="3D-ViTac" loading="lazy">
         </picture>
       </div>
       <div class="column">
@@ -1016,7 +1023,7 @@
 
     <article class="columns">
       <div class="column is-3">
-        <video width="99%" muted autoplay loop playsinline style="border-radius:14px;">
+        <video preload="none" width="99%" muted autoplay loop playsinline style="border-radius:14px;">
           <source src="static/videos/vtrefine.mp4" type="video/mp4" />
         </video>
       </div>
@@ -1050,7 +1057,7 @@
 
     <article class="columns">
       <div class="column is-3">
-        <video id="teaser_video" width=99% muted autoplay loop style="border-radius:10px; ">
+        <video preload="none" id="teaser_video" width=99% muted autoplay loop playsinline style="border-radius:10px; ">
           <source src="static/videos/touchinthewild.mp4" type="video/mp4" />
         </video>
       </div>
@@ -1076,7 +1083,7 @@
     </article>
     <article class="columns">
       <div class="column is-3">
-        <video id="teaser_video" width=99% muted autoplay loop playsinline style="border-radius:10px; ">
+        <video preload="none" id="teaser_video" width=99% muted autoplay loop playsinline style="border-radius:10px; ">
           <source src="static/videos/leflexitac.mp4" type="video/mp4" />
         </video>
       </div>
@@ -1099,7 +1106,7 @@
     </article>
     <article class="columns">
       <div class="column is-3">
-        <video id="teaser_video" width=99% muted autoplay loop style="border-radius:10px; ">
+        <video preload="none" id="teaser_video" width=99% muted autoplay loop playsinline style="border-radius:10px; ">
           <source src="static/videos/policyconsensus.mp4" type="video/mp4" />
         </video>
       </div>
@@ -1136,7 +1143,7 @@
     </article>
     <article class="columns">
       <div class="column is-3">
-        <img src="static/images/MOTIF-Poster.png" width=99% style="border-radius:10px;" />
+        <img src="static/images/MOTIF-Poster.jpg" width=99% style="border-radius:10px;" loading="lazy" />
       </div>
       <div class="column">
         <div class="content">
@@ -1162,7 +1169,9 @@
     </article>
     <article class="columns">
       <div class="column is-3">
-        <img src="static/images/npj25.gif" width=99% style="border-radius:10px;" />
+        <video width=99% muted autoplay loop playsinline preload="none" style="border-radius:10px;">
+          <source src="static/videos/npj25.mp4" type="video/mp4" />
+        </video>
       </div>
       <div class="column">
         <div class="content">
@@ -1185,7 +1194,7 @@
       
       <div class="column is-3">
         <div class="columns is-centered">
-          <img src="static/images/object_pose.jpg" width=60% style="border-radius:10px;" />
+          <img loading="lazy" decoding="async" src="static/images/object_pose.jpg" width=60% style="border-radius:10px;" />
         </div>
       </div>
       <div class="column">
@@ -1210,7 +1219,7 @@
     </article>
     <article class="columns">
       <div class="column is-3">
-        <video id="teaser_video" width=99% muted autoplay loop style="border-radius:10px; ">
+        <video preload="none" id="teaser_video" width=99% muted autoplay loop playsinline style="border-radius:10px; ">
           <source src="static/videos/reactive_gripper.mp4" type="video/mp4" />
         </video>
       </div>
@@ -1236,7 +1245,7 @@
     </article>
     <article class="columns">
       <div class="column is-3">
-        <video id="teaser_video" width=99% muted autoplay loop style="border-radius:10px; ">
+        <video preload="none" id="teaser_video" width=99% muted autoplay loop playsinline style="border-radius:10px; ">
           <source src="static/videos/tacvla.mp4" type="video/mp4" />
         </video>
       </div>
@@ -1266,7 +1275,9 @@
     </article>
     <article class="columns">
       <div class="column is-3">
-        <img src="static/images/VTAC.gif" width=99% style="border-radius:10px;" />
+        <video width=99% muted autoplay loop playsinline preload="none" style="border-radius:10px;">
+          <source src="static/videos/VTAC.mp4" type="video/mp4" />
+        </video>
       </div>
       <div class="column">
         <div class="content">
@@ -1289,7 +1300,7 @@
     </article>
     <article class="columns">
       <div class="column is-3">
-        <img src="static/images/go2umitac.jpg" width=99% style="border-radius:10px;" />
+        <img loading="lazy" decoding="async" src="static/images/go2umitac.jpg" width=99% style="border-radius:10px;" />
       </div>
       <div class="column">
         <div class="content">
@@ -1404,34 +1415,39 @@
 </script>
 
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const slides = document.querySelectorAll('.carousel-slide');
-    let currentIndex = 0;
-    const totalSlides = slides.length;
+  // Viewport-gated video playback.
+  // All non-hero <video> elements ship with preload="none" so nothing downloads
+  // up front. We only fetch + play a clip once it scrolls near the viewport, and
+  // pause it again when it leaves — saving bandwidth, CPU, and battery.
+  (function () {
+    const heroVideos = new Set(
+      Array.from(document.querySelectorAll('.hero-video video'))
+    );
+    const videos = Array.from(document.querySelectorAll('video'))
+      .filter(v => !heroVideos.has(v));
 
-    const showSlide = (index) => {
-      slides.forEach((slide, i) => {
-        slide.style.display = i === index ? 'block' : 'none';
-      });
-    };
-
-    const nextBtn = document.querySelector('.carousel-nav.next');
-    const prevBtn = document.querySelector('.carousel-nav.prev');
-
-    if (nextBtn) {
-      nextBtn.addEventListener('click', () => {
-        currentIndex = (currentIndex + 1) % totalSlides;
-        showSlide(currentIndex);
-      });
+    if (!('IntersectionObserver' in window)) {
+      // Fallback: just let the browser handle it.
+      videos.forEach(v => { v.preload = 'auto'; });
+      return;
     }
 
-    if (prevBtn) {
-      prevBtn.addEventListener('click', () => {
-        currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
-        showSlide(currentIndex);
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        const v = entry.target;
+        if (entry.isIntersecting) {
+          if (v.preload !== 'auto') v.preload = 'auto';
+          // play() can reject if the element isn't ready yet; ignore.
+          const p = v.play();
+          if (p && p.catch) p.catch(() => {});
+        } else {
+          v.pause();
+        }
       });
-    }
-  });
+    }, { rootMargin: '200px 0px', threshold: 0.1 });
+
+    videos.forEach(v => io.observe(v));
+  })();
 </script>
 
 </body>

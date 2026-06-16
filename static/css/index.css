@@ -157,11 +157,15 @@ body {
 }
 
 
-.has-bg-img { 
-  background: url('/static/images/toss.jpeg')center center;
-   background-size:cover; }
-
-
+/* Reserve space for the lazily-loaded Related Works video previews so the
+   narrow side column does not collapse-then-jump (CLS) before metadata loads.
+   object-fit:contain keeps every clip's true aspect ratio (no crop/stretch);
+   the videos already sit on a black background, so any letterboxing is invisible. */
+#related-works article.columns video {
+  aspect-ratio: 16 / 9;
+  height: auto;
+  object-fit: contain;
+}
 
 .overlay {
 position: absolute;
