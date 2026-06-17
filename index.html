@@ -19,7 +19,7 @@
 
   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./static/css/bulma.min.css">
-  <link rel="stylesheet" href="./static/css/index.css?v=20260616a">
+  <link rel="stylesheet" href="./static/css/index.css?v=20260616j">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <!-- Academicons is only used below the fold — load it without blocking render -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css"
@@ -38,9 +38,65 @@
 <body>
 
 <!-- =========================
+     Sticky Table of Contents (left sidebar)
+========================= -->
+<nav id="ft-toc" aria-label="Page sections">
+  <div class="ft-toc-inner">
+    <p class="ft-toc-title">On This Page</p>
+    <a class="ft-toc-link" href="#overview">Overview</a>
+    <a class="ft-toc-link" href="#summary-video">Summary Video</a>
+    <a class="ft-toc-link" href="#hardware">Hardware</a>
+    <div class="ft-toc-subgroup" aria-label="Hardware subsections">
+      <a class="ft-toc-link ft-toc-link-sub" href="#hardware-v2">FlexiTac-V2</a>
+      <a class="ft-toc-link ft-toc-link-sub" href="#hardware-v1">FlexiTac-V1</a>
+    </div>
+    <a class="ft-toc-link" href="#simulation">Simulation</a>
+    <a class="ft-toc-link" href="#datacollection">System Designs</a>
+    <a class="ft-toc-link" href="#community">Community</a>
+    <a class="ft-toc-link" href="#related-works">Related Works</a>
+    <a class="ft-toc-link" href="#qa">Q &amp; A</a>
+    <a class="ft-toc-link" href="#awesome-list">Awesome List</a>
+  </div>
+</nav>
+
+<!-- =========================
+     Top Nav Bar
+========================= -->
+<header class="ft-navbar">
+  <div class="ft-navbar-inner">
+    <div class="ft-navbar-left">
+      <a class="ft-brand" href="#top">FlexiTac</a>
+      <nav class="ft-nav-links">
+        <a href="#hardware">Hardware</a>
+        <a href="#simulation">Simulation</a>
+        <a href="#datacollection">System Designs</a>
+        <a href="#community">Community</a>
+        <a href="#qa">Q &amp; A</a>
+      </nav>
+    </div>
+    <div class="ft-navbar-actions">
+      <a href="https://github.com/FlexiTac/FlexiTac_Hardware_Repo" target="_blank" rel="noopener" class="ft-btn-ghost">GitHub</a>
+      <a href="https://discord.gg/6gw887Vxms" target="_blank" rel="noopener" class="ft-btn-dark">Join Discord</a>
+    </div>
+    <button class="ft-navbar-toggle" id="ft-nav-toggle" aria-label="Open menu" aria-expanded="false">
+      <i class="fa-solid fa-bars"></i>
+    </button>
+  </div>
+  <nav class="ft-nav-mobile" id="ft-nav-mobile">
+    <a href="#hardware">Hardware</a>
+    <a href="#simulation">Simulation</a>
+    <a href="#datacollection">System Designs</a>
+    <a href="#community">Community</a>
+    <a href="#qa">Q &amp; A</a>
+    <a href="https://github.com/FlexiTac/FlexiTac_Hardware_Repo" target="_blank" rel="noopener">GitHub</a>
+    <a href="https://discord.gg/6gw887Vxms" target="_blank" rel="noopener">Join Discord</a>
+  </nav>
+</header>
+
+<!-- =========================
      Hero
 ========================= -->
-<section class="hero is-link is-fullheight video" style="overflow:hidden; position:relative;">
+<section id="top" class="hero is-link is-fullheight video" style="overflow:hidden; position:relative;">
   <div class="hero-video is-hidden-mobile" style="height: 100%; width: 177.77777778vh; min-width: 100%; min-height: 56.25vw;">
     <video playsinline autoplay muted loop preload="auto" poster="static/posters/teaser.jpg">
       <source src="./static/videos/teaser_tactile.mp4" type="video/mp4">
@@ -178,6 +234,7 @@
         <li><a href="#datacollection">System Designs</a></li>
         <li><a href="#community">Community</a></li>
         <li><a href="#qa">Q &amp; A</a></li>
+        <li><a href="#awesome-list">Awesome List</a></li>
 
       </ul>
     </nav>
@@ -260,7 +317,7 @@
     </div>
   </div>
 
-<div class="box" style="padding:2.4rem 2rem;">
+<div class="box" id="hardware-v2" style="padding:2.4rem 2rem;">
   <div class="columns is-centered">
     <div class="column is-10 has-text-centered">
 
@@ -382,7 +439,7 @@
   </div>
 
     <!-- FlexiTac V1 -->
-    <div class="box" style="padding:2rem; margin-top:2rem;">
+    <div class="box" id="hardware-v1" style="padding:2rem; margin-top:2rem;">
       <div class="columns is-centered">
         <div class="column is-10 has-text-centered">
 
@@ -869,7 +926,7 @@
      Visitor Map
 ========================= -->
 <section class="section" id="community">
-  <div class="container is-max-desktop">
+  <div class="container">
     <div class="columns is-centered">
       <div class="column is-four-fifths has-text-centered">
         <span class="tag is-link is-light is-rounded" style="margin-bottom:1rem;">Community</span>
@@ -898,7 +955,11 @@
           <span>Join our WeChat Group</span>
         </a>
       </div>
+      </div>
+    </div>
 
+    <div class="columns is-centered">
+      <div class="column is-four-fifths has-text-centered">
         <!-- Visitor map card -->
         <div id="visitor-map-wrapper"
              style="display:inline-block; position:relative; width:min(720px, 100%); background:#fff; border:1px solid rgba(18,32,51,0.08); border-radius:18px; overflow:hidden; box-shadow:0 10px 30px rgba(18,32,51,0.08);">
@@ -928,7 +989,7 @@
           </div>
         </div>
 
-        <p style="color:#7a8699; font-size:0.95rem; margin-top:1rem; margin-bottom:2rem;">
+        <p style="color:#7a8699; font-size:0.95rem; margin-top:1.5rem; margin-bottom:2rem;">
           Thank you for visiting and supporting open-source tactile sensing.
         </p>
 
@@ -1134,7 +1195,8 @@
               <a href="https://deepwiki.com/policyconsensus/policyconsensus" target="_blank">[<u>Deepwiki</u>]</a>
               </br>
               <em>International Conference on Robotics & Automation (<b>ICRA</b>), 2026</em><br>
-              Featured in <span style="color:firebrick;"><b>Video Friday</b></span> on
+              <font color="firebrick"><b>Best Paper Award</b></font> at <b>CVPR 2026</b> Workshop on Multi-Sensory Modeling for Embodied Intelligence <a href="https://sense-of-space.github.io/" target="_blank">[Link]</a><br>
+              Media Coverage: Featured in <span style="color:firebrick;"><b>Video Friday</b></span> on
               <a href="https://spectrum.ieee.org/video-friday-multimode-drone" target="_blank">[<u>IEEE Spectrum</u>]</a><br>
             </p>
           </p>
@@ -1474,32 +1536,77 @@
 
 
 <!-- =========================
-     Footer
+     Awesome Flexible Tactile Arrays (curated field list — maintained, not authored, by FlexiTac)
 ========================= -->
-<footer class="footer">
+<section class="section" id="awesome-list">
   <div class="container">
     <div class="columns is-centered">
-      <div class="column is-8">
-        <div class="content">
-          <p>
-            Website template modified from <a href="https://nerfies.github.io/">Nerfies</a> and
-            <a href="https://huy-ha.github.io/scalingup/">Scaling Up Distilling Down</a>.
-          </p>
-          <p>
-            This website is licensed under a
-            <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">
-              Creative Commons Attribution-ShareAlike 4.0 International License
-            </a>.
-          </p>
-          <p>
-            This means you are free to borrow and modify the
-            <a href="https://github.com/nerfies/nerfies.github.io">source code</a> of this website as long as
-            you link back to the <a href="https://nerfies.github.io/">NeRFies</a> page in the footer.
-            Please remember to remove the analytics code included in the header if you do not want it on your website.
-          </p>
-        </div>
+      <div class="column is-four-fifths has-text-centered">
+        <span class="tag is-link is-light is-rounded" style="margin-bottom:1rem;">Awesome List</span>
+        <h2 class="title is-2 is-size-4-mobile">Awesome Flexible Tactile Arrays</h2>
+        <p style="color:#617086; max-width:780px; margin:0 auto 0.6rem auto; line-height:1.7;">
+          An open, community-curated list of research on dense, flexible piezoresistive tactile arrays for robot manipulation — spanning sensor hardware, simulation, and policy learning.
+        </p>
+        <p style="color:#8a94a6; font-size:0.92rem; max-width:780px; margin:0 auto 1.75rem auto; line-height:1.65;">
+          Maintained by the FlexiTac team</span>.
+        </p>
       </div>
     </div>
+
+    <!-- Live, scroll-on-hover preview of the Awesome Flexible Tactile Arrays list (separate repo) -->
+    <div id="gallery-preview-card" class="awesome-preview">
+      <a href="https://binghao-huang.github.io/Awesome-Flexible-Tactile-Arrays/" target="_blank" rel="noopener" class="gallery-preview-head">
+        <span style="display:inline-flex; align-items:center; gap:0.55rem;">
+          <i class="fa-solid fa-images" style="color:#2f6fed;"></i>
+          <span>Awesome Flexible Tactile Arrays</span>
+        </span>
+        <span class="gallery-preview-cta">
+          Open <i class="fa-solid fa-arrow-up-right-from-square"></i>
+        </span>
+      </a>
+      <div class="gallery-preview-frame">
+        <iframe src="https://binghao-huang.github.io/Awesome-Flexible-Tactile-Arrays/?embed=1" title="Awesome Flexible Tactile Arrays preview" loading="lazy"
+                scrolling="yes"></iframe>
+      </div>
+      <a href="https://binghao-huang.github.io/Awesome-Flexible-Tactile-Arrays/" target="_blank" rel="noopener" class="gallery-preview-foot">
+        Explore the full list <i class="fa-solid fa-arrow-right"></i>
+      </a>
+    </div>
+  </div>
+</section>
+
+
+<!-- =========================
+     Footer
+========================= -->
+<footer class="ft-footer">
+  <div class="ft-footer-grid">
+    <div class="ft-footer-col">
+      <span class="ft-footer-brand">FlexiTac</span>
+      <p class="ft-footer-tag">An open-source, scalable tactile solution for robotic systems.</p>
+      <p class="ft-footer-fine">© 2026 FlexiTac Research Community.</p>
+    </div>
+    <div class="ft-footer-col">
+      <h4>Project</h4>
+      <a href="#top">Home</a>
+      <a href="#hardware">Hardware</a>
+      <a href="https://binghao-huang.github.io/Awesome-Flexible-Tactile-Arrays/" target="_blank" rel="noopener">Awesome List</a>
+      <a href="https://arxiv.org/abs/2604.28156" target="_blank" rel="noopener">arXiv</a>
+    </div>
+    <div class="ft-footer-col">
+      <h4>Community</h4>
+      <a href="https://github.com/FlexiTac/FlexiTac_Hardware_Repo" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://discord.gg/6gw887Vxms" target="_blank" rel="noopener">Discord</a>
+      <a href="https://www.youtube.com/watch?v=HYmMbsrwWFA" target="_blank" rel="noopener">YouTube</a>
+    </div>
+  </div>
+  <div class="ft-footer-legal">
+    <p>
+      Website template modified from <a href="https://nerfies.github.io/">Nerfies</a> and
+      <a href="https://huy-ha.github.io/scalingup/">Scaling Up Distilling Down</a>.
+      Licensed under a
+      <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
+    </p>
   </div>
 </footer>
 
@@ -1507,6 +1614,125 @@
      Scripts
 ========================= -->
 <script>
+  // Top nav: mobile menu toggle + shadow-on-scroll
+  (function () {
+    var toggle = document.getElementById('ft-nav-toggle');
+    var mobile = document.getElementById('ft-nav-mobile');
+    if (toggle && mobile) {
+      toggle.addEventListener('click', function () {
+        var open = mobile.classList.toggle('is-open');
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+      mobile.addEventListener('click', function (e) {
+        if (e.target.tagName === 'A') {
+          mobile.classList.remove('is-open');
+          toggle.setAttribute('aria-expanded', 'false');
+        }
+      });
+    }
+    var navbar = document.querySelector('.ft-navbar');
+    if (navbar) {
+      var onScroll = function () { navbar.classList.toggle('is-scrolled', window.scrollY > 8); };
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+    }
+  })();
+
+  // Sticky table-of-contents sidebar: slide-in once past the hero, scrollspy
+  // to highlight the section currently in view. Mirrors the tac-corl.github.io
+  // "On This Page" rail. Hidden via CSS on narrow viewports.
+  (function () {
+    var nav = document.getElementById('ft-toc');
+    if (!nav) return;
+
+    var firstMainSection = document.getElementById('overview');
+    var footer = document.querySelector('.ft-footer');
+    var links = nav.querySelectorAll('.ft-toc-link');
+
+    // Show the rail after the hero, hide it once the footer comes into view.
+    if (firstMainSection) {
+      var updateNavVisibility = function () {
+        var triggerY = firstMainSection.offsetTop - (window.innerHeight * 0.18);
+        var pastStart = window.scrollY >= triggerY;
+        var atFooter = false;
+        if (footer) {
+          var footerRect = footer.getBoundingClientRect();
+          atFooter = footerRect.top <= window.innerHeight * 0.98;
+        }
+        nav.classList.toggle('is-visible', pastStart && !atFooter);
+      };
+      updateNavVisibility();
+      window.addEventListener('scroll', updateNavVisibility, { passive: true });
+      window.addEventListener('resize', updateNavVisibility);
+    }
+
+    // Group links by their target section so multiple links to one id stay in sync.
+    var grouped = [];
+    var byId = {};
+    links.forEach(function (link) {
+      var href = link.getAttribute('href');
+      if (!href || href.charAt(0) !== '#') return;
+      var id = href.slice(1);
+      var node = document.getElementById(id);
+      if (!node) return;
+      if (!byId[id]) {
+        byId[id] = { node: node, links: [] };
+        grouped.push(byId[id]);
+      }
+      byId[id].links.push(link);
+    });
+
+    var updateActiveLink = function () {
+      if (!grouped.length) return;
+      var marker = window.innerHeight * 0.26;
+      var current = null;
+
+      // At the very bottom of the page, force the last entry active.
+      if (window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 120) {
+        current = grouped[grouped.length - 1];
+      }
+
+      // Otherwise the last section whose top has passed the marker line wins.
+      if (!current) {
+        grouped.forEach(function (item) {
+          var rect = item.node.getBoundingClientRect();
+          if (rect.top <= marker) {
+            current = item;
+          }
+        });
+      }
+
+      // Fallback: first section still below the marker.
+      if (!current) {
+        current = grouped.find(function (item) {
+          return item.node.getBoundingClientRect().top > marker;
+        }) || grouped[grouped.length - 1];
+      }
+
+      links.forEach(function (link) {
+        link.classList.remove('is-active', 'is-active-parent');
+      });
+
+      // If a subsection is active, softly mark its parent section too.
+      if (current && current.links.some(function (link) { return link.classList.contains('ft-toc-link-sub'); })) {
+        var currentParent = current.node.closest('section[id]');
+        if (currentParent && currentParent.id !== current.node.id && byId[currentParent.id]) {
+          byId[currentParent.id].links.forEach(function (link) {
+            link.classList.add('is-active-parent');
+          });
+        }
+      }
+
+      current.links.forEach(function (link) {
+        link.classList.add('is-active');
+      });
+    };
+
+    updateActiveLink();
+    window.addEventListener('scroll', updateActiveLink, { passive: true });
+    window.addEventListener('resize', updateActiveLink);
+  })();
+
   function toggleTactileVideos() {
     const moreVideos = document.getElementById("moreVideosTactile");
     const toggleButton = document.getElementById("toggleButtonTactile");
