@@ -954,15 +954,28 @@
           </span>
           <span>Join our WeChat Group</span>
         </a>
+
+        <a href="https://binghao-huang.github.io/Awesome-FlexiTac/"
+          target="_blank"
+          rel="noopener"
+          class="button is-rounded is-light">
+          <span class="icon">
+            <i class="fa-solid fa-star"></i>
+          </span>
+          <span>Awesome List</span>
+        </a>
       </div>
       </div>
     </div>
 
-    <div class="columns is-centered">
-      <div class="column is-four-fifths has-text-centered">
+    <div class="columns">
+      <div class="column">
+        <!-- Worldwide reach + Awesome List: two cards side by side, full width -->
+        <div class="columns is-variable is-5" style="align-items:stretch;">
+          <div class="column is-half">
         <!-- Visitor map card -->
         <div id="visitor-map-wrapper"
-             style="display:inline-block; position:relative; width:min(720px, 100%); background:#fff; border:1px solid rgba(18,32,51,0.08); border-radius:18px; overflow:hidden; box-shadow:0 10px 30px rgba(18,32,51,0.08);">
+             style="position:relative; width:100%; height:100%; background:#fff; border:1px solid rgba(18,32,51,0.08); border-radius:18px; overflow:hidden; box-shadow:0 10px 30px rgba(18,32,51,0.08);">
           <div style="padding:0.9rem 1rem; border-bottom:1px solid rgba(18,32,51,0.06); background:linear-gradient(180deg, #fbfcfe 0%, #f4f7fb 100%); text-align:left; font-weight:600; color:#122033;">
             <span style="display:inline-flex; align-items:center; gap:0.55rem;">
               <i class="fa-solid fa-earth-americas" style="color:#2f6fed;"></i>
@@ -988,8 +1001,32 @@
                  style="width:100%; border-radius:14px; display:block;">
           </div>
         </div>
+          </div>
 
-        <p style="color:#7a8699; font-size:0.95rem; margin-top:1.5rem; margin-bottom:2rem;">
+          <div class="column is-half" id="awesome-list" style="scroll-margin-top:5rem;">
+            <!-- Live, scroll-on-hover preview of the Awesome Flexible Tactile Arrays list (separate repo) -->
+            <div id="gallery-preview-card" class="awesome-preview" style="width:100%; height:100%; margin:0;">
+              <a href="https://binghao-huang.github.io/Awesome-FlexiTac/" target="_blank" rel="noopener" class="gallery-preview-head">
+                <span style="display:inline-flex; align-items:center; gap:0.55rem;">
+                  <i class="fa-solid fa-images" style="color:#2f6fed;"></i>
+                  <span>Awesome FlexiTac</span>
+                </span>
+                <span class="gallery-preview-cta">
+                  Open <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </span>
+              </a>
+              <div class="gallery-preview-frame">
+                <iframe src="https://binghao-huang.github.io/Awesome-FlexiTac/?embed=1" title="Awesome Flexible Tactile Arrays preview" loading="lazy"
+                        scrolling="yes"></iframe>
+              </div>
+              <a href="https://binghao-huang.github.io/Awesome-FlexiTac/" target="_blank" rel="noopener" class="gallery-preview-foot">
+                Explore the full list <i class="fa-solid fa-arrow-right"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <p style="color:#7a8699; font-size:0.95rem; margin-top:1.5rem; margin-bottom:2rem; text-align:center;">
           Thank you for visiting and supporting open-source tactile sensing.
         </p>
 
@@ -1530,47 +1567,6 @@
             We usually recommend ordering a few extra sensor pieces as backups. In our practice, replacing a damaged sensor with a new one typically does not noticeably affect performance, suggesting <strong>good consistency across different sensor instances</strong>.          </p>
         </div>
       </div>
-    </div>
-  </div>
-</section>
-
-
-<!-- =========================
-     Awesome Flexible Tactile Arrays (curated field list — maintained, not authored, by FlexiTac)
-========================= -->
-<section class="section" id="awesome-list">
-  <div class="container">
-    <div class="columns is-centered">
-      <div class="column is-four-fifths has-text-centered">
-        <span class="tag is-link is-light is-rounded" style="margin-bottom:1rem;">Awesome List</span>
-        <h2 class="title is-2 is-size-4-mobile">Awesome Flexible Tactile Arrays</h2>
-        <p style="color:#617086; max-width:780px; margin:0 auto 0.6rem auto; line-height:1.7;">
-          A list of research on dense, flexible tactile arrays for robot.
-        </p>
-        <p style="color:#8a94a6; font-size:0.92rem; max-width:780px; margin:0 auto 1.75rem auto; line-height:1.65;">
-          Maintained by the FlexiTac team</span>.
-        </p>
-      </div>
-    </div>
-
-    <!-- Live, scroll-on-hover preview of the Awesome Flexible Tactile Arrays list (separate repo) -->
-    <div id="gallery-preview-card" class="awesome-preview">
-      <a href="https://binghao-huang.github.io/Awesome-FlexiTac/" target="_blank" rel="noopener" class="gallery-preview-head">
-        <span style="display:inline-flex; align-items:center; gap:0.55rem;">
-          <i class="fa-solid fa-images" style="color:#2f6fed;"></i>
-          <span>Awesome Flexible Tactile Arrays</span>
-        </span>
-        <span class="gallery-preview-cta">
-          Open <i class="fa-solid fa-arrow-up-right-from-square"></i>
-        </span>
-      </a>
-      <div class="gallery-preview-frame">
-        <iframe src="https://binghao-huang.github.io/Awesome-FlexiTac/?embed=1" title="Awesome Flexible Tactile Arrays preview" loading="lazy"
-                scrolling="yes"></iframe>
-      </div>
-      <a href="https://binghao-huang.github.io/Awesome-FlexiTac/" target="_blank" rel="noopener" class="gallery-preview-foot">
-        Explore the full list <i class="fa-solid fa-arrow-right"></i>
-      </a>
     </div>
   </div>
 </section>
