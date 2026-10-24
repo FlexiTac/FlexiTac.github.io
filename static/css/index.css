@@ -718,6 +718,9 @@ h2[style*="color: rgb(189, 189, 189);"] {
 }
 
 .ft-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
   font-family: 'Google Sans', 'Inter', sans-serif;
   font-size: 1.6rem;
   font-weight: 700;
@@ -725,6 +728,45 @@ h2[style*="color: rgb(189, 189, 189);"] {
   color: #fff;
   text-shadow: 0 2px 14px rgba(0, 0, 0, 0.35);
   transition: color 0.25s ease, text-shadow 0.25s ease;
+}
+
+/* Site mark, shared with Learn FlexiTac (same favicon): two drive lines crossing
+   three sense lines, one lit crossing. Like Learn FlexiTac's own themes, it uses
+   the dark-theme colors on dark backgrounds (hero, footer) and the light-theme
+   colors on the scrolled white bar. */
+.ft-logo {
+  --ft-logo-plate: #ededee;
+  --ft-logo-sense: #8a8a8f;
+  --ft-logo-drive: #0b0b0c;
+  --ft-logo-dot: #e8a061;
+  flex: none;
+  width: 2rem;
+  height: 2rem;
+}
+
+.ft-logo-plate { fill: var(--ft-logo-plate); }
+.ft-logo-dot { fill: var(--ft-logo-dot); }
+
+.ft-logo-sense,
+.ft-logo-drive {
+  fill: none;
+  stroke-width: 2.4;
+  stroke-linecap: round;
+}
+
+.ft-logo-sense { stroke: var(--ft-logo-sense); }
+.ft-logo-drive { stroke: var(--ft-logo-drive); }
+
+.ft-logo-plate,
+.ft-logo-sense,
+.ft-logo-drive,
+.ft-logo-dot {
+  transition: fill 0.25s ease, stroke 0.25s ease;
+}
+
+.ft-brand .ft-logo {
+  filter: drop-shadow(0 2px 10px rgba(0, 0, 0, 0.3));
+  transition: filter 0.25s ease;
 }
 
 .ft-nav-links {
@@ -814,6 +856,14 @@ h2[style*="color: rgb(189, 189, 189);"] {
 .ft-navbar.is-scrolled .ft-brand {
   color: var(--ft-text);
   text-shadow: none;
+}
+
+.ft-navbar.is-scrolled .ft-logo {
+  --ft-logo-plate: #18181a;
+  --ft-logo-sense: #6c6c72;
+  --ft-logo-drive: #f2f2ef;
+  --ft-logo-dot: #a24e0e;
+  filter: none;
 }
 
 .ft-navbar.is-scrolled .ft-nav-links a {
@@ -914,7 +964,9 @@ h2[style*="color: rgb(189, 189, 189);"] {
   font-size: 1.6rem;
   font-weight: 700;
   color: #fff;
-  display: block;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
   margin-bottom: 0.75rem;
 }
 

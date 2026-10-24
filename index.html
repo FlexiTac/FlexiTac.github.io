@@ -6,6 +6,8 @@
   <meta name="keywords" content="Robotics, Tactile Sensing, Manipulation, Robot Learning, Flexible Sensors">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>FlexiTac: An Open-Source, Scalable Tactile Solution for Robotic Systems</title>
+  <link rel="icon" type="image/svg+xml" href="./static/images/favicon.svg">
+  <link rel="apple-touch-icon" href="./static/images/apple-touch-icon.png">
 
   <!-- Resource hints: warm up third-party origins before they are needed -->
   <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
@@ -19,7 +21,7 @@
 
   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./static/css/bulma.min.css">
-  <link rel="stylesheet" href="./static/css/index.css?v=20260616j">
+  <link rel="stylesheet" href="./static/css/index.css?v=20261024a">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <!-- Academicons is only used below the fold — load it without blocking render -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css"
@@ -65,7 +67,16 @@
 <header class="ft-navbar">
   <div class="ft-navbar-inner">
     <div class="ft-navbar-left">
-      <a class="ft-brand" href="#top">FlexiTac</a>
+      <a class="ft-brand" href="#top">
+        <!-- Site mark (shared with Learn FlexiTac): two drive lines crossing three sense lines, one lit crossing -->
+        <svg class="ft-logo" viewBox="0 0 40 40" aria-hidden="true" focusable="false">
+          <rect x="2.5" y="2.5" width="35" height="35" rx="7" class="ft-logo-plate"/>
+          <path d="M13 9v22M20 9v22M27 9v22" class="ft-logo-sense"/>
+          <path d="M9 15.5h22M9 24.5h22" class="ft-logo-drive"/>
+          <circle cx="20" cy="24.5" r="3.4" class="ft-logo-dot"/>
+        </svg>
+        <span>FlexiTac</span>
+      </a>
       <nav class="ft-nav-links">
         <a href="#hardware">Hardware</a>
         <a href="#simulation">Simulation</a>
@@ -1697,7 +1708,15 @@
 <footer class="ft-footer">
   <div class="ft-footer-grid">
     <div class="ft-footer-col">
-      <span class="ft-footer-brand">FlexiTac</span>
+      <span class="ft-footer-brand">
+        <svg class="ft-logo" viewBox="0 0 40 40" aria-hidden="true" focusable="false">
+          <rect x="2.5" y="2.5" width="35" height="35" rx="7" class="ft-logo-plate"/>
+          <path d="M13 9v22M20 9v22M27 9v22" class="ft-logo-sense"/>
+          <path d="M9 15.5h22M9 24.5h22" class="ft-logo-drive"/>
+          <circle cx="20" cy="24.5" r="3.4" class="ft-logo-dot"/>
+        </svg>
+        <span>FlexiTac</span>
+      </span>
       <p class="ft-footer-tag">An open-source, scalable tactile solution for robotic systems.</p>
       <p class="ft-footer-fine">© 2026 FlexiTac Research Community.</p>
     </div>
