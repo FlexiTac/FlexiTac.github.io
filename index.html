@@ -21,7 +21,7 @@
 
   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./static/css/bulma.min.css">
-  <link rel="stylesheet" href="./static/css/index.css?v=20261027a">
+  <link rel="stylesheet" href="./static/css/index.css?v=20261027b">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <!-- Academicons is only used below the fold — load it without blocking render -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css"
@@ -1980,25 +1980,36 @@
   // Customization app demos: the expand button (or a click on the clip) plays it
   // full screen, with native controls only while full screen.
   (function () {
+    var trigger = null; // element that opened full screen, refocused on exit
     document.querySelectorAll('.ft-app-window').forEach(function (win) {
       var video = win.querySelector('video');
       var open = function () {
         if (document.fullscreenElement) return; // already full screen: let clicks play/pause
+        trigger = this;
         if (video.requestFullscreen) {
           video.controls = true;
           var p = video.requestFullscreen();
           if (p && p.catch) p.catch(function () { video.controls = false; });
         } else if (video.webkitEnterFullscreen) {
-          video.webkitEnterFullscreen(); // iOS Safari: video-only full screen
+          // iOS Safari: video-only full screen; throws if the player isn't ready yet
+          try { video.webkitEnterFullscreen(); } catch (e) {}
         }
       };
       win.querySelector('.ft-app-expand').addEventListener('click', open);
       video.addEventListener('click', open);
     });
     document.addEventListener('fullscreenchange', function () {
-      if (!document.fullscreenElement) {
-        document.querySelectorAll('.ft-app-window video').forEach(function (v) { v.controls = false; });
-      }
+      if (document.fullscreenElement) return;
+      document.querySelectorAll('.ft-app-window video').forEach(function (v) {
+        v.controls = false;
+        // Inline clips have no controls, so resume one that was paused in full screen
+        if (v.paused) {
+          var p = v.play();
+          if (p && p.catch) p.catch(function () {});
+        }
+      });
+      if (trigger && trigger.classList.contains('ft-app-expand')) trigger.focus({ preventScroll: true });
+      trigger = null;
     });
   })();
 </script>
