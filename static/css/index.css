@@ -420,6 +420,287 @@ img[alt] {
   -webkit-backdrop-filter: blur(10px);
 }
 
+/* Customization app preview (inside the overview card) */
+.ft-app {
+  container: ft-app / inline-size; /* the step arrows respond to this block's width */
+  margin-top: 1.75rem;
+  padding-top: 1.75rem;
+  border-top: 1px solid var(--ft-line);
+}
+
+.ft-app-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.ft-app-eyebrow {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ft-blue);
+  line-height: 1.4;
+  margin-bottom: 0.3rem;
+}
+
+.ft-app-title {
+  font-family: 'Google Sans', 'Inter', sans-serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  line-height: 1.3;
+}
+
+.ft-app-soon {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.35rem 0.8rem;
+  border-radius: 999px;
+  background: rgba(200, 79, 58, 0.09);
+  color: #b2442f;
+  font-size: 0.82rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.ft-app-soon-dot {
+  position: relative;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: #c84f3a;
+}
+
+.ft-app-soon-dot::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: #c84f3a;
+  animation: ft-app-pulse 1.8s ease-out infinite;
+}
+
+@keyframes ft-app-pulse {
+  from { transform: scale(1); opacity: 0.55; }
+  to { transform: scale(2.6); opacity: 0; }
+}
+
+/* Three-step flow: numbered pills joined by arrows */
+.ft-app-steps {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 1.7rem;
+  list-style: none;
+  margin: 0.8rem 0 1.25rem;
+  padding: 0;
+}
+
+.ft-app-steps li {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.28rem 0.8rem 0.28rem 0.32rem;
+  border-radius: 999px;
+  background: var(--ft-surface);
+  border: 1px solid var(--ft-line);
+  box-shadow: 0 1px 2px rgba(18, 32, 51, 0.04);
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--ft-text);
+  white-space: nowrap;
+}
+
+.ft-app-steps li:not(:last-child)::after {
+  content: "\f061"; /* Font Awesome arrow-right */
+  font: var(--fa-font-solid);
+  position: absolute;
+  right: -1.2rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #8a96a8;
+  font-size: 0.8rem;
+}
+
+.ft-app-step-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.4rem;
+  height: 1.4rem;
+  border-radius: 50%;
+  background: var(--ft-blue);
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+/* When the four steps no longer fit on one line they wrap, and an arrow at the
+   end of a line points nowhere, so drop the arrows; the numbers carry the order.
+   The threshold is the row's measured one-line width. */
+@container ft-app (max-width: 800px) {
+  .ft-app-steps {
+    gap: 0.45rem 0.5rem;
+  }
+
+  .ft-app-steps li:not(:last-child)::after {
+    content: none;
+  }
+}
+
+/* Each window grows in proportion to its clip's aspect ratio (--ar), so the
+   two clips sit side by side at the same height without cropping. */
+.ft-app-demos {
+  display: flex;
+  gap: 1rem;
+}
+
+.ft-app-window {
+  flex: var(--ar) 1 0;
+  min-width: 0;
+  background: #fff;
+  border: 1px solid var(--ft-line);
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: var(--ft-shadow-soft);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.ft-app-window:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--ft-shadow);
+}
+
+.ft-app-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  height: 2.1rem;
+  padding: 0 0.35rem 0 0.75rem;
+  background: #f5f7fb;
+  border-bottom: 1px solid var(--ft-line);
+}
+
+.ft-app-dots {
+  display: inline-flex;
+  gap: 0.3rem;
+}
+
+.ft-app-dots i {
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 50%;
+  background: #d5dbe5;
+}
+
+.ft-app-window:hover .ft-app-dots i:nth-child(1) { background: #ff5f57; }
+.ft-app-window:hover .ft-app-dots i:nth-child(2) { background: #febc2e; }
+.ft-app-window:hover .ft-app-dots i:nth-child(3) { background: #28c840; }
+
+.ft-app-label {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--ft-muted);
+}
+
+.ft-app-expand {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.7rem;
+  height: 1.7rem;
+  border: 0;
+  border-radius: 7px;
+  background: transparent;
+  color: var(--ft-muted);
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: background 0.18s ease, color 0.18s ease;
+}
+
+.ft-app-expand:hover,
+.ft-app-expand:focus-visible {
+  background: rgba(47, 111, 237, 0.1);
+  color: var(--ft-blue);
+}
+
+.ft-app-window video {
+  width: 100%;
+  height: auto;
+  border-radius: 0;
+  background: #fff;
+  cursor: zoom-in;
+}
+
+.ft-app-cta {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  margin-top: 1.25rem;
+  padding: 0.85rem 0.9rem 0.85rem 1rem;
+  border-radius: 14px;
+  background: linear-gradient(90deg, rgba(88, 101, 242, 0.09), rgba(47, 111, 237, 0.05));
+  border: 1px solid rgba(88, 101, 242, 0.16);
+}
+
+.ft-app-cta-icon {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.4rem;
+  height: 2.4rem;
+  border-radius: 10px;
+  background: #5865f2; /* Discord blurple */
+  color: #fff;
+  font-size: 1.15rem;
+}
+
+.ft-app-cta-text {
+  flex: 1;
+  min-width: 0;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: var(--ft-muted);
+}
+
+.ft-app-cta-text strong {
+  color: var(--ft-text);
+}
+
+.ft-app-cta-btn {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.1rem;
+  border-radius: 10px;
+  background: #5865f2;
+  color: #fff;
+  font-size: 0.88rem;
+  font-weight: 700;
+  white-space: nowrap;
+  transition: background 0.18s ease, transform 0.18s ease;
+}
+
+.ft-app-cta-btn:hover {
+  background: #4752c4;
+  color: #fff;
+  transform: translateY(-1px);
+  opacity: 1;
+}
+
 /* Hardware section */
 #hardware .title.is-5,
 #simulation .title.is-5,
@@ -1221,6 +1502,10 @@ h2[style*="color: rgb(189, 189, 189);"] {
   #ft-toc {
     transition: none;
   }
+
+  .ft-app-soon-dot::after {
+    animation: none;
+  }
 }
 
 /* Mobile tuning */
@@ -1233,6 +1518,32 @@ h2[style*="color: rgb(189, 189, 189);"] {
   #overview .column.is-four-fifths {
     padding: 1.35rem 1.2rem;
     border-radius: 18px;
+  }
+
+  .ft-app-head {
+    flex-direction: column-reverse;
+    gap: 0.6rem;
+  }
+
+  .ft-app-title {
+    font-size: 1.2rem;
+  }
+
+  .ft-app-demos {
+    flex-direction: column;
+  }
+
+  .ft-app-window {
+    flex: none;
+  }
+
+  .ft-app-cta {
+    flex-wrap: wrap;
+  }
+
+  .ft-app-cta-btn {
+    width: 100%;
+    justify-content: center;
   }
 
   article.columns {

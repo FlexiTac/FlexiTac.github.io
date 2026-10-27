@@ -21,7 +21,7 @@
 
   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./static/css/bulma.min.css">
-  <link rel="stylesheet" href="./static/css/index.css?v=20261024a">
+  <link rel="stylesheet" href="./static/css/index.css?v=20261027a">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <!-- Academicons is only used below the fold — load it without blocking render -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css"
@@ -262,34 +262,95 @@
 <section class="section is-medium" id="overview">
   <div class="container is-max-desktop">
     <div class="columns is-centered">
-      <div class="column is-four-fifths has-text-justified is-hidden-mobile">
+      <div class="column is-four-fifths">
         <span class="tag is-link is-light is-rounded" style="margin-bottom:1rem;">Overview</span>
-        <h2 class="title is-2" style="margin-bottom:1rem;">Bringing touch to every robot lab</h2>
-        </br>
-        <p class="subtitle" style="line-height:1.75;">
-          FlexiTac is a scalable, flexible tactile sensor designed to make touch sensing accessible for robotics.
-          It integrates easily into diverse platforms and manipulation tasks.
-          <strong style="color:#c84f3a;">Our goal is to make tactile sensing simpler to build, easier to customize, and more practical to deploy.</strong>          <!-- <br><br>
-          We provide:
-          <br>
-          • Open-source hardware tutorials<br>
-          • Simulation support<br>
-          • System design examples -->
-        </p>
-      </div>
 
-      <div class="column is-four-fifths is-hidden-tablet has-text-justified-mobile">
-        <span class="tag is-link is-light is-rounded" style="margin-bottom:1rem;">Overview</span>
-        <p>
-          FlexiTac is a flexible tactile sensing solution designed to make tactile sensing accessible to the robotics community.
-          Built with scalability and adaptability in mind, FlexiTac can be integrated into a wide range of robotic platforms and manipulation tasks.
-          <!-- <br><br>
-          We provide:
-          <br>
-          • <b>Open-source hardware tutorials</b><br>
-          • <b>Simulation support across multiple platforms</b><br>
-          • <b>System design guidance</b> -->
-        </p>
+        <div class="has-text-justified is-hidden-mobile">
+          <h2 class="title is-2" style="margin-bottom:1rem;">Bringing touch to every robot lab</h2>
+          </br>
+          <p class="subtitle" style="line-height:1.75;">
+            FlexiTac is a scalable, flexible tactile sensor designed to make touch sensing accessible for robotics.
+            It integrates easily into diverse platforms and manipulation tasks.
+            <strong style="color:#c84f3a;">Our goal is to make tactile sensing simpler to build, easier to customize, and more practical to deploy.</strong>          <!-- <br><br>
+            We provide:
+            <br>
+            • Open-source hardware tutorials<br>
+            • Simulation support<br>
+            • System design examples -->
+          </p>
+        </div>
+
+        <div class="is-hidden-tablet has-text-justified-mobile">
+          <p>
+            FlexiTac is a flexible tactile sensing solution designed to make tactile sensing accessible to the robotics community.
+            Built with scalability and adaptability in mind, FlexiTac can be integrated into a wide range of robotic platforms and manipulation tasks.
+            <!-- <br><br>
+            We provide:
+            <br>
+            • <b>Open-source hardware tutorials</b><br>
+            • <b>Simulation support across multiple platforms</b><br>
+            • <b>System design guidance</b> -->
+          </p>
+        </div>
+
+        <!-- Customization app preview: two demo clips side by side, then a Discord beta call-to-action -->
+        <div class="ft-app">
+          <div class="ft-app-head">
+            <div>
+              <p class="ft-app-eyebrow">Customization App</p>
+              <h3 class="ft-app-title">Design a FlexiTac sensor for your own robot</h3>
+            </div>
+            <span class="ft-app-soon"><span class="ft-app-soon-dot" aria-hidden="true"></span>Coming soon</span>
+          </div>
+          <ol class="ft-app-steps">
+            <li><span class="ft-app-step-num">1</span>Select your gripper</li>
+            <li><span class="ft-app-step-num">2</span>Find best resolution</li>
+            <li><span class="ft-app-step-num">3</span>Click to generate</li>
+            <li><span class="ft-app-step-num">4</span>Send to manufacture</li>
+          </ol>
+
+          <div class="ft-app-demos">
+            <!-- --ar is the clip's aspect ratio: it sizes each window so both clips render at the same height -->
+            <figure class="ft-app-window" style="--ar: 1.956;">
+              <div class="ft-app-bar">
+                <span class="ft-app-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+                <span class="ft-app-label">Custom fingertip shapes</span>
+                <button type="button" class="ft-app-expand" aria-label="Play the fingertip customization demo full screen">
+                  <i class="fa-solid fa-expand" aria-hidden="true"></i>
+                </button>
+              </div>
+              <video preload="none" muted autoplay loop playsinline width="1600" height="818"
+                     poster="static/posters/app_fingertip.jpg">
+                <source src="static/videos/app_fingertip.mp4" type="video/mp4">
+              </video>
+            </figure>
+
+            <figure class="ft-app-window" style="--ar: 2.204;">
+              <div class="ft-app-bar">
+                <span class="ft-app-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+                <span class="ft-app-label">Gripper presets</span>
+                <button type="button" class="ft-app-expand" aria-label="Play the gripper presets demo full screen">
+                  <i class="fa-solid fa-expand" aria-hidden="true"></i>
+                </button>
+              </div>
+              <video preload="none" muted autoplay loop playsinline width="1600" height="726"
+                     poster="static/posters/app_gripper.jpg">
+                <source src="static/videos/app_gripper.mp4" type="video/mp4">
+              </video>
+            </figure>
+          </div>
+
+          <div class="ft-app-cta">
+            <span class="ft-app-cta-icon" aria-hidden="true"><i class="fa-brands fa-discord"></i></span>
+            <p class="ft-app-cta-text">
+              <strong>Customization app coming soon.</strong>
+              Join our Discord to get the latest beta version.
+            </p>
+            <a class="ft-app-cta-btn" href="https://discord.gg/6gw887Vxms" target="_blank" rel="noopener">
+              Join Discord <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+            </a>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -1914,6 +1975,31 @@
     }, { rootMargin: '200px 0px', threshold: 0.1 });
 
     videos.forEach(v => io.observe(v));
+  })();
+
+  // Customization app demos: the expand button (or a click on the clip) plays it
+  // full screen, with native controls only while full screen.
+  (function () {
+    document.querySelectorAll('.ft-app-window').forEach(function (win) {
+      var video = win.querySelector('video');
+      var open = function () {
+        if (document.fullscreenElement) return; // already full screen: let clicks play/pause
+        if (video.requestFullscreen) {
+          video.controls = true;
+          var p = video.requestFullscreen();
+          if (p && p.catch) p.catch(function () { video.controls = false; });
+        } else if (video.webkitEnterFullscreen) {
+          video.webkitEnterFullscreen(); // iOS Safari: video-only full screen
+        }
+      };
+      win.querySelector('.ft-app-expand').addEventListener('click', open);
+      video.addEventListener('click', open);
+    });
+    document.addEventListener('fullscreenchange', function () {
+      if (!document.fullscreenElement) {
+        document.querySelectorAll('.ft-app-window video').forEach(function (v) { v.controls = false; });
+      }
+    });
   })();
 </script>
 
