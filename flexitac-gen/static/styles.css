@@ -1,0 +1,538 @@
+:root { --ink:#132033; --muted:#5d6977; --paper:#f7f8f5; --card:#fff; --line:#dbe2e5; --accent:#087e8b; --warn:#9a6517; --error:#a53131; --copper:#d7771f; --pi:#d1af46; }
+* { box-sizing:border-box; }
+[hidden] { display:none !important; }
+body { margin:0; background:var(--paper); color:var(--ink); font-family:Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,"Segoe UI",sans-serif; }
+.masthead { min-height:104px; padding:26px clamp(24px,5vw,76px); display:flex; flex-wrap:wrap; align-items:center; justify-content:flex-start; gap:18px 30px; color:#fff; background:linear-gradient(110deg,#132033,#075c69); }
+h1,h2,p { margin:0; } h1 { font-size:clamp(1.55rem,3.2vw,2.35rem); letter-spacing:-.04em; } h2 { font-size:1rem; letter-spacing:-.015em; }.eyebrow { font-size:.67rem; letter-spacing:.115em; font-weight:750; color:#63808a; }.masthead .eyebrow { color:#b9e6df; margin-bottom:6px; }.profile-badge { border:1px solid rgba(255,255,255,.45); padding:8px 11px; border-radius:999px; font-size:.76rem; white-space:nowrap; }
+main { display:grid; grid-template-columns:minmax(270px,340px) minmax(0,1fr); max-width:1600px; margin:0 auto; min-height:calc(100vh - 104px); }.controls { padding:25px; background:#fbfcfa; border-right:1px solid var(--line); }.controls section { border-bottom:1px solid var(--line); padding:0 0 20px; margin:0 0 20px; }.controls section:last-of-type { border:none; padding-bottom:0; }.controls h2 { margin-bottom:13px; }input,select,button { font:inherit; }input,select { width:100%; min-height:35px; background:#fff; border:1px solid #bfcbd0; border-radius:5px; padding:6px 8px; color:var(--ink); } input:focus,select:focus { outline:2px solid #77cbd1; border-color:var(--accent); }.two-col { display:grid; grid-template-columns:1fr 1fr; gap:11px; }.hint,.local-note,.manufacturing-note { font-size:.76rem; line-height:1.45; color:var(--muted); }.hint { margin:-4px 0 12px; }.locked { background:#f0f4ef; border:1px solid #d7e1d8 !important; border-radius:7px; padding:13px !important; }.locked dl { margin:0; display:grid; grid-template-columns:1fr auto; gap:7px 8px; font-size:.72rem; }.locked dt { color:var(--muted); }.locked dd { margin:0; text-align:right; font-weight:700; }.primary { width:100%; min-height:42px; border:0; border-radius:6px; font-weight:800; background:var(--accent); color:#fff; cursor:pointer; }.primary:hover { background:#066d78; }.primary:disabled { opacity:.5; cursor:wait; }.local-note { margin-top:12px; }.workbench { padding:25px clamp(20px,4vw,58px) 45px; min-width:0; }.status { padding:12px 14px; border-left:4px solid #607d8b; border-radius:4px; background:#edf2f4; font-size:.86rem; }.status.is-ok { border-color:var(--accent); background:#e7f4f0; }.status.is-warning { border-color:var(--warn); background:#fff7e5; }.status.is-error { border-color:var(--error); background:#fff0ef; }.summary { margin:15px 0; padding:14px; background:var(--card); border:1px solid var(--line); border-radius:7px; }.summary .issue-list { margin:8px 0 0; padding-left:20px; color:#3d4b58; font-size:.8rem; }.previews { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px; margin-top:20px; }.board-card,.downloads { background:var(--card); border:1px solid var(--line); border-radius:8px; box-shadow:0 3px 14px rgba(25,43,54,.035); }.board-card header { min-height:82px; padding:15px 16px 10px; display:flex; justify-content:space-between; gap:8px; align-items:start; border-bottom:1px solid var(--line); }.board-card header .eyebrow { margin-bottom:4px; }.board-card header span { color:var(--muted); font-size:.72rem; text-align:right; }.canvas-wrap { min-height:430px; display:grid; place-items:center; overflow:hidden; color:var(--muted); background:radial-gradient(#edf0ec 1px,transparent 1px) 0 0/14px 14px; }.downloads { display:grid; grid-template-columns:1.2fr 1fr; gap:18px; align-items:center; margin-top:20px; padding:17px; }.downloads h2 { margin:3px 0 5px; }.downloads p:not(.eyebrow) { color:var(--muted); font-size:.78rem; line-height:1.45; }.download-actions { display:flex; flex-wrap:wrap; gap:9px; justify-content:flex-end; }.download-actions button { border:1px solid #9eafb5; background:#fff; color:var(--ink); border-radius:5px; min-height:36px; padding:0 10px; font-weight:700; font-size:.77rem; cursor:pointer; }.download-actions button:disabled { color:#9aa5aa; border-color:#d1d8da; cursor:not-allowed; }.manufacturing-note { grid-column:1/-1; border-top:1px solid var(--line); padding-top:12px; }
+@media (max-width:980px) { main { grid-template-columns:1fr; }.controls { border-right:0; border-bottom:1px solid var(--line); }.previews { grid-template-columns:1fr; }.canvas-wrap { min-height:360px; }.downloads { grid-template-columns:1fr; }.download-actions { justify-content:flex-start; } }
+@media (max-width:520px) { .masthead { padding:20px; align-items:flex-start; flex-direction:column; }.profile-badge { white-space:normal; border-radius:12px; }.controls,.workbench { padding:20px; }.two-col { grid-template-columns:1fr; gap:0; } }
+
+/* Form fields: limits and choices come from /api/default profile.limits.
+   Messages show the client checks first, else the server's validation. */
+.field { display:grid; gap:5px; margin-bottom:11px; align-content:start; }
+.field-head { display:flex; flex-wrap:wrap; justify-content:space-between; align-items:baseline; gap:2px 6px; }
+.field label { color:#354454; font-size:.76rem; font-weight:700; }
+.field-range { color:var(--muted); font-size:.66rem; font-weight:500; }
+.field-message { display:grid; gap:3px; font-size:.68rem; line-height:1.35; }
+.field-message .is-error { color:var(--error); }
+.field-message .is-warning { color:var(--warn); }
+.field-message code { font-size:.62rem; }
+input[aria-invalid="true"],select[aria-invalid="true"] { border-color:var(--error); background:#fff7f6; }
+/* mm inputs step at the 1e-6 mm input resolution: no spinner; the arrow keys nudge instead. */
+input.fine-step { appearance:textfield; -moz-appearance:textfield; }
+input.fine-step::-webkit-inner-spin-button,input.fine-step::-webkit-outer-spin-button { -webkit-appearance:none; margin:0; }
+.summary .hint { margin:6px 0 0; }
+.summary .issue-list li { margin:3px 0; }
+.summary .issue-list li.is-error code { color:var(--error); }
+.summary .issue-list li.is-warning code { color:var(--warn); }
+.summary .note-list { margin:8px 0 0; padding-left:20px; color:var(--muted); font-size:.74rem; }
+.field-link { border:0; padding:0; background:none; color:var(--accent); font-weight:700; text-decoration:underline; cursor:pointer; }
+.summary a,.field-path { color:var(--accent); font-weight:700; }
+
+/* Stale state (D20): the form no longer matches the shown build. */
+.stale-banner { margin-top:10px; padding:10px 14px; display:flex; flex-wrap:wrap; gap:8px 14px; align-items:center; justify-content:space-between; border-left:4px solid var(--warn); border-radius:4px; background:#fff7e5; font-size:.84rem; }
+.stale-banner button { border:1px solid var(--warn); background:#fff; color:#6b4510; border-radius:5px; min-height:32px; padding:0 12px; font-weight:800; cursor:pointer; }
+.workbench.is-stale .canvas-wrap,.workbench.is-stale .stacked-canvas,.workbench.is-stale .drc-grid { opacity:.5; filter:grayscale(.7); transition:opacity .15s; }
+.workbench.is-stale .status,.workbench.is-stale .summary { opacity:.6; }
+
+/* Preview cards: ARIA tabs plus zoom tools for the 2D top view. */
+.preview-bar { display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:6px; padding:8px 11px; border-bottom:1px solid var(--line); }
+.preview-tabs,.mode-switch { display:flex; gap:7px; }
+.preview-tabs button,.mode-switch button { cursor:pointer; border:1px solid transparent; border-radius:4px; background:transparent; color:var(--muted); padding:5px 8px; font-size:.72rem; font-weight:750; }
+.preview-tabs button[aria-selected="true"],.mode-switch button[aria-pressed="true"] { color:#075c69; border-color:#b9d9db; background:#eef9f8; }
+.zoom-tools { display:flex; align-items:center; gap:4px; font-size:.68rem; }
+.zoom-tools.is-inactive { visibility:hidden; }
+.zoom-tools button { min-width:28px; min-height:26px; border:1px solid #c7d3d7; border-radius:4px; background:#fff; color:var(--ink); font-weight:750; cursor:pointer; }
+.zoom-tools button:disabled { color:#9aa5aa; cursor:not-allowed; }
+.zoom-tools output { min-width:96px; text-align:right; color:var(--muted); font-variant-numeric:tabular-nums; }
+.view-pane { width:100%; min-height:430px; display:grid; place-items:center; }
+.view-pane:focus-visible { outline:2px solid #77cbd1; outline-offset:-2px; }
+.zoom-pane { overflow:hidden; cursor:grab; touch-action:none; user-select:none; }
+.zoom-pane.is-panning { cursor:grabbing; }
+/* The padding keeps the screen-sized pin-1 ring visible beyond the view box. */
+.zoom-pane svg { width:100%; min-width:0; height:430px; padding:12px; display:block; overflow:visible; }
+.pin1-ring { fill:none; stroke:#b42318; stroke-width:2px; vector-effect:non-scaling-stroke; pointer-events:none; }
+.pin1-ring.is-upper { stroke:#087e8b; }.pin1-ring.is-lower { stroke:#d7771f; }
+/* The stacked view's rings are drawn above both boards (app.js drawPin1Rings); the ones in the boards place them, unseen. */
+.assembly-board .pin1-ring { visibility:hidden; }
+.pin1-overlay { position:absolute; inset:0; width:100%; height:100%; overflow:visible; pointer-events:none; z-index:2; }
+.pin1-ring-drawn { fill:none; stroke-width:2px; }
+.layer-legend { display:flex; flex-wrap:wrap; gap:4px 14px; padding:9px 14px 11px; border-top:1px solid var(--line); color:var(--muted); font-size:.68rem; }
+.layer-legend:empty { display:none; }
+.swatch { display:inline-block; width:10px; height:10px; margin-right:5px; vertical-align:-1px; border-radius:2px; }
+.swatch-copper { background:#d9672b; }.swatch-opening { background:#fff5bf; border:1px solid #b88700; }.swatch-stiffener { background:rgba(102,112,133,.55); }.swatch-pin1 { background:#b42318; border-radius:50%; }
+.preview-help { margin:8px 2px 0; color:var(--muted); font-size:.72rem; }
+.board-card.has-drc-failure { border-color:var(--error); }
+
+/* A local oblique review is intentionally derived from the same SVG geometry.
+   It is a rigid tilt of the top view, not a flex model or an EDA 3D viewer. */
+.three-d-pane { overflow:hidden; perspective:900px; background:linear-gradient(155deg,#eef5f3,#dbe8e6); position:relative; }
+.three-d-pane::after { content:"Rigid oblique tilt of the top view · not a flex model · PI stiffener (bottom side) in grey · thickness at least 2 px"; position:absolute; left:12px; bottom:10px; padding:4px 6px; font-size:.63rem; color:#3d555a; border-radius:3px; background:rgba(255,255,255,.72); }
+/* The board box has the SVG's aspect ratio; fitOblique shrinks it until the tilt fits the pane. */
+/* Its angles as it opens are app.js's OBLIQUE_HOME; a drag turns it (attachOrbit).  Two-sided: the copper side faces the
+   camera as it opens, the other side (.board-back-face) shows where the drag turns the board over; the shadow is on each
+   side's SVG, since a filter on the board would flatten it into one double-sided picture. */
+.oblique-board { position:relative; width:min(88%,calc(340px * var(--board-ratio,1.6))); transform:rotateX(var(--orbit-tilt,56deg)) rotateZ(var(--orbit-spin,-22deg)) translateY(-16px); transform-origin:center; transform-style:preserve-3d; }
+.oblique-board svg { width:100%; min-width:0; height:auto; aspect-ratio:var(--board-ratio,auto); display:block; filter:drop-shadow(13px 20px 9px rgba(13,43,45,.28)); }
+.oblique-board > svg { backface-visibility:hidden; }
+.three-d-pane:has(.oblique-board) { cursor:grab; touch-action:none; user-select:none; }
+.three-d-pane.is-orbiting { cursor:grabbing; }
+/* A board's other side (app.js boardBackSvg): turned half round and its picture mirrored back, so its features lie under
+   the copper side's; each side drawn only where it faces the camera. */
+.board-back-face { position:absolute; inset:0; transform:translateZ(calc(var(--fpc-mm,0) * -1 * var(--depth-px,0px))) rotateY(180deg); backface-visibility:hidden; }
+/* The board's thickness (app.js boardDepth): --depth-px is a millimetre of depth on screen, the board's own scale (100cqw
+   is its view box width, --view-mm) or more, so that the FPC (--fpc-mm, 0.11 mm: half a pixel at the views' usual scale)
+   is at least 2 px thick, the stiffener in proportion.  Its other side lies --fpc-mm behind the copper side; each wall
+   ring (a constant 1.6 px wide) and the stiffener's outer face at its --depth-mm; never a pointer target, no shadow. */
+.oblique-board,.assembly-board { container-type:inline-size; --depth-px:max(100cqw / var(--view-mm,1), 2px / var(--fpc-mm,1)); }
+:is(.oblique-board,.assembly-board) svg.board-edge { position:absolute; inset:0; width:100%; height:100%; aspect-ratio:auto; overflow:visible;
+  pointer-events:none; filter:none; transform:translateZ(calc(var(--depth-mm) * -1 * var(--depth-px))); }
+.fpc-edge-ring,.fpc-stiffener-ring { fill:none; stroke-width:1.6; vector-effect:non-scaling-stroke; stroke-linejoin:round; }
+.fpc-edge-ring { stroke:#c69d5c; }
+.fpc-stiffener-ring { stroke:#4d5566; }
+.fpc-stiffener-face { fill:#667085; }
+.board-back-face > svg { width:100%; height:100%; transform:scaleX(-1); }
+.board-back .outline { fill:#ecd3a3; }
+.board-back :is(.electrode,.pad) { fill:#d9672b; stroke:none; opacity:.32; }
+.board-back .route { opacity:.32; }
+.board-back .stiffener { fill:#667085; opacity:.85; }
+.board-back .pin1-back { fill:#b42318; opacity:.6; }
+
+/* Registered assembly review: the physical top board is upper and turned over
+   about its tail axis (copper down, tail still on its exit side), the bottom
+   board lower and face up; both are placed on the taxel field
+   (data-active-region of each SVG). */
+.stacked-review { margin-top:18px; }
+.stacked-review header { min-height:66px; padding:15px 16px 10px; display:flex; justify-content:space-between; gap:8px; align-items:start; border-bottom:1px solid var(--line); }
+.stacked-review header .eyebrow { margin-bottom:4px; }
+.stacked-review header span { color:var(--muted); font-size:.72rem; line-height:1.4; text-align:right; }
+.stacked-canvas { height:560px; display:grid; place-items:center; overflow:hidden; color:var(--muted); background:linear-gradient(155deg,#eef5f3,#dbe8e6); position:relative; }
+.assembly-caption { position:absolute; left:12px; bottom:10px; padding:4px 6px; font-size:.63rem; color:#3d555a; border-radius:3px; background:rgba(255,255,255,.78); }
+/* The tilted camera shows about half the scene height; the plan view shows all of it. */
+.assembly-scene { width:min(74%,620px,calc(520px * var(--assembly-ratio))); aspect-ratio:var(--assembly-aspect); position:relative; perspective:1050px; transform-style:preserve-3d; }
+/* Its angles as the view opens are app.js's ORBIT_HOME; a drag sets them (attachOrbit). */
+.assembly-camera { position:absolute; inset:0; transform-style:preserve-3d; transform:rotateX(var(--orbit-tilt,57deg)) rotateZ(var(--orbit-spin,-20deg)) scale(.82); transform-origin:center; }
+.stacked-canvas:not(.is-plan):has(.assembly-camera) { cursor:grab; touch-action:none; user-select:none; }
+.stacked-canvas.is-orbiting { cursor:grabbing; }
+.stacked-canvas:focus-visible { outline:2px solid #087e8b; outline-offset:-2px; }
+.orbit-hint { color:var(--muted); font-size:.68rem; }
+.orbit-hint[hidden] { display:none; }
+.assembly-board { position:absolute; transform-style:preserve-3d; }
+.assembly-board svg { width:100%; height:100%; min-width:0; display:block; overflow:visible; }
+.assembly-board .view-label { display:none; }
+/* The shadows and the upper board's translucency are on the SVGs: on the board or its face they would flatten it, and its
+   turned-over face would show the copper side from behind instead of the board's other side. */
+.assembly-board.is-lower { transform:translateZ(0); }
+.assembly-board.is-upper { transform:translateZ(96px); }
+.assembly-board.is-lower svg { filter:drop-shadow(10px 15px 8px rgba(13,43,45,.28)); }
+.assembly-board.is-upper svg { filter:drop-shadow(9px 13px 7px rgba(13,43,45,.23)); opacity:.78; }
+.assembly-face { position:relative; width:100%; height:100%; transform-style:preserve-3d; backface-visibility:visible; }
+.assembly-face > svg { backface-visibility:hidden; }
+.assembly-board.flip-x .assembly-face { transform:rotateX(180deg); }
+.assembly-board.flip-y .assembly-face { transform:rotateY(180deg); }
+.taxel-field { fill:none; stroke:#087e8b; stroke-width:.3; stroke-dasharray:1.2 .8; }
+.taxel-outline { fill:rgba(8,126,139,.08); stroke:#087e8b; stroke-width:.25; }
+.mask-badge { margin:.35rem 0; font-weight:600; color:#087e8b; }
+.stacked-canvas.is-plan .assembly-scene { width:min(80%,680px,calc(470px * var(--assembly-ratio))); }
+.stacked-canvas.is-plan .assembly-camera { transform:none; }
+.stacked-canvas.is-plan .assembly-board { transform:none; filter:none; }
+.stacked-canvas.is-plan .assembly-board svg { filter:none; }
+.stacked-canvas.is-plan .assembly-board.is-upper svg { opacity:.6; }
+.stacked-canvas.is-plan .board-edge { display:none; }
+.stacked-canvas.is-plan .board-back-face { transform:rotateY(180deg); }
+.assembly-legend { display:flex; flex-wrap:wrap; gap:6px 10px; padding:9px 14px 11px; border-top:1px solid var(--line); font-size:.67rem; line-height:1.35; }
+.assembly-legend:empty { display:none; }
+.assembly-key,.assembly-note { padding:4px 6px; border-radius:3px; background:#f4f8f7; color:#395158; }
+.assembly-key { font-weight:760; }
+.upper-key { border-left:3px solid #087e8b; }.lower-key { border-left:3px solid #d7771f; }.assembly-note { color:#536d74; }
+@media (max-width:980px) { .stacked-canvas { height:480px; }.assembly-scene { width:min(80%,570px,calc(440px * var(--assembly-ratio))); }.stacked-canvas.is-plan .assembly-scene { width:min(86%,570px,calc(420px * var(--assembly-ratio))); } }
+
+/* DRC panel: every rule of board.verification.checks with its measured value. */
+.drc-panel { margin-top:18px; }
+.drc-panel header { min-height:66px; padding:15px 16px 10px; display:flex; justify-content:space-between; gap:8px; align-items:start; border-bottom:1px solid var(--line); }
+.drc-panel header .eyebrow { margin-bottom:4px; }
+.drc-panel header span { color:var(--muted); font-size:.72rem; text-align:right; }
+.drc-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px; padding:14px 16px 16px; color:var(--muted); font-size:.8rem; }
+.drc-table { width:100%; border-collapse:collapse; font-size:.7rem; color:var(--ink); }
+.drc-table caption { text-align:left; font-weight:750; font-size:.78rem; padding:0 0 7px; }
+.drc-table th,.drc-table td { padding:4px 6px; border-bottom:1px solid var(--line); text-align:left; vertical-align:top; }
+.drc-table thead th { color:var(--muted); font-weight:750; border-bottom-color:#c7d3d7; }
+.drc-table tbody th { font-weight:650; }
+.drc-table .num { text-align:right; white-space:nowrap; font-variant-numeric:tabular-nums; }
+.drc-table tr.is-fail { background:#fff0ef; }
+.drc-where { display:block; color:var(--muted); font-weight:500; font-size:.62rem; overflow-wrap:anywhere; }
+.drc-badge { font-weight:800; letter-spacing:.03em; }
+.drc-badge.pass { color:#087e8b; }.drc-badge.fail { color:var(--error); }
+.drc-note { grid-column:1/-1; font-size:.7rem; color:var(--muted); line-height:1.45; }
+@media (max-width:1180px) { .drc-grid { grid-template-columns:1fr; } }
+@media (max-width:640px) { .drc-grid { padding:12px 10px 14px; }.drc-table th,.drc-table td { padding:4px 3px; }.drc-table .num { white-space:normal; } }
+
+/* Manufacturing note: the profile's JLCPCB order options and review notes (ORDER_NOTES.txt). */
+.order-note h3 { margin:11px 0 4px; font-size:.76rem; color:var(--ink); }
+.order-note ul { margin:0; padding-left:18px; font-size:.76rem; line-height:1.45; color:var(--ink); }
+.order-note li { margin:3px 0; }
+.order-note .order-why { display:block; color:var(--muted); font-size:.7rem; }
+
+/* CAD mode (web/cad/): the masthead mode switch and the CAD workspace above the shared workbench.
+   Rectangular mode only shows the switch; the workspace is hidden there. */
+/* The title and its line on FlexiTac (links to the paper and the website); the mode switch right after them (the user's
+   requests of 2026-10-30), large enough to read as the page's first choice. */
+.masthead-title { display:flex; flex-direction:column; gap:7px; min-width:0; }
+.masthead-tagline { max-width:60ch; font-size:.86rem; line-height:1.45; color:#cfe9e6; }
+.masthead-tagline a { color:#fff; font-weight:700; text-decoration:underline; text-underline-offset:2px; }
+.masthead-tagline a:hover { color:#b9e6df; }
+.masthead-tagline a:focus-visible { outline:2px solid #77cbd1; outline-offset:2px; border-radius:2px; }
+.mode-picker { position:relative; margin:0; padding:0; display:flex; border:1px solid rgba(255,255,255,.55); border-radius:999px; overflow:hidden; }
+.mode-picker legend,.cad-sr-only { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; padding:0; }
+.mode-picker label { position:relative; cursor:pointer; }
+.mode-picker input,.cad-seg input { position:absolute; inset:0; width:100%; height:100%; min-height:0; margin:0; opacity:0; cursor:pointer; }
+.mode-picker span { display:block; padding:11px 24px; font-size:1rem; font-weight:750; color:#d9efec; white-space:nowrap; }
+.mode-picker input:checked + span { background:#fff; color:#075c69; }
+.mode-picker input:focus-visible + span { outline:2px solid #77cbd1; outline-offset:-3px; }
+.cad-workspace { margin:0 0 20px; }
+.cad-workspace > header { min-height:66px; padding:15px 16px 10px; display:flex; justify-content:space-between; gap:12px; align-items:start; border-bottom:1px solid var(--line); }
+.cad-workspace > header .eyebrow { margin-bottom:4px; }
+.cad-workspace input[type="radio"] { width:auto; min-height:0; }
+.cad-workspace input[type="range"] { min-height:0; padding:0; border:0; background:none; accent-color:var(--accent); }
+.cad-workspace button:not(.primary) { border:1px solid #9eafb5; background:#fff; color:var(--ink); border-radius:5px; min-height:30px; padding:0 9px; font-weight:700; font-size:.72rem; cursor:pointer; }
+.cad-workspace button:not(.primary):disabled { color:#9aa5aa; border-color:#d1d8da; cursor:not-allowed; }
+.cad-workspace .primary { width:auto; padding:0 18px; }
+.cad-status { display:block; max-width:58%; padding:7px 10px; border-left:4px solid #607d8b; border-radius:4px; background:#edf2f4; font-size:.76rem; line-height:1.4; overflow-wrap:anywhere; }
+.cad-status.is-ok { border-color:var(--accent); background:#e7f4f0; }
+.cad-status.is-warning { border-color:var(--warn); background:#fff7e5; }
+.cad-status.is-error { border-color:var(--error); background:#fff0ef; }
+.cad-main { display:grid; grid-template-columns:minmax(0,1fr); border-bottom:1px solid var(--line); }
+.cad-stage { display:flex; flex-direction:column; min-width:0; }
+/* Step 1's file and selection settings above the 3D view (index.html .cad-filebar). */
+.cad-filebar { display:flex; flex-wrap:wrap; align-items:center; gap:8px 14px; padding:10px 12px; border-bottom:1px solid var(--line); background:#fbfdfd; }
+.cad-filebar-label { margin:0; font-size:.86rem; }
+.cad-filebar input[type="file"] { width:auto; max-width:330px; min-height:0; padding:4px 6px; }
+.cad-filebar .cad-file-note { margin:0; flex:1 1 300px; }
+.cad-filebar .cad-more { margin:0; }
+.cad-filebar .cad-more[open] { flex-basis:100%; }
+.cad-workspace > header h2 { display:flex; align-items:center; gap:9px; font-size:1.15rem; }
+.cad-title-hint { margin:4px 0 0; }
+/* The tools in the 3D view's window, on its left (index.html .cad-view-tools; the user's request of 2026-10-30): a
+   column of larger buttons over the view, beside it in the DOM so its clicks, double clicks and keys are not the view's. */
+.cad-view-wrap { position:relative; }
+.cad-view-tools { position:absolute; left:12px; top:12px; z-index:3; display:flex; flex-direction:column; align-items:stretch; gap:6px; width:max-content; }
+.cad-tools { margin:0 0 6px; padding:0; border:0; display:flex; flex-direction:column; gap:6px; min-width:0; }
+.cad-tools legend { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; padding:0; }
+.cad-tools label { position:relative; }
+.cad-tools input { position:absolute; inset:0; width:100%; height:100%; min-height:0; margin:0; opacity:0; cursor:pointer; }
+.cad-tools span,.cad-workspace .cad-view-tools button { display:block; min-width:150px; min-height:0; padding:9px 14px; text-align:left; font-size:.84rem; font-weight:750;
+  border:1px solid #b9c8cc; border-radius:6px; background:rgba(255,255,255,.95); color:#33454d; box-shadow:0 1px 3px rgba(20,40,50,.14); }
+.cad-tools input:checked + span { background:#e3f4f2; border-color:#3aa3a8; color:#075c69; }
+.cad-tools input:focus-visible + span,.cad-view-tools button:focus-visible { outline:2px solid #77cbd1; outline-offset:1px; }
+.cad-workspace .cad-view-tools button:disabled { opacity:.55; cursor:not-allowed; }
+/* The camera in the 3D view's window, top right (index.html .cad-views; beside the view in the DOM, as the tools). */
+.cad-views { position:absolute; right:12px; top:12px; z-index:3; display:flex; flex-wrap:wrap; justify-content:flex-end; gap:4px; max-width:calc(100% - 190px); }
+.cad-workspace .cad-views button { min-height:30px; padding:0 9px; border:1px solid #b9c8cc; border-radius:6px; background:rgba(255,255,255,.95);
+  color:#33454d; font-size:.78rem; font-weight:750; box-shadow:0 1px 3px rgba(20,40,50,.14); }
+.cad-view { position:relative; height:500px; overflow:hidden; background:#f2f5f6; touch-action:none; }
+.cad-view:focus-visible { outline:2px solid #77cbd1; outline-offset:-2px; }
+.cad-view .cad-canvas { position:absolute; inset:0; width:100%; height:100%; display:block; }
+.cad-view.is-dropping { outline:3px dashed var(--accent); outline-offset:-7px; }
+.cad-drop { position:absolute; inset:14px; z-index:1; display:grid; place-content:center; gap:6px; padding:12px; text-align:center; border:2px dashed #9eb7bb; border-radius:8px; color:var(--muted); font-size:.84rem; background:rgba(255,255,255,.72); }
+.cad-drop strong { color:var(--ink); font-size:1rem; }
+.cad-view.is-unavailable .cad-drop { border-color:var(--warn); }
+.cad-file-link { color:var(--accent); font-weight:750; text-decoration:underline; cursor:pointer; }
+.cad-help { padding:7px 12px; border-top:1px solid var(--line); color:var(--muted); font-size:.72rem; }
+/* The border editor (main.js; docs/CAD_BORDER.md): the toggle, its bar under the toolbar, the hover label in the view. */
+.cad-workspace button.cad-edit-border:not(:disabled) { border-color:#1e88e5; color:#0d47a1; }
+.cad-workspace button.cad-edit-border[aria-pressed="true"] { background:#1e88e5; border-color:#1565c0; color:#fff; }
+.cad-border-bar { display:flex; flex-wrap:wrap; align-items:center; gap:5px 6px; padding:6px 11px; border-bottom:1px solid var(--line); background:#f1f7fd; }
+.cad-workspace .cad-border-bar button { min-height:26px; padding:0 7px; }
+.cad-border-inset { display:inline-flex; align-items:center; gap:4px; }
+.cad-border-inset span,.cad-border-snap { color:#354454; font-size:.72rem; font-weight:700; }
+.cad-workspace .cad-border-inset input { width:56px; min-height:26px; padding:2px 5px; font-size:.76rem; }
+.cad-border-snap { display:inline-flex; align-items:center; gap:4px; cursor:pointer; }
+.cad-workspace .cad-border-snap input { width:auto; min-height:0; margin:0; accent-color:#1e88e5; }
+.cad-view.is-editing { outline:2px solid #1e88e5; outline-offset:-2px; }
+.cad-hover-label { position:absolute; z-index:2; pointer-events:none; padding:3px 7px; border-radius:4px; background:rgba(19,32,51,.88); color:#fff; font-size:.7rem; font-weight:700; white-space:nowrap; }
+.cad-border-note { margin:0 0 8px; }
+.cad-side-none { margin:6px 0 0; font-size:.72rem; }
+/* The step column scrolls inside the height of the 3D view (contain:size keeps it out of the row height). */
+.cad-step { padding:14px 16px; border-bottom:1px solid var(--line); min-width:0; }
+.cad-workspace > .cad-step:last-of-type { border-bottom:0; }
+/* The steps' titles (the user's request of 2026-10-30: larger). */
+.cad-step h3 { margin:0 0 12px; display:flex; align-items:center; gap:9px; font-size:1.08rem; letter-spacing:-.015em; }
+.cad-step-no { display:inline-grid; place-items:center; width:24px; height:24px; flex:none; border-radius:50%; background:#075c69; color:#fff; font-size:.78rem; font-weight:800; }
+.cad-step .hint { margin:0 0 9px; }
+.cad-subhead { margin:14px 0 7px; font-size:.76rem; }
+.cad-row { display:grid; gap:4px; margin-bottom:9px; }
+.cad-row label,.cad-field label { color:#354454; font-size:.74rem; font-weight:700; }
+.cad-range { grid-template-columns:minmax(0,1fr) 44px; align-items:center; }
+.cad-range label { grid-column:1/-1; }
+.cad-range-value { text-align:right; font-size:.72rem; font-variant-numeric:tabular-nums; color:var(--muted); }
+.cad-facts { display:grid; grid-template-columns:auto minmax(0,1fr); gap:3px 10px; margin:10px 0 0; font-size:.71rem; line-height:1.35; }
+.cad-facts dt { color:var(--muted); }
+.cad-facts dd { margin:0; overflow-wrap:anywhere; }
+.cad-seg { margin:0 0 9px; padding:0; border:0; display:flex; flex-wrap:wrap; align-items:center; gap:4px; min-width:0; }
+.cad-seg legend { float:left; margin:0 6px 0 0; padding:0; color:var(--muted); font-size:.72rem; font-weight:700; }
+.cad-seg label { position:relative; }
+.cad-seg span { display:block; padding:4px 9px; border:1px solid #c7d3d7; border-radius:4px; background:#fff; color:var(--muted); font-size:.72rem; font-weight:700; }
+.cad-seg input:checked + span { color:#075c69; border-color:#7fc2c6; background:#eef9f8; }
+.cad-seg input:focus-visible + span { outline:2px solid #77cbd1; outline-offset:1px; }
+/* The base edge under the 3D view, across (index.html .cad-base; main.js renderSides): its choices as pills. */
+.cad-base { padding:9px 12px 10px; border-top:1px solid var(--line); background:#fbfdfd; }
+.cad-base-title { margin:0 0 7px; display:flex; flex-wrap:wrap; align-items:baseline; gap:4px 9px; font-size:.82rem; }
+.cad-base-title .hint { margin:0; font-weight:500; }
+.cad-base .cad-sides { display:flex; flex-wrap:wrap; align-items:center; gap:6px; }
+.cad-base .cad-sides legend { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; padding:0; }
+.cad-base .cad-sides > .hint { margin:0; }
+.cad-base .cad-side { padding:5px 11px; border:1px solid #c7d3d7; border-radius:999px; background:#fff; font-size:.76rem; }
+.cad-base .cad-side:has(input:checked) { border-color:#c2185b; background:#fdf0f5; color:#7a1040; font-weight:700; }
+.cad-base .cad-side input { margin:0; }
+.cad-base .cad-side-list { display:contents; }
+.cad-base :is(.cad-side-short,.cad-side-none) { flex-basis:100%; margin:2px 0 0; }
+.cad-sides { margin:0; padding:0; border:0; min-width:0; }
+.cad-sides legend { padding:0; margin-bottom:6px; color:#354454; font-size:.74rem; font-weight:700; }
+.cad-side { display:flex; gap:7px; align-items:center; padding:3px 4px; border-radius:4px; font-size:.72rem; cursor:pointer; }
+.cad-side:hover { background:#fbe9f1; }
+.cad-side-list { max-height:190px; overflow-y:auto; margin-top:2px; border-top:1px dashed var(--line); padding-top:3px; }
+.cad-side:focus-within { background:#fbe9f1; }
+.cad-side-short { margin:6px 0 0; }
+/* "More options" larger than the other folds (the user's request of 2026-10-30): the fit's other options are found there. */
+#cadConfigMore > summary { font-size:.95rem; font-weight:750; color:#26404a; }
+.cad-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(178px,1fr)); gap:10px 14px; }
+.cad-field { display:grid; gap:4px; align-content:end; }
+.cad-field input:disabled,.cad-field select:disabled { background:#f1f4f4; color:#8a969c; }
+.cad-workspace input[aria-invalid="true"] { border-color:var(--error); background:#fff7f6; }
+.cad-actions { display:flex; flex-wrap:wrap; align-items:center; gap:10px 16px; margin-top:13px; }
+.cad-actions .hint { margin:0; flex:1 1 260px; }
+/* Step 2 side by side (index.html .cad-resolution): the settings, Fit and the proposals left, the flattened map right, in
+   sight while the left scrolls; the left takes the whole width until there is a map, and the two stack when narrow. */
+.cad-resolution { display:grid; grid-template-columns:minmax(0,1fr); border-bottom:1px solid var(--line); }
+.cad-resolution:has(#cadFlatFigure:not([hidden])) { grid-template-columns:minmax(0,1fr) minmax(300px,40%); }
+.cad-resolution-main { min-width:0; }
+.cad-resolution-main > .cad-step:last-child { border-bottom:0; }
+.cad-resolution-map { min-width:0; padding:14px 16px; border-left:1px solid var(--line); }
+.cad-resolution-map:has(#cadFlatFigure[hidden]) { display:none; }
+/* The map's window keeps its size whatever the sensor's (the drawing scales inside it). */
+.cad-resolution-map .cad-flat { position:sticky; top:14px; max-width:none; height:min(620px,80vh); display:flex; flex-direction:column; }
+.cad-resolution-map .cad-flat-svg { flex:1 1 auto; min-height:0; width:100%; height:100%; max-height:none; }
+/* Two settings a row on the left (the user's request of 2026-10-30). */
+.cad-resolution-main .cad-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+.cad-fit-note:empty { display:none; }
+.cad-fit-facts { margin:8px 0 0; }
+@media (max-width:1100px) { .cad-resolution:has(#cadFlatFigure:not([hidden])) { grid-template-columns:minmax(0,1fr); }
+  .cad-resolution-map { border-left:0; border-top:1px solid var(--line); }.cad-resolution-map .cad-flat { position:static; height:460px; } }
+.cad-proposals { container:cad-proposals / inline-size; }
+.cad-proposals-body { display:grid; gap:12px; }
+.cad-table-wrap { min-width:0; overflow-x:auto; }
+.cad-table { width:100%; border-collapse:collapse; font-size:.71rem; }
+.cad-table caption { text-align:left; font-weight:750; font-size:.76rem; padding:0 0 6px; }
+.cad-table th,.cad-table td { padding:5px 6px; border-bottom:1px solid var(--line); text-align:left; white-space:nowrap; }
+.cad-table thead th { color:var(--muted); font-weight:750; border-bottom-color:#c7d3d7; white-space:normal; vertical-align:bottom; }
+/* A narrow table drops its low-value columns (angle, stack width, traces) instead of scrolling. */
+@container cad-proposals (max-width:900px) { .cad-table .cad-opt { display:none; } }
+.cad-table .num { text-align:right; font-variant-numeric:tabular-nums; }
+.cad-table tbody tr { cursor:pointer; }
+.cad-table tbody tr:hover { background:#f6faf9; }
+.cad-table tbody tr.is-chosen { background:#eef9f8; box-shadow:inset 3px 0 0 var(--accent); }
+.cad-card { max-width:760px; padding:8px 10px; border:1px solid var(--line); border-radius:6px; background:#fbfcfc; }
+.cad-card .cad-subhead { margin:0 0 4px; }
+.cad-card .cad-facts { margin:0; }
+.cad-flat { margin:0; padding:8px; max-width:760px; border:1px solid var(--line); border-radius:6px; background:radial-gradient(#edf0ec 1px,transparent 1px) 0 0/12px 12px; }
+.cad-flat-svg { width:100%; height:auto; max-height:300px; display:block; }
+.cad-flat figcaption { margin-top:6px; color:var(--muted); font-size:.72rem; line-height:1.4; }
+.cad-flat-svg .flat-surface { fill:#fbe3c8; stroke:#b9772f; stroke-width:1; vector-effect:non-scaling-stroke; }
+.cad-flat-svg .flat-hole { fill:#fff; stroke:#b9772f; stroke-width:1; vector-effect:non-scaling-stroke; }
+.cad-flat-svg .flat-row { fill:rgba(215,119,31,.16); stroke:#d7771f; stroke-width:1.2; vector-effect:non-scaling-stroke; }
+.cad-flat-svg .flat-column { fill:rgba(8,126,139,.12); stroke:#087e8b; stroke-width:1.2; vector-effect:non-scaling-stroke; }
+/* A board's parts off the surface (main.js draws each board dotted and faint, then solid clipped to the surface). */
+.cad-flat-svg .flat-row.is-off { fill:rgba(215,119,31,.06); stroke-dasharray:2 2; }
+.cad-flat-svg .flat-column.is-off { fill:rgba(8,126,139,.05); stroke-dasharray:2 2; }
+.cad-advice { margin:.25rem 0 0; padding-left:1.1rem; }
+.cad-advice li { margin:.15rem 0; }
+.cad-view-note { margin:.35rem 0 0; }
+.cad-flat-svg .flat-field { fill:none; stroke:#132033; stroke-width:1; stroke-dasharray:4 3; vector-effect:non-scaling-stroke; }
+.cad-flat-svg .flat-base { stroke:#c2185b; stroke-width:3.5; stroke-linecap:round; vector-effect:non-scaling-stroke; }
+.cad-flat-svg .flat-taxels { fill:#1a7f3c; }
+/* The fit's border: blue, hatched where it lies beyond the surface (no taxels there). */
+.cad-flat-svg .flat-border { fill:none; stroke:#1e88e5; stroke-width:2; vector-effect:non-scaling-stroke; }
+.cad-flat-svg .flat-border-out { fill:url(#cadFlatHatch); stroke:none; }
+.cad-flat-svg .flat-hatch { stroke:#546e7a; stroke-width:1; vector-effect:non-scaling-stroke; }
+/* Step 3 side by side (index.html .cad-build): Generate left, the build on the part and its files right; stacked when narrow. */
+.cad-build { display:grid; grid-template-columns:max-content minmax(0,1fr); border-bottom:1px solid var(--line); }
+.cad-build > .cad-step { border-bottom:0; }
+.cad-build > .cad-verify { border-left:1px solid var(--line); grid-template-columns:minmax(0,1fr); gap:4px; }
+.cad-build .cad-actions { margin-top:0; flex-direction:column; align-items:flex-start; gap:8px; }
+.cad-build .cad-actions .primary { width:auto; padding:0 20px; white-space:nowrap; }
+.cad-build .cad-actions .hint { flex:none; max-width:36ch; }
+.cad-build .cad-downloads { grid-template-columns:minmax(0,1fr); gap:6px; margin-top:4px; }
+.cad-build .cad-downloads > .hint { margin:0; }
+@media (max-width:1100px) { .cad-build { grid-template-columns:minmax(0,1fr); }.cad-build > .cad-verify { border-left:0; border-top:1px solid var(--line); } }
+.cad-verify { display:grid; grid-template-columns:minmax(0,1.6fr) minmax(220px,1fr); gap:6px 18px; align-items:start; }
+.cad-verify > h3 { grid-column:1/-1; }
+.cad-verify-body { min-width:0; }
+.cad-verify-body.is-stale { opacity:.5; filter:grayscale(.7); transition:opacity .15s; }
+.cad-verify-table td,.cad-verify-table th { white-space:normal; }
+.cad-error { color:var(--error); font-size:.78rem; font-weight:700; }
+.cad-error small { display:block; color:var(--muted); font-weight:500; }
+.cad-downloads { display:grid; gap:8px; align-content:start; }
+.cad-download-actions { display:flex; flex-wrap:wrap; gap:7px; }
+.cad-diagnostics { padding:9px 16px 13px; border-top:1px solid var(--line); color:var(--muted); font-size:.7rem; }
+.cad-diagnostics summary { cursor:pointer; font-weight:700; }
+.cad-diagnostics .cad-row { margin-top:8px; max-width:520px; }
+.cad-state { display:block; margin:6px 0 0; white-space:pre-wrap; overflow-wrap:anywhere; font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:.7rem; }
+.cad-state[hidden] { display:none; }
+.cad-limits-note { margin:8px 0 0; color:var(--warn); }
+.template-note { margin:8px 0 0; font-size:.72rem; }
+.mask-note { margin:8px 0 0; font-size:.72rem; }
+.mask-note p { margin:0; }
+.mask-note.is-invalid { border-left:3px solid var(--error); padding-left:7px; }
+.mask-issues { margin:6px 0 0; padding-left:18px; }
+.mask-issues .is-error { color:var(--error); }
+.mask-note button { margin-top:7px; border:1px solid #9eafb5; background:#fff; color:var(--ink); border-radius:5px; min-height:30px; padding:0 10px; font-weight:700; font-size:.74rem; cursor:pointer; }
+@media (max-width:1200px) { .cad-view { height:430px; }
+  .cad-verify { grid-template-columns:1fr; }.cad-status { max-width:none; } }
+@media (max-width:640px) { .cad-workspace > header { flex-direction:column; }.cad-view { height:340px; } }
+@media (max-width:520px) { .mode-picker { margin:0; } }
+
+/* A clean interface: the basic controls in sight, the rest folded (details.advanced, .cad-more, the design checks,
+   the stacked view's notes and the ordering notes). */
+details > summary { cursor:pointer; list-style:none; }
+details > summary::-webkit-details-marker { display:none; }
+details > summary::before { content:"▸"; display:inline-block; width:1em; color:var(--muted); transition:transform .12s; }
+details[open] > summary::before { transform:rotate(90deg); }
+.advanced { margin:0 0 18px; border:1px solid var(--line); border-radius:7px; background:#fff; }
+.advanced > summary { padding:10px 12px; font-size:.82rem; font-weight:750; color:#354454; }
+.advanced[open] > summary { border-bottom:1px solid var(--line); }
+.advanced > :not(summary) { margin-left:12px; margin-right:12px; }
+.advanced > .hint:first-of-type { margin-top:10px; }
+.advanced section { border-bottom:1px solid var(--line); padding:12px 0 8px; margin:0; }
+.advanced section:last-child { border-bottom:0; margin-bottom:12px; }
+.advanced h2 { font-size:.86rem; margin-bottom:10px; }
+.locked .profile-badge { margin:0 0 9px; font-size:.72rem; font-weight:750; color:#354454; }
+.controls .mask-note { margin:0 0 14px; }
+/* CAD mode has its own steps: the rectangular form stays in the page (Generate writes into it), out of sight. */
+/* Gen by Surface: the order of work on the page's left (index.html .flow-guide; main.js renderGuide), in sight from top
+   to bottom, each step scrolling to its part on the right; done (teal), next (blue), in view (its row lit). */
+body[data-mode="cad"] main { grid-template-columns:minmax(240px,280px) minmax(0,1fr); }
+.flow-guide { display:none; }
+body[data-mode="cad"] .flow-guide { display:block; position:sticky; top:0; align-self:start; height:100vh; overflow-y:auto; padding:22px 16px 24px;
+  background:#fbfcfa; border-right:1px solid var(--line); }
+.flow-guide-title { margin:0 4px 18px; font-size:1.06rem; line-height:1.3; letter-spacing:-.015em; color:#132033; }
+.flow-steps { list-style:none; margin:0; padding:0; }
+.flow-step { position:relative; padding:0 0 10px; }
+.flow-step:not(:last-child)::before { content:""; position:absolute; left:23px; top:42px; bottom:0; width:2px; border-radius:1px; background:#d6e2e5; }
+.flow-step.is-done:not(:last-child)::before { background:#82c3c7; }
+.flow-step button { display:grid; grid-template-columns:30px minmax(0,1fr); gap:10px; width:100%; padding:8px; border:1px solid transparent; border-radius:10px;
+  background:none; color:inherit; font:inherit; text-align:left; cursor:pointer; }
+.flow-step button:hover { background:#eef5f5; }
+.flow-step button:focus-visible { outline:2px solid #77cbd1; outline-offset:1px; }
+.flow-step.is-here button { background:#eaf2fe; border-color:#bdd2f6; }
+.flow-no { display:grid; place-items:center; width:30px; height:30px; border-radius:50%; border:2px solid #a9bcc1; background:#fff; color:#53676e; font-size:.86rem; font-weight:800; }
+.flow-step.is-done .flow-no { border-color:#075c69; background:#075c69; color:#fff; }
+.flow-step.is-next .flow-no { border-color:#2563eb; background:#2563eb; color:#fff; box-shadow:0 0 0 4px rgba(37,99,235,.15); }
+.flow-text strong { display:block; margin-top:5px; font-size:.93rem; color:#20303a; }
+.flow-step.is-next .flow-text strong { color:#1d4ed8; }
+.flow-text > span { display:block; margin-top:3px; color:var(--muted); font-size:.76rem; line-height:1.45; }
+#cadWorkspace,#cadStepConfig,#cadStepGenerate,#downloadsTitle { scroll-margin-top:14px; }
+/* The Gerber ZIPs, first among the downloads and set off (index.html .download-main). */
+.download-actions button.download-main { min-height:42px; padding:0 16px; border-color:var(--accent); background:var(--accent); color:#fff; font-size:.86rem; font-weight:800; }
+.download-actions button.download-main:hover:not(:disabled) { background:#066d78; }
+.download-actions button.download-main:disabled { background:#e3eceb; border-color:#c9d6d8; color:#8a9a9e; }
+.flow-only { display:none; }
+body[data-mode="cad"] .flow-only { display:inline-grid; margin-right:8px; vertical-align:2px; }
+@media (max-width:980px) { body[data-mode="cad"] main { grid-template-columns:1fr; }
+  body[data-mode="cad"] .flow-guide { position:static; height:auto; border-right:0; border-bottom:1px solid var(--line); } }
+body[data-mode="cad"] .controls { display:none; }
+.cad-more { margin:6px 0 10px; }
+.cad-more > summary { font-size:.74rem; font-weight:700; color:var(--muted); padding:3px 0; }
+.cad-more[open] > summary { margin-bottom:8px; }
+.cad-more .cad-grid { margin-top:4px; }
+.cad-config-body > .cad-grid { margin-bottom:6px; }
+.board-card header h2 { align-self:center; }
+.board-card header { min-height:0; }
+.assembly-more { margin:0 14px 12px; font-size:.67rem; }
+.assembly-more > summary { font-size:.72rem; font-weight:700; color:var(--muted); padding:2px 0 6px; }
+.assembly-notes { display:flex; flex-wrap:wrap; gap:6px 10px; line-height:1.35; }
+.assembly-notes:empty { display:none; }
+.drc-panel > summary { padding:14px 16px; display:flex; align-items:center; gap:12px; }
+.drc-panel > summary::before { order:-1; }
+.drc-panel[open] > summary { border-bottom:1px solid var(--line); }
+.drc-total { font-size:.78rem; font-weight:750; }
+.drc-total.is-pass { color:var(--accent); }.drc-total.is-fail { color:var(--error); }
+.drc-bar { display:flex; justify-content:space-between; align-items:center; gap:10px; padding:10px 16px 0; color:var(--muted); font-size:.7rem; }
+.drc-bar button { border:1px solid #c7d3d7; border-radius:4px; background:#fff; color:var(--ink); font-size:.7rem; font-weight:700; padding:4px 9px; cursor:pointer; }
+.drc-panel.only-failures tr.is-pass { display:none; }
+.manufacturing-note > summary { font-size:.78rem; font-weight:750; color:#354454; padding:2px 0; }
+.manufacturing-note[open] > summary { margin-bottom:8px; }
+body.cad-no-build #results { display:none; }
+.board-card header h2 { white-space:nowrap; }
+.cad-verify-line { font-size:.8rem; font-weight:700; margin:0 0 4px; }
+.cad-verify-line.is-pass { color:var(--accent); }.cad-verify-line.is-fail { color:var(--error); }
+
+/* Looks (app.js decorateLook, setLook): the board previews and the stacked view (.look-scope) in Photo, colours sampled
+   from a photograph of a JLCPCB FlexiTac pad on white, or Diagram, the server SVG's own colours.  The extra layers
+   (.lk) show only in Photo; the CAD workspace's flat figure keeps its own colours. */
+.look-defs { position:absolute; width:0; height:0; overflow:hidden; pointer-events:none; }
+.lk { display:none; }
+.lk polyline { fill:none; stroke-linejoin:round; stroke-linecap:round; }
+.lk-gap polyline { stroke:#000; }.lk-gap :is(rect,polygon) { fill:#000; }
+.look-bar { display:flex; align-items:center; justify-content:flex-end; gap:6px; margin:16px 0 -8px; font-size:.72rem; color:var(--muted); }
+.look-bar span { font-weight:750; margin-right:2px; }
+.look-bar button { cursor:pointer; border:1px solid transparent; border-radius:4px; background:transparent; color:var(--muted); padding:4px 8px; font-size:.72rem; font-weight:750; }
+.look-bar button[aria-pressed="true"] { color:#075c69; border-color:#b9d9db; background:#eef9f8; }
+body[data-look="photo"] .look-scope .outline { fill:#df8401; stroke:#6b2a03; stroke-width:.06; }
+body[data-look="photo"] .look-scope .cutout { fill:var(--card); stroke:#6b2a03; stroke-width:.06; }
+body[data-look="photo"] .look-scope .stiffener { display:none; }
+body[data-look="photo"] .look-scope .opening { fill:#d98a2a; stroke:none; }
+body[data-look="photo"] .look-scope .route { stroke:#d26a02; }
+body[data-look="photo"] .look-scope :is(.electrode,.pad) { fill:#d26a02; stroke:none; }
+body[data-look="photo"] .look-scope :is(.lk-gap,.lk-edge,.lk-stiff,.lk-gold,.lk-grain) { display:inline; }
+/* The gaps' closing is a filter: in a 3D-transformed view it makes Chrome draw the board at a lower resolution (the
+   stacked view's and the oblique view's boards are small there anyway), so only the flat top view has it. */
+body[data-look="photo"] .look-scope :is(.stacked-canvas,.oblique-board) .lk-gap { display:none; }
+body[data-look="photo"] .look-scope .lk-edge polyline { stroke:#b85a02; }
+body[data-look="photo"] .look-scope .lk-edge :is(rect,polygon) { fill:#b85a02; stroke:#b85a02; stroke-width:.05; }
+body[data-look="photo"] .look-scope .lk-stiff { fill:#4a1606; opacity:.9; mix-blend-mode:multiply; }
+body[data-look="photo"] .look-scope .three-d-pane::after { content:"Rigid oblique tilt of the top view · not a flex model · PI stiffener (bottom side) in dark brown · thickness at least 2 px"; }
+body[data-look="photo"] .look-scope .lk-gold polyline { stroke:url(#lk-enig); }
+body[data-look="photo"] .look-scope .lk-gold :is(rect,polygon) { fill:url(#lk-enig); }
+body[data-look="photo"] .look-scope .lk-gloss { fill:url(#lk-gloss-paint); mix-blend-mode:screen; }
+/* The other side in Photo: the bare polyimide (no coverlay), its copper a darker shade seen through it, the PI stiffener
+   on it outermost, a thick amber-brown. */
+body[data-look="photo"] .look-scope .board-back .outline { fill:#d37c0c; stroke:#6b2a03; stroke-width:.06; }
+body[data-look="photo"] .look-scope .board-back .route { stroke:#b4530a; opacity:.55; }
+body[data-look="photo"] .look-scope .board-back :is(.electrode,.pad) { fill:#b4530a; opacity:.55; }
+body[data-look="photo"] .look-scope .board-back .stiffener { display:inline; fill:#7a360c; stroke:#4a1606; stroke-width:.06; opacity:.95; }
+body[data-look="photo"] .look-scope .fpc-edge-ring { stroke:#9c4b04; }
+body[data-look="photo"] .look-scope .fpc-stiffener-ring { stroke:#4a1606; }
+body[data-look="photo"] .look-scope .fpc-stiffener-face { fill:#7a360c; }
+body[data-look="photo"] .swatch-copper { background:#d26a02; }
+body[data-look="photo"] .swatch-opening { background:#cdb98c; border-color:#a48e62; }
+body[data-look="photo"] .swatch-stiffener { background:#4a1606; }
+/* The plan view sees the top FPC from above through its polyimide: its copper plainly (the registration to check). */
+.stacked-canvas.is-plan .board-back :is(.electrode,.pad,.route) { opacity:.8; }
+/* The coin for scale (app.js coinArt, coinPlane): the US Mint's photo of a quarter on a metal disk under a sheen, never a
+   pointer target.  In the 2D view it lies on the page with its shadow round it; in the 3D views on a plane of its own
+   below the boards' (.coin-plane, the table): its shadow on the table, hidden from below, its reeded side as disks rising
+   through its thickness (--thickness, of the plane's width) to its face. */
+.coin-ref,.coin-plane { pointer-events:none; }
+.coin-lying { filter:url(#coin-shadow); }
+.coin-body { fill:url(#coin-edge); }
+.coin-sheen { fill:url(#coin-sheen); }
+.coin-cast { fill:#000; filter:url(#coin-cast); }
+.coin-side-disk { fill:url(#coin-side); }
+.coin-side-reeds { fill:none; stroke:#4c5258; stroke-width:.16; opacity:.75; }
+.coin-plane { position:absolute; aspect-ratio:1; transform-style:preserve-3d; container-type:inline-size; }
+.coin-plane .coin-layer { position:absolute; inset:0; display:block; width:100%; height:100%; aspect-ratio:auto; overflow:visible; filter:none;
+  transform:translateZ(calc(var(--thickness) * var(--rise) * 100cqw)); }
+.coin-layer-cast { backface-visibility:hidden; }
+/* The face's gleam (app.js coinPlane): polished metal throws back the room, bright above its horizon and dark below; the
+   gradient's angle undoes the view's spin and the horizon slides with the tilt, so it keeps to the room as the coin turns
+   (--coin-tilt, --coin-spin: the view's angles, its own until it is first turned). */
+.coin-plane .coin-layer-gleam { inset:7.0771%; width:auto; height:auto; border-radius:50%; backface-visibility:hidden;
+  --horizon:calc(46% + 24% * sin(var(--coin-tilt) - 57deg));
+  background:linear-gradient(calc(165deg - var(--coin-spin)), rgba(255,255,255,.3) 0%, rgba(236,243,252,.08) calc(var(--horizon) - 8%),
+    rgba(44,62,84,.3) calc(var(--horizon) + 3%), rgba(44,62,84,.1) calc(var(--horizon) + 26%), rgba(255,255,255,.12) 100%); }
+.oblique-board .coin-plane { transform:translateZ(-28px); --coin-tilt:var(--orbit-tilt,56deg); --coin-spin:var(--orbit-spin,-22deg); }
+.assembly-camera .coin-plane { transform:translateZ(-56px); --coin-tilt:var(--orbit-tilt,57deg); --coin-spin:var(--orbit-spin,-20deg); }
+.stacked-canvas.is-plan :is(.coin-plane,.coin-layer) { transform:none; }
+.swatch-coin { background:radial-gradient(circle at 38% 34%, #f4f5f6, #cfd3d7 55%, #9ca2a8); border-radius:50%; }
+.coin-key { border-left:3px solid #9ca2a8; font-weight:600; }

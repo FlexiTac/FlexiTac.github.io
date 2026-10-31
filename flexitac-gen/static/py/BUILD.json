@@ -1,0 +1,16 @@
+{
+  "generator_version": "deterministic-sensor-core/0.4.0",
+  "engine_zip_sha256": "bf3424c066082f0608fa4adeae8d29685222cf2d7ff304ca04f61d1d92e66ae6",
+  "pyodide": {
+    "version": "0.27.8",
+    "archive": "https://github.com/pyodide/pyodide/releases/download/0.27.8/pyodide-core-0.27.8.tar.bz2",
+    "archive_sha256": "b7ed9d0eb44499578403d9c67935510f76c4534de3cac2fef03da4ac274ac294",
+    "files": {
+      "pyodide.js": "11394774b02fa67bb4513db9433b6a8303a3926da906e4255ec85ac97b719b4b",
+      "pyodide.asm.js": "8bd8175d6b97ee4ffff85c5aaf44130fad3e9322939826f2a52d27d786ef8908",
+      "pyodide.asm.wasm": "92160102d09feeb8c738a07c870bde47fd4c141fd70b5376188bdd951df9ea23",
+      "python_stdlib.zip": "cb5f8d7eae384fcf27c574d8b13901de1753a50f93038130c326f85b88c9012b",
+      "pyodide-lock.json": "cb18729b18db7ce2482d196209c8051d8122441b817fc2f644d643b44e5e1b0f"
+    }
+  }
+}

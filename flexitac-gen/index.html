@@ -1,0 +1,547 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; base-uri 'none'; form-action 'self'" />
+    <meta name="referrer" content="no-referrer" />
+    <meta name="flexitac-backend" content="browser" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>FlexiTac-Gen</title>
+    <link rel="stylesheet" href="static/styles.css" />
+  </head>
+  <body>
+    <header class="masthead">
+      <div class="masthead-title">
+        <h1>FlexiTac-Gen</h1>
+        <p class="masthead-tagline">A customizer for <a href="https://arxiv.org/abs/2604.28156" target="_blank" rel="noopener noreferrer">FlexiTac</a> sensors.
+          For assembly instructions and applications, see the <a href="https://flexitac.github.io/" target="_blank" rel="noopener noreferrer">FlexiTac website</a>.</p>
+      </div>
+      <!-- Mode switch (web/cad/main.js): body[data-mode] and #rect (Gen by Surface, value cad, is the default). A radio
+           group, not a tablist (app.js binds every tablist); right after the title.  The page never says "CAD" (the user's
+           requests of 2026-10-30): the mode is "Gen by Surface", a surface picked on a 3D model. -->
+      <fieldset class="mode-picker" id="modePicker">
+        <legend>Mode</legend>
+        <label title="A rectangular sensor: set its rows, columns and pitch"><input type="radio" name="appMode" id="modeRect" value="rect" /><span>Rectangular</span></label>
+        <label title="Load a 3D model (STL), pick the surface the sensor goes on, and fit the sensor to it"><input type="radio" name="appMode" id="modeCad" value="cad" checked /><span>Gen by Surface</span></label>
+      </fieldset>
+    </header>
+
+    <main>
+      <!-- The order of work in Gen by Surface (the user's requests of 2026-10-30): the page's left column, in sight from
+           top to bottom; each step scrolls to its part on the right (the 3D model, the resolution, Generate and the
+           previews, the downloads).  main.js renderGuide marks each step done or next and the one in view. -->
+      <aside class="flow-guide" id="flowGuide" aria-labelledby="flowGuideTitle">
+        <h2 class="flow-guide-title" id="flowGuideTitle">Design a FlexiTac sensor for your own robot</h2>
+        <ol class="flow-steps" id="cadGuide">
+          <li class="flow-step" data-step="1"><button type="button" data-go="cadWorkspace"><span class="flow-no" aria-hidden="true">1</span><span class="flow-text"><strong>Select your gripper</strong><span>Load your gripper finger's 3D model (STL), click the surface the sensor goes on and the base edge the tails leave across.</span></span></button></li>
+          <li class="flow-step" data-step="2"><button type="button" data-go="cadStepConfig"><span class="flow-no" aria-hidden="true">2</span><span class="flow-text"><strong>Find best resolution</strong><span>Set the pitch and the size limits, then Fit: the proposals rank the taxel fields that fit the surface.</span></span></button></li>
+          <li class="flow-step" data-step="3"><button type="button" data-go="cadStepGenerate"><span class="flow-no" aria-hidden="true">3</span><span class="flow-text"><strong>Click to generate</strong><span>Generate the chosen proposal: both FPCs are built, checked and mapped onto the part, their previews below.</span></span></button></li>
+          <li class="flow-step" data-step="4"><button type="button" data-go="downloadsTitle"><span class="flow-no" aria-hidden="true">4</span><span class="flow-text"><strong>Send to manufacture</strong><span>Download each FPC's Gerber ZIP with its order notes and order the boards.</span></span></button></li>
+        </ol>
+      </aside>
+
+      <!-- Limits (min/max/step/maxlength) and choices come from /api/default
+           profile.limits; data-field is the canonical design path of a control. -->
+      <form class="controls" id="designForm" aria-label="Sensor parameters" novalidate>
+        <section>
+          <h2>Sensor</h2>
+          <div class="field"><div class="field-head"><label for="name">Design name</label></div><input id="name" name="name" data-field="project_name" autocomplete="off" required /></div>
+          <div class="two-col">
+            <div class="field"><div class="field-head"><label for="rows">Rows</label></div><input id="rows" name="rows" data-field="matrix.rows" type="number" inputmode="numeric" required /></div>
+            <div class="field"><div class="field-head"><label for="columns">Columns</label></div><input id="columns" name="columns" data-field="matrix.columns" type="number" inputmode="numeric" required /></div>
+          </div>
+          <div class="two-col">
+            <div class="field"><div class="field-head"><label for="pitchX">X pitch</label></div><input id="pitchX" name="pitch_x_mm" data-field="matrix.pitch_x_mm" type="number" inputmode="decimal" required /></div>
+            <div class="field"><div class="field-head"><label for="pitchY">Y pitch</label></div><input id="pitchY" name="pitch_y_mm" data-field="matrix.pitch_y_mm" type="number" inputmode="decimal" required /></div>
+          </div>
+          <!-- Taxel footprint = row electrode width x column electrode width. -->
+          <div class="two-col">
+            <div class="field"><div class="field-head"><label for="rowWidth">Row electrode</label></div><input id="rowWidth" name="row_electrode_width_mm" data-field="matrix.taxel_height_mm" data-pitch="pitchY" type="number" inputmode="decimal" required /></div>
+            <div class="field"><div class="field-head"><label for="columnWidth">Column electrode</label></div><input id="columnWidth" name="column_electrode_width_mm" data-field="matrix.taxel_width_mm" data-pitch="pitchX" type="number" inputmode="decimal" required /></div>
+          </div>
+        </section>
+
+        <section>
+          <h2>Tails</h2>
+          <div class="two-col">
+            <div class="field"><div class="field-head"><label for="topTailLength">Top FPC tail length</label></div><input id="topTailLength" name="top_tail_length_mm" data-field="tail.top_length_mm" type="number" inputmode="decimal" required /></div>
+            <div class="field"><div class="field-head"><label for="bottomTailLength">Bottom FPC tail length</label></div><input id="bottomTailLength" name="bottom_tail_length_mm" data-field="tail.bottom_length_mm" type="number" inputmode="decimal" required /></div>
+          </div>
+          <div class="two-col">
+            <div class="field"><div class="field-head"><label for="connectorSide">Connector side</label></div><select id="connectorSide" name="connector_side" data-field="tail.row_side tail.column_side"><option value="bottom">Bottom</option></select></div>
+            <span aria-hidden="true"></span>
+          </div>
+        </section>
+
+        <!-- Everything beyond the basic sensor, folded (the defaults suit most designs). -->
+        <details class="advanced" id="formAdvanced">
+          <summary>Advanced</summary>
+          <p class="hint" id="mmHint" hidden></p>
+          <section>
+            <h2>FPC arrangement</h2>
+            <div class="two-col">
+              <div class="field"><div class="field-head"><label for="rowLayer">Row FPC role</label></div><select id="rowLayer" name="row_fpc_position" data-field="role_mapping.top role_mapping.bottom"><option value="top">Top FPC</option><option value="bottom">Bottom FPC</option></select></div>
+              <div class="field"><div class="field-head"><label for="scanOrder">Scan order</label></div><select id="scanOrder" name="scan_order" data-field="channel_order.rows channel_order.columns"><option value="forward">Forward</option><option value="reverse">Reverse</option></select></div>
+            </div>
+            <p class="hint">The connector side applies to both boards and turns each whole board. Scan order assigns channels to connector pins (pin 1 is marked in the previews); neither moves copper on the board.</p>
+          </section>
+
+          <section>
+            <h2>Connector size</h2>
+            <div class="two-col">
+              <div class="field"><div class="field-head"><label for="rowPins">Row connector pins</label></div><input id="rowPins" name="row_pins" data-field="connector.row_pins" data-channels="rows" type="number" inputmode="numeric" /></div>
+              <div class="field"><div class="field-head"><label for="columnPins">Column connector pins</label></div><input id="columnPins" name="column_pins" data-field="connector.column_pins" data-channels="columns" type="number" inputmode="numeric" /></div>
+            </div>
+            <p class="hint">Leave empty for one contact per channel. A larger ZIF connector adds isolated NC contacts at the unused positions.</p>
+          </section>
+
+          <section>
+            <h2>Fan-out traces</h2>
+            <div class="two-col">
+              <!-- data-nudge: the arrow keys step these fields by 1 mil (0.0254 mm), the unit of JLCPCB's trace rules. -->
+              <div class="field"><div class="field-head"><label for="traceWidth">Trace width</label></div><input id="traceWidth" name="trace_width_mm" data-field="routing.trace_width_mm" data-nudge="0.0254" type="number" inputmode="decimal" required /></div>
+              <div class="field"><div class="field-head"><label for="traceSpace">Trace spacing</label></div><input id="traceSpace" name="trace_space_mm" data-field="routing.trace_space_mm" data-nudge="0.0254" type="number" inputmode="decimal" required /></div>
+            </div>
+            <!-- Replaced by JLCPCB's trace minimum and the gold-finger width from /api/default profile.display_rules. -->
+            <p class="hint" id="traceHint">The traces leave the sensor thin, run as a tight bundle and widen again at the gold fingers.</p>
+            <!-- routing.row_sides (the Row traces): the diagonal Row bus (both, left, right) or the straight Row channel
+                 (channel), on every template; app.js sends it with formBody().  The generic template's default is both
+                 (or the channel for a single row or column), the surface template's the channel. -->
+            <div class="two-col" id="rowSidesRow">
+              <div class="field"><div class="field-head"><label for="rowSides">Row traces</label></div><select id="rowSides" name="row_sides" data-field="routing.row_sides"><option value="channel">Straight channel</option><option value="both">Diagonal, both sides</option><option value="left">Diagonal, left</option><option value="right">Diagonal, right</option></select></div>
+              <span aria-hidden="true"></span>
+            </div>
+            <p class="hint" id="rowSidesHint">Diagonal: each row trace runs as a slant from its row's end beside the field, so the board is narrowest at the tip; both boards share one outline down to their tails, which leave one bottom edge, stacked (the Row tail on the centred Column tail; they part to their own connectors). With both sides the Row pins fold (ROW_01, 03, …, 04, 02). It is built with Gen by Surface's rules (0.5 mm field margin, up to 64 columns, tails from 7.5 mm). Straight channel: the row traces run in one channel beside the field, the Row pins in order (up to 32 columns, tails from 7.0 mm).</p>
+          </section>
+
+          <section class="locked">
+            <h2>Standardized manufacturing</h2>
+            <p class="profile-badge" id="profileBadge">Loading profile…</p>
+            <dl id="lockedRules"><dt>Loading…</dt></dl>
+            <p class="hint">Active-area margin is locked by the selected manufacturing profile.</p>
+            <!-- app.js: shown when the form uses a template whose profile the server did not send (CAD mode). -->
+            <p class="hint template-note" id="templateNote" hidden></p>
+          </section>
+        </details>
+
+        <!-- app.js: CAD mode's masked field (matrix.mask of the applied proposal) with the server's issues at
+             matrix.mask and a button that drops it, or the note that an edit cleared it. -->
+        <div class="hint mask-note" id="maskNote" hidden>
+          <p id="maskText"></p>
+          <ul class="mask-issues" id="maskIssues" hidden></ul>
+          <button type="button" id="clearMask" hidden>Use the full field</button>
+        </div>
+
+        <button id="generate" class="primary" type="submit">Generate &amp; validate</button>
+      </form>
+
+      <section class="workbench" id="workbench">
+        <!-- CAD mode (web/cad/): choose a surface of an STL and fit a design to it; Generate writes the
+             chosen design into the form and submits it, so the shared workbench below shows that build.
+             Its controls carry no name or data-field: they are not part of the design form. -->
+        <section class="cad-workspace board-card" id="cadWorkspace" aria-labelledby="cadTitle" hidden>
+          <header>
+            <div>
+              <h2 id="cadTitle"><span class="cad-step-no">1</span>Select your gripper</h2>
+              <p class="hint cad-title-hint">Pick a surface on a 3D model: load your gripper finger (STL), click the surface the sensor goes on and its base edge.</p>
+            </div>
+            <output class="cad-status is-neutral" id="cadStatus" role="status" aria-live="polite">Drop an STL file on the view or choose one.</output>
+          </header>
+          <div class="cad-main">
+            <div class="cad-stage">
+              <!-- Step 1's file and selection settings, above the 3D view (the guide on the page's left names the step). -->
+              <div class="cad-filebar">
+                <h3 class="cad-filebar-label" id="cadStepFile">3D model</h3>
+                <input type="file" id="cadFile" accept=".stl,model/stl" />
+                <!-- main.js renderMeshFacts: the part loaded (the file input names only a chosen file). -->
+                <p class="hint cad-file-note" id="cadFileNote" hidden></p>
+                <details class="cad-more" id="cadFileMore">
+                  <summary>File details</summary>
+                  <div class="cad-row">
+                    <label for="cadUnit">File unit</label>
+                    <select id="cadUnit">
+                      <option value="auto">Guess from size</option><option value="m">metre (m)</option><option value="cm">centimetre (cm)</option>
+                      <option value="mm">millimetre (mm)</option><option value="in">inch (in)</option>
+                    </select>
+                  </div>
+                  <dl class="cad-facts" id="cadMeshFacts"><dt>Mesh</dt><dd>none loaded</dd></dl>
+                </details>
+                <details class="cad-more" id="cadSelectMore">
+                  <summary>Selection settings</summary>
+                  <dl class="cad-facts" id="cadSelectionFacts"><dt>Selection</dt><dd>none</dd></dl>
+                  <div class="cad-row">
+                    <label for="cadPreset">Grow preset</label>
+                    <select id="cadPreset">
+                      <option value="flat">Flat face (10° / 4°)</option><option value="surface">Surface (30°, no blend under 4 mm radius)</option>
+                      <option value="smooth">Smooth region (30° / 180°)</option><option value="custom">Custom (the values below)</option>
+                    </select>
+                  </div>
+                  <div class="cad-row cad-range">
+                    <label for="cadThetaD">Neighbour angle θd</label>
+                    <input type="range" id="cadThetaD" min="0" max="90" step="1" value="10" />
+                    <span class="cad-range-value" id="cadThetaDValue">10°</span>
+                  </div>
+                  <div class="cad-row cad-range">
+                    <label for="cadThetaC">Seed-normal cone θc</label>
+                    <input type="range" id="cadThetaC" min="0" max="180" step="1" value="4" />
+                    <span class="cad-range-value" id="cadThetaCValue">4°</span>
+                  </div>
+                  <div class="cad-row">
+                    <label for="cadMinRadius">Leave out blends under this bend radius (mm)</label>
+                    <input type="number" id="cadMinRadius" value="0" min="0" max="10000" step="0.5" inputmode="decimal" />
+                  </div>
+                </details>
+              </div>
+              <div class="cad-border-bar" id="cadBorderBar" role="toolbar" aria-label="Border" hidden>
+                <button type="button" id="cadBorderReset" title="The border back to the surface's outline (the fit then uses the whole surface as before)">Surface outline</button>
+                <span class="cad-border-inset">
+                  <button type="button" id="cadBorderInset" title="Every edge moved inward by this many mm (negative: outward)">Inset by</button>
+                  <input type="number" id="cadBorderInsetMm" value="2" min="-50" max="50" step="0.5" inputmode="decimal" aria-label="Inset (mm, negative: outward)" />
+                  <span aria-hidden="true">mm</span>
+                </span>
+                <button type="button" id="cadBorderDelete" title="Remove the selected corner (red; click a corner to select it). Key: Delete" disabled>Delete corner</button>
+                <button type="button" id="cadBorderUndo" title="Ctrl+Z" disabled>Undo</button>
+                <button type="button" id="cadBorderRedo" title="Ctrl+Shift+Z" disabled>Redo</button>
+                <label class="cad-border-snap" title="While dragging: corners and edges snap onto the surface's outline, corners near 90° become right angles"><input type="checkbox" id="cadBorderSnap" checked /><span>Snap</span></label>
+              </div>
+              <div class="cad-view-wrap">
+              <!-- The tools in the 3D view's window, on its left (the user's request of 2026-10-30): what a click on the
+                   part does, the border editor (docs/CAD_BORDER.md; handles on the part while it is pressed) and Clear.
+                   A click on a surface selects it, a click on a selected one deselects it (no Add / Subtract). -->
+              <div class="cad-view-tools" id="cadViewTools">
+                <fieldset class="cad-tools" id="cadTools">
+                  <legend>Click on the part</legend>
+                  <label title="Click a surface to select it (it grows over the face's facets); click a selected surface to deselect it"><input type="radio" name="cadTool" value="grow" checked /><span>Select a surface</span></label>
+                  <label title="Click a side of the selection's outline: the tails leave the sensor there"><input type="radio" name="cadTool" value="edge" /><span>Base edge</span></label>
+                </fieldset>
+                <button type="button" class="cad-edit-border" id="cadEditBorder" aria-pressed="false" aria-controls="cadBorderBar" disabled>Edit border</button>
+                <button type="button" class="cad-undo" id="cadUndo" disabled>Undo</button>
+                <button type="button" class="cad-clear" id="cadClear" disabled>Clear</button>
+              </div>
+              <!-- The camera, in the 3D view's window at its top right (the user's request of 2026-10-30: a row saved). -->
+              <div class="cad-views" role="group" aria-label="Camera">
+                <button type="button" data-cad-view="iso">Fit</button>
+                <button type="button" data-cad-view="selection">Selection</button>
+                <button type="button" data-cad-view="-x">−X</button><button type="button" data-cad-view="+x">+X</button>
+                <button type="button" data-cad-view="-y">−Y</button><button type="button" data-cad-view="+y">+Y</button>
+                <button type="button" data-cad-view="-z">−Z</button><button type="button" data-cad-view="+z">+Z</button>
+              </div>
+              <div class="cad-view" id="cadView" tabindex="0" role="application" aria-roledescription="3D view" aria-label="3D view of the part" aria-describedby="cadHelp">
+                <div class="cad-hover-label" id="cadHoverLabel" aria-hidden="true" hidden></div>
+                <div class="cad-drop" id="cadDrop">
+                  <p><strong>Drop an STL file here</strong></p>
+                  <p>or <label for="cadFile" class="cad-file-link">choose a file</label> · binary or ASCII STL, up to 64 MiB</p>
+                </div>
+              </div>
+              </div>
+              <!-- The base edge, under the 3D view and across it (the user's request of 2026-10-30): main.js renderSides. -->
+              <div class="cad-base" aria-labelledby="cadStepBase">
+                <h3 class="cad-base-title" id="cadStepBase">Base edge <span class="hint">the tails leave across it: pick it here or click it on the part</span></h3>
+                <p class="hint cad-border-note" id="cadBorderNote" hidden></p>
+                <fieldset class="cad-sides" id="cadSides">
+                  <legend>Tail exit side</legend>
+                  <p class="hint">Select a surface first.</p>
+                </fieldset>
+              </div>
+              <p class="cad-help" id="cadHelp">Drag: rotate · right-drag or arrow keys: pan · wheel: zoom · click a surface to select it, click it again to deselect it.</p>
+              <!-- main.js: what the 3D overlay leaves out (the parts of the boards off the surface) and where the markers are. -->
+              <p class="hint cad-view-note" id="cadViewNote" hidden></p>
+            </div>
+          </div>
+
+          <!-- Step 2 side by side (the user's request of 2026-10-30): the settings, Fit and the proposals on the left, the
+               chosen proposal's flattened map on the right (in sight while the left scrolls). -->
+          <div class="cad-resolution">
+            <div class="cad-resolution-main">
+              <section class="cad-step cad-config" aria-labelledby="cadStepConfig">
+                <h3 id="cadStepConfig"><span class="cad-step-no">2</span>Find best resolution</h3>
+                <!-- main.js reads every [data-option] in #cadConfig: the basic options and those under More options. -->
+                <div class="cad-config-body" id="cadConfig">
+                <div class="cad-grid">
+                  <div class="cad-field"><label for="cadPitch">Pitch (mm)</label><input type="number" id="cadPitch" data-option="pitch_mm" value="2.0" min="0.6" max="10" step="0.01" inputmode="decimal" /></div>
+                  <div class="cad-field"><label for="cadFill">Electrode fill (width / pitch)</label><input type="number" id="cadFill" data-option="fill" value="0.7" min="0.05" max="0.95" step="0.01" inputmode="decimal" /></div>
+                  <div class="cad-field"><label for="cadRowSides">Row traces</label>
+                    <select id="cadRowSides" data-option="row_sides" title="With Field only: the sides the row traces take beside the field, seen from outside (looking at the part) with the tails down; the Row FPC preview shows its copper side, so there they appear mirrored. Both alternates the rows (the narrowest tip; the Row pins fold), Left or Right puts every row trace on that side. Under Whole board the Row traces run in a straight channel."><option value="both">Both</option><option value="left">Left</option><option value="right">Right</option><option value="channel" disabled>Straight channel (Whole board)</option></select></div>
+                  <div class="cad-field"><label for="cadTailExtension">Tail past base edge (mm)</label><input type="number" id="cadTailExtension" data-option="tail_extension_mm" value="20" min="6.5" max="72.5" step="0.5" inputmode="decimal" title="How far the tails' ends lie past the base edge, 6.5-72.5 mm. With Field only both tails end there, or farther when the Row bus already reaches farther past the edge (the proposal card says)." /></div>
+                  <div class="cad-field"><label for="cadMaxRows">Max rows</label><input type="number" id="cadMaxRows" data-option="max_rows" value="32" min="1" max="64" step="1" inputmode="numeric" /></div>
+                  <div class="cad-field"><label for="cadMaxColumns">Max columns</label><input type="number" id="cadMaxColumns" data-option="max_columns" value="32" min="1" max="64" step="1" inputmode="numeric" /></div>
+                </div>
+                <details class="cad-more" id="cadConfigMore">
+                  <summary>More options</summary>
+                  <div class="cad-grid">
+                    <div class="cad-field"><label for="cadObjective">Objective</label>
+                      <select id="cadObjective" data-option="objective"><option value="fixed_pitch">Resolution (pitch)</option><option value="max_taxels">Most taxels</option><option value="max_area">Largest sensing area</option></select></div>
+                    <div class="cad-field"><label for="cadMinPitch">Smallest pitch (mm)</label><input type="number" id="cadMinPitch" data-option="min_pitch_mm" value="1.0" min="0.6" max="10" step="0.01" inputmode="decimal" /></div>
+                    <div class="cad-field"><label for="cadEdgeMargin">Edge margin (mm)</label><input type="number" id="cadEdgeMargin" data-option="edge_margin_mm" value="0" min="0" max="20" step="0.1" inputmode="decimal" /></div>
+                    <div class="cad-field"><label for="cadRouting">Fan-out traces (width / gap)</label>
+                      <select id="cadRouting" data-option="routing"><option value="auto">Auto</option><option value="default">0.127 / 0.127 mm</option><option value="tight">0.1016 / 0.1016 mm</option></select></div>
+                    <div class="cad-field"><label for="cadRotation">Board rotation</label>
+                      <select id="cadRotation" data-option="rotation" title="Auto turns the boards up to 30 degrees against the base edge when that fits more."><option value="auto">Auto (up to ±30°)</option><option value="none">None (square)</option></select></div>
+                    <div class="cad-field"><label for="cadRoles">Role mapping</label>
+                      <select id="cadRoles" data-option="role_mapping"><option value="auto">Auto (try both)</option><option value="rows_top">Row FPC on top</option><option value="columns_top">Column FPC on top</option></select></div>
+                    <div class="cad-field"><label for="cadContainment">Containment</label>
+                      <select id="cadContainment" data-option="containment" title="Field only: only the taxel field must lie on the surface; the Row traces, the Column fan-out and both tails may leave it (the diagonal Row bus). Whole board: everything above the tail roots lies on the surface. Either way the field follows the selected area (the rectangular fields are the Rectangular mode's)."><option value="field">Field only</option><option value="board">Whole board</option></select></div>
+                    <div class="cad-field"><label for="cadReader">Reader</label>
+                      <select id="cadReader" data-option="reader" title="The tails are sized to the reader's connectors (either electrode set on either connector); Auto takes the smallest reader that holds the readout."><option value="none">None (1 per line)</option><option value="auto">Auto (smallest that fits)</option><option value="16x16">16 × 16</option><option value="32x16">32 × 16 (FlexiTac)</option><option value="32x32">32 × 32</option><option value="48x48">48 × 48</option></select></div>
+                    <div class="cad-field"><label for="cadPlacement">Placement</label>
+                      <select id="cadPlacement" data-option="placement"><option value="far">Far from base edge</option><option value="near">Near base edge</option><option value="center">Centred</option></select></div>
+                    <div class="cad-field"><label for="cadStrainLimit">Strain limit (curved surfaces; 0.003 = 0.3 %)</label><input type="number" id="cadStrainLimit" data-option="strain_limit" value="0.003" min="0" max="0.2" step="0.0005" inputmode="decimal" /></div>
+                    <div class="cad-field"><label for="cadProposalCount">Proposals</label><input type="number" id="cadProposalCount" data-option="proposals" value="5" min="1" max="20" step="1" inputmode="numeric" /></div>
+                  </div>
+                  <p class="hint" id="cadConfigHint">Only the taxel field stays on the surface: the Row traces beside it, the Column fan-out and both tails may leave it, beyond its sides and the base edge.</p>
+                </details>
+                </div>
+                <div class="cad-actions">
+                  <button type="button" class="primary" id="cadFit" disabled>Fit sensor to the surface</button>
+                </div>
+                <p class="hint cad-limits-note" id="cadLimitsNote" hidden></p>
+              </section>
+
+              <section class="cad-step cad-proposals" aria-labelledby="cadStepProposals">
+                <h3 id="cadStepProposals">Proposals</h3>
+                <div class="cad-proposals-body">
+                  <div class="cad-table-wrap" id="cadProposalWrap"><p class="hint">Fit the sensor to list ranked proposals.</p></div>
+                  <!-- main.js: the chosen proposal's card (containment, the Row bus's tip and bands, each board's share on the surface and overhang). -->
+                  <section class="cad-card" id="cadProposalCard" aria-labelledby="cadProposalCardTitle" hidden>
+                    <h4 class="cad-subhead" id="cadProposalCardTitle">Proposal</h4>
+                    <details class="cad-more" id="cadProposalMore">
+                      <summary>Proposal details</summary>
+                      <dl class="cad-facts" id="cadProposalFacts"></dl>
+                      <!-- main.js fitNote: how the fit went (its border, the base edges tried, why so many proposals). -->
+                      <p class="hint cad-fit-facts" id="cadFitFacts"></p>
+                    </details>
+                  </section>
+                </div>
+                <!-- Only what needs doing: the settings changed since the fit, or why it found nothing (the user's request of
+                     2026-10-30: the fit's account is under Proposal details). -->
+                <p class="hint cad-fit-note" id="cadFitNote"></p>
+              </section>
+            </div>
+            <div class="cad-resolution-map">
+              <figure class="cad-flat" id="cadFlatFigure" hidden>
+                <svg id="cadFlat" class="cad-flat-svg" aria-hidden="true" focusable="false" viewBox="0 0 10 10"></svg>
+                <!-- What the map draws, for screen readers (the user's request of 2026-10-30: no caption under the map). -->
+                <figcaption class="cad-sr-only" id="cadFlatCaption">Flattened surface seen from outside.</figcaption>
+              </figure>
+            </div>
+          </div>
+
+          <!-- Step 3 side by side (the user's request of 2026-10-30): Generate on the left, the build on the part and its
+               files on the right. -->
+          <div class="cad-build">
+            <section class="cad-step cad-generate" aria-labelledby="cadStepGenerate">
+              <h3 id="cadStepGenerate"><span class="cad-step-no">3</span>Click to generate</h3>
+              <div class="cad-actions">
+                <button type="button" class="primary" id="cadGenerate" disabled>Generate &amp; validate the chosen proposal</button>
+                <p class="hint">Builds the chosen proposal; its previews and downloads appear below.</p>
+              </div>
+            </section>
+
+            <section class="cad-step cad-verify" aria-labelledby="cadStepVerify">
+              <h3 id="cadStepVerify">On the part</h3>
+              <div class="cad-verify-body" id="cadVerify"><p class="hint">After Generate, the build is mapped onto the part and checked here.</p></div>
+              <div class="cad-downloads">
+                <p class="hint" id="cadDownloadNote">Downloads are enabled for a mapped build that matches the form.</p>
+                <div class="cad-download-actions">
+                  <button type="button" id="cadSavePlacement" disabled>Placement JSON</button>
+                  <button type="button" id="cadSaveMap" disabled>Taxel map JSON</button>
+                  <button type="button" id="cadSaveCsv" disabled>Taxel map CSV</button>
+                  <button type="button" id="cadSaveWrap" disabled>Wrap template SVG</button>
+                </div>
+              </div>
+            </section>
+          </div>
+
+          <details class="cad-diagnostics">
+            <summary>Diagnostics</summary>
+            <div class="cad-row">
+              <label for="cadPick">Select a surface by its seed facet (facet, or facet:preset)</label>
+              <input id="cadPick" autocomplete="off" spellcheck="false" />
+            </div>
+            <div class="cad-row">
+              <label for="cadProbe">Screen position of an STL point (x, y, z in mm)</label>
+              <input id="cadProbe" autocomplete="off" spellcheck="false" />
+              <output id="cadProbeOut" for="cadProbe"></output>
+            </div>
+            <pre id="cadState" class="cad-state" hidden>{}</pre>
+          </details>
+        </section>
+
+        <!-- The build's results; CAD mode hides them until it has generated a build (main.js syncResults). -->
+        <div class="results" id="results">
+        <section id="status" class="status is-neutral" role="status" aria-live="polite">Loading default design…</section>
+        <section id="staleBanner" class="stale-banner" aria-live="polite" hidden>
+          <p><strong>Form changed — regenerate.</strong> <span id="staleDetail"></span></p>
+          <button type="button" id="regenerate">Regenerate</button>
+        </section>
+        <section class="summary" id="summary" aria-label="Validation summary" aria-live="polite" hidden></section>
+
+        <!-- app.js setLook: the board previews and the stacked view's look (body[data-look]; styles.css "Looks"). -->
+        <div class="look-bar" role="group" aria-label="Look of the board previews">
+          <span>Look</span>
+          <button type="button" data-look="photo" aria-pressed="true">Photo</button>
+          <button type="button" data-look="diagram" aria-pressed="false">Diagram</button>
+        </div>
+        <section class="previews" aria-label="Independent FPC previews">
+          <article class="board-card look-scope" id="rowCard" aria-labelledby="rowTitle">
+            <header><h2 id="rowTitle">Row FPC</h2><span id="rowMeta"></span></header>
+            <div class="preview-bar">
+              <div class="preview-tabs" role="tablist" aria-label="Row FPC preview mode">
+                <button type="button" role="tab" id="rowTab2d" aria-controls="rowPreview" aria-selected="true" data-board="row" data-mode="2d">2D top view</button>
+                <button type="button" role="tab" id="rowTab3d" aria-controls="rowPreview3d" aria-selected="false" tabindex="-1" data-board="row" data-mode="3d">Oblique view (rigid tilt)</button>
+              </div>
+              <div class="zoom-tools" id="rowZoomTools" role="group" aria-label="Row FPC zoom">
+                <button type="button" data-zoom="out" aria-label="Zoom out">−</button>
+                <button type="button" data-zoom="in" aria-label="Zoom in">+</button>
+                <button type="button" data-zoom="reset">Reset</button>
+                <output id="rowZoomLevel">1.0×</output>
+              </div>
+            </div>
+            <div class="canvas-wrap">
+              <div class="view-pane zoom-pane" id="rowPreview" role="tabpanel" aria-labelledby="rowTab2d" tabindex="0" data-zoom-tools="rowZoomTools"><p>Generate a design to preview.</p></div>
+              <div class="view-pane three-d-pane" id="rowPreview3d" role="tabpanel" aria-labelledby="rowTab3d" tabindex="0" hidden></div>
+            </div>
+            <p class="layer-legend" id="rowLegend"></p>
+          </article>
+          <article class="board-card look-scope" id="columnCard" aria-labelledby="columnTitle">
+            <header><h2 id="columnTitle">Column FPC</h2><span id="columnMeta"></span></header>
+            <div class="preview-bar">
+              <div class="preview-tabs" role="tablist" aria-label="Column FPC preview mode">
+                <button type="button" role="tab" id="columnTab2d" aria-controls="columnPreview" aria-selected="true" data-board="column" data-mode="2d">2D top view</button>
+                <button type="button" role="tab" id="columnTab3d" aria-controls="columnPreview3d" aria-selected="false" tabindex="-1" data-board="column" data-mode="3d">Oblique view (rigid tilt)</button>
+              </div>
+              <div class="zoom-tools" id="columnZoomTools" role="group" aria-label="Column FPC zoom">
+                <button type="button" data-zoom="out" aria-label="Zoom out">−</button>
+                <button type="button" data-zoom="in" aria-label="Zoom in">+</button>
+                <button type="button" data-zoom="reset">Reset</button>
+                <output id="columnZoomLevel">1.0×</output>
+              </div>
+            </div>
+            <div class="canvas-wrap">
+              <div class="view-pane zoom-pane" id="columnPreview" role="tabpanel" aria-labelledby="columnTab2d" tabindex="0" data-zoom-tools="columnZoomTools"><p>Generate a design to preview.</p></div>
+              <div class="view-pane three-d-pane" id="columnPreview3d" role="tabpanel" aria-labelledby="columnTab3d" tabindex="0" hidden></div>
+            </div>
+            <p class="layer-legend" id="columnLegend"></p>
+          </article>
+        </section>
+
+        <section class="stacked-review board-card look-scope" aria-labelledby="assemblyTitle">
+          <header>
+            <h2 id="assemblyTitle">Stacked tactile sensor</h2>
+            <span id="assemblyHeader"></span>
+          </header>
+          <div class="preview-bar">
+            <div class="mode-switch" role="group" aria-label="Assembly view mode">
+              <button type="button" data-assembly-mode="exploded" aria-pressed="true">Exploded 3D</button>
+              <button type="button" data-assembly-mode="plan" aria-pressed="false">Plan view (registration)</button>
+            </div>
+            <span class="orbit-hint" id="orbitHint">Drag to turn · arrow keys · double-click or 0 to reset</span>
+          </div>
+          <div class="stacked-canvas" id="stackedPreview" tabindex="0" aria-describedby="orbitHint"><p>Generate a design to inspect the registered FPC stack.</p></div>
+          <div class="assembly-legend" id="assemblyLegend"></div>
+          <details class="assembly-more" id="assemblyMore">
+            <summary>About this view</summary>
+            <div class="assembly-notes" id="assemblyNotes"></div>
+          </details>
+        </section>
+
+        <!-- Folded: app.js opens it, listing only the failing rules, when a check fails. -->
+        <details class="drc-panel board-card" id="drcPanel">
+          <summary><h2 id="drcTitle">Design checks</h2><span class="drc-total" id="drcTotal"></span></summary>
+          <div class="drc-bar"><span id="drcMeta"></span><button type="button" id="drcShowAll" hidden>Show all checks</button></div>
+          <div class="drc-grid" id="drcTables"><p>Generate a design to list every rule with its measured value.</p></div>
+        </details>
+
+        <section class="downloads" aria-labelledby="downloadsTitle">
+          <div>
+            <h2 id="downloadsTitle"><span class="cad-step-no flow-only" aria-hidden="true">4</span>Downloads</h2>
+            <p id="downloadNote">Downloads are enabled only for a valid build that matches the form.</p>
+          </div>
+          <!-- The two Gerber ZIPs first and set off: they are what goes to the factory (the user's request of 2026-10-30). -->
+          <div class="download-actions">
+            <button type="button" class="download-main" data-export="top-gerber" disabled>Top FPC Gerber ZIP</button>
+            <button type="button" class="download-main" data-export="bottom-gerber" disabled>Bottom FPC Gerber ZIP</button>
+            <button type="button" data-download="design" disabled>Design JSON</button>
+            <button type="button" data-download="layout" disabled>Derived layout JSON</button>
+            <button type="button" data-download="manifest" disabled>Build manifest</button>
+            <button type="button" data-export="project" disabled>Project review ZIP</button>
+            <button type="button" data-export="easyeda-pro" disabled title="Native EasyEDA Pro projects (.epro2), one per board, with README_EASYEDA.txt">EasyEDA Pro projects ZIP</button>
+          </div>
+          <details class="manufacturing-note" id="manufacturingNote">
+            <summary>Ordering notes</summary>
+            <p>Gerber ZIPs are deterministic Direct Gerber / JLC review candidates: upload top and bottom separately, then verify the outline, the coverlay openings and the PI stiffener listed under Standardized manufacturing. They are not EasyEDA-native exports and are not production approval. The EasyEDA Pro projects ZIP holds one native .epro2 project per board: import it into EasyEDA Pro (pro.easyeda.com, File &gt; Import &gt; EasyEDA/JLCEDA (Professional)), check FPC mode, the stiffener and DRC there, and let EasyEDA write the Gerbers and the order (README_EASYEDA.txt). Every file name starts with the build id. The design and layout JSON downloads are readable copies of the shown build; the project review ZIP carries their canonical, byte-stable versions.</p>
+            <!-- Rendered from /api/default profile.order_requirements, the entries of ORDER_NOTES.txt in every ZIP. -->
+            <section class="order-note" aria-labelledby="orderOptionsTitle">
+              <h3 id="orderOptionsTitle">Order both boards with</h3>
+              <ul id="orderOptions"><li>Loading the profile's order requirements…</li></ul>
+              <h3 id="orderNotesTitle">Review notes</h3>
+              <ul id="orderNotes"></ul>
+            </section>
+          </details>
+        </section>
+        </div>
+      </section>
+    </main>
+    <!-- The looks' shared paint (app.js decorateLook): rendered, not display:none, so other SVGs can reference it. -->
+    <svg class="look-defs" width="0" height="0" aria-hidden="true" focusable="false">
+      <defs>
+        <!-- The coin for scale (app.js coinArt, coinPlane): a US quarter, its face the US Mint's photo (vendor/coin), lit
+             from the upper left; in mm about its centre. -->
+        <clipPath id="coin-clip" clipPathUnits="objectBoundingBox"><circle cx=".5" cy=".5" r=".497" /></clipPath>
+        <linearGradient id="coin-edge" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#e9ecee" /><stop offset=".5" stop-color="#a9afb5" /><stop offset="1" stop-color="#6c7278" />
+        </linearGradient>
+        <!-- The reeded side, as a cylinder lit from the left. -->
+        <linearGradient id="coin-side" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0" stop-color="#8a9197" /><stop offset=".22" stop-color="#e2e5e8" /><stop offset=".5" stop-color="#a3a9af" />
+          <stop offset=".8" stop-color="#6d737a" /><stop offset="1" stop-color="#565c62" />
+        </linearGradient>
+        <linearGradient id="coin-sheen" x1=".15" y1="0" x2=".85" y2="1">
+          <stop offset="0" stop-color="#fff" stop-opacity=".3" /><stop offset=".4" stop-color="#fff" stop-opacity="0" />
+          <stop offset=".7" stop-color="#000" stop-opacity="0" /><stop offset="1" stop-color="#000" stop-opacity=".12" />
+        </linearGradient>
+        <!-- Its shadow on the table: a dark contact line where it touches and a soft one cast down to the right. -->
+        <filter id="coin-shadow" x="-.3" y="-.3" width="1.6" height="1.6" primitiveUnits="userSpaceOnUse">
+          <feGaussianBlur in="SourceAlpha" stdDeviation=".16" />
+          <feOffset dx=".12" dy=".2" result="near" />
+          <feGaussianBlur in="SourceAlpha" stdDeviation="1.15" />
+          <feOffset dx=".75" dy="1.15" result="far" />
+          <feFlood flood-color="#10181c" flood-opacity=".5" /><feComposite in2="near" operator="in" result="nearShadow" />
+          <feFlood flood-color="#10181c" flood-opacity=".3" /><feComposite in2="far" operator="in" result="farShadow" />
+          <feMerge><feMergeNode in="farShadow" /><feMergeNode in="nearShadow" /><feMergeNode in="SourceGraphic" /></feMerge>
+        </filter>
+        <!-- The same shadow alone, for the 3D views' table under the coin (the coin stands above it). -->
+        <filter id="coin-cast" x="-.3" y="-.3" width="1.6" height="1.6" primitiveUnits="userSpaceOnUse">
+          <feGaussianBlur in="SourceAlpha" stdDeviation=".16" />
+          <feOffset dx=".12" dy=".2" result="near" />
+          <feGaussianBlur in="SourceAlpha" stdDeviation="1.15" />
+          <feOffset dx=".75" dy="1.15" result="far" />
+          <feFlood flood-color="#10181c" flood-opacity=".5" /><feComposite in2="near" operator="in" result="nearShadow" />
+          <feFlood flood-color="#10181c" flood-opacity=".3" /><feComposite in2="far" operator="in" result="farShadow" />
+          <feMerge><feMergeNode in="farShadow" /><feMergeNode in="nearShadow" /></feMerge>
+        </filter>
+        <linearGradient id="lk-enig" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#cdb98c" /><stop offset=".55" stop-color="#ebdfbf" /><stop offset="1" stop-color="#a48e62" />
+        </linearGradient>
+        <linearGradient id="lk-gloss-paint" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#fff" stop-opacity=".22" /><stop offset=".35" stop-color="#fff" stop-opacity="0" />
+          <stop offset=".7" stop-color="#fff" stop-opacity=".06" /><stop offset="1" stop-color="#fff" stop-opacity="0" />
+        </linearGradient>
+        <!-- The gaps between traces: the copper's closing (dilate, then erode by 0.3 mm) in the gap colour. -->
+        <filter id="lk-close" x="-.05" y="-.05" width="1.1" height="1.1" primitiveUnits="userSpaceOnUse">
+          <feMorphology operator="dilate" radius="0.3" result="wide" />
+          <feMorphology in="wide" operator="erode" radius="0.3" result="closed" />
+          <feFlood flood-color="#c05700" />
+          <feComposite in2="closed" operator="in" />
+        </filter>
+        <filter id="lk-grain" x="0" y="0" width="1" height="1">
+          <feTurbulence type="fractalNoise" baseFrequency="3" numOctaves="2" seed="7" />
+          <feColorMatrix values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 .10 0" />
+        </filter>
+      </defs>
+    </svg>
+    <script src="static/backend.js" defer></script>
+    <script src="static/app.js" defer></script>
+    <script type="module" src="static/cad/main.js"></script>
+  </body>
+</html>
