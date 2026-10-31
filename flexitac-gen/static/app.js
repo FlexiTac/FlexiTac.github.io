@@ -664,8 +664,9 @@
   }
   // A coin for scale in every view of a board (the user's requests of 2026-10-30): a US quarter drawn to scale, its face
   // the US Mint's photo (web/vendor/coin), with its shadow; beside the board, never over it: in the 2D view at the bottom
-  // right of the board's view, which grows where the board leaves no room (coinSpot); in the 3D views lying on a plane
-  // below the boards' (the table), bottom right of them, its reeded side as thick as the coin (coinPlane).
+  // right of its window (2026-10-31: the view's box takes the window's shape, fitScene), which grows where the board leaves
+  // no room (coinSpot); in the 3D views lying on a plane below the boards' (the table), bottom right of them, its reeded
+  // side as thick as the coin (coinPlane).
   const COIN = {name: "US quarter", diameter_mm: 24.26, thickness_mm: 1.75, reeds: 119, photo: "static/vendor/coin/us-quarter-obverse.jpg"};
   const COIN_INSET_MM = 0.6;     // from the view's edges
   const COIN_GAP_MM = 2;         // from the board's outline
@@ -715,10 +716,9 @@
     }
     return true;
   }
-  function coinSpot(svg) {
-    // Where the 2D view's coin goes: from the view's bottom-right corner, moved right, down or both the least that keeps
-    // it COIN_GAP_MM clear of the outline, the view grown to hold it the least (relative to its size).
-    const box = numbers(svg?.getAttribute("viewBox"));
+  function coinSpot(svg, box = numbers(svg?.getAttribute("viewBox"))) {
+    // Where the 2D view's coin goes in the view box ``box``: from its bottom-right corner, moved right, down or both the
+    // least that keeps it COIN_GAP_MM clear of the outline, the box grown to hold it the least (relative to its size).
     if (!box || !(box[2] > 0 && box[3] > 0)) return null;
     const r = COIN.diameter_mm / 2; const rings = outlineRings(svg);
     const [x0, y0] = [box[0] + box[2] - r - COIN_INSET_MM, box[1] + box[3] - r - COIN_INSET_MM];
@@ -737,14 +737,47 @@
     return best;
   }
   function addCoin(svg) {
-    // The 2D view's coin: under the board, beside it, the view grown where it must be (coinSpot).
+    // The 2D view's coin: under the board, beside it, the view grown where it must be (coinSpot); fitScene moves it to
+    // the window's corner once the view is on the page.  The board's own view box is kept for that (data-board-box).
     const spot = coinSpot(svg);
     if (!spot) return;
     const box = numbers(svg.getAttribute("viewBox"));
+    svg.dataset.boardBox = box.join(" ");
     svg.setAttribute("viewBox", `${box[0]} ${box[1]} ${spot.width} ${spot.height}`);
     const coin = coinArt(spot.cx, spot.cy);
     const board = svg.querySelector(":scope > g[transform]");
     if (board) board.before(coin); else svg.append(coin);
+  }
+  function fitScene(pane) {
+    // The 2D view fills its window (the user's correction of 2026-10-31: the coin at the window's bottom right, not the
+    // board's): the board's own view box widened (or heightened) to the window's shape about the board's centre, so the
+    // board keeps its scale, and the coin in that box's bottom-right corner, COIN_INSET_MM in.  Where the board would be
+    // under the coin there, the box grows evenly about the board's centre, the least (in 0.5 % steps) that keeps the coin
+    // COIN_GAP_MM clear of the outline: the coin stays in the corner, the board centred and a little smaller.  The fit
+    // view (Reset) is that box; a zoomed view stays where it is.  Again whenever the window changes size or is shown.
+    const svg = pane.querySelector(":scope > svg"); const zoom = zooms.get(pane.id);
+    const own = numbers(svg?.dataset.boardBox); const coin = svg?.querySelector(":scope > .coin-ref");
+    if (!zoom || !own || !coin) return;
+    const rect = svg.getBoundingClientRect(); const style = getComputedStyle(svg);
+    const width = rect.width - parseFloat(style.paddingLeft) - parseFloat(style.paddingRight);
+    const height = rect.height - parseFloat(style.paddingTop) - parseFloat(style.paddingBottom);
+    if (!(width > 0 && height > 0)) return;  // not shown: placed when it is
+    const shape = width / height;
+    const [w, h] = own[2] / own[3] < shape ? [own[3] * shape, own[3]] : [own[2], own[2] / shape];
+    const [mx, my] = [own[0] + own[2] / 2, own[1] + own[3] / 2];
+    const r = COIN.diameter_mm / 2; const rings = outlineRings(svg);
+    let fit = null;
+    for (let step = 0; step <= 600 && !fit; step += 1) {
+      const grow = 1 + step / 200;
+      const [cx, cy] = [mx + w * grow / 2 - r - COIN_INSET_MM, my + h * grow / 2 - r - COIN_INSET_MM];
+      if (clearOf(rings, cx, cy, r + COIN_GAP_MM)) fit = {grow, cx: round6(cx), cy: round6(cy)};
+    }
+    if (!fit) return;
+    coin.querySelectorAll("circle").forEach(circle => { circle.setAttribute("cx", fit.cx); circle.setAttribute("cy", fit.cy); });
+    coin.querySelectorAll("image").forEach(image => { image.setAttribute("x", round6(fit.cx - r)); image.setAttribute("y", round6(fit.cy - r)); });
+    const [bw, bh] = [w * fit.grow, h * fit.grow];
+    zoom.base = {x: round6(mx - bw / 2), y: round6(my - bh / 2), w: round6(bw), h: round6(bh)};
+    setView(pane, zoom.view);
   }
   function coinPlane(className) {
     // A 3D view's coin, placed by the caller on a plane of its own (styles.css .coin-plane, the table): its shadow on the
@@ -1192,6 +1225,7 @@
       if (box && box[2] > 0 && box[3] > 0) tiltedBoard.style.setProperty("--board-ratio", (box[2] / box[3]).toFixed(6));
       oblique.replaceChildren(tiltedBoard);
       initZoom(pane, flat);
+      fitScene(pane);
       fitOblique(oblique);
     }
     $(`${key}Meta`).textContent = boardMeta(board);
@@ -1911,13 +1945,19 @@
   }));
   $("drcShowAll").addEventListener("click", () => { $("drcPanel").classList.remove("only-failures"); $("drcShowAll").hidden = true; });
   window.addEventListener("resize", () => {
-    zoomPanes.forEach(pane => { updateZoomReadout(pane); sizePin1Rings(pane); });
+    zoomPanes.forEach(pane => { fitScene(pane); updateZoomReadout(pane); sizePin1Rings(pane); });
     document.querySelectorAll(".three-d-pane").forEach(fitOblique);
     sizePin1Rings($("stackedPreview"));
   });
   // The stacked view's canvas may change size without the window (the page's layout): its rings are placed and drawn
   // again, so the ones drawn over the boards stay on them.
   if (typeof ResizeObserver === "function") new ResizeObserver(() => sizePin1Rings($("stackedPreview"))).observe($("stackedPreview"));
+  // A 2D view's window changes size with the page's layout too, and has none while hidden (its tab, CAD mode before a
+  // build): its scene takes the window's shape whenever it changes (fitScene).
+  if (typeof ResizeObserver === "function") {
+    const panes = new ResizeObserver(entries => entries.forEach(entry => fitScene(entry.target)));
+    zoomPanes.forEach(pane => panes.observe(pane));
+  }
   zoomPanes.forEach(pane => { attachZoom(pane); updateZoomReadout(pane); });
   setupTabs();
   boot();
