@@ -145,7 +145,6 @@
               <h2 id="cadTitle"><span class="cad-step-no">1</span>Select your gripper</h2>
               <p class="hint cad-title-hint">Pick a surface on a 3D model: load your gripper finger (STL), click the surface the sensor goes on and its base edge.</p>
             </div>
-            <output class="cad-status is-neutral" id="cadStatus" role="status" aria-live="polite">Drop an STL file on the view or choose one.</output>
           </header>
           <div class="cad-main">
             <div class="cad-stage">
@@ -153,8 +152,8 @@
               <div class="cad-filebar">
                 <h3 class="cad-filebar-label" id="cadStepFile">3D model</h3>
                 <input type="file" id="cadFile" accept=".stl,model/stl" />
-                <!-- main.js renderMeshFacts: the part loaded (the file input names only a chosen file). -->
-                <p class="hint cad-file-note" id="cadFileNote" hidden></p>
+                <!-- The other way in (the user's request of 2026-10-31); the 3D view's status names the model loaded. -->
+                <p class="hint cad-file-note" id="cadFileNote">or drag an STL file onto the 3D view below</p>
                 <details class="cad-more" id="cadFileMore">
                   <summary>File details</summary>
                   <div class="cad-row">
@@ -217,6 +216,7 @@
                 <button type="button" class="cad-edit-border" id="cadEditBorder" aria-pressed="false" aria-controls="cadBorderBar" disabled>Edit border</button>
                 <button type="button" class="cad-undo" id="cadUndo" disabled>Undo</button>
                 <button type="button" class="cad-clear" id="cadClear" disabled>Clear</button>
+                <button type="button" class="cad-remove" id="cadRemove" title="Take the model off the view (its selection, border and proposals too)" disabled>Remove model</button>
               </div>
               <!-- The camera, in the 3D view's window at its top right (the user's request of 2026-10-30: a row saved). -->
               <div class="cad-views" role="group" aria-label="Camera">
@@ -233,6 +233,10 @@
                   <p>or <label for="cadFile" class="cad-file-link">choose a file</label> · binary or ASCII STL, up to 64 MiB</p>
                 </div>
               </div>
+              <!-- While a model loads, over the view; then CAD mode's status at its bottom right (the user's request of
+                   2026-10-31): "name loaded", or a warning, an error or the work under way (main.js setStatus). -->
+              <div class="cad-loading" id="cadLoading" aria-hidden="true" hidden><span class="cad-spinner"></span><span id="cadLoadingText">Loading…</span></div>
+              <output class="cad-status is-neutral" id="cadStatus" role="status" aria-live="polite" hidden></output>
               </div>
               <!-- The base edge, under the 3D view and across it (the user's request of 2026-10-30): main.js renderSides. -->
               <div class="cad-base" aria-labelledby="cadStepBase">

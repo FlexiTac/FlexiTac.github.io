@@ -82,6 +82,8 @@ const cad = {
   formLimits: null, limitsSync: null,
   stale: false, busy: new Map(), controllers: new Map(), error: null, retries: 0,
   seq: {load: 0, inspect: 0, select: 0, fit: 0, preview: 0, map: 0},
+  // The model being read or inspected (its name: the veil over the view) and the last status (setStatus).
+  loading: null, status: {kind: "neutral", message: ""},
 };
 
 // -- small helpers -------------------------------------------------------------
@@ -111,9 +113,29 @@ const aborted = error => error?.code === "E_CLIENT_ABORTED";
 const isPoint = side => Boolean(side) && typeof side === "object" && Array.isArray(side.point_xyz);
 
 function setStatus(kind, message) {
-  const node = $("cadStatus");
-  node.className = `cad-status is-${kind}`;
-  node.textContent = message;
+  // CAD mode's status, at the 3D view's bottom right (the user's request of 2026-10-31): a warning, an error or the work
+  // under way in full; after a success only the model loaded ("name loaded"), the success's own report being in its
+  // step (its full text on hover).
+  cad.status = {kind, message};
+  renderStatus();
+}
+function renderStatus() {
+  const node = $("cadStatus"); const {kind, message} = cad.status;
+  const loaded = cad.inspect && cad.fileName ? `${cad.fileName} loaded` : "";
+  // While a model loads its veil says so: the status then only shows what went wrong.
+  const shown = kind === "ok" ? loaded : cad.loading && kind === "neutral" ? "" : message;
+  node.className = `cad-status is-${kind === "ok" ? "loaded" : kind}`;
+  node.textContent = shown;
+  node.title = kind === "ok" ? message : "";
+  node.hidden = !shown;
+}
+function setLoading(name) {
+  // The veil over the 3D view while a model is read and inspected (fetched first for the default part).
+  cad.loading = name || null;
+  $("cadLoading").hidden = !cad.loading;
+  $("cadLoadingText").textContent = cad.loading ? `Loading ${cad.loading}…` : "";
+  if (cad.loading && !cad.viewerError) $("cadDrop").hidden = true;  // the drop zone, unless it says WebGL is off
+  renderStatus();
 }
 function fail(error, prefix) {
   cad.error = error?.code || "E_CLIENT";
@@ -161,6 +183,8 @@ function renderState() {
   const state = {
     mode: cad.mode,
     webgl: cad.viewer ? "ok" : cad.viewerError ? "unavailable" : "not loaded",
+    loading: cad.loading,
+    status: {kind: cad.status.kind, shown: $("cadStatus").hidden ? null : $("cadStatus").textContent},
     mesh: mesh ? {name: mesh.name, facets: mesh.facets, unit: mesh.unit, format: mesh.format, watertight: mesh.watertight, browser_facets: cad.parsed?.facets ?? null} : null,
     default_part: cad.defaultPart,
     default_build: cad.defaultBuild,
@@ -218,6 +242,7 @@ function renderState() {
     candidates: Object.fromEntries(["flat", "surface", "smooth"].map(kind => [kind, (cad.inspect?.candidates?.[kind] || []).map(item => item.seed_facet)])),
     guide: renderGuide(),
   };
+  $("cadRemove").disabled = !cad.mesh && !cad.loading;
   $("cadState").textContent = JSON.stringify(state);
 }
 
@@ -353,6 +378,7 @@ async function loadDefaultPart() {
   cad.defaultPart = "loading";
   cad.defaultBuild = "pending";
   const ticket = cad.seq.load;
+  setLoading(DEFAULT_PART.name);
   try {
     // The shipped fit is optional: without it the default part's fit asks the server.
     const [reply, shipped] = await Promise.all([fetch(DEFAULT_PART.url),
@@ -368,8 +394,14 @@ async function loadDefaultPart() {
     }
   } catch (error) {
     cad.defaultPart = "failed";
-    if (ticket === cad.seq.load && !cad.mesh) setStatus("warning", `The default part (${DEFAULT_PART.name}) was not loaded (${error.message}): drop an STL file on the view or choose one.`);
+    if (ticket === cad.seq.load && !cad.mesh) {
+      setLoading(null);
+      $("cadDrop").hidden = false;
+      setStatus("warning", `The default part (${DEFAULT_PART.name}) was not loaded (${error.message}): drop an STL file on the view or choose one.`);
+    }
   }
+  // Skipped (a file came first) on this ticket: the veil was the default part's.
+  if (ticket === cad.seq.load && cad.loading === DEFAULT_PART.name && cad.defaultPart !== "loaded") setLoading(null);
   if (cad.defaultBuild === "pending" || cad.defaultBuild === "running") cad.defaultBuild = "stopped";
   renderState();
 }
@@ -426,6 +458,7 @@ async function loadFile(file, {isDefault = false} = {}) {
     return;
   }
   const ticket = (cad.seq.load += 1);
+  setLoading(file.name);
   setStatus("neutral", `Reading ${file.name}…`);
   let parsed;
   let mesh;
@@ -436,7 +469,11 @@ async function loadFile(file, {isDefault = false} = {}) {
     // One Blob per file; each request references it (and the File may change on disk later).
     mesh = new Blob([bytes]);
   } catch (error) {
-    if (ticket === cad.seq.load) fail({code: "E_CLIENT_STL", message: error.message}, `${file.name} was not loaded`);
+    if (ticket === cad.seq.load) {
+      setLoading(null);
+      if (!cad.mesh) $("cadDrop").hidden = false;
+      fail({code: "E_CLIENT_STL", message: error.message}, `${file.name} was not loaded`);
+    }
     return;
   }
   abortRequests("inspect", "select", "fit", "preview", "map");
@@ -450,12 +487,14 @@ async function loadFile(file, {isDefault = false} = {}) {
 async function inspectMesh() {
   if (!cad.mesh) return;
   const sequence = (cad.seq.inspect += 1);
-  setStatus("neutral", `Inspecting ${cad.fileName} on the local server…`);
+  setLoading(cad.fileName);
+  setStatus("neutral", `Inspecting ${cad.fileName}…`);
   let reply;
   try {
     reply = await request("inspect", "inspect", {});
   } catch (error) {
     if (sequence !== cad.seq.inspect || aborted(error)) return;
+    setLoading(null);
     cad.inspect = null;
     cad.facetMismatch = false;
     renderMeshFacts();
@@ -483,6 +522,9 @@ async function inspectMesh() {
   renderMeshFacts();
   await ensureViewer();
   showMesh();
+  // Loaded: the veil goes and the status says so at once (not the load's last progress message).
+  cad.status = {kind: "ok", message: `${cad.fileName} loaded.`};
+  setLoading(null);
   if (cad.ops.length) await runSelect();
   else {
     renderSelection();
@@ -492,6 +534,29 @@ async function inspectMesh() {
     cad.error = "E_CLIENT_FACET_ORDER";
     setStatus("warning", `Facet mismatch: the browser read ${cad.parsed.facets} facets, the server ${reply.mesh.facets}; clicking on the part to select is off (the candidate list and the Base edge tool still work).`);
   }
+  renderState();
+}
+
+function removeModel() {
+  // The model off the view (the user's request of 2026-10-31): with it its selection, border, base edge, proposals and
+  // map; a file still being read or inspected is dropped, and the default part does not come back (a file chosen or
+  // dropped loads as before).  A build already generated stays below, as when another file is loaded.
+  cad.seq.load += 1; cad.seq.inspect += 1; cad.seq.select += 1;
+  abortRequests("inspect", "select", "fit", "preview", "map");
+  if (cad.defaultPart === "loading") cad.defaultPart = "skipped";
+  const name = cad.fileName;
+  Object.assign(cad, {fileName: "", defaultFile: false, mesh: null, parsed: null, inspect: null, hidden: new Set(), facetMismatch: false,
+    ops: [], opsHistory: [], selection: null, selectionError: null, runs: [], side: "auto", error: null});
+  resetBorder();
+  resetFit();
+  cad.viewer?.clear();
+  $("cadUnit").value = "auto";
+  setLoading(null);
+  $("cadDrop").hidden = false;
+  renderMeshFacts();
+  renderSelection();
+  paintSelection();
+  setStatus("neutral", name ? `${name} removed.` : "Loading stopped.");
   renderState();
 }
 
@@ -515,11 +580,6 @@ function showMesh() {
 function renderMeshFacts() {
   const mesh = cad.inspect?.mesh;
   const facts = $("cadMeshFacts");
-  const note = $("cadFileNote");
-  note.hidden = !cad.fileName;
-  note.textContent = !cad.fileName ? "" : cad.defaultFile
-    ? `Loaded: the UMI fin-ray finger (${DEFAULT_PART.name}, HandUMI), the default part. Choose a file or drop one on the view to replace it.`
-    : `Loaded: ${cad.fileName}.`;
   if (!mesh) { facts.replaceChildren(el("dt", {}, "Mesh"), el("dd", {}, cad.fileName ? `${cad.fileName} (not inspected)` : "none loaded")); return; }
   const unit = mesh.unit === mesh.unit_guess ? `${mesh.unit} (guessed)` : `${mesh.unit} (set; guess ${mesh.unit_guess})`;
   const rows = [
@@ -2216,6 +2276,7 @@ function wire() {
   ["cadThetaD", "cadThetaC", "cadMinRadius"].forEach(id => $(id).addEventListener("input", () => { $("cadPreset").value = "custom"; syncAngles(); }));
   $("cadUndo").addEventListener("click", () => { if (cad.opsHistory.length) { cad.ops = cad.opsHistory.pop(); runSelect(); } });
   $("cadClear").addEventListener("click", () => { setOps([]); runSelect(); });
+  $("cadRemove").addEventListener("click", removeModel);
   $("cadSides").addEventListener("change", event => { if (event.target.name === "cadSide") chooseSide(event.target.value); });
   $("cadObjective").addEventListener("change", syncObjective);
   $("cadContainment").addEventListener("change", syncContainment);

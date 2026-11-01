@@ -198,8 +198,18 @@ input.fine-step::-webkit-inner-spin-button,input.fine-step::-webkit-outer-spin-b
 .cad-workspace button:not(.primary) { border:1px solid #9eafb5; background:#fff; color:var(--ink); border-radius:5px; min-height:30px; padding:0 9px; font-weight:700; font-size:.72rem; cursor:pointer; }
 .cad-workspace button:not(.primary):disabled { color:#9aa5aa; border-color:#d1d8da; cursor:not-allowed; }
 .cad-workspace .primary { width:auto; padding:0 18px; }
-.cad-status { display:block; max-width:58%; padding:7px 10px; border-left:4px solid #607d8b; border-radius:4px; background:#edf2f4; font-size:.76rem; line-height:1.4; overflow-wrap:anywhere; }
-.cad-status.is-ok { border-color:var(--accent); background:#e7f4f0; }
+/* CAD mode's status at the 3D view's bottom right (index.html #cadStatus): "name loaded", or a warning, an error or
+   the work under way; and the loading veil over the view (#cadLoading). */
+.cad-status { position:absolute; right:12px; bottom:12px; z-index:3; display:block; max-width:min(60%, 520px); padding:6px 10px; border-left:4px solid #607d8b;
+  border-radius:4px; background:rgba(237,242,244,.94); box-shadow:0 1px 4px rgba(19,32,51,.12); font-size:.76rem; line-height:1.4; overflow-wrap:anywhere; }
+.cad-status[hidden] { display:none; }
+.cad-loading { position:absolute; inset:0; z-index:2; display:grid; place-content:center; justify-items:center; gap:10px; pointer-events:none;
+  background:rgba(248,250,251,.62); color:var(--ink); font-size:.9rem; font-weight:750; }
+.cad-loading[hidden] { display:none; }
+.cad-spinner { width:30px; height:30px; border:3px solid #c9d8dc; border-top-color:var(--accent); border-radius:50%; animation:cad-spin .9s linear infinite; }
+@keyframes cad-spin { to { transform:rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .cad-spinner { animation-duration:3s; } }
+.cad-status.is-loaded { border-color:var(--accent); background:rgba(231,244,240,.94); font-weight:700; }
 .cad-status.is-warning { border-color:var(--warn); background:#fff7e5; }
 .cad-status.is-error { border-color:var(--error); background:#fff0ef; }
 .cad-main { display:grid; grid-template-columns:minmax(0,1fr); border-bottom:1px solid var(--line); }
@@ -388,7 +398,7 @@ input.fine-step::-webkit-inner-spin-button,input.fine-step::-webkit-outer-spin-b
 .mask-issues .is-error { color:var(--error); }
 .mask-note button { margin-top:7px; border:1px solid #9eafb5; background:#fff; color:var(--ink); border-radius:5px; min-height:30px; padding:0 10px; font-weight:700; font-size:.74rem; cursor:pointer; }
 @media (max-width:1200px) { .cad-view { height:430px; }
-  .cad-verify { grid-template-columns:1fr; }.cad-status { max-width:none; } }
+  .cad-verify { grid-template-columns:1fr; }.cad-status { max-width:calc(100% - 24px); } }
 @media (max-width:640px) { .cad-workspace > header { flex-direction:column; }.cad-view { height:340px; } }
 @media (max-width:520px) { .mode-picker { margin:0; } }
 
