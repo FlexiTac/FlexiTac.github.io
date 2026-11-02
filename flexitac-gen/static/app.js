@@ -338,6 +338,11 @@
     if (validity.tooShort) return `At least ${control.minLength} characters.`;
     return control.validationMessage;
   }
+  function reveal(control) {
+    // A field under a fold (Customize the sensor, Advanced: 2026-11-02) is shown before it takes the focus.
+    for (let node = control?.parentElement; node; node = node.parentElement) if (node.tagName === "DETAILS") node.open = true;
+    control?.focus();
+  }
   function validateForm({focus = false} = {}) {
     let first = null;
     for (const control of controls) {
@@ -347,7 +352,7 @@
     }
     controls.forEach(renderMessages);
     updateRanges();
-    if (first && focus) first.focus();
+    if (first && focus) reveal(first);
     return !first;
   }
   function updateRanges() {
@@ -1929,7 +1934,7 @@
   document.addEventListener("fpc:apply-design", event => { if (event.detail) event.detail.result = applyDesign(event.detail.design); });
   $("summary").addEventListener("click", event => {
     const target = event.target.closest("[data-target]");
-    if (target) $(target.dataset.target)?.focus();
+    if (target) reveal($(target.dataset.target));
   });
   document.querySelectorAll("[data-download]").forEach(button => button.addEventListener("click", () => downloadDocument(button.dataset.download)));
   document.querySelectorAll("[data-export]").forEach(button => button.addEventListener("click", () => downloadExport(button.dataset.export, button.textContent.trim())));

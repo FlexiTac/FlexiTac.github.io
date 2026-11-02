@@ -27,25 +27,35 @@
     </header>
 
     <main>
-      <!-- The order of work in Gen by Surface (the user's requests of 2026-10-30): the page's left column, in sight from
-           top to bottom; each step scrolls to its part on the right (the 3D model, the resolution, Generate and the
-           previews, the downloads).  main.js renderGuide marks each step done or next and the one in view. -->
+      <!-- The order of work in Gen by Surface (the user's requests of 2026-10-30; three steps since 2026-11-02: a model in,
+           the sensor generated at once, the Gerbers out): the page's left column, in sight from top to bottom; each step
+           scrolls to its part on the right.  main.js renderGuide marks each step done or next and the one in view. -->
       <aside class="flow-guide" id="flowGuide" aria-labelledby="flowGuideTitle">
         <h2 class="flow-guide-title" id="flowGuideTitle">Design a FlexiTac sensor for your own robot</h2>
         <ol class="flow-steps" id="cadGuide">
-          <li class="flow-step" data-step="1"><button type="button" data-go="cadWorkspace"><span class="flow-no" aria-hidden="true">1</span><span class="flow-text"><strong>Select your gripper</strong><span>Load your gripper finger's 3D model (STL), click the surface the sensor goes on and the base edge the tails leave across.</span></span></button></li>
-          <li class="flow-step" data-step="2"><button type="button" data-go="cadStepConfig"><span class="flow-no" aria-hidden="true">2</span><span class="flow-text"><strong>Find best resolution</strong><span>Set the pitch and the size limits, then Fit: the proposals rank the taxel fields that fit the surface.</span></span></button></li>
-          <li class="flow-step" data-step="3"><button type="button" data-go="cadStepGenerate"><span class="flow-no" aria-hidden="true">3</span><span class="flow-text"><strong>Click to generate</strong><span>Generate the chosen proposal: both FPCs are built, checked and mapped onto the part, their previews below.</span></span></button></li>
-          <li class="flow-step" data-step="4"><button type="button" data-go="downloadsTitle"><span class="flow-no" aria-hidden="true">4</span><span class="flow-text"><strong>Send to manufacture</strong><span>Download each FPC's Gerber ZIP with its order notes and order the boards.</span></span></button></li>
+          <li class="flow-step" data-step="1"><button type="button" data-go="cadWorkspace"><span class="flow-no" aria-hidden="true">1</span><span class="flow-text"><strong>Load your gripper</strong><span>Choose or drag an STL, click the face for the sensor.</span></span></button></li>
+          <li class="flow-step" data-step="2"><button type="button" data-go="cadQuick"><span class="flow-no" aria-hidden="true">2</span><span class="flow-text"><strong>Generate the sensor</strong><span>Press Generate sensor under the 3D view.</span></span></button>
+            <!-- In step with Customize the sensor on the right (main.js syncGuideCustomize): either one opens both, and
+                 its two steps, Fit and Generate, show here. -->
+            <div class="flow-more">
+              <button type="button" class="flow-customize" id="guideCustomize" aria-controls="cadCustomize" aria-expanded="false">Customize the sensor</button>
+              <ol class="flow-substeps" id="guideSubsteps" hidden>
+                <li class="flow-substep" data-substep="fit"><button type="button" data-go="cadStepConfig"><span class="flow-sub-no" aria-hidden="true">a</span>Fit</button></li>
+                <li class="flow-substep" data-substep="generate"><button type="button" data-go="cadStepGenerate"><span class="flow-sub-no" aria-hidden="true">b</span>Generate</button></li>
+              </ol>
+            </div>
+          </li>
+          <li class="flow-step" data-step="3"><button type="button" data-go="downloadsTitle"><span class="flow-no" aria-hidden="true">3</span><span class="flow-text"><strong>Send to manufacture</strong><span>Download the two Gerber ZIPs and order them.</span></span></button></li>
         </ol>
       </aside>
 
       <!-- Limits (min/max/step/maxlength) and choices come from /api/default
            profile.limits; data-field is the canonical design path of a control. -->
       <form class="controls" id="designForm" aria-label="Sensor parameters" novalidate>
+        <!-- In sight: the sensor's size and pitch, and Generate (2026-11-02: one step to a sensor); everything else under
+             Customize the sensor, with Advanced folded inside it as before. -->
         <section>
           <h2>Sensor</h2>
-          <div class="field"><div class="field-head"><label for="name">Design name</label></div><input id="name" name="name" data-field="project_name" autocomplete="off" required /></div>
           <div class="two-col">
             <div class="field"><div class="field-head"><label for="rows">Rows</label></div><input id="rows" name="rows" data-field="matrix.rows" type="number" inputmode="numeric" required /></div>
             <div class="field"><div class="field-head"><label for="columns">Columns</label></div><input id="columns" name="columns" data-field="matrix.columns" type="number" inputmode="numeric" required /></div>
@@ -54,6 +64,23 @@
             <div class="field"><div class="field-head"><label for="pitchX">X pitch</label></div><input id="pitchX" name="pitch_x_mm" data-field="matrix.pitch_x_mm" type="number" inputmode="decimal" required /></div>
             <div class="field"><div class="field-head"><label for="pitchY">Y pitch</label></div><input id="pitchY" name="pitch_y_mm" data-field="matrix.pitch_y_mm" type="number" inputmode="decimal" required /></div>
           </div>
+        </section>
+
+        <!-- app.js: CAD mode's masked field (matrix.mask of the applied proposal) with the server's issues at
+             matrix.mask and a button that drops it, or the note that an edit cleared it. -->
+        <div class="hint mask-note" id="maskNote" hidden>
+          <p id="maskText"></p>
+          <ul class="mask-issues" id="maskIssues" hidden></ul>
+          <button type="button" id="clearMask" hidden>Use the full field</button>
+        </div>
+
+        <button id="generate" class="primary" type="submit">Generate &amp; validate</button>
+
+        <details class="customize" id="formCustomize">
+          <summary>Customize the sensor</summary>
+        <section>
+          <h2>Electrodes</h2>
+          <div class="field"><div class="field-head"><label for="name">Design name</label></div><input id="name" name="name" data-field="project_name" autocomplete="off" required /></div>
           <!-- Taxel footprint = row electrode width x column electrode width. -->
           <div class="two-col">
             <div class="field"><div class="field-head"><label for="rowWidth">Row electrode</label></div><input id="rowWidth" name="row_electrode_width_mm" data-field="matrix.taxel_height_mm" data-pitch="pitchY" type="number" inputmode="decimal" required /></div>
@@ -123,16 +150,7 @@
             <p class="hint template-note" id="templateNote" hidden></p>
           </section>
         </details>
-
-        <!-- app.js: CAD mode's masked field (matrix.mask of the applied proposal) with the server's issues at
-             matrix.mask and a button that drops it, or the note that an edit cleared it. -->
-        <div class="hint mask-note" id="maskNote" hidden>
-          <p id="maskText"></p>
-          <ul class="mask-issues" id="maskIssues" hidden></ul>
-          <button type="button" id="clearMask" hidden>Use the full field</button>
-        </div>
-
-        <button id="generate" class="primary" type="submit">Generate &amp; validate</button>
+        </details>
       </form>
 
       <section class="workbench" id="workbench">
@@ -142,8 +160,8 @@
         <section class="cad-workspace board-card" id="cadWorkspace" aria-labelledby="cadTitle" hidden>
           <header>
             <div>
-              <h2 id="cadTitle"><span class="cad-step-no">1</span>Select your gripper</h2>
-              <p class="hint cad-title-hint">Pick a surface on a 3D model: load your gripper finger (STL), click the surface the sensor goes on and its base edge.</p>
+              <h2 id="cadTitle"><span class="cad-step-no">1</span>Load your gripper</h2>
+              <p class="hint cad-title-hint">Load your gripper finger (STL), click the face the sensor goes on (its largest flat face is picked for you), then Generate sensor.</p>
             </div>
           </header>
           <div class="cad-main">
@@ -238,7 +256,23 @@
               <div class="cad-loading" id="cadLoading" aria-hidden="true" hidden><span class="cad-spinner"></span><span id="cadLoadingText">Loading…</span></div>
               <output class="cad-status is-neutral" id="cadStatus" role="status" aria-live="polite" hidden></output>
               </div>
-              <!-- The base edge, under the 3D view and across it (the user's request of 2026-10-30): main.js renderSides. -->
+              <p class="cad-help" id="cadHelp">Drag: rotate · right-drag or arrow keys: pan · wheel: zoom · click a surface to select it, click it again to deselect it.</p>
+              <!-- One step (the user's requests of 2026-11-02): Generate sensor alone under the view (main.js oneStep: fit
+                   when needed, then the chosen proposal generated and mapped; its title says what the sensor is or what to
+                   do next, renderQuick).  The default part's sensor is generated at once; a model loaded or a face clicked
+                   only chooses (main.js autoSelect).  The Gerber ZIPs are the downloads'. -->
+              <div class="cad-quick" id="cadQuick">
+                <button type="button" class="primary cad-quick-generate" id="cadQuickGenerate" disabled>Generate sensor</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Everything beyond one step (the user's request of 2026-11-02), folded: the base edge, the resolution and the
+               fit, the proposals, Generate and the checks on the part; their own folds inside as before.  Open, a click
+               on the part toggles a surface (folded, it selects that face alone). -->
+          <details class="cad-customize" id="cadCustomize">
+            <summary>Customize the sensor <span class="hint">base edge, resolution, proposals, Generate and the checks on the part</span></summary>
+            <!-- The base edge, under the 3D view and across it (the user's request of 2026-10-30): main.js renderSides. -->
               <div class="cad-base" aria-labelledby="cadStepBase">
                 <h3 class="cad-base-title" id="cadStepBase">Base edge <span class="hint">the tails leave across it: pick it here or click it on the part</span></h3>
                 <p class="hint cad-border-note" id="cadBorderNote" hidden></p>
@@ -247,18 +281,15 @@
                   <p class="hint">Select a surface first.</p>
                 </fieldset>
               </div>
-              <p class="cad-help" id="cadHelp">Drag: rotate · right-drag or arrow keys: pan · wheel: zoom · click a surface to select it, click it again to deselect it.</p>
               <!-- main.js: what the 3D overlay leaves out (the parts of the boards off the surface) and where the markers are. -->
               <p class="hint cad-view-note" id="cadViewNote" hidden></p>
-            </div>
-          </div>
 
           <!-- Step 2 side by side (the user's request of 2026-10-30): the settings, Fit and the proposals on the left, the
                chosen proposal's flattened map on the right (in sight while the left scrolls). -->
           <div class="cad-resolution">
             <div class="cad-resolution-main">
               <section class="cad-step cad-config" aria-labelledby="cadStepConfig">
-                <h3 id="cadStepConfig"><span class="cad-step-no">2</span>Find best resolution</h3>
+                <h3 id="cadStepConfig">Resolution</h3>
                 <!-- main.js reads every [data-option] in #cadConfig: the basic options and those under More options. -->
                 <div class="cad-config-body" id="cadConfig">
                 <div class="cad-grid">
@@ -322,7 +353,10 @@
               </section>
             </div>
             <div class="cad-resolution-map">
-              <figure class="cad-flat" id="cadFlatFigure" hidden>
+              <!-- The map's window keeps its place and size (the user's request of 2026-11-02): empty, it says why (main.js
+                   renderFlatEmpty: fitting, or nothing fitted yet). -->
+              <figure class="cad-flat is-empty" id="cadFlatFigure">
+                <p class="cad-flat-empty" id="cadFlatEmpty">Select a surface, then fit the sensor.</p>
                 <svg id="cadFlat" class="cad-flat-svg" aria-hidden="true" focusable="false" viewBox="0 0 10 10"></svg>
                 <!-- What the map draws, for screen readers (the user's request of 2026-10-30: no caption under the map). -->
                 <figcaption class="cad-sr-only" id="cadFlatCaption">Flattened surface seen from outside.</figcaption>
@@ -334,7 +368,7 @@
                files on the right. -->
           <div class="cad-build">
             <section class="cad-step cad-generate" aria-labelledby="cadStepGenerate">
-              <h3 id="cadStepGenerate"><span class="cad-step-no">3</span>Click to generate</h3>
+              <h3 id="cadStepGenerate">Generate</h3>
               <div class="cad-actions">
                 <button type="button" class="primary" id="cadGenerate" disabled>Generate &amp; validate the chosen proposal</button>
                 <p class="hint">Builds the chosen proposal; its previews and downloads appear below.</p>
@@ -355,6 +389,8 @@
               </div>
             </section>
           </div>
+
+          </details>
 
           <details class="cad-diagnostics">
             <summary>Diagnostics</summary>
@@ -429,6 +465,7 @@
           </article>
         </section>
 
+        <!-- Always open, as the boards' previews (the user's request of 2026-11-02, after a version that folded it). -->
         <section class="stacked-review board-card look-scope" aria-labelledby="assemblyTitle">
           <header>
             <h2 id="assemblyTitle">Stacked tactile sensor</h2>
@@ -458,19 +495,25 @@
 
         <section class="downloads" aria-labelledby="downloadsTitle">
           <div>
-            <h2 id="downloadsTitle"><span class="cad-step-no flow-only" aria-hidden="true">4</span>Downloads</h2>
+            <h2 id="downloadsTitle"><span class="cad-step-no flow-only" aria-hidden="true">3</span>Downloads</h2>
             <p id="downloadNote">Downloads are enabled only for a valid build that matches the form.</p>
           </div>
           <!-- The two Gerber ZIPs first and set off: they are what goes to the factory (the user's request of 2026-10-30). -->
           <div class="download-actions">
             <button type="button" class="download-main" data-export="top-gerber" disabled>Top FPC Gerber ZIP</button>
             <button type="button" class="download-main" data-export="bottom-gerber" disabled>Bottom FPC Gerber ZIP</button>
-            <button type="button" data-download="design" disabled>Design JSON</button>
-            <button type="button" data-download="layout" disabled>Derived layout JSON</button>
-            <button type="button" data-download="manifest" disabled>Build manifest</button>
-            <button type="button" data-export="project" disabled>Project review ZIP</button>
-            <button type="button" data-export="easyeda-pro" disabled title="Native EasyEDA Pro projects (.epro2), one per board, with README_EASYEDA.txt">EasyEDA Pro projects ZIP</button>
           </div>
+          <!-- The other files, folded (2026-11-02). -->
+          <details class="more-files" id="moreFiles">
+            <summary>More files <span class="hint">EasyEDA Pro projects, the review bundle, the design, layout and manifest</span></summary>
+            <div class="download-actions">
+              <button type="button" data-export="easyeda-pro" disabled title="Native EasyEDA Pro projects (.epro2), one per board, with README_EASYEDA.txt">EasyEDA Pro projects ZIP</button>
+              <button type="button" data-export="project" disabled>Project review ZIP</button>
+              <button type="button" data-download="design" disabled>Design JSON</button>
+              <button type="button" data-download="layout" disabled>Derived layout JSON</button>
+              <button type="button" data-download="manifest" disabled>Build manifest</button>
+            </div>
+          </details>
           <details class="manufacturing-note" id="manufacturingNote">
             <summary>Ordering notes</summary>
             <p>Gerber ZIPs are deterministic Direct Gerber / JLC review candidates: upload top and bottom separately, then verify the outline, the coverlay openings and the PI stiffener listed under Standardized manufacturing. They are not EasyEDA-native exports and are not production approval. The EasyEDA Pro projects ZIP holds one native .epro2 project per board: import it into EasyEDA Pro (pro.easyeda.com, File &gt; Import &gt; EasyEDA/JLCEDA (Professional)), check FPC mode, the stiffener and DRC there, and let EasyEDA write the Gerbers and the order (README_EASYEDA.txt). Every file name starts with the build id. The design and layout JSON downloads are readable copies of the shown build; the project review ZIP carries their canonical, byte-stable versions.</p>

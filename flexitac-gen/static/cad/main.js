@@ -84,6 +84,8 @@ const cad = {
   seq: {load: 0, inspect: 0, select: 0, fit: 0, preview: 0, map: 0},
   // The model being read or inspected (its name: the veil over the view) and the last status (setStatus).
   loading: null, status: {kind: "neutral", message: ""},
+  // Generate sensor (oneStep, under the view) at work.
+  stepRunning: false,
 };
 
 // -- small helpers -------------------------------------------------------------
@@ -165,6 +167,15 @@ async function request(kind, route, extra) {
     renderState();
   }
 }
+function whenIdle(kind, limitMs = 60000) {
+  // Resolves once no request of ``kind`` is in flight (the server takes one surface request at a time: Generate's map
+  // waits for the proposal's preview instead of meeting a 503).
+  const end = performance.now() + limitMs;
+  return new Promise(resolve => {
+    const look = () => (!cad.busy.has(kind) || performance.now() > end ? resolve() : setTimeout(look, 40));
+    look();
+  });
+}
 function abortRequests(...kinds) {
   kinds.forEach(kind => cad.controllers.get(kind)?.abort());
 }
@@ -185,6 +196,9 @@ function renderState() {
     webgl: cad.viewer ? "ok" : cad.viewerError ? "unavailable" : "not loaded",
     loading: cad.loading,
     status: {kind: cad.status.kind, shown: $("cadStatus").hidden ? null : $("cadStatus").textContent},
+    customize: !quickMode(),
+    step_running: cad.stepRunning,
+    quick: renderQuick(),
     mesh: mesh ? {name: mesh.name, facets: mesh.facets, unit: mesh.unit, format: mesh.format, watertight: mesh.watertight, browser_facets: cad.parsed?.facets ?? null} : null,
     default_part: cad.defaultPart,
     default_build: cad.defaultBuild,
@@ -241,23 +255,131 @@ function renderState() {
     // The server's candidate surfaces (seed facets, best first; diagnostics pickSurface) and the guide's steps.
     candidates: Object.fromEntries(["flat", "surface", "smooth"].map(kind => [kind, (cad.inspect?.candidates?.[kind] || []).map(item => item.seed_facet)])),
     guide: renderGuide(),
+    guide_customize: {open: $("guideCustomize").getAttribute("aria-expanded") === "true", substeps: [...document.querySelectorAll("#guideSubsteps .flow-substep")]
+      .map(step => (step.classList.contains("is-done") ? "done" : step.classList.contains("is-next") ? "next" : "todo"))},
   };
   $("cadRemove").disabled = !cad.mesh && !cad.loading;
   $("cadState").textContent = JSON.stringify(state);
 }
 
+// -- one step (the user's requests of 2026-11-02) -------------------------------------------------
+// The default part's sensor is generated at once (buildDefaultSensor).  After that the user's changes only choose:
+// with "Customize the sensor" folded (quickMode) a model loaded gets its largest flat face selected and a click on the
+// part selects that face alone; "Generate sensor" under the view (oneStep) then fits and generates (the user's request
+// of 2026-11-02, after the first version generated on every click).  Opened, Customize is the step-by-step workspace as
+// before (a click toggles a surface; Fit and Generate there); Generate sensor works from either.
+
+const quickMode = () => !$("cadCustomize").open;
+
+function sensorCurrent() {
+  // The sensor on the part is the inputs' own: a fresh fit, its chosen proposal built and mapped.
+  const proposal = chosenProposal();
+  return Boolean(proposal && cad.fit && !fitStale() && cad.lastResult?.manifest?.build_id === proposal.build_id && cad.map?.build_id === proposal.build_id);
+}
+function renderQuick() {
+  // Generate sensor, alone under the view (the user's request of 2026-11-02): enabled when there is something to
+  // generate; its title says what the sensor on the part is, or what to do next, under way or wrong.
+  const [kind, text] = quickText();
+  const button = $("cadQuickGenerate");
+  button.disabled = kind === "busy" || !cad.selection || Boolean(cad.selectionError) || cad.editing || sensorCurrent();
+  button.title = text;
+  renderFlatEmpty();
+  return {kind, text, generate: !button.disabled};
+}
+function renderFlatEmpty() {
+  // The map's window when it has no proposal to draw: blank, saying why (it keeps its place and size meanwhile).
+  const figure = $("cadFlatFigure");
+  if (!figure.classList.contains("is-empty")) return;
+  const fitting = cad.busy.has("fit");
+  figure.classList.toggle("is-fitting", fitting);
+  $("cadFlatEmpty").textContent = fitting ? "Fitting the sensor…" : cad.selection ? "Fit the sensor to see the chosen proposal flattened here." : "Select a surface, then fit the sensor.";
+}
+function flatEmpty() {
+  $("cadFlat").replaceChildren();
+  $("cadFlatFigure").classList.add("is-empty");
+  renderFlatEmpty();
+}
+function quickText() {
+  if (cad.loading) return ["busy", `Loading ${cad.loading}…`];
+  if (!cad.inspect) return ["idle", "Choose or drag your gripper's STL, click the face the sensor goes on, then Generate sensor."];
+  const proposal = chosenProposal();
+  const working = cad.busy.size > 0 || Boolean(cad.pendingBuild) || cad.stepRunning || cad.defaultBuild === "running";
+  if (working) return ["busy", "Working on the sensor…"];
+  if (sensorCurrent() && cad.map?.ok && downloadsReady()) {
+    const m = proposal.metrics; const passed = cad.map.verification.length;
+    const positions = m.positions ?? m.rows * m.columns;
+    const size = positions === m.taxels ? `${m.rows} × ${m.columns} = ${m.taxels} taxels` : `${m.taxels} taxels in a ${m.rows} × ${m.columns} field`;
+    return ["ok", `${size} · ${fmt(proposal.design.matrix.pitch_x_mm, 1)} mm pitch · all ${passed} checks pass on the part.`];
+  }
+  if (!cad.selection) return ["idle", "Click the face the sensor goes on, then Generate sensor."];
+  if (cad.map && !cad.map.ok) return ["problem", "The sensor fails a check on the part: see Customize the sensor, On the part."];
+  if (cad.error || (cad.fit && !fitStale() && !cad.fit.proposals?.length)) return ["problem", "No sensor fits here: choose another face, or Customize the sensor."];
+  if (cad.fit && fitStale()) return ["todo", "Settings changed: Generate sensor to update it."];
+  if (proposal) return ["todo", `Proposal #${proposal.rank} (${proposal.metrics.rows} × ${proposal.metrics.columns}) fitted: Generate sensor to build it.`];
+  return ["todo", `Face selected (${fmt(cad.selection.area_mm2, 1)} mm²): Generate sensor to put the sensor on it.`];
+}
+async function oneStep() {
+  // Generate sensor: the inputs as they are fitted when the fit is missing or stale (its proposal #1 chosen), the chosen
+  // proposal generated and mapped onto the part.
+  if (!cad.selection || cad.selectionError || cad.stepRunning || cad.editing) return;
+  cad.stepRunning = true;
+  renderState();
+  try {
+    if (!cad.fit || fitStale() || !chosenProposal()) await runFit();
+    const proposal = chosenProposal();
+    if (!proposal || sensorCurrent()) return;
+    await whenIdle("preview");
+    if (chosenProposal() === proposal) await generate();
+  } finally {
+    cad.stepRunning = false;
+    renderState();
+  }
+}
+function autoSelect(seed, preset = "flat") {
+  // The face under a click (or the model's largest flat face) as the selection, alone; Generate sensor does the rest.
+  setOps([growOp(seed, "add", preset)]);
+  return runSelect({look: true});
+}
+function helpText() {
+  return quickMode()
+    ? "Drag: rotate · right-drag or arrow keys: pan · wheel: zoom · click the face the sensor goes on."
+    : "Drag: rotate · right-drag or arrow keys: pan · wheel: zoom · click a surface to select it, click it again to deselect it.";
+}
+function onCustomizeToggle() {
+  defaultHelp = helpText();
+  if (!cad.editing) $("cadHelp").textContent = defaultHelp;
+  syncGuideCustomize();
+  renderState();
+}
+
 function renderGuide() {
   // The order of work (index.html #cadGuide, the page's left column in Gen by Surface): each step done, the first one
   // not done next (markGuideHere marks the one in view).
-  const done = [Boolean(cad.selection), Boolean(cad.fit?.proposals?.length), Boolean(cad.map?.ok && downloadsReady()), false];
+  // Three steps since 2026-11-02: a model in, the sensor on it (built, mapped and checked), the Gerbers out.
+  const done = [Boolean(cad.inspect), Boolean(cad.map?.ok && downloadsReady()), false];
   const next = done.indexOf(false);
   document.querySelectorAll("#cadGuide .flow-step").forEach((step, index) => {
     step.classList.toggle("is-done", done[index]);
     step.classList.toggle("is-next", index === next);
     if (index === next) step.setAttribute("aria-current", "step"); else step.removeAttribute("aria-current");
   });
+  // Step 2's own steps under Customize the sensor: Fit (proposals for the inputs as they are), Generate (the chosen one
+  // built and mapped).
+  const subDone = [Boolean(cad.fit?.proposals?.length) && !fitStale(), sensorCurrent() && Boolean(cad.map?.ok)];
+  const subNext = subDone.indexOf(false);
+  document.querySelectorAll("#guideSubsteps .flow-substep").forEach((step, index) => {
+    step.classList.toggle("is-done", subDone[index]);
+    step.classList.toggle("is-next", index === subNext);
+  });
   markGuideHere();
   return done.map((value, index) => (value ? "done" : index === next ? "next" : "todo"));
+}
+function syncGuideCustomize() {
+  // The guide's Customize the sensor and the fold on the right are one switch (the user's request of 2026-11-02).
+  const open = $("cadCustomize").open;
+  $("guideCustomize").setAttribute("aria-expanded", String(open));
+  $("guideSubsteps").hidden = !open;
+  markGuideHere();
 }
 
 function markGuideHere() {
@@ -272,6 +394,16 @@ function markGuideHere() {
     if (target?.getClientRects().length && (target.getBoundingClientRect().top <= line || atEnd)) here = index;
   });
   steps.forEach((step, index) => step.classList.toggle("is-here", index === here));
+  // Within step 2, open: the sub-step whose part is in view (none above its first part).
+  const subs = [...document.querySelectorAll("#guideSubsteps .flow-substep")];
+  let sub = -1;
+  if (!$("guideSubsteps").hidden && here === 1) {
+    subs.forEach((step, index) => {
+      const target = $(step.querySelector("[data-go]")?.dataset.go || "");
+      if (target?.getClientRects().length && target.getBoundingClientRect().top <= line) sub = index;
+    });
+  }
+  subs.forEach((step, index) => step.classList.toggle("is-here", index === sub));
 }
 
 // The proposal's containment (metrics.containment of a field-only proposal; the whole board otherwise).
@@ -446,6 +578,8 @@ async function buildDefaultSensor() {
   await runFit();
   const fit = cad.seq.fit;
   if (!ours() || cad.seq.select !== select || !chosenProposal() || fitStale()) return;
+  await whenIdle("preview");
+  if (!ours() || cad.seq.fit !== fit) return;
   await generate();
   if (ours() && cad.seq.fit === fit) cad.defaultBuild = "done";
 }
@@ -529,6 +663,8 @@ async function inspectMesh() {
   else {
     renderSelection();
     setStatus("ok", `${cad.fileName}: ${plural(reply.mesh.facets, "facet")}. Pick a candidate surface or click the part.`);
+    const face = reply.candidates?.flat?.[0];
+    if (quickMode() && !cad.defaultFile && face && !cad.facetMismatch) await autoSelect(face.seed_facet, face.preset || "flat");
   }
   if (cad.facetMismatch) {
     cad.error = "E_CLIENT_FACET_ORDER";
@@ -653,6 +789,8 @@ function pickSurface(text) {
   const [facet, preset = "flat"] = String(text).split(":").map(part => part.trim());
   const seed = Number(facet);
   if (!cad.inspect || !Number.isInteger(seed)) return;
+  // As a click: in one step that surface alone (and its sensor), else the selection's toggle.
+  if (quickMode()) { autoSelect(seed, preset); return; }
   toggleSurface(seed, {op: "grow", seed_facet: seed, preset});
 }
 
@@ -1002,6 +1140,12 @@ function onViewClick({clientX, clientY}) {
   if (!hit) return;
   if (cad.hidden.has(hit.facet)) { setStatus("warning", `Facet ${hit.facet} is hidden inside the part (where two shells touch); it cannot be selected.`); return; }
   // No Disk tool (the user's decision of 2026-10-30; the API's disk operation stays).
+  if (quickMode()) {
+    // One step: the sensor goes on the clicked face (the face it is on already: nothing to do).
+    if (cad.ops.length === 1 && isSelected(hit.facet)) { setStatus("ok", "This face is selected: Generate sensor puts the sensor on it."); return; }
+    autoSelect(hit.facet, $("cadPreset").value);
+    return;
+  }
   toggleSurface(hit.facet, growOp(hit.facet, "add"));
 }
 
@@ -1700,7 +1844,7 @@ function renderProposals() {
     wrap.replaceChildren(el("p", {className: "hint"}, cad.selection ? "Fit the sensor to list ranked proposals." : "Select a surface, then fit the sensor."));
     $("cadFitNote").textContent = "";
     $("cadFitFacts").textContent = "";
-    $("cadFlatFigure").hidden = true;
+    flatEmpty();
     $("cadViewNote").hidden = true;
     return;
   }
@@ -1898,7 +2042,8 @@ function renderFlat() {
   const figure = $("cadFlatFigure");
   const node = $("cadFlat");
   renderViewNote(cad.fit?.selection ? proposal : null);
-  if (!proposal || !cad.fit?.selection) { figure.hidden = true; return; }
+  if (!proposal || !cad.fit?.selection) { flatEmpty(); return; }
+  figure.classList.remove("is-empty", "is-fitting");
   const selection = cad.fit.selection;
   const outlines = proposal.outlines_uv || {};
   const placement = proposal.placement;
@@ -2259,7 +2404,17 @@ function wire() {
   view.addEventListener("dblclick", onViewDoubleClick);
   view.addEventListener("keydown", onViewKey);
   document.querySelectorAll('input[name="cadTool"]').forEach(input => input.addEventListener("change", () => hoverEdge(null)));
-  defaultHelp = $("cadHelp").textContent;
+  defaultHelp = helpText();
+  $("cadHelp").textContent = defaultHelp;
+  $("cadCustomize").addEventListener("toggle", onCustomizeToggle);
+  $("cadQuickGenerate").addEventListener("click", oneStep);
+  $("guideCustomize").addEventListener("click", () => {
+    // Opens (or folds) Customize the sensor on the right; the toggle event brings the guide in step (syncGuideCustomize).
+    const fold = $("cadCustomize");
+    fold.open = !fold.open;
+    if (fold.open) fold.scrollIntoView({behavior: "smooth", block: "start"});
+  });
+
   $("cadEditBorder").addEventListener("click", () => setEditing(!cad.editing));
   [["cadBorderReset", "reset"], ["cadBorderInset", "inset"], ["cadBorderDelete", "delete"],
     ["cadBorderUndo", "undo"], ["cadBorderRedo", "redo"]].forEach(([id, action]) => $(id).addEventListener("click", () => borderAction(action)));

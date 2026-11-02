@@ -314,12 +314,10 @@ input.fine-step::-webkit-inner-spin-button,input.fine-step::-webkit-outer-spin-b
 .cad-actions .hint { margin:0; flex:1 1 260px; }
 /* Step 2 side by side (index.html .cad-resolution): the settings, Fit and the proposals left, the flattened map right, in
    sight while the left scrolls; the left takes the whole width until there is a map, and the two stack when narrow. */
-.cad-resolution { display:grid; grid-template-columns:minmax(0,1fr); border-bottom:1px solid var(--line); }
-.cad-resolution:has(#cadFlatFigure:not([hidden])) { grid-template-columns:minmax(0,1fr) minmax(300px,40%); }
+.cad-resolution { display:grid; grid-template-columns:minmax(0,1fr) minmax(300px,40%); border-bottom:1px solid var(--line); }
 .cad-resolution-main { min-width:0; }
 .cad-resolution-main > .cad-step:last-child { border-bottom:0; }
 .cad-resolution-map { min-width:0; padding:14px 16px; border-left:1px solid var(--line); }
-.cad-resolution-map:has(#cadFlatFigure[hidden]) { display:none; }
 /* The map's window keeps its size whatever the sensor's (the drawing scales inside it). */
 .cad-resolution-map .cad-flat { position:sticky; top:14px; max-width:none; height:min(620px,80vh); display:flex; flex-direction:column; }
 .cad-resolution-map .cad-flat-svg { flex:1 1 auto; min-height:0; width:100%; height:100%; max-height:none; }
@@ -327,7 +325,7 @@ input.fine-step::-webkit-inner-spin-button,input.fine-step::-webkit-outer-spin-b
 .cad-resolution-main .cad-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
 .cad-fit-note:empty { display:none; }
 .cad-fit-facts { margin:8px 0 0; }
-@media (max-width:1100px) { .cad-resolution:has(#cadFlatFigure:not([hidden])) { grid-template-columns:minmax(0,1fr); }
+@media (max-width:1100px) { .cad-resolution { grid-template-columns:minmax(0,1fr); }
   .cad-resolution-map { border-left:0; border-top:1px solid var(--line); }.cad-resolution-map .cad-flat { position:static; height:460px; } }
 .cad-proposals { container:cad-proposals / inline-size; }
 .cad-proposals-body { display:grid; gap:12px; }
@@ -347,6 +345,11 @@ input.fine-step::-webkit-inner-spin-button,input.fine-step::-webkit-outer-spin-b
 .cad-card .cad-facts { margin:0; }
 .cad-flat { margin:0; padding:8px; max-width:760px; border:1px solid var(--line); border-radius:6px; background:radial-gradient(#edf0ec 1px,transparent 1px) 0 0/12px 12px; }
 .cad-flat-svg { width:100%; height:auto; max-height:300px; display:block; }
+.cad-flat { position:relative; }
+.cad-flat.is-empty .cad-flat-svg { visibility:hidden; }
+.cad-flat-empty { display:none; position:absolute; inset:0; margin:0; place-content:center; padding:20px; text-align:center; color:var(--muted); font-size:.86rem; font-weight:700; }
+.cad-flat.is-empty .cad-flat-empty { display:grid; }
+.cad-flat.is-fitting .cad-flat-empty { color:#075c69; }
 .cad-flat figcaption { margin-top:6px; color:var(--muted); font-size:.72rem; line-height:1.4; }
 .cad-flat-svg .flat-surface { fill:#fbe3c8; stroke:#b9772f; stroke-width:1; vector-effect:non-scaling-stroke; }
 .cad-flat-svg .flat-hole { fill:#fff; stroke:#b9772f; stroke-width:1; vector-effect:non-scaling-stroke; }
@@ -430,11 +433,11 @@ body[data-mode="cad"] .flow-guide { display:block; position:sticky; top:0; align
 .flow-step { position:relative; padding:0 0 10px; }
 .flow-step:not(:last-child)::before { content:""; position:absolute; left:23px; top:42px; bottom:0; width:2px; border-radius:1px; background:#d6e2e5; }
 .flow-step.is-done:not(:last-child)::before { background:#82c3c7; }
-.flow-step button { display:grid; grid-template-columns:30px minmax(0,1fr); gap:10px; width:100%; padding:8px; border:1px solid transparent; border-radius:10px;
+.flow-step > button { display:grid; grid-template-columns:30px minmax(0,1fr); gap:10px; width:100%; padding:8px; border:1px solid transparent; border-radius:10px;
   background:none; color:inherit; font:inherit; text-align:left; cursor:pointer; }
-.flow-step button:hover { background:#eef5f5; }
+.flow-step > button:hover { background:#eef5f5; }
 .flow-step button:focus-visible { outline:2px solid #77cbd1; outline-offset:1px; }
-.flow-step.is-here button { background:#eaf2fe; border-color:#bdd2f6; }
+.flow-step.is-here > button { background:#eaf2fe; border-color:#bdd2f6; }
 .flow-no { display:grid; place-items:center; width:30px; height:30px; border-radius:50%; border:2px solid #a9bcc1; background:#fff; color:#53676e; font-size:.86rem; font-weight:800; }
 .flow-step.is-done .flow-no { border-color:#075c69; background:#075c69; color:#fff; }
 .flow-step.is-next .flow-no { border-color:#2563eb; background:#2563eb; color:#fff; box-shadow:0 0 0 4px rgba(37,99,235,.15); }
@@ -546,3 +549,51 @@ body[data-look="photo"] .swatch-stiffener { background:#4a1606; }
 .stacked-canvas.is-plan :is(.coin-plane,.coin-layer) { transform:none; }
 .swatch-coin { background:radial-gradient(circle at 38% 34%, #f4f5f6, #cfd3d7 55%, #9ca2a8); border-radius:50%; }
 .coin-key { border-left:3px solid #9ca2a8; font-weight:600; }
+
+/* One step to a sensor (the user's request of 2026-11-02): the model and the sensor on it in sight, the rest under
+   "Customize the sensor" (index.html #cadCustomize, #formCustomize), the stacked view and the other files folded. */
+.cad-quick { display:flex; align-items:center; padding:12px; border-top:1px solid var(--line); background:#f6fbfa; }
+.cad-workspace .cad-quick button.cad-quick-generate { width:auto; min-width:200px; min-height:46px; padding:0 26px; border:0; border-radius:6px; background:#0b5d9c;
+  color:#fff; font-size:1rem; font-weight:800; cursor:pointer; }
+.cad-workspace .cad-quick button.cad-quick-generate:hover:not(:disabled) { background:#094c80; }
+.cad-workspace .cad-quick button.cad-quick-generate:disabled { background:#e3eceb; color:#8a9a9e; cursor:default; opacity:1; }
+.cad-customize { border-top:1px solid var(--line); }
+.cad-customize > summary { display:flex; flex-wrap:wrap; align-items:center; gap:4px 12px; padding:16px 16px; background:#e4f2f3; border-left:5px solid var(--accent);
+  font-size:1.12rem; font-weight:800; color:#065560; cursor:pointer; }
+.cad-customize > summary:hover { background:#d6ecee; }
+.cad-customize > summary::before { content:"▸"; font-size:1rem; }
+.cad-customize[open] > summary::before { content:"▾"; }
+.cad-customize > summary::-webkit-details-marker { display:none; }
+.cad-customize > summary { list-style:none; }
+.cad-customize > summary .hint,.customize > summary .hint,.more-files > summary .hint { margin:0; font-size:.74rem; font-weight:500; }
+.cad-customize > summary .hint { font-size:.8rem; color:#3f5f66; }
+.cad-customize[open] > summary { border-bottom:1px solid var(--line); }
+.customize { margin:16px 0 0; border:1px solid var(--line); border-radius:7px; background:#fff; }
+.customize > summary { padding:11px 12px; font-size:.86rem; font-weight:800; color:#075c69; cursor:pointer; }
+.customize[open] > summary { border-bottom:1px solid var(--line); }
+.customize > :not(summary) { margin-left:12px; margin-right:12px; }
+.customize > section { border-bottom:1px solid var(--line); padding:12px 0 8px; margin-top:0; margin-bottom:0; }
+.customize > section h2 { font-size:.86rem; margin-bottom:10px; }
+.customize > .advanced { margin-top:12px; margin-bottom:12px; }
+.more-files { grid-column:1 / -1; }
+.more-files > summary { font-size:.82rem; font-weight:750; color:#354454; padding:2px 0; cursor:pointer; }
+.more-files[open] > summary { margin-bottom:10px; }
+.more-files .download-actions { justify-content:flex-start; }
+
+/* Customize the sensor in the guide (index.html #guideCustomize, #guideSubsteps; main.js syncGuideCustomize): a small
+   switch under step 2, in step with the fold on the right; open, its two steps Fit and Generate, each done or next. */
+.flow-more { margin:0 0 4px 48px; }
+.flow-customize { padding:4px 11px; border:1px solid #9fc6cb; border-radius:999px; background:#fff; color:#075c69; font:inherit; font-size:.76rem; font-weight:750; cursor:pointer; }
+.flow-customize::before { content:"▸ "; }
+.flow-customize[aria-expanded="true"] { background:#e4f2f3; border-color:var(--accent); }
+.flow-customize[aria-expanded="true"]::before { content:"▾ "; }
+.flow-customize:hover { background:#eef7f7; }
+.flow-customize:focus-visible,.flow-substep button:focus-visible { outline:2px solid #77cbd1; outline-offset:1px; }
+.flow-substeps { list-style:none; margin:6px 0 0 6px; padding:0 0 0 10px; border-left:2px solid #d6e2e5; }
+.flow-substep button { display:flex; align-items:center; gap:8px; width:100%; padding:5px 8px; border:1px solid transparent; border-radius:8px; background:none;
+  color:#20303a; font:inherit; font-size:.84rem; font-weight:750; text-align:left; cursor:pointer; }
+.flow-substep button:hover { background:#eef5f5; }
+.flow-substep.is-here button { background:#eaf2fe; border-color:#bdd2f6; }
+.flow-sub-no { display:grid; place-items:center; width:22px; height:22px; border-radius:50%; border:2px solid #a9bcc1; background:#fff; color:#53676e; font-size:.7rem; font-weight:800; }
+.flow-substep.is-done .flow-sub-no { border-color:#075c69; background:#075c69; color:#fff; }
+.flow-substep.is-next .flow-sub-no { border-color:#2563eb; background:#2563eb; color:#fff; }
