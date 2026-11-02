@@ -1094,9 +1094,7 @@ h2[style*="color: rgb(189, 189, 189);"] {
   gap: 0.6rem;
 }
 
-.ft-btn-ghost,
-.ft-btn-solid,
-.ft-btn-dark {
+.ft-btn-solid {
   font-size: 0.78rem;
   font-weight: 600;
   letter-spacing: 0.04em;
@@ -1104,18 +1102,6 @@ h2[style*="color: rgb(189, 189, 189);"] {
   padding: 0.5rem 1rem;
   border-radius: 8px;
   transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.18s ease;
-}
-
-.ft-btn-ghost {
-  color: rgba(255, 255, 255, 0.92);
-  border: 1px solid rgba(255, 255, 255, 0.35);
-}
-
-.ft-btn-ghost:hover {
-  background: rgba(255, 255, 255, 0.14);
-  border-color: rgba(255, 255, 255, 0.7);
-  color: #fff;
-  opacity: 1;
 }
 
 .ft-btn-solid {
@@ -1132,18 +1118,120 @@ h2[style*="color: rgb(189, 189, 189);"] {
   opacity: 1;
 }
 
-/* Deep-space "Join Discord" button — matches the gallery.html navbar CTA */
-.ft-btn-dark {
-  background: var(--ft-text); /* deep space #122033 */
-  color: #fff;
-  border: 1px solid var(--ft-text);
+/* GitHub repo card + Discord button: same height, radius and logo size as the
+   Awesome FlexiTac header. Light-on-dark over the hero, dark-on-light once scrolled. */
+.ft-navbar .ft-gh-card,
+.ft-navbar .ft-discord-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  height: 2.75rem;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  line-height: 1.2;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.18s ease;
 }
 
-.ft-btn-dark:hover {
+.ft-navbar .ft-gh-card {
+  padding: 0 0.85rem 0 0.6rem;
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.35);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.ft-navbar .ft-gh-card:hover {
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.14);
+  opacity: 1;
+}
+
+.ft-gh-logo,
+.ft-discord-logo {
+  flex: none;
+  width: 1.75rem;
+  height: 1.75rem;
+}
+
+.ft-gh-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.ft-gh-name {
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.ft-gh-stats {
+  display: flex;
+  gap: 0.75rem;
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.ft-gh-stats > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.ft-gh-icon {
+  width: 0.875rem;
+  height: 0.875rem;
+}
+
+/* Community link pills: larger text and icons than Bulma's default buttons */
+.ft-community-links .button {
+  font-size: 1.1rem;
+  height: 2.9em;
+  padding-left: 1.25em;
+  padding-right: 1.25em;
+}
+
+.ft-community-links .button .icon {
+  font-size: 1.3em;
+}
+
+/* Live star/fork counts inside the community "Star us on GitHub" pill */
+.ft-pill-count {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin-left: 0.6rem;
+  padding: 0.15rem 0.65rem;
+  border-radius: 999px;
+  background: rgba(18, 32, 51, 0.07);
+  color: var(--ft-muted);
+  font-size: 0.8em;
+  font-weight: 600;
+}
+
+.ft-pill-count > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.ft-pill-count .fa-star {
+  font-size: 0.9em;
+  color: #e3a008;
+}
+
+.ft-navbar .ft-discord-btn {
+  padding: 0 1rem 0 0.75rem;
+  background: var(--ft-text); /* deep space #122033 */
+  border-color: var(--ft-text);
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.ft-navbar .ft-discord-btn:hover {
   background: #0e1c2f;
   border-color: #0e1c2f;
-  transform: translateY(-1px);
   color: #fff;
+  transform: translateY(-1px);
   opacity: 1;
 }
 
@@ -1171,15 +1259,20 @@ h2[style*="color: rgb(189, 189, 189);"] {
   background: var(--ft-surface-soft);
 }
 
-.ft-navbar.is-scrolled .ft-btn-ghost {
-  color: var(--ft-muted);
-  border-color: var(--ft-line);
+.ft-navbar.is-scrolled .ft-gh-card {
+  color: var(--ft-text);
+  border-color: rgba(18, 32, 51, 0.16);
+  background: var(--ft-surface);
 }
 
-.ft-navbar.is-scrolled .ft-btn-ghost:hover {
-  color: var(--ft-blue);
-  border-color: var(--ft-blue);
+.ft-navbar.is-scrolled .ft-gh-card:hover {
+  color: var(--ft-text);
+  border-color: var(--ft-text);
   background: var(--ft-surface-soft);
+}
+
+.ft-navbar.is-scrolled .ft-gh-stats {
+  color: var(--ft-muted);
 }
 
 .ft-navbar-toggle {

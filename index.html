@@ -21,7 +21,7 @@
 
   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./static/css/bulma.min.css">
-  <link rel="stylesheet" href="./static/css/index.css?v=20261027b">
+  <link rel="stylesheet" href="./static/css/index.css?v=20261102c">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <!-- Academicons is only used below the fold — load it without blocking render -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css"
@@ -86,8 +86,21 @@
       </nav>
     </div>
     <div class="ft-navbar-actions">
-      <a href="https://github.com/FlexiTac/FlexiTac" target="_blank" rel="noopener" class="ft-btn-ghost">GitHub</a>
-      <a href="https://discord.gg/6gw887Vxms" target="_blank" rel="noopener" class="ft-btn-dark">Join Discord</a>
+      <!-- GitHub repo card + Discord button, matching the Awesome FlexiTac header; counts refreshed at the end of the page -->
+      <a href="https://github.com/FlexiTac/FlexiTac" target="_blank" rel="noopener" class="ft-gh-card" data-gh-badge aria-label="FlexiTac on GitHub: 159 stars, 17 forks">
+        <svg class="ft-gh-logo" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"/></svg>
+        <span class="ft-gh-text">
+          <span class="ft-gh-name">FlexiTac</span>
+          <span class="ft-gh-stats">
+            <span><svg class="ft-gh-icon" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.751.751 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Zm0 2.445L6.615 5.5a.75.75 0 0 1-.564.41l-3.097.45 2.24 2.184a.75.75 0 0 1 .216.664l-.528 3.084 2.769-1.456a.75.75 0 0 1 .698 0l2.77 1.456-.53-3.084a.75.75 0 0 1 .216-.664l2.24-2.183-3.096-.45a.75.75 0 0 1-.564-.41L8 2.694Z"/></svg><span data-gh-stars>159</span></span>
+            <span><svg class="ft-gh-icon" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M5 5.372v.878c0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75v-.878a2.25 2.25 0 1 1 1.5 0v.878a2.25 2.25 0 0 1-2.25 2.25h-1.5v2.128a2.251 2.251 0 1 1-1.5 0V8.5h-1.5A2.25 2.25 0 0 1 3.5 6.25v-.878a2.25 2.25 0 1 1 1.5 0ZM5 3.25a.75.75 0 1 0-1.5 0 .75.75 0 0 0 1.5 0Zm6.75.75a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm-3 8.75a.75.75 0 1 0-1.5 0 .75.75 0 0 0 1.5 0Z"/></svg><span data-gh-forks>17</span></span>
+          </span>
+        </span>
+      </a>
+      <a href="https://discord.gg/6gw887Vxms" target="_blank" rel="noopener" class="ft-discord-btn" aria-label="Join the FlexiTac Discord">
+        <svg class="ft-discord-logo" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/></svg>
+        <span>Discord</span>
+      </a>
     </div>
     <button class="ft-navbar-toggle" id="ft-nav-toggle" aria-label="Open menu" aria-expanded="false">
       <i class="fa-solid fa-bars"></i>
@@ -99,7 +112,7 @@
     <a href="#datacollection">System Designs</a>
     <a href="#community">Community</a>
     <a href="#qa">Q &amp; A</a>
-    <a href="https://github.com/FlexiTac/FlexiTac" target="_blank" rel="noopener">GitHub</a>
+    <a href="https://github.com/FlexiTac/FlexiTac" target="_blank" rel="noopener">GitHub · ★ <span data-gh-stars>159</span> · <span data-gh-forks>17</span> forks</a>
     <a href="https://discord.gg/6gw887Vxms" target="_blank" rel="noopener">Join Discord</a>
   </nav>
 </header>
@@ -1008,13 +1021,27 @@
 <section class="section" id="community">
   <div class="container">
     <div class="columns is-centered">
-      <div class="column is-four-fifths has-text-centered">
+      <div class="column has-text-centered">
         <span class="tag is-link is-light is-rounded" style="margin-bottom:1rem;">Community</span>
         <h2 class="title is-2 is-size-4-mobile">FlexiTac Community</h2>
         <p style="color:#617086; max-width:760px; margin:0 auto 1.75rem auto; line-height:1.7;">
           We are excited to see FlexiTac reach labs, students, and researchers around the world.
         </p>
-      <div class="buttons is-centered" style="margin-bottom:1.5rem; gap:0.75rem;">
+      <div class="buttons is-centered ft-community-links" style="margin-bottom:1.5rem; gap:0.75rem;">
+        <a href="https://github.com/FlexiTac/FlexiTac"
+          target="_blank"
+          rel="noopener"
+          class="button is-rounded is-light">
+          <span class="icon">
+            <i class="fa-brands fa-github"></i>
+          </span>
+          <span>Star us on GitHub</span>
+          <span class="ft-pill-count">
+            <span><i class="fa-solid fa-star" aria-hidden="true"></i> <span data-gh-stars>159</span></span>
+            <span><i class="fa-solid fa-code-fork" aria-hidden="true"></i> <span data-gh-forks>17</span></span>
+          </span>
+        </a>
+
         <a href="https://discord.gg/6gw887Vxms"
           target="_blank"
           rel="noopener"
@@ -1022,7 +1049,7 @@
           <span class="icon">
             <i class="fa-brands fa-discord"></i>
           </span>
-          <span>Join our Discord Community</span>
+          <span>Join Discord</span>
         </a>
 
         <a href="https://github.com/FlexiTac/FlexiTac.github.io/blob/main/static/images/qr.jpg"
@@ -1032,7 +1059,7 @@
           <span class="icon">
             <i class="fa-brands fa-weixin"></i>
           </span>
-          <span>Join our WeChat Group</span>
+          <span>Join WeChat</span>
         </a>
 
         <a href="https://binghao-huang.github.io/Awesome-FlexiTac/"
@@ -2015,6 +2042,43 @@
       if (trigger && trigger.classList.contains('ft-app-expand')) trigger.focus({ preventScroll: true });
       trigger = null;
     });
+  })();
+
+  // GitHub card in the navbar: refresh the FlexiTac repo's star and fork counts.
+  // The markup ships with recent counts, so the card still reads well if the
+  // unauthenticated GitHub API is rate-limited; counts are cached per tab for an hour.
+  (function () {
+    var REPO = 'FlexiTac/FlexiTac';
+    var KEY = 'gh-stats:' + REPO;
+    var TTL = 60 * 60 * 1000;
+
+    var fmt = function (n) {
+      return n >= 1000 ? (n / 1000).toFixed(n >= 10000 ? 0 : 1).replace(/\.0$/, '') + 'k' : String(n);
+    };
+
+    var apply = function (s) {
+      document.querySelectorAll('[data-gh-stars]').forEach(function (el) { el.textContent = fmt(s.stars); });
+      document.querySelectorAll('[data-gh-forks]').forEach(function (el) { el.textContent = fmt(s.forks); });
+      document.querySelectorAll('[data-gh-badge]').forEach(function (el) {
+        el.setAttribute('aria-label', 'FlexiTac on GitHub: ' + s.stars + ' stars, ' + s.forks + ' forks');
+      });
+    };
+
+    try {
+      var cached = JSON.parse(sessionStorage.getItem(KEY) || 'null');
+      if (cached && Date.now() - cached.at < TTL) { apply(cached); return; }
+    } catch (e) {}
+
+    if (!window.fetch) return;
+    fetch('https://api.github.com/repos/' + REPO, { headers: { Accept: 'application/vnd.github+json' } })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (d) {
+        if (!d || typeof d.stargazers_count !== 'number') return;
+        var s = { stars: d.stargazers_count, forks: d.forks_count, at: Date.now() };
+        apply(s);
+        try { sessionStorage.setItem(KEY, JSON.stringify(s)); } catch (e) {}
+      })
+      .catch(function () {});
   })();
 </script>
 
