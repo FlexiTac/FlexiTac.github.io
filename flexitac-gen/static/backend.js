@@ -14,6 +14,36 @@
     return;
   }
 
+  // The FlexiTac repository's stars and forks in the header (the user's request of 2026-11-02, as flexitac.github.io
+  // shows them): the build wrote recent counts into the page; they are refreshed from GitHub's API (its CSP allows
+  // api.github.com), kept for an hour per tab.  Only the static site asks; app.py's page asks nothing of other hosts.
+  const REPO = "FlexiTac/FlexiTac";
+  const KEY = `gh-stats:${REPO}`;
+  const fmt = n => (n >= 1000 ? `${(n / 1000).toFixed(n >= 10000 ? 0 : 1).replace(/\.0$/, "")}k` : String(n));
+  const applyCounts = counts => {
+    document.querySelectorAll("[data-gh-stars]").forEach(node => { node.textContent = fmt(counts.stars); });
+    document.querySelectorAll("[data-gh-forks]").forEach(node => { node.textContent = fmt(counts.forks); });
+    document.querySelectorAll("[data-gh-stats]").forEach(node => { node.hidden = false; });
+    document.querySelectorAll("[data-gh-badge]").forEach(node => node.setAttribute("aria-label", `FlexiTac on GitHub: ${counts.stars} stars, ${counts.forks} forks`));
+  };
+  const refreshCounts = () => {
+    try {
+      const cached = JSON.parse(sessionStorage.getItem(KEY) || "null");
+      if (cached && Date.now() - cached.at < 3600000) { applyCounts(cached); return; }
+    } catch (error) { /* no storage: ask */ }
+    fetch(`https://api.github.com/repos/${REPO}`, {headers: {Accept: "application/vnd.github+json"}})
+      .then(reply => (reply.ok ? reply.json() : null))
+      .then(data => {
+        if (!data || typeof data.stargazers_count !== "number") return;
+        const counts = {stars: data.stargazers_count, forks: data.forks_count, at: Date.now()};
+        applyCounts(counts);
+        try { sessionStorage.setItem(KEY, JSON.stringify(counts)); } catch (error) { /* kept for this page only */ }
+      })
+      .catch(() => { /* the built-in counts stay */ });
+  };
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", refreshCounts, {once: true});
+  else refreshCounts();
+
   const pending = new Map();
   let nextId = 1;
   let failure = null;

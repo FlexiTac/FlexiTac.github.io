@@ -1,6 +1,10 @@
 {
   "generator_version": "deterministic-sensor-core/0.4.0",
   "engine_zip_sha256": "bf3424c066082f0608fa4adeae8d29685222cf2d7ff304ca04f61d1d92e66ae6",
+  "github": {
+    "stars": 159,
+    "forks": 17
+  },
   "pyodide": {
     "version": "0.27.8",
     "archive": "https://github.com/pyodide/pyodide/releases/download/0.27.8/pyodide-core-0.27.8.tar.bz2",
