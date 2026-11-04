@@ -1,0 +1,831 @@
+/* FlexiTac-Gen's Apple-style theme (2026-11-04), over web/styles.css: index.html links it once, right after styles.css,
+   and without that line the page is as before (styles.css itself is never edited).
+   - Each rule copies the styles.css selector it overrides: the same specificity, so this file wins by order.  A rule
+     here also beats styles.css's later rules of the same specificity and its rules inside @media blocks, so whatever
+     those set for a property this file changes is re-declared below them (the last section, for the breakpoints).
+   - No @layer, @import or @font-face, no external url(): the system font stack, url() only data:.
+   - Light and dark (prefers-color-scheme): the page's shell takes the dark palette, the drawing areas stay light
+     lightboxes (.cad-view-wrap with the 3D view and its pills, .canvas-wrap, .stacked-canvas, .cad-flat) that declare
+     the light palette again; their drawings keep their own colours.
+   - Colour as Apple uses it (2026-11-04): nearly monochrome (the text greys on white and #f5f5f7, grey fills); the
+     action blue fills only each region's one primary action and what is chosen, links are blue text, the pass green
+     only a small dot, no brand colour, success not tinted.  The drawings and the base edge's magenta keep theirs.
+   - Motion is the disclosure arrow's turn alone (off under prefers-reduced-motion); hover, press and focus change at
+     once, and nothing moves or appears with the scroll or as the page opens. */
+
+/* 1. Tokens ---------------------------------------------------------------------------------------------------------- */
+:root {
+  --font: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Helvetica Neue", "Segoe UI", system-ui, Roboto, "Noto Sans", Ubuntu, Cantarell, Arial, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+  /* Radii (concentric: an inner radius is the outer one less the padding between them). */
+  --r-xs:6px; --r-sm:8px; --r-md:12px; --r-lg:18px; --r-pill:980px;
+  /* Spacing on a 4 px grid. */
+  --s1:4px; --s2:8px; --s3:12px; --s4:16px; --s5:20px; --s6:24px; --s8:32px;
+  /* Motion: only the disclosure arrow turns, critically damped (no overshoot). */
+  --dur-disclose:200ms;
+  --ease-disclose:cubic-bezier(.25,.6,.3,1);
+  /* The disclosure arrow (a mask, painted in the arrow's colour): pointing right, turned 90 degrees when open. */
+  --disclosure:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='12' viewBox='0 0 8 12'%3E%3Cpath d='M2 1.5 6.5 6 2 10.5' fill='none' stroke='%23000' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+@supports (transition-timing-function: linear(0, 1)) { :root {
+  /* A critically damped spring (damping 1.0, response 0.2 s). */
+  --ease-disclose:linear(0,.044 5%,.143 10%,.263 15%,.383 20%,.494 25%,.592 30%,.674 35%,.743 40%,.799 45%,.844 50%,.879 55%,.907 60%,.929 65%,.946 70%,.959 75%,.969 80%,.976 85%,.982 90%,.987 95%,1);
+} }
+
+/* The light palette: the page's, and the lightboxes' in either scheme (each declares it on itself, so the dark :root
+   below never reaches inside them).  WCAG on white / #f5f5f7: --text 16.8 / 15.5, --text-2 5.07 / 4.66 (never on
+   #e8e8ed), --link 5.57 / 5.11, --ok 5.13, --warn 5.50, --error 4.92 (each on its tint 4.85, 5.06, 4.60), white on
+   --accent 4.70 and --accent-hover 5.57, --control-border 3.62 / 3.33 (1.4.11's 3:1); --separator is decoration only. */
+:root, .cad-view-wrap, .canvas-wrap, .stacked-canvas, .cad-flat {
+  color-scheme:light;
+  /* Surfaces */
+  --bg:#f5f5f7; --surface:#fff; --surface-2:#fbfbfd; --well:#f5f5f7; --control-bg:#fff; --thumb:#fff;
+  /* Text */
+  --text:#1d1d1f; --text-2:#6e6e73; --text-3:#86868b;
+  /* Lines */
+  --separator:#d2d2d7; --hairline:rgba(0,0,0,.08); --control-border:#86868b;
+  /* Fills (translucent, over whatever surface) and the hover and press overlays of the white and the plain buttons */
+  --fill:rgba(118,118,128,.12); --fill-hover:rgba(118,118,128,.18); --fill-press:rgba(118,118,128,.26); --selection:rgba(0,0,0,.07);
+  --row-hover:rgba(0,0,0,.03);
+  --hover-overlay:linear-gradient(rgba(0,0,0,.04),rgba(0,0,0,.04)); --press-overlay:linear-gradient(rgba(0,0,0,.09),rgba(0,0,0,.09));
+  /* Action: blue fills only each region's one primary action (Generate sensor, the form's Generate, Advanced Customization's Generate
+     & validate, the Gerber ZIPs) and what is chosen; links are blue text; the focus ring */
+  --accent:#0071e3; --accent-hover:#0066cc; --accent-press:#0058b0; --accent-tint:rgba(0,113,227,.10);
+  --link:#0066cc; --focus:#0071e3;
+  /* States, each defined once; the pass green only as a small mark (a dot), never a fill, a badge or a sentence */
+  --ok:#008009; --ok-tint:#f2fbf2; --warn:#b64400; --warn-tint:#fff4e5; --error:#e30000; --error-tint:#fff5f5;
+  --disabled-bg:#e8e8ed; --disabled-text:#86868b;
+  /* The header's bar; the secondary text on a grey pill (--text-2 is 4.26 there); the guide's hover (half way to the
+     white row of the step in view) */
+  --nav:#fbfbfd; --text-2-on-fill:#56565b; --lift-hover:rgba(255,255,255,.5);
+  /* A settings group inset in a card (--text-2 4.66 on it) */
+  --inset:#f5f5f7;
+  /* The base edge's magenta (the 3D view and the map draw it so): its chosen pill's edge, tint and text (9.60 on the
+     tint; the edge 5.87 on white), a pill hovered */
+  --base-edge:#c2185b; --base-tint:#fdf0f5; --base-text:#7a1040; --base-hover:#fbe9f1;
+  /* styles.css's own names, pointed at the palette (its var() uses follow) */
+  --ink:var(--text); --muted:var(--text-2); --paper:var(--bg); --card:#fff; --line:var(--separator);
+  /* Shadows */
+  --shadow-card:0 1px 2px rgba(0,0,0,.04), 0 4px 14px rgba(0,0,0,.06);
+  --shadow-float:0 1px 3px rgba(0,0,0,.08), 0 4px 16px rgba(0,0,0,.12);
+  --shadow-thumb:0 3px 8px rgba(0,0,0,.12), 0 3px 1px rgba(0,0,0,.04);
+  /* Material: only the 3D view's three groups of pills */
+  --material:rgba(255,255,255,.72); --blur:saturate(180%) blur(20px);
+  /* A select's chevron */
+  --chevron:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1.5 1.75 6 6.25l4.5-4.5' fill='none' stroke='%236e6e73' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+
+/* The dark shell (Apple's dark grouped palette).  WCAG on #1c1c1e / #2c2c2e: --text 15.6 / 12.8, --text-2 6.61 / 5.42,
+   --link 5.64 / 4.62, --ok 8.42 / 6.89, --warn 8.28 / 6.78, --error 6.03 / 4.94 (#ff453a would be 4.09 on #2c2c2e),
+   each on its tint 6.17, 6.59, 5.08; --control-border 4.09 / 3.35; --focus 5.64; white on --accent as in light. */
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme:dark;
+    --bg:#000; --surface:#1c1c1e; --surface-2:#2c2c2e; --well:#000; --control-bg:#2c2c2e; --thumb:#636366;
+    --text:#f5f5f7; --text-2:#a1a1a6; --text-3:#8e8e93;
+    --separator:#424245; --hairline:rgba(255,255,255,.1); --control-border:#7c7c80;
+    --fill:rgba(118,118,128,.24); --fill-hover:rgba(118,118,128,.32); --fill-press:rgba(118,118,128,.4); --selection:rgba(255,255,255,.08);
+    --row-hover:rgba(255,255,255,.04);
+    --hover-overlay:linear-gradient(rgba(255,255,255,.07),rgba(255,255,255,.07)); --press-overlay:linear-gradient(rgba(255,255,255,.13),rgba(255,255,255,.13));
+    --accent-tint:rgba(10,132,255,.2);
+    --link:#2997ff; --focus:#2997ff;
+    --ok:#30d158; --ok-tint:#1f3526; --warn:#ff9f0a; --warn-tint:#3c2e1b; --error:#ff6961; --error-tint:#402322;
+    --disabled-bg:#2c2c2e; --disabled-text:#6e6e73;
+    /* Apple's dark navigation bar; on the grey pill --text-2 is 5.33 (4.77 hovered) */
+    --nav:#161617; --text-2-on-fill:var(--text-2); --lift-hover:rgba(255,255,255,.06);
+    /* the inset group a step lighter than the card (--text-2 5.42 on it) */
+    --inset:#2c2c2e;
+    /* the base edge's magenta a step lighter (#c2185b is 2.90 on #1c1c1e): the edge 4.32 on the group, 3.19 on the
+       chosen pill; the chosen pill neutral (a step lighter grey, the text colour), its ring and its radio the magenta
+       (a magenta tint was the loudest colour of the dark shell) */
+    --base-edge:#e0457f; --base-tint:#333336; --base-text:#f5f5f7; --base-hover:#303032;
+    --card:var(--surface);
+    --shadow-card:none;
+    --shadow-float:0 1px 3px rgba(0,0,0,.5), 0 4px 16px rgba(0,0,0,.5);
+    --shadow-thumb:0 3px 8px rgba(0,0,0,.3), 0 3px 1px rgba(0,0,0,.1);
+    --material:rgba(30,30,32,.72);
+    --chevron:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1.5 1.75 6 6.25l4.5-4.5' fill='none' stroke='%23a1a1a6' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  }
+  /* The lightboxes' text and paper (styles.css leaves the first two's colour and the last two's paper to their parents). */
+  .cad-view-wrap, .cad-flat { color:var(--text); }
+  .canvas-wrap, .cad-flat { background-color:var(--surface); }
+}
+
+/* More contrast (the system setting): darker secondary text and lines, cards edged, links underlined. */
+@media (prefers-contrast: more) {
+  :root, .cad-view-wrap, .canvas-wrap, .stacked-canvas, .cad-flat {
+    --text-2:#424245; --separator:#86868b; --hairline:rgba(0,0,0,.4); --control-border:#6e6e73; --material:rgba(255,255,255,.96);
+  }
+  a { text-decoration:underline; }
+}
+@media (prefers-contrast: more) and (prefers-color-scheme: dark) {
+  :root { --text-2:#d1d1d6; --separator:#8e8e93; --hairline:rgba(255,255,255,.4); --control-border:#a1a1a6; --material:rgba(30,30,32,.96); }
+}
+/* Less transparency (the system setting), or no backdrop filter: the material solid. */
+@media (prefers-reduced-transparency: reduce) {
+  :root, .cad-view-wrap, .canvas-wrap, .stacked-canvas, .cad-flat { --material:rgba(255,255,255,.96); --blur:none; }
+}
+@media (prefers-reduced-transparency: reduce) and (prefers-color-scheme: dark) { :root { --material:rgba(30,30,32,.96); } }
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  :root, .cad-view-wrap, .canvas-wrap, .stacked-canvas, .cad-flat { --material:rgba(255,255,255,.96); --blur:none; }
+}
+
+/* 2. Type: the system font, its size and leading left as styles.css has them (the drawings' captions inherit them). -- */
+body { font-family:var(--font); -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; font-synthesis:none; }
+
+/* 3. Focus: one ring, never animated; inset in the boxes that clip (the mode switch, the 3D view, the previews). --- */
+:focus-visible { outline:2px solid var(--focus); outline-offset:2px; }
+input:focus,select:focus { outline:2px solid var(--focus); outline-offset:0; border-color:var(--accent); }
+.view-pane:focus-visible { outline:2px solid var(--focus); outline-offset:-2px; }
+.masthead-link:focus-visible { outline:2px solid var(--focus); outline-offset:2px; }
+.masthead-tagline a:focus-visible { outline:2px solid var(--focus); outline-offset:2px; border-radius:2px; }
+.mode-picker input:focus-visible + span { outline:2px solid var(--focus); outline-offset:-2px; }
+.cad-tools input:focus-visible + span,.cad-view-tools button:focus-visible { outline:2px solid var(--focus); outline-offset:1px; }
+.cad-view:focus-visible { outline:2px solid var(--focus); outline-offset:-2px; }
+/* The 3D view's WebGL canvas paints over its own inset outline: the ring again on a layer above it (under the pills,
+   which have a z-index), letting the pointer through. */
+.cad-view:focus-visible::after { content:""; position:absolute; inset:0; box-shadow:inset 0 0 0 2px var(--focus); pointer-events:none; }
+.cad-seg input:focus-visible + span { outline:2px solid var(--focus); outline-offset:1px; }
+.flow-step button:focus-visible { outline:2px solid var(--focus); outline-offset:1px; }
+.flow-customize:focus-visible,.flow-substep button:focus-visible { outline:2px solid var(--focus); outline-offset:1px; }
+.stacked-canvas:focus-visible { outline:2px solid var(--focus); outline-offset:-2px; }
+
+/* 4. A pass: never the action blue, green only as a dot (as Apple uses it) ------------------------------------------
+   styles.css drew a pass in --accent, now the action blue (the drawings' data teal stays).  A sentence that passes is
+   body text (500), its own "✓" (the DOM's text) its mark; the PASS badges plain secondary text (a FAIL keeps its red
+   pill, so a failing row stands out of a column of passes).  The only green is the status's and the 3D view's 8 px
+   dot. */
+.status.is-ok { border-color:var(--ok); }
+.drc-total.is-pass,.cad-verify-line.is-pass { color:var(--text); font-weight:500; }
+.cad-status.is-loaded { border-color:var(--ok); }
+.drc-badge.pass { color:var(--text-2); }
+
+/* 5. Buttons, five tiers --------------------------------------------------------------------------------------------
+   Blue fills only each region's one primary action: the large blue pill (44 px: the form's Generate & validate,
+   Generate sensor, the Gerber ZIPs) and the blue pill (36 px: Advanced Customization's Generate & validate, or Fit while it is the
+   guide's next step).  Every other action is Apple's grey secondary pill (36 px: Fit otherwise, Regenerate; 30 px: Use
+   the full field), the white outlined pill (the other
+   files, the workspace's buttons) or the plain button (Show all checks).  A press darkens, never scales; the white and
+   plain ones darken by an overlay (background-image), so a state's own background (Edit border on) stays under it. */
+.primary { min-height:44px; padding:0 22px; border:0; border-radius:var(--r-pill); background:var(--accent); color:#fff; font-size:17px; font-weight:600; letter-spacing:-.01em; }
+.primary:hover { background:var(--accent-hover); }
+.primary:active:not(:disabled) { background:var(--accent-press); }
+/* Disabled: quiet, opaque; the wait cursor as before (the form's Generate is off while it builds). */
+.primary:disabled { opacity:1; background:var(--disabled-bg); color:var(--disabled-text); cursor:wait; }
+
+.cad-workspace .primary { width:auto; min-height:36px; padding:0 18px; font-size:15px; }
+/* Fit: the grey secondary pill (the fold's one blue action is its Generate & validate); off, as the blue ones.  While
+   it is the guide's next step (no proposals yet, or the settings or the border changed since them), it is the blue
+   one: Generate & validate is off then (main.js renderGenerate), so the fold still has a single blue fill. */
+#cadFit:not(:disabled) { background:var(--fill); color:var(--text); }
+#cadFit:not(:disabled):hover { background:var(--fill-hover); }
+#cadFit:not(:disabled):active { background:var(--fill-press); }
+body:has(#guideSubsteps .flow-substep[data-substep="fit"].is-next) #cadFit:not(:disabled) { background:var(--accent); color:#fff; }
+body:has(#guideSubsteps .flow-substep[data-substep="fit"].is-next) #cadFit:not(:disabled):hover { background:var(--accent-hover); }
+body:has(#guideSubsteps .flow-substep[data-substep="fit"].is-next) #cadFit:not(:disabled):active { background:var(--accent-press); }
+.cad-workspace .cad-quick button.cad-quick-generate { width:auto; min-width:220px; min-height:44px; padding:0 28px; border:1px solid transparent; border-radius:var(--r-pill);
+  background:var(--accent); color:#fff; font-size:17px; font-weight:600; cursor:pointer; }
+.cad-workspace .cad-quick button.cad-quick-generate:hover:not(:disabled) { background:var(--accent-hover); }
+.cad-workspace .cad-quick button.cad-quick-generate:active:not(:disabled) { background:var(--accent-press); }
+/* Off (generating, no surface chosen, the border being edited or the sensor already the selection's): a quiet outlined
+   pill, the guide's next step and the Gerber ZIPs the blue ones then; its title still says why. */
+.cad-workspace .cad-quick button.cad-quick-generate:disabled { background:var(--control-bg); border-color:var(--separator); color:var(--text-3); box-shadow:none; cursor:default; opacity:1; }
+
+.download-actions button { min-height:34px; padding:0 14px; border:1px solid var(--control-border); border-radius:var(--r-pill); background:var(--control-bg); color:var(--text);
+  font-size:13px; font-weight:500; cursor:pointer; }
+.download-actions button:hover:not(:disabled) { background-image:var(--hover-overlay); }
+.download-actions button:active:not(:disabled) { background-image:var(--press-overlay); }
+.download-actions button:disabled { color:var(--disabled-text); border-color:var(--separator); cursor:not-allowed; }
+.download-actions button.download-main { min-height:44px; padding:0 20px; border-color:var(--accent); background:var(--accent); color:#fff; font-size:17px; font-weight:600; letter-spacing:-.01em; }
+.download-actions button.download-main:hover:not(:disabled) { border-color:var(--accent-hover); background:var(--accent-hover); }
+.download-actions button.download-main:active:not(:disabled) { border-color:var(--accent-press); background:var(--accent-press); }
+.download-actions button.download-main:disabled { background:var(--disabled-bg); border-color:var(--disabled-bg); color:var(--disabled-text); }
+/* Still two columns, the Gerber ZIPs' as wide as they need (17 px pills side by side; styles.css's 1fr was too narrow
+   for them at 1440 px), the text's at least 240 px; one column at 1240 px and under (the last section), where the two
+   pills no longer fit beside the text (they wrapped onto two rows there). */
+.downloads { grid-template-columns:minmax(240px,1fr) auto; }
+
+/* Regenerate: the grey secondary pill on the stale banner's surface (the form's Generate & validate is the blue one). */
+.stale-banner button { min-height:36px; padding:0 18px; border:0; border-radius:var(--r-pill); background:var(--fill); color:var(--text); font-size:15px; font-weight:600; }
+.stale-banner button:hover { background:var(--fill-hover); }
+.stale-banner button:active { background:var(--fill-press); }
+
+/* Use the full field: the grey secondary pill on the mask note's tint, as Regenerate on the stale banner's (the form's
+   blue is its Generate & validate; on either tint the text 11.4 or more light, 7.86 dark, pressed). */
+.mask-note button { min-height:30px; margin-top:8px; padding:0 14px; border:0; border-radius:var(--r-pill); background:var(--fill); color:var(--text); font-size:13px; font-weight:600; }
+.mask-note button:hover { background:var(--fill-hover); }
+.mask-note button:active { background:var(--fill-press); }
+
+.drc-bar button { min-height:30px; padding:0 10px; border:0; border-radius:var(--r-pill); background:transparent; color:var(--link); font-size:13px; font-weight:500; }
+/* It sits on the design checks' well (section 13): hovered the card's surface, pressed that with the faint overlay (the
+   link 5.57 / 5.10, dark 5.64 / 4.63; a grey fill left it at 4.46, 4.41 pressed in dark). */
+.drc-bar button:hover { background:var(--surface); }
+.drc-bar button:active { background:var(--surface) var(--hover-overlay); }
+
+/* The workspace's own buttons: white outlined pills.  The 3D view's tools and camera and the border bar, whose rules of
+   the same specificity come later, are the workspace's (section 11): rows and text buttons on the material pills. */
+.cad-workspace button:not(.primary) { min-height:30px; padding:0 12px; border:1px solid var(--control-border); border-radius:var(--r-pill); background:var(--control-bg); color:var(--text);
+  font-size:13px; font-weight:500; }
+.cad-workspace button:not(.primary):hover:not(:disabled) { background-image:var(--hover-overlay); }
+.cad-workspace button:not(.primary):active:not(:disabled) { background-image:var(--press-overlay); }
+.cad-workspace button:not(.primary):disabled { color:var(--disabled-text); border-color:var(--separator); cursor:not-allowed; }
+/* The two that take something away, in the error red. */
+#cadRemove:not(:disabled),#cadBorderDelete:not(:disabled) { color:var(--error); }
+
+/* Links in the text: the link blue, underlined where styles.css underlines them. */
+.field-link { color:var(--link); }
+.summary a,.field-path { color:var(--link); }
+.cad-file-link { color:var(--link); }
+
+/* 6. Segmented controls -------------------------------------------------------------------------------------------
+   A grey track, the chosen segment a white thumb (it does not slide); chosen as before, by aria-selected / aria-pressed.
+   Segments 24 px tall (12 px text, 500: the same width chosen or not) in a 28 px track.  The look bar holds its label
+   too: its buttons are the track (28 px), the thumb their ::before (2 px in). */
+.preview-tabs,.mode-switch { gap:0; padding:2px; border-radius:var(--r-sm); background:var(--fill); }
+.preview-tabs button,.mode-switch button { border:1px solid transparent; border-radius:var(--r-xs); background:transparent; color:var(--text); padding:3px 12px; font-size:12px; line-height:16px; font-weight:500; }
+.preview-tabs button:not([aria-selected="true"]):hover,.mode-switch button:not([aria-pressed="true"]):hover { background:var(--fill); }
+.preview-tabs button[aria-selected="true"],.mode-switch button[aria-pressed="true"] { color:var(--text); border-color:transparent; background:var(--thumb); box-shadow:var(--shadow-thumb); }
+.look-bar { gap:0; color:var(--text-2); font-size:12px; }
+.look-bar span { font-weight:600; margin-right:8px; }
+.look-bar button { position:relative; z-index:0; border:1px solid transparent; border-radius:0; background:var(--fill); color:var(--text); padding:5px 12px; font-size:12px; line-height:16px; font-weight:500; }
+.look-bar button:first-of-type { border-radius:var(--r-sm) 0 0 var(--r-sm); }
+.look-bar button:last-of-type { border-radius:0 var(--r-sm) var(--r-sm) 0; }
+.look-bar button:not([aria-pressed="true"]):hover { background:var(--fill-hover); }
+.look-bar button[aria-pressed="true"] { color:var(--text); border-color:transparent; background:var(--fill); }
+.look-bar button[aria-pressed="true"]::before { content:""; position:absolute; inset:2px; z-index:-1; border-radius:var(--r-xs); background:var(--thumb); box-shadow:var(--shadow-thumb); }
+
+/* 7. Fields ---------------------------------------------------------------------------------------------------------
+   Rounded, the control border; a select drawn without the platform's arrow, a grey chevron instead (a data: image).
+   styles.css's background shorthands on a select (invalid, disabled in the workspace) would drop it: each is
+   re-declared with it.  No input's appearance is touched (the mm inputs' own, styles.css's, stays). */
+input,select { min-height:35px; padding:6px 10px; border:1px solid var(--control-border); border-radius:var(--r-sm); background:var(--control-bg); color:var(--text); }
+input::placeholder { color:var(--text-2); opacity:1; }
+select { -webkit-appearance:none; appearance:none; padding-right:30px; background:var(--control-bg) var(--chevron) no-repeat right 11px center / 12px 8px; }
+input:disabled,select:disabled { background-color:var(--disabled-bg); color:var(--disabled-text); }
+input[aria-invalid="true"],select[aria-invalid="true"] { border-color:var(--error); background:var(--error-tint); }
+select[aria-invalid="true"] { background:var(--error-tint) var(--chevron) no-repeat right 11px center / 12px 8px; }
+.cad-field input:disabled,.cad-field select:disabled { background:var(--disabled-bg); color:var(--disabled-text); }
+.cad-field select:disabled { background:var(--disabled-bg) var(--chevron) no-repeat right 11px center / 12px 8px; }
+.cad-workspace input[aria-invalid="true"] { border-color:var(--error); background:var(--error-tint); }
+
+/* 8. Disclosure, banners, tables --------------------------------------------------------------------------------- */
+/* One arrow for every fold (and the guide's Advanced Customization switch): a chevron to the right, down when open (styles.css
+   turns it 90 degrees); its box as wide as styles.css's glyph's (1em) with its margin.  Advanced Customization's own
+   "▾" (turned too, it pointed left) is gone.  Grey; a link-blue fold's rule paints it currentColor, its summary's
+   colour (color:inherit here: styles.css gives the arrow its own grey colour, which currentColor would take). */
+details > summary::before { content:""; display:inline-block; width:.75em; height:.75em; margin-right:.25em; vertical-align:-.06em; color:inherit; background-color:var(--muted);
+  -webkit-mask:var(--disclosure) center / .45em .7em no-repeat; mask:var(--disclosure) center / .45em .7em no-repeat;
+  transition:transform var(--dur-disclose) var(--ease-disclose); }
+.cad-customize > summary::before { content:""; }
+.cad-customize[open] > summary::before { content:""; }
+.flow-customize::before { content:""; display:inline-block; width:.7em; height:.7em; margin-right:.35em; vertical-align:-.04em; background-color:currentColor;
+  -webkit-mask:var(--disclosure) center / .42em .66em no-repeat; mask:var(--disclosure) center / .42em .66em no-repeat;
+  transition:transform var(--dur-disclose) var(--ease-disclose); }
+.flow-customize[aria-expanded="true"]::before { content:""; transform:rotate(90deg); }
+
+/* Banners: a rounded bar on the surface, a dot of its state's colour before the text (in ::before, out of innerText
+   and textContent; the status is no flex box, so its text is as before); a warning or an error also on its tint, a
+   success not (a green panel would be the largest green on the page).  The stale banner as the status, its dot the
+   warning's (it is a flex box of styles.css's: the dot goes in its paragraph). */
+.status { padding:12px 14px; border-left:0; border-radius:var(--r-md); background:var(--surface); box-shadow:inset 0 0 0 1px var(--hairline); font-size:15px; line-height:1.4; }
+.status::before { content:""; display:inline-block; width:8px; height:8px; margin-right:9px; border-radius:50%; background:var(--text-3); vertical-align:.08em; }
+.status.is-ok { background:var(--surface); }
+.status.is-warning { background:var(--warn-tint); }
+.status.is-error { background:var(--error-tint); }
+.status.is-ok::before { background:var(--ok); }
+.status.is-warning::before { background:var(--warn); }
+.status.is-error::before { background:var(--error); }
+.stale-banner { padding:10px 10px 10px 14px; border-left:0; border-radius:var(--r-md); background:var(--surface); box-shadow:inset 0 0 0 1px var(--hairline); font-size:15px; line-height:1.4; }
+.stale-banner > p::before { content:""; display:inline-block; width:8px; height:8px; margin-right:9px; border-radius:50%; background:var(--warn); vertical-align:.08em; }
+.summary { border-color:var(--hairline); border-radius:var(--r-md); }
+.summary .issue-list { color:var(--text); }
+.mask-note { padding:8px 11px; border-radius:var(--r-sm); background:var(--warn-tint); }
+.mask-note.is-invalid { border-left:0; padding-left:11px; background:var(--error-tint); }
+
+/* Tables: their sizes as before; hairlines, the head semibold and secondary, the chosen proposal tinted. */
+.cad-table caption { font-weight:600; }
+.cad-table thead th { color:var(--muted); font-weight:600; border-bottom-color:var(--separator); }
+.cad-table tbody tr:hover { background:var(--row-hover); }
+.cad-table tbody tr.is-chosen { background:var(--accent-tint); box-shadow:inset 3px 0 0 var(--accent); }
+.drc-table caption { font-weight:600; }
+.drc-table thead th { color:var(--muted); font-weight:600; border-bottom-color:var(--separator); }
+.drc-table tbody th { font-weight:600; }
+.drc-table tr.is-fail { background:var(--error-tint); }
+.drc-badge { padding:1px 6px; border-radius:var(--r-pill); font-size:11px; font-weight:600; letter-spacing:.02em; }
+.drc-badge.pass { background:transparent; }
+.drc-badge.fail { background:var(--error-tint); }
+
+/* 9. The header (plan 3.2) -----------------------------------------------------------------------------------------
+   Apple's navigation bar: a solid bar over a hairline (dark in the dark scheme), not fixed.  styles.css's grid, its
+   gaps, the mode switch beside the title and the side padding stay (the links 60-80 px from the right edge at 1440 px);
+   16 + 44 + 10 + 20 + 13 px and the hairline make styles.css's 104 px minimum. */
+.masthead { padding:16px clamp(24px,5vw,76px) 13px; border-bottom:1px solid var(--hairline); color:var(--text); background:var(--nav); }
+.masthead h1 { font-size:28px; line-height:1.14; font-weight:600; letter-spacing:.007em; }
+.masthead-tagline { font-size:14px; line-height:1.43; color:var(--text-2); }
+.masthead-tagline a { color:var(--link); font-weight:inherit; }
+.masthead-tagline a:hover { color:var(--link); text-decoration-thickness:2px; }
+/* The mode switch: a segmented control, a grey track and the chosen mode a white thumb, 44 px tall (2 + 10 + 20 + 10
+   + 2); the radios still cover their labels (styles.css). */
+.mode-picker { padding:2px; border:0; border-radius:var(--r-pill); background:var(--fill); overflow:visible; }
+.mode-picker span { padding:10px 22px; border-radius:var(--r-pill); font-size:16px; line-height:1.25; font-weight:600; letter-spacing:-.01em; color:var(--text); }
+.mode-picker input:not(:checked):hover + span { background:var(--fill); }
+.mode-picker input:checked + span { background:var(--thumb); color:var(--text); box-shadow:var(--shadow-thumb); }
+/* The community: GitHub and Discord the same grey pill, their marks in the text colour (currentColor), GitHub's counts
+   the darker secondary grey, tabular.  No brand blue: these rules come after styles.css's .masthead-discord (its
+   #5865f2 fill and hover, of the same specificity), so Discord takes them as GitHub does. */
+.masthead-link { gap:8px; padding:0 18px 0 14px; border:1px solid transparent; border-radius:var(--r-pill); background:var(--fill); color:var(--text); font-size:14px; font-weight:600; }
+.masthead-link:hover { border-color:transparent; background:var(--fill-hover); }
+.masthead-link:active { background:var(--fill-press); }
+.masthead-gh-name { font-size:14px; font-weight:600; }
+.masthead-gh-stats { gap:10px; font-size:12px; font-weight:500; color:var(--text-2-on-fill); font-variant-numeric:tabular-nums; }
+
+/* 10. The guide (plan 3.3) ------------------------------------------------------------------------------------------
+   A setup assistant's list on the page's grey, the next step the one that stands out: its number the blue circle and
+   its title the link blue (a row to click), the steps done quiet (a grey circle, their number the darker secondary
+   grey 5.8:1, the line after them darker), the steps to come a white circle with a ring; no halo, no green.  The step
+   in view a white row (the grey selection of the plan left the descriptions' --text-2 at 3.99, white gives 5.07),
+   never faded.  Its sticky box (top 0, the window's height) is styles.css's, its line on the right the header's
+   hairline (styles.css's separator grey was the heaviest line of the page). */
+body[data-mode="cad"] .flow-guide { background:var(--bg); border-right-color:var(--hairline); }
+.flow-guide-title { font-size:17px; line-height:1.29; font-weight:600; letter-spacing:-.022em; color:var(--text); }
+.flow-step:not(:last-child)::before { background:var(--separator); }
+.flow-step.is-done:not(:last-child)::before { background:var(--text-3); }
+.flow-step > button { border-radius:var(--r-sm); }
+.flow-step > button:hover { background:var(--lift-hover); }
+.flow-step.is-here > button { border-color:var(--hairline); background:var(--surface); box-shadow:0 1px 2px rgba(0,0,0,.05); }
+.flow-no { border-color:var(--separator); background:var(--surface); color:var(--text-2); font-size:14px; font-weight:600; font-variant-numeric:tabular-nums; }
+.flow-step.is-done .flow-no { border-color:transparent; background:var(--fill); color:var(--text-2-on-fill); }
+.flow-step.is-next .flow-no { border-color:var(--accent); background:var(--accent); color:#fff; box-shadow:none; }
+/* The title's 20 px line centred on the 30 px number (5 px down); the next step's in the link blue. */
+.flow-text strong { font-size:15px; line-height:20px; font-weight:600; letter-spacing:-.01em; color:var(--text); }
+.flow-step.is-next .flow-text strong { color:var(--link); }
+.flow-text > span { font-size:13px; line-height:1.38; color:var(--text-2); }
+/* Advanced Customization: a text button in the link blue, its arrow on the titles' edge; open, only the arrow turns.
+   Its two steps are 32 px rows, numbered like the steps. */
+.flow-more { margin:0 0 4px 40px; }
+.flow-customize { padding:4px 8px; border:1px solid transparent; border-radius:var(--r-pill); background:transparent; color:var(--link); font-size:13px; font-weight:500; }
+.flow-customize:hover { background:var(--lift-hover); }
+.flow-customize[aria-expanded="true"] { border-color:transparent; background:transparent; }
+.flow-customize[aria-expanded="true"]:hover { background:var(--lift-hover); }
+.flow-substeps { margin:4px 0 0 14px; border-left-color:var(--separator); }
+.flow-substep button { min-height:32px; padding:4px 8px; border-radius:var(--r-sm); color:var(--text); font-size:13px; font-weight:600; }
+.flow-substep button:hover { background:var(--lift-hover); }
+.flow-substep.is-here button { border-color:var(--hairline); background:var(--surface); box-shadow:0 1px 2px rgba(0,0,0,.05); }
+.flow-sub-no { border-color:var(--separator); background:var(--surface); color:var(--text-2); font-size:11px; font-weight:600; font-variant-numeric:tabular-nums; }
+.flow-substep.is-done .flow-sub-no { border-color:transparent; background:var(--fill); color:var(--text-2-on-fill); }
+.flow-substep.is-next button { color:var(--link); }
+.flow-substep.is-next .flow-sub-no { border-color:var(--accent); background:var(--accent); color:#fff; }
+
+/* 11. The workspace (plan 3.4) --------------------------------------------------------------------------------------
+   A white card (dark: the surface) with 18 px corners, a hairline edge and the card shadow, no overflow (the map's
+   sticky box is inside it); a 20 px gutter for its header, file bar, help line and Generate sensor.  The 3D view and
+   what floats on it are the lightbox (light in either scheme): three groups of material pills, their places kept. */
+.cad-workspace { border-color:var(--hairline); border-radius:var(--r-lg); box-shadow:var(--shadow-card); }
+.cad-workspace > header { padding:16px 20px 12px; }
+.cad-workspace > header h2 { gap:10px; font-size:24px; line-height:1.17; font-weight:600; letter-spacing:.009em; }
+/* The steps' numbers neutral (blue is for what does something); the title's 28 px, its colour re-declared over
+   styles.css's .board-card header span (the muted grey, which left the number at 2.6:1 on its circle). */
+.cad-step-no { background:var(--text); color:var(--surface); font-weight:600; font-variant-numeric:tabular-nums; }
+.cad-workspace > header h2 .cad-step-no { width:28px; height:28px; color:var(--surface); font-size:15px; line-height:1; letter-spacing:0; }
+.cad-title-hint { font-size:15px; line-height:1.4; color:var(--text-2); }
+
+/* The file bar: a row of the card.  The file input is its button, an outlined pill, and the file's name; the two folds
+   are link-blue disclosures, open a settings group (rows on the inset grey, hairlines between them). */
+.cad-filebar { gap:8px 16px; padding:10px 20px; background:transparent; }
+.cad-filebar-label { font-size:13px; font-weight:600; }
+.cad-filebar input[type="file"] { padding:0; border:0; border-radius:var(--r-pill); background:transparent; color:var(--text-2); font-size:13px; }
+.cad-filebar input[type="file"]::file-selector-button { min-height:30px; margin:0 10px 0 0; padding:0 14px; border:1px solid var(--control-border); border-radius:var(--r-pill);
+  background:var(--control-bg); color:var(--text); font-family:inherit; font-size:inherit; font-weight:500; cursor:pointer; }
+.cad-filebar input[type="file"]::file-selector-button:hover { background-image:var(--hover-overlay); }
+.cad-filebar input[type="file"]::file-selector-button:active { background-image:var(--press-overlay); }
+/* It acts as a button: its ring for the keyboard only. */
+.cad-filebar input[type="file"]:focus { border-color:transparent; outline-offset:2px; }
+.cad-filebar input[type="file"]:focus:not(:focus-visible) { outline:none; }
+.cad-filebar .cad-file-note { font-size:13px; line-height:1.4; color:var(--text-2); }
+.cad-filebar .cad-more > summary { padding:4px 0; font-size:13px; font-weight:500; color:var(--link); }
+.cad-filebar .cad-more > summary::before { background-color:currentColor; }
+.cad-filebar .cad-more > :not(summary) { max-width:560px; margin:0; padding:10px 14px; background:var(--inset); }
+.cad-filebar .cad-more > summary + * { border-radius:var(--r-md) var(--r-md) 0 0; }
+.cad-filebar .cad-more > :not(summary) + * { border-top:1px solid var(--separator); }
+.cad-filebar .cad-more > :last-child { border-radius:0 0 var(--r-md) var(--r-md); }
+.cad-filebar .cad-row label { color:var(--text); font-size:12px; font-weight:500; }
+.cad-filebar .cad-more select,.cad-filebar .cad-more input[type="number"] { min-height:30px; padding-top:5px; padding-bottom:5px; font-size:13px; }
+
+/* The border editor's bar: a row of the card between hairlines (not the plan's grey strip: on it the error red was 4.27
+   and a hovered link 4.24, 3.30 in dark), its buttons link-blue text buttons, Delete corner the error red (section 5);
+   hovered the faint overlay (link 5.10 / 4.63), pressed the same in dark (the stronger one left the link at 3.79). */
+.cad-border-bar { gap:4px 6px; padding:6px 14px; background:var(--surface); }
+.cad-workspace .cad-border-bar button { min-height:28px; padding:0 10px; border-color:transparent; background:transparent; color:var(--link); font-size:13px; }
+@media (prefers-color-scheme: dark) { .cad-workspace .cad-border-bar button:active:not(:disabled) { background-image:var(--hover-overlay); } }
+.cad-workspace .cad-border-bar button:disabled { border-color:transparent; }
+/* The two red ones hovered and pressed on the error tint (4.60 / 5.03), not a grey that would take the red under 4.5. */
+.cad-workspace .cad-border-bar #cadBorderDelete:hover:not(:disabled),.cad-workspace .cad-border-bar #cadBorderDelete:active:not(:disabled),
+.cad-workspace .cad-view-tools #cadRemove:hover:not(:disabled),.cad-workspace .cad-view-tools #cadRemove:active:not(:disabled) { background-image:none; background-color:var(--error-tint); }
+.cad-border-inset span,.cad-border-snap { color:var(--text); font-size:13px; font-weight:500; }
+.cad-workspace .cad-border-inset input { min-height:28px; border-radius:var(--r-xs); font-size:13px; }
+.cad-workspace .cad-border-snap input { accent-color:var(--accent); }
+
+/* The 3D view: Apple's grey (viewer.js clears to the same #f5f5f7); a file dragged over it a dashed blue frame, the
+   border being edited the drawings' blue (styles.css). */
+.cad-view { background:#f5f5f7; }
+.cad-drop { border-color:var(--text-3); border-radius:var(--r-md); color:var(--text-2); font-size:13px; background:rgba(255,255,255,.72); }
+.cad-drop strong { color:var(--text); font-size:17px; font-weight:600; }
+.cad-file-link { font-weight:600; }
+.cad-hover-label { padding:4px 8px; border-radius:var(--r-xs); background:rgba(29,29,31,.86); font-size:12px; font-weight:500; }
+.cad-help { padding:8px 20px; color:var(--text-2); font-size:12px; }
+
+/* The material pills: the tools top left (6 px in, so each row 18 px from the view's left; rows 36 px), the camera top
+   right (4 px in, 30 px buttons: one row ends 46 px under the view's top, two 78), the status bottom right (12 px from
+   the corner, as before).  One blur for each group, not one for each button. */
+.cad-view-tools,.cad-views,.cad-status { background:var(--material); -webkit-backdrop-filter:var(--blur); backdrop-filter:var(--blur);
+  box-shadow:0 0 0 1px var(--hairline), var(--shadow-float); }
+.cad-view-tools { gap:2px; padding:6px; border-radius:14px; }
+.cad-tools { gap:2px; margin:0 0 4px; padding:0 0 4px; border-bottom:1px solid var(--separator); }
+.cad-tools span,.cad-workspace .cad-view-tools button { min-height:36px; padding:8px 12px; border:1px solid transparent; border-radius:var(--r-sm); background:transparent;
+  color:var(--text); font-size:13px; line-height:18px; font-weight:500; box-shadow:none; }
+.cad-tools input:not(:checked):hover + span { background:var(--fill); }
+.cad-tools input:checked + span { border-color:transparent; background:var(--accent-tint); color:var(--link); }
+/* While the border is edited the click tools are not in use: the chosen one plain, so Done editing is the one blue. */
+.cad-view-tools:has(.cad-edit-border[aria-pressed="true"]) .cad-tools input:checked + span { background:transparent; color:var(--text); }
+.cad-workspace .cad-view-tools button:hover:not(:disabled) { background-image:linear-gradient(var(--fill),var(--fill)); }
+.cad-workspace .cad-view-tools button:active:not(:disabled) { background-image:linear-gradient(var(--fill-press),var(--fill-press)); }
+/* Off: the label colour at styles.css's .55, readable and plainly off. */
+.cad-workspace .cad-view-tools button:disabled { border-color:transparent; color:var(--text); }
+/* Edit border: a row like the others; pressed (the border editor on) the action blue. */
+.cad-workspace button.cad-edit-border:not(:disabled) { border-color:transparent; color:var(--text); }
+.cad-workspace button.cad-edit-border[aria-pressed="true"] { border-color:transparent; background:var(--accent); color:#fff; }
+.cad-workspace .cad-view-tools button.cad-edit-border[aria-pressed="true"]:hover:not(:disabled) { background-image:none; background-color:var(--accent-hover); }
+.cad-workspace .cad-view-tools button.cad-edit-border[aria-pressed="true"]:active:not(:disabled) { background-image:none; background-color:var(--accent-press); }
+
+.cad-views { gap:2px; padding:4px; border-radius:19px; }
+.cad-workspace .cad-views button { min-height:30px; padding:0 10px; border:1px solid transparent; border-radius:var(--r-pill); background:transparent; color:var(--text);
+  font-size:13px; font-weight:500; box-shadow:none; }
+.cad-workspace .cad-views button:hover:not(:disabled) { background-image:linear-gradient(var(--fill),var(--fill)); }
+.cad-workspace .cad-views button:active:not(:disabled) { background-image:linear-gradient(var(--fill-press),var(--fill-press)); }
+
+/* The status: a dot of its state before the text (in ::before, out of textContent); a warning and an error on their
+   solid tints. */
+.cad-status { padding:6px 12px 6px 10px; border-left:0; border-radius:16px; color:var(--text); font-size:12px; line-height:1.4; font-weight:500; }
+.cad-status::before { content:""; display:inline-block; width:8px; height:8px; margin-right:7px; border-radius:50%; background:var(--text-3); vertical-align:.04em; }
+.cad-status.is-loaded { background:var(--material); font-weight:600; }
+.cad-status.is-loaded::before { background:var(--ok); }
+.cad-status.is-warning { background:var(--warn-tint); -webkit-backdrop-filter:none; backdrop-filter:none; }
+.cad-status.is-warning::before { background:var(--warn); }
+.cad-status.is-error { background:var(--error-tint); -webkit-backdrop-filter:none; backdrop-filter:none; }
+.cad-status.is-error::before { background:var(--error); }
+
+/* The loading veil: the material over the whole view, a grey spinner (it turns only while the veil shows). */
+.cad-loading { background:var(--material); -webkit-backdrop-filter:var(--blur); backdrop-filter:var(--blur); color:var(--text); font-size:15px; font-weight:500; }
+.cad-spinner { border-color:var(--separator); border-top-color:var(--text-2); }
+
+/* Generate sensor (its pill: section 5): on the card, no strip of its own, under the help line. */
+.cad-quick { padding:12px 20px; border-top:0; background:transparent; }
+
+/* 12. Advanced Customization (plan 3.5) -------------------------------------------------------------------------------
+   Folded: a row of the card, its title 17 px semibold and its hint 13 px (no teal bar, no teal fill), hovered the faint
+   overlay.  Open: its parts on the well (#f5f5f7; dark: black), each a white group (dark: the card's surface) set apart
+   by margins, never padding, so no box the checks measure grows: the base edge (a footnote under it), Resolution and
+   Proposals beside the map, Generate beside On the part.  Rows 13 px (labels 500, inputs 30 px), footnotes 12 px; the
+   tables keep their sizes (section 8 has their colours).  The map is a lightbox, white and dotted in either scheme; its
+   sticky box (position, top, height) is styles.css's. */
+/* Its line above is the workspace's (.cad-main's border-bottom): styles.css's own top line doubled it. */
+.cad-customize { border-top:0; }
+.cad-customize > summary { gap:4px 10px; padding:14px 20px; border-left:0; background:var(--surface); color:var(--text);
+  font-size:17px; line-height:1.29; font-weight:600; letter-spacing:-.022em; }
+.cad-customize > summary:hover { background-color:var(--surface); background-image:var(--hover-overlay); }
+.cad-customize > summary:focus-visible { outline-offset:-2px; }
+.cad-customize > summary .hint { font-size:13px; line-height:1.38; font-weight:400; letter-spacing:0; color:var(--text-2); }
+.cad-customize[open] { padding-bottom:16px; background:var(--well); }
+.cad-customize > :not(summary) { margin-left:16px; margin-right:16px; }
+.cad-customize .hint { font-size:12px; line-height:1.4; }
+/* The groups: white on the well (a hairline ring, no border: their boxes' sizes as before). */
+.cad-base,.cad-resolution-main > .cad-step,.cad-build > .cad-step { border-radius:var(--r-md); background:var(--surface); box-shadow:0 0 0 1px var(--hairline); }
+.cad-step h3 { font-size:17px; line-height:1.29; font-weight:600; letter-spacing:-.022em; color:var(--text); }
+
+/* The base edge: its choices 30 px pills, 12 px (the five in a row at 1440 px, as before), the radio in each as before;
+   the chosen one in the base edge's magenta. */
+.cad-customize > .cad-base { margin-top:16px; }
+.cad-base { padding:12px 16px 14px; border-top:0; }
+.cad-base-title { margin:0 0 10px; gap:2px 10px; color:var(--text); font-size:15px; line-height:1.33; font-weight:600; letter-spacing:-.01em; }
+.cad-base-title .hint { font-size:13px; line-height:1.38; font-weight:400; letter-spacing:0; color:var(--text-2); }
+.cad-base .cad-sides { gap:6px; }
+.cad-base .cad-side { min-height:30px; gap:6px; padding:3px 10px 3px 8px; border:1px solid var(--separator); border-radius:var(--r-pill); background:var(--control-bg);
+  color:var(--text); font-size:12px; font-weight:500; }
+.cad-side:hover,.cad-side:focus-within { background:var(--base-hover); }
+.cad-base .cad-side:has(input:checked) { border-color:var(--base-edge); background:var(--base-tint); color:var(--base-text); font-weight:600; }
+.cad-base .cad-side input { accent-color:var(--base-edge); }
+.cad-sides legend { color:var(--text-2); }
+.cad-border-note { color:var(--text-2); }
+/* What the 3D overlay leaves out: a footnote under the group, on the well, in line with the group's text. */
+.cad-customize > .cad-view-note { margin:8px 32px 0; }
+
+/* Step 2: Resolution and Proposals two groups on the left, the map on the well on the right.  The map's column is the
+   map alone now (styles.css's 40 %, at least 300 px, held it and its 16 px padding): 40 % less 32 px, at least 268 px,
+   leaves the settings and the proposals table about as wide as before (the table fits from about 1180 px, as before). */
+.cad-resolution { grid-template-columns:minmax(0,1fr) minmax(268px,calc(40% - 32px)); gap:12px; margin-top:12px; border-bottom:0; }
+.cad-resolution-main > .cad-step { border-bottom:0; }
+.cad-resolution-main > .cad-step + .cad-step { margin-top:12px; }
+.cad-resolution-map { padding:0; border-left:0; }
+.cad-row label,.cad-field label { color:var(--text); font-size:13px; font-weight:500; }
+.cad-customize .cad-field input,.cad-customize .cad-field select { min-height:30px; padding-top:5px; padding-bottom:5px; font-size:13px; }
+.cad-customize .cad-field input[type="number"] { font-variant-numeric:tabular-nums; }
+/* The folds inside: link-blue disclosures; More options larger (15 px, as the user asked: the fit's other options). */
+.cad-customize .cad-more > summary { padding:4px 0; font-size:13px; font-weight:500; color:var(--link); }
+.cad-customize .cad-more > summary::before { background-color:currentColor; }
+#cadConfigMore > summary { font-size:15px; font-weight:600; letter-spacing:-.01em; color:var(--link); }
+.cad-customize .cad-more > .cad-grid + .hint { margin-top:10px; }
+/* The proposals: the table's radios the action blue; the chosen proposal's card an inset group. */
+.cad-table input[type="radio"] { accent-color:var(--accent); }
+.cad-card { padding:10px 12px; border-color:transparent; border-radius:10px; background:var(--inset); }
+.cad-card .cad-subhead { color:var(--text); font-size:13px; font-weight:600; }
+.cad-card .cad-more { margin-bottom:0; }
+.cad-card .cad-facts { font-size:12px; line-height:1.4; }
+/* The map: a white box with grey dots (a hairline edge); empty, it says why (fitting in the text colour).  Its white is
+   also an image layer under the dots: with the colour alone, headless Chromium (SwiftShader) at times drew the sticky
+   map's lower part without it, on the dark page, from the second page of a browser on. */
+.cad-flat { border-color:var(--hairline); border-radius:var(--r-md); background-color:var(--surface);
+  background-image:radial-gradient(#e8e8ed 1px,transparent 1px),linear-gradient(var(--surface),var(--surface)); background-position:0 0; background-size:12px 12px,auto; }
+.cad-flat-empty { color:var(--text-2); font-size:15px; font-weight:500; }
+.cad-flat.is-fitting .cad-flat-empty { color:var(--text); font-weight:600; }
+
+/* Step 3: Generate and On the part two groups side by side (the build's height as before); the four files 28 px
+   outlined pills, in a row. */
+.cad-build { gap:12px; margin-top:12px; border-bottom:0; }
+.cad-build > .cad-verify { border-left:0; }
+.cad-verify-line { font-size:13px; line-height:1.38; font-weight:600; }
+.cad-error { font-size:13px; font-weight:600; }
+.cad-download-actions { gap:6px; }
+.cad-workspace .cad-download-actions button { min-height:28px; padding:0 11px; font-size:12px; }
+
+/* Diagnostics: a small fold at the card's foot, 12 px, in the card's gutter. */
+.cad-diagnostics { padding:10px 20px 14px; color:var(--text-2); font-size:12px; }
+.cad-diagnostics summary { font-weight:500; }
+.cad-diagnostics .cad-row label { color:var(--text-2); font-size:12px; font-weight:500; }
+.cad-diagnostics input { min-height:28px; padding-top:4px; padding-bottom:4px; font-size:13px; }
+.cad-state { font-family:var(--font-mono); font-size:11px; }
+
+/* 13. The results and the downloads (plan 3.6) ---------------------------------------------------------------------
+   White cards (dark: the surface) with 18 px corners, a hairline edge (a failing board's stays the error red:
+   styles.css's .board-card.has-drc-failure is the more specific) and the card shadow, no overflow; 21 px titles, a
+   20 px gutter.  What they draw are lightboxes, light in either scheme: the previews' white and dots, the oblique view's
+   and the stacked view's neutral grey gradient (155 degrees, as before), their captions only recoloured (their size,
+   place and padding are styles.css's: the checks keep the pin-1 rings off them).  Nothing is laid over the stacked view.
+   Section 8 has the banners' and the tables' colours, section 5 the download buttons, section 6 the segments. */
+.board-card,.downloads { border-color:var(--hairline); border-radius:var(--r-lg); box-shadow:var(--shadow-card); }
+
+/* The status, the stale banner, the summary. */
+.stale-banner strong { font-weight:600; }
+.summary { padding:14px 16px; }
+.summary > strong { font-size:15px; font-weight:600; letter-spacing:-.01em; }
+.summary .hint { font-size:13px; line-height:1.4; }
+.summary .issue-list { font-size:13px; line-height:1.45; }
+.summary .issue-list code { font-family:var(--font-mono); font-size:12px; }
+.summary .note-list { color:var(--text-2); font-size:12px; line-height:1.4; }
+/* The masked field's count: the text colour (the data teal, #087e8b, was 3.4:1 on the dark card). */
+.mask-badge { color:var(--text); font-size:13px; }
+
+/* The board cards: the title and under it its line of facts (beside the 21 px title they wrapped at 1440 px, the Row
+   FPC's mid number), the bar of the tabs and the zoom, the preview, the legend.  The header and the bar keep
+   styles.css's lines. */
+.previews .board-card > header,.stacked-review > header { flex-direction:column; gap:2px; padding:14px 20px 12px; }
+.previews .board-card > header h2,.stacked-review > header h2 { align-self:auto; font-size:21px; line-height:1.19; font-weight:600; letter-spacing:.011em; }
+.previews .board-card > header span,.stacked-review > header span { color:var(--text-2); font-size:12px; line-height:1.4; text-align:left; text-wrap:pretty; }
+.preview-bar { gap:8px; padding:8px 20px; }
+/* The zoom: its three buttons one grey capsule (28 px, as the tabs' track; hairlines between them), each darker
+   hovered and pressed; the level after it in the secondary grey, as wide as its longest reading ("400.0× · 2419.0
+   px/mm"): the level's width never changes as it zooms, so the bar never re-wraps under the pointer (a level growing
+   past the room beside the tabs had moved the preview 36 px down mid-zoom, at 1600 px). */
+.zoom-tools { gap:0; font-size:12px; }
+.zoom-tools button { min-width:28px; min-height:28px; padding:0 9px; border:1px solid transparent; border-radius:0; background:var(--fill); color:var(--text);
+  font-size:12px; line-height:16px; font-weight:600; }
+.zoom-tools button + button { box-shadow:inset 1px 0 0 var(--separator); }
+.zoom-tools button[data-zoom="out"] { padding-left:11px; border-radius:var(--r-pill) 0 0 var(--r-pill); }
+.zoom-tools button[data-zoom="reset"] { padding-right:12px; border-radius:0 var(--r-pill) var(--r-pill) 0; }
+.zoom-tools button[data-zoom="in"],.zoom-tools button[data-zoom="out"] { font-size:15px; font-weight:500; }
+.zoom-tools button:hover:not(:disabled) { background-color:var(--fill-hover); }
+.zoom-tools button:active:not(:disabled) { background-color:var(--fill-press); }
+.zoom-tools button:disabled { color:var(--disabled-text); }
+.zoom-tools output { min-width:148px; margin-left:10px; text-align:left; color:var(--text-2); }
+/* The preview: white with grey dots (the white also an image layer, as the map's), its size and clipping styles.css's;
+   rounded at the card's foot when nothing follows it (no legend yet). */
+.canvas-wrap { background-color:var(--surface); background-image:radial-gradient(#e8e8ed 1px,transparent 1px),linear-gradient(var(--surface),var(--surface));
+  background-position:0 0; background-size:14px 14px,auto; }
+.board-card > .canvas-wrap:has(+ .layer-legend:empty) { border-radius:0 0 calc(var(--r-lg) - 1px) calc(var(--r-lg) - 1px); }
+.three-d-pane { background-image:linear-gradient(155deg,#f5f5f7,#e8e8ed); }
+.three-d-pane::after { color:#424245; background:rgba(255,255,255,.8); border-radius:var(--r-xs); }
+/* The legend: 12 px, the secondary grey; each swatch ringed (the dark brown stiffener's was lost on the dark card). */
+.layer-legend { gap:4px 14px; padding:10px 20px 12px; color:var(--text-2); font-size:12px; line-height:1.4; }
+.swatch { box-shadow:0 0 0 1px rgba(0,0,0,.12); }
+
+/* The stacked view: its height, its 3D and its overlays styles.css's; the neutral gradient, the caption recoloured.
+   Its keys inset chips (the teal and orange edges, the coin's grey, kept), its notes a small fold. */
+.stacked-canvas { background-image:linear-gradient(155deg,#f5f5f7,#e8e8ed); }
+.assembly-caption { color:#424245; }
+.orbit-hint { color:var(--text-2); font-size:12px; }
+.assembly-legend { gap:6px 8px; padding:10px 20px 12px; font-size:12px; line-height:1.4; }
+.assembly-key,.assembly-note { padding:4px 8px; border-radius:var(--r-xs); background:var(--inset); color:var(--text); }
+.assembly-key { border-radius:0 var(--r-xs) var(--r-xs) 0; font-weight:600; }
+.assembly-note { color:var(--text-2); }
+.assembly-more { margin:0 20px 12px; font-size:12px; }
+.assembly-more > summary { padding:4px 0 8px; color:var(--link); font-size:13px; font-weight:500; }
+.assembly-more > summary::before { background-color:currentColor; }
+
+/* The design checks: folded, a title row (17 px, its total 13 px: a pass the text colour after a green dot, section 4,
+   a failure the error red), hovered the faint overlay; open, the tables on the well (their sizes styles.css's), the
+   row's corners the card's. */
+.drc-panel > summary { flex-wrap:wrap; gap:2px 10px; padding:14px 20px; border-radius:calc(var(--r-lg) - 1px); background:var(--surface); }
+.drc-panel[open] > summary { border-radius:calc(var(--r-lg) - 1px) calc(var(--r-lg) - 1px) 0 0; }
+.drc-panel > summary:hover { background-image:var(--hover-overlay); }
+.drc-panel > summary:focus-visible { outline-offset:-2px; }
+.drc-panel > summary h2 { white-space:nowrap; font-size:17px; line-height:1.29; font-weight:600; letter-spacing:-.022em; }
+.drc-total { white-space:nowrap; font-size:13px; font-weight:600; }
+.drc-panel[open] { background:var(--well); }
+.drc-bar { padding:12px 20px 0; color:var(--text-2); font-size:12px; }
+.drc-grid { padding:12px 20px 18px; color:var(--text-2); }
+.drc-table caption { color:var(--text); }
+
+/* The downloads: the title 24 px (Gen by Surface: its 3 as the workspace's 1), its note 15 px; the Gerber ZIPs and the
+   other files section 5's pills; More files a link-blue disclosure (15 px, as More options), the ordering notes a small
+   one, their lists 13 px. */
+.downloads { gap:12px 24px; padding:20px; }
+.downloads h2 { margin:0 0 6px; font-size:24px; line-height:1.17; font-weight:600; letter-spacing:.009em; }
+#downloadsTitle .cad-step-no { width:28px; height:28px; margin-right:10px; font-size:15px; line-height:1; letter-spacing:0; vertical-align:3px; }
+#downloadNote { color:var(--text-2); font-size:15px; line-height:1.4; }
+.more-files > summary { padding:4px 0; color:var(--link); font-size:15px; font-weight:600; letter-spacing:-.01em; }
+.more-files > summary::before,.manufacturing-note > summary::before { background-color:currentColor; }
+.more-files > summary .hint { margin-left:4px; color:var(--text-2); font-size:13px; font-weight:400; letter-spacing:0; }
+.manufacturing-note { padding-top:12px; }
+.manufacturing-note > summary { padding:4px 0; color:var(--link); font-size:13px; font-weight:500; }
+.downloads .manufacturing-note > p { color:var(--text-2); font-size:13px; line-height:1.45; }
+.order-note h3 { margin:12px 0 4px; color:var(--text); font-size:13px; font-weight:600; }
+.order-note ul { color:var(--text); font-size:13px; line-height:1.45; }
+.order-note .order-why { color:var(--text-2); font-size:12px; line-height:1.4; }
+
+/* 14. The rectangular form (plan 3.7) ------------------------------------------------------------------------------
+   The column on the page's grey (dark: black), the header's hairline beside it; its parts groups, as Advanced Customization's in
+   Gen by Surface: Sensor a white group (dark: the surface), Generate & validate under it the mode's one blue action (full
+   width, section 5's large pill), Advanced Customization a white fold group whose sections are rows between hairlines (no
+   card in a card), More options a fold row in it (link blue, as the fit's More options), the standardized manufacturing an inset
+   group.  Labels stay over their inputs, two columns (one on a phone: styles.css).  Type: the two groups' titles 17 px
+   (Advanced Customization as in Gen by Surface), their sections 15 px, More options' sections 13 px in the secondary grey,
+   labels 13 px (500), inputs 15 px, hints and messages 12 px, the limits 11 px.  Every size is a margin or a padding
+   of the parts' own boxes: the order, the ids and the fields' places are index.html's. */
+/* Sensor's group 12 px in (its last field's 11 px margin and 1 px under the inputs) and the column's top 16 px: Generate
+   & validate ends 357 px down at 1440 x 900, above the 365 px of the page before the theme. */
+.controls { padding:16px 20px 20px; background:var(--bg); border-right-color:var(--hairline); }
+/* styles.css's .controls section:last-of-type zeroes the last top-level section's (Sensor's) padding: re-declared. */
+.controls > section { margin-bottom:16px; padding:12px 16px 1px; border-radius:var(--r-md); background:var(--surface); box-shadow:0 0 0 1px var(--hairline); }
+.controls > section:last-of-type { padding-bottom:1px; }
+.controls > section > h2 { margin-bottom:10px; color:var(--text); font-size:17px; line-height:1.29; font-weight:600; letter-spacing:-.022em; }
+/* The fields: the label and its limits on one line (the limits wrap under a long label), the message under the input,
+   its long words broken (a code path in a 125 px column) rather than widening the column.  Side by side, the two
+   fields share their rows (a subgrid: the label's, the input's, the message's), so a label that wraps beside one that
+   does not (Top / Bottom FPC tail length) leaves the two inputs level; the 5 px between a field's rows are margins
+   (a gap would also open under a hidden message). */
+.two-col { gap:0 12px; }
+.two-col > .field { grid-row:span 3; grid-template-rows:subgrid; row-gap:0; }
+.two-col > .field > input,.two-col > .field > select { margin-top:5px; }
+.two-col > .field > .field-message { margin-top:5px; }
+.field-head { gap:2px 8px; }
+.field label { color:var(--text); font-size:13px; font-weight:500; }
+.field-range { color:var(--text-2); font-size:11px; font-weight:500; font-variant-numeric:tabular-nums; }
+.controls input,.controls select { font-size:15px; }
+.controls input[type="number"] { font-variant-numeric:tabular-nums; }
+.field-message { gap:2px; font-size:12px; line-height:1.35; overflow-wrap:anywhere; }
+.field-message code { font-family:var(--font-mono); font-size:11px; }
+.controls .hint { font-size:12px; line-height:1.4; }
+
+/* The masked field's note (app.js, from Gen by Surface): section 8's warning tint (an error's when the server finds
+   the mask unroutable), the text colour, its issues 12 px, its button section 5's grey pill. */
+.controls .mask-note { margin:0 0 16px; padding:10px 12px; border-radius:var(--r-md); color:var(--text); font-size:13px; line-height:1.4; }
+.mask-issues { font-size:12px; line-height:1.4; }
+.mask-issues code { font-family:var(--font-mono); font-size:11px; }
+
+/* Advanced Customization: a white fold group, its title row hovered the faint overlay (rounded with the group); open, a
+   line under the title and its sections inset 16 px, hairlines between them. */
+.customize { margin-top:16px; border-color:transparent; border-radius:var(--r-md); background:var(--surface); box-shadow:0 0 0 1px var(--hairline); }
+.customize > summary { padding:12px 16px; border-radius:calc(var(--r-md) - 1px); color:var(--text); font-size:17px; line-height:1.29; font-weight:600; letter-spacing:-.022em; }
+.customize[open] > summary { border-radius:calc(var(--r-md) - 1px) calc(var(--r-md) - 1px) 0 0; }
+.customize > summary:hover { background-image:var(--hover-overlay); }
+.customize > summary:focus-visible { outline-offset:-2px; }
+.customize > :not(summary) { margin-left:16px; margin-right:16px; }
+.customize > section { padding:14px 0 5px; }
+.customize > section h2 { margin-bottom:10px; color:var(--text); font-size:15px; line-height:1.33; font-weight:600; letter-spacing:-.01em; }
+/* More options (.advanced): a fold row after Tails (a hairline above it, as between the sections), link blue (the fit's More options
+   is so); open, its sections rows between hairlines, their titles 13 px in the secondary grey. */
+.advanced { border-width:1px 0 0; border-radius:0; background:transparent; }
+.customize > .advanced { margin-top:4px; margin-bottom:0; }
+.advanced > summary { padding:12px 0; color:var(--link); font-size:15px; line-height:1.33; font-weight:600; letter-spacing:-.01em; }
+.advanced > summary::before { background-color:currentColor; }
+.advanced > :not(summary) { margin-left:0; margin-right:0; }
+.advanced section { padding:12px 0 5px; }
+.advanced section:last-child { margin-bottom:16px; }
+.advanced h2 { margin-bottom:8px; color:var(--text-2); font-size:13px; line-height:1.38; font-weight:600; letter-spacing:0; }
+/* The standardized manufacturing: an inset group (the inset grey, its edge gone: styles.css's border is !important, so
+   is its mirror here, the theme's only one), the profile a chip that wraps (it ran past the column), the rules rows
+   between hairlines, their values semibold; its note under them (styles.css's -4 px had it over the last rule). */
+.locked { border-color:transparent !important; border-radius:var(--r-md); background:var(--inset); }
+.locked .profile-badge { margin:0 0 8px; padding:5px 10px; border:0; border-radius:var(--r-sm); background:var(--surface); color:var(--text); font-size:12px; line-height:1.35;
+  font-weight:600; white-space:normal; }
+.locked dl { gap:0; font-size:12px; line-height:1.35; }
+.locked dt,.locked dd { padding:6px 0; }
+.locked dt ~ dt,.locked dd ~ dd { border-top:1px solid var(--separator); }
+.locked dt { padding-right:12px; color:var(--text-2); }
+.locked dd { color:var(--text); font-weight:600; font-variant-numeric:tabular-nums; }
+.locked .hint { margin:8px 0 0; }
+
+/* Motion, the breakpoints and the media (last, so their conditions win) ---------------------------------------------
+   Motion is feedback to the pointer and the keyboard only, never to the scroll or the page opening (plan 4):
+   - a hover, a press (it darkens, never scales or moves: section 5) and the focus ring change at once, colours only;
+     so does every state (enabled again, pressed, selected, the step in view): no colour fades (a hover's fade out
+     also ran when a button came back on with the pointer elsewhere, which CSS cannot tell apart);
+   - a fold's content shows and hides at once, only its arrow turns, 200 ms, critically damped (section 8; a turn
+     interrupted reverses from where it is).
+   Under prefers-reduced-motion the arrow's turn is off too (below), and the guide's two scrolls (main.js) jump. */
+
+/* styles.css's breakpoints: a rule above that changes a property one of their rules sets is re-declared here, in a
+   block of the same condition. */
+/* Stacked (styles.css: the map under the settings, On the part under Generate, each with a line above): groups apart
+   by the gap instead. */
+@media (max-width:1100px) { .cad-resolution { grid-template-columns:minmax(0,1fr); } .cad-resolution-map { border-top:0; } .cad-build > .cad-verify { border-top:0; } }
+/* The downloads in one column (styles.css's from 980 px), the Gerber ZIPs side by side under the text, from 1240 px. */
+@media (max-width:1240px) { .downloads { grid-template-columns:1fr; } .downloads > .download-actions { justify-content:flex-start; } }
+/* styles.css's narrower design checks. */
+@media (max-width:640px) { .drc-grid { padding:12px 12px 14px; } }
+/* One column (styles.css: the guide and the form over the results, a line under each): that line the hairline too. */
+@media (max-width:980px) { .controls,body[data-mode="cad"] .flow-guide { border-bottom-color:var(--hairline); } }
+/* styles.css's links' 10 px (icons alone) up to 600 px, where it hides their names. */
+@media (max-width:600px) { .masthead-link { padding:0 10px; } }
+/* On a phone: the header's text on the page's 20 px gutter (styles.css's); 16 px gutters inside the cards
+   (Advanced Customization's groups 8 px in from the workspace's edge). */
+@media (max-width:520px) { .masthead { padding:12px 20px; }
+  /* The 3D view's pills compact (their places as above): the tools' rows 32 px and as wide as their longest label,
+     the camera in two rows beside them, so the part shows between and under them. */
+  .cad-view-tools { padding:4px; border-radius:12px; }
+  .cad-tools span,.cad-workspace .cad-view-tools button { min-width:0; min-height:32px; padding:6px 10px; font-size:12px; line-height:18px; }
+  .cad-views { max-width:calc(100% - 156px); padding:3px; border-radius:17px; }
+  .cad-workspace .cad-views button { min-height:28px; padding:0 8px; font-size:12px; }
+  .cad-workspace > header { padding:14px 16px 12px; } .cad-filebar { padding:10px 16px; } .cad-help { padding:8px 16px; } .cad-quick { padding:12px 16px; }
+  .cad-customize > summary { padding:14px 16px; } .cad-customize > :not(summary) { margin-left:8px; margin-right:8px; }
+  .cad-customize > .cad-view-note { margin-left:24px; margin-right:24px; } .cad-diagnostics { padding:10px 16px 14px; }
+  /* Generate's label (styles.css keeps it on one line) wraps on a phone rather than run past the window. */
+  .cad-build .cad-actions .primary { max-width:100%; padding-top:7px; padding-bottom:7px; border-radius:18px; line-height:1.25; white-space:normal; }
+  /* The results: 16 px gutters. */
+  .previews .board-card > header,.stacked-review > header { padding:12px 16px 10px; }
+  .preview-bar { padding:8px 16px; } .layer-legend,.assembly-legend { padding-left:16px; padding-right:16px; } .assembly-more { margin-left:16px; margin-right:16px; }
+  .drc-panel > summary { padding:14px 16px; } .drc-bar { padding-left:16px; padding-right:16px; } .downloads { padding:16px; }
+  /* The two Gerber ZIPs one block, each the column's width (stacked at different widths they looked ragged). */
+  .download-actions button.download-main { width:100%; } }
+/* A touch screen: Advanced Customization's fields and the form's at 16 px, so a phone's browser does not zoom in on them. */
+@media (pointer: coarse) { .cad-customize .cad-field input,.cad-customize .cad-field select,.cad-diagnostics input,.controls input,.controls select { font-size:16px; } }
+
+@media (prefers-reduced-motion: reduce) {
+  :root { --dur-disclose:0ms; }
+  details > summary::before,.flow-customize::before { transition:none; }
+  /* The checks on the part greyed at once when the form changes (styles.css fades them in .15 s), and the results. */
+  .cad-verify-body.is-stale { transition:none; }
+  .workbench.is-stale .canvas-wrap,.workbench.is-stale .stacked-canvas,.workbench.is-stale .drc-grid { transition:none; }
+}
+
+/* The dark shell: the legends' swatches ringed lighter (the stiffener's dark brown on the dark card).  Out of date (the
+   form changed), the previews and the stacked view stay lightboxes: styles.css's fade (half opacity, greyed) would
+   leave them a grey slab over the dark card, so they are opaque here and paled by the filter instead (contrast 1/3
+   then brightness 1.5 maps each channel to half way to white, as the half opacity does over the light card).  This
+   re-values styles.css's own stale opacity and filter there, adding none. */
+@media (prefers-color-scheme: dark) { .swatch { box-shadow:0 0 0 1px rgba(255,255,255,.3); }
+  .workbench.is-stale .canvas-wrap,.workbench.is-stale .stacked-canvas { opacity:1; filter:grayscale(.7) contrast(.3333) brightness(1.5); } }
+
+/* More contrast: the cards edged in the control border (here, after the cards' hairline; a failing board's red is the
+   more specific). */
+@media (prefers-contrast: more) { .board-card,.downloads { border-color:var(--control-border); } }
+
+/* Forced colours (Windows contrast themes): the drawings keep theirs, the chosen segment is outlined, the arrows and
+   dots take the text colour. */
+@media (forced-colors: active) {
+  .cad-view,.view-pane,.stacked-canvas,.cad-flat { forced-color-adjust:none; }
+  .preview-tabs button[aria-selected="true"],.mode-switch button[aria-pressed="true"],.look-bar button[aria-pressed="true"],
+  .mode-picker input:checked + span,.cad-tools input:checked + span { outline:2px solid Highlight; outline-offset:-2px; }
+  details > summary::before,.flow-customize::before,.status::before { forced-color-adjust:none; background-color:CanvasText; }
+  /* The guide: the step in view outlined, the next step's number in the highlight, the ones done filled. */
+  .flow-step.is-here > button,.flow-substep.is-here button { outline:2px solid Highlight; outline-offset:-2px; }
+  .flow-step.is-next .flow-no,.flow-substep.is-next .flow-sub-no { forced-color-adjust:none; border-color:Highlight; background:Highlight; color:HighlightText; box-shadow:none; }
+  .flow-step.is-done .flow-no,.flow-substep.is-done .flow-sub-no { forced-color-adjust:none; border-color:CanvasText; background:CanvasText; color:Canvas; }
+  /* The workspace: the 3D view's pills edged (their shadow gone), Edit border on outlined, the status's dot. */
+  .cad-view-tools,.cad-views,.cad-status { outline:1px solid CanvasText; }
+  .cad-workspace button.cad-edit-border[aria-pressed="true"] { outline:2px solid Highlight; outline-offset:-2px; }
+  #cadStatus::before { forced-color-adjust:none; background-color:CanvasText; }
+  /* Advanced Customization: its groups edged (their fill and ring gone), Fit and Generate edged (their pills have no border: only
+     the label was left), the chosen base edge and proposal outlined. */
+  .cad-base,.cad-resolution-main > .cad-step,.cad-build > .cad-step { outline:1px solid CanvasText; }
+  .cad-customize .primary { border:1px solid ButtonText; }
+  .cad-base .cad-side:has(input:checked) { outline:2px solid Highlight; outline-offset:1px; }
+  .cad-table tbody tr.is-chosen { outline:2px solid Highlight; outline-offset:-2px; }
+  /* The results: the status's dot in the text colour (styles.css's state rules outrank .status::before above),
+     Regenerate edged (its pill has no border). */
+  #status::before,.stale-banner > p::before { forced-color-adjust:none; background-color:CanvasText; }
+  .stale-banner button { border:1px solid ButtonText; }
+  /* The form: its groups edged (their fill and ring gone), Generate & validate and Use the full field edged (their
+     pills have no border). */
+  .controls > section,.customize,.locked { outline:1px solid CanvasText; }
+  .controls .primary,.mask-note button { border:1px solid ButtonText; }
+}

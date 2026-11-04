@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>FlexiTac-Gen</title>
     <link rel="stylesheet" href="static/styles.css" />
+    <link rel="stylesheet" href="static/theme.css" />
   </head>
   <body>
     <header class="masthead">
@@ -25,11 +26,12 @@
         <label title="Load a 3D model (STL), pick the surface the sensor goes on, and fit the sensor to it"><input type="radio" name="appMode" id="modeCad" value="cad" checked /><span>Gen by Surface</span></label>
       </fieldset>
       <!-- The FlexiTac community, as on https://flexitac.github.io/ (the user's requests of 2026-11-02): its GitHub, with
-           the repository's stars and forks, and Discord, their marks inline.  The counts are the static site's: written
-           into the page when it is built and refreshed from GitHub's API as it opens (tools/build_static_site.py,
-           web/backend.js); app.py's page asks nothing of other hosts, so it shows the name alone. -->
+           the repository's stars and forks, and Discord, their marks inline.  The counts are written into the page: by
+           app.py as it serves it (read from GitHub's API hourly; none with --no-github) and by tools/build_static_site.py
+           as it builds the static site, which refreshes them as it opens (web/backend.js).  Without them the card shows
+           the name alone. -->
       <nav class="masthead-links" aria-label="FlexiTac community">
-        <a class="masthead-link masthead-github" href="https://github.com/FlexiTac/FlexiTac" target="_blank" rel="noopener noreferrer" aria-label="FlexiTac on GitHub: 159 stars, 17 forks" data-gh-badge><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true" focusable="false"><path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"/></svg><span class="masthead-gh-text"><span class="masthead-gh-name">FlexiTac</span><span class="masthead-gh-stats" data-gh-stats><span><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true" focusable="false"><path d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.751.751 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Zm0 2.445L6.615 5.5a.75.75 0 0 1-.564.41l-3.097.45 2.24 2.184a.75.75 0 0 1 .216.664l-.528 3.084 2.769-1.456a.75.75 0 0 1 .698 0l2.77 1.456-.53-3.084a.75.75 0 0 1 .216-.664l2.24-2.183-3.096-.45a.75.75 0 0 1-.564-.41L8 2.694Z"/></svg><span data-gh-stars>159</span></span><span><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true" focusable="false"><path d="M5 5.372v.878c0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75v-.878a2.25 2.25 0 1 1 1.5 0v.878a2.25 2.25 0 0 1-2.25 2.25h-1.5v2.128a2.251 2.251 0 1 1-1.5 0V8.5h-1.5A2.25 2.25 0 0 1 3.5 6.25v-.878a2.25 2.25 0 1 1 1.5 0ZM5 3.25a.75.75 0 1 0-1.5 0 .75.75 0 0 0 1.5 0Zm6.75.75a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm-3 8.75a.75.75 0 1 0-1.5 0 .75.75 0 0 0 1.5 0Z"/></svg><span data-gh-forks>17</span></span></span></span></a>
+        <a class="masthead-link masthead-github" href="https://github.com/FlexiTac/FlexiTac" target="_blank" rel="noopener noreferrer" aria-label="FlexiTac on GitHub: 163 stars, 17 forks" data-gh-badge><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true" focusable="false"><path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"/></svg><span class="masthead-gh-text"><span class="masthead-gh-name">FlexiTac</span><span class="masthead-gh-stats" data-gh-stats><span><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true" focusable="false"><path d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.751.751 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Zm0 2.445L6.615 5.5a.75.75 0 0 1-.564.41l-3.097.45 2.24 2.184a.75.75 0 0 1 .216.664l-.528 3.084 2.769-1.456a.75.75 0 0 1 .698 0l2.77 1.456-.53-3.084a.75.75 0 0 1 .216-.664l2.24-2.183-3.096-.45a.75.75 0 0 1-.564-.41L8 2.694Z"/></svg><span data-gh-stars>163</span></span><span><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true" focusable="false"><path d="M5 5.372v.878c0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75v-.878a2.25 2.25 0 1 1 1.5 0v.878a2.25 2.25 0 0 1-2.25 2.25h-1.5v2.128a2.251 2.251 0 1 1-1.5 0V8.5h-1.5A2.25 2.25 0 0 1 3.5 6.25v-.878a2.25 2.25 0 1 1 1.5 0ZM5 3.25a.75.75 0 1 0-1.5 0 .75.75 0 0 0 1.5 0Zm6.75.75a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm-3 8.75a.75.75 0 1 0-1.5 0 .75.75 0 0 0 1.5 0Z"/></svg><span data-gh-forks>17</span></span></span></span></a>
         <a class="masthead-link masthead-discord" href="https://discord.gg/6gw887Vxms" target="_blank" rel="noopener noreferrer" aria-label="Join the FlexiTac Discord"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/></svg><span>Discord</span></a>
       </nav>
     </header>
@@ -43,10 +45,11 @@
         <ol class="flow-steps" id="cadGuide">
           <li class="flow-step" data-step="1"><button type="button" data-go="cadWorkspace"><span class="flow-no" aria-hidden="true">1</span><span class="flow-text"><strong>Load your gripper</strong><span>Choose or drag an STL, click the face for the sensor.</span></span></button></li>
           <li class="flow-step" data-step="2"><button type="button" data-go="cadQuick"><span class="flow-no" aria-hidden="true">2</span><span class="flow-text"><strong>Generate the sensor</strong><span>Press Generate sensor under the 3D view.</span></span></button>
-            <!-- In step with Customize the sensor on the right (main.js syncGuideCustomize): either one opens both, and
-                 its two steps, Fit and Generate, show here. -->
+            <!-- In step with Advanced Customization on the right (main.js syncGuideCustomize): either one opens both, and
+                 its two steps, Fit and Generate, show here.  Named so at the user's request of 2026-11-04 (Customize
+                 the sensor before; the form's Advanced inside it now More options, as the fit's). -->
             <div class="flow-more">
-              <button type="button" class="flow-customize" id="guideCustomize" aria-controls="cadCustomize" aria-expanded="false">Customize the sensor</button>
+              <button type="button" class="flow-customize" id="guideCustomize" aria-controls="cadCustomize" aria-expanded="false">Advanced Customization</button>
               <ol class="flow-substeps" id="guideSubsteps" hidden>
                 <li class="flow-substep" data-substep="fit"><button type="button" data-go="cadStepConfig"><span class="flow-sub-no" aria-hidden="true">a</span>Fit</button></li>
                 <li class="flow-substep" data-substep="generate"><button type="button" data-go="cadStepGenerate"><span class="flow-sub-no" aria-hidden="true">b</span>Generate</button></li>
@@ -61,7 +64,7 @@
            profile.limits; data-field is the canonical design path of a control. -->
       <form class="controls" id="designForm" aria-label="Sensor parameters" novalidate>
         <!-- In sight: the sensor's size and pitch, and Generate (2026-11-02: one step to a sensor); everything else under
-             Customize the sensor, with Advanced folded inside it as before. -->
+             Advanced Customization, with More options folded inside it (Advanced until 2026-11-04). -->
         <section>
           <h2>Sensor</h2>
           <div class="two-col">
@@ -85,7 +88,7 @@
         <button id="generate" class="primary" type="submit">Generate &amp; validate</button>
 
         <details class="customize" id="formCustomize">
-          <summary>Customize the sensor</summary>
+          <summary>Advanced Customization</summary>
         <section>
           <h2>Electrodes</h2>
           <div class="field"><div class="field-head"><label for="name">Design name</label></div><input id="name" name="name" data-field="project_name" autocomplete="off" required /></div>
@@ -110,7 +113,7 @@
 
         <!-- Everything beyond the basic sensor, folded (the defaults suit most designs). -->
         <details class="advanced" id="formAdvanced">
-          <summary>Advanced</summary>
+          <summary>More options</summary>
           <p class="hint" id="mmHint" hidden></p>
           <section>
             <h2>FPC arrangement</h2>
@@ -280,7 +283,7 @@
                fit, the proposals, Generate and the checks on the part; their own folds inside as before.  Open, a click
                on the part toggles a surface (folded, it selects that face alone). -->
           <details class="cad-customize" id="cadCustomize">
-            <summary>Customize the sensor <span class="hint">base edge, resolution, proposals, Generate and the checks on the part</span></summary>
+            <summary>Advanced Customization <span class="hint">base edge, resolution, proposals, Generate and the checks on the part</span></summary>
             <!-- The base edge, under the 3D view and across it (the user's request of 2026-10-30): main.js renderSides. -->
               <div class="cad-base" aria-labelledby="cadStepBase">
                 <h3 class="cad-base-title" id="cadStepBase">Base edge <span class="hint">the tails leave across it: pick it here or click it on the part</span></h3>

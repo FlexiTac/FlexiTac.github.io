@@ -136,7 +136,7 @@ export function createViewer(host, {onClick = null} = {}) {
   renderer.domElement.className = "cad-canvas";
   host.append(renderer.domElement);
   const scene = new THREE.Scene();
-  scene.background = new THREE.Color(0xf2f5f6);
+  scene.background = new THREE.Color(0xf5f5f7);  // Apple's grey, as .cad-view in theme.css
   const camera = new THREE.PerspectiveCamera(35, 1, 0.1, 10000);
   camera.up.set(0, 0, 1);
   scene.add(new THREE.HemisphereLight(0xffffff, 0x8899aa, 1.7));

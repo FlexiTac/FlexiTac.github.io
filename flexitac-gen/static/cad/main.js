@@ -264,9 +264,9 @@ function renderState() {
 
 // -- one step (the user's requests of 2026-11-02) -------------------------------------------------
 // The default part's sensor is generated at once (buildDefaultSensor).  After that the user's changes only choose:
-// with "Customize the sensor" folded (quickMode) a model loaded gets its largest flat face selected and a click on the
+// with "Advanced Customization" folded (quickMode) a model loaded gets its largest flat face selected and a click on the
 // part selects that face alone; "Generate sensor" under the view (oneStep) then fits and generates (the user's request
-// of 2026-11-02, after the first version generated on every click).  Opened, Customize is the step-by-step workspace as
+// of 2026-11-02, after the first version generated on every click).  Opened, Advanced Customization is the step-by-step workspace as
 // before (a click toggles a surface; Fit and Generate there); Generate sensor works from either.
 
 const quickMode = () => !$("cadCustomize").open;
@@ -312,8 +312,8 @@ function quickText() {
     return ["ok", `${size} · ${fmt(proposal.design.matrix.pitch_x_mm, 1)} mm pitch · all ${passed} checks pass on the part.`];
   }
   if (!cad.selection) return ["idle", "Click the face the sensor goes on, then Generate sensor."];
-  if (cad.map && !cad.map.ok) return ["problem", "The sensor fails a check on the part: see Customize the sensor, On the part."];
-  if (cad.error || (cad.fit && !fitStale() && !cad.fit.proposals?.length)) return ["problem", "No sensor fits here: choose another face, or Customize the sensor."];
+  if (cad.map && !cad.map.ok) return ["problem", "The sensor fails a check on the part: see Advanced Customization, On the part."];
+  if (cad.error || (cad.fit && !fitStale() && !cad.fit.proposals?.length)) return ["problem", "No sensor fits here: choose another face, or open Advanced Customization."];
   if (cad.fit && fitStale()) return ["todo", "Settings changed: Generate sensor to update it."];
   if (proposal) return ["todo", `Proposal #${proposal.rank} (${proposal.metrics.rows} × ${proposal.metrics.columns}) fitted: Generate sensor to build it.`];
   return ["todo", `Face selected (${fmt(cad.selection.area_mm2, 1)} mm²): Generate sensor to put the sensor on it.`];
@@ -363,7 +363,7 @@ function renderGuide() {
     step.classList.toggle("is-next", index === next);
     if (index === next) step.setAttribute("aria-current", "step"); else step.removeAttribute("aria-current");
   });
-  // Step 2's own steps under Customize the sensor: Fit (proposals for the inputs as they are), Generate (the chosen one
+  // Step 2's own steps under Advanced Customization: Fit (proposals for the inputs as they are), Generate (the chosen one
   // built and mapped).
   const subDone = [Boolean(cad.fit?.proposals?.length) && !fitStale(), sensorCurrent() && Boolean(cad.map?.ok)];
   const subNext = subDone.indexOf(false);
@@ -375,7 +375,7 @@ function renderGuide() {
   return done.map((value, index) => (value ? "done" : index === next ? "next" : "todo"));
 }
 function syncGuideCustomize() {
-  // The guide's Customize the sensor and the fold on the right are one switch (the user's request of 2026-11-02).
+  // The guide's Advanced Customization and the fold on the right are one switch (the user's request of 2026-11-02).
   const open = $("cadCustomize").open;
   $("guideCustomize").setAttribute("aria-expanded", String(open));
   $("guideSubsteps").hidden = !open;
@@ -2409,10 +2409,10 @@ function wire() {
   $("cadCustomize").addEventListener("toggle", onCustomizeToggle);
   $("cadQuickGenerate").addEventListener("click", oneStep);
   $("guideCustomize").addEventListener("click", () => {
-    // Opens (or folds) Customize the sensor on the right; the toggle event brings the guide in step (syncGuideCustomize).
+    // Opens (or folds) Advanced Customization on the right; the toggle event brings the guide in step (syncGuideCustomize).
     const fold = $("cadCustomize");
     fold.open = !fold.open;
-    if (fold.open) fold.scrollIntoView({behavior: "smooth", block: "start"});
+    if (fold.open) fold.scrollIntoView({behavior: window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start"});
   });
 
   $("cadEditBorder").addEventListener("click", () => setEditing(!cad.editing));
@@ -2452,7 +2452,7 @@ function wire() {
   $("cadProbe").addEventListener("input", updateProbe);
   $("cadPick").addEventListener("change", event => pickSurface(event.target.value));
   document.querySelectorAll("[data-go]").forEach(button => button.addEventListener("click", () =>
-    $(button.dataset.go)?.scrollIntoView({behavior: "smooth", block: "start"})));
+    $(button.dataset.go)?.scrollIntoView({behavior: window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start"})));
   let guideFrame = 0;
   const followScroll = () => { if (!guideFrame) guideFrame = requestAnimationFrame(() => { guideFrame = 0; markGuideHere(); }); };
   window.addEventListener("scroll", followScroll, {passive: true});

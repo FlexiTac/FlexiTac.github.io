@@ -1,8 +1,8 @@
 {
   "generator_version": "deterministic-sensor-core/0.4.0",
-  "engine_zip_sha256": "bf3424c066082f0608fa4adeae8d29685222cf2d7ff304ca04f61d1d92e66ae6",
+  "engine_zip_sha256": "89d8d4e665cfebb1d260be5bb2045bfaa3e89fa9ab980bccec6098f34a48af99",
   "github": {
-    "stars": 159,
+    "stars": 163,
     "forks": 17
   },
   "pyodide": {

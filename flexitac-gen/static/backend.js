@@ -16,7 +16,8 @@
 
   // The FlexiTac repository's stars and forks in the header (the user's request of 2026-11-02, as flexitac.github.io
   // shows them): the build wrote recent counts into the page; they are refreshed from GitHub's API (its CSP allows
-  // api.github.com), kept for an hour per tab.  Only the static site asks; app.py's page asks nothing of other hosts.
+  // api.github.com), kept for an hour per tab.  Only the static site asks: app.py writes them into the page it serves
+  // (it reads them itself), and its page asks no other host.
   const REPO = "FlexiTac/FlexiTac";
   const KEY = `gh-stats:${REPO}`;
   const fmt = n => (n >= 1000 ? `${(n / 1000).toFixed(n >= 10000 ? 0 : 1).replace(/\.0$/, "")}k` : String(n));

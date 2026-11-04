@@ -339,7 +339,7 @@
     return control.validationMessage;
   }
   function reveal(control) {
-    // A field under a fold (Customize the sensor, Advanced: 2026-11-02) is shown before it takes the focus.
+    // A field under a fold (Advanced Customization, More options: folded since 2026-11-02, so named since 2026-11-04) is shown before it takes the focus.
     for (let node = control?.parentElement; node; node = node.parentElement) if (node.tagName === "DETAILS") node.open = true;
     control?.focus();
   }
