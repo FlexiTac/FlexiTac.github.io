@@ -96,7 +96,10 @@ const cad = {
   // newest wins).  The build of the default part's or a Library sensor's under way (buildDefaultSensor): its run.
   samplePending: null, sampleTicket: 0, buildRun: null,
   // Whether CAD mode generated a build this session: until then its results below (a rectangular build) stay hidden.
-  generated: false,
+  // newPart: a model loaded (a file, a sample) since the last Generate: the build below is another part's, hidden the same
+  // way until Generate builds this one (the review of 2026-11-06: a sample dropped had the sensor before under it, ready
+  // to download; Remove model leaves it).
+  generated: false, newPart: false,
   verifyOpen: false,  // the user's choice for the folded checks on the part
   viewer: null, viewerLoad: null, viewerError: null,
   fileName: "", defaultFile: false, mesh: null, parsed: null, inspect: null, hidden: new Set(), facetMismatch: false,
@@ -470,8 +473,9 @@ const shortList = items => (items.length > 6 ? `${items.slice(0, 3).join(", ")},
 
 function syncResults() {
   // CAD mode shows the shared results (status, previews, checks, downloads) once they are a CAD build: its own Generate
-  // this session or a surface-template build; a rectangular build is the Rectangular mode's.
-  const shown = cad.generated || cad.lastResult?.design?.template_id === SURFACE_TEMPLATE_ID;
+  // this session or a surface-template build; a rectangular build is the Rectangular mode's.  Not while the part shown
+  // came after it (cad.newPart).
+  const shown = !cad.newPart && (cad.generated || cad.lastResult?.design?.template_id === SURFACE_TEMPLATE_ID);
   document.body.classList.toggle("cad-no-build", cad.mode === "cad" && !shown);
 }
 
@@ -491,8 +495,9 @@ function setMode(mode, {fromHash = false} = {}) {
     ensureViewer();
     loadDefaultPart();
     if (!cad.limitsSync) syncFitLimits();
-    // A build generated in the other mode is mapped now (or reported as a mismatch).
-    if (chosenProposal() && cad.lastResult?.ok && cad.lastResult.manifest.build_id !== cad.map?.build_id) mapBuild(cad.lastResult);
+    // A build generated in the other mode is mapped now (or reported as a mismatch); not one before this part's first
+    // Generate (cad.newPart, onResult).
+    if (!cad.newPart && chosenProposal() && cad.lastResult?.ok && cad.lastResult.manifest.build_id !== cad.map?.build_id) mapBuild(cad.lastResult);
   }
   renderState();
 }
@@ -600,7 +605,7 @@ async function loadDefaultPart() {
   }
   // Skipped (a file came first) on this ticket: the veil was the default part's.
   if (ticket === cad.seq.load && cad.loading === part.name && cad.defaultPart !== "loaded") setLoading(null);
-  // Its build not started (buildDefaultSensor settles its own, and a sample's may run by now).
+  // Its build not started (buildDefaultSensor settles its own; a sample's part is never built here, idle).
   if (cad.defaultBuild === "pending") cad.defaultBuild = "stopped";
   renderState();
 }
@@ -811,7 +816,9 @@ async function loadFile(file, {isDefault = false} = {}) {
   }
   abortRequests("inspect", "select", "fit", "preview", "map");
   if (!isDefault) leaveLibrary();  // the user's own file: a Library sensor's ?part and options go
-  Object.assign(cad, {fileName: file.name, defaultFile: isDefault, mesh, parsed, inspect: null, facetMismatch: false, ops: [], opsHistory: [], selection: null, selectionError: null, runs: [], side: "auto", error: null});
+  Object.assign(cad, {fileName: file.name, defaultFile: isDefault, mesh, parsed, inspect: null, facetMismatch: false, ops: [], opsHistory: [], selection: null, selectionError: null, runs: [], side: "auto", error: null,
+    fitSource: null, newPart: true});
+  syncResults();  // the build below, if any, is the part before's
   resetBorder();
   resetFit();
   $("cadUnit").value = "auto";
@@ -874,7 +881,7 @@ async function inspectMesh() {
 function removeModel() {
   // The model off the view (the user's request of 2026-10-31): with it its selection, border, base edge, proposals and
   // map; a file still being read or inspected is dropped, and the default part does not come back (a file chosen or
-  // dropped loads as before).  A build already generated stays below, as when another file is loaded.
+  // dropped loads as before).  A build already generated stays below (a model loaded next hides it, cad.newPart).
   cad.seq.load += 1; cad.seq.inspect += 1; cad.seq.select += 1;
   abortRequests("inspect", "select", "fit", "preview", "map");
   if (cad.defaultPart === "loading") cad.defaultPart = "skipped";
@@ -2319,7 +2326,7 @@ async function generate() {
   const proposal = chosenProposal();
   if (!proposal || cad.pendingBuild) return;
   cad.pendingBuild = proposal.build_id;
-  cad.generated = true;
+  cad.generated = true; cad.newPart = false;
   syncResults();
   abortRequests("map");
   cad.seq.map += 1;
@@ -2357,7 +2364,10 @@ function onResult(event) {
   const pending = cad.pendingBuild;
   cad.pendingBuild = null;
   renderGenerate();
-  if (!proposal || !cad.lastResult) { renderState(); return; }
+  // A build landing before this part's first Generate (cad.newPart: the part before's, a model loaded while it was built)
+  // is not mapped onto this part's proposal, which it is not (the review of 2026-11-06: in Advanced Customization it
+  // said "No sensor fits here" and "fit again").
+  if (!proposal || !cad.lastResult || cad.newPart) { renderState(); return; }
   if (!cad.lastResult.ok) {
     abortRequests("map");
     cad.seq.map += 1;
@@ -2414,6 +2424,8 @@ async function mapBuild(result, {look = false} = {}) {
     if (sequence !== cad.seq.map) return;
     cad.map = reply;
     cad.mapError = null;
+    // Mapped onto this part, the build below is its own (a proposal chosen whose build is the one shown): shown.
+    if (cad.newPart) { cad.newPart = false; syncResults(); }
     cad.error = cad.facetMismatch ? "E_CLIENT_FACET_ORDER" : null;
     cad.stale = $("workbench").classList.contains("is-stale");
     drawOverlay(reply, result.design);
