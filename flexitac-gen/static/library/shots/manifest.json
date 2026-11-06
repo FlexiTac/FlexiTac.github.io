@@ -4,13 +4,13 @@
  "shots": {
   "arx-x5-1mm": {
    "art": {
-    "build_id": "surface-32x26-d387cf38c447",
+    "build_id": "surface-32x26-1b2b8fcf20b8",
     "bytes": 13233,
-    "json_sha256": "1b2c237d92fe8b726cdd03f7f65345bedb816613c57d472a08688c7218c588f0",
+    "json_sha256": "e9e232bc2ddb7abad33d0c48dda23bbeb05ca582e3cb33fbbd00df9d9b2f6a0f",
     "path": "art/arx-x5-1mm.json.gz",
-    "sha256": "5d24ad2441d459eec42c628a9a834220ef061af125b4eb1aeac8a0c488df5d40"
+    "sha256": "4f49c21c4a3daf874947e9fa7c9b93ab2320280c7448606e8a67fc1c0a8199bd"
    },
-   "build_id": "surface-32x26-d387cf38c447",
+   "build_id": "surface-32x26-1b2b8fcf20b8",
    "figure_sha256": "5455123b46177272aa7d1a22a47da9333750ec9e29acb0c9328827bf71eb217b",
    "files": {
     "assembled": {
@@ -35,7 +35,7 @@
      "width": 1280
     }
    },
-   "fit_sha256": "ab0a67ac20369d37be0e83609aaa076e38da02d4617f02767e5726df29881e90",
+   "fit_sha256": "f3fd0d982507158bc100cb2c3658fcb7cea60251507a54cb7ee378038acdd2c2",
    "look": "photo",
    "margins_px": {
     "assembled": [
@@ -90,13 +90,13 @@
   },
   "arx-x5-2mm": {
    "art": {
-    "build_id": "surface-32x25-2909c6a6e34d",
-    "bytes": 13479,
-    "json_sha256": "9f2db9acb24a26a468136f445d262c0eaea247d23194447c4fc11f91f2537331",
+    "build_id": "surface-32x25-f86dce773ee4",
+    "bytes": 13480,
+    "json_sha256": "f08dc2bd345cb963e0714146f17ac1e2c288ef12568d0769a765d4add98c76bd",
     "path": "art/arx-x5-2mm.json.gz",
-    "sha256": "7763355dc54fd3d8dc852805fa5e128337809ee47cb3626df270f04be05b9211"
+    "sha256": "bbfdfcfdd6005c0f90d9613b40efb5f35e472316c2060c3402d94161c8d614a1"
    },
-   "build_id": "surface-32x25-2909c6a6e34d",
+   "build_id": "surface-32x25-f86dce773ee4",
    "figure_sha256": "5455123b46177272aa7d1a22a47da9333750ec9e29acb0c9328827bf71eb217b",
    "files": {
     "assembled": {
@@ -121,7 +121,7 @@
      "width": 1280
     }
    },
-   "fit_sha256": "41e4fd9616d5130371674b758a6d01827e62d2b99ff0d90fb814674dc168ebc4",
+   "fit_sha256": "0b82f3e32d1489edec238926e9088220b07d11f566502f17f70a775014f892f4",
    "look": "photo",
    "margins_px": {
     "assembled": [
@@ -176,13 +176,13 @@
   },
   "arx-x5-3mm": {
    "art": {
-    "build_id": "surface-23x19-2e88c11f611e",
-    "bytes": 11066,
-    "json_sha256": "a1f8b2bd959bd5636dc63847a76437b5b3687d59fb7f82d97544b1fa0e29e24a",
+    "build_id": "surface-23x19-abbdaa926a1a",
+    "bytes": 11067,
+    "json_sha256": "268631e29b762b3d71594d21e4ab7570e39433e700a5d29ba4e066ee072c7195",
     "path": "art/arx-x5-3mm.json.gz",
-    "sha256": "0e3c50d76a7f81313225262a96736dd08e673aa480de13a2ee53548be837e72b"
+    "sha256": "bb6dc31a03419ef9a790975337ed9403be79e3451b4426e158441c9d720df2ee"
    },
-   "build_id": "surface-23x19-2e88c11f611e",
+   "build_id": "surface-23x19-abbdaa926a1a",
    "figure_sha256": "5455123b46177272aa7d1a22a47da9333750ec9e29acb0c9328827bf71eb217b",
    "files": {
     "assembled": {
@@ -207,7 +207,7 @@
      "width": 1280
     }
    },
-   "fit_sha256": "da877afccd3b0d6c1aefcfab7ccbedc34e0b6266e8c79bf108e4988e4717a811",
+   "fit_sha256": "dfb76a3be770f117759f93ad957cd71931f6c584f6f170e55624e275b6f51da2",
    "look": "photo",
    "margins_px": {
     "assembled": [
@@ -262,13 +262,13 @@
   },
   "arx-x5-4mm": {
    "art": {
-    "build_id": "surface-17x13-bed9167960fc",
+    "build_id": "surface-17x13-857d94ae8ca0",
     "bytes": 9000,
-    "json_sha256": "41f5e58dc6120273c5551376a2ee2896ba95b48ebec98e2a3202661a1e8647bf",
+    "json_sha256": "13ac3747806b98c3647ca623cfc9cd223c4afb321f8053ae53a7043703538419",
     "path": "art/arx-x5-4mm.json.gz",
-    "sha256": "fd36df4230c4528ef11f904781d02f4f70420a1fc89ef500c6d8a965ebb200ee"
+    "sha256": "2f24571b35c02159c3225ee67fdcb3ad58fbf7ec2fc8bcd9893bc0e0ecf7e87e"
    },
-   "build_id": "surface-17x13-bed9167960fc",
+   "build_id": "surface-17x13-857d94ae8ca0",
    "figure_sha256": "5455123b46177272aa7d1a22a47da9333750ec9e29acb0c9328827bf71eb217b",
    "files": {
     "assembled": {
@@ -293,7 +293,7 @@
      "width": 1280
     }
    },
-   "fit_sha256": "9fd020196a76878d7e219053cea1f6692c8d7793cdbbef8b405ee45145696890",
+   "fit_sha256": "6b931016f39b53c01affa0321db40dbf24dbd3ab25505af51e4335a5137519c5",
    "look": "photo",
    "margins_px": {
     "assembled": [
@@ -348,13 +348,13 @@
   },
   "franka-hand-1.5mm": {
    "art": {
-    "build_id": "surface-11x11-689f162f2f63",
-    "bytes": 6286,
-    "json_sha256": "11fd5f045daa344fadcff8d5cc34faf3e2daa041d671aa644d35ff4a0c81c9aa",
+    "build_id": "surface-11x11-862174f9923b",
+    "bytes": 6287,
+    "json_sha256": "744ee9b35875020d33b1da2ad31484625f968e31ff01e3b6188f7c8ace163d2d",
     "path": "art/franka-hand-1.5mm.json.gz",
-    "sha256": "764cc7db0b82939c4b1aab1b7861eab5e997ce5ddbc976896f4901e8dbe56cb9"
+    "sha256": "dc826692a5e14df960d668cad8b517dac8b3a0601aa8f0d733f73ea9bb790e41"
    },
-   "build_id": "surface-11x11-689f162f2f63",
+   "build_id": "surface-11x11-862174f9923b",
    "figure_sha256": "5455123b46177272aa7d1a22a47da9333750ec9e29acb0c9328827bf71eb217b",
    "files": {
     "assembled": {
@@ -379,7 +379,7 @@
      "width": 1280
     }
    },
-   "fit_sha256": "e1dba4177bc9515b7c21f4644fcdc49eace514d319363e715c924ffc068f4528",
+   "fit_sha256": "8d0940f7d175bcd21d871cff6ba6140d87b89f0d8234097d604e79384c0187f4",
    "look": "photo",
    "margins_px": {
     "assembled": [
@@ -434,13 +434,13 @@
   },
   "franka-hand-1mm": {
    "art": {
-    "build_id": "surface-16x17-f4fc01f8c041",
-    "bytes": 8313,
-    "json_sha256": "145283d74f45039559858f212799591bf4640083504ddf6bfeac8b27ff021f30",
+    "build_id": "surface-16x17-a5adb4b6de19",
+    "bytes": 8314,
+    "json_sha256": "9ab945e3944c88379ea853f2f8442ee9408f5c81a2259c8a2e7eb2733246a94e",
     "path": "art/franka-hand-1mm.json.gz",
-    "sha256": "fb8fbf5936e9b0063c8d19f575263019b469cdabc16c4d4c71373c65070fabdc"
+    "sha256": "6644235c6dc79d5daff1ee00df55cd065d25ead002b52ed09fd5979176031969"
    },
-   "build_id": "surface-16x17-f4fc01f8c041",
+   "build_id": "surface-16x17-a5adb4b6de19",
    "figure_sha256": "5455123b46177272aa7d1a22a47da9333750ec9e29acb0c9328827bf71eb217b",
    "files": {
     "assembled": {
@@ -465,7 +465,7 @@
      "width": 1280
     }
    },
-   "fit_sha256": "c139adc22c266f7a65a5ea9b704dabb0ebfa58f5df2aad00301018f5119efaa3",
+   "fit_sha256": "a935239a7fd4b8b6e82822822ae0fc133466c6ea0d196d91437b71dec1152de8",
    "look": "photo",
    "margins_px": {
     "assembled": [
@@ -520,13 +520,13 @@
   },
   "franka-hand-2.5mm": {
    "art": {
-    "build_id": "surface-7x7-219eb060fc64",
-    "bytes": 5438,
-    "json_sha256": "9e6329a2292ec026c73b4f917c325eedb839f9952a500e6078f34219c0b7d42a",
+    "build_id": "surface-7x7-0d2c216bbe24",
+    "bytes": 5439,
+    "json_sha256": "0f67de6af62967ce456885fa9659fa0c86f9613ea7ffb268be31c969c98fee10",
     "path": "art/franka-hand-2.5mm.json.gz",
-    "sha256": "164f2753cde5c9c041e63c67a99d00779ff2fc4c45ffcc65e09619ef810af235"
+    "sha256": "39545ffe4cf5e8b9adb484d5008004f621ad91fecbec43de0f7bb84c8bf92aa7"
    },
-   "build_id": "surface-7x7-219eb060fc64",
+   "build_id": "surface-7x7-0d2c216bbe24",
    "figure_sha256": "5455123b46177272aa7d1a22a47da9333750ec9e29acb0c9328827bf71eb217b",
    "files": {
     "assembled": {
@@ -551,7 +551,7 @@
      "width": 1280
     }
    },
-   "fit_sha256": "05fb065b2d17f778eb1e05d4b4e641736c951c4b85b3f967b491debc9826fc08",
+   "fit_sha256": "26dc9fe22c3d35b91bfac7f049700b7ee7153461a3153731494ed77dfbf2bff7",
    "look": "photo",
    "margins_px": {
     "assembled": [
@@ -606,13 +606,13 @@
   },
   "franka-hand-2mm": {
    "art": {
-    "build_id": "surface-8x8-7d3333991a15",
-    "bytes": 5483,
-    "json_sha256": "ef5b496fb66038d8448bdfc2e459b10d30a1dab1c27557d59b00cf5ea386e9b6",
+    "build_id": "surface-8x8-1ac1c1d0696d",
+    "bytes": 5485,
+    "json_sha256": "7458a96790730d9dca44637b2dfdab2f5acae973429189a3911e68e7e968e8cd",
     "path": "art/franka-hand-2mm.json.gz",
-    "sha256": "83b8bcc2971d12f24a70e4d1e6e13c0b540795e5ff7d842a2561fdc692c6cd09"
+    "sha256": "9003fb086eb08bd219ffd1ecc42abd160369b58b8e8f05790398d61c18b91d62"
    },
-   "build_id": "surface-8x8-7d3333991a15",
+   "build_id": "surface-8x8-1ac1c1d0696d",
    "figure_sha256": "5455123b46177272aa7d1a22a47da9333750ec9e29acb0c9328827bf71eb217b",
    "files": {
     "assembled": {
@@ -637,7 +637,7 @@
      "width": 1280
     }
    },
-   "fit_sha256": "f9d673a88f61a7efb49e5678627aa7f9e666608f7ccf363dc2161a7aed68507d",
+   "fit_sha256": "8edc8ab488d0469d1b1d505706274dc7374fb52c9ac96d33859537affb3b18ed",
    "look": "photo",
    "margins_px": {
     "assembled": [
@@ -692,13 +692,13 @@
   },
   "i2rt-yam-1mm": {
    "art": {
-    "build_id": "surface-32x32-dd7be86a5052",
+    "build_id": "surface-32x32-958029ab83c1",
     "bytes": 13854,
-    "json_sha256": "86cda442b77d69bc8ac8e482df75d48bed23566d0c64ea668f6c44ab1904a0d7",
+    "json_sha256": "428c50e2070452f9cee576167bb62f0db4ca34cab0220560fb4af51dac9358a1",
     "path": "art/i2rt-yam-1mm.json.gz",
-    "sha256": "4b7059b64c5c92a935ad917369078d4c3b229c8dcbd5dadbdc46fffb5144feaa"
+    "sha256": "9269f98b016ba55b47c009cb8e55f70ed2bc8f2234a9a9f75d307ea0e1bf0541"
    },
-   "build_id": "surface-32x32-dd7be86a5052",
+   "build_id": "surface-32x32-958029ab83c1",
    "figure_sha256": "5455123b46177272aa7d1a22a47da9333750ec9e29acb0c9328827bf71eb217b",
    "files": {
     "assembled": {
@@ -723,7 +723,7 @@
      "width": 1280
     }
    },
-   "fit_sha256": "ec614c02b651b8d743f5b54dff2181170b1b42dee6c3d818fd57778c99c4eaab",
+   "fit_sha256": "ec252048ff9b7b9cd46e6b5af60a2b7454e6eb3649cbaf824677aa8b920caff8",
    "look": "photo",
    "margins_px": {
     "assembled": [
@@ -778,13 +778,13 @@
   },
   "i2rt-yam-2mm": {
    "art": {
-    "build_id": "surface-32x32-f99cfa65c746",
-    "bytes": 14438,
-    "json_sha256": "27b2e39a82d96d2b31f32cfe464ba80207b35e38fde3e6e7cf19d716e12e3669",
+    "build_id": "surface-32x32-34eefac6ad11",
+    "bytes": 14437,
+    "json_sha256": "9d6766b17745c85b9f3a9ad5d9f40e56f016b7b1a1113bef85ca99f45205135d",
     "path": "art/i2rt-yam-2mm.json.gz",
-    "sha256": "d306268a47ff66c91321b66577de0d6a7f5e20d4978531af5d100f58b097f357"
+    "sha256": "602b69f254966c39f94ac702cd7039942c58707d04b60aaaa5e25c2cf7de7de7"
    },
-   "build_id": "surface-32x32-f99cfa65c746",
+   "build_id": "surface-32x32-34eefac6ad11",
    "figure_sha256": "5455123b46177272aa7d1a22a47da9333750ec9e29acb0c9328827bf71eb217b",
    "files": {
     "assembled": {
@@ -809,7 +809,7 @@
      "width": 1280
     }
    },
-   "fit_sha256": "5d3327a1b03a62ba042de3a284d43ea04b9dad6304fb153b65e260f355b2a579",
+   "fit_sha256": "306fe0b4767ab33f88ba272381f755175080398b1aee6ee7b4b3fa9bd4b4d8cb",
    "look": "photo",
    "margins_px": {
     "assembled": [
@@ -864,13 +864,13 @@
   },
   "i2rt-yam-3mm": {
    "art": {
-    "build_id": "surface-23x23-11ed05f4e0e9",
-    "bytes": 11378,
-    "json_sha256": "e74ef07e793da1e666d383a10898594c7f8643cc5f6759e3fd5b7ff299af4b95",
+    "build_id": "surface-23x23-e64c2b2efbe4",
+    "bytes": 11379,
+    "json_sha256": "92447f1e69396e5464334889ea51d51e63042e390ce0c21ce18f5e9305634e41",
     "path": "art/i2rt-yam-3mm.json.gz",
-    "sha256": "4545e0afc47ce66ba915512f1a5c6b486a2141c554d59c1c03ce1a85f9ecf4a4"
+    "sha256": "cbe056d490d3611d45ed870da1ad3fabac589c55264033a9d691a53a9e3ccc8a"
    },
-   "build_id": "surface-23x23-11ed05f4e0e9",
+   "build_id": "surface-23x23-e64c2b2efbe4",
    "figure_sha256": "5455123b46177272aa7d1a22a47da9333750ec9e29acb0c9328827bf71eb217b",
    "files": {
     "assembled": {
@@ -895,7 +895,7 @@
      "width": 1280
     }
    },
-   "fit_sha256": "e674d161d88c48e8a9b95aa466fbc52a93329e5ef7141c536f3c514697993063",
+   "fit_sha256": "7e7d2ab519a12911f8cd3cc0a240c1d1fbf1eaae23cb190252e02befdcf0701f",
    "look": "photo",
    "margins_px": {
     "assembled": [
@@ -950,13 +950,13 @@
   },
   "i2rt-yam-4mm": {
    "art": {
-    "build_id": "surface-17x17-df23535bd385",
+    "build_id": "surface-17x17-1554b68ffbe4",
     "bytes": 9154,
-    "json_sha256": "9928381e398203998546e2cc88e0ee623f5a9889e4dc19aa945a63cfd62d7b42",
+    "json_sha256": "7091fb9b72c8c175cc9bf35abdebc5cfcfed054152c7903f9297a0194a2f4be9",
     "path": "art/i2rt-yam-4mm.json.gz",
-    "sha256": "814fbfd77c5519998a7d7a140069eb85b0dd184a3d9ae080e400513cf1ace4ec"
+    "sha256": "57ea68059b907f2cba6055ba51a2c2900e017c9a40637783928f463a78972e09"
    },
-   "build_id": "surface-17x17-df23535bd385",
+   "build_id": "surface-17x17-1554b68ffbe4",
    "figure_sha256": "5455123b46177272aa7d1a22a47da9333750ec9e29acb0c9328827bf71eb217b",
    "files": {
     "assembled": {
@@ -981,7 +981,7 @@
      "width": 1280
     }
    },
-   "fit_sha256": "736918ffe6b2c224b4ac86ea5b4d393014790dbdea7a32da78d1dfe4b551683f",
+   "fit_sha256": "0959bd2c85d5f7dad8b9dbb7444454618858c22bde1b98621f3178b4ba545964",
    "look": "photo",
    "margins_px": {
     "assembled": [
@@ -1036,13 +1036,13 @@
   },
   "makermods-metal-1.5mm": {
    "art": {
-    "build_id": "surface-32x15-63204c3821cb",
-    "bytes": 12051,
-    "json_sha256": "f94d3194a45433fe81ea45654f8911eeb313c9a40f43b6815cbb282b48d904b6",
+    "build_id": "surface-32x15-584343a224cc",
+    "bytes": 12050,
+    "json_sha256": "55a3cc1a9eb8a7a9f69519c23dcecabdb9d71606f14f594bd375bbc95a59d270",
     "path": "art/makermods-metal-1.5mm.json.gz",
-    "sha256": "ddf7fdf50286474fa998e3d629daf2f176b4e94aaf0011dac0bc5fc9d16d738c"
+    "sha256": "8d14d00aaf10aec01d4cf21e8deebb4749a60b513ff7717b44b6e6469f80f753"
    },
-   "build_id": "surface-32x15-63204c3821cb",
+   "build_id": "surface-32x15-584343a224cc",
    "figure_sha256": "5455123b46177272aa7d1a22a47da9333750ec9e29acb0c9328827bf71eb217b",
    "files": {
     "assembled": {
@@ -1067,7 +1067,7 @@
      "width": 1280
     }
    },
-   "fit_sha256": "e582aebea77d7050ca0808af8a1d0eefdb507d624b6e12333e23f2549ce0c16f",
+   "fit_sha256": "0c84b7369e0bae11a34168c706f74a2aed9f408dcda91713d44ddf51869972d3",
    "look": "photo",
    "margins_px": {
     "assembled": [
@@ -1122,13 +1122,13 @@
   },
   "makermods-metal-1mm": {
    "art": {
-    "build_id": "surface-32x19-3eb813284900",
-    "bytes": 11329,
-    "json_sha256": "35f3a4c641794b4cc9377781f58be2da3608e5f27fd26a457c57375ff32e216d",
+    "build_id": "surface-32x19-a9f12c616d73",
+    "bytes": 11330,
+    "json_sha256": "b81208fb29597f431a5ddb7a75d73b97eb241f7ee8fa9bbe830c7de9bf48c59f",
     "path": "art/makermods-metal-1mm.json.gz",
-    "sha256": "e23034d337ba242f92acf3b30ae3c45f615a387b762b740bb87b128a097a8563"
+    "sha256": "8a24d7e79119405ea5a6c89b0d10887c7fe1fd5d76533f28cf9e7a532f5e4713"
    },
-   "build_id": "surface-32x19-3eb813284900",
+   "build_id": "surface-32x19-a9f12c616d73",
    "figure_sha256": "5455123b46177272aa7d1a22a47da9333750ec9e29acb0c9328827bf71eb217b",
    "files": {
     "assembled": {
@@ -1153,7 +1153,7 @@
      "width": 1280
     }
    },
-   "fit_sha256": "b39e3e69534fc6d285b987a3a9e682dc07c1498da1dabcd735db947c2cdce8df",
+   "fit_sha256": "8a784441bbc8a5f1bccf449a0cee197c6a3ca9784035ccf247b91bcb1f763480",
    "look": "photo",
    "margins_px": {
     "assembled": [
@@ -1208,13 +1208,13 @@
   },
   "makermods-metal-2mm": {
    "art": {
-    "build_id": "surface-32x11-0e51fc8c2c00",
+    "build_id": "surface-32x11-66a0a690c5a5",
     "bytes": 9930,
-    "json_sha256": "90f03a7023b8d4f714de548e2b3c88cce6f6edfc8e7331a04d83bbdd72ae472b",
+    "json_sha256": "412124f2d32defed9746d7f3f536bfaaada42dbbe425d7e162e5ee2365a1f104",
     "path": "art/makermods-metal-2mm.json.gz",
-    "sha256": "70b1f7a44d24be36e4115fcb737a234aea3b1d68ea770b97403ca6bb253f6a4a"
+    "sha256": "a6d70faeb7466068f0c4a0ed36fc20f6fe1f478f03213d9b77bbab52846254a8"
    },
-   "build_id": "surface-32x11-0e51fc8c2c00",
+   "build_id": "surface-32x11-66a0a690c5a5",
    "figure_sha256": "5455123b46177272aa7d1a22a47da9333750ec9e29acb0c9328827bf71eb217b",
    "files": {
     "assembled": {
@@ -1239,7 +1239,7 @@
      "width": 1280
     }
    },
-   "fit_sha256": "32350ca03ffe1bd0b18b109ab4b8a7b98fcdc655d04f01955872c66ebe0298cd",
+   "fit_sha256": "2b94f4767bbec8b2fd7a299324578c6650f2a4e3b6bcc4d024c946f85443c07f",
    "look": "photo",
    "margins_px": {
     "assembled": [
@@ -1294,13 +1294,13 @@
   },
   "makermods-metal-3mm": {
    "art": {
-    "build_id": "surface-22x8-f1f8d070e8f4",
-    "bytes": 8221,
-    "json_sha256": "911ea5b1bc87e24e0aa0113cb64a2bf857631118724bfbb5651a524f096d04d3",
+    "build_id": "surface-22x8-49d77605b721",
+    "bytes": 8219,
+    "json_sha256": "2eef2f9bbe576b17e73d8cf11786a1e2f1be88144a828363e1fdd69e5bb3a72c",
     "path": "art/makermods-metal-3mm.json.gz",
-    "sha256": "bffdd01a310ad430150ac81efc6b0eaa53578740c2236f2eb34d5dcb3f4b3fbd"
+    "sha256": "618ab3430990ade4c7da5a2571eb7d17e0f2af5814ce8891ae9016e458f61655"
    },
-   "build_id": "surface-22x8-f1f8d070e8f4",
+   "build_id": "surface-22x8-49d77605b721",
    "figure_sha256": "5455123b46177272aa7d1a22a47da9333750ec9e29acb0c9328827bf71eb217b",
    "files": {
     "assembled": {
@@ -1325,7 +1325,7 @@
      "width": 1280
     }
    },
-   "fit_sha256": "4836757712dbc0529febdf47919bfed6003173db2a19d7dd3004350e3a3ca496",
+   "fit_sha256": "15e34ad429e8b91686c8194a82b7708fb9dedbcf07cd7199dd743b81a854736d",
    "look": "photo",
    "margins_px": {
     "assembled": [
@@ -1380,13 +1380,13 @@
   },
   "trossen-widowx-ai-1.5mm": {
    "art": {
-    "build_id": "surface-32x22-1aa4b358103b",
-    "bytes": 13740,
-    "json_sha256": "cd57458b17c80a1351d35b8cf7c8b69bbf1a225ea96118347d1610369cc3b1ff",
+    "build_id": "surface-32x22-37a10808e66d",
+    "bytes": 13739,
+    "json_sha256": "36994f01ee01e85a3d326e27ff42dcb131c0754530403eaa2a1c967cbbbcf5eb",
     "path": "art/trossen-widowx-ai-1.5mm.json.gz",
-    "sha256": "5eff848a1ff287529504f8c932fd9b1d9dcb3e7ca1a588ecd23324768c3f826b"
+    "sha256": "eda1e23528ee61948c33e102179918c8011f098c3b4d39b0fa71953bf9a8740b"
    },
-   "build_id": "surface-32x22-1aa4b358103b",
+   "build_id": "surface-32x22-37a10808e66d",
    "figure_sha256": "5455123b46177272aa7d1a22a47da9333750ec9e29acb0c9328827bf71eb217b",
    "files": {
     "assembled": {
@@ -1411,7 +1411,7 @@
      "width": 1280
     }
    },
-   "fit_sha256": "ec7714487cacac6811443a05e6b1df1b466112609f8993e989d869726ebbb16a",
+   "fit_sha256": "935875d094eab679e6cc69c436dcc826babfc6051c1e4eb44abd705124419465",
    "look": "photo",
    "margins_px": {
     "assembled": [
@@ -1466,13 +1466,13 @@
   },
   "trossen-widowx-ai-1mm": {
    "art": {
-    "build_id": "surface-32x25-cd7ee5fdf18e",
+    "build_id": "surface-32x25-ae74126325ef",
     "bytes": 13377,
-    "json_sha256": "1194179a588b4ab0ed8648137fc5b6b03cba2a245c1033dc52864f1a745bbb51",
+    "json_sha256": "116217562a9ad219c7bcfbd65dc674bb9863d6d2c11571a1dbb9cbfd550ae530",
     "path": "art/trossen-widowx-ai-1mm.json.gz",
-    "sha256": "8e61bd748c333e36450b55f27a7f558ea3819a00a07d8686acbe58ce5756500b"
+    "sha256": "b7aa4c2e8fa345fb0f0a8d31c1eb17d3ecedebc6b3064be2856cc396ebc2dab3"
    },
-   "build_id": "surface-32x25-cd7ee5fdf18e",
+   "build_id": "surface-32x25-ae74126325ef",
    "figure_sha256": "5455123b46177272aa7d1a22a47da9333750ec9e29acb0c9328827bf71eb217b",
    "files": {
     "assembled": {
@@ -1497,7 +1497,7 @@
      "width": 1280
     }
    },
-   "fit_sha256": "bba27a4dc6ef98ce1bcbec3e539add9970c074d2d7e5801a7c42ef5dc57e3da5",
+   "fit_sha256": "6b0c5bf0826a03407b89e01637ef570c82fe91c84729af52e46eb4b5c40b97a2",
    "look": "photo",
    "margins_px": {
     "assembled": [
@@ -1552,13 +1552,13 @@
   },
   "trossen-widowx-ai-2mm": {
    "art": {
-    "build_id": "surface-24x16-cb567f0c5d2d",
-    "bytes": 10946,
-    "json_sha256": "0c298ab30749c839a5b85b18c80a310c053f03f6a0523b14b9cc322c2e9670ce",
+    "build_id": "surface-24x16-aa1b0391082b",
+    "bytes": 10945,
+    "json_sha256": "79d97d6cd0eae4a708b831d738bcaa7b4d4b7eb4731726f2a778b8d38b33000f",
     "path": "art/trossen-widowx-ai-2mm.json.gz",
-    "sha256": "ab339437d00d2732bff1099e72ba7267775ea9d1f898387d75bebfaed697d847"
+    "sha256": "bdb00fec9079915b3eec4089a8c32f08ec6bce76cd4531d38cbe836293332b92"
    },
-   "build_id": "surface-24x16-cb567f0c5d2d",
+   "build_id": "surface-24x16-aa1b0391082b",
    "figure_sha256": "5455123b46177272aa7d1a22a47da9333750ec9e29acb0c9328827bf71eb217b",
    "files": {
     "assembled": {
@@ -1583,7 +1583,7 @@
      "width": 1280
     }
    },
-   "fit_sha256": "6e3613ad5c0bb12420e1fe72a25dce5cc838114d2c846a755cf752ced31391b0",
+   "fit_sha256": "8b62a344707906cc605c814a92329b5eaa77341363e43d71f8352a0b2f1cffcf",
    "look": "photo",
    "margins_px": {
     "assembled": [
@@ -1638,13 +1638,13 @@
   },
   "trossen-widowx-ai-3mm": {
    "art": {
-    "build_id": "surface-16x11-9c4e1741c0f1",
-    "bytes": 7479,
-    "json_sha256": "135d794a63ba95abff646cd86310a0f9b209ecd4c9dea48b26f744db7d089296",
+    "build_id": "surface-16x11-c00ef83387db",
+    "bytes": 7480,
+    "json_sha256": "7837661e259b50a163f95c0b145db507bf4681b27499563a80fd6c7ed0fe214b",
     "path": "art/trossen-widowx-ai-3mm.json.gz",
-    "sha256": "b0f45b7480b6cc3f6b69d8c5bdc01c1860bfbc74502f3a02bbf2c3713b04fe54"
+    "sha256": "dd9128c63154989b76c3ee20d33a732df404fe8c7a7c10a3ac8a6728f26327a9"
    },
-   "build_id": "surface-16x11-9c4e1741c0f1",
+   "build_id": "surface-16x11-c00ef83387db",
    "figure_sha256": "5455123b46177272aa7d1a22a47da9333750ec9e29acb0c9328827bf71eb217b",
    "files": {
     "assembled": {
@@ -1669,7 +1669,7 @@
      "width": 1280
     }
    },
-   "fit_sha256": "aaadec490c9ddd57d4f314c3db1c9f87680a54b85603caedd34161fe55caa831",
+   "fit_sha256": "6d7665849df5eb7f29687b4f0eda0f779e1f0397c39dfcdc5113cf17cc4574ad",
    "look": "photo",
    "margins_px": {
     "assembled": [
@@ -1724,13 +1724,13 @@
   },
   "umi-convex-tip13.8-2mm": {
    "art": {
-    "build_id": "surface-32x12-4cb9374144c8",
-    "bytes": 9927,
-    "json_sha256": "2cefb1b449b6c56c53d6f7b8dd52e2a5cf7b7a274952004c228f3502f0c840df",
+    "build_id": "surface-32x12-a034302ef746",
+    "bytes": 9928,
+    "json_sha256": "dd4344c42e8fbe62657d5f22654aedc9e04b7ba0aa91e27c05ea527041d3483d",
     "path": "art/umi-convex-tip13.8-2mm.json.gz",
-    "sha256": "3c1ae8fa77256842bfe5d5899a2dae99fba48ed673edcebbfee7c3736dd1a560"
+    "sha256": "70923af9a1e8ef0188e0d315cb3d99a2786c63789582622f4467acb255460b7f"
    },
-   "build_id": "surface-32x12-4cb9374144c8",
+   "build_id": "surface-32x12-a034302ef746",
    "figure_sha256": "5455123b46177272aa7d1a22a47da9333750ec9e29acb0c9328827bf71eb217b",
    "files": {
     "assembled": {
@@ -1755,7 +1755,7 @@
      "width": 1280
     }
    },
-   "fit_sha256": "f5c7c91e461a7bf815bf7dec03dc3aa4ace2d1758d55ea43f7eb4db1f813b3c0",
+   "fit_sha256": "3e6f321f4040462dacd69f2c1062f589f9dd22e522d5ff3663cd43a512969c32",
    "look": "photo",
    "margins_px": {
     "assembled": [
@@ -1775,13 +1775,13 @@
   },
   "umi-convex-tip17.8-2mm": {
    "art": {
-    "build_id": "surface-32x12-88dcc0061ffb",
-    "bytes": 9720,
-    "json_sha256": "f6837ecf49692a68bab9f75eda18a6c7cbf11d2fb2bf695d3422183d712129e0",
+    "build_id": "surface-32x12-6d1f5e05bf71",
+    "bytes": 9718,
+    "json_sha256": "8e3a42c9c414175428822b38c2b09c1007a4fa7ffb6bba4ce52b0a10ed8b66c7",
     "path": "art/umi-convex-tip17.8-2mm.json.gz",
-    "sha256": "f69fe7b8229c6baab3017213f6ab44c34d75ea1e45db98edc3b3292ba61ef8a0"
+    "sha256": "baab9be47abf3f76a4334f9f55c2b6bc104847c16890e5c440461a7b102de2ec"
    },
-   "build_id": "surface-32x12-88dcc0061ffb",
+   "build_id": "surface-32x12-6d1f5e05bf71",
    "figure_sha256": "5455123b46177272aa7d1a22a47da9333750ec9e29acb0c9328827bf71eb217b",
    "files": {
     "assembled": {
@@ -1806,7 +1806,7 @@
      "width": 1280
     }
    },
-   "fit_sha256": "7f62b3d67427bfa5b475d56fbd55b186dce0fb9bfc2cdb5aafe64be9caa3817a",
+   "fit_sha256": "cda4a2f49e7b216c04dcd63d1b7447cfd497f3d8d9d9b2869978b5cea26ee611",
    "look": "photo",
    "margins_px": {
     "assembled": [
@@ -1826,13 +1826,13 @@
   },
   "umi-convex-tip21.8-2mm": {
    "art": {
-    "build_id": "surface-32x12-7d835504aece",
-    "bytes": 9443,
-    "json_sha256": "d3b67c4eef9a478c8b3b36e5c33678c6f4498514edcd1246fb37e56383158a9d",
+    "build_id": "surface-32x12-aa51c2101766",
+    "bytes": 9442,
+    "json_sha256": "c30247d8924e89fe466ad0e40544ce894ee9a6775e7326828b41c29b3675a726",
     "path": "art/umi-convex-tip21.8-2mm.json.gz",
-    "sha256": "339214e6962821e42b252d75ce97c88b291c936c25a76986b6c795e54f562677"
+    "sha256": "86c8b81f0d987b4bf0f64f567468355b890af1c21aedf6e216ad4d041c04477c"
    },
-   "build_id": "surface-32x12-7d835504aece",
+   "build_id": "surface-32x12-aa51c2101766",
    "figure_sha256": "5455123b46177272aa7d1a22a47da9333750ec9e29acb0c9328827bf71eb217b",
    "files": {
     "assembled": {
@@ -1857,7 +1857,7 @@
      "width": 1280
     }
    },
-   "fit_sha256": "a0b1858cd42b3e0934f80a99d322f56f4451c5a341112ae74210e87bc7c2a91f",
+   "fit_sha256": "27cdfe655aab9cd0369bdf07663aede521ebd693c5b94045a283b230fbe708b3",
    "look": "photo",
    "margins_px": {
     "assembled": [
@@ -1877,13 +1877,13 @@
   },
   "umi-convex-tip5.8-2mm": {
    "art": {
-    "build_id": "surface-32x11-6c5ee79ebf58",
+    "build_id": "surface-32x11-fc12618f01c0",
     "bytes": 10104,
-    "json_sha256": "499b9a3bc95783a540ef73bd871fce1b76b9f54bd5f06939a052b639c664c6bb",
+    "json_sha256": "6fe47d97f74db38fdb10b96c79ed3106664cd89ee21ca49c99e3b78d4666a71d",
     "path": "art/umi-convex-tip5.8-2mm.json.gz",
-    "sha256": "9545b4a7f35b1cb337ec5f4f312d5773a9f3779d713b48ad22bc57053b39fdfa"
+    "sha256": "f1d4d505ca6339fa875c94363740420842f9630d8bc4152d35c4b370608fa7cf"
    },
-   "build_id": "surface-32x11-6c5ee79ebf58",
+   "build_id": "surface-32x11-fc12618f01c0",
    "figure_sha256": "5455123b46177272aa7d1a22a47da9333750ec9e29acb0c9328827bf71eb217b",
    "files": {
     "assembled": {
@@ -1908,7 +1908,7 @@
      "width": 1280
     }
    },
-   "fit_sha256": "24282b687f3499e46ba306719543d532d98581f2916d01561a8b68ef81afaf95",
+   "fit_sha256": "80337a7522718a1ee2e8b54c9f049646000ad71acf586f124d64a8c818c709bc",
    "look": "photo",
    "margins_px": {
     "assembled": [
@@ -1928,13 +1928,13 @@
   },
   "umi-convex-tip9.8-2mm": {
    "art": {
-    "build_id": "surface-32x12-e3dfb9eb7e81",
+    "build_id": "surface-32x12-c87d9b1c4d73",
     "bytes": 10289,
-    "json_sha256": "415a74ac2b7c95e1374c0831a780fdad145a45bfef5eb7dba6961a8162f3b169",
+    "json_sha256": "e35f186ecc837745fbc0ca48ac414b65977ad6dc390b1b16dbf43b163968156a",
     "path": "art/umi-convex-tip9.8-2mm.json.gz",
-    "sha256": "5c14f1a4ae612029e24dd66ac7d5e5f452ac39e955d90f84fb70fcad906ce938"
+    "sha256": "05abfa46f71a069c9f566c0e18fa02df133ae513f4a19bc3bb547561af5d3405"
    },
-   "build_id": "surface-32x12-e3dfb9eb7e81",
+   "build_id": "surface-32x12-c87d9b1c4d73",
    "figure_sha256": "5455123b46177272aa7d1a22a47da9333750ec9e29acb0c9328827bf71eb217b",
    "files": {
     "assembled": {
@@ -1959,7 +1959,7 @@
      "width": 1280
     }
    },
-   "fit_sha256": "5f685b7feacf79d9f291fbdde9cbb554f32c9d8d77f8dcfc8c098ca4c0831399",
+   "fit_sha256": "52829092304fc59129f0e0110741edeaa93def1dd116261c45736d512885c343",
    "look": "photo",
    "margins_px": {
     "assembled": [
@@ -1979,13 +1979,13 @@
   },
   "umi-finray-1.5mm": {
    "art": {
-    "build_id": "surface-32x17-5b221a9ddb1a",
-    "bytes": 10624,
-    "json_sha256": "eba6885aa36f9569cd928bf2b8d0225a5c62ecf44c4f25dbe092326ac33b8084",
+    "build_id": "surface-32x17-8963ba729b38",
+    "bytes": 10623,
+    "json_sha256": "0b5901223f4135adaf1baad768461623ae1ce276135de6b0e883b87c1fe43952",
     "path": "art/umi-finray-1.5mm.json.gz",
-    "sha256": "394ace9931213c01417d0d4826ad00645494c9c4bd6ac6c68a95cd5d31b576e9"
+    "sha256": "ff40c2d4e372b1ef8e959d1d302fb5c4ae42764ac6a238b86bdaf2263fd91934"
    },
-   "build_id": "surface-32x17-5b221a9ddb1a",
+   "build_id": "surface-32x17-8963ba729b38",
    "figure_sha256": "5455123b46177272aa7d1a22a47da9333750ec9e29acb0c9328827bf71eb217b",
    "files": {
     "assembled": {
@@ -2010,7 +2010,7 @@
      "width": 1280
     }
    },
-   "fit_sha256": "bbda4cb4be8aa2907f6274657338e236653b598f5365b16a51bcdd6e7c2aa446",
+   "fit_sha256": "07cc3ee1e73e180dce0ad7cf641f3eaf51636739acc8e8e60eed286c40a6d712",
    "look": "photo",
    "margins_px": {
     "assembled": [
@@ -2030,13 +2030,13 @@
   },
   "umi-finray-1mm": {
    "art": {
-    "build_id": "surface-32x25-56dc8881a924",
-    "bytes": 11377,
-    "json_sha256": "9021f08a85e7be08201461deba4e0f21cb1546d0f9c6941a034b42bc6227339b",
+    "build_id": "surface-32x25-82641c4b560c",
+    "bytes": 11378,
+    "json_sha256": "a914d5745f13ce840d2b40dc907bbaca9dba3815aa029deb0fd1f193024c0d25",
     "path": "art/umi-finray-1mm.json.gz",
-    "sha256": "de0c011969688517e207a7e0419266a10364867f7d64c186d44bc68b189b3ee5"
+    "sha256": "b3b26d7c71313d83d5526eb4227273c9b8a4a4581ebe403c02901c4517a8aace"
    },
-   "build_id": "surface-32x25-56dc8881a924",
+   "build_id": "surface-32x25-82641c4b560c",
    "figure_sha256": "5455123b46177272aa7d1a22a47da9333750ec9e29acb0c9328827bf71eb217b",
    "files": {
     "assembled": {
@@ -2061,7 +2061,7 @@
      "width": 1280
     }
    },
-   "fit_sha256": "4f70104841b71986253c54de3c573899c01faf087bbd5024956e1936faee210b",
+   "fit_sha256": "bcbed5e7e1adfa1e336698c4aad1db9eca7d26ca26ffee8d2eff6ce42a312659",
    "look": "photo",
    "margins_px": {
     "assembled": [
@@ -2081,13 +2081,13 @@
   },
   "umi-finray-2mm": {
    "art": {
-    "build_id": "surface-32x12-083b8f742943",
-    "bytes": 9040,
-    "json_sha256": "2a3f0a3a3db79b27f13236c155e6ec3ce1c5e73b8ce0db4de3b1207faf0866c7",
+    "build_id": "surface-32x12-38ff2814faf0",
+    "bytes": 9041,
+    "json_sha256": "8b938c5ed7ce08350108fde0eb8f47303b3bac61bb994f6bd7d4f25198164133",
     "path": "art/umi-finray-2mm.json.gz",
-    "sha256": "5315ec4c2b345d5fef8c1a84ee7989ca9dfb772d4ddf88a72c1115ff766c435f"
+    "sha256": "0ce84a0d87f7508736d6507eb9a8b0306bb709ba3b481a2973b04a801e9e5750"
    },
-   "build_id": "surface-32x12-083b8f742943",
+   "build_id": "surface-32x12-38ff2814faf0",
    "figure_sha256": "5455123b46177272aa7d1a22a47da9333750ec9e29acb0c9328827bf71eb217b",
    "files": {
     "assembled": {
@@ -2112,7 +2112,7 @@
      "width": 1280
     }
    },
-   "fit_sha256": "cca7c5d986c02f89c913d47bf428ee0fb19c122c0475c042bd89ae3eb66e72a6",
+   "fit_sha256": "fb5c5288972dd22b714bd34aec6a58215964d3a6ef6f035e463959afd21784ca",
    "look": "photo",
    "margins_px": {
     "assembled": [
@@ -2132,13 +2132,13 @@
   },
   "umi-finray-3mm": {
    "art": {
-    "build_id": "surface-21x8-b1004352a5d1",
-    "bytes": 7379,
-    "json_sha256": "dd734c0af775cd0179d8ee34963d8594f8e630dc13a6f50e16dac50e7c69bdea",
+    "build_id": "surface-21x8-e75a5db676f5",
+    "bytes": 7380,
+    "json_sha256": "7347f82127219b5f552c0447823c4fd8f7616dedf4ef2cec361dc3cd828b26c2",
     "path": "art/umi-finray-3mm.json.gz",
-    "sha256": "5281fc330b2f624a1522e4801648fc2b4c8683ef8ee268c71a54be72b861b9e2"
+    "sha256": "e48586656772c6358ddbcdb0c6f5be5b893a7d377d24d83214d33acc269bcd73"
    },
-   "build_id": "surface-21x8-b1004352a5d1",
+   "build_id": "surface-21x8-e75a5db676f5",
    "figure_sha256": "5455123b46177272aa7d1a22a47da9333750ec9e29acb0c9328827bf71eb217b",
    "files": {
     "assembled": {
@@ -2163,7 +2163,7 @@
      "width": 1280
     }
    },
-   "fit_sha256": "5318de6b0ca1e20b38795a7aa580c7ca26bf2e0a0ccba4ef2b4856f24f3bedaa",
+   "fit_sha256": "7b4e0a6014a00f0f2af34f2ea47aef6a29c044b2112589dc99c64a13a01dc1a9",
    "look": "photo",
    "margins_px": {
     "assembled": [
@@ -2183,13 +2183,13 @@
   },
   "umi-trap-tip13.8-2mm": {
    "art": {
-    "build_id": "surface-32x11-168582f38f42",
-    "bytes": 9739,
-    "json_sha256": "d14dc0bd02918fba146fadb6a06a0b9ad5e0e145f0a946c7acd092d0c92f9f13",
+    "build_id": "surface-32x11-27622a79a750",
+    "bytes": 9738,
+    "json_sha256": "2f2c5f17cde3cacf3ca6e752ab8b51c6ef858d24f5f86f44af84c59ae89b267f",
     "path": "art/umi-trap-tip13.8-2mm.json.gz",
-    "sha256": "6a900390c2b35d84682ad3d2ca1371290d773dbced2b3537abd11aee16d5507a"
+    "sha256": "0d0eebe2c3f99576621042102e7191e86df387b6a5c58415c8b8033e8e169a6b"
    },
-   "build_id": "surface-32x11-168582f38f42",
+   "build_id": "surface-32x11-27622a79a750",
    "figure_sha256": "5455123b46177272aa7d1a22a47da9333750ec9e29acb0c9328827bf71eb217b",
    "files": {
     "assembled": {
@@ -2214,7 +2214,7 @@
      "width": 1280
     }
    },
-   "fit_sha256": "5f94304afdbb47c689356b0774baf880821d8c43c2fd06419489a79b46337c48",
+   "fit_sha256": "6074eb52273584e109228148d07371766b59d582c3f51a9f588883406ddbfecf",
    "look": "photo",
    "margins_px": {
     "assembled": [
@@ -2234,13 +2234,13 @@
   },
   "umi-trap-tip17.8-2mm": {
    "art": {
-    "build_id": "surface-32x11-5c364f28c111",
-    "bytes": 9391,
-    "json_sha256": "fd6dec30d821bf17ed2751d017781368f57c3b6603ae36e907de6eabd9d3cfe1",
+    "build_id": "surface-32x11-2ddc49b792b8",
+    "bytes": 9392,
+    "json_sha256": "8ac70c370e97308b971e2686b43fbd4ca2223914adc83c6411528559fc56e91d",
     "path": "art/umi-trap-tip17.8-2mm.json.gz",
-    "sha256": "95bd93c478d5673fed155daf8a9de6c0dfffd4d9abd58d6c879ebfe9dbb4aa50"
+    "sha256": "93b29842768bc16d6c705136c0ceb8e8b65ea8016b7a58dcbc88bf32db0971e7"
    },
-   "build_id": "surface-32x11-5c364f28c111",
+   "build_id": "surface-32x11-2ddc49b792b8",
    "figure_sha256": "5455123b46177272aa7d1a22a47da9333750ec9e29acb0c9328827bf71eb217b",
    "files": {
     "assembled": {
@@ -2265,7 +2265,7 @@
      "width": 1280
     }
    },
-   "fit_sha256": "9a24a2f2f21c0fce5790e8fc75a433b393ecce9ae6efae7117b8de2fe0a018c5",
+   "fit_sha256": "03a76fdb0ca47d1ff60646dfc50925b8c7de004392dc10cf117e7dbc3ac52646",
    "look": "photo",
    "margins_px": {
     "assembled": [
@@ -2285,13 +2285,13 @@
   },
   "umi-trap-tip21.8-2mm": {
    "art": {
-    "build_id": "surface-32x11-68d7d24e056f",
-    "bytes": 9273,
-    "json_sha256": "a1d967568ddbed68c8717b86fecc27a8b2f40dbeff23581080b4c32d2b5cf857",
+    "build_id": "surface-32x11-9b2bfedb5657",
+    "bytes": 9274,
+    "json_sha256": "9e36494e097947c8b9d2ae4fdc364c91062ad3da09c7ac647a9d8bf51404a87b",
     "path": "art/umi-trap-tip21.8-2mm.json.gz",
-    "sha256": "1ee3a1a7eb4309b4fc1e59e41950ca3087c92482a2f3ceaaa1a78fce6a4eecdf"
+    "sha256": "0e09a6d69fc602b90fcc7dca734eafa035b9109bf02148573881961fdff05c90"
    },
-   "build_id": "surface-32x11-68d7d24e056f",
+   "build_id": "surface-32x11-9b2bfedb5657",
    "figure_sha256": "5455123b46177272aa7d1a22a47da9333750ec9e29acb0c9328827bf71eb217b",
    "files": {
     "assembled": {
@@ -2316,7 +2316,7 @@
      "width": 1280
     }
    },
-   "fit_sha256": "d712ab6d2b22668fe2735f1680e327e0269e0478161c8369328e9b0fc25dccc7",
+   "fit_sha256": "116a7e207f328e11be5036f38aa82c7aaa8edd4f67c11a66ab4e1662ed8c565e",
    "look": "photo",
    "margins_px": {
     "assembled": [
@@ -2336,13 +2336,13 @@
   },
   "umi-trap-tip5.8-2mm": {
    "art": {
-    "build_id": "surface-32x11-8c34082adb12",
-    "bytes": 9944,
-    "json_sha256": "6562fe294f280c43e066254e67951089ccd01abd42af76e1bcdbdb7bf6b0b5e0",
+    "build_id": "surface-32x11-c0f9f03ccc7a",
+    "bytes": 9945,
+    "json_sha256": "ec0a386b5348c4d3ae428fc025c37e45c6656bdcb25558352f0f80895fdc2ba0",
     "path": "art/umi-trap-tip5.8-2mm.json.gz",
-    "sha256": "d4b758c9931bbdb9a339334bc4dcfaa853d5a6609b4b91609383dd530c5bb68b"
+    "sha256": "a85c22fcba44201ce5bae710bb54612a3294d7024eb40a385b77233040c3024f"
    },
-   "build_id": "surface-32x11-8c34082adb12",
+   "build_id": "surface-32x11-c0f9f03ccc7a",
    "figure_sha256": "5455123b46177272aa7d1a22a47da9333750ec9e29acb0c9328827bf71eb217b",
    "files": {
     "assembled": {
@@ -2367,7 +2367,7 @@
      "width": 1280
     }
    },
-   "fit_sha256": "180f8dd81346365b588eb39e1b41db297975bc64c35044a236dcfad3d1acafe6",
+   "fit_sha256": "79a4b0d77e09f3b2dee7f8a2f46371b5c77d2b0279967230ff7af92c90adf429",
    "look": "photo",
    "margins_px": {
     "assembled": [
@@ -2387,13 +2387,13 @@
   },
   "umi-trap-tip9.8-2mm": {
    "art": {
-    "build_id": "surface-32x11-557e60081323",
-    "bytes": 10012,
-    "json_sha256": "20553f7a912e37e474f56250f41b2cd1d871a7bbadbda3a92147abd8f31c5765",
+    "build_id": "surface-32x11-2b7d6823399c",
+    "bytes": 10013,
+    "json_sha256": "b45f9ebdee32307a1977fc879f6c0e2d879163f92fea30eeabdbe64cc2d70fa3",
     "path": "art/umi-trap-tip9.8-2mm.json.gz",
-    "sha256": "24cc93d07e11c053b3f900aad4d458687466e85d30b4f02449035f361daa24b4"
+    "sha256": "d394f2bfde25c6fabac850a99672a930df38d8c603cf7c8d4080c90070e4aac0"
    },
-   "build_id": "surface-32x11-557e60081323",
+   "build_id": "surface-32x11-2b7d6823399c",
    "figure_sha256": "5455123b46177272aa7d1a22a47da9333750ec9e29acb0c9328827bf71eb217b",
    "files": {
     "assembled": {
@@ -2418,7 +2418,7 @@
      "width": 1280
     }
    },
-   "fit_sha256": "a6c19c0745c4344358b2569c053b4738247f55655ba9899102f99f622fc3e07b",
+   "fit_sha256": "d755cd2b34810e46140f912174e6515074c7a630427c7d773cb27037b05b0385",
    "look": "photo",
    "margins_px": {
     "assembled": [
@@ -2438,13 +2438,13 @@
   },
   "unitree-dex1-1.5mm": {
    "art": {
-    "build_id": "surface-32x17-292a1ecb211e",
-    "bytes": 12216,
-    "json_sha256": "4207dfa8d4d0e54159ff3c164515ebad5d9262204b6bb972c02b90dc06d54b47",
+    "build_id": "surface-32x17-d4b9eb05e5ae",
+    "bytes": 12217,
+    "json_sha256": "5d786f932f02abc6c4476c7e39192073ca363b70d265943bfcece10b9139a4f5",
     "path": "art/unitree-dex1-1.5mm.json.gz",
-    "sha256": "20ffe4f610408fea31856e6768ae11f4eb087af58dba66611e57825e7fa06abe"
+    "sha256": "e3b8de518c743ad27b8b0cdd14cc7dc0078f4de23dd6ea0eab03442b32e64162"
    },
-   "build_id": "surface-32x17-292a1ecb211e",
+   "build_id": "surface-32x17-d4b9eb05e5ae",
    "figure_sha256": "5455123b46177272aa7d1a22a47da9333750ec9e29acb0c9328827bf71eb217b",
    "files": {
     "assembled": {
@@ -2469,7 +2469,7 @@
      "width": 1280
     }
    },
-   "fit_sha256": "61ceefd2a37621209df4a78850f8bc2abf0449ace5c7652839af684cbf23c9bc",
+   "fit_sha256": "ebc197d85b01dfc66798288e18c2fb912f530203c375b85baa636658ec378a29",
    "look": "photo",
    "margins_px": {
     "assembled": [
@@ -2524,13 +2524,13 @@
   },
   "unitree-dex1-1mm": {
    "art": {
-    "build_id": "surface-32x26-f3007aad2bd7",
+    "build_id": "surface-32x26-fe111c6f103a",
     "bytes": 13594,
-    "json_sha256": "aa8c8f3b078551e9a66c5274639e4efbcf82608550500b9f369bae6ca08a8a04",
+    "json_sha256": "dbc5b6669e72ace98b37878cc40df5d38625b1f796154aea0998f5abd9dd3e78",
     "path": "art/unitree-dex1-1mm.json.gz",
-    "sha256": "8c2d00cf10bc225f6ea425cc3c06da5727f43c0214ae845d0359dad82c7e0cda"
+    "sha256": "738f2a26e818fac920832de767938492eae2ebb634bf47bd57a3a297d77508cf"
    },
-   "build_id": "surface-32x26-f3007aad2bd7",
+   "build_id": "surface-32x26-fe111c6f103a",
    "figure_sha256": "5455123b46177272aa7d1a22a47da9333750ec9e29acb0c9328827bf71eb217b",
    "files": {
     "assembled": {
@@ -2555,7 +2555,7 @@
      "width": 1280
     }
    },
-   "fit_sha256": "9f86b8d238c815d1839a92b1a64f8cb77011b8bea782ac424347eafaef729192",
+   "fit_sha256": "4f9c7ffe21908920bfb3582aee4a7e5e5cfaa97df714fff27098492440b9e8f0",
    "look": "photo",
    "margins_px": {
     "assembled": [
@@ -2610,13 +2610,13 @@
   },
   "unitree-dex1-2mm": {
    "art": {
-    "build_id": "surface-24x13-fb9d6bd1fe2c",
-    "bytes": 10210,
-    "json_sha256": "bca97004fa4ede6c7c77cc0a4925cd7cedfa17bb100add4a973182937848926b",
+    "build_id": "surface-24x13-f6889c1d1b59",
+    "bytes": 10209,
+    "json_sha256": "6be8e98b7961063ae93e0595b507a93cbfae1b6128c8affb204b241cfaeec741",
     "path": "art/unitree-dex1-2mm.json.gz",
-    "sha256": "f4d0b8cf87dcfe4fdbb046a54dc7522a2c0c521b2ad49fe27d1c28442de90240"
+    "sha256": "d280b19db75f67dacb244800a52ab4236e8a062857b19fe2371ac1be73fa4356"
    },
-   "build_id": "surface-24x13-fb9d6bd1fe2c",
+   "build_id": "surface-24x13-f6889c1d1b59",
    "figure_sha256": "5455123b46177272aa7d1a22a47da9333750ec9e29acb0c9328827bf71eb217b",
    "files": {
     "assembled": {
@@ -2641,7 +2641,7 @@
      "width": 1280
     }
    },
-   "fit_sha256": "535986de75a6d988d6de3b4c03c2b4f11452eb1429f2b69283d0481ccac304ce",
+   "fit_sha256": "81274309e8919dfe4c194824d9c1c7576550cb26ff16c4e64ebc0c0eed796979",
    "look": "photo",
    "margins_px": {
     "assembled": [
@@ -2696,13 +2696,13 @@
   },
   "unitree-dex1-3mm": {
    "art": {
-    "build_id": "surface-16x9-e5a994e53503",
+    "build_id": "surface-16x9-97d15171542d",
     "bytes": 7167,
-    "json_sha256": "e4d2f59ab7faec8e30be26b99817ca2867d57031626f2954aaa081af3f1317a0",
+    "json_sha256": "6fbf8a66b433956b4adc323eb467214480658bee6d06a117880ba68de1baa379",
     "path": "art/unitree-dex1-3mm.json.gz",
-    "sha256": "2f093ff720dd07e2acd4cd449b353dcf7851bde0175b4509723a4c0de8b75c34"
+    "sha256": "a814c4e5274767543cdfa436ebd52769436c1dc29176430904d25772b9955fa4"
    },
-   "build_id": "surface-16x9-e5a994e53503",
+   "build_id": "surface-16x9-97d15171542d",
    "figure_sha256": "5455123b46177272aa7d1a22a47da9333750ec9e29acb0c9328827bf71eb217b",
    "files": {
     "assembled": {
@@ -2727,7 +2727,7 @@
      "width": 1280
     }
    },
-   "fit_sha256": "f852a682f4af46e18d920dae735e2344b27d0f1aea7f3b929274e9cf12d591a6",
+   "fit_sha256": "d0dc0f758840db461b1fe321897d49c7a490644220d0c51724df9aa0ff59967c",
    "look": "photo",
    "margins_px": {
     "assembled": [
@@ -2782,13 +2782,13 @@
   },
   "widowx-250-1.5mm": {
    "art": {
-    "build_id": "surface-17x17-b9e5e409ec81",
-    "bytes": 8300,
-    "json_sha256": "4b4cab3d72b021ef2fa831f30e82920e3528bba998969851f681f742ebf1071d",
+    "build_id": "surface-17x17-899c8a1fd232",
+    "bytes": 8301,
+    "json_sha256": "a2f6f2bd471924debe23228ccc9912ead4798d7bb0b5bcc6cf337deb2074feea",
     "path": "art/widowx-250-1.5mm.json.gz",
-    "sha256": "f1faa79da1ca44cf55eeee2d2df6e8f2769b69194f9acd3d55335b1b476a07d1"
+    "sha256": "7a101294fe0552233bd3c64a387f0f3e143bf5685b1222b30466757491a46fd9"
    },
-   "build_id": "surface-17x17-b9e5e409ec81",
+   "build_id": "surface-17x17-899c8a1fd232",
    "figure_sha256": "5455123b46177272aa7d1a22a47da9333750ec9e29acb0c9328827bf71eb217b",
    "files": {
     "assembled": {
@@ -2813,7 +2813,7 @@
      "width": 1280
     }
    },
-   "fit_sha256": "bac8b6305c42a588c20cd5abb2c04ffa41a3b5f018b8ed91788d2e5fa6c6e5e1",
+   "fit_sha256": "a6db36b8af032a54a52049fe6c0746107df41acad04436bde9bfedd499e0ddea",
    "look": "photo",
    "margins_px": {
     "assembled": [
@@ -2868,13 +2868,13 @@
   },
   "widowx-250-1mm": {
    "art": {
-    "build_id": "surface-26x27-62928ed42a39",
+    "build_id": "surface-26x27-00b579408d5f",
     "bytes": 11135,
-    "json_sha256": "bdfb1433ee468740ed883e284ba158bd25f3c00c0022de93b1bfda40c88c04dd",
+    "json_sha256": "c8676b4542e9b9d3e3f0d842e79622c028b6df1f230a2f78cadc6c303e92fae4",
     "path": "art/widowx-250-1mm.json.gz",
-    "sha256": "c472cb6a66118a0c0232df10b64e62e991c9db9d548895dc85517755830e7e6d"
+    "sha256": "d142e59eb324bf460edf5baa72fa95a7ef65985a1fb5702522645e54d3fd706e"
    },
-   "build_id": "surface-26x27-62928ed42a39",
+   "build_id": "surface-26x27-00b579408d5f",
    "figure_sha256": "5455123b46177272aa7d1a22a47da9333750ec9e29acb0c9328827bf71eb217b",
    "files": {
     "assembled": {
@@ -2899,7 +2899,7 @@
      "width": 1280
     }
    },
-   "fit_sha256": "33a8a21eba92505fe443b6e47f67d08195eeda8cbd0254c0b6f10b593ac323f6",
+   "fit_sha256": "c50a8a61291bee91b432bda30e842dc2716d201155138164b4d7091125119f1f",
    "look": "photo",
    "margins_px": {
     "assembled": [
@@ -2954,13 +2954,13 @@
   },
   "widowx-250-2mm": {
    "art": {
-    "build_id": "surface-13x13-c86af2cbab4b",
-    "bytes": 6386,
-    "json_sha256": "56744b06117d97168836b063fb6440347ccc24a2f183d5ef2673a83e896174f7",
+    "build_id": "surface-13x13-bb5a27712f98",
+    "bytes": 6385,
+    "json_sha256": "b50e1b1251f720cf7e1418c7cb792fbb1049cde9becf7bd241814c808db71577",
     "path": "art/widowx-250-2mm.json.gz",
-    "sha256": "cded9649e7adbe50ef5efd751ebfca7c6225771125cee00b0da8de2ff95e5985"
+    "sha256": "3a9a91a3f4f18a35e86ed4563641b47b0c89e354604b4a0de1e53d1ec97d8133"
    },
-   "build_id": "surface-13x13-c86af2cbab4b",
+   "build_id": "surface-13x13-bb5a27712f98",
    "figure_sha256": "5455123b46177272aa7d1a22a47da9333750ec9e29acb0c9328827bf71eb217b",
    "files": {
     "assembled": {
@@ -2985,7 +2985,7 @@
      "width": 1280
     }
    },
-   "fit_sha256": "52dbf3c8d63948799d91c5aece43d4af35cd22bff5404e6bad08483b8166fb28",
+   "fit_sha256": "ec99a4dcebc95d7a19231a46cc129d89c80bf23df71eefb420bf15837b0acb93",
    "look": "photo",
    "margins_px": {
     "assembled": [
@@ -3040,13 +3040,13 @@
   },
   "widowx-250-3mm": {
    "art": {
-    "build_id": "surface-9x9-2bfc8af66d96",
-    "bytes": 5712,
-    "json_sha256": "464dad4fc233b263d638a1d032a46dc133062f4aee5ec8bcd18ce7e7a2224876",
+    "build_id": "surface-9x9-6da100ae4f56",
+    "bytes": 5711,
+    "json_sha256": "0d611bf97ddd51adb5486d51b4feae3c17fe55b5e3222e3ab8083dd0591bd7fa",
     "path": "art/widowx-250-3mm.json.gz",
-    "sha256": "72f2f0b889c0e9a84d227fdf7514af408a55e433dc54320503c205e43e39adce"
+    "sha256": "08cc5e6b162711bd196d41e6cdc6affa02da08f8d3b4c2270a59f9ca833b5174"
    },
-   "build_id": "surface-9x9-2bfc8af66d96",
+   "build_id": "surface-9x9-6da100ae4f56",
    "figure_sha256": "5455123b46177272aa7d1a22a47da9333750ec9e29acb0c9328827bf71eb217b",
    "files": {
     "assembled": {
@@ -3071,7 +3071,7 @@
      "width": 1280
     }
    },
-   "fit_sha256": "bfc70cf664be701a4404c5077b9a4ba0110daaf0b228e6b73ea60cd0417823c8",
+   "fit_sha256": "bbdfd6fb03eeb41e0afbc47d6650210a63d392de7606ac1f7a0fe6dd58a64499",
    "look": "photo",
    "margins_px": {
     "assembled": [
