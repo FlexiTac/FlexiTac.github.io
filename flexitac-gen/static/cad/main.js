@@ -3021,6 +3021,24 @@ function wireSamples() {
       if (seen < view.height / 2) $("cadWorkspace").scrollIntoView({behavior: window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start"});
     });
   });
+  document.querySelector("#samplePalette .sample-grid")?.addEventListener("focusin", revealTile);
+}
+
+function revealTile(event) {
+  // A tile Tabbed to that the palette's scroller shows only in part (a browser scrolls a focused element into view only
+  // when none of it shows; the review of 2026-11-06: below 760 px the third tile 61 px past the row, its focus ring cut):
+  // the scroller moved the least that shows it whole, its ring in the scroller's padding, along each way it scrolls (the
+  // phone's row sideways, a short laptop window's two columns down).  The keyboard's focus only (:focus-visible: a
+  // click's or a drag's never moves a tile from under the pointer), and the scroller only (the page stays put).
+  const grid = event.currentTarget; const tile = event.target.closest?.("[data-sample]");
+  if (!tile || !tile.matches(":focus-visible")) return;
+  const style = getComputedStyle(grid); const area = grid.getBoundingClientRect(); const box = tile.getBoundingClientRect();
+  const [x, y] = [area.left + grid.clientLeft, area.top + grid.clientTop];  // its inside, less its border and scroll bars
+  const move = (low, high, from, to) => (low < from ? low - from : high > to ? Math.min(high - to, low - from) : 0);
+  const scrolls = value => value === "auto" || value === "scroll";
+  const left = scrolls(style.overflowX) ? move(box.left, box.right, x + parseFloat(style.paddingLeft), x + grid.clientWidth - parseFloat(style.paddingRight)) : 0;
+  const top = scrolls(style.overflowY) ? move(box.top, box.bottom, y + parseFloat(style.paddingTop), y + grid.clientHeight - parseFloat(style.paddingBottom)) : 0;
+  if (left || top) grid.scrollBy({left, top});
 }
 
 // -- diagnostics ----------------------------------------------------------------------------

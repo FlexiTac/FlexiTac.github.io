@@ -55,12 +55,16 @@ full opening of 37 mm a finger (the Library's decimated bodies,
 `web/library/bodies/widowx-250/`); changed by the FlexiTac-Gen project in
 2026.
 
+Each of the two carries that notice in its 80-byte STL header too:
+`modified (assembled: <id>) by FlexiTac-Gen 2026, see NOTICE.md`, as the
+Library's bodies do.
+
 ## Files
 
 | File | Source at commit | Licence and holder | Change | SHA-256 |
 | --- | --- | --- | --- | --- |
-| `franka-hand-gripper.stl` | mujoco_menagerie `f3b6013`, `franka_emika_panda/assets/finger_1.obj`, `finger_0.obj`, `hand_0.obj` to `hand_4.obj` | Apache-2.0, `licenses/mujoco_menagerie-franka_emika_panda.txt` | modified: assembled from the Library's Franka Hand pad and the hand's bodies (decimated, OBJ in metres to binary STL in millimetres) at the full opening | `e06a40f6b35245556e251095b5a4c18ca3bb5befde16003ea82a0ab6fbefd765` |
-| `widowx-250-gripper.stl` | mujoco_menagerie `f3b6013`, `trossen_wx250s/assets/wx250s_10_gripper_finger.stl`, `wx250s_7_gripper.stl`, `wx250s_8_gripper_prop.stl`, `wx250s_9_gripper_bar.stl` | BSD-3-Clause, Trossen Robotics, `licenses/mujoco_menagerie-trossen_wx250s.txt` | modified: assembled from both fingers and the gripper's bodies (decimated) at the full opening | `997bcaefe5c9ff76575cc849a49551dff3079650b15a5212335902cb61d291f1` |
+| `franka-hand-gripper.stl` | mujoco_menagerie `f3b6013`, `franka_emika_panda/assets/finger_1.obj`, `finger_0.obj`, `hand_0.obj` to `hand_4.obj` | Apache-2.0, `licenses/mujoco_menagerie-franka_emika_panda.txt` | modified: assembled from the Library's Franka Hand pad and the hand's bodies (decimated, OBJ in metres to binary STL in millimetres) at the full opening | `80be6e7ba0aa48520a544e489346766b86b0b914b9ad78fd7d30dcef6ad9e578` |
+| `widowx-250-gripper.stl` | mujoco_menagerie `f3b6013`, `trossen_wx250s/assets/wx250s_10_gripper_finger.stl`, `wx250s_7_gripper.stl`, `wx250s_8_gripper_prop.stl`, `wx250s_9_gripper_bar.stl` | BSD-3-Clause, Trossen Robotics, `licenses/mujoco_menagerie-trossen_wx250s.txt` | modified: assembled from both fingers and the gripper's bodies (decimated) at the full opening | `67c658deca7b3a05fc1e86c43a0780734740b3e31453423bba1e15576ac8d4e2` |
 | `licenses/mujoco_menagerie-franka_emika_panda.txt` | mujoco_menagerie `f3b6013`, `franka_emika_panda/LICENSE` | Apache-2.0 | unchanged | `a6cba85bc92e0cff7a450b1d873c0eaa2e9fc96bf472df0247a26bec77bf3ff9` |
 | `licenses/mujoco_menagerie-trossen_wx250s.txt` | mujoco_menagerie `f3b6013`, `trossen_wx250s/LICENSE` | BSD-3-Clause, Trossen Robotics | unchanged | `21868447315ac2b10e592d08958c1035b19a32cf39e9165b23033f68390098cb` |
 

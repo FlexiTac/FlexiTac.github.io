@@ -9,6 +9,13 @@
 // (THEME_KEY, "dark" or "light", shared by the two pages, as app.js's look is); without storage (a private window,
 // blocked site data) the page opens light and the toggle still switches it for that page.  The toggle's icon (a moon
 // in light, a sun in dark) follows the attribute in the style sheets; its aria-pressed and tooltip are set here.
+//
+// Being the one script that runs before the first paint, it also marks the Library opened at an address of its own
+// (library.html, its <meta name="flexitac-page" content="library">, at #<id>: a sensor's page shared or reloaded, a
+// place of the grid) with <html data-lib-place>, under which library.css hides the grid's title, tagline and footer
+// until library.js's first route clears it and shows the page the address names (the review of 2026-11-06: hidden by
+// the deferred library.js as it ran, a frame of the grid's title over the footer had still been painted on 7 of 16 such
+// opens).
 "use strict";
 
 (() => {
@@ -31,6 +38,7 @@
   }
 
   show(stored());
+  if (location.hash.length > 1 && document.querySelector('meta[name="flexitac-page"][content="library"]')) root.dataset.libPlace = "";
   document.addEventListener("DOMContentLoaded", () => show(root.dataset.theme), {once: true});
   // Delegated, so a click before DOMContentLoaded counts too.
   document.addEventListener("click", event => {

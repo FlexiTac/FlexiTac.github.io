@@ -663,6 +663,10 @@ body[data-mode="cad"] .flow-guide { background:var(--bg); border-right-color:var
 /* The stacked view: its height, its 3D and its overlays styles.css's; the neutral gradient (no keys, notes or caption
    with it since 2026-11-06). */
 .stacked-canvas { background-image:linear-gradient(155deg,#f5f5f7,#e8e8ed); }
+/* Its last row rounded as the card's foot, as the boards' previews (the verification of 2026-11-06: the gradient's
+   square corners stood out of the card's rounded foot, most in dark): the radius here, the card's less its edge; which
+   corners by the layout, styles.css's (its stack-card container). */
+.stacked-review { --stack-foot:calc(var(--r-lg) - 1px); }
 /* The figures' controls in their frames (the user's request of 2026-11-06; styles.css places them, top left, Reset view
    top right): frosted chips as the 3D view's material pills (its blur, a hairline ring, the floating shadow), so they
    read over a drawing turned or zoomed under them, in the light palette wherever they sit (the lightboxes' list above):

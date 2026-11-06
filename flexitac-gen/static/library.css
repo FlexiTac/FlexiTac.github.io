@@ -51,6 +51,10 @@ main.lib { --lib-gutter:clamp(24px,5vw,76px); --lib-gap:20px; display:block; max
   overscroll-behavior-x:contain; scroll-snap-type:x mandatory; scroll-padding:0 var(--lib-gutter); scrollbar-width:none; }
 .lib-track::-webkit-scrollbar { display:none; }
 .lib-track > * { flex:none; scroll-snap-align:start; }
+/* Tabbed to, a shelf's card comes into the window with its focus ring and room round it, as the grippers' cards (the
+   verification of 2026-11-06: at 390 and 360 px the UMI shelf's card stopped flush with the window's bottom, its ring
+   cut); sideways none, so it snaps at the gutter as before. */
+.lib-track > .lib-card { scroll-margin:16px 0; }
 .lib-arrows { display:flex; justify-content:flex-end; gap:12px; margin:-12px 0 0; }
 /* A shelf whose arrows are hidden keeps their room (36 px less the 12 px they rise into the track), so every shelf is
    as far from the next one with or without them (the review of 2026-11-05: 79 px after a shelf with arrows, 57 px
@@ -184,6 +188,9 @@ main.lib { --lib-gutter:clamp(24px,5vw,76px); --lib-gap:20px; display:block; max
 .lib-footer { padding:18px clamp(24px,5vw,76px) 28px; border-top:1px solid var(--hairline); color:var(--text-2); font-size:12px; line-height:1.4; }
 .lib-footer p { margin:0; }
 .lib-footer a { color:var(--link); }
+/* The page opened at an address of its own (theme.js's data-lib-place, set before the first paint): the grid's title,
+   tagline and footer wait for library.js's first route, which clears it (the review of 2026-11-06). */
+:root[data-lib-place] #libHero,:root[data-lib-place] .lib-footer { display:none; }
 
 /* More contrast: the page's links underlined as the theme's (the cards, pills and Open are boxes). */
 @media (prefers-contrast: more) { .mode-links a span,.lib .lib-back span,.lib-links a,.lib-provenance a,.lib-footer a { text-decoration:underline; } }

@@ -157,7 +157,7 @@
     "name": "franka-hand-gripper.stl",
     "bytes": 231784,
     "facets": 4634,
-    "sha256": "e06a40f6b35245556e251095b5a4c18ca3bb5befde16003ea82a0ab6fbefd765",
+    "sha256": "80be6e7ba0aa48520a544e489346766b86b0b914b9ad78fd7d30dcef6ad9e578",
     "unit": "mm"
    },
    "assembled": {
@@ -198,7 +198,7 @@
     "name": "widowx-250-gripper.stl",
     "bytes": 64484,
     "facets": 1288,
-    "sha256": "997bcaefe5c9ff76575cc849a49551dff3079650b15a5212335902cb61d291f1",
+    "sha256": "67c658deca7b3a05fc1e86c43a0780734740b3e31453423bba1e15576ac8d4e2",
     "unit": "mm"
    },
    "assembled": {

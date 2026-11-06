@@ -601,6 +601,11 @@ body[data-mode="cad"] .flow-guide { display:block; position:sticky; top:0; align
   .sample-palette { display:grid; grid-template-columns:auto minmax(0,1fr); column-gap:8px; align-items:baseline; margin:8px 0 0; padding-top:8px; }
   .sample-palette-title,.sample-palette-hint { margin:0; }
   .sample-grid { grid-column:1 / -1; grid-template-columns:none; grid-auto-flow:column; grid-auto-columns:138px; overflow-x:auto; gap:4px; margin:4px -3px 0; padding:3px; }
+  /* The row's tiles one height (the verification of 2026-11-06: a tile with a two-line name 32 px, the others 30 px, its
+     second line 3 px off the tile's bottom edge): each tile as tall as its row, 34 px, a two-line name 4 px clear of
+     either edge. */
+  .sample-grid > li { display:flex; }
+  .sample-grid .sample { min-height:34px; padding-top:3px; padding-bottom:3px; }
 }
 #cadWorkspace,#cadStepConfig,#cadStepGenerate,#downloadsTitle { scroll-margin-top:14px; }
 /* The Gerber ZIPs, first among the downloads and set off (index.html .download-main). */
@@ -764,10 +769,18 @@ body[data-look="photo"] .look-scope :is(.oblique-board,.stacked-canvas:not(.is-p
 .stack-figure.is-on-part { display:none; }
 body[data-mode="cad"] .stack-figure.is-on-part { display:block; border-top:1px solid var(--line); }
 body[data-mode="cad"] .stacked-review { container:stack-card / inline-size; }
+/* The card's last row rounded at its foot (the verification of 2026-11-06: the figures' gradient stood square out of the
+   card's rounded foot): Rectangular's registration alone and Gen by Surface's sensor on the part under it both bottom
+   corners, the registration above it none; side by side the left's bottom left, the right's bottom right.  The radius
+   theme.css's (--stack-foot), else this sheet's card's 8 px less its edge. */
+.stack-figure.is-registration > .stacked-canvas,body[data-mode="cad"] .stack-figure.is-on-part > .stacked-canvas { border-radius:0 0 var(--stack-foot,7px) var(--stack-foot,7px); }
+body[data-mode="cad"] .stack-figure.is-registration > .stacked-canvas { border-radius:0; }
 @container stack-card (min-width:720px) {
   .stack-figures { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); }
   .stack-figure { min-width:0; }
   body[data-mode="cad"] .stack-figure.is-on-part { border-top:0; border-left:1px solid var(--line); }
+  body[data-mode="cad"] .stack-figure.is-registration > .stacked-canvas { border-radius:0 0 0 var(--stack-foot,7px); }
+  body[data-mode="cad"] .stack-figure.is-on-part > .stacked-canvas { border-radius:0 0 var(--stack-foot,7px) 0; }
 }
 .figure-reset { position:absolute; top:12px; right:12px; z-index:3; min-height:26px; padding:0 10px; border:1px solid #c8ccd0; border-radius:4px; background:#fff; color:var(--ink);
   font-size:.68rem; font-weight:750; cursor:pointer; }

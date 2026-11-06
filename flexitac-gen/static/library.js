@@ -49,16 +49,16 @@
   const state = {index: null, files: null, filesError: null, filesLoad: null, view: null, picture: VIEWS[0][0], gridY: 0, opener: null, fromGrid: false, syncs: []};
   history.scrollRestoration = "manual";
   // The page opened at an address of its own (a sensor's page shared or reloaded, a place of the grid): the grid's title,
-  // tagline and footer wait for the first route (opened(), once entries.json is in), which shows the page the address
-  // names (the review of 2026-11-06: a sensor's page opened directly had first shown the grid's title over the footer,
-  // 40 to 100 ms here, up to 1.9 s on a slow 3G at 390 px, then switched to the sensor's page).
-  const FOOTER = document.querySelector(".lib-footer");
-  if (location.hash.length > 1) {
-    $("libHero").hidden = true;
-    if (FOOTER) FOOTER.hidden = true;
-  }
+  // tagline and footer wait for the first route (opened(), once entries.json is in, or its failure), which shows the page
+  // the address names (the review of 2026-11-06: a sensor's page opened directly had first shown the grid's title over
+  // the footer, 40 to 100 ms here, up to 1.9 s on a slow 3G at 390 px, then switched to the sensor's page).  From the
+  // first paint: theme.js marks <html data-lib-place> in <head>, library.css hides them under it (when this deferred
+  // script hid them as it ran, a frame had still been painted on 7 of 16 direct opens); marked here too should theme.js
+  // not have run.
+  const ROOT = document.documentElement;
+  if (location.hash.length > 1) ROOT.dataset.libPlace = "";
   function opened() {
-    if (FOOTER) FOOTER.hidden = false;
+    delete ROOT.dataset.libPlace;
   }
 
   // -- small helpers -------------------------------------------------------------------------------------------------
@@ -219,6 +219,19 @@
     left.addEventListener("click", () => step(-1));
     right.addEventListener("click", () => step(1));
     track.addEventListener("scroll", sync, {passive: true});
+    // A card Tabbed to that the row shows only in part (a browser scrolls a focused element into view only when none of
+    // it shows; the review of 2026-11-06: at 390 px the UMI shelf's 1.5 mm card had 192 of its 273 px past the window):
+    // the row moved the least that shows it whole inside its gutters (the cards then snap).  The keyboard's focus only
+    // (:focus-visible: a click's never moves a card from under the pointer), and the row only (the page stays put).
+    track.addEventListener("focusin", event => {
+      const card = [...track.children].find(child => child.contains(event.target));
+      if (!card || !event.target.matches(":focus-visible")) return;
+      const style = getComputedStyle(track); const box = card.getBoundingClientRect();
+      const inside = track.getBoundingClientRect().left + track.clientLeft;
+      const [start, end] = [inside + parseFloat(style.paddingLeft), inside + track.clientWidth - parseFloat(style.paddingRight)];
+      const shift = box.left < start ? box.left - start : box.right > end ? Math.min(box.right - end, box.left - start) : 0;
+      if (shift) track.scrollBy({left: shift});
+    });
     state.syncs.push(sync);
     return [track, arrows];
   }
@@ -422,7 +435,9 @@
   // moves) and hides it; the Exploded | Assembled control drives both.  One view for the page (one WebGL context), made on
   // the first sensor's page that has one and kept, its host moved into each sensor's page; three.js loads on a sensor's
   // page only (the one dynamic import below), never on the grid.  Without WebGL, with Save-Data, a file that does not load
-  // or a lost context the picture stays, and nothing is logged.  ?probe: <pre id="libViewState" hidden>, the view's state
+  // or a lost context the picture stays, and this script logs nothing; without WebGL three.js's WebGLRenderer still says
+  // why it has no context with console.error (three lines in Chromium; the verification of 2026-11-06), left as it is
+  // (library_checks part_view takes them).  ?probe: <pre id="libViewState" hidden>, the view's state
   // for the checks; ?probe=shoot: the shots tool's (the drawing where the figure frames it, the stage's numbers measured).
   const PROBE = new URLSearchParams(location.search).get("probe");
   // host: the view's element (made once); view: library_view.js's (made once); load: its module; off and note: why this

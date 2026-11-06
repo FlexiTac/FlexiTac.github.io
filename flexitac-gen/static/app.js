@@ -101,6 +101,10 @@
     return node;
   }
   const round6 = number => Math.round(number * 1e6) / 1e6;
+  // Whether an element is rendered (it has a box: no display:none on it or above it).  Element.checkVisibility where the
+  // browser has it, else its client rects, the same test: Safari has checkVisibility only since 17.4 and Firefox since
+  // 106 (the review of 2026-11-06), so the page calls it behind this guard alone (tests/test_surface_web.py).
+  const rendered = node => (typeof node.checkVisibility === "function" ? node.checkVisibility() : node.getClientRects().length > 0);
   const clamp = (number, low, high) => Math.min(high, Math.max(low, number));
   const plural = (count, word, many = `${word}s`) => `${count} ${count === 1 ? word : many}`;
   const capitalize = text => text.charAt(0).toUpperCase() + text.slice(1);
@@ -763,28 +767,35 @@
     // The view's controls lie over its frame's top left (2026-11-06): where the board at that fit (its outline, its
     // label and its pin-1 ring, boardDrawing) would come within CONTROLS_CLEAR_PX of them, the window starts
     // FIGURE_ROOM_PX under them (two rows where a narrow frame wraps them) and the board is fitted again below them; else
-    // the window is styles.css's, as before.
+    // the window is styles.css's, as before.  That step only places the board: should it throw (a browser without an
+    // API it uses), the board keeps the plain fit and the build still shows (the review of 2026-11-06: an unguarded
+    // Element.checkVisibility, which Safari has only since 17.4, had failed every build there, in both modes).
     const svg = pane.querySelector(":scope > svg"); const zoom = zooms.get(pane.id);
     const own = numbers(svg?.dataset.boardBox); const coin = svg?.querySelector(":scope > .coin-ref");
     if (!zoom || !own || !coin) return;
     svg.style.paddingTop = "";
     let fit = fitWindow(svg, own);
     if (!fit) return;  // not shown (or no fit): placed when it is
-    const tools = controlsBox(pane.parentElement); const drawn = tools && boardDrawing(svg);
-    if (drawn) {
-      const frame = svg.getBoundingClientRect();
-      const at = (x, y) => [frame.left + fit.left + (x - fit.base.x) * fit.scale, frame.top + fit.top + (y - fit.base.y) * fit.scale];
-      const [left, top] = at(drawn.left, drawn.top); const [right, bottom] = at(drawn.right, drawn.bottom);
-      const rings = drawn.rings.map(([x, y]) => at(x, y)); const ring = PIN1_RING_PX + 1;
-      const boxes = [[left, top, right, bottom], ...rings.map(([x, y]) => [x - ring, y - ring, x + ring, y + ring])];
-      const near = boxes.some(([l, t, r, b]) => l < tools.right + CONTROLS_CLEAR_PX && r > tools.left - CONTROLS_CLEAR_PX
-        && t < tools.bottom + CONTROLS_CLEAR_PX && b > tools.top - CONTROLS_CLEAR_PX);
-      if (near) {
-        svg.style.paddingTop = `${round6(tools.bottom - frame.top + FIGURE_ROOM_PX)}px`;
-        fit = fitWindow(svg, own);
-        if (!fit) return;
+    try {
+      const tools = controlsBox(pane.parentElement); const drawn = tools && boardDrawing(svg);
+      if (drawn) {
+        const frame = svg.getBoundingClientRect();
+        const at = (x, y) => [frame.left + fit.left + (x - fit.base.x) * fit.scale, frame.top + fit.top + (y - fit.base.y) * fit.scale];
+        const [left, top] = at(drawn.left, drawn.top); const [right, bottom] = at(drawn.right, drawn.bottom);
+        const rings = drawn.rings.map(([x, y]) => at(x, y)); const ring = PIN1_RING_PX + 1;
+        const boxes = [[left, top, right, bottom], ...rings.map(([x, y]) => [x - ring, y - ring, x + ring, y + ring])];
+        const near = boxes.some(([l, t, r, b]) => l < tools.right + CONTROLS_CLEAR_PX && r > tools.left - CONTROLS_CLEAR_PX
+          && t < tools.bottom + CONTROLS_CLEAR_PX && b > tools.top - CONTROLS_CLEAR_PX);
+        if (near) {
+          svg.style.paddingTop = `${round6(tools.bottom - frame.top + FIGURE_ROOM_PX)}px`;
+          fit = fitWindow(svg, own);
+        }
       }
+    } catch (error) {
+      svg.style.paddingTop = "";
+      fit = fitWindow(svg, own);
     }
+    if (!fit) return;
     const r = COIN.diameter_mm / 2;
     coin.querySelectorAll("circle").forEach(circle => { circle.setAttribute("cx", fit.cx); circle.setAttribute("cy", fit.cy); });
     coin.querySelectorAll("image").forEach(image => { image.setAttribute("x", round6(fit.cx - r)); image.setAttribute("y", round6(fit.cy - r)); });
@@ -814,8 +825,9 @@
   }
   function boardDrawing(svg) {
     // What a 2D view draws of its board, in the SVG's user units: the box of its outline and its label, and the centres
-    // of its pin-1 rings (each PIN1_RING_PX round on screen); null where it has no outline.
-    const boxes = [...svg.querySelectorAll(".outline, .view-label")].filter(node => node.checkVisibility()).map(node => {
+    // of its pin-1 rings (each PIN1_RING_PX round on screen); null where it has no outline.  Of those only what is
+    // rendered (no display:none on it or above it).
+    const boxes = [...svg.querySelectorAll(".outline, .view-label")].filter(rendered).map(node => {
       let matrix = new DOMMatrix();
       for (let parent = node.parentNode; parent && parent !== svg; parent = parent.parentNode) {
         const transform = parent.transform?.baseVal?.consolidate();
