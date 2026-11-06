@@ -28,10 +28,12 @@
   // move does, a ring steps one ring diameter and this gap from its triangle, the steps tried in turn, each ring's
   // [along, across] its triangle's axis (the top FPC's, then the bottom FPC's; along +1 inward over the tail's end, -1
   // outward past the triangle; across, beside it): none; the top FPC's inward; and the bottom FPC's outward, or beside
-  // its triangle where outward leaves the view; then the others.
+  // its triangle where outward leaves the view; then the others; last the top FPC's beside its triangle and the bottom
+  // FPC's along its own (the review of 2026-11-06: in the plan view of a 2 x 2 field at 390 px, the tails leaving left,
+  // the triangles 3 px apart and the view's edge next to them, only those keep each ring clear of the other triangle).
   const PIN1_RING_GAP_PX = 4;
   const PIN1_STEPS = [[[0, 0], [0, 0]], [[1, 0], [0, 0]], [[1, 0], [-1, 0]], [[1, 0], [0, 1]], [[1, 0], [0, -1]], [[-1, 0], [0, 0]],
-    [[0, 0], [-1, 0]], [[-1, 0], [1, 0]], [[0, 0], [1, 0]]];
+    [[0, 0], [-1, 0]], [[-1, 0], [1, 0]], [[0, 0], [1, 0]], [[0, 1], [1, 0]], [[0, -1], [1, 0]], [[0, 1], [-1, 0]], [[0, -1], [-1, 0]]];
   const OBLIQUE_MARGIN_PX = 16;
   // A figure's controls over its frame's top left (index.html .figure-tools, the user's request of 2026-11-06): what it
   // draws at its home keeps CONTROLS_CLEAR_PX clear of them; a 2D view's window that must start under them starts

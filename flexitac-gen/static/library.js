@@ -48,6 +48,18 @@
   // opener: where the grid was and the card that opened a sensor's page (Back puts both back); syncs: each track's arrows.
   const state = {index: null, files: null, filesError: null, filesLoad: null, view: null, picture: VIEWS[0][0], gridY: 0, opener: null, fromGrid: false, syncs: []};
   history.scrollRestoration = "manual";
+  // The page opened at an address of its own (a sensor's page shared or reloaded, a place of the grid): the grid's title,
+  // tagline and footer wait for the first route (opened(), once entries.json is in), which shows the page the address
+  // names (the review of 2026-11-06: a sensor's page opened directly had first shown the grid's title over the footer,
+  // 40 to 100 ms here, up to 1.9 s on a slow 3G at 390 px, then switched to the sensor's page).
+  const FOOTER = document.querySelector(".lib-footer");
+  if (location.hash.length > 1) {
+    $("libHero").hidden = true;
+    if (FOOTER) FOOTER.hidden = true;
+  }
+  function opened() {
+    if (FOOTER) FOOTER.hidden = false;
+  }
 
   // -- small helpers -------------------------------------------------------------------------------------------------
 
@@ -669,6 +681,7 @@
 
   function route() {
     if (!state.index) return;
+    opened();
     // An entry of the page's history it has been at (marked below) is Back's or Forward's; any other (a link, a back
     // link, a typed address) is marked now.
     const traversed = history.state?.library === true;
@@ -700,6 +713,8 @@
     } catch (error) {
       state.index = null;
       $("libGrid").hidden = true;
+      $("libHero").hidden = false;
+      opened();
       $("libStatus").textContent = `The library could not be loaded (${error.message}). Gen by Surface and Rectangular still work.`;
       return;
     }

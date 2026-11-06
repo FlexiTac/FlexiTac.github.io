@@ -2,14 +2,15 @@
 
 The step guide's "Try a sample" (Gen by Surface, `index.html`; the list is
 `samples.json`) offers eight parts a visitor drags onto the 3D view, or
-clicks, to see a sensor generated at once.  Six of them are Library fingers,
+clicks, to put a sensor on (the part loads alone; the visitor clicks the
+face and presses Generate sensor).  Six of them are Library fingers,
 served from `web/library/meshes/` as they are and covered by
 `web/library/NOTICE.md`: the UMI fin-ray finger's trapezoid tip of 5.8 mm and
 convex arc tip of 13.8 mm (cut by the FlexiTac-Gen project from the HandUMI
 finger), and the HandUMI replicas of the ARX X5 and MakerMods Metal Arm tips,
 the I2RT YAM's left tip and the Unitree Dex1-1's finger.  The two whole
-grippers are this folder's files, tabled below; their sensors are the
-Library's of each gripper's finger.
+grippers are this folder's files, tabled below; each names the Library's
+sensor of its gripper's finger.
 
 ## Sources
 

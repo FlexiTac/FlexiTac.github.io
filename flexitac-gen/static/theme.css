@@ -358,8 +358,13 @@ details > summary::before { content:""; display:inline-block; width:.75em; heigh
 /* Below 360 px (an iPhone SE with Display Zoom is 320 px wide; the review of 2026-11-05): the title 22 px and the mode
    switch's segments 14 px with 14 px sides, so the title clears the community links and the switch fits the 20 px
    gutters (at 28 px and 16 / 22 px the page scrolled 35 px sideways at 320 px, on both pages).  360 px and up as before
-   (ui_checks' 360-720 px sweep). */
-@media (max-width:359px) { .masthead h1 { font-size:22px; } .mode-picker span { padding:11px 14px; font-size:14px; } }
+   (ui_checks' 360-720 px sweep).  Gen by Surface's title there 20 px and free to wrap (the review of 2026-11-06: "Load
+   your gripper" kept on one line at 24 px by the board cards' nowrap ran 1.3 px past a 320 px window, which scrolled
+   sideways).  From 360 to 374 px the switch's segments 18 px to their sides, not 22 (the review of 2026-11-06: 335 px
+   wide from the 20 px gutter, the switch had left 5 to 15 px on its right at 360 to 370 px); its height as before. */
+@media (max-width:359px) { .masthead h1 { font-size:22px; } .mode-picker span { padding:11px 14px; font-size:14px; }
+  .cad-workspace > header h2 { font-size:20px; white-space:normal; } }
+@media (min-width:360px) and (max-width:374px) { .mode-picker span { padding-left:18px; padding-right:18px; } }
 /* Step 1's file note naming a Library sensor (main.js libraryNote): its link the link blue, as the header's line. */
 .cad-file-note a { color:var(--link); }
 

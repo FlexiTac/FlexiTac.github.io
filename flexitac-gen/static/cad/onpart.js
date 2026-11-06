@@ -60,6 +60,9 @@ const FILM_PX_PER_MM = 8;
 // the pane's height times this).
 const KEY_TURN_DEG = 5;
 const ROTATE_SPEED = 0.6;
+// A touch turns the view once it has gone this far across (CSS px) and more across than along; a vertical swipe is the
+// page's scroll (touch-action pan-y) and turns nothing.
+const TOUCH_SLOP_PX = 6;
 // Texture texels that the alpha test drops (the board's outline is the art's edge).  The sheets' materials turn it into
 // coverage (alphaToCoverage: the renderer's MSAA smooths the outlines, which an alpha test alone leaves in hard steps;
 // the review of 2026-11-05), their colour replacing a covered sample's and their alpha never lowering it (below).
@@ -793,6 +796,24 @@ export function createOnPartView(host, {onViewChange = () => {}, onContext = () 
   controls.cursorStyle = "grab";
   // A vertical swipe scrolls the page on a touch screen; a drag across turns the view (OrbitControls set "none").
   canvas.style.touchAction = "pan-y";
+  // And turns it only once it goes across (the review of 2026-11-06): the browser takes a swipe for the page's scroll
+  // after a few pointermoves (then pointercancel), which OrbitControls had turned the view by, so on a phone one vertical
+  // swipe over a gripper tilted it edge-on and a second showed it from below.  A touch's moves are held back from
+  // OrbitControls (it listens on the document; the pointer is captured to the canvas) until it has gone TOUCH_SLOP_PX
+  // across and more across than along; then the turn catches up from where the touch began.
+  const touch = {id: null, x: 0, y: 0, across: false};
+  canvas.addEventListener("pointerdown", event => {
+    if (event.pointerType === "touch" && touch.id === null) Object.assign(touch, {id: event.pointerId, x: event.clientX, y: event.clientY, across: false});
+  });
+  canvas.addEventListener("pointermove", event => {
+    if (event.pointerType !== "touch" || event.pointerId !== touch.id || touch.across) return;
+    const across = Math.abs(event.clientX - touch.x); const along = Math.abs(event.clientY - touch.y);
+    if (across >= TOUCH_SLOP_PX && across > along) touch.across = true;
+    else event.stopPropagation();
+  });
+  const touchEnd = event => { if (event.pointerId === touch.id) touch.id = null; };
+  canvas.addEventListener("pointerup", touchEnd);
+  canvas.addEventListener("pointercancel", touchEnd);
   const maxTexturePx = Math.min(4096, renderer.capabilities.maxTextureSize || 4096);
   const anisotropy = Math.min(8, renderer.capabilities.getMaxAnisotropy());
   // The contact shade's uniforms, shared by the part's shader (a blank map, no strength, until a stack is assembled).
@@ -1075,8 +1096,10 @@ export function createOnPartView(host, {onViewChange = () => {}, onContext = () 
     // more, contact_px, and by how much at most, contact_max, and of the part's pixels along the stack's edge (no sheet
     // over them, one next to them) the share it darkens so, contact_edge (Assembled only: the line where the stack meets
     // the part, which a light line between the two had left out); the drawing without the edge bands, the
-    // pixels they change by more than PROBE_STEP, band_px; studio, whether the sheets mirror the studio (studioFor).
-    // Device pixels, in the same task as the renders.
+    // pixels they change by more than PROBE_STEP, band_px; studio, whether the sheets mirror the studio (studioFor); the
+    // sheets drawn alone, the share of their covered pixels the whole drawing shows as they are (within PROBE_STEP),
+    // sheets_seen (the rest hidden by the part in front of them: a whole gripper's other finger and body had hidden all but
+    // a sliver of the stack, the review of 2026-11-06).  Device pixels, in the same task as the renders.
     if (!probe || !view.sheets || !(view.size[0] > 0)) return null;
     const gl = renderer.getContext();
     const {x: width, y: height} = renderer.getDrawingBufferSize(new THREE.Vector2());
@@ -1128,6 +1151,14 @@ export function createOnPartView(host, {onViewChange = () => {}, onContext = () 
         }
       }
       view.part.visible = false;
+    }
+    sheetsShown(() => true);
+    const alone = read();
+    let sheetsPx = 0; let seenPx = 0;
+    for (let k = 0; k < alone.length; k += 4) {
+      if (alone[k + 3] !== 255) continue;
+      sheetsPx += 1;
+      seenPx += Math.max(Math.abs(alone[k] - all[k]), Math.abs(alone[k + 1] - all[k + 1]), Math.abs(alone[k + 2] - all[k + 2])) <= PROBE_STEP;
     }
     bandsShown(false);
     sheetsShown(name => name === "film");
@@ -1200,7 +1231,7 @@ export function createOnPartView(host, {onViewChange = () => {}, onContext = () 
     return {edge_px: edge, margin_px: margin, seam_px: seam, film_outline_px: outline, film_soft: outline ? Math.round((soft / outline) * 1e6) / 1e6 : null,
       film_bands: filmBands, board_median: median, taxel_median: taxelMedian, contact_px: contactPx, contact_max: Math.round(contactMax * 10) / 10,
       contact_edge: edgePx ? Math.round((edgeShaded / edgePx) * 1e3) / 1e3 : null, band_px: bands,
-      studio: Boolean(look.environment), buffer: [width, height]};
+      sheets_seen: sheetsPx ? Math.round((seenPx / sheetsPx) * 1e3) / 1e3 : null, studio: Boolean(look.environment), buffer: [width, height]};
   }
 
   /**

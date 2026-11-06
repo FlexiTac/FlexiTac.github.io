@@ -11,7 +11,7 @@
     "sha256": "5d24ad2441d459eec42c628a9a834220ef061af125b4eb1aeac8a0c488df5d40"
    },
    "build_id": "surface-32x26-d387cf38c447",
-   "figure_sha256": "c82b4611bf35c5a4127d2f683ac749a52455fab64352d0ab3da9a373866d98a3",
+   "figure_sha256": "5455123b46177272aa7d1a22a47da9333750ec9e29acb0c9328827bf71eb217b",
    "files": {
     "assembled": {
      "bytes": 32802,
@@ -97,7 +97,7 @@
     "sha256": "7763355dc54fd3d8dc852805fa5e128337809ee47cb3626df270f04be05b9211"
    },
    "build_id": "surface-32x25-2909c6a6e34d",
-   "figure_sha256": "c82b4611bf35c5a4127d2f683ac749a52455fab64352d0ab3da9a373866d98a3",
+   "figure_sha256": "5455123b46177272aa7d1a22a47da9333750ec9e29acb0c9328827bf71eb217b",
    "files": {
     "assembled": {
      "bytes": 34822,
@@ -183,7 +183,7 @@
     "sha256": "0e3c50d76a7f81313225262a96736dd08e673aa480de13a2ee53548be837e72b"
    },
    "build_id": "surface-23x19-2e88c11f611e",
-   "figure_sha256": "c82b4611bf35c5a4127d2f683ac749a52455fab64352d0ab3da9a373866d98a3",
+   "figure_sha256": "5455123b46177272aa7d1a22a47da9333750ec9e29acb0c9328827bf71eb217b",
    "files": {
     "assembled": {
      "bytes": 34546,
@@ -269,7 +269,7 @@
     "sha256": "fd36df4230c4528ef11f904781d02f4f70420a1fc89ef500c6d8a965ebb200ee"
    },
    "build_id": "surface-17x13-bed9167960fc",
-   "figure_sha256": "c82b4611bf35c5a4127d2f683ac749a52455fab64352d0ab3da9a373866d98a3",
+   "figure_sha256": "5455123b46177272aa7d1a22a47da9333750ec9e29acb0c9328827bf71eb217b",
    "files": {
     "assembled": {
      "bytes": 33440,
@@ -355,7 +355,7 @@
     "sha256": "764cc7db0b82939c4b1aab1b7861eab5e997ce5ddbc976896f4901e8dbe56cb9"
    },
    "build_id": "surface-11x11-689f162f2f63",
-   "figure_sha256": "c82b4611bf35c5a4127d2f683ac749a52455fab64352d0ab3da9a373866d98a3",
+   "figure_sha256": "5455123b46177272aa7d1a22a47da9333750ec9e29acb0c9328827bf71eb217b",
    "files": {
     "assembled": {
      "bytes": 26128,
@@ -441,7 +441,7 @@
     "sha256": "fb8fbf5936e9b0063c8d19f575263019b469cdabc16c4d4c71373c65070fabdc"
    },
    "build_id": "surface-16x17-f4fc01f8c041",
-   "figure_sha256": "c82b4611bf35c5a4127d2f683ac749a52455fab64352d0ab3da9a373866d98a3",
+   "figure_sha256": "5455123b46177272aa7d1a22a47da9333750ec9e29acb0c9328827bf71eb217b",
    "files": {
     "assembled": {
      "bytes": 25932,
@@ -527,7 +527,7 @@
     "sha256": "164f2753cde5c9c041e63c67a99d00779ff2fc4c45ffcc65e09619ef810af235"
    },
    "build_id": "surface-7x7-219eb060fc64",
-   "figure_sha256": "c82b4611bf35c5a4127d2f683ac749a52455fab64352d0ab3da9a373866d98a3",
+   "figure_sha256": "5455123b46177272aa7d1a22a47da9333750ec9e29acb0c9328827bf71eb217b",
    "files": {
     "assembled": {
      "bytes": 25522,
@@ -613,7 +613,7 @@
     "sha256": "83b8bcc2971d12f24a70e4d1e6e13c0b540795e5ff7d842a2561fdc692c6cd09"
    },
    "build_id": "surface-8x8-7d3333991a15",
-   "figure_sha256": "c82b4611bf35c5a4127d2f683ac749a52455fab64352d0ab3da9a373866d98a3",
+   "figure_sha256": "5455123b46177272aa7d1a22a47da9333750ec9e29acb0c9328827bf71eb217b",
    "files": {
     "assembled": {
      "bytes": 25506,
@@ -699,7 +699,7 @@
     "sha256": "4b7059b64c5c92a935ad917369078d4c3b229c8dcbd5dadbdc46fffb5144feaa"
    },
    "build_id": "surface-32x32-dd7be86a5052",
-   "figure_sha256": "c82b4611bf35c5a4127d2f683ac749a52455fab64352d0ab3da9a373866d98a3",
+   "figure_sha256": "5455123b46177272aa7d1a22a47da9333750ec9e29acb0c9328827bf71eb217b",
    "files": {
     "assembled": {
      "bytes": 34108,
@@ -785,7 +785,7 @@
     "sha256": "d306268a47ff66c91321b66577de0d6a7f5e20d4978531af5d100f58b097f357"
    },
    "build_id": "surface-32x32-f99cfa65c746",
-   "figure_sha256": "c82b4611bf35c5a4127d2f683ac749a52455fab64352d0ab3da9a373866d98a3",
+   "figure_sha256": "5455123b46177272aa7d1a22a47da9333750ec9e29acb0c9328827bf71eb217b",
    "files": {
     "assembled": {
      "bytes": 35340,
@@ -871,7 +871,7 @@
     "sha256": "4545e0afc47ce66ba915512f1a5c6b486a2141c554d59c1c03ce1a85f9ecf4a4"
    },
    "build_id": "surface-23x23-11ed05f4e0e9",
-   "figure_sha256": "c82b4611bf35c5a4127d2f683ac749a52455fab64352d0ab3da9a373866d98a3",
+   "figure_sha256": "5455123b46177272aa7d1a22a47da9333750ec9e29acb0c9328827bf71eb217b",
    "files": {
     "assembled": {
      "bytes": 34670,
@@ -957,7 +957,7 @@
     "sha256": "814fbfd77c5519998a7d7a140069eb85b0dd184a3d9ae080e400513cf1ace4ec"
    },
    "build_id": "surface-17x17-df23535bd385",
-   "figure_sha256": "c82b4611bf35c5a4127d2f683ac749a52455fab64352d0ab3da9a373866d98a3",
+   "figure_sha256": "5455123b46177272aa7d1a22a47da9333750ec9e29acb0c9328827bf71eb217b",
    "files": {
     "assembled": {
      "bytes": 34070,
@@ -1043,7 +1043,7 @@
     "sha256": "ddf7fdf50286474fa998e3d629daf2f176b4e94aaf0011dac0bc5fc9d16d738c"
    },
    "build_id": "surface-32x15-63204c3821cb",
-   "figure_sha256": "c82b4611bf35c5a4127d2f683ac749a52455fab64352d0ab3da9a373866d98a3",
+   "figure_sha256": "5455123b46177272aa7d1a22a47da9333750ec9e29acb0c9328827bf71eb217b",
    "files": {
     "assembled": {
      "bytes": 25028,
@@ -1129,7 +1129,7 @@
     "sha256": "e23034d337ba242f92acf3b30ae3c45f615a387b762b740bb87b128a097a8563"
    },
    "build_id": "surface-32x19-3eb813284900",
-   "figure_sha256": "c82b4611bf35c5a4127d2f683ac749a52455fab64352d0ab3da9a373866d98a3",
+   "figure_sha256": "5455123b46177272aa7d1a22a47da9333750ec9e29acb0c9328827bf71eb217b",
    "files": {
     "assembled": {
      "bytes": 24540,
@@ -1215,7 +1215,7 @@
     "sha256": "70b1f7a44d24be36e4115fcb737a234aea3b1d68ea770b97403ca6bb253f6a4a"
    },
    "build_id": "surface-32x11-0e51fc8c2c00",
-   "figure_sha256": "c82b4611bf35c5a4127d2f683ac749a52455fab64352d0ab3da9a373866d98a3",
+   "figure_sha256": "5455123b46177272aa7d1a22a47da9333750ec9e29acb0c9328827bf71eb217b",
    "files": {
     "assembled": {
      "bytes": 25104,
@@ -1301,7 +1301,7 @@
     "sha256": "bffdd01a310ad430150ac81efc6b0eaa53578740c2236f2eb34d5dcb3f4b3fbd"
    },
    "build_id": "surface-22x8-f1f8d070e8f4",
-   "figure_sha256": "c82b4611bf35c5a4127d2f683ac749a52455fab64352d0ab3da9a373866d98a3",
+   "figure_sha256": "5455123b46177272aa7d1a22a47da9333750ec9e29acb0c9328827bf71eb217b",
    "files": {
     "assembled": {
      "bytes": 24292,
@@ -1387,7 +1387,7 @@
     "sha256": "5eff848a1ff287529504f8c932fd9b1d9dcb3e7ca1a588ecd23324768c3f826b"
    },
    "build_id": "surface-32x22-1aa4b358103b",
-   "figure_sha256": "c82b4611bf35c5a4127d2f683ac749a52455fab64352d0ab3da9a373866d98a3",
+   "figure_sha256": "5455123b46177272aa7d1a22a47da9333750ec9e29acb0c9328827bf71eb217b",
    "files": {
     "assembled": {
      "bytes": 31864,
@@ -1473,7 +1473,7 @@
     "sha256": "8e61bd748c333e36450b55f27a7f558ea3819a00a07d8686acbe58ce5756500b"
    },
    "build_id": "surface-32x25-cd7ee5fdf18e",
-   "figure_sha256": "c82b4611bf35c5a4127d2f683ac749a52455fab64352d0ab3da9a373866d98a3",
+   "figure_sha256": "5455123b46177272aa7d1a22a47da9333750ec9e29acb0c9328827bf71eb217b",
    "files": {
     "assembled": {
      "bytes": 30966,
@@ -1559,7 +1559,7 @@
     "sha256": "ab339437d00d2732bff1099e72ba7267775ea9d1f898387d75bebfaed697d847"
    },
    "build_id": "surface-24x16-cb567f0c5d2d",
-   "figure_sha256": "c82b4611bf35c5a4127d2f683ac749a52455fab64352d0ab3da9a373866d98a3",
+   "figure_sha256": "5455123b46177272aa7d1a22a47da9333750ec9e29acb0c9328827bf71eb217b",
    "files": {
     "assembled": {
      "bytes": 30846,
@@ -1645,7 +1645,7 @@
     "sha256": "b0f45b7480b6cc3f6b69d8c5bdc01c1860bfbc74502f3a02bbf2c3713b04fe54"
    },
    "build_id": "surface-16x11-9c4e1741c0f1",
-   "figure_sha256": "c82b4611bf35c5a4127d2f683ac749a52455fab64352d0ab3da9a373866d98a3",
+   "figure_sha256": "5455123b46177272aa7d1a22a47da9333750ec9e29acb0c9328827bf71eb217b",
    "files": {
     "assembled": {
      "bytes": 30312,
@@ -1731,7 +1731,7 @@
     "sha256": "3c1ae8fa77256842bfe5d5899a2dae99fba48ed673edcebbfee7c3736dd1a560"
    },
    "build_id": "surface-32x12-4cb9374144c8",
-   "figure_sha256": "c82b4611bf35c5a4127d2f683ac749a52455fab64352d0ab3da9a373866d98a3",
+   "figure_sha256": "5455123b46177272aa7d1a22a47da9333750ec9e29acb0c9328827bf71eb217b",
    "files": {
     "assembled": {
      "bytes": 27644,
@@ -1782,7 +1782,7 @@
     "sha256": "f69fe7b8229c6baab3017213f6ab44c34d75ea1e45db98edc3b3292ba61ef8a0"
    },
    "build_id": "surface-32x12-88dcc0061ffb",
-   "figure_sha256": "c82b4611bf35c5a4127d2f683ac749a52455fab64352d0ab3da9a373866d98a3",
+   "figure_sha256": "5455123b46177272aa7d1a22a47da9333750ec9e29acb0c9328827bf71eb217b",
    "files": {
     "assembled": {
      "bytes": 27626,
@@ -1833,7 +1833,7 @@
     "sha256": "339214e6962821e42b252d75ce97c88b291c936c25a76986b6c795e54f562677"
    },
    "build_id": "surface-32x12-7d835504aece",
-   "figure_sha256": "c82b4611bf35c5a4127d2f683ac749a52455fab64352d0ab3da9a373866d98a3",
+   "figure_sha256": "5455123b46177272aa7d1a22a47da9333750ec9e29acb0c9328827bf71eb217b",
    "files": {
     "assembled": {
      "bytes": 28424,
@@ -1884,7 +1884,7 @@
     "sha256": "9545b4a7f35b1cb337ec5f4f312d5773a9f3779d713b48ad22bc57053b39fdfa"
    },
    "build_id": "surface-32x11-6c5ee79ebf58",
-   "figure_sha256": "c82b4611bf35c5a4127d2f683ac749a52455fab64352d0ab3da9a373866d98a3",
+   "figure_sha256": "5455123b46177272aa7d1a22a47da9333750ec9e29acb0c9328827bf71eb217b",
    "files": {
     "assembled": {
      "bytes": 27482,
@@ -1935,7 +1935,7 @@
     "sha256": "5c14f1a4ae612029e24dd66ac7d5e5f452ac39e955d90f84fb70fcad906ce938"
    },
    "build_id": "surface-32x12-e3dfb9eb7e81",
-   "figure_sha256": "c82b4611bf35c5a4127d2f683ac749a52455fab64352d0ab3da9a373866d98a3",
+   "figure_sha256": "5455123b46177272aa7d1a22a47da9333750ec9e29acb0c9328827bf71eb217b",
    "files": {
     "assembled": {
      "bytes": 27540,
@@ -1986,7 +1986,7 @@
     "sha256": "394ace9931213c01417d0d4826ad00645494c9c4bd6ac6c68a95cd5d31b576e9"
    },
    "build_id": "surface-32x17-5b221a9ddb1a",
-   "figure_sha256": "c82b4611bf35c5a4127d2f683ac749a52455fab64352d0ab3da9a373866d98a3",
+   "figure_sha256": "5455123b46177272aa7d1a22a47da9333750ec9e29acb0c9328827bf71eb217b",
    "files": {
     "assembled": {
      "bytes": 29098,
@@ -2037,7 +2037,7 @@
     "sha256": "de0c011969688517e207a7e0419266a10364867f7d64c186d44bc68b189b3ee5"
    },
    "build_id": "surface-32x25-56dc8881a924",
-   "figure_sha256": "c82b4611bf35c5a4127d2f683ac749a52455fab64352d0ab3da9a373866d98a3",
+   "figure_sha256": "5455123b46177272aa7d1a22a47da9333750ec9e29acb0c9328827bf71eb217b",
    "files": {
     "assembled": {
      "bytes": 25680,
@@ -2088,7 +2088,7 @@
     "sha256": "5315ec4c2b345d5fef8c1a84ee7989ca9dfb772d4ddf88a72c1115ff766c435f"
    },
    "build_id": "surface-32x12-083b8f742943",
-   "figure_sha256": "c82b4611bf35c5a4127d2f683ac749a52455fab64352d0ab3da9a373866d98a3",
+   "figure_sha256": "5455123b46177272aa7d1a22a47da9333750ec9e29acb0c9328827bf71eb217b",
    "files": {
     "assembled": {
      "bytes": 27854,
@@ -2139,7 +2139,7 @@
     "sha256": "5281fc330b2f624a1522e4801648fc2b4c8683ef8ee268c71a54be72b861b9e2"
    },
    "build_id": "surface-21x8-b1004352a5d1",
-   "figure_sha256": "c82b4611bf35c5a4127d2f683ac749a52455fab64352d0ab3da9a373866d98a3",
+   "figure_sha256": "5455123b46177272aa7d1a22a47da9333750ec9e29acb0c9328827bf71eb217b",
    "files": {
     "assembled": {
      "bytes": 24036,
@@ -2190,7 +2190,7 @@
     "sha256": "6a900390c2b35d84682ad3d2ca1371290d773dbced2b3537abd11aee16d5507a"
    },
    "build_id": "surface-32x11-168582f38f42",
-   "figure_sha256": "c82b4611bf35c5a4127d2f683ac749a52455fab64352d0ab3da9a373866d98a3",
+   "figure_sha256": "5455123b46177272aa7d1a22a47da9333750ec9e29acb0c9328827bf71eb217b",
    "files": {
     "assembled": {
      "bytes": 27392,
@@ -2241,7 +2241,7 @@
     "sha256": "95bd93c478d5673fed155daf8a9de6c0dfffd4d9abd58d6c879ebfe9dbb4aa50"
    },
    "build_id": "surface-32x11-5c364f28c111",
-   "figure_sha256": "c82b4611bf35c5a4127d2f683ac749a52455fab64352d0ab3da9a373866d98a3",
+   "figure_sha256": "5455123b46177272aa7d1a22a47da9333750ec9e29acb0c9328827bf71eb217b",
    "files": {
     "assembled": {
      "bytes": 26404,
@@ -2292,7 +2292,7 @@
     "sha256": "1ee3a1a7eb4309b4fc1e59e41950ca3087c92482a2f3ceaaa1a78fce6a4eecdf"
    },
    "build_id": "surface-32x11-68d7d24e056f",
-   "figure_sha256": "c82b4611bf35c5a4127d2f683ac749a52455fab64352d0ab3da9a373866d98a3",
+   "figure_sha256": "5455123b46177272aa7d1a22a47da9333750ec9e29acb0c9328827bf71eb217b",
    "files": {
     "assembled": {
      "bytes": 27964,
@@ -2343,7 +2343,7 @@
     "sha256": "d4b758c9931bbdb9a339334bc4dcfaa853d5a6609b4b91609383dd530c5bb68b"
    },
    "build_id": "surface-32x11-8c34082adb12",
-   "figure_sha256": "c82b4611bf35c5a4127d2f683ac749a52455fab64352d0ab3da9a373866d98a3",
+   "figure_sha256": "5455123b46177272aa7d1a22a47da9333750ec9e29acb0c9328827bf71eb217b",
    "files": {
     "assembled": {
      "bytes": 24944,
@@ -2394,7 +2394,7 @@
     "sha256": "24cc93d07e11c053b3f900aad4d458687466e85d30b4f02449035f361daa24b4"
    },
    "build_id": "surface-32x11-557e60081323",
-   "figure_sha256": "c82b4611bf35c5a4127d2f683ac749a52455fab64352d0ab3da9a373866d98a3",
+   "figure_sha256": "5455123b46177272aa7d1a22a47da9333750ec9e29acb0c9328827bf71eb217b",
    "files": {
     "assembled": {
      "bytes": 26200,
@@ -2445,7 +2445,7 @@
     "sha256": "20ffe4f610408fea31856e6768ae11f4eb087af58dba66611e57825e7fa06abe"
    },
    "build_id": "surface-32x17-292a1ecb211e",
-   "figure_sha256": "c82b4611bf35c5a4127d2f683ac749a52455fab64352d0ab3da9a373866d98a3",
+   "figure_sha256": "5455123b46177272aa7d1a22a47da9333750ec9e29acb0c9328827bf71eb217b",
    "files": {
     "assembled": {
      "bytes": 31470,
@@ -2531,7 +2531,7 @@
     "sha256": "8c2d00cf10bc225f6ea425cc3c06da5727f43c0214ae845d0359dad82c7e0cda"
    },
    "build_id": "surface-32x26-f3007aad2bd7",
-   "figure_sha256": "c82b4611bf35c5a4127d2f683ac749a52455fab64352d0ab3da9a373866d98a3",
+   "figure_sha256": "5455123b46177272aa7d1a22a47da9333750ec9e29acb0c9328827bf71eb217b",
    "files": {
     "assembled": {
      "bytes": 31610,
@@ -2617,7 +2617,7 @@
     "sha256": "f4d0b8cf87dcfe4fdbb046a54dc7522a2c0c521b2ad49fe27d1c28442de90240"
    },
    "build_id": "surface-24x13-fb9d6bd1fe2c",
-   "figure_sha256": "c82b4611bf35c5a4127d2f683ac749a52455fab64352d0ab3da9a373866d98a3",
+   "figure_sha256": "5455123b46177272aa7d1a22a47da9333750ec9e29acb0c9328827bf71eb217b",
    "files": {
     "assembled": {
      "bytes": 30730,
@@ -2703,7 +2703,7 @@
     "sha256": "2f093ff720dd07e2acd4cd449b353dcf7851bde0175b4509723a4c0de8b75c34"
    },
    "build_id": "surface-16x9-e5a994e53503",
-   "figure_sha256": "c82b4611bf35c5a4127d2f683ac749a52455fab64352d0ab3da9a373866d98a3",
+   "figure_sha256": "5455123b46177272aa7d1a22a47da9333750ec9e29acb0c9328827bf71eb217b",
    "files": {
     "assembled": {
      "bytes": 30690,
@@ -2789,7 +2789,7 @@
     "sha256": "f1faa79da1ca44cf55eeee2d2df6e8f2769b69194f9acd3d55335b1b476a07d1"
    },
    "build_id": "surface-17x17-b9e5e409ec81",
-   "figure_sha256": "c82b4611bf35c5a4127d2f683ac749a52455fab64352d0ab3da9a373866d98a3",
+   "figure_sha256": "5455123b46177272aa7d1a22a47da9333750ec9e29acb0c9328827bf71eb217b",
    "files": {
     "assembled": {
      "bytes": 23432,
@@ -2875,7 +2875,7 @@
     "sha256": "c472cb6a66118a0c0232df10b64e62e991c9db9d548895dc85517755830e7e6d"
    },
    "build_id": "surface-26x27-62928ed42a39",
-   "figure_sha256": "c82b4611bf35c5a4127d2f683ac749a52455fab64352d0ab3da9a373866d98a3",
+   "figure_sha256": "5455123b46177272aa7d1a22a47da9333750ec9e29acb0c9328827bf71eb217b",
    "files": {
     "assembled": {
      "bytes": 25120,
@@ -2961,7 +2961,7 @@
     "sha256": "cded9649e7adbe50ef5efd751ebfca7c6225771125cee00b0da8de2ff95e5985"
    },
    "build_id": "surface-13x13-c86af2cbab4b",
-   "figure_sha256": "c82b4611bf35c5a4127d2f683ac749a52455fab64352d0ab3da9a373866d98a3",
+   "figure_sha256": "5455123b46177272aa7d1a22a47da9333750ec9e29acb0c9328827bf71eb217b",
    "files": {
     "assembled": {
      "bytes": 23496,
@@ -3047,7 +3047,7 @@
     "sha256": "72f2f0b889c0e9a84d227fdf7514af408a55e433dc54320503c205e43e39adce"
    },
    "build_id": "surface-9x9-2bfc8af66d96",
-   "figure_sha256": "c82b4611bf35c5a4127d2f683ac749a52455fab64352d0ab3da9a373866d98a3",
+   "figure_sha256": "5455123b46177272aa7d1a22a47da9333750ec9e29acb0c9328827bf71eb217b",
    "files": {
     "assembled": {
      "bytes": 23012,
