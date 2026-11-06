@@ -1,0 +1,53 @@
+{
+ "format": "flexitac-library-scenes/v1",
+ "about": "The Library's whole-gripper scenes (the user's request of 2026-11-05: the grippers that are not UMI fingers shown whole, a sensor on both fingers, the jaws fully open; the user's decision of 2026-11-06: one stack exploded, the sensor finger's, the near finger see-through in both views, its stack assembled): each gripper part's scene (scenes/<part>.json, its bodies in bodies/<part>/) and the rules every scene is drawn and checked by (docs/LIBRARY_VIEW.md).  The scenes map is written by the project's scene builder; the rules by hand, hashed into every gripper picture's record.",
+ "rules": {
+  "gap_share": 0.42,
+  "min_step_mm": 2,
+  "ghost_opacity": 0.28,
+  "measure_px": [
+   1280,
+   800
+  ],
+  "depth_tol_mm": 0.1,
+  "explode_stacks": [
+   "sensor"
+  ],
+  "see_through_modes": [
+   "exploded",
+   "assembled"
+  ],
+  "camera": {
+   "exploded": {
+    "tilt_deg": 65,
+    "elevation_deg": 30,
+    "front": 1
+   },
+   "assembled": {
+    "tilt_deg": 57,
+    "elevation_deg": 30,
+    "front": 1
+   }
+  },
+  "checks": {
+   "opaque_cover_max": 0.1,
+   "layer_visible_min": 0.25,
+   "clearance_min_mm": 3,
+   "stacks_apart_min_g": 0.2,
+   "stacks_apart_min_mm": 3,
+   "stacks_apart_min_px": 20,
+   "near_seen_min": 0.5,
+   "card_min_px": 20,
+   "ghost_cover_min": 0.02
+  }
+ },
+ "scenes": {
+  "franka-hand": "scenes/franka-hand.json",
+  "widowx-250": "scenes/widowx-250.json",
+  "trossen-widowx-ai": "scenes/trossen-widowx-ai.json",
+  "arx-x5": "scenes/arx-x5.json",
+  "i2rt-yam": "scenes/i2rt-yam.json",
+  "unitree-dex1": "scenes/unitree-dex1.json",
+  "makermods-metal": "scenes/makermods-metal.json"
+ }
+}

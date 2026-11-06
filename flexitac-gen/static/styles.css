@@ -36,13 +36,12 @@ input.fine-step::-webkit-inner-spin-button,input.fine-step::-webkit-outer-spin-b
 .workbench.is-stale .canvas-wrap,.workbench.is-stale .stacked-canvas,.workbench.is-stale .drc-grid { opacity:.5; filter:grayscale(.7); transition:opacity .15s; }
 .workbench.is-stale .status,.workbench.is-stale .summary { opacity:.6; }
 
-/* Preview cards: ARIA tabs plus zoom tools for the 2D top view. */
-.preview-bar { display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:6px; padding:8px 11px; border-bottom:1px solid var(--line); }
+/* Preview cards: ARIA tabs plus zoom tools for the 2D view, in the view's frame since 2026-11-06 (.figure-tools, below). */
 .preview-tabs,.mode-switch { display:flex; gap:7px; }
 .preview-tabs button,.mode-switch button { cursor:pointer; border:1px solid transparent; border-radius:4px; background:transparent; color:var(--muted); padding:5px 8px; font-size:.72rem; font-weight:750; }
 .preview-tabs button[aria-selected="true"],.mode-switch button[aria-pressed="true"] { color:#075c69; border-color:#b9d9db; background:#eef9f8; }
 .zoom-tools { display:flex; align-items:center; gap:4px; font-size:.68rem; }
-.zoom-tools.is-inactive { visibility:hidden; }
+.zoom-tools.is-inactive { display:none; }
 .zoom-tools button { min-width:28px; min-height:26px; border:1px solid #c7d3d7; border-radius:4px; background:#fff; color:var(--ink); font-weight:750; cursor:pointer; }
 .zoom-tools button:disabled { color:#9aa5aa; cursor:not-allowed; }
 .zoom-tools output { min-width:96px; text-align:right; color:var(--muted); font-variant-numeric:tabular-nums; }
@@ -58,10 +57,6 @@ input.fine-step::-webkit-inner-spin-button,input.fine-step::-webkit-outer-spin-b
 .assembly-board .pin1-ring { visibility:hidden; }
 .pin1-overlay { position:absolute; inset:0; width:100%; height:100%; overflow:visible; pointer-events:none; z-index:2; }
 .pin1-ring-drawn { fill:none; stroke-width:2px; }
-.layer-legend { display:flex; flex-wrap:wrap; gap:4px 14px; padding:9px 14px 11px; border-top:1px solid var(--line); color:var(--muted); font-size:.68rem; }
-.layer-legend:empty { display:none; }
-.swatch { display:inline-block; width:10px; height:10px; margin-right:5px; vertical-align:-1px; border-radius:2px; }
-.swatch-copper { background:#d9672b; }.swatch-opening { background:#fff5bf; border:1px solid #b88700; }.swatch-stiffener { background:rgba(102,112,133,.55); }.swatch-pin1 { background:#b42318; border-radius:50%; }
 .preview-help { margin:8px 2px 0; color:var(--muted); font-size:.72rem; }
 .board-card.has-drc-failure { border-color:var(--error); }
 
@@ -71,10 +66,11 @@ input.fine-step::-webkit-inner-spin-button,input.fine-step::-webkit-outer-spin-b
 .three-d-pane::after { content:"Rigid oblique tilt of the top view · not a flex model · PI stiffener (bottom side) in grey · thickness at least 2 px"; position:absolute; left:12px; bottom:10px; padding:4px 6px; font-size:.63rem; color:#3d555a; border-radius:3px; background:rgba(255,255,255,.72); }
 /* The board box has the SVG's aspect ratio; fitOblique shrinks it until the tilt fits the pane. */
 /* Its angles as it opens are app.js's OBLIQUE_HOME; a drag turns it (attachOrbit).  Two-sided: the copper side faces the
-   camera as it opens, the other side (.board-back-face) shows where the drag turns the board over; the shadow is on each
-   side's SVG, since a filter on the board would flatten it into one double-sided picture. */
+   camera as it opens, the other side (.board-back-face) shows where the drag turns the board over; the shadow is a leaf
+   of its own (.board-shadow, below; each side's SVG had a drop-shadow before the views' light of 2026-11-05), since a
+   filter on the board would flatten it into one double-sided picture. */
 .oblique-board { position:relative; width:min(88%,calc(340px * var(--board-ratio,1.6))); transform:rotateX(var(--orbit-tilt,56deg)) rotateZ(var(--orbit-spin,-22deg)) translateY(-16px); transform-origin:center; transform-style:preserve-3d; }
-.oblique-board svg { width:100%; min-width:0; height:auto; aspect-ratio:var(--board-ratio,auto); display:block; filter:drop-shadow(13px 20px 9px rgba(13,43,45,.28)); }
+.oblique-board svg { width:100%; min-width:0; height:auto; aspect-ratio:var(--board-ratio,auto); display:block; }
 .oblique-board > svg { backface-visibility:hidden; }
 .three-d-pane:has(.oblique-board) { cursor:grab; touch-action:none; user-select:none; }
 .three-d-pane.is-orbiting { cursor:grabbing; }
@@ -88,11 +84,37 @@ input.fine-step::-webkit-inner-spin-button,input.fine-step::-webkit-outer-spin-b
 .oblique-board,.assembly-board { container-type:inline-size; --depth-px:max(100cqw / var(--view-mm,1), 2px / var(--fpc-mm,1)); }
 :is(.oblique-board,.assembly-board) svg.board-edge { position:absolute; inset:0; width:100%; height:100%; aspect-ratio:auto; overflow:visible;
   pointer-events:none; filter:none; transform:translateZ(calc(var(--depth-mm) * -1 * var(--depth-px))); }
-.fpc-edge-ring,.fpc-stiffener-ring { fill:none; stroke-width:1.6; vector-effect:non-scaling-stroke; stroke-linejoin:round; }
-.fpc-edge-ring { stroke:#c69d5c; }
-.fpc-stiffener-ring { stroke:#4d5566; }
-.fpc-stiffener-face { fill:#667085; }
+/* The walls in the views' light (app.js boardDepth, lightView): each ring is split by the way its walls face, each part
+   (--wall-light: its ring's --wall-0 ... --wall-11) the material's colour (--edge-paint: the polyimide's, the stiffener's)
+   times the light on a wall facing that way, so the strip that faces the key is lit and the one turned from it in shade;
+   the stiffener's outer face, a face of the board's other side, as that side (--back-light). */
+.fpc-edge-ring,.fpc-stiffener-ring { fill:none; stroke-width:1.6; vector-effect:non-scaling-stroke; stroke-linejoin:round; stroke-linecap:round;
+  stroke:color-mix(in srgb, var(--edge-paint) var(--wall-light,60%), #000); }
+.fpc-edge-ring { --edge-paint:#f4d7a1; }
+.fpc-stiffener-ring { --edge-paint:#667085; }
+.fpc-stiffener-face { --edge-paint:#667085; fill:color-mix(in srgb, var(--edge-paint) var(--back-light,60%), #000); }
 .board-back-face > svg { width:100%; height:100%; transform:scaleX(-1); }
+/* Each side's light (app.js lightBoard, lightView): a leaf of the 3D view over the side's SVG, in its plane (the other
+   side's: .is-back, as .board-back-face and its mirrored SVG lie) and with its view box, whose two paths are the board's
+   outline less its cutouts (even-odd), so nothing is painted outside the board: the shade (black, or white where the side
+   faces the lights better than at the home view) and the satin sweep, a gradient of --sheen (the light the coverlay gives
+   back, tinted toward the art's amber) whose stops app.js sets as the view turns.  Never a pointer target, no shadow of
+   its own; hidden with the plan view, which stays a flat plan. */
+:is(.oblique-board,.assembly-face) > svg:is(.board-light,.board-shadow) { position:absolute; inset:0; width:100%; height:100%; aspect-ratio:auto; pointer-events:none;
+  filter:none; backface-visibility:hidden; --sheen:#ffeac6; }
+:is(.oblique-board,.assembly-face) > svg.board-light.is-back { transform:translateZ(calc(var(--fpc-mm,0) * -1 * var(--depth-px,0px))) rotateY(180deg) scaleX(-1); }
+.board-light stop { stop-color:var(--sheen); }
+.board-shadow path { fill:rgb(13 43 45); }
+.stacked-canvas.is-plan :is(.board-light,.board-shadow) { display:none; }
+/* The shadow on the table, cast away from the views' key light (app.js lightBoard, lightView; the user's request of
+   2026-11-05: the light of the sensor on the part in every 3D view): the board's outline blurred as its sides'
+   drop-shadow was (--shadow-blur, the Gaussian's deviation: 4.5 px; sRGB 13 43 45 at 28 %), a leaf just behind its
+   copper side drawn from both of its sides, moved in the board's plane by --shadow-u / --shadow-v (a share of the length
+   it has on screen at the view's home, 21 px as before) and faded by --shadow-k, so that on screen it falls down and to
+   the right whatever the turn (before, it turned with the board, up and to the left once the board had spun half round). */
+.oblique-board { --shadow-blur:4.5px; }
+.oblique-board > svg.board-shadow { overflow:visible; opacity:calc(.28 * var(--shadow-k,1)); backface-visibility:visible;
+  transform:translateZ(-.5px) translate(calc(var(--shadow-u,.034) * 21px), calc(var(--shadow-v,1.539) * 21px)); }
 .board-back .outline { fill:#ecd3a3; }
 .board-back :is(.electrode,.pad) { fill:#d9672b; stroke:none; opacity:.32; }
 .board-back .route { opacity:.32; }
@@ -108,7 +130,6 @@ input.fine-step::-webkit-inner-spin-button,input.fine-step::-webkit-outer-spin-b
 .stacked-review header .eyebrow { margin-bottom:4px; }
 .stacked-review header span { color:var(--muted); font-size:.72rem; line-height:1.4; text-align:right; }
 .stacked-canvas { height:560px; display:grid; place-items:center; overflow:hidden; color:var(--muted); background:linear-gradient(155deg,#eef5f3,#dbe8e6); position:relative; }
-.assembly-caption { position:absolute; left:12px; bottom:10px; padding:4px 6px; font-size:.63rem; color:#3d555a; border-radius:3px; background:rgba(255,255,255,.78); }
 /* The tilted camera shows about half the scene height; the plan view shows all of it. */
 .assembly-scene { width:min(74%,620px,calc(520px * var(--assembly-ratio))); aspect-ratio:var(--assembly-aspect); position:relative; perspective:1050px; transform-style:preserve-3d; }
 /* Its angles as the view opens are app.js's ORBIT_HOME; a drag sets them (attachOrbit). */
@@ -116,8 +137,6 @@ input.fine-step::-webkit-inner-spin-button,input.fine-step::-webkit-outer-spin-b
 .stacked-canvas:not(.is-plan):has(.assembly-camera) { cursor:grab; touch-action:none; user-select:none; }
 .stacked-canvas.is-orbiting { cursor:grabbing; }
 .stacked-canvas:focus-visible { outline:2px solid #087e8b; outline-offset:-2px; }
-.orbit-hint { color:var(--muted); font-size:.68rem; }
-.orbit-hint[hidden] { display:none; }
 .assembly-board { position:absolute; transform-style:preserve-3d; }
 .assembly-board svg { width:100%; height:100%; min-width:0; display:block; overflow:visible; }
 .assembly-board .view-label { display:none; }
@@ -125,8 +144,21 @@ input.fine-step::-webkit-inner-spin-button,input.fine-step::-webkit-outer-spin-b
    turned-over face would show the copper side from behind instead of the board's other side. */
 .assembly-board.is-lower { transform:translateZ(0); }
 .assembly-board.is-upper { transform:translateZ(96px); }
-.assembly-board.is-lower svg { filter:drop-shadow(10px 15px 8px rgba(13,43,45,.28)); }
-.assembly-board.is-upper svg { filter:drop-shadow(9px 13px 7px rgba(13,43,45,.23)); opacity:.78; }
+.assembly-board.is-upper svg { opacity:.78; }
+/* The shadows, cast away from the key as the oblique view's (app.js lightBoard, lightView: --shadow-u / --shadow-v in the
+   boards' plane, a share of their length on screen at the home view, 15.6 and 13.8 px before the camera's scale, blurred
+   and dark as the sides' drop-shadows were, the top FPC's under its translucency); the turned-over top FPC's leaf mirrored
+   as its face is (flip-x y, flip-y x).  Before, the sides' drop-shadow rule had the weight of the walls' filter:none, so
+   that every wall ring cast a shadow too, nine a board. */
+.assembly-face > svg.board-shadow { backface-visibility:visible; }
+.assembly-board.is-lower { --shadow-blur:4px; }
+.assembly-board.is-upper { --shadow-blur:3.5px; }
+.assembly-board.is-lower .assembly-face > svg.board-shadow { opacity:calc(.28 * var(--shadow-k,1));
+  transform:translateZ(-.5px) translate(calc(var(--shadow-u,.075) * 15.6px), calc(var(--shadow-v,1.576) * 15.6px)); }
+.assembly-board.is-upper.flip-x .assembly-face > svg.board-shadow { opacity:calc(.78 * .23 * var(--shadow-k,1));
+  transform:translateZ(-.5px) translate(calc(var(--shadow-u,.075) * 13.8px), calc(var(--shadow-v,1.576) * -13.8px)); }
+.assembly-board.is-upper.flip-y .assembly-face > svg.board-shadow { opacity:calc(.78 * .23 * var(--shadow-k,1));
+  transform:translateZ(-.5px) translate(calc(var(--shadow-u,.075) * -13.8px), calc(var(--shadow-v,1.576) * 13.8px)); }
 .assembly-face { position:relative; width:100%; height:100%; transform-style:preserve-3d; backface-visibility:visible; }
 .assembly-face > svg { backface-visibility:hidden; }
 .assembly-board.flip-x .assembly-face { transform:rotateX(180deg); }
@@ -134,19 +166,15 @@ input.fine-step::-webkit-inner-spin-button,input.fine-step::-webkit-outer-spin-b
 .taxel-field { fill:none; stroke:#087e8b; stroke-width:.3; stroke-dasharray:1.2 .8; }
 .taxel-outline { fill:rgba(8,126,139,.08); stroke:#087e8b; stroke-width:.25; }
 .mask-badge { margin:.35rem 0; font-weight:600; color:#087e8b; }
-.stacked-canvas.is-plan .assembly-scene { width:min(80%,680px,calc(470px * var(--assembly-ratio))); }
+/* --plan-fit: below 1 where the boards would lie under the frame's controls (app.js clearPlanOfControls, 2026-11-06). */
+.stacked-canvas.is-plan .assembly-scene { width:calc(min(80%,680px,calc(470px * var(--assembly-ratio))) * var(--plan-fit,1)); }
 .stacked-canvas.is-plan .assembly-camera { transform:none; }
 .stacked-canvas.is-plan .assembly-board { transform:none; filter:none; }
 .stacked-canvas.is-plan .assembly-board svg { filter:none; }
 .stacked-canvas.is-plan .assembly-board.is-upper svg { opacity:.6; }
 .stacked-canvas.is-plan .board-edge { display:none; }
 .stacked-canvas.is-plan .board-back-face { transform:rotateY(180deg); }
-.assembly-legend { display:flex; flex-wrap:wrap; gap:6px 10px; padding:9px 14px 11px; border-top:1px solid var(--line); font-size:.67rem; line-height:1.35; }
-.assembly-legend:empty { display:none; }
-.assembly-key,.assembly-note { padding:4px 6px; border-radius:3px; background:#f4f8f7; color:#395158; }
-.assembly-key { font-weight:760; }
-.upper-key { border-left:3px solid #087e8b; }.lower-key { border-left:3px solid #d7771f; }.assembly-note { color:#536d74; }
-@media (max-width:980px) { .stacked-canvas { height:480px; }.assembly-scene { width:min(80%,570px,calc(440px * var(--assembly-ratio))); }.stacked-canvas.is-plan .assembly-scene { width:min(86%,570px,calc(420px * var(--assembly-ratio))); } }
+@media (max-width:980px) { .stacked-canvas { height:480px; }.assembly-scene { width:min(80%,570px,calc(440px * var(--assembly-ratio))); }.stacked-canvas.is-plan .assembly-scene { width:calc(min(86%,570px,calc(420px * var(--assembly-ratio))) * var(--plan-fit,1)); } }
 
 /* DRC panel: every rule of board.verification.checks with its measured value. */
 .drc-panel { margin-top:18px; }
@@ -184,7 +212,7 @@ input.fine-step::-webkit-inner-spin-button,input.fine-step::-webkit-outer-spin-b
 .masthead h1 { grid-area:title; line-height:1.1; white-space:nowrap; }
 .masthead-tagline { grid-area:tagline; font-size:.86rem; line-height:1.45; color:#cfe9e6; }
 .masthead .mode-picker { grid-area:modes; justify-self:start; }
-.masthead-links { grid-area:links; display:flex; align-items:center; gap:10px; }
+.masthead-links { display:flex; align-items:center; gap:10px; }
 .masthead-link { display:inline-flex; align-items:center; gap:9px; height:44px; padding:0 16px 0 12px; border:1px solid rgba(255,255,255,.38); border-radius:8px;
   background:rgba(255,255,255,.06); color:#fff; font-size:.95rem; font-weight:700; text-decoration:none; }
 .masthead-link svg { flex:none; width:26px; height:26px; }
@@ -212,6 +240,57 @@ input.fine-step::-webkit-inner-spin-button,input.fine-step::-webkit-outer-spin-b
 .mode-picker span { display:block; padding:11px 24px; font-size:1rem; font-weight:750; color:#d9efec; white-space:nowrap; }
 .mode-picker input:checked + span { background:#fff; color:#075c69; }
 .mode-picker input:focus-visible + span { outline:2px solid #77cbd1; outline-offset:-3px; }
+/* The Library link (library.html; the user's requests of 2026-11-05): a text link right after the mode switch, 12 px
+   after it (the grid's 30 px gap less 18), on the title's line, its own grid area; the line on FlexiTac spans all five.
+   At 1100 px and below (the header's two lines, as before the link) it is a flex row that wraps: the title and the
+   community links, a line break (the ::after), the mode switch and the Library link, then the line on FlexiTac; where
+   the link no longer fits beside the switch it takes a line of its own.  From 1101 to 1130 px the one line keeps the
+   link with the grid's gaps 18 px, not 30, the link still 12 px after the switch (the review of 2026-11-05: with 30 px
+   the community links ran up to 23 px into the right padding there, and a two-line header from 1130 px cost those
+   widths 54 px; 18 px leaves 13 px to spare at 1101 px, measured).  `order` keeps the title block's children (display
+   contents: the title, then its line) in that order; `.masthead .mode-picker` outranks the 520 px rule below
+   (.mode-picker's margin 0).  The SVG's size is here: the theme styles no SVG element. */
+.masthead { grid-template-columns:auto auto auto minmax(0,1fr) auto; grid-template-areas:"title modes library . links" "tagline tagline tagline tagline tagline"; }
+.masthead-library { grid-area:library; justify-self:start; margin-left:-18px; display:inline-flex; align-items:center; gap:6px; height:44px; padding:0 10px;
+  border-radius:980px; color:inherit; font-size:16px; font-weight:600; line-height:1.25; text-decoration:none; white-space:nowrap; }
+.masthead-library svg { width:16px; height:16px; flex:none; }
+@media (min-width:1101px) and (max-width:1130px) { .masthead { column-gap:18px; } .masthead-library { margin-left:-6px; } }
+@media (max-width:1100px) { .masthead { display:flex; flex-wrap:wrap; align-items:center; column-gap:30px; row-gap:0; }
+  .masthead h1 { order:0; flex:1 1 0; min-width:0; } .masthead-end { order:1; }
+  .masthead::after { content:""; order:2; flex-basis:100%; height:0; }
+  .masthead .mode-picker { order:3; margin-top:10px; margin-right:-18px; } .masthead-library { order:4; margin:10px 0 0; }
+  .masthead-tagline { order:5; flex-basis:100%; margin-top:10px; } }
+/* On a phone the link 36 px tall and its padding 4 px: it stays beside the switch down to 480 px and takes its own
+   line (+46 px) below, which the user accepted at 480 px and below (10 px of padding wrapped it from 491 px; measured
+   in Chromium on Linux, DejaVu Sans; with other fonts the wrap point shifts). */
+@media (max-width:520px) { .masthead-library { height:36px; padding:0 4px; gap:5px; } }
+/* The header's right (2026-11-06): the look's toggle (web/theme.js), then the community links, one row 10 px apart in the
+   grid's links area (the flex row's second item at 1100 px and below).  The toggle is an icon button as tall as the
+   community's pills and round: a moon while the page is light (it turns dark on), a sun while it is dark, by <html
+   data-theme> (no script swaps them, so a page opened dark shows its sun from the first paint).  Its room (measured in
+   Chromium on Linux, DejaVu Sans, the widest of the system fonts here; with the GitHub card's counts none, 159 / 17 and
+   9.9k / 999): from 1101 to 1220 px and from 601 to 630 px Discord shows its mark alone (the line had no 54 px to
+   spare there: at 1101 px the switch's Library link ran into the toggle, at 601 px with 9.9k counts the title ran
+   into it; with Discord named the grid's spacer, not its two 30 px gaps, has to give the 54 px, so with 9.9k / 999
+   the community links ran into the header's right padding up to 1219 px, with 159 / 17 up to 1207 px, the review of
+   2026-11-06; GitHub keeps its name and counts); up to 410 px the three are circles 6 px apart, as large as the line
+   leaves room for with the title 8 px or more clear (the revision of 2026-11-06: one fixed 32 px had left 40 px unused
+   at 390 px): 44 px up to 410, 40 up to 394 (390 px, an iPhone), 36 up to 382 (375 px) and 32 up to 370 (at 360 px the
+   title, 28 px, left 12 px beside the two pills; below 360 px it is 22 px), each a 4 px step from about 9 px of
+   clearance, the line still 44 px tall.  The rest of the header is as before. */
+.masthead-end { grid-area:links; display:flex; align-items:center; gap:10px; }
+.masthead-theme { display:inline-flex; align-items:center; justify-content:center; flex:none; width:44px; height:44px; margin:0; padding:0;
+  border:1px solid rgba(255,255,255,.38); border-radius:999px; background:rgba(255,255,255,.06); color:#fff; cursor:pointer; }
+.masthead-theme svg { flex:none; width:20px; height:20px; }
+.masthead-theme .theme-sun { display:none; }
+:where(:root[data-theme="dark"]) .masthead-theme .theme-moon { display:none; }
+:where(:root[data-theme="dark"]) .masthead-theme .theme-sun { display:block; }
+@media (min-width:601px) and (max-width:630px), (min-width:1101px) and (max-width:1220px) { .masthead-discord { padding:0 10px; } .masthead-discord > span { display:none; } }
+@media (max-width:410px) { .masthead-end { min-height:44px; } .masthead-end,.masthead-links { gap:6px; }
+  .masthead-theme,.masthead-link { width:44px; height:44px; justify-content:center; padding:0; } .masthead-link svg { width:26px; height:26px; } }
+@media (max-width:394px) { .masthead-theme,.masthead-link { width:40px; height:40px; } .masthead-link svg { width:24px; height:24px; } }
+@media (max-width:382px) { .masthead-theme,.masthead-link { width:36px; height:36px; } .masthead-theme svg { width:18px; height:18px; } .masthead-link svg { width:22px; height:22px; } }
+@media (max-width:370px) { .masthead-theme,.masthead-link { width:32px; height:32px; } .masthead-link svg { width:18px; height:18px; } }
 .cad-workspace { margin:0 0 20px; }
 .cad-workspace > header { min-height:66px; padding:15px 16px 10px; display:flex; justify-content:space-between; gap:12px; align-items:start; border-bottom:1px solid var(--line); }
 .cad-workspace > header .eyebrow { margin-bottom:4px; }
@@ -266,6 +345,9 @@ input.fine-step::-webkit-inner-spin-button,input.fine-step::-webkit-outer-spin-b
 .cad-view:focus-visible { outline:2px solid #77cbd1; outline-offset:-2px; }
 .cad-view .cad-canvas { position:absolute; inset:0; width:100%; height:100%; display:block; }
 .cad-view.is-dropping { outline:3px dashed var(--accent); outline-offset:-7px; }
+/* A drag over the 3D view (a file, a sample's tile: main.js) drawn over the part too: the canvas covers the view's own
+   outline once a model is shown (theme.css draws the focus ring so as well; 2026-11-06). */
+.cad-view.is-dropping::after { content:""; position:absolute; inset:5px; z-index:2; border:3px dashed var(--accent); border-radius:10px; pointer-events:none; }
 .cad-drop { position:absolute; inset:14px; z-index:1; display:grid; place-content:center; gap:6px; padding:12px; text-align:center; border:2px dashed #9eb7bb; border-radius:8px; color:var(--muted); font-size:.84rem; background:rgba(255,255,255,.72); }
 .cad-drop strong { color:var(--ink); font-size:1rem; }
 .cad-view.is-unavailable .cad-drop { border-color:var(--warn); }
@@ -466,6 +548,60 @@ body[data-mode="cad"] .flow-guide { display:block; position:sticky; top:0; align
 .flow-text strong { display:block; margin-top:5px; font-size:.93rem; color:#20303a; }
 .flow-step.is-next .flow-text strong { color:#1d4ed8; }
 .flow-text > span { display:block; margin-top:3px; color:var(--muted); font-size:.76rem; line-height:1.45; }
+/* The samples under the steps (index.html #samplePalette, main.js loadSample; the user's request of 2026-11-06): two
+   columns of tiles, each a thumbnail and a name, dragged onto the 3D view or pressed; the one shown edged (is-current).
+   On a narrow page (the guide above the workspace) one row that scrolls sideways, so the steps and the view stay near. */
+.sample-palette { margin:12px 4px 0; padding-top:10px; border-top:1px solid var(--line); }
+.sample-palette-title { margin:0 0 2px; font-size:.86rem; line-height:1.3; }
+.sample-palette-hint { margin:0 0 6px; color:var(--muted); font-size:.7rem; line-height:1.4; }
+.sample-grid { list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:5px; }
+.sample-grid > li { min-width:0; }
+.sample { position:relative; display:flex; flex-direction:column; gap:1px; width:100%; min-height:44px; padding:3px; border:1px solid var(--line); border-radius:9px;
+  background:#fff; color:inherit; font:inherit; text-align:left; cursor:grab; }
+.sample:hover { border-color:#9fc6cb; }
+.sample:focus-visible { outline:2px solid #77cbd1; outline-offset:1px; }
+.sample:active { cursor:grabbing; }
+.sample.is-current { border-color:var(--accent); box-shadow:inset 0 0 0 1px var(--accent); }
+.sample[aria-busy="true"] { cursor:progress; }
+.sample img { display:block; width:100%; height:auto; aspect-ratio:24 / 11; margin-bottom:2px; border-radius:6px; background:#f5f5f7; pointer-events:none; }
+.sample-name { display:block; padding:0 3px; overflow:hidden; white-space:nowrap; text-overflow:ellipsis; font-size:.72rem; font-weight:700; line-height:1.3; }
+.sample-hint-tap { display:none; }
+@media (pointer:coarse) { .sample-hint-click { display:none; } .sample-hint-tap { display:inline; } }
+/* Compact tiles, each thumbnail beside its name (two lines at most), 30 px high: a laptop's window (under 920 px the
+   guide had overflowed its window-high column, its own scrollbar narrowing the steps, the grippers out of sight), the
+   side of a narrow page's guide and a phone's row (the review of 2026-11-06), so that the palette moves nothing. */
+@media (min-width:981px) and (max-height:919px), (max-width:980px) {
+  .sample-grid .sample { flex-direction:row; align-items:center; gap:5px; min-height:30px; padding:2px; }
+  .sample-grid .sample img { flex:none; width:clamp(44px,36%,72px); margin:0; }
+  .sample-grid .sample-name { display:-webkit-box; -webkit-box-orient:vertical; -webkit-line-clamp:2; padding:0 2px 0 0; white-space:normal; font-size:11px; line-height:13px; }
+}
+/* The guide's column a flex column: on a short window the palette gives way, its grid scrolling inside it, never the
+   steps (Advanced Customization's steps open, a window under 720 px); its focus rings inside the scroller's padding. */
+@media (min-width:981px) {
+  body[data-mode="cad"] .flow-guide { display:flex; flex-direction:column; }
+  .sample-palette { display:flex; flex-direction:column; min-height:0; }
+  .sample-grid { min-height:64px; margin:0 -3px; padding:3px; overflow-y:auto; }
+}
+@media (min-width:981px) and (max-height:919px) {
+  .sample-palette { margin-top:6px; padding-top:8px; }
+  .sample-palette-hint { margin-bottom:3px; }
+  .sample-grid { gap:3px 4px; }
+  body[data-mode="cad"] .flow-guide { padding-bottom:16px; }
+}
+/* A narrow page (the guide above the workspace): beside the steps, which take no more than their own width, two
+   columns of four as on the left; on a phone one row under them that scrolls sideways, the heading and the hint on one
+   line, about 80 px in all.  Either way the workspace starts where it did without the palette, or near. */
+@media (min-width:760px) and (max-width:980px) {
+  body[data-mode="cad"] .flow-guide { display:grid; grid-template-columns:max-content minmax(0,1fr); column-gap:24px; align-items:start; }
+  .flow-guide-title { grid-column:1 / -1; }
+  .sample-palette { grid-column:2; grid-row:2; margin:0; padding:0 0 0 18px; border-top:0; border-left:1px solid var(--line); }
+  .sample-grid { margin:0 -3px; padding:3px; gap:3px 4px; }
+}
+@media (max-width:759px) {
+  .sample-palette { display:grid; grid-template-columns:auto minmax(0,1fr); column-gap:8px; align-items:baseline; margin:8px 0 0; padding-top:8px; }
+  .sample-palette-title,.sample-palette-hint { margin:0; }
+  .sample-grid { grid-column:1 / -1; grid-template-columns:none; grid-auto-flow:column; grid-auto-columns:138px; overflow-x:auto; gap:4px; margin:4px -3px 0; padding:3px; }
+}
 #cadWorkspace,#cadStepConfig,#cadStepGenerate,#downloadsTitle { scroll-margin-top:14px; }
 /* The Gerber ZIPs, first among the downloads and set off (index.html .download-main). */
 .download-actions button.download-main { min-height:42px; padding:0 16px; border-color:var(--accent); background:var(--accent); color:#fff; font-size:.86rem; font-weight:800; }
@@ -483,10 +619,6 @@ body[data-mode="cad"] .controls { display:none; }
 .cad-config-body > .cad-grid { margin-bottom:6px; }
 .board-card header h2 { align-self:center; }
 .board-card header { min-height:0; }
-.assembly-more { margin:0 14px 12px; font-size:.67rem; }
-.assembly-more > summary { font-size:.72rem; font-weight:700; color:var(--muted); padding:2px 0 6px; }
-.assembly-notes { display:flex; flex-wrap:wrap; gap:6px 10px; line-height:1.35; }
-.assembly-notes:empty { display:none; }
 .drc-panel > summary { padding:14px 16px; display:flex; align-items:center; gap:12px; }
 .drc-panel > summary::before { order:-1; }
 .drc-panel[open] > summary { border-bottom:1px solid var(--line); }
@@ -536,12 +668,13 @@ body[data-look="photo"] .look-scope .board-back .outline { fill:#d37c0c; stroke:
 body[data-look="photo"] .look-scope .board-back .route { stroke:#b4530a; opacity:.55; }
 body[data-look="photo"] .look-scope .board-back :is(.electrode,.pad) { fill:#b4530a; opacity:.55; }
 body[data-look="photo"] .look-scope .board-back .stiffener { display:inline; fill:#7a360c; stroke:#4a1606; stroke-width:.06; opacity:.95; }
-body[data-look="photo"] .look-scope .fpc-edge-ring { stroke:#9c4b04; }
-body[data-look="photo"] .look-scope .fpc-stiffener-ring { stroke:#4a1606; }
-body[data-look="photo"] .look-scope .fpc-stiffener-face { fill:#7a360c; }
-body[data-look="photo"] .swatch-copper { background:#d26a02; }
-body[data-look="photo"] .swatch-opening { background:#cdb98c; border-color:#a48e62; }
-body[data-look="photo"] .swatch-stiffener { background:#4a1606; }
+body[data-look="photo"] .look-scope .fpc-edge-ring { --edge-paint:#df8401; }
+body[data-look="photo"] .look-scope :is(.fpc-stiffener-ring,.fpc-stiffener-face) { --edge-paint:#7a360c; }
+/* The sweep's tint in Photo (app.js lightView): the light the coverlay gives back, 72 % of the way from white to the open
+   PI's hue (onpart.js BOARD_LOOK.tint; Diagram's, #ffeac6, is its PI's). */
+body[data-look="photo"] .look-scope svg.board-light { --sheen:#ffbc90; }
+/* The static gloss of Photo's grain is the flat view's: the 3D views have their light's sweep, which moves with the view. */
+body[data-look="photo"] .look-scope :is(.oblique-board,.stacked-canvas:not(.is-plan)) .lk-gloss { display:none; }
 /* The plan view sees the top FPC from above through its polyimide: its copper plainly (the registration to check). */
 .stacked-canvas.is-plan .board-back :is(.electrode,.pad,.route) { opacity:.8; }
 /* The coin for scale (app.js coinArt, coinPlane): the US Mint's photo of a quarter on a metal disk under a sheen, never a
@@ -559,6 +692,9 @@ body[data-look="photo"] .swatch-stiffener { background:#4a1606; }
 .coin-plane .coin-layer { position:absolute; inset:0; display:block; width:100%; height:100%; aspect-ratio:auto; overflow:visible; filter:none;
   transform:translateZ(calc(var(--thickness) * var(--rise) * 100cqw)); }
 .coin-layer-cast { backface-visibility:hidden; }
+/* Its shadow on the table turned about the coin's centre (app.js lightView, --coin-cast-turn) to fall away from the key as
+   the boards' do, whatever the turn (index.html #coin-cast offsets it down and to the right in the coin's own plane). */
+.coin-plane .coin-layer-cast { transform:rotate(var(--coin-cast-turn,0deg)); }
 /* The face's gleam (app.js coinPlane): polished metal throws back the room, bright above its horizon and dark below; the
    gradient's angle undoes the view's spin and the horizon slides with the tilt, so it keeps to the room as the coin turns
    (--coin-tilt, --coin-spin: the view's angles, its own until it is first turned). */
@@ -569,8 +705,6 @@ body[data-look="photo"] .swatch-stiffener { background:#4a1606; }
 .oblique-board .coin-plane { transform:translateZ(-28px); --coin-tilt:var(--orbit-tilt,56deg); --coin-spin:var(--orbit-spin,-22deg); }
 .assembly-camera .coin-plane { transform:translateZ(-56px); --coin-tilt:var(--orbit-tilt,57deg); --coin-spin:var(--orbit-spin,-20deg); }
 .stacked-canvas.is-plan :is(.coin-plane,.coin-layer) { transform:none; }
-.swatch-coin { background:radial-gradient(circle at 38% 34%, #f4f5f6, #cfd3d7 55%, #9ca2a8); border-radius:50%; }
-.coin-key { border-left:3px solid #9ca2a8; font-weight:600; }
 
 /* One step to a sensor (the user's request of 2026-11-02): the model and the sensor on it in sight, the rest under
    "Advanced Customization" (index.html #cadCustomize, #formCustomize), the stacked view and the other files folded. */
@@ -619,3 +753,53 @@ body[data-look="photo"] .swatch-stiffener { background:#4a1606; }
 .flow-sub-no { display:grid; place-items:center; width:22px; height:22px; border-radius:50%; border:2px solid #a9bcc1; background:#fff; color:#53676e; font-size:.7rem; font-weight:800; }
 .flow-substep.is-done .flow-sub-no { border-color:#075c69; background:#075c69; color:#fff; }
 .flow-substep.is-next .flow-sub-no { border-color:#2563eb; background:#2563eb; color:#fff; }
+
+/* The sensor on the part (the user's request of 2026-11-05; index.html .stack-figures, main.js 7b, web/cad/onpart.js): in
+   Gen by Surface the stacked card holds two figures, the registration (#stackedPreview, as before) and the sensor on the
+   part (#sensorOnPart, a second .stacked-canvas: the same height, lightbox and stale fade, its WebGL canvas transparent
+   over it), side by side where the card is 720 px wide or more (a container query: the card's width is not the
+   window's, the guide folds away at 980 px; inline-size containment makes no containing block of position:fixed), else
+   one under the other, their frames level (their controls in them and no legends under them since 2026-11-06).
+   Rectangular mode shows the registration alone: no container, no second figure. */
+.stack-figure.is-on-part { display:none; }
+body[data-mode="cad"] .stack-figure.is-on-part { display:block; border-top:1px solid var(--line); }
+body[data-mode="cad"] .stacked-review { container:stack-card / inline-size; }
+@container stack-card (min-width:720px) {
+  .stack-figures { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); }
+  .stack-figure { min-width:0; }
+  body[data-mode="cad"] .stack-figure.is-on-part { border-top:0; border-left:1px solid var(--line); }
+}
+.figure-reset { position:absolute; top:12px; right:12px; z-index:3; min-height:26px; padding:0 10px; border:1px solid #c8ccd0; border-radius:4px; background:#fff; color:var(--ink);
+  font-size:.68rem; font-weight:750; cursor:pointer; }
+.figure-reset[hidden] { display:none; }
+.figure-reset:disabled { color:#a0a4a8; cursor:not-allowed; }
+.on-part-note { max-width:34ch; padding:0 16px; text-align:center; }
+.on-part-canvas { position:absolute; inset:0; width:100%; height:100%; display:block; cursor:grab; user-select:none; }
+.on-part-canvas:active { cursor:grabbing; }
+.on-part-canvas[hidden] { display:none; }
+
+/* The figures' controls in their frames (the user's request of 2026-11-06: "这个可以把button做进示意图框里面放在左侧排列
+   更简洁; 同时字可以更简略; 而且可以统一, 3d view/2d view"; index.html .figure-tools): each figure's switch, then the 2D
+   view's zoom, over its frame's top left, 12 px in, in one row, the pointer through the row's gaps to the figure; Reset
+   view over the top right (.figure-reset: the registration's 3D view, the sensor on the part).  What a figure draws at
+   its home stays off them: a 2D view whose board would reach under them starts its window under them (app.js fitScene,
+   else as before), the plan view's scene shrinks where its boards would (app.js clearPlanOfControls, --plan-fit), and
+   the sensor on the part's pane keeps a 40 px band at its top (a transparent border, the gradient under it; the pane's
+   size as before, its canvas the room below; the Library's shots set border 0 and take the whole pane, as before). */
+.canvas-wrap,.stack-figure { position:relative; }
+.figure-tools { position:absolute; top:12px; left:12px; z-index:3; display:flex; flex-wrap:wrap; align-items:center; gap:8px; max-width:calc(100% - 24px);
+  pointer-events:none; }
+.figure-tools > * { pointer-events:auto; }
+/* A frame narrower than the row at its size (a phone's): the segments and the zoom tighter, every button still 24 px
+   or more each way, so the row fits in one line down to a 360 px wide page; narrower it wraps, and the 2D view's window
+   starts under both rows where the board would lie under them (app.js fitScene). */
+.canvas-wrap { container:figure-frame / inline-size; }
+@container figure-frame (max-width:379.98px) {
+  .canvas-wrap .figure-tools { gap:4px; }
+  .canvas-wrap .figure-tools .preview-tabs button { padding-left:5px; padding-right:5px; }
+  .canvas-wrap .figure-tools .zoom-tools button { min-width:24px; padding-left:5px; padding-right:5px; }
+  .canvas-wrap .figure-tools .zoom-tools button[data-zoom="out"] { padding-left:6px; }
+  .canvas-wrap .figure-tools .zoom-tools button[data-zoom="reset"] { padding-left:6px; padding-right:7px; }
+  .canvas-wrap .figure-tools .zoom-tools output { margin-left:4px; }
+  .canvas-wrap .figure-tools .zoom-tools { padding-right:7px; } }
+.stacked-canvas.on-part-view { border-top:40px solid transparent; background-origin:border-box; }

@@ -1,0 +1,232 @@
+{
+ "format": "flexitac-samples/v1",
+ "about": "Gen by Surface's samples (index.html #samplePalette, under the step guide; the user's request of 2026-11-06): eight parts a visitor drags onto the 3D view, or clicks, to see a sensor generated at once (web/cad/main.js loadSample, ./?sample=<id>). Each takes the Library sensor named by 'library' (library/entries.json: its fit's selection, base, border and options); a Library finger is that part's own mesh and shipped fit, a whole gripper its own mesh ('mesh', written by tools/sample_grippers.py from 'assembled': the part's facets first, so the sensor's seed facets name the same face) fitted by the engine, its sensor then seen from 'camera' (toward the camera, in the mesh's axes: past the other finger, which stands where the face's normal would put it). The thumbnails are drawn by tools/browser/sample_thumbs.py in the 3D view's look from 'view' (dir: toward the camera, up: the picture's up, in the mesh's axes). Hand-kept; tests/test_samples.py checks it against the page, the files, the Library and the engine.",
+ "samples": [
+  {
+   "id": "umi-trap-tip5.8",
+   "name": "UMI trapezoid",
+   "title": "UMI finger, trapezoid tip 5.8 mm",
+   "kind": "5.8 mm tip",
+   "library": "umi-trap-tip5.8-2mm",
+   "thumb": {
+    "src": "thumbs/umi-trap-tip5.8.webp",
+    "width": 240,
+    "height": 110,
+    "view": {
+     "dir": [
+      -0.95,
+      0.12,
+      -0.25
+     ],
+     "up": [
+      0,
+      1,
+      0
+     ]
+    }
+   }
+  },
+  {
+   "id": "umi-convex-tip13.8",
+   "name": "UMI convex",
+   "title": "UMI finger, convex arc tip 13.8 mm",
+   "kind": "13.8 mm tip",
+   "library": "umi-convex-tip13.8-2mm",
+   "thumb": {
+    "src": "thumbs/umi-convex-tip13.8.webp",
+    "width": 240,
+    "height": 110,
+    "view": {
+     "dir": [
+      -0.95,
+      0.12,
+      -0.25
+     ],
+     "up": [
+      0,
+      1,
+      0
+     ]
+    }
+   }
+  },
+  {
+   "id": "arx-x5",
+   "name": "ARX X5",
+   "title": "ARX X5 gripper finger (HandUMI replica)",
+   "kind": "finger",
+   "library": "arx-x5-2mm",
+   "thumb": {
+    "src": "thumbs/arx-x5.webp",
+    "width": 240,
+    "height": 110,
+    "view": {
+     "dir": [
+      -0.62,
+      0.55,
+      0.56
+     ],
+     "up": [
+      0,
+      0,
+      1
+     ]
+    }
+   }
+  },
+  {
+   "id": "i2rt-yam",
+   "name": "I2RT YAM",
+   "title": "I2RT YAM gripper tip",
+   "kind": "finger",
+   "library": "i2rt-yam-2mm",
+   "thumb": {
+    "src": "thumbs/i2rt-yam.webp",
+    "width": 240,
+    "height": 110,
+    "view": {
+     "dir": [
+      0.62,
+      -0.55,
+      0.56
+     ],
+     "up": [
+      0.7,
+      0.2,
+      0.4
+     ]
+    }
+   }
+  },
+  {
+   "id": "unitree-dex1",
+   "name": "Unitree Dex1-1",
+   "title": "Unitree Dex1-1 gripper finger",
+   "kind": "finger",
+   "library": "unitree-dex1-2mm",
+   "thumb": {
+    "src": "thumbs/unitree-dex1.webp",
+    "width": 240,
+    "height": 110,
+    "view": {
+     "dir": [
+      0.62,
+      0.55,
+      0.56
+     ],
+     "up": [
+      0,
+      0,
+      1
+     ]
+    }
+   }
+  },
+  {
+   "id": "makermods-metal",
+   "name": "MakerMods",
+   "title": "MakerMods Metal Arm gripper tip (HandUMI replica)",
+   "kind": "finger",
+   "library": "makermods-metal-2mm",
+   "thumb": {
+    "src": "thumbs/makermods-metal.webp",
+    "width": 240,
+    "height": 110,
+    "view": {
+     "dir": [
+      -0.62,
+      0.55,
+      0.56
+     ],
+     "up": [
+      -0.6,
+      -0.4,
+      0.5
+     ]
+    }
+   }
+  },
+  {
+   "id": "franka-hand-gripper",
+   "name": "Franka Hand",
+   "title": "Franka Hand, the whole gripper, jaws open",
+   "kind": "whole gripper",
+   "library": "franka-hand-2mm",
+   "mesh": {
+    "file": "franka-hand-gripper.stl",
+    "name": "franka-hand-gripper.stl",
+    "bytes": 231784,
+    "facets": 4634,
+    "sha256": "e06a40f6b35245556e251095b5a4c18ca3bb5befde16003ea82a0ab6fbefd765",
+    "unit": "mm"
+   },
+   "assembled": {
+    "part": "library/meshes/franka-hand.stl",
+    "scene": "library/scenes/franka-hand.json"
+   },
+   "camera": [
+    0.3,
+    -0.5,
+    0.81
+   ],
+   "thumb": {
+    "src": "thumbs/franka-hand-gripper.webp",
+    "width": 240,
+    "height": 110,
+    "view": {
+     "dir": [
+      -0.62,
+      0.55,
+      0.56
+     ],
+     "up": [
+      0,
+      0,
+      1
+     ]
+    }
+   }
+  },
+  {
+   "id": "widowx-250-gripper",
+   "name": "WidowX 250",
+   "title": "WidowX 250, the whole gripper, jaws open",
+   "kind": "whole gripper",
+   "library": "widowx-250-2mm",
+   "mesh": {
+    "file": "widowx-250-gripper.stl",
+    "name": "widowx-250-gripper.stl",
+    "bytes": 64484,
+    "facets": 1288,
+    "sha256": "997bcaefe5c9ff76575cc849a49551dff3079650b15a5212335902cb61d291f1",
+    "unit": "mm"
+   },
+   "assembled": {
+    "part": "library/meshes/widowx-250.stl",
+    "scene": "library/scenes/widowx-250.json"
+   },
+   "camera": [
+    -0.78,
+    0.5,
+    0.38
+   ],
+   "thumb": {
+    "src": "thumbs/widowx-250-gripper.webp",
+    "width": 240,
+    "height": 110,
+    "view": {
+     "dir": [
+      -0.62,
+      0.55,
+      0.56
+     ],
+     "up": [
+      0,
+      0,
+      1
+     ]
+    }
+   }
+  }
+ ]
+}

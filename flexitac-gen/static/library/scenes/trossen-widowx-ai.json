@@ -1,0 +1,219 @@
+{
+ "format": "flexitac-library-scene/v1",
+ "part": "trossen-widowx-ai",
+ "part_mesh_sha256": "7e2792c557d7e15681b0a3cb693b728931c620d34d326f9f5409ba966372ee8c",
+ "about": "Trossen WidowX AI at full opening: trossen_arm_description 1f36d47, urdf/generated/wxai/wxai_follower.urdf (BSD-3-Clause): left_carriage_joint and right_carriage_joint prismatic 0..0.044 m on link_6, q 44 mm.  The bodies are mujoco_menagerie f3b6013 trossen_wxai link_6.obj, carriage_left.obj and carriage_right.obj (BSD-3-Clause) and, on each carriage, the HandUMI backbone (handumi-hw 1448278, WXAI-LEFT-Gripper-backbone.stl, Apache-2.0) under its sock, the Library mesh.  The backbone's file frame is registered on the menagerie's gripper_left.obj, which sits at carriage_left's origin (iterative closest point from 24 axis-aligned starts, the rotation snapped to the axes; median 0.02 mm).  The other finger is the mirror image of this one (x -> -x across the plane half way between the jaws): the HandUMI RIGHT backbone and sock are the LEFT ones mirrored (median 0.011 mm), so its sensor is the mirror-image board.",
+ "frame": "the part's file axes, mm",
+ "approach": [
+  0.0,
+  0.0,
+  1.0
+ ],
+ "opening": {
+  "q_mm": 44.0,
+  "limit_mm": 44.0,
+  "joint": "left_carriage_joint/right_carriage_joint (slide y of link_6)",
+  "source": "trossen_arm_description 1f36d47, urdf/generated/wxai/wxai_follower.urdf: left_carriage_joint limit 0 0.044 m"
+ },
+ "mate": {
+  "kind": "mirror",
+  "matrix": [
+   [
+    -1.0,
+    0.0,
+    0.0,
+    -88.0
+   ],
+   [
+    0.0,
+    1.0,
+    0.0,
+    0.0
+   ],
+   [
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  ],
+  "part": true
+ },
+ "bodies": [
+  {
+   "mesh": "bodies/trossen-widowx-ai/link_6.stl",
+   "sha256": "be82b4d7a19e00c7dcd21d4e5e4fee8a92f5f1c7f77af4563c2a6960f3afaf37",
+   "bytes": 36884,
+   "triangles": 736,
+   "matrix": [
+    [
+     0.0,
+     1.0,
+     0.0,
+     -43.972
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     -0.011
+    ],
+    [
+     1.0,
+     0.0,
+     0.0,
+     -156.288
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": null
+  },
+  {
+   "mesh": "bodies/trossen-widowx-ai/carriage_left.stl",
+   "sha256": "2d7261c67d20067c006bef6b5fbee06005505829c71a3ddbbd8359667c40021d",
+   "bytes": 19584,
+   "triangles": 390,
+   "matrix": [
+    [
+     0.0,
+     1.0,
+     0.0,
+     23.028
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     -0.011
+    ],
+    [
+     1.0,
+     0.0,
+     0.0,
+     -69.788
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": null
+  },
+  {
+   "mesh": "bodies/trossen-widowx-ai/carriage_right.stl",
+   "sha256": "ba52c7e0e9f23e33ab2acaf65a6514c41f8cfa78e9c2eb08bd55263f16eaba65",
+   "bytes": 19484,
+   "triangles": 388,
+   "matrix": [
+    [
+     0.0,
+     1.0,
+     0.0,
+     -110.972
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     -0.011
+    ],
+    [
+     1.0,
+     0.0,
+     0.0,
+     -69.788
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": null
+  },
+  {
+   "mesh": "bodies/trossen-widowx-ai/wxai-left-gripper-backbone.stl",
+   "sha256": "33bb42eb82f340536926a1c362021b064d21684e22d884021756bc89601674f8",
+   "bytes": 75484,
+   "triangles": 1508,
+   "matrix": [
+    [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     1.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": "sensor"
+  },
+  {
+   "mesh": "bodies/trossen-widowx-ai/wxai-left-gripper-backbone.stl",
+   "sha256": "33bb42eb82f340536926a1c362021b064d21684e22d884021756bc89601674f8",
+   "bytes": 75484,
+   "triangles": 1508,
+   "matrix": [
+    [
+     -1.0,
+     0.0,
+     0.0,
+     -88.0
+    ],
+    [
+     0.0,
+     1.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": "mate"
+  }
+ ],
+ "see_through": [
+  "mate"
+ ],
+ "picture": "on both fingers of the open gripper"
+}

@@ -1,0 +1,87 @@
+{
+ "format": "flexitac-library-scene/v1",
+ "part": "arx-x5",
+ "part_mesh_sha256": "5cf0e92353f4f5787b086eb518ff1d529ea41eb07502cdc3a2979766ccdd3018",
+ "about": "ARX X5 at full opening: mujoco_menagerie f3b6013, arx_l5/arx_l5.xml (BSD-3-Clause): joint7 slide 0..0.044 m, q 44 mm.  The body is link6.obj, the whole hand (the housing, the gripper motor, the rails and the end stops; the jaws' racks run inside its rails and the HandUMI tips replace link7 and link8).  link6 is placed by the Library mesh, the HandUMI LEFT tip (handumi-hw 1448278), registered on link7 (iterative closest point, the rotation snapped to the axes; median 0.55 mm).  The other finger is the HandUMI RIGHT tip, the LEFT one's mirror image (z -> -z of their files, median 0.014 mm), on link8: the mirror across link6's plane between the jaws, so its sensor is the mirror-image board.",
+ "frame": "the part's file axes, mm",
+ "approach": [
+  1.0,
+  0.0,
+  0.0
+ ],
+ "opening": {
+  "q_mm": 44.0,
+  "limit_mm": 44.0,
+  "joint": "joint7/joint8 (slide y of link6)",
+  "source": "mujoco_menagerie f3b6013, arx_l5/arx_l5.xml: joint7 range 0 0.044 m"
+ },
+ "mate": {
+  "kind": "mirror",
+  "matrix": [
+   [
+    1.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   [
+    0.0,
+    1.0,
+    0.0,
+    0.0
+   ],
+   [
+    0.0,
+    0.0,
+    -1.0,
+    163.932
+   ],
+   [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  ],
+  "part": true
+ },
+ "bodies": [
+  {
+   "mesh": "bodies/arx-x5/link6.stl",
+   "sha256": "27f9dcff1ff5364068a9c4ef610d2f27d6e319e5423bd75e1c138819eb94635f",
+   "bytes": 335884,
+   "triangles": 6716,
+   "matrix": [
+    [
+     1.0,
+     0.0,
+     0.0,
+     -81.73
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     -13.87
+    ],
+    [
+     0.0,
+     -1.0,
+     0.0,
+     81.952
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": null
+  }
+ ],
+ "see_through": [
+  "mate"
+ ],
+ "picture": "on both fingers of the open gripper"
+}

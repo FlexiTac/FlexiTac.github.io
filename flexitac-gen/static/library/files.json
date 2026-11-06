@@ -1,0 +1,636 @@
+{
+ "format": "flexitac-library-files/v1",
+ "generator_version": "deterministic-sensor-core/0.4.0",
+ "variants": {
+  "arx-x5-1mm": {
+   "bottom-gerber": {
+    "bytes": 36627,
+    "name": "surface-32x26-d387cf38c447-bottom-columns-direct-gerber.zip",
+    "path": "files/arx-x5-1mm/surface-32x26-d387cf38c447-bottom-columns-direct-gerber.zip",
+    "sha256": "975112462993ae103db1006ba1f0a65eac223c0f5438345edf5c8c0119475462"
+   },
+   "build_id": "surface-32x26-d387cf38c447",
+   "top-gerber": {
+    "bytes": 42686,
+    "name": "surface-32x26-d387cf38c447-top-rows-direct-gerber.zip",
+    "path": "files/arx-x5-1mm/surface-32x26-d387cf38c447-top-rows-direct-gerber.zip",
+    "sha256": "6d6c0442dbc95b384a54687d98b30278461a4007453d813479e237e6bef6b121"
+   }
+  },
+  "arx-x5-2mm": {
+   "bottom-gerber": {
+    "bytes": 38283,
+    "name": "surface-32x25-2909c6a6e34d-bottom-columns-direct-gerber.zip",
+    "path": "files/arx-x5-2mm/surface-32x25-2909c6a6e34d-bottom-columns-direct-gerber.zip",
+    "sha256": "34ffe97d2f757c7049c5c8d671f226f882e663538b8d52234190fa0ebfb344db"
+   },
+   "build_id": "surface-32x25-2909c6a6e34d",
+   "top-gerber": {
+    "bytes": 45588,
+    "name": "surface-32x25-2909c6a6e34d-top-rows-direct-gerber.zip",
+    "path": "files/arx-x5-2mm/surface-32x25-2909c6a6e34d-top-rows-direct-gerber.zip",
+    "sha256": "543e59bd79fd58551cb9842fd0bd42942596d106b809150a1943462c30dea97e"
+   }
+  },
+  "arx-x5-3mm": {
+   "bottom-gerber": {
+    "bytes": 34331,
+    "name": "surface-23x19-2e88c11f611e-bottom-columns-direct-gerber.zip",
+    "path": "files/arx-x5-3mm/surface-23x19-2e88c11f611e-bottom-columns-direct-gerber.zip",
+    "sha256": "282fd20b2f08215b719af53f44f2d7970be3b2909514014dcb0a7fd11fd8c496"
+   },
+   "build_id": "surface-23x19-2e88c11f611e",
+   "top-gerber": {
+    "bytes": 38445,
+    "name": "surface-23x19-2e88c11f611e-top-rows-direct-gerber.zip",
+    "path": "files/arx-x5-3mm/surface-23x19-2e88c11f611e-top-rows-direct-gerber.zip",
+    "sha256": "b6ce04610bd1cf5651f1b88933bae616f06036152f8cfef0eceb9825cca60ab2"
+   }
+  },
+  "arx-x5-4mm": {
+   "bottom-gerber": {
+    "bytes": 30346,
+    "name": "surface-17x13-bed9167960fc-bottom-columns-direct-gerber.zip",
+    "path": "files/arx-x5-4mm/surface-17x13-bed9167960fc-bottom-columns-direct-gerber.zip",
+    "sha256": "0c4fd0c91a42def60ed95e3e1a6dfbeb25c76c561cfe21695e6c86502d4791a4"
+   },
+   "build_id": "surface-17x13-bed9167960fc",
+   "top-gerber": {
+    "bytes": 34024,
+    "name": "surface-17x13-bed9167960fc-top-rows-direct-gerber.zip",
+    "path": "files/arx-x5-4mm/surface-17x13-bed9167960fc-top-rows-direct-gerber.zip",
+    "sha256": "e3d9aee59c3ee942b62dad543bf6d9c3aae384d8b0d982445da4a6ba978c4b78"
+   }
+  },
+  "franka-hand-1.5mm": {
+   "bottom-gerber": {
+    "bytes": 28375,
+    "name": "surface-11x11-689f162f2f63-bottom-columns-direct-gerber.zip",
+    "path": "files/franka-hand-1.5mm/surface-11x11-689f162f2f63-bottom-columns-direct-gerber.zip",
+    "sha256": "71180a5f329757108beb7ee56c209979011275b1c1c1559f23f81d815aec5e9a"
+   },
+   "build_id": "surface-11x11-689f162f2f63",
+   "top-gerber": {
+    "bytes": 29206,
+    "name": "surface-11x11-689f162f2f63-top-rows-direct-gerber.zip",
+    "path": "files/franka-hand-1.5mm/surface-11x11-689f162f2f63-top-rows-direct-gerber.zip",
+    "sha256": "fa39db3095ec07547e56c411e0eba5332e7a4a943ae5951b5b1e64b6a7dc6b7e"
+   }
+  },
+  "franka-hand-1mm": {
+   "bottom-gerber": {
+    "bytes": 30632,
+    "name": "surface-16x17-f4fc01f8c041-bottom-columns-direct-gerber.zip",
+    "path": "files/franka-hand-1mm/surface-16x17-f4fc01f8c041-bottom-columns-direct-gerber.zip",
+    "sha256": "f0dbf157121bda2e477f505044282171f4a787f37a3303d4069c454d589b6ad6"
+   },
+   "build_id": "surface-16x17-f4fc01f8c041",
+   "top-gerber": {
+    "bytes": 31545,
+    "name": "surface-16x17-f4fc01f8c041-top-rows-direct-gerber.zip",
+    "path": "files/franka-hand-1mm/surface-16x17-f4fc01f8c041-top-rows-direct-gerber.zip",
+    "sha256": "bd59a35510297e2769e247654f02aee92e74dc24576802d445c3ba3264e78db3"
+   }
+  },
+  "franka-hand-2.5mm": {
+   "bottom-gerber": {
+    "bytes": 25841,
+    "name": "surface-7x7-219eb060fc64-bottom-columns-direct-gerber.zip",
+    "path": "files/franka-hand-2.5mm/surface-7x7-219eb060fc64-bottom-columns-direct-gerber.zip",
+    "sha256": "01ea26da6cb0532152bc31e9ce6a9a85c1b41069065237901df49f7c0f5dcfc4"
+   },
+   "build_id": "surface-7x7-219eb060fc64",
+   "top-gerber": {
+    "bytes": 26407,
+    "name": "surface-7x7-219eb060fc64-top-rows-direct-gerber.zip",
+    "path": "files/franka-hand-2.5mm/surface-7x7-219eb060fc64-top-rows-direct-gerber.zip",
+    "sha256": "eac1462166526f5c16967b6dbb88e2f416404aebfec695ba22d5a511b5df3145"
+   }
+  },
+  "franka-hand-2mm": {
+   "bottom-gerber": {
+    "bytes": 26461,
+    "name": "surface-8x8-7d3333991a15-bottom-columns-direct-gerber.zip",
+    "path": "files/franka-hand-2mm/surface-8x8-7d3333991a15-bottom-columns-direct-gerber.zip",
+    "sha256": "69d4f0c3b33942aa88e037302f3aafc2c2cb640d9ee4848e86b2fcdbbaf58924"
+   },
+   "build_id": "surface-8x8-7d3333991a15",
+   "top-gerber": {
+    "bytes": 27008,
+    "name": "surface-8x8-7d3333991a15-top-rows-direct-gerber.zip",
+    "path": "files/franka-hand-2mm/surface-8x8-7d3333991a15-top-rows-direct-gerber.zip",
+    "sha256": "7e3ea9e54cc62499da4d1e2f6a6a86dbd07b2ea1bf5532517d10bc30dd226e33"
+   }
+  },
+  "i2rt-yam-1mm": {
+   "bottom-gerber": {
+    "bytes": 39768,
+    "name": "surface-32x32-dd7be86a5052-bottom-columns-direct-gerber.zip",
+    "path": "files/i2rt-yam-1mm/surface-32x32-dd7be86a5052-bottom-columns-direct-gerber.zip",
+    "sha256": "d7d4f533d0c3b8fed694851d8dd75ca0ea0c1fcc5fb5bd9ce2dc1cc78c735c49"
+   },
+   "build_id": "surface-32x32-dd7be86a5052",
+   "top-gerber": {
+    "bytes": 42520,
+    "name": "surface-32x32-dd7be86a5052-top-rows-direct-gerber.zip",
+    "path": "files/i2rt-yam-1mm/surface-32x32-dd7be86a5052-top-rows-direct-gerber.zip",
+    "sha256": "2d9f7a6bef16bf46676561d47f2474c432f1eba9f634dcbbf9ba236e29ba29b3"
+   }
+  },
+  "i2rt-yam-2mm": {
+   "bottom-gerber": {
+    "bytes": 42490,
+    "name": "surface-32x32-f99cfa65c746-bottom-columns-direct-gerber.zip",
+    "path": "files/i2rt-yam-2mm/surface-32x32-f99cfa65c746-bottom-columns-direct-gerber.zip",
+    "sha256": "b69df81b9cb080f5069f1f8406e6eb5d44d6dec3174e97483677fc050e056814"
+   },
+   "build_id": "surface-32x32-f99cfa65c746",
+   "top-gerber": {
+    "bytes": 45518,
+    "name": "surface-32x32-f99cfa65c746-top-rows-direct-gerber.zip",
+    "path": "files/i2rt-yam-2mm/surface-32x32-f99cfa65c746-top-rows-direct-gerber.zip",
+    "sha256": "8c78665d940db021404c3de54a3e1c5b74d4afa6cbc066c23d7de52bafdcf696"
+   }
+  },
+  "i2rt-yam-3mm": {
+   "bottom-gerber": {
+    "bytes": 36484,
+    "name": "surface-23x23-11ed05f4e0e9-bottom-columns-direct-gerber.zip",
+    "path": "files/i2rt-yam-3mm/surface-23x23-11ed05f4e0e9-bottom-columns-direct-gerber.zip",
+    "sha256": "3720a1a10c4a50ac2d1bc79149a8b3f68ff5444d30a4e4483f6c94bdc612d1a3"
+   },
+   "build_id": "surface-23x23-11ed05f4e0e9",
+   "top-gerber": {
+    "bytes": 38273,
+    "name": "surface-23x23-11ed05f4e0e9-top-rows-direct-gerber.zip",
+    "path": "files/i2rt-yam-3mm/surface-23x23-11ed05f4e0e9-top-rows-direct-gerber.zip",
+    "sha256": "e5f02bf578c41a817f589b642dfdb2769f7367ff9b7980e06c79e9559edf7515"
+   }
+  },
+  "i2rt-yam-4mm": {
+   "bottom-gerber": {
+    "bytes": 32505,
+    "name": "surface-17x17-df23535bd385-bottom-columns-direct-gerber.zip",
+    "path": "files/i2rt-yam-4mm/surface-17x17-df23535bd385-bottom-columns-direct-gerber.zip",
+    "sha256": "57fd2ce051a10113a227ac9e5c6c1501579ddb68d5389244fd89956a8eb78023"
+   },
+   "build_id": "surface-17x17-df23535bd385",
+   "top-gerber": {
+    "bytes": 33863,
+    "name": "surface-17x17-df23535bd385-top-rows-direct-gerber.zip",
+    "path": "files/i2rt-yam-4mm/surface-17x17-df23535bd385-top-rows-direct-gerber.zip",
+    "sha256": "dff971ccdee3ea27fdafb929c9b0d70534e030d892c1192448dae2fc7e165cb2"
+   }
+  },
+  "makermods-metal-1.5mm": {
+   "bottom-gerber": {
+    "bytes": 31557,
+    "name": "surface-32x15-63204c3821cb-bottom-columns-direct-gerber.zip",
+    "path": "files/makermods-metal-1.5mm/surface-32x15-63204c3821cb-bottom-columns-direct-gerber.zip",
+    "sha256": "97a3e883eb9e2c6f4a3b5c17780562a8cea891abf18efdf6022c5495b60204ef"
+   },
+   "build_id": "surface-32x15-63204c3821cb",
+   "top-gerber": {
+    "bytes": 46009,
+    "name": "surface-32x15-63204c3821cb-top-rows-direct-gerber.zip",
+    "path": "files/makermods-metal-1.5mm/surface-32x15-63204c3821cb-top-rows-direct-gerber.zip",
+    "sha256": "a9b167d43f22e23375915edc9c83b7678be179150b74f1bbf88432ef2dbec607"
+   }
+  },
+  "makermods-metal-1mm": {
+   "bottom-gerber": {
+    "bytes": 32457,
+    "name": "surface-32x19-3eb813284900-bottom-columns-direct-gerber.zip",
+    "path": "files/makermods-metal-1mm/surface-32x19-3eb813284900-bottom-columns-direct-gerber.zip",
+    "sha256": "2cb442c2ba630edc33074bd0cbf82d17463c528d9310425cbae76581ca7b8917"
+   },
+   "build_id": "surface-32x19-3eb813284900",
+   "top-gerber": {
+    "bytes": 41695,
+    "name": "surface-32x19-3eb813284900-top-rows-direct-gerber.zip",
+    "path": "files/makermods-metal-1mm/surface-32x19-3eb813284900-top-rows-direct-gerber.zip",
+    "sha256": "4b2b855fd9063fb18b95fc4ff027dadf9b6d3314e1af78ec0d21d98590b6d194"
+   }
+  },
+  "makermods-metal-2mm": {
+   "bottom-gerber": {
+    "bytes": 28954,
+    "name": "surface-32x11-0e51fc8c2c00-bottom-columns-direct-gerber.zip",
+    "path": "files/makermods-metal-2mm/surface-32x11-0e51fc8c2c00-bottom-columns-direct-gerber.zip",
+    "sha256": "7724bb17a2d8fe28fdae6368e9139206879ba41944f0ab506870ee0eeae19d68"
+   },
+   "build_id": "surface-32x11-0e51fc8c2c00",
+   "top-gerber": {
+    "bytes": 45202,
+    "name": "surface-32x11-0e51fc8c2c00-top-rows-direct-gerber.zip",
+    "path": "files/makermods-metal-2mm/surface-32x11-0e51fc8c2c00-top-rows-direct-gerber.zip",
+    "sha256": "63bd74ed198d2cc25cd2269e4d02ce39058957115607fcd615f49011b175bd14"
+   }
+  },
+  "makermods-metal-3mm": {
+   "bottom-gerber": {
+    "bytes": 26997,
+    "name": "surface-22x8-f1f8d070e8f4-bottom-columns-direct-gerber.zip",
+    "path": "files/makermods-metal-3mm/surface-22x8-f1f8d070e8f4-bottom-columns-direct-gerber.zip",
+    "sha256": "f7526238eaf07c8ac2083e61475298126edfa98ebcde9289b64c2aab76f2f6a3"
+   },
+   "build_id": "surface-22x8-f1f8d070e8f4",
+   "top-gerber": {
+    "bytes": 37649,
+    "name": "surface-22x8-f1f8d070e8f4-top-rows-direct-gerber.zip",
+    "path": "files/makermods-metal-3mm/surface-22x8-f1f8d070e8f4-top-rows-direct-gerber.zip",
+    "sha256": "4f119ea75466acd9bf2cafce06cea24c675b33511d61c8db9d1683714840e67c"
+   }
+  },
+  "trossen-widowx-ai-1.5mm": {
+   "bottom-gerber": {
+    "bytes": 36359,
+    "name": "surface-32x22-1aa4b358103b-bottom-columns-direct-gerber.zip",
+    "path": "files/trossen-widowx-ai-1.5mm/surface-32x22-1aa4b358103b-bottom-columns-direct-gerber.zip",
+    "sha256": "603bacf8012808306aa0b15086821dac12b34469e437d8999772e66a8aee508e"
+   },
+   "build_id": "surface-32x22-1aa4b358103b",
+   "top-gerber": {
+    "bytes": 46058,
+    "name": "surface-32x22-1aa4b358103b-top-rows-direct-gerber.zip",
+    "path": "files/trossen-widowx-ai-1.5mm/surface-32x22-1aa4b358103b-top-rows-direct-gerber.zip",
+    "sha256": "9c6e8e42717f658ada33f2b54efb0a8b6cb9823ddf6c651f347fcdc91a341eea"
+   }
+  },
+  "trossen-widowx-ai-1mm": {
+   "bottom-gerber": {
+    "bytes": 36197,
+    "name": "surface-32x25-cd7ee5fdf18e-bottom-columns-direct-gerber.zip",
+    "path": "files/trossen-widowx-ai-1mm/surface-32x25-cd7ee5fdf18e-bottom-columns-direct-gerber.zip",
+    "sha256": "014bc37278dfbdeca6a0bdb6fdcb137f253620d780935660bb51e78fa5315c41"
+   },
+   "build_id": "surface-32x25-cd7ee5fdf18e",
+   "top-gerber": {
+    "bytes": 42692,
+    "name": "surface-32x25-cd7ee5fdf18e-top-rows-direct-gerber.zip",
+    "path": "files/trossen-widowx-ai-1mm/surface-32x25-cd7ee5fdf18e-top-rows-direct-gerber.zip",
+    "sha256": "008bec0a2996b8f9a2be8f048b56cf3849713e6966dd3fa336cc1979d654fe6d"
+   }
+  },
+  "trossen-widowx-ai-2mm": {
+   "bottom-gerber": {
+    "bytes": 32349,
+    "name": "surface-24x16-cb567f0c5d2d-bottom-columns-direct-gerber.zip",
+    "path": "files/trossen-widowx-ai-2mm/surface-24x16-cb567f0c5d2d-bottom-columns-direct-gerber.zip",
+    "sha256": "2e4fe2badd040713af09c1056974ec797af8ef07b46ba2473f8d444d14c44a37"
+   },
+   "build_id": "surface-24x16-cb567f0c5d2d",
+   "top-gerber": {
+    "bytes": 39762,
+    "name": "surface-24x16-cb567f0c5d2d-top-rows-direct-gerber.zip",
+    "path": "files/trossen-widowx-ai-2mm/surface-24x16-cb567f0c5d2d-top-rows-direct-gerber.zip",
+    "sha256": "0f0cdad058cc57af72b11e0bbd2315a0524585a5010fdf622962b505c0aac9b6"
+   }
+  },
+  "trossen-widowx-ai-3mm": {
+   "bottom-gerber": {
+    "bytes": 29080,
+    "name": "surface-16x11-9c4e1741c0f1-bottom-columns-direct-gerber.zip",
+    "path": "files/trossen-widowx-ai-3mm/surface-16x11-9c4e1741c0f1-bottom-columns-direct-gerber.zip",
+    "sha256": "b66af8298717d3770fa084142360526dbfc5c67e73c11b549082382de9973221"
+   },
+   "build_id": "surface-16x11-9c4e1741c0f1",
+   "top-gerber": {
+    "bytes": 33313,
+    "name": "surface-16x11-9c4e1741c0f1-top-rows-direct-gerber.zip",
+    "path": "files/trossen-widowx-ai-3mm/surface-16x11-9c4e1741c0f1-top-rows-direct-gerber.zip",
+    "sha256": "67db10a40bfabf03fe06111e079959895fe7f3c5046ffe3d34867ff71d8b457a"
+   }
+  },
+  "umi-convex-tip13.8-2mm": {
+   "bottom-gerber": {
+    "bytes": 29661,
+    "name": "surface-32x12-4cb9374144c8-bottom-columns-direct-gerber.zip",
+    "path": "files/umi-convex-tip13.8-2mm/surface-32x12-4cb9374144c8-bottom-columns-direct-gerber.zip",
+    "sha256": "4edb3ed95f6e348aeba9aafe8489184d3557a2586ac1f39e375b37a6e1211cca"
+   },
+   "build_id": "surface-32x12-4cb9374144c8",
+   "top-gerber": {
+    "bytes": 45472,
+    "name": "surface-32x12-4cb9374144c8-top-rows-direct-gerber.zip",
+    "path": "files/umi-convex-tip13.8-2mm/surface-32x12-4cb9374144c8-top-rows-direct-gerber.zip",
+    "sha256": "46fb1be74fbba0ca6c37cd7fc8529390a793952a2501caa4db384f0787560eb7"
+   }
+  },
+  "umi-convex-tip17.8-2mm": {
+   "bottom-gerber": {
+    "bytes": 29663,
+    "name": "surface-32x12-88dcc0061ffb-bottom-columns-direct-gerber.zip",
+    "path": "files/umi-convex-tip17.8-2mm/surface-32x12-88dcc0061ffb-bottom-columns-direct-gerber.zip",
+    "sha256": "75f11b3a0c1dca8639eb4000558e067ffbdbe56f92a0b5918c69d51ca065153f"
+   },
+   "build_id": "surface-32x12-88dcc0061ffb",
+   "top-gerber": {
+    "bytes": 45194,
+    "name": "surface-32x12-88dcc0061ffb-top-rows-direct-gerber.zip",
+    "path": "files/umi-convex-tip17.8-2mm/surface-32x12-88dcc0061ffb-top-rows-direct-gerber.zip",
+    "sha256": "3f90beb000293d989b330b64c462d206f5bf5f00625e5cf84c704c969256910a"
+   }
+  },
+  "umi-convex-tip21.8-2mm": {
+   "bottom-gerber": {
+    "bytes": 29647,
+    "name": "surface-32x12-7d835504aece-bottom-columns-direct-gerber.zip",
+    "path": "files/umi-convex-tip21.8-2mm/surface-32x12-7d835504aece-bottom-columns-direct-gerber.zip",
+    "sha256": "733e95537b0a338a995e8a06f89b4cf62439f5ce8d439514dbfa7537704191f9"
+   },
+   "build_id": "surface-32x12-7d835504aece",
+   "top-gerber": {
+    "bytes": 44838,
+    "name": "surface-32x12-7d835504aece-top-rows-direct-gerber.zip",
+    "path": "files/umi-convex-tip21.8-2mm/surface-32x12-7d835504aece-top-rows-direct-gerber.zip",
+    "sha256": "e5f421d793576f69561d2a1004b594a64e1155df54637ceb960232e481a91e33"
+   }
+  },
+  "umi-convex-tip5.8-2mm": {
+   "bottom-gerber": {
+    "bytes": 28970,
+    "name": "surface-32x11-6c5ee79ebf58-bottom-columns-direct-gerber.zip",
+    "path": "files/umi-convex-tip5.8-2mm/surface-32x11-6c5ee79ebf58-bottom-columns-direct-gerber.zip",
+    "sha256": "368e231f2d4b71912844aa401d7b53cd183ed49e6690b8bafc2601fbb5e5c543"
+   },
+   "build_id": "surface-32x11-6c5ee79ebf58",
+   "top-gerber": {
+    "bytes": 45726,
+    "name": "surface-32x11-6c5ee79ebf58-top-rows-direct-gerber.zip",
+    "path": "files/umi-convex-tip5.8-2mm/surface-32x11-6c5ee79ebf58-top-rows-direct-gerber.zip",
+    "sha256": "44033c0bf49386e5dbb9c0a30de3b17fcb39fcc2d745352aec63100d9e397ac7"
+   }
+  },
+  "umi-convex-tip9.8-2mm": {
+   "bottom-gerber": {
+    "bytes": 29735,
+    "name": "surface-32x12-e3dfb9eb7e81-bottom-columns-direct-gerber.zip",
+    "path": "files/umi-convex-tip9.8-2mm/surface-32x12-e3dfb9eb7e81-bottom-columns-direct-gerber.zip",
+    "sha256": "2cb7ae7af34860317b36a1502268168b5615d8de14c430642e9255437df47c4d"
+   },
+   "build_id": "surface-32x12-e3dfb9eb7e81",
+   "top-gerber": {
+    "bytes": 45928,
+    "name": "surface-32x12-e3dfb9eb7e81-top-rows-direct-gerber.zip",
+    "path": "files/umi-convex-tip9.8-2mm/surface-32x12-e3dfb9eb7e81-top-rows-direct-gerber.zip",
+    "sha256": "fd1c93db8e03ac9d74a6a15f4795ae87000b622b3cec252aa6e7e17ef94766f0"
+   }
+  },
+  "umi-finray-1.5mm": {
+   "bottom-gerber": {
+    "bytes": 32697,
+    "name": "surface-32x17-5b221a9ddb1a-bottom-columns-direct-gerber.zip",
+    "path": "files/umi-finray-1.5mm/surface-32x17-5b221a9ddb1a-bottom-columns-direct-gerber.zip",
+    "sha256": "111694c87667a9490fe393c12e3bc63546ee62cd20da426e59881f38e8b03a53"
+   },
+   "build_id": "surface-32x17-5b221a9ddb1a",
+   "top-gerber": {
+    "bytes": 44213,
+    "name": "surface-32x17-5b221a9ddb1a-top-rows-direct-gerber.zip",
+    "path": "files/umi-finray-1.5mm/surface-32x17-5b221a9ddb1a-top-rows-direct-gerber.zip",
+    "sha256": "be7ce457b6ba765ca4e8902a9e4fe8bf961335e900da1361781cd4555d3f09a2"
+   }
+  },
+  "umi-finray-1mm": {
+   "bottom-gerber": {
+    "bytes": 35280,
+    "name": "surface-32x25-56dc8881a924-bottom-columns-direct-gerber.zip",
+    "path": "files/umi-finray-1mm/surface-32x25-56dc8881a924-bottom-columns-direct-gerber.zip",
+    "sha256": "1d39cb0e8396f12a777fa8466df7b88f5d2b7565d29e3d291a3c29f5f5d999c2"
+   },
+   "build_id": "surface-32x25-56dc8881a924",
+   "top-gerber": {
+    "bytes": 40545,
+    "name": "surface-32x25-56dc8881a924-top-rows-direct-gerber.zip",
+    "path": "files/umi-finray-1mm/surface-32x25-56dc8881a924-top-rows-direct-gerber.zip",
+    "sha256": "8f7e925533bb52404ca9106364d912e14cc4e0c13152fa2ac183f908f36061a0"
+   }
+  },
+  "umi-finray-2mm": {
+   "bottom-gerber": {
+    "bytes": 29411,
+    "name": "surface-32x12-083b8f742943-bottom-columns-direct-gerber.zip",
+    "path": "files/umi-finray-2mm/surface-32x12-083b8f742943-bottom-columns-direct-gerber.zip",
+    "sha256": "85ecdb43a6a03c4c8e24352c6ef2327a968e6c45cfe5b4d69d92c87f191c15f2"
+   },
+   "build_id": "surface-32x12-083b8f742943",
+   "top-gerber": {
+    "bytes": 44101,
+    "name": "surface-32x12-083b8f742943-top-rows-direct-gerber.zip",
+    "path": "files/umi-finray-2mm/surface-32x12-083b8f742943-top-rows-direct-gerber.zip",
+    "sha256": "352c7e5b13a38aed92abeca5399101a406bb84f7b86a9f29db8993751ea0d7ed"
+   }
+  },
+  "umi-finray-3mm": {
+   "bottom-gerber": {
+    "bytes": 26726,
+    "name": "surface-21x8-b1004352a5d1-bottom-columns-direct-gerber.zip",
+    "path": "files/umi-finray-3mm/surface-21x8-b1004352a5d1-bottom-columns-direct-gerber.zip",
+    "sha256": "3123e0665db1a68c8446b26f8f3b908c8377773c35bb732796283ebe5d8c3ed2"
+   },
+   "build_id": "surface-21x8-b1004352a5d1",
+   "top-gerber": {
+    "bytes": 36127,
+    "name": "surface-21x8-b1004352a5d1-top-rows-direct-gerber.zip",
+    "path": "files/umi-finray-3mm/surface-21x8-b1004352a5d1-top-rows-direct-gerber.zip",
+    "sha256": "0f6a0500b361e8c13c7c550b1514fb4d1d409d73792db8536f1e8682043adc61"
+   }
+  },
+  "umi-trap-tip13.8-2mm": {
+   "bottom-gerber": {
+    "bytes": 28885,
+    "name": "surface-32x11-168582f38f42-bottom-columns-direct-gerber.zip",
+    "path": "files/umi-trap-tip13.8-2mm/surface-32x11-168582f38f42-bottom-columns-direct-gerber.zip",
+    "sha256": "620d3a1f637679fe315c9e7f3e0172f2a8919d3965c7a140846e0c44755fe5b0"
+   },
+   "build_id": "surface-32x11-168582f38f42",
+   "top-gerber": {
+    "bytes": 45552,
+    "name": "surface-32x11-168582f38f42-top-rows-direct-gerber.zip",
+    "path": "files/umi-trap-tip13.8-2mm/surface-32x11-168582f38f42-top-rows-direct-gerber.zip",
+    "sha256": "b1f25b6ee199081fa9384f1d12d22bd6708537fad0f92572eb3b08fdb6f889e7"
+   }
+  },
+  "umi-trap-tip17.8-2mm": {
+   "bottom-gerber": {
+    "bytes": 28916,
+    "name": "surface-32x11-5c364f28c111-bottom-columns-direct-gerber.zip",
+    "path": "files/umi-trap-tip17.8-2mm/surface-32x11-5c364f28c111-bottom-columns-direct-gerber.zip",
+    "sha256": "d191902d242c41fc159fdcb63f6f79a2cfbbb53db95e7ea1f4f14de7dfd112bd"
+   },
+   "build_id": "surface-32x11-5c364f28c111",
+   "top-gerber": {
+    "bytes": 45035,
+    "name": "surface-32x11-5c364f28c111-top-rows-direct-gerber.zip",
+    "path": "files/umi-trap-tip17.8-2mm/surface-32x11-5c364f28c111-top-rows-direct-gerber.zip",
+    "sha256": "321f9f837c1419dc44070cb62c954956875451b4bfe2270294e28ad074131233"
+   }
+  },
+  "umi-trap-tip21.8-2mm": {
+   "bottom-gerber": {
+    "bytes": 29076,
+    "name": "surface-32x11-68d7d24e056f-bottom-columns-direct-gerber.zip",
+    "path": "files/umi-trap-tip21.8-2mm/surface-32x11-68d7d24e056f-bottom-columns-direct-gerber.zip",
+    "sha256": "a5e77ff897b1cdf23c0cd9dc197dea5871e3d22c1c6774deb9f1d0afee9e4961"
+   },
+   "build_id": "surface-32x11-68d7d24e056f",
+   "top-gerber": {
+    "bytes": 44513,
+    "name": "surface-32x11-68d7d24e056f-top-rows-direct-gerber.zip",
+    "path": "files/umi-trap-tip21.8-2mm/surface-32x11-68d7d24e056f-top-rows-direct-gerber.zip",
+    "sha256": "d6e1628990d3a009fb29813c977e0a5b46ba3b5843a609a10cf61bfbe2108bf9"
+   }
+  },
+  "umi-trap-tip5.8-2mm": {
+   "bottom-gerber": {
+    "bytes": 28902,
+    "name": "surface-32x11-8c34082adb12-bottom-columns-direct-gerber.zip",
+    "path": "files/umi-trap-tip5.8-2mm/surface-32x11-8c34082adb12-bottom-columns-direct-gerber.zip",
+    "sha256": "43ca7ee5af5daabda8bec59bbe691ea00840496bf3c8e93d953e206f7df3a6c4"
+   },
+   "build_id": "surface-32x11-8c34082adb12",
+   "top-gerber": {
+    "bytes": 45721,
+    "name": "surface-32x11-8c34082adb12-top-rows-direct-gerber.zip",
+    "path": "files/umi-trap-tip5.8-2mm/surface-32x11-8c34082adb12-top-rows-direct-gerber.zip",
+    "sha256": "3d999f51153c411daf2ff61602e0688cf616c666d9075c26ebca06dad1bc1358"
+   }
+  },
+  "umi-trap-tip9.8-2mm": {
+   "bottom-gerber": {
+    "bytes": 28924,
+    "name": "surface-32x11-557e60081323-bottom-columns-direct-gerber.zip",
+    "path": "files/umi-trap-tip9.8-2mm/surface-32x11-557e60081323-bottom-columns-direct-gerber.zip",
+    "sha256": "227a8ab3f98c1daedf32627a1609658521e0ca551f776c53e2f82f0dfa0fdd82"
+   },
+   "build_id": "surface-32x11-557e60081323",
+   "top-gerber": {
+    "bytes": 45906,
+    "name": "surface-32x11-557e60081323-top-rows-direct-gerber.zip",
+    "path": "files/umi-trap-tip9.8-2mm/surface-32x11-557e60081323-top-rows-direct-gerber.zip",
+    "sha256": "59aa7f8cb616f587a1f73a2f59e068eed45a9a320055e671a1df13be0c360f25"
+   }
+  },
+  "unitree-dex1-1.5mm": {
+   "bottom-gerber": {
+    "bytes": 33070,
+    "name": "surface-32x17-292a1ecb211e-bottom-columns-direct-gerber.zip",
+    "path": "files/unitree-dex1-1.5mm/surface-32x17-292a1ecb211e-bottom-columns-direct-gerber.zip",
+    "sha256": "f96aa326169952a11fe03b9d9a2a004ca81cc8bd003fb1251e972e80eace2b17"
+   },
+   "build_id": "surface-32x17-292a1ecb211e",
+   "top-gerber": {
+    "bytes": 45348,
+    "name": "surface-32x17-292a1ecb211e-top-rows-direct-gerber.zip",
+    "path": "files/unitree-dex1-1.5mm/surface-32x17-292a1ecb211e-top-rows-direct-gerber.zip",
+    "sha256": "b775904eedc2eff0576b27ced89d2007c63612221c64717324147ab9c970b65d"
+   }
+  },
+  "unitree-dex1-1mm": {
+   "bottom-gerber": {
+    "bytes": 36924,
+    "name": "surface-32x26-f3007aad2bd7-bottom-columns-direct-gerber.zip",
+    "path": "files/unitree-dex1-1mm/surface-32x26-f3007aad2bd7-bottom-columns-direct-gerber.zip",
+    "sha256": "8acb7924263ecbe32fc8148b09177209c69cb1aab5265380f84206707f00e63b"
+   },
+   "build_id": "surface-32x26-f3007aad2bd7",
+   "top-gerber": {
+    "bytes": 43123,
+    "name": "surface-32x26-f3007aad2bd7-top-rows-direct-gerber.zip",
+    "path": "files/unitree-dex1-1mm/surface-32x26-f3007aad2bd7-top-rows-direct-gerber.zip",
+    "sha256": "fd2d02d2f2c0fe9c7a7f33737896cb4fa43426c158478ceaea292a18c4248515"
+   }
+  },
+  "unitree-dex1-2mm": {
+   "bottom-gerber": {
+    "bytes": 30390,
+    "name": "surface-24x13-fb9d6bd1fe2c-bottom-columns-direct-gerber.zip",
+    "path": "files/unitree-dex1-2mm/surface-24x13-fb9d6bd1fe2c-bottom-columns-direct-gerber.zip",
+    "sha256": "c953ca761155aaf163f8832821badd67ee6f4648b45f823182100bfb1e21e5d9"
+   },
+   "build_id": "surface-24x13-fb9d6bd1fe2c",
+   "top-gerber": {
+    "bytes": 39310,
+    "name": "surface-24x13-fb9d6bd1fe2c-top-rows-direct-gerber.zip",
+    "path": "files/unitree-dex1-2mm/surface-24x13-fb9d6bd1fe2c-top-rows-direct-gerber.zip",
+    "sha256": "f06927fc69a1c47b56061e9fc861332dd1e4fe98c9266a263ea4ad69391759aa"
+   }
+  },
+  "unitree-dex1-3mm": {
+   "bottom-gerber": {
+    "bytes": 27647,
+    "name": "surface-16x9-e5a994e53503-bottom-columns-direct-gerber.zip",
+    "path": "files/unitree-dex1-3mm/surface-16x9-e5a994e53503-bottom-columns-direct-gerber.zip",
+    "sha256": "8afab2bf8de62f110f174abfb557d0a04f45313030a7139481e2439b5bb4428c"
+   },
+   "build_id": "surface-16x9-e5a994e53503",
+   "top-gerber": {
+    "bytes": 33291,
+    "name": "surface-16x9-e5a994e53503-top-rows-direct-gerber.zip",
+    "path": "files/unitree-dex1-3mm/surface-16x9-e5a994e53503-top-rows-direct-gerber.zip",
+    "sha256": "69544de4dbfd88b1b6fd1f25774fb0cead5705b0ea6c7a1253a4928ebf1f2e1e"
+   }
+  },
+  "widowx-250-1.5mm": {
+   "bottom-gerber": {
+    "bytes": 32466,
+    "name": "surface-17x17-b9e5e409ec81-bottom-columns-direct-gerber.zip",
+    "path": "files/widowx-250-1.5mm/surface-17x17-b9e5e409ec81-bottom-columns-direct-gerber.zip",
+    "sha256": "2b82486d6320598046e85b4e9df730f68b5c895ef94d0bf30b20f07fbd10d57b"
+   },
+   "build_id": "surface-17x17-b9e5e409ec81",
+   "top-gerber": {
+    "bytes": 33547,
+    "name": "surface-17x17-b9e5e409ec81-top-rows-direct-gerber.zip",
+    "path": "files/widowx-250-1.5mm/surface-17x17-b9e5e409ec81-top-rows-direct-gerber.zip",
+    "sha256": "55c80d9fdcd03b8c5f4186467dade1b48ef142932aedbbab35717d24feb0d72a"
+   }
+  },
+  "widowx-250-1mm": {
+   "bottom-gerber": {
+    "bytes": 36024,
+    "name": "surface-26x27-62928ed42a39-bottom-columns-direct-gerber.zip",
+    "path": "files/widowx-250-1mm/surface-26x27-62928ed42a39-bottom-columns-direct-gerber.zip",
+    "sha256": "386c272a1a2acb64731f6bd3681165b5ded02059390c4edcaa18e81a4d3fd9f5"
+   },
+   "build_id": "surface-26x27-62928ed42a39",
+   "top-gerber": {
+    "bytes": 37857,
+    "name": "surface-26x27-62928ed42a39-top-rows-direct-gerber.zip",
+    "path": "files/widowx-250-1mm/surface-26x27-62928ed42a39-top-rows-direct-gerber.zip",
+    "sha256": "c5c8f83971460e30e4d0ecf6ac8cbf73ca1e95e1ad25eedaf5128c43dc509aaa"
+   }
+  },
+  "widowx-250-2mm": {
+   "bottom-gerber": {
+    "bytes": 29794,
+    "name": "surface-13x13-c86af2cbab4b-bottom-columns-direct-gerber.zip",
+    "path": "files/widowx-250-2mm/surface-13x13-c86af2cbab4b-bottom-columns-direct-gerber.zip",
+    "sha256": "c294aeef33dd28085a26d01832cd61905885e349f72a62f07cb4ed16306a58e6"
+   },
+   "build_id": "surface-13x13-c86af2cbab4b",
+   "top-gerber": {
+    "bytes": 30673,
+    "name": "surface-13x13-c86af2cbab4b-top-rows-direct-gerber.zip",
+    "path": "files/widowx-250-2mm/surface-13x13-c86af2cbab4b-top-rows-direct-gerber.zip",
+    "sha256": "02b9947273888952fb3a36f2773111798b9857229071a60f7cf44858adc7ae4f"
+   }
+  },
+  "widowx-250-3mm": {
+   "bottom-gerber": {
+    "bytes": 27102,
+    "name": "surface-9x9-2bfc8af66d96-bottom-columns-direct-gerber.zip",
+    "path": "files/widowx-250-3mm/surface-9x9-2bfc8af66d96-bottom-columns-direct-gerber.zip",
+    "sha256": "1f4dcf8168b8e5f58e5a5fe738685e97fb71907b8ea90ab324b53520c197d660"
+   },
+   "build_id": "surface-9x9-2bfc8af66d96",
+   "top-gerber": {
+    "bytes": 27761,
+    "name": "surface-9x9-2bfc8af66d96-top-rows-direct-gerber.zip",
+    "path": "files/widowx-250-3mm/surface-9x9-2bfc8af66d96-top-rows-direct-gerber.zip",
+    "sha256": "74df80db09986294539a7f2b9dee691bf4261da5d8349babcccd7df58b1df35c"
+   }
+  }
+ }
+}

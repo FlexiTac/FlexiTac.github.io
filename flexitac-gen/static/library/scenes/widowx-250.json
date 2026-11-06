@@ -1,0 +1,153 @@
+{
+ "format": "flexitac-library-scene/v1",
+ "part": "widowx-250",
+ "part_mesh_sha256": "6a459bd4ef07eb5c4687e258bd9564004e741437e2e668af7ed31964567d8f90",
+ "about": "WidowX 250 at full opening: mujoco_menagerie f3b6013, trossen_wx250s/wx250s.xml (BSD-3-Clause): left_finger slide 0.015..0.037 m, q 37 mm (right_finger -0.037).  The bodies are wx250s_7_gripper and wx250s_9_gripper_bar where wx250s.xml places them (pos -0.02 0 0, quat 1 0 0 1) and wx250s_8_gripper_prop, which wx250s.xml declares but does not place, at the same pose (as the interbotix description places the horn).  The Library mesh is wx250s_10_gripper_finger.stl as the left finger draws it; the other finger is wx250s.xml's right finger: the same mesh turned 180 degrees about the approach axis, so its sensor is the same board.",
+ "frame": "the part's file axes, mm",
+ "approach": [
+  -1.0,
+  0.0,
+  0.0
+ ],
+ "opening": {
+  "q_mm": 37.0,
+  "limit_mm": 37.0,
+  "joint": "left_finger/right_finger (slide y)",
+  "source": "mujoco_menagerie f3b6013, trossen_wx250s/wx250s.xml: left_finger range 0.015 0.037 m"
+ },
+ "mate": {
+  "kind": "turned",
+  "matrix": [
+   [
+    1.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   [
+    0.0,
+    -1.0,
+    0.0,
+    84.0
+   ],
+   [
+    0.0,
+    0.0,
+    -1.0,
+    0.0
+   ],
+   [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  ],
+  "part": true
+ },
+ "bodies": [
+  {
+   "mesh": "bodies/widowx-250/wx250s_7_gripper.stl",
+   "sha256": "4e4f1bb053c1946e5ba5c6d24dec9bbb9f29cb938654904a4996b618a042c5cf",
+   "bytes": 6284,
+   "triangles": 124,
+   "matrix": [
+    [
+     0.0,
+     1.0,
+     0.0,
+     86.0
+    ],
+    [
+     -1.0,
+     0.0,
+     0.0,
+     42.0
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": null
+  },
+  {
+   "mesh": "bodies/widowx-250/wx250s_9_gripper_bar.stl",
+   "sha256": "aaa7b9b712cf789361fb2155a2a1ac54623bfe9c82aea2ba3ed8738447d17fd1",
+   "bytes": 9484,
+   "triangles": 188,
+   "matrix": [
+    [
+     0.0,
+     1.0,
+     0.0,
+     86.0
+    ],
+    [
+     -1.0,
+     0.0,
+     0.0,
+     42.0
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": null
+  },
+  {
+   "mesh": "bodies/widowx-250/wx250s_8_gripper_prop.stl",
+   "sha256": "0deb0cd3d6e310964ad3d446effaa41e19480b10c3435d478cbef71c3071fea5",
+   "bytes": 4484,
+   "triangles": 88,
+   "matrix": [
+    [
+     0.0,
+     1.0,
+     0.0,
+     86.0
+    ],
+    [
+     -1.0,
+     0.0,
+     0.0,
+     42.0
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": null
+  }
+ ],
+ "see_through": [
+  "mate"
+ ],
+ "picture": "on both fingers of the open gripper"
+}

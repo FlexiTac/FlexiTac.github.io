@@ -1,0 +1,1098 @@
+{
+ "about": "The Library's gripper parts (library.html): each part's mesh, licence and the face the page selects (the request's selection, base and border, with seed facets), and its variants (pitch and fill; the page's other options are its defaults).  Written once by the private tools/library_import.py from the multi-gripper video's recipes, then edited by hand; the UMI finger's tapered tips (the family umi-tapers) and their meshes come from the private tools/library_tips.py, which cuts them from the HandUMI finger; tools/library_write.py fits every variant and writes entries.json and fits/.",
+ "families": {
+  "umi-tapers": {
+   "axes": [
+    {
+     "choices": [
+      {
+       "label": "Trapezoid",
+       "value": "trap"
+      },
+      {
+       "label": "Convex arc",
+       "value": "convex"
+      }
+     ],
+     "key": "shape",
+     "label": "Shape"
+    },
+    {
+     "choices": [
+      {
+       "label": "21.8",
+       "value": "21.8"
+      },
+      {
+       "label": "17.8",
+       "value": "17.8"
+      },
+      {
+       "label": "13.8",
+       "value": "13.8"
+      },
+      {
+       "label": "9.8",
+       "value": "9.8"
+      },
+      {
+       "label": "5.8",
+       "value": "5.8"
+      }
+     ],
+     "key": "tip_mm",
+     "label": "Tip width (mm)"
+    }
+   ],
+   "default": "umi-trap-tip13.8-2mm",
+   "grid": {
+    "convex|13.8": "umi-convex-tip13.8-2mm",
+    "convex|17.8": "umi-convex-tip17.8-2mm",
+    "convex|21.8": "umi-convex-tip21.8-2mm",
+    "convex|5.8": "umi-convex-tip5.8-2mm",
+    "convex|9.8": "umi-convex-tip9.8-2mm",
+    "trap|13.8": "umi-trap-tip13.8-2mm",
+    "trap|17.8": "umi-trap-tip17.8-2mm",
+    "trap|21.8": "umi-trap-tip21.8-2mm",
+    "trap|5.8": "umi-trap-tip5.8-2mm",
+    "trap|9.8": "umi-trap-tip9.8-2mm"
+   },
+   "h_mm": 75,
+   "shelf": "umi-finray",
+   "title": "Tapered tips"
+  }
+ },
+ "format": "flexitac-library-parts/v1",
+ "order": [
+  "umi-finray",
+  "umi-trap-tip21.8",
+  "umi-trap-tip17.8",
+  "umi-trap-tip13.8",
+  "umi-trap-tip9.8",
+  "umi-trap-tip5.8",
+  "umi-convex-tip21.8",
+  "umi-convex-tip17.8",
+  "umi-convex-tip13.8",
+  "umi-convex-tip9.8",
+  "umi-convex-tip5.8",
+  "franka-hand",
+  "widowx-250",
+  "trossen-widowx-ai",
+  "arx-x5",
+  "i2rt-yam",
+  "unitree-dex1",
+  "makermods-metal"
+ ],
+ "parts": {
+  "arx-x5": {
+   "finger": "gripper tip, HandUMI",
+   "license": {
+    "change": "unchanged",
+    "holder": "BrikHMP18 (HandUMI hardware)",
+    "source": "https://github.com/murobotics-ai/handumi-hw/blob/144827862d4e2d5cd2d331ce7eed1374d3c769df/hardware/STL/gripper_tips/ARX-X5-2023/ARX-X5-2023-LEFT-Gripper.stl",
+    "spdx": "Apache-2.0",
+    "text": "licenses/handumi-hw.txt"
+   },
+   "maker": "ARX Robotics",
+   "mesh": {
+    "bytes": 135284,
+    "file": "meshes/arx-x5.stl",
+    "name": "arx-x5.stl",
+    "sha256": "5cf0e92353f4f5787b086eb518ff1d529ea41eb07502cdc3a2979766ccdd3018"
+   },
+   "setup": {
+    "base": {
+     "point_xyz": [
+      1,
+      -13.1,
+      28.9
+     ]
+    },
+    "border": null,
+    "options": {
+     "rotation": "none"
+    },
+    "selection": {
+     "ops": [
+      {
+       "mode": "add",
+       "op": "grow",
+       "preset": "surface",
+       "seed_facet": 984
+      },
+      {
+       "mode": "subtract",
+       "op": "grow",
+       "preset": "flat",
+       "seed_facet": 975
+      }
+     ]
+    }
+   },
+   "title": "ARX X5",
+   "variants": [
+    {
+     "badge": "Fine",
+     "fill": 0.5,
+     "pitch_mm": 1
+    },
+    {
+     "fill": 0.5,
+     "pitch_mm": 2
+    },
+    {
+     "fill": 0.5,
+     "pitch_mm": 3
+    },
+    {
+     "fill": 0.5,
+     "pitch_mm": 4
+    }
+   ]
+  },
+  "franka-hand": {
+   "finger": "gripper finger pad",
+   "license": {
+    "change": "convex hull of finger_1.obj, m to mm, binary STL",
+    "holder": "Franka Robotics (franka_ros meshes) and Google DeepMind (MuJoCo Menagerie)",
+    "source": "https://github.com/google-deepmind/mujoco_menagerie/blob/f3b6013629c7b94f8ee93fd977b161fa8350f9bc/franka_emika_panda/assets/finger_1.obj",
+    "spdx": "Apache-2.0",
+    "text": "licenses/mujoco_menagerie-franka_emika_panda.txt"
+   },
+   "maker": "Franka Robotics",
+   "mesh": {
+    "bytes": 3984,
+    "file": "meshes/franka-hand.stl",
+    "name": "franka-hand.stl",
+    "sha256": "3ac26349fc85ab971b81696e31ac88955f45d065ddc1254de376fea9d89b6c2c"
+   },
+   "setup": {
+    "base": {
+     "point_xyz": [
+      0,
+      0.02,
+      36.27
+     ]
+    },
+    "border": null,
+    "options": {},
+    "selection": {
+     "ops": [
+      {
+       "mode": "add",
+       "op": "grow",
+       "preset": "flat",
+       "seed_facet": 17
+      }
+     ]
+    }
+   },
+   "title": "Franka Hand",
+   "variants": [
+    {
+     "badge": "Fine",
+     "fill": 0.5,
+     "pitch_mm": 1
+    },
+    {
+     "fill": 0.5,
+     "pitch_mm": 1.5
+    },
+    {
+     "fill": 0.5,
+     "pitch_mm": 2
+    },
+    {
+     "fill": 0.5,
+     "pitch_mm": 2.5
+    }
+   ]
+  },
+  "i2rt-yam": {
+   "finger": "crank gripper tip",
+   "license": {
+    "change": "unchanged",
+    "holder": "I2RT Robotics",
+    "source": "https://github.com/i2rt-robotics/i2rt/blob/120c3c81400171174604e503943f8d1ebc891058/i2rt/robot_models/gripper/crank_4310/assets/tip_left.stl",
+    "spdx": "MIT",
+    "text": "licenses/i2rt.txt"
+   },
+   "maker": "I2RT Robotics",
+   "mesh": {
+    "bytes": 400084,
+    "file": "meshes/i2rt-yam.stl",
+    "name": "i2rt-yam.stl",
+    "sha256": "b70f8c1e32ccfae03fec46ac10a0f04195347bc530ee761143a5d7c5bb07ae07"
+   },
+   "setup": {
+    "base": {
+     "point_xyz": [
+      3.38,
+      -187.44,
+      148.9
+     ]
+    },
+    "border": null,
+    "options": {
+     "rotation": "none"
+    },
+    "selection": {
+     "ops": [
+      {
+       "mode": "add",
+       "op": "grow",
+       "preset": "flat",
+       "seed_facet": 2893
+      }
+     ]
+    }
+   },
+   "title": "I2RT YAM",
+   "variants": [
+    {
+     "badge": "Fine",
+     "fill": 0.5,
+     "pitch_mm": 1
+    },
+    {
+     "fill": 0.5,
+     "pitch_mm": 2
+    },
+    {
+     "fill": 0.5,
+     "pitch_mm": 3
+    },
+    {
+     "fill": 0.5,
+     "pitch_mm": 4
+    }
+   ]
+  },
+  "makermods-metal": {
+   "finger": "gripper tip, HandUMI",
+   "license": {
+    "change": "unchanged",
+    "holder": "BrikHMP18 (HandUMI hardware)",
+    "source": "https://github.com/murobotics-ai/handumi-hw/blob/144827862d4e2d5cd2d331ce7eed1374d3c769df/hardware/STL/gripper_tips/MakerMods-Metal/metal-arm-gripper-tip-left.stl",
+    "spdx": "Apache-2.0",
+    "text": "licenses/handumi-hw.txt"
+   },
+   "maker": "MakerMods",
+   "mesh": {
+    "bytes": 62684,
+    "file": "meshes/makermods-metal.stl",
+    "name": "makermods-metal.stl",
+    "sha256": "f480c8fb9fbe5027ce0741436cd3c60c77702c2eec2b80d87f5829c4adca5925"
+   },
+   "setup": {
+    "base": {
+     "point_xyz": [
+      -5.45,
+      0,
+      12
+     ]
+    },
+    "border": null,
+    "options": {},
+    "selection": {
+     "ops": [
+      {
+       "mode": "add",
+       "op": "grow",
+       "preset": "flat",
+       "seed_facet": 109
+      },
+      {
+       "mode": "add",
+       "op": "grow",
+       "preset": "flat",
+       "seed_facet": 880
+      }
+     ]
+    }
+   },
+   "title": "MakerMods Metal Arm",
+   "variants": [
+    {
+     "badge": "Fine",
+     "fill": 0.5,
+     "pitch_mm": 1
+    },
+    {
+     "fill": 0.5,
+     "pitch_mm": 1.5
+    },
+    {
+     "fill": 0.5,
+     "pitch_mm": 2
+    },
+    {
+     "fill": 0.5,
+     "pitch_mm": 3
+    }
+   ]
+  },
+  "trossen-widowx-ai": {
+   "finger": "gripper tip sock, HandUMI",
+   "license": {
+    "change": "unchanged",
+    "holder": "BrikHMP18 (HandUMI hardware)",
+    "source": "https://github.com/murobotics-ai/handumi-hw/blob/144827862d4e2d5cd2d331ce7eed1374d3c769df/hardware/STL/gripper_tips/Trossen-WidowXAI/WXAI-LEFT-Gripper-sock.stl",
+    "spdx": "Apache-2.0",
+    "text": "licenses/handumi-hw.txt"
+   },
+   "maker": "Trossen Robotics",
+   "mesh": {
+    "bytes": 3770084,
+    "file": "meshes/trossen-widowx-ai.stl",
+    "name": "trossen-widowx-ai.stl",
+    "sha256": "7e2792c557d7e15681b0a3cb693b728931c620d34d326f9f5409ba966372ee8c"
+   },
+   "setup": {
+    "base": {
+     "point_xyz": [
+      4.8,
+      -4.41,
+      -50.04
+     ]
+    },
+    "border": null,
+    "options": {
+     "rotation": "none"
+    },
+    "selection": {
+     "ops": [
+      {
+       "mode": "add",
+       "op": "grow",
+       "preset": "surface",
+       "seed_facet": 22577
+      }
+     ]
+    }
+   },
+   "title": "Trossen WidowX AI",
+   "variants": [
+    {
+     "badge": "Fine",
+     "fill": 0.5,
+     "pitch_mm": 1
+    },
+    {
+     "fill": 0.5,
+     "pitch_mm": 1.5
+    },
+    {
+     "fill": 0.5,
+     "pitch_mm": 2
+    },
+    {
+     "fill": 0.5,
+     "pitch_mm": 3
+    }
+   ]
+  },
+  "umi-convex-tip13.8": {
+   "family": "umi-tapers",
+   "finger": "soft fin-ray finger, convex arc tip",
+   "label": "UMI convex arc tip, 13.8 mm",
+   "license": {
+    "change": "tip cut (convex arc, h 75 mm, tip 13.8 mm) from UMI-Soft-Gripper-Finger.stl",
+    "holder": "BrikHMP18 (HandUMI hardware)",
+    "source": "https://github.com/murobotics-ai/handumi-hw/blob/144827862d4e2d5cd2d331ce7eed1374d3c769df/hardware/STL/gripper_tips/UMI-Gripper/UMI-Soft-Gripper-Finger.stl",
+    "spdx": "Apache-2.0",
+    "text": "licenses/handumi-hw.txt"
+   },
+   "maker": "UMI (Chi et al.), HandUMI replica",
+   "mesh": {
+    "bytes": 259484,
+    "file": "meshes/umi-convex-tip13.8.stl",
+    "name": "umi-convex-tip13.8.stl",
+    "sha256": "0aa24fb4dbd23de90c14b498bbeee9888dd34a6ac473d4a9db544ab572840ee2"
+   },
+   "setup": {
+    "base": {
+     "point_xyz": [
+      0,
+      -12.9,
+      -3
+     ]
+    },
+    "border": null,
+    "options": {},
+    "selection": {
+     "ops": [
+      {
+       "mode": "add",
+       "op": "grow",
+       "preset": "flat",
+       "seed_facet": 1129
+      }
+     ]
+    }
+   },
+   "title": "UMI Fin-Ray Gripper, tapered tip",
+   "variants": [
+    {
+     "fill": 0.5,
+     "pitch_mm": 2
+    }
+   ]
+  },
+  "umi-convex-tip17.8": {
+   "family": "umi-tapers",
+   "finger": "soft fin-ray finger, convex arc tip",
+   "label": "UMI convex arc tip, 17.8 mm",
+   "license": {
+    "change": "tip cut (convex arc, h 75 mm, tip 17.8 mm) from UMI-Soft-Gripper-Finger.stl",
+    "holder": "BrikHMP18 (HandUMI hardware)",
+    "source": "https://github.com/murobotics-ai/handumi-hw/blob/144827862d4e2d5cd2d331ce7eed1374d3c769df/hardware/STL/gripper_tips/UMI-Gripper/UMI-Soft-Gripper-Finger.stl",
+    "spdx": "Apache-2.0",
+    "text": "licenses/handumi-hw.txt"
+   },
+   "maker": "UMI (Chi et al.), HandUMI replica",
+   "mesh": {
+    "bytes": 259484,
+    "file": "meshes/umi-convex-tip17.8.stl",
+    "name": "umi-convex-tip17.8.stl",
+    "sha256": "e254c3fd40cc7e3c1a3c49683cb7f8829d473590d40c4270a408c30fb26ec8c3"
+   },
+   "setup": {
+    "base": {
+     "point_xyz": [
+      0,
+      -12.9,
+      -3
+     ]
+    },
+    "border": null,
+    "options": {},
+    "selection": {
+     "ops": [
+      {
+       "mode": "add",
+       "op": "grow",
+       "preset": "flat",
+       "seed_facet": 1129
+      }
+     ]
+    }
+   },
+   "title": "UMI Fin-Ray Gripper, tapered tip",
+   "variants": [
+    {
+     "fill": 0.5,
+     "pitch_mm": 2
+    }
+   ]
+  },
+  "umi-convex-tip21.8": {
+   "family": "umi-tapers",
+   "finger": "soft fin-ray finger, convex arc tip",
+   "label": "UMI convex arc tip, 21.8 mm",
+   "license": {
+    "change": "tip cut (convex arc, h 75 mm, tip 21.8 mm) from UMI-Soft-Gripper-Finger.stl",
+    "holder": "BrikHMP18 (HandUMI hardware)",
+    "source": "https://github.com/murobotics-ai/handumi-hw/blob/144827862d4e2d5cd2d331ce7eed1374d3c769df/hardware/STL/gripper_tips/UMI-Gripper/UMI-Soft-Gripper-Finger.stl",
+    "spdx": "Apache-2.0",
+    "text": "licenses/handumi-hw.txt"
+   },
+   "maker": "UMI (Chi et al.), HandUMI replica",
+   "mesh": {
+    "bytes": 259284,
+    "file": "meshes/umi-convex-tip21.8.stl",
+    "name": "umi-convex-tip21.8.stl",
+    "sha256": "428e618e51772bd4882cc0fc1de132e4a1a8bff5d78fd9450fbf368bb95159e4"
+   },
+   "setup": {
+    "base": {
+     "point_xyz": [
+      0,
+      -12.9,
+      -3
+     ]
+    },
+    "border": null,
+    "options": {},
+    "selection": {
+     "ops": [
+      {
+       "mode": "add",
+       "op": "grow",
+       "preset": "flat",
+       "seed_facet": 1129
+      }
+     ]
+    }
+   },
+   "title": "UMI Fin-Ray Gripper, tapered tip",
+   "variants": [
+    {
+     "fill": 0.5,
+     "pitch_mm": 2
+    }
+   ]
+  },
+  "umi-convex-tip5.8": {
+   "family": "umi-tapers",
+   "finger": "soft fin-ray finger, convex arc tip",
+   "label": "UMI convex arc tip, 5.8 mm",
+   "license": {
+    "change": "tip cut (convex arc, h 75 mm, tip 5.8 mm) from UMI-Soft-Gripper-Finger.stl",
+    "holder": "BrikHMP18 (HandUMI hardware)",
+    "source": "https://github.com/murobotics-ai/handumi-hw/blob/144827862d4e2d5cd2d331ce7eed1374d3c769df/hardware/STL/gripper_tips/UMI-Gripper/UMI-Soft-Gripper-Finger.stl",
+    "spdx": "Apache-2.0",
+    "text": "licenses/handumi-hw.txt"
+   },
+   "maker": "UMI (Chi et al.), HandUMI replica",
+   "mesh": {
+    "bytes": 259484,
+    "file": "meshes/umi-convex-tip5.8.stl",
+    "name": "umi-convex-tip5.8.stl",
+    "sha256": "d9562c18e2bc35af280f0d2f33577600a24c990098824df6718b66f17b1ab685"
+   },
+   "setup": {
+    "base": {
+     "point_xyz": [
+      0,
+      -12.9,
+      -3
+     ]
+    },
+    "border": null,
+    "options": {},
+    "selection": {
+     "ops": [
+      {
+       "mode": "add",
+       "op": "grow",
+       "preset": "flat",
+       "seed_facet": 1130
+      }
+     ]
+    }
+   },
+   "title": "UMI Fin-Ray Gripper, tapered tip",
+   "variants": [
+    {
+     "fill": 0.5,
+     "pitch_mm": 2
+    }
+   ]
+  },
+  "umi-convex-tip9.8": {
+   "family": "umi-tapers",
+   "finger": "soft fin-ray finger, convex arc tip",
+   "label": "UMI convex arc tip, 9.8 mm",
+   "license": {
+    "change": "tip cut (convex arc, h 75 mm, tip 9.8 mm) from UMI-Soft-Gripper-Finger.stl",
+    "holder": "BrikHMP18 (HandUMI hardware)",
+    "source": "https://github.com/murobotics-ai/handumi-hw/blob/144827862d4e2d5cd2d331ce7eed1374d3c769df/hardware/STL/gripper_tips/UMI-Gripper/UMI-Soft-Gripper-Finger.stl",
+    "spdx": "Apache-2.0",
+    "text": "licenses/handumi-hw.txt"
+   },
+   "maker": "UMI (Chi et al.), HandUMI replica",
+   "mesh": {
+    "bytes": 259484,
+    "file": "meshes/umi-convex-tip9.8.stl",
+    "name": "umi-convex-tip9.8.stl",
+    "sha256": "3314dca59dd8260caf74ccb957d0ffe3c42e7267ad34f88affd2a818c5a702cb"
+   },
+   "setup": {
+    "base": {
+     "point_xyz": [
+      0,
+      -12.9,
+      -3
+     ]
+    },
+    "border": null,
+    "options": {},
+    "selection": {
+     "ops": [
+      {
+       "mode": "add",
+       "op": "grow",
+       "preset": "flat",
+       "seed_facet": 1130
+      }
+     ]
+    }
+   },
+   "title": "UMI Fin-Ray Gripper, tapered tip",
+   "variants": [
+    {
+     "fill": 0.5,
+     "pitch_mm": 2
+    }
+   ]
+  },
+  "umi-finray": {
+   "finger": "soft fin-ray finger",
+   "license": {
+    "change": "unchanged",
+    "holder": "BrikHMP18 (HandUMI hardware)",
+    "source": "https://github.com/murobotics-ai/handumi-hw/blob/144827862d4e2d5cd2d331ce7eed1374d3c769df/hardware/STL/gripper_tips/UMI-Gripper/UMI-Soft-Gripper-Finger.stl",
+    "spdx": "Apache-2.0",
+    "text": "licenses/handumi-hw.txt"
+   },
+   "maker": "UMI (Chi et al.), HandUMI replica",
+   "mesh": {
+    "bytes": 181284,
+    "file": "../vendor/umi/UMI-Soft-Gripper-Finger.stl",
+    "name": "UMI-Soft-Gripper-Finger.stl",
+    "sha256": "63331c666d485de462f3c7c80eb4200fd2bf98ac325095f5b0e8774a95dc8442"
+   },
+   "setup": {
+    "base": "auto",
+    "border": {
+     "uv": [
+      [
+       -5.143899,
+       12.900001
+      ],
+      [
+       -5.143899,
+       -12.900001
+      ],
+      [
+       59.856101,
+       -12.900001
+      ],
+      [
+       59.856101,
+       12.900001
+      ]
+     ]
+    },
+    "options": {},
+    "selection": {
+     "ops": [
+      {
+       "mode": "add",
+       "op": "grow",
+       "preset": "flat",
+       "seed_facet": 2144
+      }
+     ]
+    }
+   },
+   "title": "UMI Fin-Ray Gripper",
+   "variants": [
+    {
+     "badge": "Fine",
+     "fill": 0.5,
+     "pitch_mm": 1
+    },
+    {
+     "fill": 0.5,
+     "pitch_mm": 1.5
+    },
+    {
+     "fill": 0.5,
+     "fit": "../vendor/umi/default-fit.json",
+     "pitch_mm": 2
+    },
+    {
+     "fill": 0.5,
+     "pitch_mm": 3
+    }
+   ]
+  },
+  "umi-trap-tip13.8": {
+   "family": "umi-tapers",
+   "finger": "soft fin-ray finger, trapezoid tip",
+   "label": "UMI trapezoid tip, 13.8 mm",
+   "license": {
+    "change": "tip cut (trapezoid, h 75 mm, tip 13.8 mm) from UMI-Soft-Gripper-Finger.stl",
+    "holder": "BrikHMP18 (HandUMI hardware)",
+    "source": "https://github.com/murobotics-ai/handumi-hw/blob/144827862d4e2d5cd2d331ce7eed1374d3c769df/hardware/STL/gripper_tips/UMI-Gripper/UMI-Soft-Gripper-Finger.stl",
+    "spdx": "Apache-2.0",
+    "text": "licenses/handumi-hw.txt"
+   },
+   "maker": "UMI (Chi et al.), HandUMI replica",
+   "mesh": {
+    "bytes": 183484,
+    "file": "meshes/umi-trap-tip13.8.stl",
+    "name": "umi-trap-tip13.8.stl",
+    "sha256": "5c5c582158db5034865aef20390cf9f6c8abf59b74277f3b251dd0eb270cbbe7"
+   },
+   "setup": {
+    "base": {
+     "point_xyz": [
+      0,
+      -12.9,
+      -3
+     ]
+    },
+    "border": null,
+    "options": {},
+    "selection": {
+     "ops": [
+      {
+       "mode": "add",
+       "op": "grow",
+       "preset": "flat",
+       "seed_facet": 272
+      }
+     ]
+    }
+   },
+   "title": "UMI Fin-Ray Gripper, tapered tip",
+   "variants": [
+    {
+     "fill": 0.5,
+     "pitch_mm": 2
+    }
+   ]
+  },
+  "umi-trap-tip17.8": {
+   "family": "umi-tapers",
+   "finger": "soft fin-ray finger, trapezoid tip",
+   "label": "UMI trapezoid tip, 17.8 mm",
+   "license": {
+    "change": "tip cut (trapezoid, h 75 mm, tip 17.8 mm) from UMI-Soft-Gripper-Finger.stl",
+    "holder": "BrikHMP18 (HandUMI hardware)",
+    "source": "https://github.com/murobotics-ai/handumi-hw/blob/144827862d4e2d5cd2d331ce7eed1374d3c769df/hardware/STL/gripper_tips/UMI-Gripper/UMI-Soft-Gripper-Finger.stl",
+    "spdx": "Apache-2.0",
+    "text": "licenses/handumi-hw.txt"
+   },
+   "maker": "UMI (Chi et al.), HandUMI replica",
+   "mesh": {
+    "bytes": 182684,
+    "file": "meshes/umi-trap-tip17.8.stl",
+    "name": "umi-trap-tip17.8.stl",
+    "sha256": "23a46a0071b4807e028333fe0053565f0bbd96c10aba4fc8bce83c6b56e80549"
+   },
+   "setup": {
+    "base": {
+     "point_xyz": [
+      0,
+      -12.9,
+      -3
+     ]
+    },
+    "border": null,
+    "options": {},
+    "selection": {
+     "ops": [
+      {
+       "mode": "add",
+       "op": "grow",
+       "preset": "flat",
+       "seed_facet": 77
+      }
+     ]
+    }
+   },
+   "title": "UMI Fin-Ray Gripper, tapered tip",
+   "variants": [
+    {
+     "fill": 0.5,
+     "pitch_mm": 2
+    }
+   ]
+  },
+  "umi-trap-tip21.8": {
+   "family": "umi-tapers",
+   "finger": "soft fin-ray finger, trapezoid tip",
+   "label": "UMI trapezoid tip, 21.8 mm",
+   "license": {
+    "change": "tip cut (trapezoid, h 75 mm, tip 21.8 mm) from UMI-Soft-Gripper-Finger.stl",
+    "holder": "BrikHMP18 (HandUMI hardware)",
+    "source": "https://github.com/murobotics-ai/handumi-hw/blob/144827862d4e2d5cd2d331ce7eed1374d3c769df/hardware/STL/gripper_tips/UMI-Gripper/UMI-Soft-Gripper-Finger.stl",
+    "spdx": "Apache-2.0",
+    "text": "licenses/handumi-hw.txt"
+   },
+   "maker": "UMI (Chi et al.), HandUMI replica",
+   "mesh": {
+    "bytes": 181384,
+    "file": "meshes/umi-trap-tip21.8.stl",
+    "name": "umi-trap-tip21.8.stl",
+    "sha256": "6ee1d59992d71ec0207ba15798b97c6bfc0e3001ef1282969c601dda46da6f29"
+   },
+   "setup": {
+    "base": {
+     "point_xyz": [
+      0,
+      -12.9,
+      -3
+     ]
+    },
+    "border": null,
+    "options": {},
+    "selection": {
+     "ops": [
+      {
+       "mode": "add",
+       "op": "grow",
+       "preset": "flat",
+       "seed_facet": 73
+      }
+     ]
+    }
+   },
+   "title": "UMI Fin-Ray Gripper, tapered tip",
+   "variants": [
+    {
+     "fill": 0.5,
+     "pitch_mm": 2
+    }
+   ]
+  },
+  "umi-trap-tip5.8": {
+   "family": "umi-tapers",
+   "finger": "soft fin-ray finger, trapezoid tip",
+   "label": "UMI trapezoid tip, 5.8 mm",
+   "license": {
+    "change": "tip cut (trapezoid, h 75 mm, tip 5.8 mm) from UMI-Soft-Gripper-Finger.stl",
+    "holder": "BrikHMP18 (HandUMI hardware)",
+    "source": "https://github.com/murobotics-ai/handumi-hw/blob/144827862d4e2d5cd2d331ce7eed1374d3c769df/hardware/STL/gripper_tips/UMI-Gripper/UMI-Soft-Gripper-Finger.stl",
+    "spdx": "Apache-2.0",
+    "text": "licenses/handumi-hw.txt"
+   },
+   "maker": "UMI (Chi et al.), HandUMI replica",
+   "mesh": {
+    "bytes": 183084,
+    "file": "meshes/umi-trap-tip5.8.stl",
+    "name": "umi-trap-tip5.8.stl",
+    "sha256": "aa0f328d24c5107df0f2b19768edfe0b997835d286f7bea688d9721f57eea7e8"
+   },
+   "setup": {
+    "base": {
+     "point_xyz": [
+      0,
+      -12.9,
+      -3
+     ]
+    },
+    "border": null,
+    "options": {},
+    "selection": {
+     "ops": [
+      {
+       "mode": "add",
+       "op": "grow",
+       "preset": "flat",
+       "seed_facet": 76
+      }
+     ]
+    }
+   },
+   "title": "UMI Fin-Ray Gripper, tapered tip",
+   "variants": [
+    {
+     "fill": 0.5,
+     "pitch_mm": 2
+    }
+   ]
+  },
+  "umi-trap-tip9.8": {
+   "family": "umi-tapers",
+   "finger": "soft fin-ray finger, trapezoid tip",
+   "label": "UMI trapezoid tip, 9.8 mm",
+   "license": {
+    "change": "tip cut (trapezoid, h 75 mm, tip 9.8 mm) from UMI-Soft-Gripper-Finger.stl",
+    "holder": "BrikHMP18 (HandUMI hardware)",
+    "source": "https://github.com/murobotics-ai/handumi-hw/blob/144827862d4e2d5cd2d331ce7eed1374d3c769df/hardware/STL/gripper_tips/UMI-Gripper/UMI-Soft-Gripper-Finger.stl",
+    "spdx": "Apache-2.0",
+    "text": "licenses/handumi-hw.txt"
+   },
+   "maker": "UMI (Chi et al.), HandUMI replica",
+   "mesh": {
+    "bytes": 184284,
+    "file": "meshes/umi-trap-tip9.8.stl",
+    "name": "umi-trap-tip9.8.stl",
+    "sha256": "3cca74b0f6f70e3296bb4aa57ce537df5bac6eadbf90a2223e4e3be5b99a86bf"
+   },
+   "setup": {
+    "base": {
+     "point_xyz": [
+      0,
+      -12.9,
+      -3
+     ]
+    },
+    "border": null,
+    "options": {},
+    "selection": {
+     "ops": [
+      {
+       "mode": "add",
+       "op": "grow",
+       "preset": "flat",
+       "seed_facet": 81
+      }
+     ]
+    }
+   },
+   "title": "UMI Fin-Ray Gripper, tapered tip",
+   "variants": [
+    {
+     "fill": 0.5,
+     "pitch_mm": 2
+    }
+   ]
+  },
+  "unitree-dex1": {
+   "finger": "gripper finger",
+   "license": {
+    "change": "unchanged",
+    "holder": "HangZhou YuShu Technology Co., Ltd. (Unitree Robotics)",
+    "source": "https://github.com/unitreerobotics/unitree_ros/blob/b579bbe1671bf330e42f6fc1b9cd75a73b0879a7/robots/g1_description/meshes/Dex1_finger_link_1.STL",
+    "spdx": "BSD-3-Clause",
+    "text": "licenses/unitree_ros.txt"
+   },
+   "maker": "Unitree Robotics",
+   "mesh": {
+    "bytes": 313884,
+    "file": "meshes/unitree-dex1.stl",
+    "name": "unitree-dex1.stl",
+    "sha256": "7cd2ff199556e3955547a34c75ed9ea777fb7d704fc98e7318d0f67e4aaedf5a"
+   },
+   "setup": {
+    "base": {
+     "point_xyz": [
+      91.25,
+      -23.39,
+      0
+     ]
+    },
+    "border": null,
+    "options": {},
+    "selection": {
+     "ops": [
+      {
+       "mode": "add",
+       "op": "grow",
+       "preset": "flat",
+       "seed_facet": 5059
+      }
+     ]
+    }
+   },
+   "title": "Unitree Dex1-1",
+   "variants": [
+    {
+     "badge": "Fine",
+     "fill": 0.5,
+     "pitch_mm": 1
+    },
+    {
+     "fill": 0.5,
+     "pitch_mm": 1.5
+    },
+    {
+     "fill": 0.5,
+     "pitch_mm": 2
+    },
+    {
+     "fill": 0.5,
+     "pitch_mm": 3
+    }
+   ]
+  },
+  "widowx-250": {
+   "finger": "gripper finger",
+   "license": {
+    "change": "unchanged",
+    "holder": "Trossen Robotics",
+    "source": "https://github.com/google-deepmind/mujoco_menagerie/blob/f3b6013629c7b94f8ee93fd977b161fa8350f9bc/trossen_wx250s/assets/wx250s_10_gripper_finger.stl",
+    "spdx": "BSD-3-Clause",
+    "text": "licenses/mujoco_menagerie-trossen_wx250s.txt"
+   },
+   "maker": "Trossen Robotics",
+   "mesh": {
+    "bytes": 22284,
+    "file": "meshes/widowx-250.stl",
+    "name": "widowx-250.stl",
+    "sha256": "6a459bd4ef07eb5c4687e258bd9564004e741437e2e668af7ed31964567d8f90"
+   },
+   "setup": {
+    "base": {
+     "point_xyz": [
+      -16,
+      13.95,
+      0
+     ]
+    },
+    "border": null,
+    "options": {
+     "rotation": "none"
+    },
+    "selection": {
+     "ops": [
+      {
+       "mode": "add",
+       "op": "disk",
+       "radius_mm": 0,
+       "seed_facet": 113
+      },
+      {
+       "mode": "add",
+       "op": "disk",
+       "radius_mm": 0,
+       "seed_facet": 112
+      },
+      {
+       "mode": "add",
+       "op": "disk",
+       "radius_mm": 0,
+       "seed_facet": 114
+      },
+      {
+       "mode": "add",
+       "op": "disk",
+       "radius_mm": 0,
+       "seed_facet": 111
+      },
+      {
+       "mode": "add",
+       "op": "disk",
+       "radius_mm": 0,
+       "seed_facet": 115
+      },
+      {
+       "mode": "add",
+       "op": "disk",
+       "radius_mm": 0,
+       "seed_facet": 98
+      },
+      {
+       "mode": "add",
+       "op": "disk",
+       "radius_mm": 0,
+       "seed_facet": 116
+      },
+      {
+       "mode": "add",
+       "op": "disk",
+       "radius_mm": 0,
+       "seed_facet": 99
+      }
+     ]
+    }
+   },
+   "title": "WidowX 250",
+   "variants": [
+    {
+     "badge": "Fine",
+     "fill": 0.5,
+     "pitch_mm": 1
+    },
+    {
+     "fill": 0.5,
+     "pitch_mm": 1.5
+    },
+    {
+     "fill": 0.5,
+     "pitch_mm": 2
+    },
+    {
+     "fill": 0.5,
+     "pitch_mm": 3
+    }
+   ]
+  }
+ }
+}

@@ -1,0 +1,223 @@
+/* The Library (library.html, web/library.js; the user's requests of 2026-11-05), over web/styles.css and web/theme.css:
+   the theme's tokens, light and dark, and its rule of colour (the action blue fills only the page's one primary action,
+   Open in Gen by Surface; selections are the grey thumb; no green fill), laid out as the Apple Store: the title with its
+   line on the right, the grippers' cards four to a row, then the UMI finger's shelf of cards that scrolls sideways
+   inside itself, never the page (both 2026-11-06), and a sensor's own page.  Nothing moves on its own: no transition or
+   animation, every jump instant (the page's scrolling is the browser's auto), hover and press change at once.  No
+   @import, no url() but data:, nothing fixed or sticky. */
+
+/* The page: block, its side padding the header's (the shelves' rows reach the window's edges, their cards start on it). */
+main.lib { --lib-gutter:clamp(24px,5vw,76px); --lib-gap:20px; display:block; max-width:none; min-height:0; margin:0; padding:0 var(--lib-gutter) 56px; }
+.lib h2,.lib h3,.lib p,.lib dl,.lib dd { margin:0; }
+.lib a { color:var(--link); }
+
+/* The mode switch as two links (the header's geometry is index.html's): the segments' spans, no thumb on this page. */
+.mode-links a { display:block; border-radius:var(--r-pill); color:var(--text); text-decoration:none; }
+.mode-links a:hover span { background:var(--fill); }
+.mode-links a:active span { background:var(--fill-press); }
+.mode-links a:focus-visible { outline:2px solid var(--focus); outline-offset:-2px; }
+
+/* The title and its line: "Library" large on the left, the line on the right (stacked below 735 px).  The title the
+   Store's 80 px from 1100 px (64 px, then 40 px below 735 px) and the line two lines at 1440 px (21 px below 1100 px), so
+   the title leads (the review of 2026-11-05: at 48 px against three lines of 24 px the line outweighed it).  From 1100 px
+   each of its halves is a line of its own, as the Store's breaks between its phrases (its second review: the grey half
+   began with a lone "Open" at the end of the first line); narrower, its lines are balanced.  Its lines end on the
+   gutter (right-aligned beside the title; library.html writes "open-source" with a no-break hyphen): left-aligned,
+   balanced lines left a third of the hero empty on their right from 1024 to 1280 px (the review of 2026-11-05). */
+.lib-hero { display:flex; align-items:flex-end; justify-content:space-between; gap:24px 48px; padding:44px 0 28px; }
+.lib-title { font-size:80px; line-height:1.05; font-weight:600; letter-spacing:-.015em; color:var(--text); }
+.lib-tagline { max-width:860px; font-size:24px; line-height:1.17; font-weight:600; letter-spacing:.009em; color:var(--text); text-align:right; text-wrap:balance; }
+.lib-tagline-more { color:var(--text-2); }
+@media (min-width:1100px) { .lib-tagline-more { display:block; } }
+/* From 1100 to 1279 px the line 21 px, as below 1100 px: two lines from 1200 px, where at 24 px each half wrapped (four). */
+@media (min-width:1100px) and (max-width:1279px) { .lib-tagline { font-size:21px; } }
+.lib-note { margin:0 0 20px; padding:10px 14px; border-radius:var(--r-md); background:var(--fill); color:var(--text); font-size:15px; }
+.lib-status { color:var(--text); font-size:17px; }
+.lib-status:not(:empty) { padding:20px 0; }
+
+/* The picture slot: 16:10, a light box in both schemes, its placeholder the field and its lines (a sensor's page's is
+   3:1 below 900 px: the narrower windows' rules).  A picture (the on-part figure on a transparent ground, 2026-11-05)
+   fills the box contained and centred, its light the box's in the dark scheme too. */
+.lib-shot { aspect-ratio:16 / 10; border-radius:var(--r-md); background:#f5f5f7; overflow:hidden; }
+.lib-shot > svg,.lib-shot > img { display:block; width:100%; height:100%; object-fit:contain; }
+.lib-field { fill:#fff; stroke:#c7c7cc; stroke-width:1; vector-effect:non-scaling-stroke; }
+.lib-lines line { stroke:#86868b; stroke-opacity:.55; stroke-width:1; vector-effect:non-scaling-stroke; }
+/* A sensor's page's picture framed as a card (on the page's grey the light box alone would not show). */
+.lib-frame { display:block; padding:6px; border-radius:var(--r-lg); background:var(--surface); box-shadow:var(--shadow-card); }
+
+/* A row that scrolls sideways: as wide as the window (the gutter is its padding), snapping to a card at the gutter;
+   room above and below for the cards' shadows; no scroll bar (the arrows and a swipe move it). */
+.lib-track { display:flex; gap:var(--lib-gap); margin:0 calc(-1 * var(--lib-gutter)); padding:8px var(--lib-gutter) 28px; overflow-x:auto; overflow-y:hidden;
+  overscroll-behavior-x:contain; scroll-snap-type:x mandatory; scroll-padding:0 var(--lib-gutter); scrollbar-width:none; }
+.lib-track::-webkit-scrollbar { display:none; }
+.lib-track > * { flex:none; scroll-snap-align:start; }
+.lib-arrows { display:flex; justify-content:flex-end; gap:12px; margin:-12px 0 0; }
+/* A shelf whose arrows are hidden keeps their room (36 px less the 12 px they rise into the track), so every shelf is
+   as far from the next one with or without them (the review of 2026-11-05: 79 px after a shelf with arrows, 57 px
+   after one without, at 1440 px). */
+.lib-shelf:has(> .lib-arrows[hidden]) > .lib-track { padding-bottom:calc(28px + 24px); }
+.lib-arrow { display:grid; place-items:center; width:36px; height:36px; padding:0; border:0; border-radius:50%; background:var(--fill); color:var(--text); cursor:pointer; }
+.lib-arrow:hover:not(:disabled) { background:var(--fill-hover); }
+.lib-arrow:active:not(:disabled) { background:var(--fill-press); }
+.lib-arrow:disabled { color:var(--text-3); cursor:default; }
+.lib-arrow:focus-visible { outline:2px solid var(--focus); outline-offset:2px; }
+/* Tabbed to, an arrow comes into sight with its ring and room round it, as a card does (at 390 x 844 it sat on the
+   window's bottom edge, its ring cut; the review of 2026-11-06). */
+.lib-arrow { scroll-margin:16px; }
+.lib-chevron { width:16px; height:16px; }
+
+/* The shelves: the heading's bold half and its grey half (wrapped pretty: its lines filled, no word alone on the last;
+   balanced, a two-line heading took half the row, the review of 2026-11-05), then the cards.  A jump puts the shelf's top at the window's (its heading 28 px below it): the shelf above, its arrows
+   included, out of sight (a 12 px margin showed them cut at the window's top; the review of 2026-11-05).  The grippers'
+   section (.lib-section, 2026-11-06: a grid, not a row, the grid's first) is spaced and jumped to as a shelf: the UMI
+   shelf's heading 56 px below the grid's last row (the cards' 28 px and the shelf's), as far as the grippers' heading
+   is below the title's line from 735 px. */
+.lib-shelf,.lib-section { padding-top:28px; scroll-margin-top:0; }
+.lib-shelf-title { font-size:28px; line-height:1.14; font-weight:600; letter-spacing:.007em; color:var(--text); text-wrap:pretty; }
+.lib-shelf-title strong { font-weight:600; }
+.lib-shelf-title span { color:var(--text-2); }
+
+/* A card: white (the dark card in the dark scheme), 18 px corners, a soft shadow and a stronger one hovered, at once;
+   no blue; four in view from 1100 px, three from 735 px, below that 78 % of the row (the next one shows). */
+.lib .lib-card { display:flex; flex-direction:column; width:calc((100% - 3 * var(--lib-gap)) / 4); padding:6px; border-radius:var(--r-lg); background:var(--surface);
+  box-shadow:var(--shadow-card); color:var(--text); text-decoration:none; }
+.lib .lib-card:hover { box-shadow:var(--shadow-float); }
+.lib-card:focus-visible { outline:2px solid var(--focus); outline-offset:2px; }
+.lib-card-text { display:flex; flex-direction:column; gap:2px; padding:12px 12px 14px; }
+.lib-badge { min-height:16px; font-size:12px; line-height:16px; font-weight:600; letter-spacing:.06em; text-transform:uppercase; color:var(--text-2); }
+.lib-card-name { margin:2px 0 4px; font-size:17px; line-height:1.24; font-weight:600; letter-spacing:-.022em; }
+.lib-card-line { font-size:14px; line-height:1.43; color:var(--text-2); font-variant-numeric:tabular-nums; }
+
+/* The grippers' section (the user's request of 2026-11-06): one card per gripper, four to a row (4 + 3, from the left),
+   each the width of a shelf's card in view from 1100 px (a quarter of the row less the gaps) and as its look; two to
+   a row below 735 px, never three (it would leave 3 + 3 + 1).  It turns at the shelf's own 735 px, so its cards are
+   never wider than the UMI shelf's below it (the review of 2026-11-06: turning at 768 px, from 735 to 767 px its cards
+   were 321 to 335 px over the shelf's 207 to 217 px, the grippers 1,397 px tall at 744 px).  At 735 px four to a row
+   are 150 px cards with 114 px of text, a 360 px phone's 116 px: its lines on one line each, a two-word name on two
+   ("Franka / Hand"), as there.  It wraps: nothing scrolls sideways.  Its cards' room above and below is the shelf's
+   track's (8 px, 28 px); its names and lines balanced ("Trossen / WidowX AI"). */
+.lib-cards { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:var(--lib-gap); padding:8px 0 28px; }
+/* Tabbed to, a card of the lower rows comes into sight with its focus ring (2 px, 2 px off) and room round it, not
+   flush with the window's edge. */
+.lib .lib-cards > .lib-card { width:auto; min-width:0; scroll-margin:16px 0; }
+.lib-cards .lib-card-name,.lib-cards .lib-card-line { text-wrap:balance; }
+@media (max-width:734px) { .lib-cards { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+/* Below 360 px the text's sides 6 px, not 12 px: at 320 px "MakerMods" (107 px) ran 11 px past a 96 px line. */
+@media (max-width:359px) { .lib-cards .lib-card-text { padding-left:6px; padding-right:6px; } }
+
+/* A sensor's page: the back link, then the picture (7) and the facts (5) side by side from 900 px. */
+.lib-detail { padding:24px 0 8px; }
+.lib .lib-back { display:inline-flex; align-items:center; gap:4px; min-height:32px; color:var(--link); font-size:17px; text-decoration:none; }
+.lib .lib-back:hover span { text-decoration:underline; }
+.lib-detail-body { display:grid; grid-template-columns:minmax(0,7fr) minmax(0,5fr); gap:48px; align-items:start; margin-top:16px; }
+.lib-info { display:flex; flex-direction:column; gap:16px; }
+/* The title and the line under it balanced: no word alone on the last line (the second review of 2026-11-05). */
+.lib-detail-title { font-size:40px; line-height:1.1; font-weight:600; letter-spacing:0; color:var(--text); text-wrap:balance; }
+/* Focused when the page opens (for a screen reader), never by Tab (tabindex -1): no ring. */
+.lib-detail-title:focus,.lib-detail-title:focus-visible { outline:none; }
+.lib-detail-line { margin-top:-10px; color:var(--text-2); font-size:17px; text-wrap:balance; }
+/* The pitch: a segmented control as the mode switch, a grey track and the chosen pitch a white thumb (never blue). */
+.lib-seg { margin:0; padding:0; border:0; min-width:0; }
+.lib-seg legend { padding:0 0 6px; color:var(--text-2); font-size:14px; font-weight:600; }
+.lib-seg-track { display:flex; padding:2px; border-radius:var(--r-pill); background:var(--fill); }
+.lib-seg label { position:relative; flex:1 1 auto; cursor:pointer; }
+.lib-seg input { position:absolute; inset:0; width:100%; height:100%; min-height:0; margin:0; opacity:0; cursor:pointer; }
+.lib-seg span { display:block; padding:7px 8px; border-radius:var(--r-pill); color:var(--text); font-size:15px; line-height:1.33; font-weight:600; text-align:center; white-space:nowrap; }
+.lib-seg input:not(:checked):hover + span { background:var(--fill); }
+.lib-seg input:checked + span { background:var(--thumb); box-shadow:var(--shadow-thumb); }
+.lib-seg input:focus-visible + span { outline:2px solid var(--focus); outline-offset:-2px; }
+/* A sensor's picture's view (2026-11-05: the on-part figure at its Exploded or its Assembled home): the pitch's control
+   made small (13 px, 30 px tall), centred under the picture in its frame, as far from it as from the frame's edge
+   (6 px), its two segments as wide as the wider, its legend ("View") for a screen reader only; a grey track and the
+   chosen view a white thumb (never blue), at once. */
+.lib-view { position:relative; margin:0; padding:6px 0 0; border:0; min-width:0; text-align:center; }
+.lib-view legend { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; padding:0; }
+.lib-view .lib-seg-track { display:inline-grid; grid-template-columns:1fr 1fr; padding:2px; border-radius:var(--r-pill); background:var(--fill); }
+.lib-view label { position:relative; cursor:pointer; }
+.lib-view input { position:absolute; inset:0; width:100%; height:100%; min-height:0; margin:0; opacity:0; cursor:pointer; }
+.lib-view span { display:block; padding:4px 14px; border-radius:var(--r-pill); color:var(--text); font-size:13px; line-height:1.38; font-weight:600; white-space:nowrap; }
+.lib-view input:not(:checked):hover + span { background:var(--fill); }
+.lib-view input:checked + span { background:var(--thumb); box-shadow:var(--shadow-thumb); }
+.lib-view input:focus-visible + span { outline:2px solid var(--focus); outline-offset:-2px; }
+/* A sensor's page in 3D (the user's request of 2026-11-05, "lib 点进去具体的每个夹爪的时候, 那个图也做成可以三维旋转的";
+   library.js, cad/library_view.js): the picture's slot in .lib-stage beside the view's host, .lib-live, laid over the
+   slot's box exactly (its corners too) and hidden until the sensor is drawn there; drawn (is-live), the host shows and
+   the picture under it (or its placeholder) is hidden by visibility alone, so nothing moves and the box stays light in
+   both schemes.  The canvas is onpart.js's (styles.css .on-part-canvas: a grab cursor; a vertical swipe scrolls the
+   page, a drag across turns the view).  Its focus ring the page's; its hint for a screen reader only. */
+.lib-stage { position:relative; }
+.lib-live { position:absolute; inset:0; border-radius:var(--r-md); overflow:hidden; visibility:hidden; }
+.lib-stage.is-live > .lib-live { visibility:visible; }
+.lib-stage.is-live img,.lib-stage.is-live svg { visibility:hidden; }
+.lib-live:focus-visible { outline:2px solid var(--focus); outline-offset:2px; }
+.lib-live-hint { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; }
+.lib-facts { display:grid; gap:8px; padding:14px 0; border-top:1px solid var(--separator); border-bottom:1px solid var(--separator); }
+.lib-facts div { display:grid; grid-template-columns:72px minmax(0,1fr); gap:12px; font-size:15px; line-height:1.4; }
+.lib-facts dt { color:var(--text-2); }
+.lib-facts dd { color:var(--text); font-variant-numeric:tabular-nums; }
+.lib-facts code { font-family:var(--font-mono); font-size:13px; overflow-wrap:anywhere; }
+/* Open in Gen by Surface: the page's one blue fill. */
+.lib .lib-open { display:inline-flex; align-items:center; justify-content:center; align-self:flex-start; min-height:44px; padding:0 22px; border-radius:var(--r-pill);
+  background:var(--accent); color:#fff; font-size:17px; font-weight:600; letter-spacing:-.01em; text-decoration:none; }
+.lib .lib-open:hover { background:var(--accent-hover); }
+.lib .lib-open:active { background:var(--accent-press); }
+.lib-open:focus-visible { outline:2px solid var(--focus); outline-offset:2px; }
+/* The Gerber ZIPs: grey pills, as wide as their text beside each other (never wider than Open, the primary action;
+   the review of 2026-11-05), the column's width under 900 px, as Open is. */
+.lib-pills { display:flex; flex-wrap:wrap; gap:10px; }
+.lib-pills > * { flex:0 0 auto; }
+.lib .lib-pill { display:inline-flex; align-items:center; justify-content:center; min-height:36px; padding:0 18px; border:0; border-radius:var(--r-pill);
+  background:var(--fill); color:var(--text); font-size:15px; font-weight:600; text-decoration:none; cursor:pointer; }
+.lib .lib-pill:hover:not(:disabled) { background:var(--fill-hover); }
+.lib .lib-pill:active:not(:disabled) { background:var(--fill-press); }
+.lib .lib-pill:disabled { color:var(--text-3); cursor:default; }
+.lib-pill:focus-visible { outline:2px solid var(--focus); outline-offset:2px; }
+.lib-download-note { color:var(--text-2); font-size:14px; }
+.lib-download-note:empty { display:none; }
+.lib-download-note:not(:empty) { margin-top:8px; }
+.lib-links { font-size:15px; color:var(--text-2); }
+.lib-provenance,.lib-detail-note { color:var(--text-2); font-size:13px; line-height:1.45; overflow-wrap:anywhere; }
+/* The source ("mujoco_menagerie at f3b6013") on one line. */
+.lib-provenance a { white-space:nowrap; }
+
+/* The footer: the trademark line and the notice. */
+.lib-footer { padding:18px clamp(24px,5vw,76px) 28px; border-top:1px solid var(--hairline); color:var(--text-2); font-size:12px; line-height:1.4; }
+.lib-footer p { margin:0; }
+.lib-footer a { color:var(--link); }
+
+/* More contrast: the page's links underlined as the theme's (the cards, pills and Open are boxes). */
+@media (prefers-contrast: more) { .mode-links a span,.lib .lib-back span,.lib-links a,.lib-provenance a,.lib-footer a { text-decoration:underline; } }
+/* The dark scheme (the header's toggle on, <html data-theme="dark">): the cards have no shadow there (the theme's), so a
+   hairline edges them. */
+:where(:root[data-theme="dark"]) .lib .lib-card,:where(:root[data-theme="dark"]) .lib-frame { box-shadow:inset 0 0 0 1px var(--hairline); } :where(:root[data-theme="dark"]) .lib .lib-card:hover { box-shadow:inset 0 0 0 1px var(--separator); }
+
+/* Narrower windows.  From 900 to 1279 px a sensor's page splits its width evenly: at 7 to 5 its facts wrapped at 900 px
+   and its two pills stacked up to about 1230 px (the second review of 2026-11-05); evenly they are side by side from
+   about 1020 px.  Below 735 px the line is 17 px under a tighter title, so a phone's first screen reaches the grippers'
+   first row (it took five lines of 21 px there). */
+@media (max-width:1279px) { .lib-detail-body { grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:32px; } }
+@media (max-width:1099px) { .lib .lib-card { width:calc((100% - 2 * var(--lib-gap)) / 3); } .lib-shelf-title { font-size:24px; } .lib-title { font-size:64px; } .lib-tagline { font-size:21px; } }
+/* Below 900 px (one column) Open in Gen by Surface and the downloads come right after the pitch, before the facts, so
+   a phone's first screen holds the page's action (the review of 2026-11-05: Open was at 934 px on a 390 x 844 phone). */
+@media (max-width:899px) { .lib-detail-body { grid-template-columns:minmax(0,1fr); gap:24px; } .lib .lib-open,.lib .lib-pill { align-self:stretch; width:100%; }
+  .lib-pills { flex-direction:column; } .lib-info > * { order:2; } .lib-info > .lib-detail-title,.lib-info > .lib-detail-line,.lib-info > .lib-seg { order:0; }
+  .lib-info > .lib-open,.lib-info > .lib-downloads { order:1; } }
+/* There a sensor's picture is 3:1, not 16:10 (the user's decision of 2026-11-05, "可压扁": it may be squashed), still
+   above Open with its drawing or image contained and centred, so Open is in a 390 x 844 phone's first screen on every
+   sensor's page and on the Tapered tips' (a three-line title and two controls: 88 px below it at 16:10, 11 px inside
+   at 3:1; 5:2 left it 12 px below), and in a 360 x 740 one's on every gripper's.  The 3D figure of the sensor on the
+   part that a later stage puts here is then 113 px tall at 390 px, 89 px at 320 px and 266 px at 899 px.  On lower
+   phones (375 x 667, 320 x 640) the header's 239 px leave too little: a two-line title's Open stays below the first
+   screen unless the picture were at most 58 px tall at 375 px (31 px at 320 px), a tapered tip's even with none. */
+@media (max-width:899px) { .lib-shot-detail { aspect-ratio:3 / 1; } }
+/* With pictures (2026-11-05) the frame holds the Exploded | Assembled control under the picture too, 36 px more, which
+   would put the Tapered tips' Open 25 px below a 390 x 844 phone's first screen; so there, with the control, the page
+   is tighter round the picture and between the title's items (the page's top 24 to 16 px, the picture 16 to 12 px
+   under the back link and 24 to 16 px above the title, the four gaps from the title to Open 16 to 12 px: 36 px in
+   all), its Open where it was without pictures (11 px inside at 390 x 844), and the picture keeps its 3:1 band.
+   Without a picture (no control) the page is as before. */
+@media (max-width:899px) { .lib-detail:has(.lib-view) { padding-top:16px; } .lib-detail:has(.lib-view) .lib-detail-body { margin-top:12px; gap:16px; }
+  .lib-detail:has(.lib-view) .lib-info { gap:12px; } }
+@media (max-width:734px) { main.lib { --lib-gap:16px; } .lib-hero { flex-direction:column; align-items:flex-start; gap:12px; padding:24px 0 12px; } .lib-title { font-size:40px; }
+  .lib-tagline { font-size:17px; line-height:1.29; text-align:left; } .lib .lib-card { width:78%; } .lib-shelf-title { font-size:21px; } .lib-detail-title { font-size:32px; } }
+@media (max-width:520px) { main.lib { --lib-gutter:20px; } .lib-footer { padding:16px 20px 24px; } }

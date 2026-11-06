@@ -7,6 +7,9 @@
     <meta name="flexitac-backend" content="browser" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>FlexiTac-Gen</title>
+    <!-- Light, or dark once the visitor turns it on (web/theme.js): set on <html> here, before the style sheets and
+         without defer, so the first paint is already in the visitor's look. -->
+    <script src="static/theme.js"></script>
     <link rel="stylesheet" href="static/styles.css" />
     <link rel="stylesheet" href="static/theme.css" />
   </head>
@@ -25,15 +28,28 @@
         <label title="A rectangular sensor: set its rows, columns and pitch"><input type="radio" name="appMode" id="modeRect" value="rect" /><span>Rectangular</span></label>
         <label title="Load a 3D model (STL), pick the surface the sensor goes on, and fit the sensor to it"><input type="radio" name="appMode" id="modeCad" value="cad" checked /><span>Gen by Surface</span></label>
       </fieldset>
-      <!-- The FlexiTac community, as on https://flexitac.github.io/ (the user's requests of 2026-11-02): its GitHub, with
-           the repository's stars and forks, and Discord, their marks inline.  The counts are written into the page: by
-           app.py as it serves it (read from GitHub's API hourly; none with --no-github) and by tools/build_static_site.py
-           as it builds the static site, which refreshes them as it opens (web/backend.js).  Without them the card shows
-           the name alone. -->
-      <nav class="masthead-links" aria-label="FlexiTac community">
-        <a class="masthead-link masthead-github" href="https://github.com/FlexiTac/FlexiTac" target="_blank" rel="noopener noreferrer" aria-label="FlexiTac on GitHub: 163 stars, 17 forks" data-gh-badge><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true" focusable="false"><path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"/></svg><span class="masthead-gh-text"><span class="masthead-gh-name">FlexiTac</span><span class="masthead-gh-stats" data-gh-stats><span><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true" focusable="false"><path d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.751.751 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Zm0 2.445L6.615 5.5a.75.75 0 0 1-.564.41l-3.097.45 2.24 2.184a.75.75 0 0 1 .216.664l-.528 3.084 2.769-1.456a.75.75 0 0 1 .698 0l2.77 1.456-.53-3.084a.75.75 0 0 1 .216-.664l2.24-2.183-3.096-.45a.75.75 0 0 1-.564-.41L8 2.694Z"/></svg><span data-gh-stars>163</span></span><span><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true" focusable="false"><path d="M5 5.372v.878c0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75v-.878a2.25 2.25 0 1 1 1.5 0v.878a2.25 2.25 0 0 1-2.25 2.25h-1.5v2.128a2.251 2.251 0 1 1-1.5 0V8.5h-1.5A2.25 2.25 0 0 1 3.5 6.25v-.878a2.25 2.25 0 1 1 1.5 0ZM5 3.25a.75.75 0 1 0-1.5 0 .75.75 0 0 0 1.5 0Zm6.75.75a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm-3 8.75a.75.75 0 1 0-1.5 0 .75.75 0 0 0 1.5 0Z"/></svg><span data-gh-forks>17</span></span></span></span></a>
-        <a class="masthead-link masthead-discord" href="https://discord.gg/6gw887Vxms" target="_blank" rel="noopener noreferrer" aria-label="Join the FlexiTac Discord"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/></svg><span>Discord</span></a>
-      </nav>
+      <!-- The Library (library.html; the user's requests of 2026-11-05): sensors already fitted to open-source gripper
+           fingers, each opening here at ./?part=<id>.  A text link right after the mode switch (the switch stays the
+           title block's next sibling), not a third mode; in a new tab, so a model loaded here stays.  Not a
+           masthead-link: the community's two pills keep their checks. -->
+      <a class="masthead-library" href="library.html" target="_blank" rel="noopener" title="Sensors already fitted to open-source grippers (opens in a new tab)"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true" focusable="false"><rect x="1.5" y="1.5" width="5.5" height="5.5" rx="1.2"/><rect x="9" y="1.5" width="5.5" height="5.5" rx="1.2"/><rect x="1.5" y="9" width="5.5" height="5.5" rx="1.2"/><rect x="9" y="9" width="5.5" height="5.5" rx="1.2"/></svg><span>Library</span></a>
+      <!-- The header's right (2026-11-06): the look's toggle, then the FlexiTac community.  The toggle (the user's request
+           of 2026-11-06: the page light by default, a small mark before GitHub switching to dark; web/theme.js) is a
+           moon while the page is light and a sun while it is dark (the style sheets show one by <html data-theme>),
+           pressed in dark; the choice is kept per visitor, for both pages.  Its marks are filled shapes, no stroke (a
+           stroked sun made Chromium raster the whole page a little differently, 1-3 levels on every antialiased edge). -->
+      <div class="masthead-end">
+        <button type="button" class="masthead-theme" id="themeToggle" aria-pressed="false" aria-label="Dark mode" title="Turn dark mode on"><svg class="theme-moon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M20.89 13.41A9 9 0 1 1 10.59 3.11 7.5 7.5 0 0 0 20.89 13.41Z"/></svg><svg class="theme-sun" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4.5"/><rect x="11" y="2" width="2" height="3" rx="1"/><rect x="11" y="19" width="2" height="3" rx="1"/><rect x="2" y="11" width="3" height="2" rx="1"/><rect x="19" y="11" width="3" height="2" rx="1"/><g transform="rotate(45 12 12)"><rect x="11" y="2" width="2" height="3" rx="1"/><rect x="11" y="19" width="2" height="3" rx="1"/><rect x="2" y="11" width="3" height="2" rx="1"/><rect x="19" y="11" width="3" height="2" rx="1"/></g></svg></button>
+        <!-- The FlexiTac community, as on https://flexitac.github.io/ (the user's requests of 2026-11-02): its GitHub, with
+             the repository's stars and forks, and Discord, their marks inline.  The counts are written into the page: by
+             app.py as it serves it (read from GitHub's API hourly; none with --no-github) and by tools/build_static_site.py
+             as it builds the static site, which refreshes them as it opens (web/backend.js).  Without them the card shows
+             the name alone. -->
+        <nav class="masthead-links" aria-label="FlexiTac community">
+          <a class="masthead-link masthead-github" href="https://github.com/FlexiTac/FlexiTac" target="_blank" rel="noopener noreferrer" aria-label="FlexiTac on GitHub: 164 stars, 17 forks" data-gh-badge><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true" focusable="false"><path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"/></svg><span class="masthead-gh-text"><span class="masthead-gh-name">FlexiTac</span><span class="masthead-gh-stats" data-gh-stats><span><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true" focusable="false"><path d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.751.751 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Zm0 2.445L6.615 5.5a.75.75 0 0 1-.564.41l-3.097.45 2.24 2.184a.75.75 0 0 1 .216.664l-.528 3.084 2.769-1.456a.75.75 0 0 1 .698 0l2.77 1.456-.53-3.084a.75.75 0 0 1 .216-.664l2.24-2.183-3.096-.45a.75.75 0 0 1-.564-.41L8 2.694Z"/></svg><span data-gh-stars>164</span></span><span><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true" focusable="false"><path d="M5 5.372v.878c0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75v-.878a2.25 2.25 0 1 1 1.5 0v.878a2.25 2.25 0 0 1-2.25 2.25h-1.5v2.128a2.251 2.251 0 1 1-1.5 0V8.5h-1.5A2.25 2.25 0 0 1 3.5 6.25v-.878a2.25 2.25 0 1 1 1.5 0ZM5 3.25a.75.75 0 1 0-1.5 0 .75.75 0 0 0 1.5 0Zm6.75.75a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm-3 8.75a.75.75 0 1 0-1.5 0 .75.75 0 0 0 1.5 0Z"/></svg><span data-gh-forks>17</span></span></span></span></a>
+          <a class="masthead-link masthead-discord" href="https://discord.gg/6gw887Vxms" target="_blank" rel="noopener noreferrer" aria-label="Join the FlexiTac Discord"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/></svg><span>Discord</span></a>
+        </nav>
+      </div>
     </header>
 
     <main>
@@ -58,6 +74,24 @@
           </li>
           <li class="flow-step" data-step="3"><button type="button" data-go="downloadsTitle"><span class="flow-no" aria-hidden="true">3</span><span class="flow-text"><strong>Send to manufacture</strong><span>Download the two Gerber ZIPs and order them.</span></span></button></li>
         </ol>
+        <!-- Samples to try (the user's request of 2026-11-06): eight parts in two columns under the steps (one row that
+             scrolls sideways on a narrow page), each dragged onto the 3D view or pressed to load it and generate its
+             sensor at once (main.js loadSample; static/samples/samples.json holds each one's mesh and Library sensor, in
+             this order; the thumbnails are tools/browser/sample_thumbs.py's).  Hidden with the guide in Rectangular. -->
+        <section class="sample-palette" id="samplePalette" aria-labelledby="samplePaletteTitle">
+          <h3 class="sample-palette-title" id="samplePaletteTitle">Try a sample</h3>
+          <p class="sample-palette-hint" id="samplePaletteHint">Drag onto the 3D view, or <span class="sample-hint-click">click</span><span class="sample-hint-tap">tap</span>.</p>
+          <ul class="sample-grid">
+            <li><button type="button" class="sample" data-sample="umi-trap-tip5.8" title="UMI finger, trapezoid tip 5.8 mm" draggable="true" aria-describedby="samplePaletteHint"><img src="static/samples/thumbs/umi-trap-tip5.8.webp" width="240" height="110" alt="" draggable="false" /><span class="sample-name">UMI trapezoid</span><span class="sample-kind cad-sr-only">, 5.8 mm tip</span></button></li>
+            <li><button type="button" class="sample" data-sample="umi-convex-tip13.8" title="UMI finger, convex arc tip 13.8 mm" draggable="true" aria-describedby="samplePaletteHint"><img src="static/samples/thumbs/umi-convex-tip13.8.webp" width="240" height="110" alt="" draggable="false" /><span class="sample-name">UMI convex</span><span class="sample-kind cad-sr-only">, 13.8 mm tip</span></button></li>
+            <li><button type="button" class="sample" data-sample="arx-x5" title="ARX X5 gripper finger (HandUMI replica)" draggable="true" aria-describedby="samplePaletteHint"><img src="static/samples/thumbs/arx-x5.webp" width="240" height="110" alt="" draggable="false" /><span class="sample-name">ARX X5</span><span class="sample-kind cad-sr-only">, finger</span></button></li>
+            <li><button type="button" class="sample" data-sample="i2rt-yam" title="I2RT YAM gripper tip" draggable="true" aria-describedby="samplePaletteHint"><img src="static/samples/thumbs/i2rt-yam.webp" width="240" height="110" alt="" draggable="false" /><span class="sample-name">I2RT YAM</span><span class="sample-kind cad-sr-only">, finger</span></button></li>
+            <li><button type="button" class="sample" data-sample="unitree-dex1" title="Unitree Dex1-1 gripper finger" draggable="true" aria-describedby="samplePaletteHint"><img src="static/samples/thumbs/unitree-dex1.webp" width="240" height="110" alt="" draggable="false" /><span class="sample-name">Unitree Dex1-1</span><span class="sample-kind cad-sr-only">, finger</span></button></li>
+            <li><button type="button" class="sample" data-sample="makermods-metal" title="MakerMods Metal Arm gripper tip (HandUMI replica)" draggable="true" aria-describedby="samplePaletteHint"><img src="static/samples/thumbs/makermods-metal.webp" width="240" height="110" alt="" draggable="false" /><span class="sample-name">Maker<wbr />Mods</span><span class="sample-kind cad-sr-only">, finger</span></button></li>
+            <li><button type="button" class="sample" data-sample="franka-hand-gripper" title="Franka Hand, the whole gripper, jaws open" draggable="true" aria-describedby="samplePaletteHint"><img src="static/samples/thumbs/franka-hand-gripper.webp" width="240" height="110" alt="" draggable="false" /><span class="sample-name">Franka Hand</span><span class="sample-kind cad-sr-only">, whole gripper</span></button></li>
+            <li><button type="button" class="sample" data-sample="widowx-250-gripper" title="WidowX 250, the whole gripper, jaws open" draggable="true" aria-describedby="samplePaletteHint"><img src="static/samples/thumbs/widowx-250-gripper.webp" width="240" height="110" alt="" draggable="false" /><span class="sample-name">WidowX 250</span><span class="sample-kind cad-sr-only">, whole gripper</span></button></li>
+          </ul>
+        </section>
       </aside>
 
       <!-- Limits (min/max/step/maxlength) and choices come from /api/default
@@ -268,7 +302,10 @@
               <div class="cad-loading" id="cadLoading" aria-hidden="true" hidden><span class="cad-spinner"></span><span id="cadLoadingText">Loading…</span></div>
               <output class="cad-status is-neutral" id="cadStatus" role="status" aria-live="polite" hidden></output>
               </div>
-              <p class="cad-help" id="cadHelp">Drag: rotate · right-drag or arrow keys: pan · wheel: zoom · click a surface to select it, click it again to deselect it.</p>
+              <!-- The view's help: hidden (the user's request of 2026-11-06, "这行小字也去掉,可以缩减一行": no row of its own), still
+                   the view's description (aria-describedby); shown while the border is edited, whose keys it alone gives
+                   (main.js setEditing). -->
+              <p class="cad-help" id="cadHelp" hidden>Drag: rotate · right-drag or arrow keys: pan · wheel: zoom · click a surface to select it, click it again to deselect it.</p>
               <!-- One step (the user's requests of 2026-11-02): Generate sensor alone under the view (main.js oneStep: fit
                    when needed, then the chosen proposal generated and mapped; its title says what the sensor is or what to
                    do next, renderQuick).  The default part's sensor is generated at once; a model loaded or a face clicked
@@ -306,7 +343,7 @@
                 <div class="cad-config-body" id="cadConfig">
                 <div class="cad-grid">
                   <div class="cad-field"><label for="cadPitch">Pitch (mm)</label><input type="number" id="cadPitch" data-option="pitch_mm" value="2.0" min="0.6" max="10" step="0.01" inputmode="decimal" /></div>
-                  <div class="cad-field"><label for="cadFill">Electrode fill (width / pitch)</label><input type="number" id="cadFill" data-option="fill" value="0.7" min="0.05" max="0.95" step="0.01" inputmode="decimal" /></div>
+                  <div class="cad-field"><label for="cadFill">Electrode fill (width / pitch)</label><input type="number" id="cadFill" data-option="fill" value="0.5" min="0.05" max="0.95" step="0.01" inputmode="decimal" /></div>
                   <div class="cad-field"><label for="cadRowSides">Row traces</label>
                     <select id="cadRowSides" data-option="row_sides" title="With Field only: the sides the row traces take beside the field, seen from outside (looking at the part) with the tails down; the Row FPC preview shows its copper side, so there they appear mirrored. Both alternates the rows (the narrowest tip; the Row pins fold), Left or Right puts every row trace on that side. Under Whole board the Row traces run in a straight channel."><option value="both">Both</option><option value="left">Left</option><option value="right">Right</option><option value="channel" disabled>Straight channel (Whole board)</option></select></div>
                   <div class="cad-field"><label for="cadTailExtension">Tail past base edge (mm)</label><input type="number" id="cadTailExtension" data-option="tail_extension_mm" value="20" min="6.5" max="72.5" step="0.5" inputmode="decimal" title="How far the tails' ends lie past the base edge, 6.5-72.5 mm. With Field only both tails end there, or farther when the Row bus already reaches farther past the edge (the proposal card says)." /></div>
@@ -437,43 +474,45 @@
         <section class="previews" aria-label="Independent FPC previews">
           <article class="board-card look-scope" id="rowCard" aria-labelledby="rowTitle">
             <header><h2 id="rowTitle">Row FPC</h2><span id="rowMeta"></span></header>
-            <div class="preview-bar">
-              <div class="preview-tabs" role="tablist" aria-label="Row FPC preview mode">
-                <button type="button" role="tab" id="rowTab2d" aria-controls="rowPreview" aria-selected="true" data-board="row" data-mode="2d">2D top view</button>
-                <button type="button" role="tab" id="rowTab3d" aria-controls="rowPreview3d" aria-selected="false" tabindex="-1" data-board="row" data-mode="3d">Oblique view (rigid tilt)</button>
-              </div>
-              <div class="zoom-tools" id="rowZoomTools" role="group" aria-label="Row FPC zoom">
-                <button type="button" data-zoom="out" aria-label="Zoom out">−</button>
-                <button type="button" data-zoom="in" aria-label="Zoom in">+</button>
-                <button type="button" data-zoom="reset">Reset</button>
-                <output id="rowZoomLevel">1.0×</output>
-              </div>
-            </div>
             <div class="canvas-wrap">
+              <!-- The view's controls in its frame, top left in one row (the user's request of 2026-11-06: "把button做进
+                   示意图框里面放在左侧排列 更简洁; 同时字可以更简略; 而且可以统一, 3d view/2d view"): the two views, 3D view first
+                   (the card opens on the 2D view), then the 2D view's zoom (app.js selectTab: with that view only), its
+                   level alone in sight (the px/mm in its tooltip and its accessible text, app.js updateZoomReadout). -->
+              <div class="figure-tools">
+                <div class="preview-tabs" role="tablist" aria-label="Row FPC preview mode">
+                  <button type="button" role="tab" id="rowTab3d" aria-controls="rowPreview3d" aria-selected="false" tabindex="-1" data-board="row" data-mode="3d">3D view</button>
+                  <button type="button" role="tab" id="rowTab2d" aria-controls="rowPreview" aria-selected="true" data-board="row" data-mode="2d">2D view</button>
+                </div>
+                <div class="zoom-tools" id="rowZoomTools" role="group" aria-label="Row FPC zoom">
+                  <button type="button" data-zoom="out" aria-label="Zoom out">−</button>
+                  <button type="button" data-zoom="in" aria-label="Zoom in">+</button>
+                  <button type="button" data-zoom="reset">Reset</button>
+                  <output id="rowZoomLevel">1.0×</output>
+                </div>
+              </div>
               <div class="view-pane zoom-pane" id="rowPreview" role="tabpanel" aria-labelledby="rowTab2d" tabindex="0" data-zoom-tools="rowZoomTools"><p>Generate a design to preview.</p></div>
               <div class="view-pane three-d-pane" id="rowPreview3d" role="tabpanel" aria-labelledby="rowTab3d" tabindex="0" hidden></div>
             </div>
-            <p class="layer-legend" id="rowLegend"></p>
           </article>
           <article class="board-card look-scope" id="columnCard" aria-labelledby="columnTitle">
             <header><h2 id="columnTitle">Column FPC</h2><span id="columnMeta"></span></header>
-            <div class="preview-bar">
-              <div class="preview-tabs" role="tablist" aria-label="Column FPC preview mode">
-                <button type="button" role="tab" id="columnTab2d" aria-controls="columnPreview" aria-selected="true" data-board="column" data-mode="2d">2D top view</button>
-                <button type="button" role="tab" id="columnTab3d" aria-controls="columnPreview3d" aria-selected="false" tabindex="-1" data-board="column" data-mode="3d">Oblique view (rigid tilt)</button>
-              </div>
-              <div class="zoom-tools" id="columnZoomTools" role="group" aria-label="Column FPC zoom">
-                <button type="button" data-zoom="out" aria-label="Zoom out">−</button>
-                <button type="button" data-zoom="in" aria-label="Zoom in">+</button>
-                <button type="button" data-zoom="reset">Reset</button>
-                <output id="columnZoomLevel">1.0×</output>
-              </div>
-            </div>
             <div class="canvas-wrap">
+              <div class="figure-tools">
+                <div class="preview-tabs" role="tablist" aria-label="Column FPC preview mode">
+                  <button type="button" role="tab" id="columnTab3d" aria-controls="columnPreview3d" aria-selected="false" tabindex="-1" data-board="column" data-mode="3d">3D view</button>
+                  <button type="button" role="tab" id="columnTab2d" aria-controls="columnPreview" aria-selected="true" data-board="column" data-mode="2d">2D view</button>
+                </div>
+                <div class="zoom-tools" id="columnZoomTools" role="group" aria-label="Column FPC zoom">
+                  <button type="button" data-zoom="out" aria-label="Zoom out">−</button>
+                  <button type="button" data-zoom="in" aria-label="Zoom in">+</button>
+                  <button type="button" data-zoom="reset">Reset</button>
+                  <output id="columnZoomLevel">1.0×</output>
+                </div>
+              </div>
               <div class="view-pane zoom-pane" id="columnPreview" role="tabpanel" aria-labelledby="columnTab2d" tabindex="0" data-zoom-tools="columnZoomTools"><p>Generate a design to preview.</p></div>
               <div class="view-pane three-d-pane" id="columnPreview3d" role="tabpanel" aria-labelledby="columnTab3d" tabindex="0" hidden></div>
             </div>
-            <p class="layer-legend" id="columnLegend"></p>
           </article>
         </section>
 
@@ -483,19 +522,37 @@
             <h2 id="assemblyTitle">Stacked tactile sensor</h2>
             <span id="assemblyHeader"></span>
           </header>
-          <div class="preview-bar">
-            <div class="mode-switch" role="group" aria-label="Assembly view mode">
-              <button type="button" data-assembly-mode="exploded" aria-pressed="true">Exploded 3D</button>
-              <button type="button" data-assembly-mode="plan" aria-pressed="false">Plan view (registration)</button>
+          <!-- Gen by Surface: the registration on the left, the sensor on the part on the right (main.js 7b, onpart.js; the
+               user's request of 2026-11-05), side by side where the card is 720 px wide or more, else one under the
+               other.  Rectangular mode shows the registration alone, as before (styles.css).  No legend or notes under
+               them since the user's request of 2026-11-06 ("这部分的解释说明可以去掉"), in either mode. -->
+          <div class="stack-figures">
+          <!-- Each figure's controls in its frame, top left (the user's request of 2026-11-06, as the boards' cards): the
+               registration's 3D view / 2D view, the sensor on the part's Exploded / Assembled; Reset view at the top right
+               while a 3D view is drawn; the drag hints hidden, each its view's description. -->
+          <div class="stack-figure is-registration">
+            <div class="figure-tools">
+              <div class="mode-switch" role="group" aria-label="Assembly view mode">
+                <button type="button" data-assembly-mode="exploded" aria-pressed="true">3D view</button>
+                <button type="button" data-assembly-mode="plan" aria-pressed="false">2D view</button>
+              </div>
             </div>
-            <span class="orbit-hint" id="orbitHint">Drag to turn · arrow keys · double-click or 0 to reset</span>
+            <div class="stacked-canvas" id="stackedPreview" tabindex="0" aria-describedby="orbitHint"><p>Generate a design to inspect the registered FPC stack.</p></div>
+            <button type="button" class="figure-reset" id="stackedReset" hidden>Reset view</button>
+            <p id="orbitHint" hidden>Drag to turn · arrow keys · double-click or 0 to reset</p>
           </div>
-          <div class="stacked-canvas" id="stackedPreview" tabindex="0" aria-describedby="orbitHint"><p>Generate a design to inspect the registered FPC stack.</p></div>
-          <div class="assembly-legend" id="assemblyLegend"></div>
-          <details class="assembly-more" id="assemblyMore">
-            <summary>About this view</summary>
-            <div class="assembly-notes" id="assemblyNotes"></div>
-          </details>
+          <div class="stack-figure is-on-part">
+            <div class="figure-tools">
+              <div class="mode-switch" role="group" aria-label="Sensor on the part view mode">
+                <button type="button" data-on-part-mode="exploded" aria-pressed="true">Exploded</button>
+                <button type="button" data-on-part-mode="assembled" aria-pressed="false">Assembled</button>
+              </div>
+            </div>
+            <div class="stacked-canvas on-part-view" id="sensorOnPart" tabindex="0" role="group" aria-label="Sensor on the part" aria-describedby="onPartHint"><p class="on-part-note">Generate a sensor to see it on the part.</p></div>
+            <button type="button" class="figure-reset" id="onPartReset" disabled hidden>Reset view</button>
+            <p id="onPartHint" hidden>Drag to turn · arrow keys · double-click or 0 to reset</p>
+          </div>
+          </div>
         </section>
 
         <!-- Folded: app.js opens it, listing only the failing rules, when a check fails. -->

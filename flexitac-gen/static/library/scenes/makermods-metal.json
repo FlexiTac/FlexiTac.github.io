@@ -1,0 +1,87 @@
+{
+ "format": "flexitac-library-scene/v1",
+ "part": "makermods-metal",
+ "part_mesh_sha256": "f480c8fb9fbe5027ce0741436cd3c60c77702c2eec2b80d87f5829c4adca5925",
+ "about": "MakerMods Metal Arm at full opening: its two HandUMI tips (handumi-hw 1448278, metal-arm-gripper-tip-left.stl, the Library mesh, Apache-2.0), 50 mm each (metal-python-ros bccf3c8, metal_ros2/src/metal_description/urdf/metal_with_gripper.urdf: joint7/joint8 0..0.05 m), the faces 96 mm apart.  The HandUMI tips are one file: the other tip is this one turned 180 degrees about the approach axis, 95.0 mm along x, so its sensor is the same board.  No MakerMods part is drawn (its licence is not clear): the tips stand on a plain rail drawn by the FlexiTac-Gen project, 170 x 26 x 10 mm, not MakerMods hardware.",
+ "frame": "the part's file axes, mm",
+ "approach": [
+  0.0,
+  0.0,
+  1.0
+ ],
+ "opening": {
+  "q_mm": 50.0,
+  "limit_mm": 50.0,
+  "joint": "joint7/joint8 (slide)",
+  "source": "metal-python-ros bccf3c8, metal_ros2/src/metal_description/urdf/metal_with_gripper.urdf: joint7 limit -0.05 0, joint8 limit 0 0.05 m"
+ },
+ "mate": {
+  "kind": "turned",
+  "matrix": [
+   [
+    -1.0,
+    0.0,
+    0.0,
+    95.0
+   ],
+   [
+    0.0,
+    -1.0,
+    0.0,
+    0.0
+   ],
+   [
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  ],
+  "part": true
+ },
+ "bodies": [
+  {
+   "mesh": "bodies/makermods-metal/rail.stl",
+   "sha256": "5e7fb69b93bc051ce01619729dee5d70b8578369b03355712f05ceff262f6a89",
+   "bytes": 684,
+   "triangles": 12,
+   "matrix": [
+    [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     1.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": null
+  }
+ ],
+ "see_through": [
+  "mate"
+ ],
+ "picture": "on both fingertips on a plain rail"
+}

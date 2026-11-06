@@ -28,11 +28,16 @@
   // move does, a ring steps one ring diameter and this gap from its triangle, the steps tried in turn, each ring's
   // [along, across] its triangle's axis (the top FPC's, then the bottom FPC's; along +1 inward over the tail's end, -1
   // outward past the triangle; across, beside it): none; the top FPC's inward; and the bottom FPC's outward, or beside
-  // its triangle where outward leaves the view or meets its caption; then the others.
+  // its triangle where outward leaves the view; then the others.
   const PIN1_RING_GAP_PX = 4;
   const PIN1_STEPS = [[[0, 0], [0, 0]], [[1, 0], [0, 0]], [[1, 0], [-1, 0]], [[1, 0], [0, 1]], [[1, 0], [0, -1]], [[-1, 0], [0, 0]],
     [[0, 0], [-1, 0]], [[-1, 0], [1, 0]], [[0, 0], [1, 0]]];
   const OBLIQUE_MARGIN_PX = 16;
+  // A figure's controls over its frame's top left (index.html .figure-tools, the user's request of 2026-11-06): what it
+  // draws at its home keeps CONTROLS_CLEAR_PX clear of them; a 2D view's window that must start under them starts
+  // FIGURE_ROOM_PX under them (its padding on the other sides, the pin-1 ring's room).
+  const CONTROLS_CLEAR_PX = 4;
+  const FIGURE_ROOM_PX = 12;
   // The stacked view's exploded camera (styles.css .assembly-camera): its tilt about the screen's x axis (0 straight from
   // above, 90 edge on, 180 from under the stack) and its turn in the boards' plane as the view opens.  A drag turns it
   // (across the screen) and tilts it (a drag down toward the view from above), by ORBIT_DEG_PER_PX; the arrow keys by
@@ -51,12 +56,6 @@
   const COUNT_RULES = new Set(["outline_simple", "connectivity"]);
   // engine MASK_TEMPLATES: the template whose designs may carry a field mask (matrix.mask).
   const MASK_TEMPLATE = "surface_matrix_v1";
-  const OPENING_NAMES = {
-    electrode_field_opening: ["merged electrode-field window", "merged electrode-field windows"],
-    sensor_electrode_opening: ["electrode window", "electrode windows"],
-    connector_contact_opening: ["gang contact window", "gang contact windows"],
-  };
-
   const $ = id => document.getElementById(id);
   const form = $("designForm");
   const generateButton = $("generate");
@@ -113,8 +112,6 @@
     const [whole, fraction = ""] = round6(number).toFixed(6).replace(/0+$/, "").split(".");
     return `${whole}.${fraction.padEnd(3, "0")}`;
   }
-  // The stacked view's notes: every length to the micrometre, three decimals (P5-diagonal-bus.md section 27.5).
-  const micrometres = number => round6(number).toFixed(3);
   function setStatus(kind, message) { const node = $("status"); node.className = `status is-${kind}`; node.textContent = message; }
   const sleep = seconds => new Promise(resolve => setTimeout(resolve, seconds * 1000));
 
@@ -692,11 +689,12 @@
     return svgEl("g", {class: "coin-ref", "data-coin": COIN.name, "data-diameter-mm": COIN.diameter_mm},
       svgEl("g", {class: "coin-lying"}, ...coinFace(true, cx, cy)));
   }
-  function outlineRings(svg) {
-    // The board's outline polygons in the SVG's root user units (through its board group's transform).
+  function outlineRings(svg, selector = ".outline") {
+    // The board's outline polygons (or its cutouts', ``selector``) in the SVG's root user units (through its board group's
+    // transform).
     const group = svg.querySelector(":scope > g[transform]");
     const matrix = group?.transform?.baseVal?.consolidate()?.matrix;
-    return [...(group?.querySelectorAll(":scope > .outline") || [])].map(polygon => {
+    return [...(group?.querySelectorAll(`:scope > ${selector}`) || [])].map(polygon => {
       const values = (polygon.getAttribute("points") || "").trim().split(/[\s,]+/).map(Number);
       const ring = [];
       for (let index = 0; index + 1 < values.length; index += 2) {
@@ -760,29 +758,85 @@
     // under the coin there, the box grows evenly about the board's centre, the least (in 0.5 % steps) that keeps the coin
     // COIN_GAP_MM clear of the outline: the coin stays in the corner, the board centred and a little smaller.  The fit
     // view (Reset) is that box; a zoomed view stays where it is.  Again whenever the window changes size or is shown.
+    // The view's controls lie over its frame's top left (2026-11-06): where the board at that fit (its outline, its
+    // label and its pin-1 ring, boardDrawing) would come within CONTROLS_CLEAR_PX of them, the window starts
+    // FIGURE_ROOM_PX under them (two rows where a narrow frame wraps them) and the board is fitted again below them; else
+    // the window is styles.css's, as before.
     const svg = pane.querySelector(":scope > svg"); const zoom = zooms.get(pane.id);
     const own = numbers(svg?.dataset.boardBox); const coin = svg?.querySelector(":scope > .coin-ref");
     if (!zoom || !own || !coin) return;
+    svg.style.paddingTop = "";
+    let fit = fitWindow(svg, own);
+    if (!fit) return;  // not shown (or no fit): placed when it is
+    const tools = controlsBox(pane.parentElement); const drawn = tools && boardDrawing(svg);
+    if (drawn) {
+      const frame = svg.getBoundingClientRect();
+      const at = (x, y) => [frame.left + fit.left + (x - fit.base.x) * fit.scale, frame.top + fit.top + (y - fit.base.y) * fit.scale];
+      const [left, top] = at(drawn.left, drawn.top); const [right, bottom] = at(drawn.right, drawn.bottom);
+      const rings = drawn.rings.map(([x, y]) => at(x, y)); const ring = PIN1_RING_PX + 1;
+      const boxes = [[left, top, right, bottom], ...rings.map(([x, y]) => [x - ring, y - ring, x + ring, y + ring])];
+      const near = boxes.some(([l, t, r, b]) => l < tools.right + CONTROLS_CLEAR_PX && r > tools.left - CONTROLS_CLEAR_PX
+        && t < tools.bottom + CONTROLS_CLEAR_PX && b > tools.top - CONTROLS_CLEAR_PX);
+      if (near) {
+        svg.style.paddingTop = `${round6(tools.bottom - frame.top + FIGURE_ROOM_PX)}px`;
+        fit = fitWindow(svg, own);
+        if (!fit) return;
+      }
+    }
+    const r = COIN.diameter_mm / 2;
+    coin.querySelectorAll("circle").forEach(circle => { circle.setAttribute("cx", fit.cx); circle.setAttribute("cy", fit.cy); });
+    coin.querySelectorAll("image").forEach(image => { image.setAttribute("x", round6(fit.cx - r)); image.setAttribute("y", round6(fit.cy - r)); });
+    zoom.base = fit.base;
+    setView(pane, zoom.view);
+  }
+  function fitWindow(svg, own) {
+    // fitScene's fit view of the window as the SVG's padding leaves it: the view box, the coin's centre, and the window's
+    // place in the SVG's box with its scale (screen px a mm); null where the SVG is not shown or the coin finds no room.
     const rect = svg.getBoundingClientRect(); const style = getComputedStyle(svg);
-    const width = rect.width - parseFloat(style.paddingLeft) - parseFloat(style.paddingRight);
-    const height = rect.height - parseFloat(style.paddingTop) - parseFloat(style.paddingBottom);
-    if (!(width > 0 && height > 0)) return;  // not shown: placed when it is
+    const [left, top] = [parseFloat(style.paddingLeft), parseFloat(style.paddingTop)];
+    const width = rect.width - left - parseFloat(style.paddingRight);
+    const height = rect.height - top - parseFloat(style.paddingBottom);
+    if (!(width > 0 && height > 0)) return null;
     const shape = width / height;
     const [w, h] = own[2] / own[3] < shape ? [own[3] * shape, own[3]] : [own[2], own[2] / shape];
     const [mx, my] = [own[0] + own[2] / 2, own[1] + own[3] / 2];
     const r = COIN.diameter_mm / 2; const rings = outlineRings(svg);
-    let fit = null;
-    for (let step = 0; step <= 600 && !fit; step += 1) {
+    for (let step = 0; step <= 600; step += 1) {
       const grow = 1 + step / 200;
       const [cx, cy] = [mx + w * grow / 2 - r - COIN_INSET_MM, my + h * grow / 2 - r - COIN_INSET_MM];
-      if (clearOf(rings, cx, cy, r + COIN_GAP_MM)) fit = {grow, cx: round6(cx), cy: round6(cy)};
+      if (!clearOf(rings, cx, cy, r + COIN_GAP_MM)) continue;
+      const [bw, bh] = [w * grow, h * grow];
+      return {cx: round6(cx), cy: round6(cy), base: {x: round6(mx - bw / 2), y: round6(my - bh / 2), w: round6(bw), h: round6(bh)}, left, top, scale: width / bw};
     }
-    if (!fit) return;
-    coin.querySelectorAll("circle").forEach(circle => { circle.setAttribute("cx", fit.cx); circle.setAttribute("cy", fit.cy); });
-    coin.querySelectorAll("image").forEach(image => { image.setAttribute("x", round6(fit.cx - r)); image.setAttribute("y", round6(fit.cy - r)); });
-    const [bw, bh] = [w * fit.grow, h * fit.grow];
-    zoom.base = {x: round6(mx - bw / 2), y: round6(my - bh / 2), w: round6(bw), h: round6(bh)};
-    setView(pane, zoom.view);
+    return null;
+  }
+  function boardDrawing(svg) {
+    // What a 2D view draws of its board, in the SVG's user units: the box of its outline and its label, and the centres
+    // of its pin-1 rings (each PIN1_RING_PX round on screen); null where it has no outline.
+    const boxes = [...svg.querySelectorAll(".outline, .view-label")].filter(node => node.checkVisibility()).map(node => {
+      let matrix = new DOMMatrix();
+      for (let parent = node.parentNode; parent && parent !== svg; parent = parent.parentNode) {
+        const transform = parent.transform?.baseVal?.consolidate();
+        if (transform) matrix = DOMMatrix.fromMatrix(transform.matrix).multiply(matrix);
+      }
+      const own = node.transform?.baseVal?.consolidate();
+      if (own) matrix = matrix.multiply(DOMMatrix.fromMatrix(own.matrix));
+      const box = node.getBBox();
+      return [[box.x, box.y], [box.x + box.width, box.y], [box.x, box.y + box.height], [box.x + box.width, box.y + box.height]]
+        .map(([x, y]) => new DOMPoint(x, y).matrixTransform(matrix));
+    }).flat();
+    if (!boxes.length) return null;
+    return {left: Math.min(...boxes.map(point => point.x)), right: Math.max(...boxes.map(point => point.x)),
+      top: Math.min(...boxes.map(point => point.y)), bottom: Math.max(...boxes.map(point => point.y)),
+      rings: [...svg.querySelectorAll(":scope > .pin1-ring")].map(ring => [Number(ring.getAttribute("cx")), Number(ring.getAttribute("cy"))])};
+  }
+  function controlsBox(frame) {
+    // The box on screen of a figure's controls in its frame (index.html .figure-tools: the chips shown), or null.
+    const chips = [...(frame?.querySelectorAll(":scope > .figure-tools > *") || [])].map(chip => chip.getBoundingClientRect())
+      .filter(box => box.width > 0 && box.height > 0);
+    if (!chips.length) return null;
+    return {left: Math.min(...chips.map(box => box.left)), top: Math.min(...chips.map(box => box.top)),
+      right: Math.max(...chips.map(box => box.right)), bottom: Math.max(...chips.map(box => box.bottom))};
   }
   function coinPlane(className) {
     // A 3D view's coin, placed by the caller on a plane of its own (styles.css .coin-plane, the table): its shadow on the
@@ -812,9 +866,11 @@
   // The board's thickness in the 3D views (the user's request of 2026-10-30): the stack-up of its result (board.fpc.stackup:
   // core PI, copper, coverlay adhesive and coverlay, 0.11 mm) behind the copper side, which stays where it was (the views'
   // registration and pin-1 rings are the copper side's), and the stiffener below that (0.225 mm).  To scale where that is
-  // at least 2 px on screen, else drawn 2 px thick, the stiffener in proportion (styles.css --depth-px; the captions say
-  // so).  Their walls are rings along the outline, its cutouts and the stiffener's edge, so the top FPC stays see-through
-  // over the field; the stiffener's outer face closes it.  styles.css lays each at its depth.
+  // at least 2 px on screen, else drawn 2 px thick, the stiffener in proportion (styles.css --depth-px; the oblique
+  // views' caption says so).  Their walls are rings along the outline, its cutouts and the stiffener's edge, so the top
+  // FPC stays see-through over the field; the stiffener's outer face closes it.  styles.css lays each at its depth.
+  // Since the views' light of 2026-11-05 each ring is drawn in parts by the way its walls face (wallBins), each part lit
+  // as a wall facing that way (lightView: styles.css --wall-light).
   const FPC_EDGE_LAYERS = 3;
   const STIFFENER_EDGE_LAYERS = 5;
   function boardDepth(container, face, board, svg) {
@@ -826,31 +882,374 @@
     const stiffener = stack.stiffener_side === "bottom" ? Number(stack.stiffener_thickness_mm) || 0 : 0;
     if (!(fpc > 0)) return;
     const shapes = selector => [...group.querySelectorAll(`:scope > :is(${selector})`)];
-    const layer = (kind, depth, nodes, className) => {
-      const copies = nodes.map(node => {
-        const copy = svgEl(node.localName, {class: className});
-        ["points", "d", "x", "y", "width", "height", "rx", "ry", "cx", "cy", "r"].forEach(name => {
-          if (node.hasAttribute(name)) copy.setAttribute(name, node.getAttribute(name));
-        });
-        return copy;
+    const copies = (nodes, className) => nodes.map(node => {
+      const copy = svgEl(node.localName, {class: className});
+      ["points", "d", "x", "y", "width", "height", "rx", "ry", "cx", "cy", "r"].forEach(name => {
+        if (node.hasAttribute(name)) copy.setAttribute(name, node.getAttribute(name));
       });
+      return copy;
+    });
+    const parts = (bins, className) => bins.map(([bin, d]) => {
+      const path = svgEl("path", {class: className, d, "data-wall": bin});
+      path.style.setProperty("--wall-light", `var(--wall-${bin})`);
+      return path;
+    });
+    const layer = (kind, depth, children) => {
       const copy = svgEl("svg", {class: `board-edge board-edge-${kind}`, viewBox: svg.getAttribute("viewBox"),
         preserveAspectRatio: svg.getAttribute("preserveAspectRatio") || "xMidYMid meet", "aria-hidden": "true", focusable: "false"},
-        svgEl("g", {transform: group.getAttribute("transform")}, ...copies));
+        svgEl("g", {transform: group.getAttribute("transform")}, ...children));
       copy.style.setProperty("--depth-mm", String(round6(depth)));
       return copy;
     };
-    const walls = shapes(".outline, .cutout"); const stiffeners = stiffener > 0 ? shapes(".stiffener") : [];
-    const layers = Array.from({length: FPC_EDGE_LAYERS}, (_, index) => layer("fpc", fpc * (index + 0.5) / FPC_EDGE_LAYERS, walls, "fpc-edge-ring"));
+    const walls = wallBins(group, shapes(".outline, .cutout")); const stiffeners = stiffener > 0 ? shapes(".stiffener") : [];
+    const stiffenerWalls = wallBins(group, stiffeners);
+    const layers = Array.from({length: FPC_EDGE_LAYERS}, (_, index) => layer("fpc", fpc * (index + 0.5) / FPC_EDGE_LAYERS, parts(walls, "fpc-edge-ring")));
     if (stiffeners.length) {
       layers.push(...Array.from({length: STIFFENER_EDGE_LAYERS}, (_, index) =>
-        layer("stiffener", fpc + stiffener * (index + 0.5) / STIFFENER_EDGE_LAYERS, stiffeners, "fpc-stiffener-ring")));
-      layers.push(layer("stiffener-face", fpc + stiffener, stiffeners, "fpc-stiffener-face"));
+        layer("stiffener", fpc + stiffener * (index + 0.5) / STIFFENER_EDGE_LAYERS, parts(stiffenerWalls, "fpc-stiffener-ring"))));
+      layers.push(layer("stiffener-face", fpc + stiffener, copies(stiffeners, "fpc-stiffener-face")));
     }
     container.style.setProperty("--view-mm", String(round6(box[2])));
     container.style.setProperty("--fpc-mm", String(fpc));
     Object.assign(container.dataset, {fpcMm: String(fpc), stiffenerMm: String(round6(stiffener))});
     face.append(...layers);
+  }
+  function wallBins(group, nodes) {
+    // The walls of ``nodes`` (polygons of the board's group) by the way they face: [bin, path data in the group's units],
+    // one bin for each of WALL_BINS directions of the wall's outward normal in the SVG's root units (y down, the board's
+    // own frame on screen), the outline's away from the board and a cutout's into its hole (the ring's turn from the sign
+    // of its area).
+    const matrix = group.transform?.baseVal?.consolidate()?.matrix;
+    const bins = new Map();
+    for (const node of nodes) {
+      const values = (node.getAttribute("points") || "").trim().split(/[\s,]+/).map(Number);
+      const ring = [];
+      for (let index = 0; index + 1 < values.length; index += 2) {
+        const [x, y] = [values[index], values[index + 1]];
+        ring.push([x, y, ...(matrix ? [matrix.a * x + matrix.c * y + matrix.e, matrix.b * x + matrix.d * y + matrix.f] : [x, y])]);
+      }
+      let area = 0;
+      ring.forEach((point, index) => { const next = ring[(index + 1) % ring.length]; area += point[2] * next[3] - next[2] * point[3]; });
+      const outward = Math.sign(area) * (node.classList.contains("cutout") ? -1 : 1);
+      ring.forEach((point, index) => {
+        const next = ring[(index + 1) % ring.length];
+        const [dx, dy] = [next[2] - point[2], next[3] - point[3]];
+        if (!(Math.hypot(dx, dy) > 0) || !outward) return;
+        const turn = Math.atan2(-outward * dx, outward * dy) / (2 * Math.PI / WALL_BINS);
+        const bin = ((Math.round(turn) % WALL_BINS) + WALL_BINS) % WALL_BINS;
+        bins.set(bin, `${bins.get(bin) || ""}M${point[0]} ${point[1]}L${next[0]} ${next[1]}`);
+      });
+    }
+    return [...bins].sort((a, b) => a[0] - b[0]);
+  }
+
+  // -- the 3D views' light --------------------------------------------------------------------------
+  // The oblique views and the stacked view's exploded figure in the light of the sensor on the part (the user's request
+  // of 2026-11-05: "you only put the new light and shade on the last 3D figure; put it on every 3D view"; before, the
+  // boards' art was drawn flat, a printed sticker turning in a room without light): the sensor on the part's lights and
+  // studio (web/cad/studio.js since the merge of 2026-11-05, which the 3D view draws in too), fixed to the viewer as there
+  // (a turn turns the boards under them, as on a turntable), and web/cad/onpart.js's boards' satin coverlay.  app.js is a
+  // classic script and cannot import them (ES modules, which main.js loads in Gen by Surface only), so the few numbers the
+  // light needs are copied here; tests/test_surface_web.py keeps them equal to studio.js's (LIGHTS, STUDIO) and
+  // onpart.js's (BOARD_LOOK, BAND.shade).  In these views a board is a plane whose normal in the lights' frame (x right,
+  // y up, z toward the viewer) is (0, sin tilt, cos tilt), or its opposite for its other side, whatever the spin: at the
+  // same tilt the registration's boards and the sensor on the part's are lit alike (the sensor on the part's camera up
+  // the stack's normal and its Exploded home ORBIT_HOME's since the user's decision of 2026-11-05, so its boards' normal
+  // in its camera's frame is this one too).  What the light gives a board (lightView, on every
+  // turn through attachOrbit's callbacks, and when a view is drawn or rests):
+  //   - each side's brightness: the lights' irradiance on it (the hemisphere by the side's height, the key, the rim and
+  //     the sheen lamp by their cosines, as onpart.js's MeshStandardMaterial takes them) over the irradiance at the
+  //     Exploded home (ORBIT_HOME: the art is drawn for it, so there it is unchanged), as a black veil where it is less
+  //     and a white one where it is more (the veil's shade: styles.css .board-light);
+  //   - the satin sweep: what the coverlay sends to the eye, the studio's reflection (its room and softboxes through
+  //     three.js's environment BRDF at BOARD_LOOK.roughness) and the highlights of the key, the rim and the lamp (GGX),
+  //     at points across the side as the CSS perspective's eye sees them, less the room's even reflection at the home
+  //     view (the Photo look's colours were sampled from a photograph taken in a room: they hold it already, and added
+  //     again it was a haze over the art), as a gradient along the way it changes most, tinted toward the art's amber
+  //     (styles.css --sheen): faint at the home view (a flat board there mirrors the studio's ceiling, between its
+  //     softboxes), it slides as the tilt changes, the key's softbox sweeping over the board toward 30 degrees and the
+  //     room at a grazing angle, and keeps to the screen as the board spins under it;
+  //   - its walls (boardDepth's rings, in WALL_BINS parts by the way they face) the material's colour times BAND.shade
+  //     times the light on a wall facing that way, and the stiffener's outer face lit as the board's other side;
+  //   - the shadows on the table cast away from the key, down and to the right on screen whatever the turn, longer as
+  //     the key grazes the board, fainter as its share of the light falls, none where the board turns its far side to it.
+  // The veils are leaves of their own (lightBoard), each over its side and in its plane, their paths the outline less the
+  // cutouts: nothing is painted outside the board, and the art's SVG (its grain a filter) is never drawn again for a
+  // turn.  The plan view is a plan: flat and unlit.
+  const VIEW_LIGHTS = {
+    sky: [1.75, 1.75, 1.75],
+    ground: [0.66, 0.69, 0.75],
+    key: {at: [-0.5, 0.65, 0.55], intensity: 1.25},
+    rim: {at: [0.65, 0.4, -0.65], intensity: 0.9},
+    lamp: {at: [-0.67, 0.56, -1.24], intensity: 0.3},
+  };
+  const VIEW_STUDIO = {
+    room: {zenith: 0.5, horizon: 0.3, floor: 0.08},
+    distance: 6,
+    panels: [
+      {at: [-0.75, 0.6, -0.27], size: [6, 4], radiance: 1.6},   // back softbox
+      {at: [-0.49, 0.78, 0.39], size: [6, 4], radiance: 1.2},   // key
+      {at: [0.05, 1, 0.1], size: [7, 7], radiance: 0.6},        // overhead
+      {at: [0.8, -0.15, 0.6], size: [4, 6], radiance: 0.35},    // fill
+      {at: [-0.85, 0.25, -0.5], size: [1.2, 9], radiance: 1.6}, // rim, left
+      {at: [0.85, 0.25, -0.5], size: [1.2, 9], radiance: 1.6},  // rim, right
+    ],
+  };
+  const VIEW_BOARD_LOOK = {gain: 1.22, roughness: 0.45, envMapIntensity: 0.9};
+  const VIEW_BAND_SHADE = 0.82;
+  // The sweep's veil: its opacity SHEEN.gain times the light the coverlay sends (linear, a share of the art's own: the
+  // tint at that opacity lifts the open PI's amber about as that light added in linear would, 2 to 4 times its share by
+  // channel), at most SHEEN.most (a grazing highlight), in SHEEN.stops stops; and the walls' WALL_BINS directions (30
+  // degrees apart).
+  const SHEEN = {gain: 4, most: 0.4, stops: 5};
+  const WALL_BINS = 12;
+  // A veil scales the art's sRGB levels, so a linear ratio k is k ** (1 / DISPLAY_GAMMA) of them; a white veil lifts a
+  // mid level (sRGB 0.6) as much (WHITE_VEIL times the lift).  The light's luminance from its colour (Rec. 709).
+  const DISPLAY_GAMMA = 2.2;
+  const WHITE_VEIL = 1.5;
+  const LUMA = [0.2126, 0.7152, 0.0722];
+  const DEG = Math.PI / 180;
+  const dot3 = (a, b) => a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
+  const unit3 = vector => { const length = Math.hypot(...vector) || 1; return vector.map(value => value / length); };
+  const smoothstep = (low, high, value) => { const t = clamp((value - low) / (high - low), 0, 1); return t * t * (3 - 2 * t); };
+  // The lights' directions; the lamp's as the board sees it (one camera distance in front of the camera, as onpart.js
+  // puts the sheets' target); the coverlay's GGX alpha and its lobe's width (twice its half width at half maximum: a
+  // reflection's), which softens each panel's edge; each panel's reach, the angular radius of a disc of its area.
+  const LIGHT_RAYS = [VIEW_LIGHTS.key, VIEW_LIGHTS.rim].map(({at, intensity}) => ({toward: unit3(at), intensity}));
+  const LAMP_TOWARD = unit3([VIEW_LIGHTS.lamp.at[0], VIEW_LIGHTS.lamp.at[1], VIEW_LIGHTS.lamp.at[2] + 1]);
+  const GGX_ALPHA = VIEW_BOARD_LOOK.roughness ** 2;
+  const SHEEN_LOBE = 2 * Math.atan(GGX_ALPHA * Math.sqrt(Math.SQRT2 - 1));
+  const STUDIO_PANELS = VIEW_STUDIO.panels.map(({at, size, radiance}) => {
+    const reach = Math.atan(Math.sqrt(size[0] * size[1] / Math.PI) / VIEW_STUDIO.distance);
+    return {toward: unit3(at), outer: Math.cos(reach + SHEEN_LOBE), inner: Math.cos(Math.max(0, reach - SHEEN_LOBE)), radiance};
+  });
+
+  function turned([x, y, z], tilt, spin) {
+    // A point or direction of a board's frame (CSS axes: y down, z toward the viewer) as the views' rotateX(tilt)
+    // rotateZ(spin) shows it (radians), in the lights' frame (y up).
+    const [cs, ss, ct, st] = [Math.cos(spin), Math.sin(spin), Math.cos(tilt), Math.sin(tilt)];
+    const [u, v] = [cs * x - ss * y, ss * x + cs * y];
+    return [u, st * z - ct * v, st * v + ct * z];
+  }
+  function irradiance(normal) {
+    // The lights' irradiance (luminance) on a surface of unit ``normal``: the hemisphere's ground to its sky by the
+    // normal's height, each directional light and the lamp by its cosine.
+    const {sky, ground} = VIEW_LIGHTS; const height = 0.5 * normal[1] + 0.5;
+    let total = LUMA.reduce((light, share, channel) => light + share * (ground[channel] + (sky[channel] - ground[channel]) * height), 0);
+    for (const {toward, intensity} of LIGHT_RAYS) total += intensity * Math.max(0, dot3(normal, toward));
+    return total + VIEW_LIGHTS.lamp.intensity * Math.max(0, dot3(normal, LAMP_TOWARD));
+  }
+  const HOME_NORMAL = [0, Math.sin(ORBIT_HOME.tilt * DEG), Math.cos(ORBIT_HOME.tilt * DEG)];
+  const HOME_IRRADIANCE = irradiance(HOME_NORMAL);
+  const keyShare = normal => LIGHT_RAYS[0].intensity * Math.max(0, dot3(normal, LIGHT_RAYS[0].toward)) / irradiance(normal);
+  const HOME_KEY_SHARE = keyShare(HOME_NORMAL);
+  const lit = ratio => `${round6(100 * Math.min(1, Math.max(0, ratio) ** (1 / DISPLAY_GAMMA)))}%`;
+  function roomRadiance(direction) {
+    // The studio's room toward unit ``direction``: its zenith, its horizon and its floor, smooth between.
+    const {zenith, horizon, floor} = VIEW_STUDIO.room; const up = direction[1];
+    return up >= 0 ? horizon + (zenith - horizon) * Math.sqrt(up) : horizon + (floor - horizon) * Math.sqrt(-up);
+  }
+  function studioRadiance(direction) {
+    // The studio's radiance toward unit ``direction``: its room and its panels, each its radiance where the coverlay's
+    // lobe takes it in.
+    let light = roomRadiance(direction);
+    for (const {toward, outer, inner, radiance} of STUDIO_PANELS) light += radiance * smoothstep(outer, inner, dot3(direction, toward));
+    return light;
+  }
+  function environmentBRDF(cosView) {
+    // three.js's EnvironmentBRDF for a dielectric (F0 0.04, F90 1) at BOARD_LOOK.roughness (its DFGApprox, Karis's).
+    const roughness = VIEW_BOARD_LOOK.roughness;
+    const r = [1 - roughness, 0.0425 - 0.0275 * roughness, 1.04 - 0.572 * roughness, 0.022 * roughness - 0.04];
+    const a004 = Math.min(r[0] * r[0], 2 ** (-9.28 * cosView)) * r[0] + r[1];
+    return 0.04 * (r[2] - 1.04 * a004) + (r[3] + 1.04 * a004);
+  }
+  function highlight(normal, toward, view, cosView) {
+    // three.js's BRDF_GGX times the cosine: a light's highlight on the coverlay (Schlick's Fresnel, the correlated Smith
+    // visibility, the GGX distribution).
+    const cosLight = dot3(normal, toward);
+    if (!(cosLight > 0)) return 0;
+    const half = unit3([toward[0] + view[0], toward[1] + view[1], toward[2] + view[2]]);
+    const cosHalf = Math.max(0, dot3(normal, half)); const fresnel = 0.04 + 0.96 * (1 - Math.max(0, dot3(view, half))) ** 5;
+    const a2 = GGX_ALPHA * GGX_ALPHA;
+    const visibility = 0.5 / Math.max(1e-6, cosLight * Math.sqrt(a2 + (1 - a2) * cosView * cosView) + cosView * Math.sqrt(a2 + (1 - a2) * cosLight * cosLight));
+    const distribution = a2 / (Math.PI * (cosHalf * cosHalf * (a2 - 1) + 1) ** 2);
+    return fresnel * visibility * distribution * cosLight;
+  }
+  function reflected(point, normal, eye, lamp) {
+    // What the coverlay at ``point`` (px, the lights' frame) sends to ``eye``: the studio's reflection (less the room's
+    // at the home view, HOME_ROOM) and the lights' highlights, as a share of the art's own light at the Exploded home
+    // (onpart.js: the art times BOARD_LOOK.gain times the irradiance over pi).
+    const view = unit3([eye[0] - point[0], eye[1] - point[1], eye[2] - point[2]]); const cosView = dot3(normal, view);
+    if (!(cosView > 0)) return 0;
+    const mirror = normal.map((value, axis) => 2 * cosView * value - view[axis]);
+    let light = environmentBRDF(cosView) * studioRadiance(mirror) * VIEW_BOARD_LOOK.envMapIntensity - HOME_ROOM;
+    for (const {toward, intensity} of LIGHT_RAYS) light += intensity * highlight(normal, toward, view, cosView);
+    light += VIEW_LIGHTS.lamp.intensity * highlight(normal, unit3([lamp[0] - point[0], lamp[1] - point[1], lamp[2] - point[2]]), view, cosView);
+    return Math.max(0, light) * Math.PI / (VIEW_BOARD_LOOK.gain * HOME_IRRADIANCE);
+  }
+  // The room's even reflection at the home view, on the eye's axis (what the art's colours hold already).
+  const HOME_ROOM = environmentBRDF(HOME_NORMAL[2]) * VIEW_BOARD_LOOK.envMapIntensity
+    * roomRadiance(HOME_NORMAL.map((value, axis) => 2 * HOME_NORMAL[2] * value - (axis === 2 ? 1 : 0)));
+
+  const boardLights = new WeakMap();
+  let lightSerial = 0;
+  function lightBoard(board, faces, flip = [1, 1]) {
+    // A board's light, for lightView to paint: for each side (``faces``: the copper side's SVG, then its other side's) a
+    // veil, its shade and its sweep, and for the board its shadow on the table, each a leaf SVG of the 3D view (styles.css
+    // .board-light, .board-shadow) in the side's plane with the side's view box, its paths the outline less its cutouts
+    // (in the side's root user units).  As leaves of the 3D context each is a layer of its own, so a turn draws nothing of
+    // the art again: the shadow, its blur an SVG filter drawn with it once, is only moved and faded (measured on
+    // SwiftShader, 2026-11-05: a drop-shadow on the side's SVG re-valued as the view turned had its art and its grain
+    // filter rasterised again every frame, 4 to 15 times the drag's CPU, and a CSS blur on a moving leaf was blurred again
+    // every frame, 3 times), and the veil of the side in sight alone is drawn again.  The copper side's leaves follow its SVG, the other side's the side
+    // (.board-back-face, whose plane styles.css gives its veil: .is-back).  ``flip``: the signs from a side's SVG to the
+    // board's frame (the stacked view's turned-over top FPC: flip-x mirrors y, flip-y x).
+    const leaf = (svg, className, ...children) => svgEl("svg", {class: className, viewBox: svg.getAttribute("viewBox"),
+      preserveAspectRatio: svg.getAttribute("preserveAspectRatio") || "xMidYMid meet", "aria-hidden": "true", focusable: "false"}, ...children);
+    let shadow = null; let blur = null;
+    const sides = faces.map((svg, index) => {
+      const box = numbers(svg?.getAttribute("viewBox"));
+      const rings = svg ? [...outlineRings(svg), ...outlineRings(svg, ".cutout")] : [];
+      const after = index === 0 ? svg : svg?.closest(".board-back-face");
+      if (!box || !rings.length || !after) return null;
+      const d = rings.map(ring => `M${ring.map(([x, y]) => `${round6(x)} ${round6(y)}`).join("L")}Z`).join("");
+      const id = `board-light-${(lightSerial += 1)}`;
+      const stops = Array.from({length: SHEEN.stops}, (_, stop) => svgEl("stop", {offset: round6(stop / (SHEEN.stops - 1)), "stop-opacity": 0}));
+      const gradient = svgEl("linearGradient", {id, gradientUnits: "userSpaceOnUse", x1: 0, y1: 0, x2: 1, y2: 0}, ...stops);
+      const tone = svgEl("path", {class: "board-light-shade", d, "fill-rule": "evenodd", fill: "#000", "fill-opacity": 0});
+      const veil = leaf(svg, `board-light${index === 0 ? "" : " is-back"}`, svgEl("defs", {}, gradient), tone,
+        svgEl("path", {class: "board-light-sheen", d, "fill-rule": "evenodd", fill: `url(#${id})`}));
+      if (index === 0) {
+        blur = svgEl("feGaussianBlur", {stdDeviation: 0});
+        shadow = leaf(svg, "board-shadow", svgEl("defs", {}, svgEl("filter", {id: `${id}-blur`, filterUnits: "userSpaceOnUse",
+          x: box[0] - box[2], y: box[1] - box[3], width: 3 * box[2], height: 3 * box[3]}, blur)), svgEl("path", {d, "fill-rule": "evenodd", filter: `url(#${id}-blur)`}));
+      }
+      after.after(...[veil, index === 0 ? shadow : null].filter(Boolean));
+      const xs = rings.flat().map(point => point[0]); const ys = rings.flat().map(point => point[1]);
+      return {tone, gradient, stops, box, extent: [Math.min(...xs), Math.min(...ys), Math.max(...xs), Math.max(...ys)], side: index === 0 ? 1 : -1};
+    });
+    boardLights.set(board, {sides, flip, blur, frame: null, rings: null, next: -1});
+  }
+  function lightFrame(target, board) {
+    // Where a board lies for its light, read when its view is drawn or rests (a turn changes none of it): its box (px);
+    // the element the orbit turns (the oblique board itself, or the stacked view's camera), its transform's origin from
+    // the eye's axis and the rest of its transform after the turn (the oblique board's lift, the camera's scale); the
+    // board's centre in that element's frame (its box centre and its own translateZ); and the perspective's distance.
+    const stacked = board.classList.contains("assembly-board");
+    const turning = stacked ? board.parentElement : board;
+    const room = stacked ? turning.parentElement : target;
+    const [width, height] = [board.offsetWidth, board.offsetHeight];
+    const depth = parseFloat(getComputedStyle(room).perspective);
+    if (!(width > 0 && height > 0 && room.clientWidth > 0 && depth > 0)) return null;
+    const {tilt, spin} = orbitView(target);
+    const rest = new DOMMatrix(`rotateZ(${-spin}deg) rotateX(${-tilt}deg)`).multiply(new DOMMatrixReadOnly(getComputedStyle(turning).transform));
+    const origin = [turning.offsetLeft + turning.offsetWidth / 2 - room.clientWidth / 2, turning.offsetTop + turning.offsetHeight / 2 - room.clientHeight / 2];
+    const centre = stacked ? [board.offsetLeft + width / 2 - turning.offsetWidth / 2, board.offsetTop + height / 2 - turning.offsetHeight / 2,
+      new DOMMatrixReadOnly(getComputedStyle(board).transform).m43] : [0, 0, 0];
+    return {width, height, rest, origin, centre, depth};
+  }
+  // The walls' light is set on their rings (boardDepth's layers, each the board's size), all of them where the view is
+  // drawn or rests and one ring a frame as it turns, in turn: every ring drawn again every frame was most of the drag's
+  // cost on SwiftShader (the 9 rings' tiles along the outline), and a ring of a 2 px strip a few frames behind the turn
+  // is not seen.
+  function lightView(target, measure = false) {
+    // The light of a 3D view at its present angles (attachOrbit's): each board's sides, walls and the view's shadows;
+    // ``measure``: where the boards lie read again (lightFrame; once a view is drawn, rests or changes size).
+    if (!target || target.classList.contains("is-plan")) return;
+    const {tilt, spin} = orbitView(target);
+    for (const board of target.querySelectorAll(".oblique-board, .assembly-board")) {
+      const light = boardLights.get(board);
+      if (!light) continue;
+      const all = measure || !light.frame;
+      if (all) {
+        light.frame = lightFrame(target, board);
+        // The shadow's blur: styles.css's --shadow-blur (px, as the sides' drop-shadows had it) in the board's mm.
+        const blur = parseFloat(getComputedStyle(board).getPropertyValue("--shadow-blur"));
+        const scale = light.frame && light.sides[0] ? light.frame.width / light.sides[0].box[2] : 0;
+        if (light.blur && blur > 0 && scale > 0) light.blur.setAttribute("stdDeviation", round6(blur / scale));
+      }
+      paintBoard(board, light, tilt * DEG, spin * DEG, all);
+    }
+    castShadows(target, tilt * DEG, spin * DEG);
+  }
+  function paintBoard(board, light, tilt, spin, all) {
+    // A board's side in sight (its shade and sweep), and its walls (--wall-0 ...) and its stiffener's outer face
+    // (--back-light) on its rings: all of them where ``all``, else the next one.
+    const {sides, flip, frame} = light;
+    const copper = turned([0, 0, flip[0] * flip[1]], tilt, spin);
+    for (const side of sides) if (side) paintSide(side, copper.map(value => side.side * value), frame, flip, tilt, spin);
+    const rings = light.rings || (light.rings = [...board.querySelectorAll("svg.board-edge")]);
+    if (!rings.length) return;
+    const values = Array.from({length: WALL_BINS}, (_, bin) => {
+      const angle = 2 * Math.PI * bin / WALL_BINS;
+      return [`--wall-${bin}`, lit(VIEW_BAND_SHADE * irradiance(turned([flip[0] * Math.cos(angle), flip[1] * Math.sin(angle), 0], tilt, spin)) / HOME_IRRADIANCE)];
+    });
+    values.push(["--back-light", lit(irradiance(copper.map(value => -value)) / HOME_IRRADIANCE)]);
+    light.next = ((light.next ?? -1) + 1) % rings.length;
+    for (const ring of all ? rings : [rings[light.next]]) values.forEach(([name, value]) => ring.style.setProperty(name, value));
+  }
+  function paintSide(side, normal, frame, flip, tilt, spin) {
+    // One side, while it faces the viewer (else it is drawn on no pixel, and painted once it turns back): its shade (its
+    // irradiance over the home's) and its sweep: what the coverlay sends to the eye at the corners of its outline's box
+    // gives the way it changes most, along which SHEEN.stops points across the board give the gradient's stops.
+    if (!(normal[2] > 0)) return;
+    const level = (irradiance(normal) / HOME_IRRADIANCE) ** (1 / DISPLAY_GAMMA);
+    side.tone.setAttribute("fill", level < 1 ? "#000" : "#fff");
+    side.tone.setAttribute("fill-opacity", round6(level < 1 ? 1 - level : Math.min(1, WHITE_VEIL * (level - 1))));
+    if (!frame) return;
+    const {width, height, rest, origin, centre, depth} = frame;
+    const eye = [0, 0, depth]; const lamp = VIEW_LIGHTS.lamp.at.map((value, axis) => value * depth + (axis === 2 ? depth : 0));
+    const [x0, y0, x1, y1] = side.extent; const [cx, cy] = [(x0 + x1) / 2, (y0 + y1) / 2]; const box = side.box;
+    const sent = (x, y) => {
+      // A point of the side (its root user units) in the lights' frame: the board's frame, the rest of the turning
+      // element's transform, the turn, the element's origin.
+      const u = flip[0] * ((x - box[0]) / box[2] - 0.5) * width; const v = flip[1] * ((y - box[1]) / box[3] - 0.5) * height;
+      const local = rest.transformPoint(new DOMPoint(centre[0] + u, centre[1] + v, centre[2]));
+      const point = turned([local.x, local.y, local.z], tilt, spin);
+      return reflected([point[0] + origin[0], point[1] - origin[1], point[2]], normal, eye, lamp);
+    };
+    const corners = [[x0, y0], [x1, y0], [x1, y1], [x0, y1]];
+    const [a, b, c, d] = corners.map(([x, y]) => sent(x, y));
+    const slope = [(b + c - a - d) / (2 * (x1 - x0) || 1), (c + d - a - b) / (2 * (y1 - y0) || 1)];
+    const steepest = Math.hypot(...slope) > 1e-12 ? slope.map(value => value / Math.hypot(...slope)) : [1, 0];
+    const reach = corners.map(([x, y]) => (x - cx) * steepest[0] + (y - cy) * steepest[1]);
+    const [low, high] = [Math.min(...reach), Math.max(...reach)];
+    Object.entries({x1: cx + low * steepest[0], y1: cy + low * steepest[1], x2: cx + high * steepest[0], y2: cy + high * steepest[1]})
+      .forEach(([name, value]) => side.gradient.setAttribute(name, round6(value)));
+    side.stops.forEach((stop, index) => {
+      const along = low + (high - low) * index / (SHEEN.stops - 1);
+      stop.setAttribute("stop-opacity", round6(clamp(SHEEN.gain * sent(cx + along * steepest[0], cy + along * steepest[1]), 0, SHEEN.most)));
+    });
+  }
+  const SHADOW_LONGEST = 2.5;  // a grazing key's shadow on screen, in its length at the home view
+  const SHADOW_REACH = 3.5;    // its offset in the board's plane, in the same unit
+  const COIN_CAST_DEG = Math.atan2(1.15, 0.75) / DEG;  // index.html #coin-cast's offset, in the coin's plane
+  function castShadows(target, tilt, spin) {
+    // The view's shadows (styles.css --shadow-u, --shadow-v, --shadow-k of each board's shadow leaf; the coin's cast
+    // layer's --coin-cast-turn): on a plane under
+    // the board a shadow lies away from the key, which on screen is along the key's direction there turned half round,
+    // whatever the turn; as long as the key's slant over the side turned to the viewer makes it, and as dark as the key's
+    // share of that side's light, none where the board turns its far side to the key.  In the board's plane (the
+    // drop-shadow's frame) that offset is the screen's through the inverse of the tilt and spin there.
+    const facing = Math.cos(tilt) >= 0 ? 1 : -1;
+    const normal = [0, facing * Math.sin(tilt), facing * Math.cos(tilt)];
+    const key = LIGHT_RAYS[0].toward; const slant = dot3(normal, key);
+    const along = Math.min(SHADOW_LONGEST, dot3(HOME_NORMAL, key) / Math.max(slant, 1e-3));
+    const away = [-key[0], key[1]].map(value => value / Math.hypot(key[0], key[1]));
+    const [dx, dy] = away.map(value => along * value);
+    // Edge on (the tilt near 90 degrees) the board and its table are lines on screen: the offset in the plane is held to
+    // SHADOW_REACH and the shadow fades.
+    const [ct, cs, ss] = [Math.cos(tilt), Math.cos(spin), Math.sin(spin)];
+    let [u, v] = Math.abs(ct) > 1e-3 ? [cs * dx + ss * dy / ct, -ss * dx + cs * dy / ct] : [0, 0];
+    const length = Math.hypot(u, v);
+    if (length > SHADOW_REACH) [u, v] = [u * SHADOW_REACH / length, v * SHADOW_REACH / length];
+    const strength = Math.min(1, keyShare(normal) / HOME_KEY_SHARE) * smoothstep(0, 0.2, slant) * smoothstep(0, 0.2, Math.abs(ct));
+    // Set on the leaves that take them, not on the view: a custom property of the view is every element's under it, all
+    // of whose styles a turn would then work out again (the stacked view's rings then read the layout, twice a frame).
+    const values = {"--shadow-u": String(round6(u)), "--shadow-v": String(round6(v)), "--shadow-k": String(round6(strength))};
+    for (const shadow of target.querySelectorAll(".board-shadow")) Object.entries(values).forEach(([name, value]) => shadow.style.setProperty(name, value));
+    const turn = `${round6(Math.atan2(v, u) / DEG - COIN_CAST_DEG)}deg`;
+    for (const cast of target.querySelectorAll(".coin-layer-cast")) cast.style.setProperty("--coin-cast-turn", turn);
   }
 
   // -- looks ------------------------------------------------------------------------------
@@ -939,6 +1338,96 @@
     document.querySelectorAll(".zoom-pane, .oblique-board").forEach(sizePin1Rings);
     if ($("stackedPreview")) sizePin1Rings($("stackedPreview"));
   }
+
+  // -- board art for the sensor on the part ---------------------------------------------------
+  // Gen by Surface's stacked card shows the sensor on the part beside the registration (web/cad/onpart.js; the user's
+  // request of 2026-11-05): each board's two sides as textures on its sheet.  A texture is an SVG drawn as an image,
+  // which neither the page's CSS nor index.html's .look-defs reach, so "fpc:board-art" (main.js asks, as for a template's
+  // limits) answers each board's copper side (boardSvg, the look's layers added) and its polyimide side (boardBackSvg) as
+  // standalone SVG documents: the look's rules of styles.css inlined (lookCss), the paints of .look-defs copied in, the
+  // label, the pin-1 marker and every ARIA attribute left out, sized in pixels for the raster (preserveAspectRatio none:
+  // the view box fills it exactly, so a texture coordinate is the share of the view box).
+  // {boards, px_per_mm, max_px} -> {look, boards: {row, column: {role, physical_side, view_box, region, active_outline,
+  // px, front, back}}}, every length in the SVG's root units (mm, after its Y flip).
+  const ART_CLASSES = new Set(["outline", "cutout", "stiffener", "opening", "route", "electrode", "pad", "lk", "board-back"]);
+  const ART_PAINTS = ["lk-enig", "lk-gloss-paint", "lk-close", "lk-grain"];
+  const lookRules = new Map();
+
+  function topLevelParts(selector) {
+    // A selector list split at its own commas (not those inside :is() or an attribute's quotes).
+    const parts = []; let depth = 0; let quote = ""; let start = 0;
+    for (let index = 0; index < selector.length; index += 1) {
+      const character = selector[index];
+      if (quote) { if (character === quote) quote = ""; continue; }
+      if (character === '"' || character === "'") quote = character;
+      else if (character === "(" || character === "[") depth += 1;
+      else if (character === ")" || character === "]") depth -= 1;
+      else if (character === "," && depth === 0) { parts.push(selector.slice(start, index).trim()); start = index + 1; }
+    }
+    parts.push(selector.slice(start).trim());
+    return parts.filter(Boolean);
+  }
+  function isArtSelector(selector) {
+    // Its first compound one of the boards' own classes (.outline, .route, ..., .lk or .lk-*, .board-back), or an :is()
+    // of them only; no pseudo-element (the oblique view's caption is ::after).
+    if (selector.includes("::")) return false;
+    const artClass = text => /^\.[\w-]+$/.test(text) && (ART_CLASSES.has(text.slice(1)) || text.startsWith(".lk-"));
+    const first = /^:is\(([^()]*)\)/.exec(selector) || /^(\.[\w-]+)(?=$|[\s>+~])/.exec(selector);
+    return Boolean(first) && first[1].split(",").every(item => artClass(item.trim()));
+  }
+  function lookCss(look) {
+    // The rules of styles.css that colour a board's art in ``look``: its own (body[data-look=...] .look-scope ..., the
+    // prefix dropped) and the base ones of the art classes (.lk hidden, .board-back's colours), in their order.
+    if (lookRules.has(look)) return lookRules.get(look);
+    const prefix = `body[data-look="${look}"] .look-scope `;
+    const sheet = [...document.styleSheets].find(item => /\/styles\.css(\?|$)/.test(item.href || ""));
+    const rules = [];
+    for (const rule of sheet?.cssRules || []) {
+      if (!(rule instanceof CSSStyleRule)) continue;  // no @media, @supports or nested rules colour the art
+      const kept = topLevelParts(rule.selectorText).map(part => (part.startsWith(prefix) ? part.slice(prefix.length) : part.startsWith("body[") ? "" : part))
+        .filter(part => part && isArtSelector(part));
+      if (kept.length) rules.push(`${kept.join(",")}{${rule.style.cssText}}`);
+    }
+    const css = rules.join("\n");
+    lookRules.set(look, css);
+    return css;
+  }
+  function artDocument(svg, css, size) {
+    // A copy of a board SVG as a document of its own: no ARIA, label, pin-1 marker or tooltip; the paints and the look.
+    ["role", "aria-label", "aria-hidden", "focusable"].forEach(name => svg.removeAttribute(name));
+    svg.querySelectorAll("title, .view-label, .pin1-marker, .pin1-back").forEach(node => node.remove());
+    const defs = svgEl("defs", {}, ...ART_PAINTS.map(id => $(id)?.cloneNode(true)).filter(Boolean));
+    const style = svgEl("style", {});
+    style.textContent = css;
+    const own = svg.querySelector(":scope > style");
+    if (own) own.after(style, defs);
+    else svg.prepend(style, defs);
+    svg.setAttribute("width", String(size[0]));
+    svg.setAttribute("height", String(size[1]));
+    svg.setAttribute("preserveAspectRatio", "none");
+    return new XMLSerializer().serializeToString(svg);
+  }
+  async function boardArt(detail) {
+    // Async: whatever fails is the promise's rejection (main.js shows it in the figure), never an uncaught error.
+    const look = LOOKS.includes(document.body.dataset.look) ? document.body.dataset.look : LOOKS[0];
+    const perMm = Number(detail?.px_per_mm) > 0 ? Number(detail.px_per_mm) : 12;
+    const maxPx = Number(detail?.max_px) > 0 ? Number(detail.max_px) : 4096;
+    const css = lookCss(look);
+    const boards = {};
+    for (const key of BOARD_KEYS) {
+      const board = detail?.boards?.[key];
+      const front = boardSvg(board, roleTitle(board)); const back = boardBackSvg(board);
+      const viewBox = front && numbers(front.getAttribute("viewBox")); const region = front && numbers(front.getAttribute("data-active-region"));
+      if (!back || !viewBox || !region || !(viewBox[2] > 0 && viewBox[3] > 0)) throw new RequestError("E_CLIENT_ART", `the ${roleTitle(board)} has no usable SVG (view box and taxel field)`);
+      const outline = (front.getAttribute("data-active-outline") || "").trim();
+      const scale = Math.min(perMm, maxPx / Math.max(viewBox[2], viewBox[3]));
+      const px = [Math.max(1, Math.round(viewBox[2] * scale)), Math.max(1, Math.round(viewBox[3] * scale))];
+      boards[key] = {role: board.role, physical_side: board.physical_side, view_box: viewBox, region,
+        active_outline: outline ? outline.split(/\s+/).map(point => point.split(",").map(Number)) : null,
+        px, front: artDocument(front, css, px), back: artDocument(back, css, px)};
+    }
+    return {look, boards};
+  }
   function addPin1Ring(svg, layer = "") {
     // A ring around the server's pin-1 triangle, which is tiny at fit-to-view scale;
     // sizePin1Rings gives it a fixed screen radius once the SVG is laid out.  In the stacked view (layer "upper" or
@@ -979,9 +1468,9 @@
     // then tilts them about the screen's x axis, so the two boxes are alike, each read as an ellipse along the screen's
     // axes; the ring drawn in it, drawPin1Rings, is about 1 / 1.28 of it there, so the drawn rings part by more), placed
     // the gap apart, neither taking in the other board's triangle and each nearer its own (so each marks its own pin-1 pad
-    // only), both within the view and off its caption: round their triangles where that holds; else moved apart the least
-    // that holds it, each still holding its own triangle's centre (below); else the first steps of PIN1_STEPS that hold
-    // it; where none does, the first that keeps them apart.
+    // only), both within the view: round their triangles where that holds; else moved apart the least that holds it,
+    // each still holding its own triangle's centre (below); else the first steps of PIN1_STEPS that hold it; where none
+    // does, the first that keeps them apart.
     const rings = [scope.querySelector(".pin1-ring.is-upper"), scope.querySelector(".pin1-ring.is-lower")];
     if (rings.some(ring => !ring?.dataset.dx || !svgScale(ring.ownerSVGElement))) return;
     const drawn = ring => { const box = ring.getBoundingClientRect(); return {x: box.left + box.width / 2, y: box.top + box.height / 2, rx: box.width / 2, ry: box.height / 2}; };
@@ -997,7 +1486,6 @@
     if (views.some(view => !(view.rx > 0 && view.ry > 0))) return;
     const triangles = rings.map(ring => ring.ownerSVGElement.querySelector(".pin1-marker")?.getBoundingClientRect());
     const frame = scope.getBoundingClientRect();
-    const caption = scope.querySelector(".assembly-caption")?.getBoundingClientRect();
     const at = (view, [along, across]) => ({...view, x: view.x + along * view.along[0] + across * view.across[0], y: view.y + along * view.along[1] + across * view.across[1]});
     // Distances with y scaled by the ellipses' aspect, where they are circles.
     const aspect = views[0].rx / views[0].ry;
@@ -1007,13 +1495,10 @@
     const centre = box => box && {x: box.left + box.width / 2, y: box.top + box.height / 2};
     const near = (ring, point) => Math.hypot(point.x - ring.x, (point.y - ring.y) * aspect);
     const own = (ring, mine, other) => !mine || !other || near(ring, centre(mine)) < near(ring, centre(other));
-    // Within the view (it clips) and not under its caption by more than a third of the ring's radius both ways (by
-    // ``slack`` px less for a ring moved apart, which lands where the rings just part: off the edge of either rule).
-    const under = (low, high, from, to, radius, slack) => Math.min(high, to) - Math.max(low, from) > radius / 3 - slack;
+    // Within the view (it clips; by ``slack`` px more for a ring moved apart, which lands where the rings just part: off
+    // the view's edge).
     const shown = (ring, slack) => ring.x - ring.rx >= frame.left + slack && ring.x + ring.rx <= frame.right - slack
-      && ring.y - ring.ry >= frame.top + slack && ring.y + ring.ry <= frame.bottom - slack
-      && !(caption?.width && under(ring.x - ring.rx, ring.x + ring.rx, caption.left, caption.right, ring.rx, slack)
-           && under(ring.y - ring.ry, ring.y + ring.ry, caption.top, caption.bottom, ring.ry, slack));
+      && ring.y - ring.ry >= frame.top + slack && ring.y + ring.ry <= frame.bottom - slack;
     const fits = ([upper, lower], slack = 0) => apart(upper, lower) && clear(upper, triangles[1]) && clear(lower, triangles[0])
       && own(upper, triangles[0], triangles[1]) && own(lower, triangles[1], triangles[0]) && shown(upper, slack) && shown(lower, slack);
     // Its own triangle's centre within the ring: the ring still rounds it.
@@ -1188,22 +1673,6 @@
       `${Number(metrics.outline_width_mm).toFixed(1)} × ${Number(metrics.outline_height_mm).toFixed(1)} mm`,
     ].join(" · ");
   }
-  function legend(board) {
-    const counts = new Map();
-    (board.layers?.top_coverlay_openings || []).forEach(opening => counts.set(opening.kind, (counts.get(opening.kind) || 0) + 1));
-    const windows = [...counts].map(([kind, count]) => {
-      const [one, many] = OPENING_NAMES[kind] || [String(kind).replace(/_/g, " "), `${String(kind).replace(/_/g, " ")}s`];
-      return count === 1 ? one : `${count} ${many}`;
-    });
-    const swatch = name => el("span", {className: `swatch swatch-${name}`, "aria-hidden": "true"});
-    return [
-      el("span", {}, swatch("copper"), "Top copper"),
-      el("span", {}, swatch("opening"), `Coverlay: ${windows.join(" + ") || "no openings"}`),
-      el("span", {}, swatch("stiffener"), "PI stiffener (bottom side)"),
-      el("span", {}, swatch("pin1"), `Pin 1 (${pin1Net(board)})`),
-      el("span", {}, swatch("coin"), `Coin for scale: ${COIN.name}, ${COIN.diameter_mm} mm`),
-    ];
-  }
   function renderBoard(key, board) {
     const pane = $(`${key}Preview`); const oblique = $(`${key}Preview3d`);
     const where = `${roleTitle(board)}, ${board.physical_side} of the stack`;
@@ -1219,7 +1688,9 @@
       addCoin(flat);
       pane.replaceChildren(flat);
       const box = numbers(tilted.getAttribute("viewBox"));
-      const tiltedBoard = el("div", {className: "oblique-board"}, tilted, backFace(boardBackSvg(board)));
+      const back = boardBackSvg(board);
+      const tiltedBoard = el("div", {className: "oblique-board"}, tilted, backFace(back));
+      lightBoard(tiltedBoard, [tilted, back]);
       boardDepth(tiltedBoard, tiltedBoard, board, tilted);
       if (box && box[2] > 0 && box[3] > 0) {
         // The coin on the table below the tilted board, bottom right of it (its SVGs hold COIN_MARGIN_MM round the coin).
@@ -1233,8 +1704,9 @@
       fitScene(pane);
       fitOblique(oblique);
     }
+    // No layer legend under the board since the user's request of 2026-11-06 ("这个部分也可以去掉,没必要的介绍"): the
+    // drawing, its coin and its pin-1 ring say it.
     $(`${key}Meta`).textContent = boardMeta(board);
-    $(`${key}Legend`).replaceChildren(...legend(board));
     $(`${key}Card`).classList.toggle("has-drc-failure", board.verification?.all_checks_passed === false);
   }
   function fitOblique(panel) {
@@ -1261,6 +1733,7 @@
     board.style.left = `${round6((room.left + room.right) / 2 - (box.left + box.right) / 2)}px`;
     board.style.top = `${round6((room.top + room.bottom) / 2 - (box.top + box.bottom) / 2)}px`;
     sizePin1Rings(board);
+    lightView(panel, true);
   }
   function renderBoards(result) {
     BOARD_KEYS.forEach(key => renderBoard(key, result.boards[key]));
@@ -1272,15 +1745,13 @@
       $(`${key}Preview`).replaceChildren(el("p", {}, message));
       $(`${key}Preview3d`).replaceChildren(el("p", {}, message));
       $(`${key}Meta`).textContent = "No current build";
-      $(`${key}Legend`).replaceChildren();
       $(`${key}Card`).classList.remove("has-drc-failure");
       zooms.delete(`${key}Preview`);
       updateZoomReadout($(`${key}Preview`));
     }
     $("stackedPreview").replaceChildren(el("p", {}, message));
+    $("stackedReset").hidden = true;
     $("assemblyHeader").textContent = "";
-    $("assemblyLegend").replaceChildren();
-    $("assemblyNotes").replaceChildren();
     $("drcTables").replaceChildren(el("p", {}, message));
     $("drcMeta").textContent = "";
     $("drcTotal").textContent = "";
@@ -1335,9 +1806,13 @@
     const zoom = zooms.get(pane.id); const svg = pane.querySelector("svg");
     tools.querySelectorAll("button").forEach(button => { button.disabled = !zoom || !svg; });
     const output = tools.querySelector("output");
-    if (!zoom || !svg) { output.textContent = "—"; return; }
+    if (!zoom || !svg) { output.textContent = "—"; output.removeAttribute("title"); return; }
+    // The level alone in sight (the user's request of 2026-11-06: the controls in the frame, the words shorter); the
+    // scale on screen in its tooltip and, for a screen reader, in its text.
     const view = zoom.view || zoom.base; const matrix = svg.getScreenCTM();
-    output.textContent = `${(zoom.base.w / view.w).toFixed(1)}×${matrix ? ` · ${matrix.a.toFixed(1)} px/mm` : ""}`;
+    const level = `${(zoom.base.w / view.w).toFixed(1)}×`; const scale = matrix ? ` · ${matrix.a.toFixed(1)} px/mm` : "";
+    output.replaceChildren(level, ...(scale ? [el("span", {className: "cad-sr-only"}, scale)] : []));
+    output.title = level + scale;
   }
   function attachZoom(pane) {
     $(pane.dataset.zoomTools).addEventListener("click", event => {
@@ -1402,7 +1877,7 @@
     const target = $("stackedPreview"); const header = $("assemblyHeader");
     const boards = BOARD_KEYS.map(key => result.boards[key]);
     const upper = boards.find(board => board.physical_side === "top"); const lower = boards.find(board => board.physical_side === "bottom");
-    const message = text => { target.replaceChildren(el("p", {}, text)); header.textContent = ""; $("assemblyLegend").replaceChildren(); $("assemblyNotes").replaceChildren(); };
+    const message = text => { target.replaceChildren(el("p", {}, text)); header.textContent = ""; $("stackedReset").hidden = true; };
     if (!upper || !lower) return message("No assembly preview: the boards have no physical top/bottom assignment.");
     if (!SIDES.includes(upper.tail?.side) || !SIDES.includes(lower.tail?.side)) return message("No assembly preview: a board has no tail side.");
     if ([upper, lower].some(board => board.verification?.registration?.orthogonal === false)) {
@@ -1435,7 +1910,7 @@
       const outline = svg.getAttribute("data-active-outline");
       if (outline) svg.append(svgEl("polygon", {class: "taxel-outline", points: outline}));
       addPin1Ring(svg, board === upper ? "upper" : "lower");
-      // The legend names pin 1; tooltips of the flipped copy would duplicate it.
+      // No tooltips on the stacked copies (the turned-over one's would name what lies mirrored under the pointer).
       svg.querySelectorAll("title").forEach(title => title.remove());
       // The other side: the polyimide, shown where the view turns the copper side away (the top FPC from above).
       const back = boardBackSvg(board);
@@ -1445,6 +1920,8 @@
       }
       const face = el("div", {className: "assembly-face"}, svg, backFace(back));
       const box = el("div", {className: `assembly-board ${className}`, "data-physical-side": board.physical_side, "data-role": board.role}, face);
+      // The turned-over top FPC's sides, mirrored with its face (its veils' sweep and walls' light in the board's frame).
+      lightBoard(box, [svg, back], board === upper ? (axis === "x" ? [1, -1] : [-1, 1]) : [1, 1]);
       boardDepth(box, face, board, svg);
       Object.assign(box.style, {left: percent(place.left - minX, width), top: percent(place.top - minY, height), width: percent(place.width, width), height: percent(place.height, height)});
       return box;
@@ -1455,86 +1932,69 @@
       el("div", {className: "assembly-camera"}, coin, boardBox(lower, lowerSvg, lowerPlace, "is-lower"), boardBox(upper, upperSvg, upperPlace, `is-upper flip-${axis}`)));
     scene.style.setProperty("--assembly-aspect", `${width.toFixed(6)} / ${height.toFixed(6)}`);
     scene.style.setProperty("--assembly-ratio", (width / height).toFixed(6));
-    const grid = upper.grid_registration || {};
-    const mirrored = axis === "y" ? "left to right" : "top to bottom";
-    // Both pin-1 rings are drawn over both boards (drawPin1Rings), in screen pixels.
-    target.replaceChildren(scene, svgEl("svg", {class: "pin1-overlay", "aria-hidden": "true", focusable: "false"}),
-      el("p", {className: "assembly-caption", "aria-hidden": "true"}));
-    // The two boards' keys stay in sight; the notes are folded under "About this view" (#assemblyMore).
-    $("assemblyLegend").replaceChildren(
-      el("span", {className: "assembly-key upper-key"}, `Top FPC · ${roleTitle(upper)} · upper · turned over about its tail axis (${axis.toUpperCase()}) · copper faces down · tail exits ${upper.tail.side} · pin 1 ${pin1Net(upper)} (teal ring)`),
-      el("span", {className: "assembly-key lower-key"}, `Bottom FPC · ${roleTitle(lower)} · lower · face up · copper faces up · tail exits ${lower.tail.side} · pin 1 ${pin1Net(lower)} (orange ring)`),
-      el("span", {className: "assembly-key coin-key"}, `Coin for scale on the table below the stack: ${COIN.name}, ${COIN.diameter_mm} mm`));
-    $("assemblyNotes").replaceChildren(...[
-      el("span", {className: "assembly-note"}, `Registered on the ${micrometres(fieldW)} × ${micrometres(fieldH)} mm taxel field (dashed outline; ${grid.rows} × ${grid.columns} taxels). Turning the top FPC over about its tail axis keeps its tail's exit side and mirrors the board ${mirrored} as seen from above. Exploded spacing is visual only; the boards carry no alignment features. Each pin-1 ring rounds its board's triangle past the tail's end; where the two would meet or one would take in the other board's triangle, they move apart, away from each other, each still round its own triangle's centre.`),
-      rowBusNote(boards)].filter(Boolean));
+    // Both pin-1 rings are drawn over both boards (drawPin1Rings), in screen pixels.  No legend, notes or caption with
+    // the figure (the user's requests of 2026-11-06): the header line names the two boards' places.
+    target.replaceChildren(scene, svgEl("svg", {class: "pin1-overlay", "aria-hidden": "true", focusable: "false"}));
     header.replaceChildren(`Top FPC (${upper.role}) upper, copper down · Bottom FPC (${lower.role}) lower, copper up`);
     setAssemblyMode(target.dataset.mode || "exploded");
-  }
-  function rowBusNote(boards) {
-    // The diagonal Row bus (routing.row_sides): one outline for both boards down to their tail roots (construction.
-    // row_bus.shared_outline_below_field_mm, a registration key), both tails leave on one side, stacked (the top FPC's tail over
-    // the bottom FPC's where they meet; they part to their own connectors), and with both sides the Row pins fold (the
-    // board's construction.row_bus and tail.row_contact_order; the tails' overlap is a registration key).
-    const row = boards.find(board => board.role === "rows");
-    const bus = row?.construction?.row_bus;
-    if (!bus) return null;
-    const registration = row.verification?.registration || {};
-    const overlap = registration.tail_overlap_width_mm;
-    const [upper, lower] = row.physical_side === "top" ? ["Row", "Column"] : ["Column", "Row"];
-    const where = Number.isFinite(overlap) && overlap > 0 ? `, ${micrometres(overlap)} mm of their width on each other` : " where they meet";
-    // Both tails leave the shared bottom edge, so equal lengths end together, their contacts in line (CAD mode's fit gives
-    // them equal lengths, P5-diagonal-bus.md section 27.3; the form's own lengths may differ).
-    const column = boards.find(board => board.role === "columns");
-    const lengths = [row, column].map(board => Number(board?.tail?.bounds?.height));
-    const longer = lengths.every(Number.isFinite) && Math.abs(lengths[0] - lengths[1]) > 1e-6 ? (lengths[0] > lengths[1] ? "Row" : "Column") : "";
-    const ends = longer ? `, the ${longer} tail ${micrometres(Math.abs(lengths[0] - lengths[1]))} mm longer` : ", ending together, their contacts in line";
-    // The Row nets by pin, from the pads (the scan order numbers the pins: reversed, pin 1 is the last contact).
-    const order = rowPinOrder(row);
-    const pins = shortList(order);
-    const sides = bus.sides === "both" ? "both sides" : `the ${bus.sides} side`;
-    // Where the Row tail lies (construction.row_bus.tail_position): centred under the field in every side mode, as the
-    // Column tail (diagonal-bus/10).
-    const position = bus.tail_position !== "centred" ? ""
-      : bus.sides === "both" ? ", meet in a funnel into the Row tail centred under the field"
-      : ", fan in under the field into the Row tail centred under it";
-    const shared = Number.isFinite(bus.shared_outline_below_field_mm)
-      ? `Both boards share one outline down to their tail roots (${micrometres(bus.shared_outline_below_field_mm)} mm below the taxel field), so they `
-        + "align by their edges; only the tails differ. " : "";
-    return el("span", {className: "assembly-note", id: "assemblyRowBus", "data-row-sides": bus.sides, "data-tail-position": bus.tail_position || "",
-      "data-tails": bus.tails || "", "data-shared-outline": bus.shared_outline_below_field_mm ?? ""},
-      `Diagonal Row bus (${bus.kind}, ${sides}): ${shared}The Row traces run beside the field${position}, and both tails leave ${row.tail.side}, `
-      + `stacked: the ${upper} tail over the ${lower} tail${where}, both centred on the field${ends}; they part to their own connectors. `
-      + `Row pins 1–${order.length}: ${pins}`
-      + `${bus.sides === "both" ? " (folded: the odd rows from ROW_01's side, the even rows back from the other)" : ""}.`);
-  }
-  function rowPinOrder(board) {
-    // The Row nets by connector pin, pin 1 first, from the board's connector pads.
-    return (board?.layers?.top_copper?.pads || []).filter(pad => pad.kind === "connector_pad" && /^ROW_/.test(pad.net || ""))
-      .sort((a, b) => a.pin - b.pin).map(pad => pad.net);
-  }
-  function shortList(items) {
-    // "a, b, c, …, y, z" for a long list, every item when nothing would be left out.
-    return items.length > 6 ? `${items.slice(0, 3).join(", ")}, …, ${items.slice(-2).join(", ")}` : items.join(", ");
   }
   function setAssemblyMode(mode) {
     const target = $("stackedPreview");
     target.dataset.mode = mode;
     target.classList.toggle("is-plan", mode === "plan");
     document.querySelectorAll("[data-assembly-mode]").forEach(button => button.setAttribute("aria-pressed", String(button.dataset.assemblyMode === mode)));
-    const caption = target.querySelector(".assembly-caption");
-    if (caption) caption.textContent = mode === "plan" ? "Plan view · upper board mirrored and translucent, as seen through from above · dashed: taxel field" : "Exploded 3D registration review · visual spacing only · thickness at least 2 px";
-    $("orbitHint").hidden = mode === "plan";
+    // Reset view in the frame's top right while the 3D view is drawn (as the sensor on the part's; the drag hint, hidden
+    // since 2026-11-06, stays the view's description).
+    $("stackedReset").hidden = mode === "plan" || !target.querySelector(".assembly-camera");
+    clearPlanOfControls(target);
+    lightView(target, true);
     sizePin1Rings(target);
+  }
+  function clearPlanOfControls(target) {
+    // The plan view under its frame's controls (index.html .figure-tools, the user's request of 2026-11-06): where its
+    // scene as styles.css sizes it would put a board's outline or a pin-1 ring (3 PIN1_RING_PX round its triangle: the
+    // ring and a step apart, separatePin1Rings) within CONTROLS_CLEAR_PX of them, the scene shrinks about its centre (the
+    // pane centres it; --plan-fit scales styles.css's width) until they clear the controls by that much; else, and in the
+    // exploded view, the scene keeps styles.css's size, as before.
+    const scene = target.querySelector(":scope > .assembly-scene");
+    if (!scene) return;
+    scene.style.removeProperty("--plan-fit");
+    const tools = target.dataset.mode === "plan" ? controlsBox(target.parentElement) : null;
+    if (!tools) return;
+    const front = ".assembly-face > svg:not(.board-shadow)";
+    let fit = 1;
+    for (let pass = 0; pass < 3; pass += 1) {
+      const rings = [...scene.querySelectorAll(`${front} .pin1-marker`)].map(node => node.getBoundingClientRect()).map(box => {
+        const room = 3 * PIN1_RING_PX;
+        return {left: box.left - room, right: box.right + room, top: box.top - room};
+      });
+      const drawn = [...[...scene.querySelectorAll(`${front} polygon.outline`)].map(node => node.getBoundingClientRect()), ...rings];
+      if (!drawn.length) return;
+      const top = Math.min(...drawn.map(box => box.top)); const clear = tools.bottom + CONTROLS_CLEAR_PX;
+      if (top >= clear || Math.min(...drawn.map(box => box.left)) >= tools.right + CONTROLS_CLEAR_PX
+        || Math.max(...drawn.map(box => box.right)) <= tools.left - CONTROLS_CLEAR_PX) return;
+      const box = scene.getBoundingClientRect(); const centre = box.top + box.height / 2;
+      if (!(centre > clear)) return;
+      fit *= (centre - clear) / (centre - top);
+      scene.style.setProperty("--plan-fit", fit.toFixed(6));
+    }
+  }
+  const orbits = new WeakMap();
+  const orbitResets = new WeakMap();
+  function orbitView(target) {
+    // A 3D view's angles (degrees) as attachOrbit holds them: its home until it is first turned.
+    return orbits.get(target)?.() || (target?.id === "stackedPreview" ? ORBIT_HOME : OBLIQUE_HOME);
   }
   function attachOrbit(target, {home = ORBIT_HOME, active, moved, rested}) {
     // Drag to turn a 3D view from ``home``: the stacked view's exploded camera, or a board card's oblique view.  The angles
     // are custom properties of the view, so they hold across new designs; while it turns ``moved`` runs (the stacked
-    // view draws its rings where the boards now lie, drawPin1Rings), and ``rested`` once it rests (the rings placed
-    // again, separatePin1Rings; an oblique view fits its pane again).
+    // view draws its rings where the boards now lie, drawPin1Rings; both light the boards as they now face, lightView),
+    // and ``rested`` once it rests (the rings placed again, separatePin1Rings; an oblique view fits its pane again).  The
+    // angles are orbitView's too; orbitResets holds its way back home (0, a double click, the stacked view's Reset view).
     let view = {...home};
     let drag = null;
     let frame = 0;
+    orbits.set(target, () => view);
     const turn = (next, rest) => {
       view = {tilt: Math.min(ORBIT_TILT_MAX_DEG, Math.max(0, next.tilt)), spin: ((next.spin + 180) % 360 + 360) % 360 - 180};
       target.style.setProperty("--orbit-tilt", `${round6(view.tilt)}deg`);
@@ -1561,7 +2021,9 @@
     };
     target.addEventListener("pointerup", stop);
     target.addEventListener("pointercancel", stop);
-    target.addEventListener("dblclick", () => { if (active()) turn(home, true); });
+    const reset = () => { if (active()) turn(home, true); };
+    orbitResets.set(target, reset);
+    target.addEventListener("dblclick", reset);
     target.addEventListener("keydown", event => {
       const step = {ArrowLeft: [0, 1], ArrowRight: [0, -1], ArrowUp: [1, 0], ArrowDown: [-1, 0]}[event.key];
       if (!active() || !(step || event.key === "0") || event.altKey || event.ctrlKey || event.metaKey) return;
@@ -1800,7 +2262,9 @@
   // design it applied.  Events on document (detail.result is set to a Promise):
   //   "fpc:mode" {mode}; "fpc:template-info" {template_id} -> {template_id, limits, name, served};
   //   "fpc:apply-design" {design} -> {ok, problems, build_id}: checks the design against its
-  //   template's limits before it touches the form, then sets the form and generates.
+  //   template's limits before it touches the form, then sets the form and generates;
+  //   "fpc:board-art" {boards, px_per_mm, max_px} -> {look, boards}: the boards' two sides in the
+  //   page's look, as textures of the sensor on the part (2026-11-05; "board art" above).
   const templates = new Map();
   const templateState = {defaultId: null, cadId: null, mode: "rect"};
   let defaultsDone;
@@ -1932,6 +2396,7 @@
   document.addEventListener("fpc:mode", event => { templateState.mode = event.detail?.mode === "cad" ? "cad" : "rect"; syncTemplate(); });
   document.addEventListener("fpc:template-info", event => { if (event.detail) event.detail.result = templateInfo(event.detail.template_id); });
   document.addEventListener("fpc:apply-design", event => { if (event.detail) event.detail.result = applyDesign(event.detail.design); });
+  document.addEventListener("fpc:board-art", event => { if (event.detail) event.detail.result = boardArt(event.detail); });
   $("summary").addEventListener("click", event => {
     const target = event.target.closest("[data-target]");
     if (target) reveal($(target.dataset.target));
@@ -1941,22 +2406,30 @@
   document.querySelectorAll("[data-assembly-mode]").forEach(button => button.addEventListener("click", () => setAssemblyMode(button.dataset.assemblyMode)));
   document.querySelectorAll("button[data-look]").forEach(button => button.addEventListener("click", () => setLook(button.dataset.look)));
   setLook(storedLook() || LOOKS[0], false);
+  // Both kinds of 3D view are lit as they turn (lightView: the boards' shade, sweep, walls and shadows); an oblique view
+  // is lit again with its fit (fitOblique), the stacked view where it rests (the boards read where they now lie).
   attachOrbit($("stackedPreview"), {
     active: () => $("stackedPreview").dataset.mode !== "plan" && Boolean($("stackedPreview").querySelector(".assembly-camera")),
-    moved: drawPin1Rings, rested: sizePin1Rings,
+    moved: target => { lightView(target); drawPin1Rings(target); }, rested: target => { lightView(target, true); sizePin1Rings(target); },
   });
+  $("stackedReset").addEventListener("click", () => orbitResets.get($("stackedPreview"))?.());
   document.querySelectorAll(".three-d-pane").forEach(pane => attachOrbit(pane, {
-    home: OBLIQUE_HOME, active: () => Boolean(pane.querySelector(".oblique-board")), moved: () => {}, rested: fitOblique,
+    home: OBLIQUE_HOME, active: () => Boolean(pane.querySelector(".oblique-board")), moved: target => lightView(target), rested: fitOblique,
   }));
   $("drcShowAll").addEventListener("click", () => { $("drcPanel").classList.remove("only-failures"); $("drcShowAll").hidden = true; });
   window.addEventListener("resize", () => {
     zoomPanes.forEach(pane => { fitScene(pane); updateZoomReadout(pane); sizePin1Rings(pane); });
     document.querySelectorAll(".three-d-pane").forEach(fitOblique);
+    clearPlanOfControls($("stackedPreview"));
+    lightView($("stackedPreview"), true);
     sizePin1Rings($("stackedPreview"));
   });
   // The stacked view's canvas may change size without the window (the page's layout): its rings are placed and drawn
-  // again, so the ones drawn over the boards stay on them.
-  if (typeof ResizeObserver === "function") new ResizeObserver(() => sizePin1Rings($("stackedPreview"))).observe($("stackedPreview"));
+  // again, so the ones drawn over the boards stay on them, and its boards lit where they now lie.
+  if (typeof ResizeObserver === "function") {
+    new ResizeObserver(() => { clearPlanOfControls($("stackedPreview")); lightView($("stackedPreview"), true); sizePin1Rings($("stackedPreview")); })
+      .observe($("stackedPreview"));
+  }
   // A 2D view's window changes size with the page's layout too, and has none while hidden (its tab, CAD mode before a
   // build): its scene takes the window's shape whenever it changes (fitScene).
   if (typeof ResizeObserver === "function") {

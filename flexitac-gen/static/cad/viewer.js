@@ -4,9 +4,20 @@
 // on the first entry to CAD mode only.
 // Display coordinates are millimetres re-centred on the bounding-box centre;
 // every point passed in or out of this module is in the STL frame in mm.
+//
+// The look (the user's request of 2026-11-05: "you only added the new light and shade to the last 3D figure; add it to
+// every 3D view", after the sensor on the part's of the same day: real light, not only shadow, a surface with a faint
+// frosted reflection so that nothing reads as a black hole): the studio the sensor on the part is drawn in (studio.js:
+// its lights hung on the camera, its studio's reflections, Khronos PBR Neutral tone mapping, one warning a cause and a
+// fallback to the lights alone, the studio made again when a lost context comes back).  The part's facets keep their
+// meaning colours (paint: the part's grey, the hidden facets', the selected area's orange, a refused selection's red),
+// lit as a matte surface with the studio's reflections only (VIEW_LOOK); every marker (the selection's outline, the base
+// edge, the border and its handles, the hover, the overlay's lines, end markers and taxels, the axes) is drawn unlit in
+// its own colour, past the tone mapping.  Picking, the handles and the drags are the geometry's: the look changes none.
 
 import * as THREE from "../vendor/three/three.module.js";
 import {OrbitControls} from "../vendor/three/OrbitControls.js";
+import {LIGHTS, lookOf, studioLights, toneMap} from "./studio.js";
 
 const CLICK_PX = 4;
 const SIDE_PICK_PX = 14;
@@ -34,11 +45,42 @@ const COLORS = {
   handleHot: 0xffb300, handleSelected: 0xe53935,
 };
 const VIEWS = {"-x": [-1, 0, 0], "+x": [1, 0, 0], "-y": [0, -1, 0], "+y": [0, 1, 0], "-z": [0, 0, -1], "+z": [0, 0, 1], iso: [-0.62, -0.55, 0.56]};
+// The part's look (2026-11-05): the sensor on the part's matte part (onpart.js PART_LOOK: roughness 0.6, no metal) with
+// the studio's reflections at VIEW_LOOK.envMapIntensity (reflections only: a faint frosted sheen, 2 to 6 sRGB levels and
+// up to about 15 at a grazing angle, that keeps a face turned from the lights from reading as a hole), its facets'
+// colours lifted VIEW_LOOK.gain: the view frames the selection face-on, where the studio's key falls at about 56 degrees
+// (the old sun lay nearly along the view), and at a gain of 1 the selected orange drew (194, 148, 75) there against
+// (221, 174, 100) before; at 1.3 it draws (219, 169, 88), and the faces toward the key stay under the view's grey
+// (235 to 240 against #f5f5f7's 245: Khronos PBR Neutral rolls them off), those turned from it about 150 (measured on
+// the default part and the Library's WidowX 250 and I2RT YAM at 1440 x 900; the look's checks: cad_checks part_view_look).
+const VIEW_LOOK = {gain: 1.3, roughness: 0.6, metalness: 0, envMapIntensity: 1};
+// A software renderer (no GPU: SwiftShader, llvmpipe), by its WebGL renderer's name.  There the look's fragments cost 2 to
+// 3 times the view's Lambert of before (the studio's lookup and the lights' highlights: at DPR 2 on SwiftShader a drag's
+// frame took 51, 119 and 97 ms against 24, 37 and 38 ms before on the default part, the I2RT YAM and the WidowX AI, the
+// Library's largest mesh), so while a drag turns the view or moves a border handle the part is drawn without them: the
+// same facets under the same lights' diffuse light (diffuseMaterial; three.js lights MeshLambertMaterial as it lights
+// MeshStandardMaterial's diffuse: 1 to 4 sRGB levels from the look), 26, 45 and 43 ms; the look again as the drag ends.
+// A GPU draws the look all the time.
+const SOFTWARE_RENDERER = /SwiftShader|llvmpipe|softpipe|Software Rasterizer/i;
+// The checks' reads (pixels, probe only): a normal toward the key (LIGHTS.key.at) by this cosine at least, or turned from
+// it by less than TURNED_FROM; a pixel the studio or the tone mapping changes by PROBE_LEVEL sRGB levels or more.
+const TOWARD_KEY = 0.6;
+const TURNED_FROM = 0.1;
+const PROBE_LEVEL = 1;
+
+// The view's warnings ("3D view: ...", each cause once), the studio's reflections-only patch and its studio (studio.js).
+const {reflectionsOnly, studioFor} = lookOf("3D view", {studied: "3d-view studio", without: "the part is drawn"});
+
+// The markers keep their own colours (the meaning colours): unlit and past the tone mapping (studio.js toneMap), the sRGB
+// of before the look of 2026-11-05.
+const markerMaterial = parameters => new THREE.MeshBasicMaterial({...parameters, toneMapped: false});
+const lineMaterial = parameters => new THREE.LineBasicMaterial({...parameters, toneMapped: false});
 
 function dispose(object) {
   object?.traverse?.(node => {
     node.geometry?.dispose();
     (Array.isArray(node.material) ? node.material : [node.material]).forEach(material => material?.dispose());
+    node.userData.look?.dispose();  // the part's look, when a drag's material stands in for it (SOFTWARE_RENDERER)
   });
 }
 
@@ -101,7 +143,7 @@ function tubes(runs, radius, color, {opacity = 1, dash = null} = {}) {
       if (before.lengthSq() > 0 && after.lengthSq() > 0 && before.angleTo(after) > 0.05) joints.push(run[i]);
     }
   }
-  const material = new THREE.MeshBasicMaterial({color, transparent: opacity < 1, opacity, depthWrite: opacity >= 1});
+  const material = markerMaterial({color, transparent: opacity < 1, opacity, depthWrite: opacity >= 1});
   const group = new THREE.Group();
   const matrix = new THREE.Matrix4(); const rotation = new THREE.Quaternion(); const scale = new THREE.Vector3();
   const yAxis = new THREE.Vector3(0, 1, 0); const middle = new THREE.Vector3(); const direction = new THREE.Vector3();
@@ -129,21 +171,49 @@ function tubes(runs, radius, color, {opacity = 1, dash = null} = {}) {
   return group;
 }
 
-/** Create the viewer in `host`; throws when WebGL is unavailable. */
-export function createViewer(host, {onClick = null} = {}) {
+/** The part's grey (linear RGB), as the 3D view paints it: the sensor on the part (onpart.js) starts from it (its PART_LOOK). */
+export const PART_RGB = COLORS.base;
+
+function partMaterial(look) {
+  // The part (VIEW_LOOK): its facets' colours (paint) lit by the studio's lights, mirroring the studio (look.environment,
+  // turned with the camera by look.rotation) without its diffuse light; both sides (an STL's facets may face either way),
+  // a little behind what is drawn on it (polygon offset).  Without the studio the same material lit by the lights alone.
+  const {gain, ...matte} = VIEW_LOOK;
+  const material = new THREE.MeshStandardMaterial({vertexColors: true, color: new THREE.Color(gain, gain, gain), ...matte,
+    envMap: look.environment?.texture || null, side: THREE.DoubleSide, polygonOffset: true, polygonOffsetFactor: 1, polygonOffsetUnits: 1});
+  material.envMapRotation = look.rotation;
+  material.onBeforeCompile = shader => { shader.fragmentShader = reflectionsOnly(shader.fragmentShader); };
+  material.customProgramCacheKey = () => "view-part";
+  return material;
+}
+
+function diffuseMaterial() {
+  // The part's diffuse light alone (a drag's frames on a software renderer, SOFTWARE_RENDERER): its facets' colours times
+  // VIEW_LOOK.gain under the same lights, both sides, the same polygon offset.
+  const {gain} = VIEW_LOOK;
+  return new THREE.MeshLambertMaterial({vertexColors: true, color: new THREE.Color(gain, gain, gain), side: THREE.DoubleSide,
+    polygonOffset: true, polygonOffsetFactor: 1, polygonOffsetUnits: 1});
+}
+
+/**
+ * Create the viewer in `host`; throws when WebGL is unavailable.  probe: the checks' reads of the drawn pixels (pixels:
+ * each a render and a gl.readPixels, which stalls the GPU), off for a visitor (main.js: the page's ?probe).
+ */
+export function createViewer(host, {onClick = null, probe = false} = {}) {
   const renderer = new THREE.WebGLRenderer({antialias: true});
   renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+  toneMap(renderer);
   renderer.domElement.className = "cad-canvas";
   host.append(renderer.domElement);
   const scene = new THREE.Scene();
-  scene.background = new THREE.Color(0xf5f5f7);  // Apple's grey, as .cad-view in theme.css
+  scene.background = new THREE.Color(0xf5f5f7);  // Apple's grey, as .cad-view in theme.css (a clear colour: no tone mapping)
   const camera = new THREE.PerspectiveCamera(35, 1, 0.1, 10000);
   camera.up.set(0, 0, 1);
-  scene.add(new THREE.HemisphereLight(0xffffff, 0x8899aa, 1.7));
-  const sun = new THREE.DirectionalLight(0xffffff, 1.3);
-  sun.position.set(0.3, 0.6, 1);
-  camera.add(sun);
-  scene.add(camera);
+  const lights = studioLights(scene, camera);
+  // The part's look: the studio (null without it) and its rotation, the camera's (the part's material shares it); and the
+  // drag's material (diffuseMaterial) on a software renderer, null on a GPU (set once the renderer's name is read, below).
+  const look = {environment: studioFor(renderer), rotation: new THREE.Euler()};
+  let dragMaterial = null;
   const controls = new OrbitControls(camera, renderer.domElement);
   controls.enableDamping = false;
   controls.listenToKeyEvents(host);  // arrow keys pan while the view has the focus
@@ -152,6 +222,12 @@ export function createViewer(host, {onClick = null} = {}) {
   const dragRay = new THREE.Raycaster();
   const groups = {mesh: null, outline: null, side: null, overlay: null, axes: null, hover: null, border: null, handles: null};
   const model = {center: [0, 0, 0], radius: 1, facets: 0, hidden: new Set(), selection: [], rejected: false};
+  // The markers' size (the exit's and the border's tubes, their dashes, the overlay's end markers) goes with the part's
+  // radius, or with a smaller one main.js gives (setMarkScale: a whole gripper's finger, its markers as on that finger
+  // alone; the review of 2026-11-06); each new mesh takes its own again.
+  let markRadius = null;
+  const marks = () => (markRadius > 0 ? Math.min(markRadius, model.radius) : model.radius);
+  function setMarkScale(radiusMm) { markRadius = radiusMm > 0 ? radiusMm : null; }
   // The border editor: the handles (STL points), the one under the pointer or held ("kind:index"),
   // whether editing is on, the drag in progress and its listener; the selection's facets as a mesh
   // of their own for the drag's ray (built on demand).
@@ -162,7 +238,13 @@ export function createViewer(host, {onClick = null} = {}) {
   let overlayStale = false;
 
   function render() {
+    // The studio turns with the camera (three.js looks it up through this rotation's inverse: in the camera's frame), the
+    // hemisphere's up is the camera's and the lamp at its place for the camera's distance (a zoom moves it with the
+    // camera): the light falls alike whatever the turn, as on the sensor on the part.
     placeHandles();
+    look.rotation.setFromQuaternion(camera.quaternion);
+    lights.turn();
+    lights.place(camera.position.distanceTo(controls.target));
     renderer.render(scene, camera);
   }
   function requestRender() {
@@ -171,6 +253,16 @@ export function createViewer(host, {onClick = null} = {}) {
     requestAnimationFrame(() => { pending = false; render(); });
   }
   controls.addEventListener("change", requestRender);
+  function dragging(on) {
+    // A drag's frames on a software renderer (SOFTWARE_RENDERER): the part's diffuse light alone while it lasts, its look
+    // drawn as it ends.
+    const part = groups.mesh;
+    if (!dragMaterial || !part) return;
+    part.material = on ? dragMaterial : part.userData.look;
+    if (!on) requestRender();
+  }
+  controls.addEventListener("start", () => dragging(true));
+  controls.addEventListener("end", () => dragging(false));
 
   function resize() {
     const width = host.clientWidth; const height = host.clientHeight;
@@ -215,6 +307,7 @@ export function createViewer(host, {onClick = null} = {}) {
     }
     model.center = [0, 1, 2].map(axis => 0.5 * (low[axis] + high[axis]));
     model.radius = Math.max(1e-3, 0.5 * Math.hypot(high[0] - low[0], high[1] - low[1], high[2] - low[2]));
+    markRadius = null;
     model.facets = facets;
     model.hidden = new Set(hiddenFacets);
     model.selection = [];
@@ -237,9 +330,8 @@ export function createViewer(host, {onClick = null} = {}) {
     geometry.setAttribute("color", new THREE.BufferAttribute(new Float32Array(display.length), 3));
     geometry.computeBoundingSphere();
     // Non-indexed and in file order: the raycaster's faceIndex is the STL facet id.
-    const mesh = new THREE.Mesh(geometry, new THREE.MeshLambertMaterial({
-      vertexColors: true, side: THREE.DoubleSide, polygonOffset: true, polygonOffsetFactor: 1, polygonOffsetUnits: 1,
-    }));
+    const mesh = new THREE.Mesh(geometry, partMaterial(look));
+    mesh.userData.look = mesh.material;
     endDrag();
     ["outline", "side", "overlay", "hover", "border", "handles"].forEach(key => replace(key, null));
     border.handles = [];
@@ -275,7 +367,7 @@ export function createViewer(host, {onClick = null} = {}) {
 
   function polyline(points, color, closed = false) {
     const geometry = new THREE.BufferGeometry().setFromPoints(points.map(local));
-    const material = new THREE.LineBasicMaterial({color});
+    const material = lineMaterial({color});
     return closed ? new THREE.LineLoop(geometry, material) : new THREE.Line(geometry, material);
   }
 
@@ -292,8 +384,8 @@ export function createViewer(host, {onClick = null} = {}) {
     const runs = (Array.isArray(points?.[0]?.[0]) ? points : [points]).filter(run => Array.isArray(run) && run.length > 1);
     const outside = polylines(outsideRuns).map(run => run.map(local));
     if (!runs.length && !outside.length) { replace("side", null); return; }
-    const radius = Math.max(0.15, model.radius * 0.006);
-    const material = new THREE.MeshBasicMaterial({color: COLORS.side});
+    const radius = Math.max(0.15, marks() * 0.006);
+    const material = markerMaterial({color: COLORS.side});
     const group = new THREE.Group();
     for (const run of runs) {
       const path = new THREE.CurvePath();
@@ -301,7 +393,7 @@ export function createViewer(host, {onClick = null} = {}) {
       group.add(new THREE.Mesh(new THREE.TubeGeometry(path, Math.max(1, run.length - 1) * 4, radius, 8, false), material));
     }
     // Dashed like the border beyond the surface (setBorder), at the exit's thickness (over the border's dashes).
-    const dash = Math.max(0.5, model.radius * 0.025);
+    const dash = Math.max(0.5, marks() * 0.025);
     const dashed = outside.length ? tubes(outside, radius, COLORS.side, {dash: [dash, 0.7 * dash]}) : null;
     if (dashed) group.add(dashed);
     group.userData = {segments: runs.reduce((total, run) => total + run.length - 1, 0), outsideSegments: dashed?.userData.segments || 0};
@@ -330,7 +422,7 @@ export function createViewer(host, {onClick = null} = {}) {
     if (!map) { replace("overlay", null); return; }
     const group = new THREE.Group();
     for (const key of ["row", "column", "field"]) {
-      const material = new THREE.LineBasicMaterial({color: COLORS[key], transparent: true});
+      const material = lineMaterial({color: COLORS[key], transparent: true});
       material.userData.color = COLORS[key];
       group.add(new THREE.LineSegments(segments(map.overlay?.[key]), material));
     }
@@ -339,8 +431,8 @@ export function createViewer(host, {onClick = null} = {}) {
       const ends = edgeEnds(map.overlay?.[key]);
       if (!ends.length) continue;
       // Large and in one dark colour of their own, so that they stand out against the board's line where it leaves.
-      const marker = new THREE.SphereGeometry(Math.max(0.6, model.radius * 0.02), 16, 10);
-      const material = new THREE.MeshBasicMaterial({color: COLORS.leave, transparent: true});
+      const marker = new THREE.SphereGeometry(Math.max(0.6, marks() * 0.02), 16, 10);
+      const material = markerMaterial({color: COLORS.leave, transparent: true});
       material.userData.color = COLORS.leave;
       const instances = new THREE.InstancedMesh(marker, material, ends.length);
       const matrix = new THREE.Matrix4();
@@ -353,7 +445,7 @@ export function createViewer(host, {onClick = null} = {}) {
     const taxels = Array.isArray(map.taxels) ? map.taxels : [];
     if (taxels.length) {
       const disc = new THREE.CircleGeometry(Math.max(0.05, taxelRadiusMm), 16);
-      const material = new THREE.MeshBasicMaterial({color: COLORS.taxel, side: THREE.DoubleSide, transparent: true});
+      const material = markerMaterial({color: COLORS.taxel, side: THREE.DoubleSide, transparent: true});
       material.userData.color = COLORS.taxel;
       const instances = new THREE.InstancedMesh(disc, material, taxels.length);
       const matrix = new THREE.Matrix4(); const rotation = new THREE.Quaternion(); const unit = new THREE.Vector3(1, 1, 1);
@@ -559,7 +651,7 @@ export function createViewer(host, {onClick = null} = {}) {
     return {index: chosen.index, point: chosen.point, distance: chosen.distance};
   }
 
-  const sideRadius = () => Math.max(0.15, model.radius * 0.006);
+  const sideRadius = () => Math.max(0.15, marks() * 0.006);
   /** Highlight the side under the cursor (a run of STL points, a list of runs, or null), around the exit's tube. */
   function setHoverRun(run) {
     const runs = polylines(run).map(points => points.map(local));
@@ -579,9 +671,9 @@ export function createViewer(host, {onClick = null} = {}) {
     const outside = polylines(outsideRuns).map(run => run.map(local));
     if (!inside.length && !outside.length) { replace("border", null); return; }
     const group = new THREE.Group();
-    const radius = Math.max(0.1, model.radius * 0.004);
+    const radius = Math.max(0.1, marks() * 0.004);
     const solid = inside.length ? tubes(inside, radius, COLORS.border) : null;
-    const dash = Math.max(0.5, model.radius * 0.025);
+    const dash = Math.max(0.5, marks() * 0.025);
     const dashed = outside.length ? tubes(outside, radius, COLORS.borderOutside, {dash: [dash, 0.7 * dash]}) : null;
     [solid, dashed].forEach(part => part && group.add(part));
     group.userData = {segments: solid?.userData.segments || 0, outsideSegments: dashed?.userData.segments || 0};
@@ -615,8 +707,8 @@ export function createViewer(host, {onClick = null} = {}) {
       const node = new THREE.Group();
       node.position.copy(local(handle.xyz));
       node.userData = {kind: handle.kind, key: `${handle.kind}:${handle.index}`, xyz: handle.xyz, selected: handle.selected};
-      const ring = new THREE.Mesh(shapes[handle.kind], new THREE.MeshBasicMaterial({color: COLORS.handleRing, side: THREE.BackSide, depthTest: false, transparent: true}));
-      const core = new THREE.Mesh(shapes[handle.kind], new THREE.MeshBasicMaterial({color: COLORS.handle, depthTest: false, transparent: true}));
+      const ring = new THREE.Mesh(shapes[handle.kind], markerMaterial({color: COLORS.handleRing, side: THREE.BackSide, depthTest: false, transparent: true}));
+      const core = new THREE.Mesh(shapes[handle.kind], markerMaterial({color: COLORS.handle, depthTest: false, transparent: true}));
       ring.scale.setScalar(1.4);
       ring.renderOrder = 20;
       core.renderOrder = 21;
@@ -706,7 +798,7 @@ export function createViewer(host, {onClick = null} = {}) {
     geometry.setAttribute("position", new THREE.BufferAttribute(positions, 3));
     geometry.computeBoundingSphere();
     geometry.computeBoundingBox();
-    const surface = new THREE.Mesh(geometry, new THREE.MeshBasicMaterial({side: THREE.DoubleSide}));
+    const surface = new THREE.Mesh(geometry, markerMaterial({side: THREE.DoubleSide}));  // never drawn: the drag's ray only
     surface.updateMatrixWorld(true);
     border.surface = {mesh: surface, slots, triangles: null};
     return border.surface;
@@ -781,6 +873,7 @@ export function createViewer(host, {onClick = null} = {}) {
     border.drag = {kind: handle.kind, index: handle.index, pointerId: event.pointerId, offset: at ? [at.x - event.clientX, at.y - event.clientY] : [0, 0],
       last: handle.xyz.slice(), facet, selectionIndex, controls: controls.enabled, press: [event.clientX, event.clientY], moved: false};
     controls.enabled = false;
+    dragging(true);
     setHot(`${handle.kind}:${handle.index}`);
     renderer.domElement.style.cursor = "grabbing";
     emitDrag("start");
@@ -790,6 +883,7 @@ export function createViewer(host, {onClick = null} = {}) {
     if (!drag) return;
     border.drag = null;
     controls.enabled = drag.controls;
+    dragging(false);
     try {
       if (renderer.domElement.hasPointerCapture?.(drag.pointerId)) renderer.domElement.releasePointerCapture(drag.pointerId);
     } catch (error) { /* the pointer is gone */ }
@@ -873,13 +967,146 @@ export function createViewer(host, {onClick = null} = {}) {
     if (moved < CLICK_PX && onClick) onClick({clientX: event.clientX, clientY: event.clientY, shiftKey: event.shiftKey, altKey: event.altKey});
   });
 
+  // A lost context (a GPU reset; a phone's tab long in the background): three.js makes its state again when it comes back
+  // (its own listener runs first), and the part, the markers and their materials upload again as they are drawn.  The
+  // studio (a render target, lost with the context) is made again (or not, studioFor) for the part's material; the lost
+  // one is dropped, never disposed (a dispose now has three.js delete the lost context's GL objects in the new one:
+  // Chrome's "WebGL: INVALID_OPERATION: delete: object does not belong to this context", as the sensor on the part had,
+  // the review of 2026-11-05); the garbage collector takes its JS side.  Then the view is drawn again.
+  canvas.addEventListener("webglcontextrestored", () => {
+    look.environment = studioFor(renderer);
+    if (groups.mesh) groups.mesh.userData.look.envMap = look.environment?.texture || null;
+    requestRender();
+  });
+
+  /**
+   * The checks' reads of the look (probe only; main.js answers "fpc:view-look" with them under ?probe): the drawing as it
+   * is, in the drawing buffer's device pixels, each read a render and a gl.readPixels in this task.  The part drawn alone
+   * lit, without the studio's reflections (envMapIntensity 0) and without the tone mapping, in its facets' own colours
+   * unlit (which pixel shows which meaning colour) and with its normals (the camera's frame); for each of paint's colours
+   * seen (base, hidden, selected, rejected) its pixels drawn whole (the same colour round them): px, their median sRGB
+   * lit (rgb), the part's alone of those toward the key (toward: the normal within TOWARD_KEY's cosine of LIGHTS.key.at)
+   * and turned from it (away: under TURNED_FROM), the share the studio lightens by PROBE_LEVEL or more and by how much on
+   * average and at most (sheen: its faint frosted reflection), and the share the tone mapping changes by PROBE_LEVEL or
+   * more (toned); each marker group drawn alone over the part (drawn black), its pixels and the colour most of them show
+   * (rgb: its own, unlit); the background's median, whether the part mirrors the studio (studio), and the renderer's
+   * textures, geometries and programs (memory: a model's load leaves no render target or texture behind).
+   */
+  function pixels() {
+    if (!probe || !groups.mesh) return null;
+    const gl = renderer.getContext();
+    const {x: width, y: height} = renderer.getDrawingBufferSize(new THREE.Vector2());
+    const read = () => {
+      render();
+      const data = new Uint8Array(4 * width * height);
+      gl.readPixels(0, 0, width, height, gl.RGBA, gl.UNSIGNED_BYTE, data);
+      return data;
+    };
+    const part = groups.mesh; const material = part.material;
+    const lit = read();
+    const markers = Object.entries(groups).filter(([key, group]) => group && key !== "mesh" && group.visible);
+    markers.forEach(([, group]) => { group.visible = false; });
+    const bare = read();
+    const intensity = material.envMapIntensity;
+    material.envMapIntensity = 0;
+    const matte = read();
+    material.envMapIntensity = intensity;
+    const tone = renderer.toneMapping;
+    renderer.toneMapping = THREE.NoToneMapping;
+    const untoned = read();
+    renderer.toneMapping = tone;
+    const offset = {side: THREE.DoubleSide, polygonOffset: true, polygonOffsetFactor: 1, polygonOffsetUnits: 1};
+    const passes = {materials: []};
+    for (const [name, pass] of [["keys", markerMaterial({vertexColors: true, ...offset})], ["normals", new THREE.MeshNormalMaterial(offset)],
+      ["black", markerMaterial({color: 0x000000, ...offset})]]) {
+      part.material = pass;
+      passes[name] = read();
+      passes.materials.push(pass);
+    }
+    const drawn = {};
+    for (const [name, group] of markers) {
+      // Its pixels: those it changes over the black part; its colour: the one most of them show (where it is drawn whole).
+      group.visible = true;
+      const alone = read();
+      group.visible = false;
+      const counts = new Map();
+      let px = 0;
+      for (let k = 0; k < alone.length; k += 4) {
+        if (alone[k] === passes.black[k] && alone[k + 1] === passes.black[k + 1] && alone[k + 2] === passes.black[k + 2]) continue;
+        const rgb = (alone[k] << 16) | (alone[k + 1] << 8) | alone[k + 2];
+        counts.set(rgb, (counts.get(rgb) || 0) + 1);
+        px += 1;
+      }
+      let most = null;
+      for (const [rgb, count] of counts) if (!most || count > most[1]) most = [rgb, count];
+      drawn[name] = {px, rgb: most ? [most[0] >> 16, (most[0] >> 8) & 255, most[0] & 255] : null};
+    }
+    passes.materials.forEach(pass => pass.dispose());
+    part.material = material;
+    markers.forEach(([, group]) => { group.visible = true; });
+    render();
+    // Which of paint's colours a pixel shows (its sRGB within 2 levels: the GPU's rounding), and the background's.
+    const sRGB = rgb => { const hex = new THREE.Color().setRGB(...rgb).getHex(); return [hex >> 16, (hex >> 8) & 255, hex & 255]; };
+    const colours = ["base", "hidden", "selected", "rejected"].map(name => [name, sRGB(COLORS[name])]);
+    const keys = passes.keys; const normals = passes.normals;
+    const colourAt = k => {
+      for (const [name, [r, g, b]] of colours) if (Math.abs(keys[k] - r) <= 2 && Math.abs(keys[k + 1] - g) <= 2 && Math.abs(keys[k + 2] - b) <= 2) return name;
+      return null;
+    };
+    const clear = scene.background.getHex();
+    const toward = new THREE.Vector3(...LIGHTS.key.at).normalize();
+    const lists = {};
+    const background = [];
+    for (let y = 1; y < height - 1; y += 1) {
+      for (let x = 1; x < width - 1; x += 1) {
+        const k = 4 * (y * width + x);
+        const name = colourAt(k);
+        if (!name) {
+          if (((keys[k] << 16) | (keys[k + 1] << 8) | keys[k + 2]) === clear) background.push(k);
+          continue;
+        }
+        if ([k - 4, k + 4, k - 4 * width, k + 4 * width].some(near => colourAt(near) !== name)) continue;
+        const facing = (normals[k] / 127.5 - 1) * toward.x + (normals[k + 1] / 127.5 - 1) * toward.y + (normals[k + 2] / 127.5 - 1) * toward.z;
+        const list = lists[name] ||= {all: [], toward: [], away: []};
+        list.all.push(k);
+        if (facing >= TOWARD_KEY) list.toward.push(k);
+        if (facing < TURNED_FROM) list.away.push(k);
+      }
+    }
+    const median = (data, at) => (at.length ? [0, 1, 2].map(channel => {
+      const histogram = new Uint32Array(256);
+      at.forEach(k => { histogram[data[k + channel]] += 1; });
+      let seen = 0;
+      for (let level = 0; level < 256; level += 1) { seen += histogram[level]; if (2 * seen >= at.length) return level; }
+      return 255;
+    }) : null);
+    const classes = {};
+    for (const [name, list] of Object.entries(lists)) {
+      let lighter = 0; let more = 0; let most = 0; let toned = 0;
+      for (const k of list.all) {
+        const sheen = Math.max(bare[k] - matte[k], bare[k + 1] - matte[k + 1], bare[k + 2] - matte[k + 2]);
+        lighter += sheen >= PROBE_LEVEL;
+        more += Math.max(0, sheen);
+        most = Math.max(most, sheen);
+        toned += Math.max(Math.abs(bare[k] - untoned[k]), Math.abs(bare[k + 1] - untoned[k + 1]), Math.abs(bare[k + 2] - untoned[k + 2])) >= PROBE_LEVEL;
+      }
+      const share = count => Math.round((count / list.all.length) * 1e3) / 1e3;
+      classes[name] = {px: list.all.length, rgb: median(lit, list.all), toward: median(bare, list.toward), toward_px: list.toward.length,
+        away: median(bare, list.away), away_px: list.away.length,
+        sheen: {share: share(lighter), mean: Math.round((more / list.all.length) * 10) / 10, max: most}, toned: share(toned)};
+    }
+    return {buffer: [width, height], studio: Boolean(look.environment), classes, markers: drawn, background: median(lit, background),
+      memory: {textures: renderer.info.memory.textures, geometries: renderer.info.memory.geometries, programs: renderer.info.programs?.length ?? null}};
+  }
+
   const gl = renderer.getContext();
   const debug = gl.getExtension("WEBGL_debug_renderer_info");
   const info = {renderer: String(debug ? gl.getParameter(debug.UNMASKED_RENDERER_WEBGL) : gl.getParameter(gl.RENDERER)), three: THREE.REVISION};
+  dragMaterial = SOFTWARE_RENDERER.test(info.renderer) ? diffuseMaterial() : null;
   resize();
   return {
-    setMesh, clear, setSelection, setOutline, setSide, setOverlay, setOverlayStale, view, lookAt, setClearance, pick, project, nearestRun, nearestPoint, resize,
-    nearestVisiblePoint, isVisible, setHoverRun, setBorder, setBorderHandles, pickHandle, pickBorder, onBorderDrag, setBorderEditing,
+    setMesh, clear, setSelection, setOutline, setSide, setOverlay, setMarkScale, setOverlayStale, view, lookAt, setClearance, pick, project, nearestRun, nearestPoint, resize,
+    nearestVisiblePoint, isVisible, setHoverRun, setBorder, setBorderHandles, pickHandle, pickBorder, onBorderDrag, setBorderEditing, pixels,
     info: () => ({...info, overlayTaxels: groups.overlay?.userData.taxels || 0, overlayMarkers: groups.overlay?.userData.markers || 0,
       hoverRun: Boolean(groups.hover), sideSegments: groups.side?.userData.segments || 0, sideOutsideSegments: groups.side?.userData.outsideSegments || 0, borderSegments: groups.border?.userData.segments || 0, borderOutsideSegments: groups.border?.userData.outsideSegments || 0,
       borderHandles: border.handles.length, borderHandlesShown: border.shown ? border.shown.size : null, borderEditing: border.editing, borderDragging: border.drag ? `${border.drag.kind}:${border.drag.index}` : null}),

@@ -1,7 +1,9 @@
 // CAD mode ("Gen by Surface" on the page) of FlexiTac-Gen: the mode switch, the CAD workspace
 // steps (file, surface, base edge, configure, proposals, generate, mapping,
 // downloads) and the calls to /api/surface/*.  three.js is loaded only by
-// viewer.js, imported on the first entry to CAD mode.
+// viewer.js, imported on the first entry to CAD mode, and by onpart.js (the
+// sensor on the part beside the stacked view, 2026-11-05), imported once the
+// 3D view has loaded; drape.js, its geometry, is pure and imported here.
 //
 // Generate never calls the generator itself: it hands the chosen design to the
 // form with the "fpc:apply-design" event; web/app.js checks it against the
@@ -19,6 +21,7 @@
 import {parseStl} from "./stl.js";
 import {MAX_SURFACE_BYTES, surfaceRequest} from "./api.js";
 import * as B from "./border.js";
+import * as D from "./drape.js";
 
 const SVG_NS = "http://www.w3.org/2000/svg";
 // select.PRESETS of surface/select.py: [theta_d_deg, theta_c_deg, min_radius_mm].
@@ -37,6 +40,22 @@ const FIT_MAX_COLUMNS = 64;
 // at once.  The fit takes at most 32 rows and 32 columns (Max rows / columns; the template allows more).
 const DEFAULT_PART = {url: "static/vendor/umi/UMI-Soft-Gripper-Finger.stl", name: "UMI-Soft-Gripper-Finger.stl",
   fit: "static/vendor/umi/default-fit.json", tipSide: 2, borderMm: 65};
+// The Library (library.html; the user's requests of 2026-11-05): ./?part=<id> opens one of its sensors here in place of
+// DEFAULT_PART (<id> a variant, or a part or a family meaning its default variant, entries.json): the part's mesh and its shipped
+// fit (static/library/fits/<id>.json, tools/library_write.py: the request this page sends for it, which runFit then
+// takes as DEFAULT_PART's), its sensor built at once from that request's own selection, base, border and options
+// (buildDefaultSensor), step 1's file note naming it.  The user's own file or Remove model leaves it (leaveLibrary):
+// ?part goes from the address and the options it set go back.  An unknown id: DEFAULT_PART, with a warning.
+const LIBRARY_INDEX = "static/library/entries.json";
+const LIBRARY_ID = new URLSearchParams(location.search).get("part") || "";
+// The samples under the step guide (index.html #samplePalette; the user's request of 2026-11-06): a tile dragged onto
+// the 3D view (its id in the drag's SAMPLE_TYPE data) or pressed loads its part and builds its sensor at once
+// (loadSample), as ./?sample=<id> does (the address says the sample shown, ./?part's way; a reload shows it again).
+// static/samples/samples.json gives each one's Library sensor (its fit's selection, base, border and options) and, for a
+// whole gripper, its own mesh (the part's facets first, so that selection names the same face; fitted by the engine).
+const SAMPLES_INDEX = "static/samples/samples.json";
+const SAMPLE_TYPE = "application/x-flexitac-sample";
+const SAMPLE_ID = new URLSearchParams(location.search).get("sample") || "";
 const FIT_DEFAULT_MAX = 32;
 const ARC_HALF_LENGTH_MM = 15;
 const ARC_WHEN_SIDES_SHORTER_MM = 20;
@@ -66,6 +85,13 @@ const cad = {
   defaultPart: "idle", defaultBuild: "idle",
   // The default part's shipped fit ({request, reply}) and where the last fit came from (the server or that file).
   defaultFit: null, fitSource: null,
+  // The Library's sensor shown in its place (./?part=<id>): {id, label, part, fitError, options: the controls it set,
+  // {id: value}}, or null; a sample's carries sample: {id, name, gripper, camera, partFacets} (./?sample=<id>).
+  entry: null,
+  // The sample on its way (loadSample): {id, load: the cad.seq.load it answers to, loadFile's once its mesh is read},
+  // until its sensor's build returns, or null (sampleLoading: live while nothing came after it); each press's ticket
+  // (the newest wins).  The build of the default part's or a sample's sensor under way (buildDefaultSensor): its run.
+  samplePending: null, sampleTicket: 0, buildRun: null,
   // Whether CAD mode generated a build this session: until then its results below (a rectangular build) stay hidden.
   generated: false,
   verifyOpen: false,  // the user's choice for the folded checks on the part
@@ -86,6 +112,11 @@ const cad = {
   loading: null, status: {kind: "neutral", message: ""},
   // Generate sensor (oneStep, under the view) at work.
   stepRunning: false,
+  // The sensor on the part (section 7b): its view (onpart.js, made once) and its loading, the state shown and its note,
+  // the map and look drawn and those being drawn, the serial of the last draw, its numbers for #cadState, the mode
+  // (exploded or assembled).
+  onPart: {view: null, load: null, failed: false, lost: false, state: "off", note: null, drawn: null, want: null, failedFor: null, serial: 0,
+    info: null, mode: "exploded"},
 };
 
 // -- small helpers -------------------------------------------------------------
@@ -176,6 +207,24 @@ function whenIdle(kind, limitMs = 60000) {
     look();
   });
 }
+function whenBuilt(limitMs = 120000) {
+  // Resolves once no build of Generate is pending (cad.pendingBuild: the form's answer and its result).
+  const end = performance.now() + limitMs;
+  return new Promise(resolve => {
+    const look = () => (!cad.pendingBuild || performance.now() > end ? resolve() : setTimeout(look, 40));
+    look();
+  });
+}
+function whenSettled(limitMs = 180000) {
+  // Resolves once no sensor's build of the default part or a sample is under way (cad.buildRun), nor a build or request,
+  // and the status says how it ended (not the work under way, neutral: a build's map reports a little after it).
+  const end = performance.now() + limitMs;
+  const settled = () => !(cad.buildRun || cad.pendingBuild || cad.busy.size) && cad.status.kind !== "neutral";
+  return new Promise(resolve => {
+    const look = () => (settled() || performance.now() > end ? resolve() : setTimeout(look, 40));
+    look();
+  });
+}
 function abortRequests(...kinds) {
   kinds.forEach(kind => cad.controllers.get(kind)?.abort());
 }
@@ -188,6 +237,7 @@ function askApp(type, detail) {
 // -- state output (deterministic, for the browser checks) -----------------------
 
 function renderState() {
+  syncOnPart();
   const mesh = cad.inspect?.mesh;
   const proposal = chosenProposal();
   const verification = cad.map?.verification || [];
@@ -202,6 +252,7 @@ function renderState() {
     mesh: mesh ? {name: mesh.name, facets: mesh.facets, unit: mesh.unit, format: mesh.format, watertight: mesh.watertight, browser_facets: cad.parsed?.facets ?? null} : null,
     default_part: cad.defaultPart,
     default_build: cad.defaultBuild,
+    sample: renderSamples(),
     facet_mismatch: cad.facetMismatch,
     ops: cad.ops.length,
     selection: cad.selection ? {facets: cad.selection.facets.length, area_mm2: cad.selection.area_mm2, kind: cad.selection.kind, sides: cad.selection.sides.length} : null,
@@ -246,6 +297,7 @@ function renderState() {
     pending_build: cad.pendingBuild,
     verification: cad.map ? {ok: cad.map.ok === true, passed: verification.filter(record => record.passed).length, total: verification.length} : null,
     map_error: cad.mapError?.code ?? null,
+    on_part: onPartState(),
     stale: cad.stale,
     downloads: downloadsReady(),
     placement_build_id: placementDocument()?.build_id ?? null,
@@ -454,7 +506,7 @@ function ensureViewer() {
   if (!cad.viewerLoad) {
     cad.viewerLoad = import("./viewer.js").then(module => {
       try {
-        cad.viewer = module.createViewer($("cadView"), {onClick: onViewClick});
+        cad.viewer = module.createViewer($("cadView"), {onClick: onViewClick, probe: ON_PART_PROBE});
       } catch (error) {
         throw new Error(`WebGL unavailable: ${error?.message || error}`);
       }
@@ -505,37 +557,157 @@ function syncFitLimits() {
 // -- 1. file ----------------------------------------------------------------------
 
 async function loadDefaultPart() {
-  // CAD mode's part until the user chooses one (DEFAULT_PART): fetched once, and dropped when a file came meanwhile.
+  // CAD mode's part until the user chooses one (DEFAULT_PART, or the Library's sensor of ./?part=<id>): fetched once,
+  // and dropped when a file came meanwhile.
   if (cad.defaultPart !== "idle" || cad.mesh) return;
   cad.defaultPart = "loading";
   cad.defaultBuild = "pending";
   const ticket = cad.seq.load;
-  setLoading(DEFAULT_PART.name);
+  const {part, entry, missing} = LIBRARY_ID ? await libraryPart(LIBRARY_ID) : SAMPLE_ID ? await samplePart(SAMPLE_ID)
+    : {part: DEFAULT_PART, entry: null, missing: ""};
+  const ours = () => ticket === cad.seq.load && !cad.mesh;
+  if (ours()) setLoading(part.name);
   try {
-    // The shipped fit is optional: without it the default part's fit asks the server.
-    const [reply, shipped] = await Promise.all([fetch(DEFAULT_PART.url),
-      fetch(DEFAULT_PART.fit).then(answer => (answer.ok ? answer.json() : null)).catch(() => null)]);
+    // The shipped fit is optional: without it the default part's fit asks the server (a Library sensor's stops).
+    let fitError = "";
+    const [reply, shipped] = await Promise.all([fetch(part.url),
+      fetch(part.fit).then(answer => (answer.ok ? answer.json() : Promise.reject(new Error(`HTTP ${answer.status}`))))
+        .catch(error => { fitError = error.message; return null; })]);
     if (!reply.ok) throw new Error(`HTTP ${reply.status}`);
-    cad.defaultFit = shipped?.request && shipped?.reply ? shipped : null;
+    cad.defaultFit = shippedFit(part, shipped);
     const bytes = await reply.blob();
-    if (ticket !== cad.seq.load || cad.mesh) cad.defaultPart = "skipped";
+    if (!ours()) cad.defaultPart = "skipped";
     else {
       cad.defaultPart = "loaded";
-      await loadFile(new File([bytes], DEFAULT_PART.name, {type: "model/stl"}), {isDefault: true});
-      await buildDefaultSensor();
+      await loadFile(new File([bytes], part.name, {type: "model/stl"}), {isDefault: true});
+      const load = cad.seq.load;
+      if (entry && cad.defaultFile) cad.entry = {...entry, fitError: fitError || (cad.defaultFit ? "" : "no request or reply")};
+      cad.viewer?.setMarkScale(sampleFingerRadius());
+      libraryNote();
+      if (await buildDefaultSensor()) sampleView();
+      if (missing) {
+        // Said once the sensor is built and mapped (the map's own status would cover it).
+        await whenIdle("map");
+        if (cad.defaultFile && cad.seq.load === load) setStatus("warning", missing);
+      }
     }
   } catch (error) {
     cad.defaultPart = "failed";
-    if (ticket === cad.seq.load && !cad.mesh) {
+    if (ours()) {
       setLoading(null);
       $("cadDrop").hidden = false;
-      setStatus("warning", `The default part (${DEFAULT_PART.name}) was not loaded (${error.message}): drop an STL file on the view or choose one.`);
+      setStatus("warning", `The default part (${part.name}) was not loaded (${error.message}): drop an STL file on the view or choose one.`);
     }
   }
   // Skipped (a file came first) on this ticket: the veil was the default part's.
-  if (ticket === cad.seq.load && cad.loading === DEFAULT_PART.name && cad.defaultPart !== "loaded") setLoading(null);
-  if (cad.defaultBuild === "pending" || cad.defaultBuild === "running") cad.defaultBuild = "stopped";
+  if (ticket === cad.seq.load && cad.loading === part.name && cad.defaultPart !== "loaded") setLoading(null);
+  // Its build not started (buildDefaultSensor settles its own, and a sample's may run by now).
+  if (cad.defaultBuild === "pending") cad.defaultBuild = "stopped";
   renderState();
+}
+
+async function libraryPart(id, {fallback = true} = {}) {
+  // The Library's sensor <id> (a variant id, or a part id or a family id meaning its default variant, as library.html#<id>
+  // takes them: ?part=umi-tapers the tapered tips' default, the review of 2026-11-05) as the default part: its mesh,
+  // its fit and its entry.  An unknown id or no index: DEFAULT_PART, the reason, and ?part dropped from the address
+  // (without fallback, a sample's lookup: null for an unknown id, the error thrown).
+  let reason;
+  try {
+    const answer = await fetch(LIBRARY_INDEX);
+    if (!answer.ok) throw new Error(`HTTP ${answer.status}`);
+    const index = await answer.json();
+    const chosen = Object.hasOwn(index.variants || {}, id) ? id : Object.hasOwn(index.parts || {}, id) ? index.parts[id].default
+      : Object.hasOwn(index.families || {}, id) ? index.families[id].default : "";
+    const variant = chosen ? index.variants[chosen] : null;
+    const part = variant ? index.parts[variant.part] : null;
+    if (part) {
+      return {part: {url: `static/library/${part.mesh.file}`, name: part.mesh.name, fit: `static/library/${variant.fit}`, facets: part.mesh.facets},
+        entry: {id: chosen, label: variant.label, part: variant.part, options: {}}, missing: ""};
+    }
+    reason = `No library sensor is named ${id}; the UMI finger is shown.`;
+  } catch (error) {
+    if (!fallback) throw error;
+    reason = `No library sensor is shown (the library was not loaded: ${error.message}); the UMI finger is shown.`;
+  }
+  if (!fallback) return null;
+  dropPartParameter();
+  return {part: DEFAULT_PART, entry: null, missing: reason};
+}
+
+function shippedFit(part, shipped) {
+  // A fit file ({request, reply}) as runFit takes it, or null.  A whole-gripper sample (part.ownMesh: its own mesh, not
+  // the one the Library's reply was fitted on) keeps the request alone, without the file's name: buildDefaultSensor
+  // builds from it, and since no request the page sends is it (each names its file), runFit asks the server.
+  if (!shipped?.request || !shipped?.reply) return null;
+  if (!part.ownMesh) return shipped;
+  const {name, ...request} = shipped.request;
+  return {request, reply: null};
+}
+
+function dropPartParameter() {
+  // ?part and ?sample off the address (replaceState), every other parameter as written (?debug stays ?debug) and the
+  // hash kept.
+  const pairs = location.search.slice(1).split("&").filter(pair => pair !== "");
+  const kept = pairs.filter(pair => !["part", "sample"].includes(pair.split("=")[0]));
+  if (kept.length === pairs.length) return;
+  history.replaceState(history.state, "", `${location.pathname}${kept.length ? `?${kept.join("&")}` : ""}${location.hash}`);
+}
+
+function libraryNote() {
+  // Step 1's file note (index.html #cadFileNote): while a Library sensor is shown "From the Library: <label>" (one line;
+  // the Library in a new tab, at that sensor), else its own text (the user's of 2026-10-31).  The label's pitch and its
+  // "mm" are joined by a no-break space, so where the note wraps (a phone) "mm" is not left alone on its last line (the
+  // review of 2026-11-05).
+  const note = $("cadFileNote");
+  if (!("text" in note.dataset)) note.dataset.text = note.textContent;
+  if (!cad.entry) { note.textContent = note.dataset.text; return; }
+  // A whole-gripper sample: its name (its sensor is the Library's of its finger; a Library finger's note is the Library's).
+  if (cad.entry.sample?.gripper) { note.textContent = `Sample: ${cad.entry.sample.name}, whole gripper`; return; }
+  note.replaceChildren("From the ", el("a", {href: `library.html#${cad.entry.id}`, target: "_blank", rel: "noopener"}, "Library"), `: ${cad.entry.label.replace(/ mm$/, "\u00a0mm")}`);
+}
+
+function controlDefault(control) {
+  // A Resolution control's own default (index.html's): a select's defaultSelected option (else its first), an input's
+  // defaultValue.
+  return control.tagName === "SELECT" ? ([...control.options].find(option => option.defaultSelected) || control.options[0]).value : control.defaultValue;
+}
+
+function applyLibraryOptions(options) {
+  // The Library sensor's options on the Resolution step's controls (each [data-option] its request names), each one off
+  // its control's own default recorded ({id: the value set}) for leaveLibrary, whether this wrote it or the control held
+  // it already (a browser's restored form: Firefox puts a reloaded page's values back before main.js runs, and leaving
+  // the Library then kept 1 mm, 0.65 and rotation none; the review of 2026-11-05); numbers compared as numbers (2 is the
+  // default 2.0).
+  const changed = {};
+  for (const control of $("cadConfig").querySelectorAll("[data-option]")) {
+    const key = control.dataset.option;
+    if (!Object.hasOwn(options, key)) continue;
+    const value = String(options[key]);
+    const same = other => (control.tagName === "SELECT" ? other === value : Number(other) === Number(value));
+    if (!same(control.value)) control.value = value;
+    if (!same(controlDefault(control))) changed[control.id] = control.value;
+  }
+  cad.entry.options = changed;
+  syncObjective();
+  syncContainment();
+}
+
+function leaveLibrary() {
+  // The user's own file, or Remove model: the Library's sensor is no longer shown.  Each option it set that still holds
+  // the value it set goes back to the page's default (one the user changed meanwhile stays); ?part leaves the address.
+  const entry = cad.entry;
+  cad.entry = null;
+  if (entry) {
+    for (const [id, value] of Object.entries(entry.options)) {
+      const control = $(id);
+      if (!control || control.value !== value) continue;
+      control.value = controlDefault(control);
+    }
+    syncObjective();
+    syncContainment();
+  }
+  dropPartParameter();
+  libraryNote();
 }
 
 function defaultBorder() {
@@ -562,26 +734,63 @@ function canonical(value) {
 async function buildDefaultSensor() {
   // The default part's sensor, as if clicked: its first flat candidate (the finger's contact face), Fit with the options
   // as they are (Max rows / columns FIT_DEFAULT_MAX) and Generate of the first proposal.  Another file, selection, fit,
-  // option or the Rectangular mode on the way stops it.
+  // option or the Rectangular mode on the way stops it.  A Library sensor (cad.entry) is built from its shipped fit's
+  // request instead: its options, its selection, its border or base point, so that runFit's request is that one.
+  // It settles cad.defaultBuild itself (done, or stopped however it ends, unless a later build runs: cad.buildRun), and
+  // says whether it built the sensor (the review of 2026-11-06: a sample's build superseded by the user's own file had
+  // left it running, Generate sensor disabled for good).
+  const plan = cad.entry && cad.defaultFit ? cad.defaultFit.request : null;
   const face = cad.inspect?.candidates?.flat?.[0];
   const load = cad.seq.load;
   const ours = () => cad.defaultFile && cad.seq.load === load && cad.mode === "cad";
-  if (!ours() || !face) return;
-  cad.defaultBuild = "running";
-  renderState();
-  Object.assign(cad, {ops: [{op: "grow", mode: "add", seed_facet: face.seed_facet, preset: face.preset}], opsHistory: []});
-  await runSelect({look: true});
-  const select = cad.seq.select;
-  if (!ours() || !cad.selection || cad.selectionError) return;
-  const border = defaultBorder();
-  if (border) commitBorder(border, {side: "auto"});
-  await runFit();
-  const fit = cad.seq.fit;
-  if (!ours() || cad.seq.select !== select || !chosenProposal() || fitStale()) return;
-  await whenIdle("preview");
-  if (!ours() || cad.seq.fit !== fit) return;
-  await generate();
-  if (ours() && cad.seq.fit === fit) cad.defaultBuild = "done";
+  if (!ours()) {
+    if (!cad.buildRun) cad.defaultBuild = "stopped";
+    return false;
+  }
+  const run = (cad.buildRun = {});
+  let built = false;
+  try {
+    if (cad.entry && !plan) {
+      cad.defaultBuild = "stopped";
+      setStatus("warning", `The library fit of ${cad.entry.id} was not loaded (${cad.entry.fitError}); click the face and press Generate sensor.`);
+      return false;
+    }
+    if (!plan && !face) return false;
+    cad.defaultBuild = "running";
+    renderState();
+    // A sample dropped while the last one's build is under way: that build lands first (generate starts no second one,
+    // and its result finds no proposal of ours to map).
+    await whenBuilt();
+    if (!ours()) return false;
+    if (plan) applyLibraryOptions(plan.options || {});
+    const ops = plan ? structuredClone(plan.selection.ops) : [{op: "grow", mode: "add", seed_facet: face.seed_facet, preset: face.preset}];
+    Object.assign(cad, {ops, opsHistory: []});
+    await runSelect({look: true});
+    const select = cad.seq.select;
+    if (!ours() || !cad.selection || cad.selectionError) return false;
+    if (plan) {
+      if (plan.border) commitBorder(structuredClone(plan.border.uv), {side: "auto"});
+      else if (isPoint(plan.base)) choosePoint(plan.base.point_xyz);
+    } else {
+      const border = defaultBorder();
+      if (border) commitBorder(border, {side: "auto"});
+    }
+    await runFit();
+    const fit = cad.seq.fit;
+    if (!ours() || cad.seq.select !== select || !chosenProposal() || fitStale()) return false;
+    await whenIdle("preview");
+    if (!ours() || cad.seq.fit !== fit) return false;
+    await generate();
+    if (!ours() || cad.seq.fit !== fit) return false;
+    cad.defaultBuild = "done";
+    built = true;
+    return true;
+  } finally {
+    if (cad.buildRun === run) {
+      cad.buildRun = null;
+      if (!built) cad.defaultBuild = "stopped";
+    }
+  }
 }
 
 async function loadFile(file, {isDefault = false} = {}) {
@@ -611,6 +820,7 @@ async function loadFile(file, {isDefault = false} = {}) {
     return;
   }
   abortRequests("inspect", "select", "fit", "preview", "map");
+  if (!isDefault) leaveLibrary();  // the user's own file: a Library sensor's ?part and options go
   Object.assign(cad, {fileName: file.name, defaultFile: isDefault, mesh, parsed, inspect: null, facetMismatch: false, ops: [], opsHistory: [], selection: null, selectionError: null, runs: [], side: "auto", error: null});
   resetBorder();
   resetFit();
@@ -680,6 +890,7 @@ function removeModel() {
   cad.seq.load += 1; cad.seq.inspect += 1; cad.seq.select += 1;
   abortRequests("inspect", "select", "fit", "preview", "map");
   if (cad.defaultPart === "loading") cad.defaultPart = "skipped";
+  leaveLibrary();
   const name = cad.fileName;
   Object.assign(cad, {fileName: "", defaultFile: false, mesh: null, parsed: null, inspect: null, hidden: new Set(), facetMismatch: false,
     ops: [], opsHistory: [], selection: null, selectionError: null, runs: [], side: "auto", error: null});
@@ -709,6 +920,7 @@ function guessScale(positions) {
 function showMesh() {
   if (!cad.viewer || !cad.parsed || !cad.inspect) return;
   cad.viewer.setMesh(cad.parsed.positions, cad.inspect.mesh.scale_to_mm, cad.facetMismatch ? [] : cad.inspect.hidden_facets);
+  cad.viewer.setMarkScale(sampleFingerRadius());
   $("cadDrop").hidden = true;
   paintSelection();
 }
@@ -1458,7 +1670,10 @@ function setEditing(on, {quiet = false} = {}) {
   cad.viewer?.setBorderEditing(next);
   paintBorder();
   renderBorderBar();
+  // The help line takes a row only while the border is edited (its keys are said nowhere else); else it is hidden, the 3D
+  // view's description still (the user's request of 2026-11-06).
   $("cadHelp").textContent = next ? EDIT_HELP : defaultHelp;
+  $("cadHelp").hidden = !next;
   if (changed && !quiet) {
     setStatus("ok", next ? `Editing the border. ${borderSummary()} Clicks on the part select nothing until Done editing.`
       : `${borderEdited() ? borderSummary() : "Border: the surface outline."} ${cad.fit && fitStale() ? "Fit again to update the proposals." : ""}`.trim());
@@ -2293,6 +2508,7 @@ function renderVerification() {
       `Build ${cad.map.build_id} · ${cad.map.taxel_count} taxels on the part · ${verdict}`), details);
   }
   renderDownloads();
+  syncOnPart();
 }
 
 function onStaleChange() {
@@ -2303,6 +2519,223 @@ function onStaleChange() {
   $("cadVerify").classList.toggle("is-stale", stale);
   renderDownloads();
   renderState();
+}
+
+// -- 7b. the sensor on the part (the stacked card's right-hand figure) ----------------------------------------
+// The user's request of 2026-11-05: in this mode the stacked card shows, beside the registration (app.js's exploded
+// stack of the two FPCs, on the left and unchanged), what the sensor looks like on the part: the part, and outward from
+// it the bottom FPC, the film (velostat, black, over the taxel field) and the top FPC, each draped on the part's surface
+// and exploded along its normal (drape.js computes the sheets, onpart.js draws them with three.js).  It is drawn from
+// what the page holds once the build is mapped (cad.map of cad.lastResult's build; no request of its own): the fit's
+// chart (cad.fit.selection, the chart of the placement's uv), the STL, the mapped placement and the build's boards,
+// whose art app.js gives in the page's look ("fpc:board-art"; drawn again when the look changes).  syncOnPart runs after
+// every change of the map (renderVerification), of the mode and of the look, and whenever the state is published.
+
+const ON_PART_PX_PER_MM = 12;
+// The checks' reads of the drawn figure (onpart.js faces and pixels: renders and gl.readPixels, a GPU stall each) and
+// its comparison with the map (drape.js metrics), with ?probe only: a visitor's page draws the figure and no more (the
+// review of 2026-11-05).  The 3D view's reads of its look too (viewer.js pixels, its answer to "fpc:view-look"; the
+// user's request of 2026-11-05 gave it the figure's studio).
+const ON_PART_PROBE = new URLSearchParams(location.search).has("probe");
+const ON_PART_NOTES = {
+  part: "Load a part to see the sensor on it.",
+  build: "Generate the chosen proposal to see its sensor on the part.",
+  facets: "The browser and the server read this part's facets differently, so the sensor cannot be drawn on it here.",
+  waiting: "Placing the sensor on the part…",
+  drawing: "Drawing the sensor on the part…",
+  webgl: "This view needs WebGL, which is off in this browser.",
+};
+// The Diagram look's copper (engine/core.py's board SVG), within this much per channel: a taxel's centre on its art.
+const DIAGRAM_COPPER = [217, 103, 43];
+const COPPER_TOLERANCE = 24;
+const partBoxes = new WeakMap();
+
+function partBox() {
+  // The part's box in mm (the STL frame), [[x0, y0, z0], [x1, y1, z1]], kept per file.
+  const positions = cad.parsed?.positions; const scale = cad.inspect?.mesh?.scale_to_mm;
+  if (!positions || !Number.isFinite(scale)) return null;
+  const known = partBoxes.get(positions);
+  if (known?.scale === scale) return known.box;
+  const low = [Infinity, Infinity, Infinity]; const high = [-Infinity, -Infinity, -Infinity];
+  for (let i = 0; i < positions.length; i += 1) {
+    const axis = i % 3; const value = positions[i] * scale;
+    if (value < low[axis]) low[axis] = value;
+    if (value > high[axis]) high[axis] = value;
+  }
+  partBoxes.set(positions, {scale, box: [low, high]});
+  return [low, high];
+}
+
+function onPartPlan() {
+  // What the figure shows now: off (Rectangular mode), unavailable (no WebGL), empty (no part, no mapped build of the
+  // surface template, a facet mismatch), waiting (a build or its map on the way) or the drawing of cad.map in the look.
+  const op = cad.onPart; const result = cad.lastResult; const map = cad.map;
+  if (cad.mode !== "cad") return {state: "off", note: null};
+  if (cad.viewerError || op.failed || op.lost) return {state: "unavailable", note: ON_PART_NOTES.webgl};
+  if (!cad.parsed || !cad.inspect) return {state: "empty", note: ON_PART_NOTES.part};
+  if (cad.facetMismatch) return {state: "empty", note: ON_PART_NOTES.facets};
+  const built = result?.ok === true && result.design?.template_id === SURFACE_TEMPLATE_ID;
+  if (built && map && map.build_id === result.manifest.build_id && Array.isArray(cad.fit?.selection?.facets_uv)
+      && map.mesh?.sha256 === cad.inspect.mesh.sha256 && map.mesh?.unit === cad.inspect.mesh.unit) {
+    return {state: "draw", map, look: document.body.dataset.look || "photo"};
+  }
+  if (cad.pendingBuild || cad.busy.has("map")) return {state: "waiting", note: ON_PART_NOTES.waiting};
+  return {state: "empty", note: ON_PART_NOTES.build};
+}
+
+function syncOnPart() {
+  const op = cad.onPart;
+  if (!$("sensorOnPart")) return;
+  const plan = onPartPlan();
+  if (plan.state === "draw") {
+    if (op.drawn?.map === plan.map && op.drawn.look === plan.look) {
+      if (op.state !== "drawn") setOnPart("drawn", null);
+      return;
+    }
+    if (op.state === "drawing" && op.want?.map === plan.map && op.want.look === plan.look) return;
+    // A drawing that failed is not tried again until the map or the look changes.
+    if (op.state === "failed" && op.failedFor?.map === plan.map && op.failedFor.look === plan.look) return;
+    drawOnPart(plan);
+    return;
+  }
+  if (plan.state === "off") {
+    // Hidden with its card's half (styles.css); a drawing is kept for the way back, one under way goes on.
+    if (op.state !== "off") setOnPart("off", null);
+    return;
+  }
+  if (op.state === plan.state && op.note === plan.note) return;
+  // Nothing drawn: an earlier build's figure never stays.
+  op.serial += 1;
+  op.drawn = null;
+  op.want = null;
+  op.view?.clear({part: plan.state === "empty" && !cad.parsed, keep: cad.parsed?.positions});
+  setOnPart(plan.state, plan.note);
+}
+
+function onPartView() {
+  // The figure's view, made once (one WebGL context for the page) after the 3D view loaded; null without WebGL.
+  const op = cad.onPart;
+  if (op.view || op.failed) return Promise.resolve(op.view);
+  if (!op.load) {
+    op.load = ensureViewer().then(viewer => (viewer ? import("./onpart.js") : null)).then(module => {
+      if (!module) return null;
+      try {
+        op.view = module.createOnPartView($("sensorOnPart"), {onViewChange: renderState, onContext: onPartContext, probe: ON_PART_PROBE});
+      } catch (error) {
+        op.failed = true;
+        return null;
+      }
+      return op.view;
+    }).catch(() => {
+      op.failed = true;
+      return null;
+    });
+  }
+  return op.load;
+}
+
+function onPartContext(restored) {
+  // The browser dropped the figure's WebGL context (and may give it back: then drawn again).
+  const op = cad.onPart;
+  op.lost = !restored;
+  op.drawn = null;
+  op.want = null;
+  if (!restored) setOnPart("unavailable", ON_PART_NOTES.webgl);
+  else op.state = "empty";
+  renderState();
+}
+
+async function drawOnPart(plan) {
+  const op = cad.onPart;
+  const serial = (op.serial += 1);
+  op.want = {map: plan.map, look: plan.look};
+  setOnPart("drawing", ON_PART_NOTES.drawing);
+  const result = cad.lastResult;
+  const current = () => serial === op.serial && cad.map === plan.map && cad.lastResult === result;
+  try {
+    const view = await onPartView();
+    if (!current()) return;
+    if (!view) {
+      op.want = null;
+      setOnPart("unavailable", ON_PART_NOTES.webgl);
+      renderState();
+      return;
+    }
+    const arts = await askApp("fpc:board-art", {boards: result.boards, px_per_mm: ON_PART_PX_PER_MM, max_px: view.maxTexturePx});
+    if (!current()) return;
+    const started = performance.now();
+    const placement = plan.map.placement?.build_id === plan.map.build_id ? plan.map.placement : chosenProposal()?.placement;
+    const stack = D.buildStack({selection: cad.fit.selection, vertices: vertices(), placement, arts, boards: result.boards, partBox: partBox()});
+    if (!stack) throw new Error("the boards could not be laid on the fit's surface (its chart, the placement or a board's outline is missing).");
+    const probes = D.probes(stack, plan.map.taxels);
+    const built = performance.now();
+    const metrics = ON_PART_PROBE ? D.metrics(stack, plan.map, result.boards) : {};
+    const drapeMs = [built - started, performance.now() - built];
+    // The mode as the switch shows it; a click while the art loads sets it on the view, which show() keeps.
+    if (view.info().mode !== op.mode) view.setMode(op.mode);
+    const shown = await view.show({stack, positions: cad.parsed.positions, probes});
+    if (!current() || !shown) return;
+    op.drawn = {map: plan.map, look: plan.look};
+    op.want = null;
+    op.info = onPartNumbers(stack, arts, shown, metrics, drapeMs);
+    setOnPart(cad.mode === "cad" ? "drawn" : "off", null);
+  } catch (error) {
+    if (!current()) return;
+    op.want = null;
+    op.drawn = null;
+    op.failedFor = {map: plan.map, look: plan.look};
+    op.view?.clear({keep: cad.parsed?.positions});
+    setOnPart("failed", `The sensor could not be drawn on the part: ${describe(error)}`);
+  }
+  renderState();
+}
+
+function onPartNumbers(stack, arts, shown, metrics, drapeMs) {
+  // The drawing's numbers for #cadState (the checks): its frame and explode, its sizes, how it agrees with the map, what
+  // the art shows at the taxels.
+  const copper = rgba => rgba[3] === 255 && rgba.slice(0, 3).every((value, k) => Math.abs(value - DIAGRAM_COPPER[k]) <= COPPER_TOLERANCE);
+  const shareOf = list => (list.length ? round6(list.filter(copper).length / list.length) : null);
+  const styles = (arts.boards.row.front.match(/<style>[\s\S]*?<\/style>/g) || []).slice(1).join("");
+  return {top_board: arts.boards[stack.topKey].role, bottom_board: arts.boards[stack.bottomKey].role, gap_mm: stack.gap_mm, nest_mm: stack.nest_mm,
+    explode: stack.explode, spread_deg: stack.spread_deg, width_mm: stack.width_mm, texture_px: shown.texture_px, vertices: shown.vertices,
+    on_surface: stack.on_surface, ...metrics,
+    copper_share: arts.look === "diagram" ? {row: shareOf(shown.samples.row), column: shareOf(shown.samples.column)} : null,
+    look_rgb: shown.samples[stack.bottomKey][0] || null, faces: shown.faces,
+    art_css: {bytes: styles.length, ascii: /^[\x00-\x7f]*$/.test(styles)}, drape_ms: Math.round(drapeMs[0]), metrics_ms: ON_PART_PROBE ? Math.round(drapeMs[1]) : null};
+}
+
+function setOnPart(state, note) {
+  // The figure's state on the page: its note (over the pane where nothing is drawn) and Reset view (no legend under it
+  // since the user's request of 2026-11-06).
+  const op = cad.onPart;
+  op.state = state;
+  op.note = note;
+  const pane = $("sensorOnPart");
+  const text = pane.querySelector(":scope > .on-part-note");
+  const shown = state === "drawn" || (state === "drawing" && Boolean(op.view?.info().shown));
+  if (text) {
+    text.hidden = shown || state === "off";
+    text.textContent = note || "";
+  }
+  $("onPartReset").disabled = state !== "drawn";
+  $("onPartReset").hidden = !shown;
+}
+
+function setOnPartMode(mode) {
+  const op = cad.onPart;
+  op.mode = mode === "assembled" ? "assembled" : "exploded";
+  document.querySelectorAll("[data-on-part-mode]").forEach(button => button.setAttribute("aria-pressed", String(button.dataset.onPartMode === op.mode)));
+  op.view?.setMode(op.mode);
+  renderState();
+}
+
+function onPartState() {
+  // #cadState's on_part: the state, its note, what is drawn and its numbers (onPartNumbers), the camera.
+  const op = cad.onPart; const view = op.view?.info();
+  const drawn = op.state === "drawn" && op.info;
+  return {state: op.state, note: op.note, build_id: drawn ? op.drawn.map.build_id : null, look: drawn ? op.drawn.look : null, mode: op.mode,
+    ...(drawn ? op.info : {}), moved: Boolean(view?.moved), draws: view?.draws ?? 0, drawn_mode: drawn ? view?.drawnMode ?? null : null,
+    pixels: drawn ? view?.pixels ?? null : null, camera: drawn ? view?.camera ?? null : null};
 }
 
 // -- 8. downloads --------------------------------------------------------------------------
@@ -2383,6 +2816,192 @@ function download(kind) {
   else if (kind === "wrap") saveBlob(`${id}-wrap-template.svg`, map.wrap_svg, "image/svg+xml");
 }
 
+// -- samples (index.html #samplePalette; the user's request of 2026-11-06) ----------------------------------------
+
+let samplesIndex = null;
+async function sampleLookup(id) {
+  // A sample of samples.json as the default part: {part, entry}, its Library sensor's (libraryPart without its fallback) with, for a whole
+  // gripper, the sample's own mesh (part.ownMesh); throws for an unknown sample or one whose sensor is not in the Library.
+  if (!samplesIndex) {
+    samplesIndex = fetch(SAMPLES_INDEX).then(answer => (answer.ok ? answer.json() : Promise.reject(new Error(`HTTP ${answer.status}`))));
+    samplesIndex.catch(() => { samplesIndex = null; });
+  }
+  const sample = ((await samplesIndex).samples || []).find(item => item.id === id);
+  if (!sample) throw new Error(`no sample is named ${id}`);
+  const found = await libraryPart(sample.library, {fallback: false});
+  if (!found) throw new Error(`its sensor ${sample.library} is not in the Library`);
+  const part = sample.mesh ? {...found.part, url: `static/samples/${sample.mesh.file}`, name: sample.mesh.name, ownMesh: true} : found.part;
+  return {part, entry: {...found.entry, sample: {id: sample.id, name: sample.name, gripper: Boolean(sample.mesh), camera: sample.camera || null,
+    partFacets: sample.mesh ? found.part.facets || 0 : 0}}};
+}
+
+async function samplePart(id) {
+  // ./?sample=<id> as the page opens (loadDefaultPart): the sample, or DEFAULT_PART with the reason and ?sample dropped.
+  try {
+    return {...(await sampleLookup(id)), missing: ""};
+  } catch (error) {
+    dropPartParameter();
+    return {part: DEFAULT_PART, entry: null, missing: `No sample is shown (${error.message}); the UMI finger is shown.`};
+  }
+}
+
+function sampleAddress(id) {
+  // ./?sample=<id> in the address (replaceState; ?part goes, every other parameter and the hash kept): a reload shows it.
+  const pairs = location.search.slice(1).split("&").filter(pair => pair !== "" && !["part", "sample"].includes(pair.split("=")[0]));
+  pairs.push(`sample=${encodeURIComponent(id)}`);
+  history.replaceState(history.state, "", `${location.pathname}?${pairs.join("&")}${location.hash}`);
+}
+
+function sampleShown() {
+  // The sample whose part is in the 3D view (its tile edged), or null.
+  return cad.defaultFile ? cad.entry?.sample?.id || null : null;
+}
+
+function sampleLoading(id = null) {
+  // The sample on its way (that one, or any), live: nothing came after it (another sample in its place, the user's own
+  // file, Remove model), until its sensor's build returns (the review of 2026-11-06: it had counted from the press to
+  // the mesh's fetch only, and on after a file had replaced it).
+  const pending = cad.samplePending;
+  return Boolean(pending && (id === null || pending.id === id) && pending.load === cad.seq.load);
+}
+
+async function loadSample(id) {
+  // A sample's tile dropped on the 3D view or pressed: its part loaded as the default part is (loadFile as the default
+  // file, the Library sensor's options, selection, border and base, buildDefaultSensor: fitted, generated and mapped at
+  // once) and the address ./?sample=<id>.  The newest press wins (the user's own file and Remove model drop it too),
+  // but the model shown keeps its sensor and its build until this sample's mesh is in hand: a sample not loaded (its
+  // files unavailable, Rectangular chosen meanwhile) leaves the page as it was, with a warning.  The sample on its way
+  // is not asked again; the one shown, its sensor built or being built, is framed again rather than reloaded (what the
+  // visitor changed since stays; the review of 2026-11-06).  The status and the 3D view's veil say what loads.
+  if (!id) return;
+  if (cad.mode !== "cad") setMode("cad");
+  if (sampleLoading(id)) return;
+  const name = document.querySelector(`#samplePalette [data-sample="${CSS.escape(id)}"] .sample-name`)?.textContent || id;
+  const ticket = (cad.sampleTicket += 1);
+  const waiting = cad.samplePending;
+  if (sampleShown() === id && (cad.defaultBuild === "done" || cad.buildRun)) {
+    // Shown already: another sample on its way gives way to this press; a built sensor is framed again.
+    if (waiting && cad.loading === waiting.name) setLoading(null);
+    cad.samplePending = null;
+    if (cad.defaultBuild === "done" && !cad.buildRun) frameSample();
+    renderState();
+    return;
+  }
+  // The default part still on its way gives way at once (nothing is shown yet).
+  if (cad.defaultPart === "loading") cad.seq.load += 1;
+  const pending = (cad.samplePending = {id, name, load: cad.seq.load});
+  const live = () => ticket === cad.sampleTicket && pending.load === cad.seq.load;
+  setLoading(name);
+  renderState();
+  try {
+    const {part, entry} = await sampleLookup(id);
+    let fitError = "";
+    const [reply, shipped] = await Promise.all([fetch(part.url),
+      fetch(part.fit).then(answer => (answer.ok ? answer.json() : Promise.reject(new Error(`HTTP ${answer.status}`))))
+        .catch(error => { fitError = error.message; return null; })]);
+    if (!reply.ok) throw new Error(`HTTP ${reply.status}`);
+    const bytes = await reply.blob();
+    if (!live()) return;  // a newer sample, the user's own file or Remove model: theirs the veil and the status
+    if (cad.mode !== "cad") {
+      setLoading(null);
+      setStatus("neutral", `The sample ${name} was not loaded (Rectangular was chosen meanwhile).`);
+      return;
+    }
+    leaveLibrary();  // the sensor shown before: the options it set back, its ?part or ?sample off the address
+    cad.defaultFit = shippedFit(part, shipped);
+    const loading = loadFile(new File([bytes], part.name, {type: "model/stl"}), {isDefault: true});
+    pending.load = cad.seq.load;  // loadFile's own (taken as it starts)
+    await loading;
+    // A newer sample pressed meanwhile lets this one build until its own mesh is in hand.
+    if (pending.load !== cad.seq.load || !cad.defaultFile || !cad.inspect) return;
+    cad.entry = {...entry, fitError: fitError || (cad.defaultFit ? "" : "no request or reply")};
+    cad.viewer?.setMarkScale(sampleFingerRadius());
+    sampleAddress(id);
+    libraryNote();
+    renderState();
+    if (await buildDefaultSensor()) sampleView();
+  } catch (error) {
+    if (!live()) return;
+    setLoading(null);
+    if (!cad.mesh && !cad.viewerError) $("cadDrop").hidden = false;
+    const warning = `The sample ${name} was not loaded (${error.message}).`;
+    setStatus("warning", warning);
+    // The sensor shown, still being built, lands after it: said again then (that build's "loaded" would cover it).
+    if (cad.buildRun) {
+      const load = cad.seq.load;
+      whenSettled().then(() => {
+        if (ticket === cad.sampleTicket && load === cad.seq.load && cad.status.kind === "ok") { setStatus("warning", warning); renderState(); }
+      });
+    }
+  } finally {
+    if (cad.samplePending === pending) cad.samplePending = null;
+    renderState();
+  }
+}
+
+function frameSample() {
+  // The sample shown, framed again (a press on its tile): a whole gripper's sensor from its camera, a finger's selection.
+  if (cad.entry?.sample?.camera) sampleView(); else lookAtSelection();
+}
+
+function sampleView() {
+  // A whole gripper's sensor seen from its sample's camera (a direction toward the camera, the mesh's axes), its face
+  // framed with some of the finger round it: along the face's normal (lookAtSelection) the camera would stand in the
+  // other finger, which faces it across the open jaws.  Once its sensor is built; the user's own turns after that stay.
+  const camera = cad.defaultFile ? cad.entry?.sample?.camera : null;
+  const loop = cad.selection?.outline_xyz || [];
+  if (!camera || !cad.viewer || !loop.length || cad.defaultBuild !== "done") return;
+  const centre = [0, 1, 2].map(k => loop.reduce((total, point) => total + point[k], 0) / loop.length);
+  cad.viewer.lookAt(centre, camera, 1.5 * Math.max(...loop.map(point => distance3(point, centre))), viewClear());
+}
+
+function sampleFingerRadius() {
+  // A whole gripper's finger, its first facets (the Library part's, samples.json): half its box's diagonal in mm, for the
+  // 3D view's markers sized as on that finger alone (viewer.js setMarkScale), or null (they are sized from the whole
+  // model: on a whole hand the exit markers had covered the sensor's corners; the review of 2026-11-06).
+  const facets = cad.defaultFile ? cad.entry?.sample?.partFacets || 0 : 0;
+  const positions = cad.parsed?.positions; const scale = cad.inspect?.mesh?.scale_to_mm || 1;
+  if (!facets || !positions || positions.length < 9 * facets) return null;
+  const low = [Infinity, Infinity, Infinity]; const high = [-Infinity, -Infinity, -Infinity];
+  for (let i = 0; i < 9 * facets; i += 1) {
+    const axis = i % 3;
+    low[axis] = Math.min(low[axis], positions[i]); high[axis] = Math.max(high[axis], positions[i]);
+  }
+  return 0.5 * scale * Math.hypot(high[0] - low[0], high[1] - low[1], high[2] - low[2]);
+}
+
+function renderSamples() {
+  // The palette's tiles: the sample shown (its part in the 3D view) edged and aria-current, the one on its way busy.
+  const shown = sampleShown();
+  const pending = sampleLoading() ? cad.samplePending.id : null;
+  document.querySelectorAll("#samplePalette [data-sample]").forEach(tile => {
+    const id = tile.dataset.sample;
+    tile.classList.toggle("is-current", id === shown);
+    if (id === shown) tile.setAttribute("aria-current", "true"); else tile.removeAttribute("aria-current");
+    if (id === pending) tile.setAttribute("aria-busy", "true"); else tile.removeAttribute("aria-busy");
+  });
+  return {pending, shown};
+}
+
+function wireSamples() {
+  // A tile's drag carries its id (SAMPLE_TYPE) to the 3D view's drop (wire); a press (a click, Enter, Space, a tap: who
+  // cannot drag) loads it here, the 3D view brought into sight when less than half of it is (the guide above it on a
+  // phone).
+  document.querySelectorAll("#samplePalette [data-sample]").forEach(tile => {
+    tile.addEventListener("dragstart", event => {
+      event.dataTransfer.setData(SAMPLE_TYPE, tile.dataset.sample);
+      event.dataTransfer.effectAllowed = "copy";
+    });
+    tile.addEventListener("dragend", () => $("cadView").classList.remove("is-dropping"));
+    tile.addEventListener("click", () => {
+      loadSample(tile.dataset.sample);
+      const view = $("cadView").getBoundingClientRect();
+      const seen = Math.min(view.bottom, window.innerHeight) - Math.max(view.top, 0);
+      if (seen < view.height / 2) $("cadWorkspace").scrollIntoView({behavior: window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start"});
+    });
+  });
+}
+
 // -- diagnostics ----------------------------------------------------------------------------
 
 function updateProbe() {
@@ -2419,13 +3038,21 @@ function wire() {
   [["cadBorderReset", "reset"], ["cadBorderInset", "inset"], ["cadBorderDelete", "delete"],
     ["cadBorderUndo", "undo"], ["cadBorderRedo", "redo"]].forEach(([id, action]) => $(id).addEventListener("click", () => borderAction(action)));
   $("cadBorderInsetMm").addEventListener("keydown", event => { if (event.key === "Enter") { event.preventDefault(); borderAction("inset"); } });
-  view.addEventListener("dragover", event => { event.preventDefault(); view.classList.add("is-dropping"); });
-  view.addEventListener("dragleave", () => view.classList.remove("is-dropping"));
-  view.addEventListener("drop", event => {
+  // A file or a sample's tile dropped anywhere on the 3D view's window, the tools drawn over it too (the review of
+  // 2026-11-06: the menu on its left, where a tile dragged from the guide comes in, had refused it); the frame lit until
+  // the drag leaves the window, not as it crosses from the view to a tool.
+  const wrap = view.closest(".cad-view-wrap") || view;
+  wrap.addEventListener("dragover", event => { event.preventDefault(); view.classList.add("is-dropping"); });
+  wrap.addEventListener("dragleave", event => { if (!wrap.contains(event.relatedTarget)) view.classList.remove("is-dropping"); });
+  wrap.addEventListener("drop", event => {
+    // A sample's tile (its id in SAMPLE_TYPE: loadSample), else the user's file.
     event.preventDefault();
     view.classList.remove("is-dropping");
-    loadFile(event.dataTransfer?.files?.[0]);
+    const sample = event.dataTransfer?.getData(SAMPLE_TYPE);
+    if (sample) loadSample(sample);
+    else loadFile(event.dataTransfer?.files?.[0]);
   });
+  wireSamples();
   $("cadUnit").addEventListener("change", () => { cad.facetMismatch = false; resetFit(); inspectMesh(); });
   $("cadPreset").addEventListener("change", syncAngles);
   ["cadThetaD", "cadThetaC", "cadMinRadius"].forEach(id => $(id).addEventListener("input", () => { $("cadPreset").value = "custom"; syncAngles(); }));
@@ -2460,8 +3087,14 @@ function wire() {
   document.addEventListener("fpc:result", onResult);
   document.addEventListener("fpc:cleared", onCleared);
   new MutationObserver(onStaleChange).observe($("workbench"), {attributes: true, attributeFilter: ["class"]});
+  // The sensor on the part (7b): its modes and Reset view; drawn again in the look chosen (app.js setLook: body[data-look]).
+  document.querySelectorAll("[data-on-part-mode]").forEach(button => button.addEventListener("click", () => setOnPartMode(button.dataset.onPartMode)));
+  $("onPartReset").addEventListener("click", () => { cad.onPart.view?.reset(); renderState(); });
+  new MutationObserver(renderState).observe(document.body, {attributes: true, attributeFilter: ["data-look"]});
   // The state dump is for the browser checks and debugging (?debug shows it).
   $("cadState").hidden = !new URLSearchParams(location.search).has("debug");
+  // The 3D view's look read for the browser checks (?probe only: renders and gl.readPixels), as askApp's events answer.
+  if (ON_PART_PROBE) document.addEventListener("fpc:view-look", event => { if (event.detail) event.detail.result = cad.viewer?.pixels() ?? null; });
 }
 
 wire();

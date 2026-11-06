@@ -1,0 +1,285 @@
+{
+ "format": "flexitac-library-scene/v1",
+ "part": "franka-hand",
+ "part_mesh_sha256": "3ac26349fc85ab971b81696e31ac88955f45d065ddc1254de376fea9d89b6c2c",
+ "about": "Franka Hand at full opening: mujoco_menagerie f3b6013, franka_emika_panda/hand.xml (Apache-2.0): finger_joint1/2 slide 0..0.04 m, q 40 mm.  The bodies are the hand's five visual meshes (hand_0..hand_4.obj) and, on each finger, finger_0.obj; the sensor finger's pad is the Library mesh (the convex hull of finger_1.obj).  The other finger is hand.xml's right_finger: the same finger turned 180 degrees about the hand's axis (its quat 0 0 0 1), so its sensor is the same board.  The whole hand is drawn.",
+ "frame": "the part's file axes, mm",
+ "approach": [
+  0.0,
+  0.0,
+  1.0
+ ],
+ "opening": {
+  "q_mm": 40.0,
+  "limit_mm": 40.0,
+  "joint": "finger_joint1/2 (slide y)",
+  "source": "mujoco_menagerie f3b6013, franka_emika_panda/hand.xml: class finger, range 0 0.04 m"
+ },
+ "mate": {
+  "kind": "turned",
+  "matrix": [
+   [
+    -1.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   [
+    0.0,
+    -1.0,
+    0.0,
+    -80.0
+   ],
+   [
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  ],
+  "part": true
+ },
+ "bodies": [
+  {
+   "mesh": "bodies/franka-hand/hand_0.stl",
+   "sha256": "ba1dc5e09278f0e26986950e5ec54bf7e62c361eec7d2684032c88027364b603",
+   "bytes": 784,
+   "triangles": 14,
+   "matrix": [
+    [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     1.0,
+     0.0,
+     -40.0
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     -58.4
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": null
+  },
+  {
+   "mesh": "bodies/franka-hand/hand_1.stl",
+   "sha256": "5320d381d8aeab2fb1387988ebd23351ea7db8d82ff999feb6f22fb585f393a0",
+   "bytes": 12684,
+   "triangles": 252,
+   "matrix": [
+    [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     1.0,
+     0.0,
+     -40.0
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     -58.4
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": null
+  },
+  {
+   "mesh": "bodies/franka-hand/hand_2.stl",
+   "sha256": "19661cf24853021f5ffd679e06e166a746f981a7289669cfa48d6c3ba39b1fe0",
+   "bytes": 79184,
+   "triangles": 1582,
+   "matrix": [
+    [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     1.0,
+     0.0,
+     -40.0
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     -58.4
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": null
+  },
+  {
+   "mesh": "bodies/franka-hand/hand_3.stl",
+   "sha256": "478989357bc67efb859a676a900f7442934c757db1a6d14dcd5e77076ac9836b",
+   "bytes": 66584,
+   "triangles": 1330,
+   "matrix": [
+    [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     1.0,
+     0.0,
+     -40.0
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     -58.4
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": null
+  },
+  {
+   "mesh": "bodies/franka-hand/hand_4.stl",
+   "sha256": "d9d2fdc7966225a5ff56b05015a16dc243fe41f8c7aad7f13562ff8a0bc5bbf0",
+   "bytes": 28884,
+   "triangles": 576,
+   "matrix": [
+    [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     1.0,
+     0.0,
+     -40.0
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     -58.4
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": null
+  },
+  {
+   "mesh": "bodies/franka-hand/finger_0.stl",
+   "sha256": "3a4788747102666fbe3b298cd6290b1a219bcce0a5699a2ab7c8490317468491",
+   "bytes": 18184,
+   "triangles": 362,
+   "matrix": [
+    [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     1.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": "sensor"
+  },
+  {
+   "mesh": "bodies/franka-hand/finger_0.stl",
+   "sha256": "3a4788747102666fbe3b298cd6290b1a219bcce0a5699a2ab7c8490317468491",
+   "bytes": 18184,
+   "triangles": 362,
+   "matrix": [
+    [
+     -1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     -1.0,
+     0.0,
+     -80.0
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": "mate"
+  }
+ ],
+ "see_through": [
+  "mate"
+ ],
+ "picture": "on both fingers of the open gripper"
+}

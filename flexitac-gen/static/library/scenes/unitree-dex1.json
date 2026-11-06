@@ -1,0 +1,87 @@
+{
+ "format": "flexitac-library-scene/v1",
+ "part": "unitree-dex1",
+ "part_mesh_sha256": "7cd2ff199556e3955547a34c75ed9ea777fb7d704fc98e7318d0f67e4aaedf5a",
+ "about": "Unitree Dex1-1 at full opening: unitree_ros b579bbe, robots/g1_description/g1_29dof_mode_15_with_dex1_1.urdf (BSD-3-Clause): left_dex1_finger_joint_1/2 prismatic -0.02..0.0245 m, q 24.5 mm.  The body is Dex1_base_link.STL (the motor, the rails and the wrist adapter; not a closed surface, decimated all the same).  The Library mesh is Dex1_finger_link_1.STL; the other finger, Dex1_finger_link_2, is that finger turned 180 degrees about the approach axis (median 0.028 mm), so its sensor is the same board.",
+ "frame": "the part's file axes, mm",
+ "approach": [
+  1.0,
+  0.0,
+  0.0
+ ],
+ "opening": {
+  "q_mm": 24.5,
+  "limit_mm": 24.5,
+  "joint": "left_dex1_finger_joint_1/2 (prismatic y)",
+  "source": "unitree_ros b579bbe, robots/g1_description/g1_29dof_mode_15_with_dex1_1.urdf: left_dex1_finger_joint_1 limit -0.02 0.0245 m"
+ },
+ "mate": {
+  "kind": "turned",
+  "matrix": [
+   [
+    1.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   [
+    0.0,
+    -1.0,
+    0.0,
+    49.0
+   ],
+   [
+    0.0,
+    0.0,
+    -1.0,
+    0.0
+   ],
+   [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  ],
+  "part": true
+ },
+ "bodies": [
+  {
+   "mesh": "bodies/unitree-dex1/dex1_base_link.stl",
+   "sha256": "fb5e81436c287e1ed6c35a7b1496706c285cd49b109be4e6e5b91ebef15d908f",
+   "bytes": 1142084,
+   "triangles": 22840,
+   "matrix": [
+    [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     1.0,
+     0.0,
+     24.5
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": null
+  }
+ ],
+ "see_through": [
+  "mate"
+ ],
+ "picture": "on both fingers of the open gripper"
+}

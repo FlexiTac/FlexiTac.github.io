@@ -1,0 +1,120 @@
+{
+ "format": "flexitac-library-scene/v1",
+ "part": "i2rt-yam",
+ "part_mesh_sha256": "b70f8c1e32ccfae03fec46ac10a0f04195347bc530ee761143a5d7c5bb07ae07",
+ "about": "I2RT YAM crank gripper at full opening: i2rt 120c3c8, i2rt/robot_models/gripper/crank_4310/crank_4310.xml (MIT): joint7/joint8 slide 0..0.039574 m, coupled, q 39.574 mm.  The bodies are gripper.stl (the motor, the rail plate, the crank and its links) and tip_right.stl, the other finger, where crank_4310.xml places them (pure translations); the Library mesh is tip_left.stl.  The other finger is another part whose contact face is tip_left's mirror image (x -> -x across the gripper's mid-plane, median 0.047 mm on the face): the mate is that mirror, its sensor the mirror-image board, and the finger drawn there is tip_right itself.",
+ "frame": "the part's file axes, mm",
+ "approach": [
+  0.0,
+  -1.0,
+  0.0
+ ],
+ "opening": {
+  "q_mm": 39.574,
+  "limit_mm": 39.574,
+  "joint": "joint7/joint8 (slide x, coupled)",
+  "source": "i2rt 120c3c8, i2rt/robot_models/gripper/crank_4310/crank_4310.xml: joint7 range 0 0.039574 m"
+ },
+ "mate": {
+  "kind": "mirror",
+  "matrix": [
+   [
+    -1.0,
+    0.0,
+    0.0,
+    -75.048
+   ],
+   [
+    0.0,
+    1.0,
+    0.0,
+    0.0
+   ],
+   [
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  ],
+  "part": false
+ },
+ "bodies": [
+  {
+   "mesh": "bodies/i2rt-yam/gripper.stl",
+   "sha256": "bc1a2a90fd9776866e4bbf901ee8572a78a1be2f2b055ff171819281120b401d",
+   "bytes": 107384,
+   "triangles": 2146,
+   "matrix": [
+    [
+     1.0,
+     0.0,
+     0.0,
+     -37.524
+    ],
+    [
+     0.0,
+     1.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": null
+  },
+  {
+   "mesh": "bodies/i2rt-yam/tip_right.stl",
+   "sha256": "56839ed9d8f5c5a17d2e0dccae0c75769ba6f699270ba4bfb36eccc886b5400f",
+   "bytes": 173384,
+   "triangles": 3466,
+   "matrix": [
+    [
+     1.0,
+     0.0,
+     0.0,
+     -75.048
+    ],
+    [
+     0.0,
+     1.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": "mate"
+  }
+ ],
+ "see_through": [
+  "mate"
+ ],
+ "picture": "on both fingers of the open gripper"
+}

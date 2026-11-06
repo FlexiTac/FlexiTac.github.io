@@ -4,9 +4,13 @@
      here also beats styles.css's later rules of the same specificity and its rules inside @media blocks, so whatever
      those set for a property this file changes is re-declared below them (the last section, for the breakpoints).
    - No @layer, @import or @font-face, no external url(): the system font stack, url() only data:.
-   - Light and dark (prefers-color-scheme): the page's shell takes the dark palette, the drawing areas stay light
-     lightboxes (.cad-view-wrap with the 3D view and its pills, .canvas-wrap, .stacked-canvas, .cad-flat) that declare
-     the light palette again; their drawings keep their own colours.
+   - Light, and dark once the visitor turns it on (the user's request of 2026-11-06: light by default, whatever the
+     system's prefers-color-scheme; the header's toggle sets <html data-theme="dark">, web/theme.js, kept per visitor).
+     In dark the page's shell takes the dark palette, the drawing areas stay light lightboxes (.cad-view-wrap with the
+     3D view and its pills, .canvas-wrap, .stacked-canvas, .cad-flat) that declare the light palette again; their
+     drawings keep their own colours.  Every dark rule hangs on :root:where([data-theme="dark"]) (for :root's own) or
+     :where(:root[data-theme="dark"]) before the selector: :where() adds nothing to the specificity, so each dark rule
+     outranks exactly what it did under the system's dark scheme (until 2026-11-06), and the dark look is as it was.
    - Colour as Apple uses it (2026-11-04): nearly monochrome (the text greys on white and #f5f5f7, grey fills); the
      action blue fills only each region's one primary action and what is chosen, links are blue text, the pass green
      only a small dot, no brand colour, success not tinted.  The drawings and the base edge's magenta keep theirs.
@@ -36,7 +40,7 @@
    below never reaches inside them).  WCAG on white / #f5f5f7: --text 16.8 / 15.5, --text-2 5.07 / 4.66 (never on
    #e8e8ed), --link 5.57 / 5.11, --ok 5.13, --warn 5.50, --error 4.92 (each on its tint 4.85, 5.06, 4.60), white on
    --accent 4.70 and --accent-hover 5.57, --control-border 3.62 / 3.33 (1.4.11's 3:1); --separator is decoration only. */
-:root, .cad-view-wrap, .canvas-wrap, .stacked-canvas, .cad-flat {
+:root, .cad-view-wrap, .canvas-wrap, .stacked-canvas, .cad-flat, .figure-tools, .figure-reset {
   color-scheme:light;
   /* Surfaces */
   --bg:#f5f5f7; --surface:#fff; --surface-2:#fbfbfd; --well:#f5f5f7; --control-bg:#fff; --thumb:#fff;
@@ -69,7 +73,7 @@
   --shadow-card:0 1px 2px rgba(0,0,0,.04), 0 4px 14px rgba(0,0,0,.06);
   --shadow-float:0 1px 3px rgba(0,0,0,.08), 0 4px 16px rgba(0,0,0,.12);
   --shadow-thumb:0 3px 8px rgba(0,0,0,.12), 0 3px 1px rgba(0,0,0,.04);
-  /* Material: only the 3D view's three groups of pills */
+  /* Material: the 3D view's three groups of pills and the figures' controls in their frames (2026-11-06) */
   --material:rgba(255,255,255,.72); --blur:saturate(180%) blur(20px);
   /* A select's chevron */
   --chevron:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1.5 1.75 6 6.25l4.5-4.5' fill='none' stroke='%236e6e73' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
@@ -78,56 +82,54 @@
 /* The dark shell (Apple's dark grouped palette).  WCAG on #1c1c1e / #2c2c2e: --text 15.6 / 12.8, --text-2 6.61 / 5.42,
    --link 5.64 / 4.62, --ok 8.42 / 6.89, --warn 8.28 / 6.78, --error 6.03 / 4.94 (#ff453a would be 4.09 on #2c2c2e),
    each on its tint 6.17, 6.59, 5.08; --control-border 4.09 / 3.35; --focus 5.64; white on --accent as in light. */
-@media (prefers-color-scheme: dark) {
-  :root {
-    color-scheme:dark;
-    --bg:#000; --surface:#1c1c1e; --surface-2:#2c2c2e; --well:#000; --control-bg:#2c2c2e; --thumb:#636366;
-    --text:#f5f5f7; --text-2:#a1a1a6; --text-3:#8e8e93;
-    --separator:#424245; --hairline:rgba(255,255,255,.1); --control-border:#7c7c80;
-    --fill:rgba(118,118,128,.24); --fill-hover:rgba(118,118,128,.32); --fill-press:rgba(118,118,128,.4); --selection:rgba(255,255,255,.08);
-    --row-hover:rgba(255,255,255,.04);
-    --hover-overlay:linear-gradient(rgba(255,255,255,.07),rgba(255,255,255,.07)); --press-overlay:linear-gradient(rgba(255,255,255,.13),rgba(255,255,255,.13));
-    --accent-tint:rgba(10,132,255,.2);
-    --link:#2997ff; --focus:#2997ff;
-    --ok:#30d158; --ok-tint:#1f3526; --warn:#ff9f0a; --warn-tint:#3c2e1b; --error:#ff6961; --error-tint:#402322;
-    --disabled-bg:#2c2c2e; --disabled-text:#6e6e73;
-    /* Apple's dark navigation bar; on the grey pill --text-2 is 5.33 (4.77 hovered) */
-    --nav:#161617; --text-2-on-fill:var(--text-2); --lift-hover:rgba(255,255,255,.06);
-    /* the inset group a step lighter than the card (--text-2 5.42 on it) */
-    --inset:#2c2c2e;
-    /* the base edge's magenta a step lighter (#c2185b is 2.90 on #1c1c1e): the edge 4.32 on the group, 3.19 on the
-       chosen pill; the chosen pill neutral (a step lighter grey, the text colour), its ring and its radio the magenta
-       (a magenta tint was the loudest colour of the dark shell) */
-    --base-edge:#e0457f; --base-tint:#333336; --base-text:#f5f5f7; --base-hover:#303032;
-    --card:var(--surface);
-    --shadow-card:none;
-    --shadow-float:0 1px 3px rgba(0,0,0,.5), 0 4px 16px rgba(0,0,0,.5);
-    --shadow-thumb:0 3px 8px rgba(0,0,0,.3), 0 3px 1px rgba(0,0,0,.1);
-    --material:rgba(30,30,32,.72);
-    --chevron:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1.5 1.75 6 6.25l4.5-4.5' fill='none' stroke='%23a1a1a6' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
-  }
-  /* The lightboxes' text and paper (styles.css leaves the first two's colour and the last two's paper to their parents). */
-  .cad-view-wrap, .cad-flat { color:var(--text); }
-  .canvas-wrap, .cad-flat { background-color:var(--surface); }
+:root:where([data-theme="dark"]) {
+  color-scheme:dark;
+  --bg:#000; --surface:#1c1c1e; --surface-2:#2c2c2e; --well:#000; --control-bg:#2c2c2e; --thumb:#636366;
+  --text:#f5f5f7; --text-2:#a1a1a6; --text-3:#8e8e93;
+  --separator:#424245; --hairline:rgba(255,255,255,.1); --control-border:#7c7c80;
+  --fill:rgba(118,118,128,.24); --fill-hover:rgba(118,118,128,.32); --fill-press:rgba(118,118,128,.4); --selection:rgba(255,255,255,.08);
+  --row-hover:rgba(255,255,255,.04);
+  --hover-overlay:linear-gradient(rgba(255,255,255,.07),rgba(255,255,255,.07)); --press-overlay:linear-gradient(rgba(255,255,255,.13),rgba(255,255,255,.13));
+  --accent-tint:rgba(10,132,255,.2);
+  --link:#2997ff; --focus:#2997ff;
+  --ok:#30d158; --ok-tint:#1f3526; --warn:#ff9f0a; --warn-tint:#3c2e1b; --error:#ff6961; --error-tint:#402322;
+  --disabled-bg:#2c2c2e; --disabled-text:#6e6e73;
+  /* Apple's dark navigation bar; on the grey pill --text-2 is 5.33 (4.77 hovered) */
+  --nav:#161617; --text-2-on-fill:var(--text-2); --lift-hover:rgba(255,255,255,.06);
+  /* the inset group a step lighter than the card (--text-2 5.42 on it) */
+  --inset:#2c2c2e;
+  /* the base edge's magenta a step lighter (#c2185b is 2.90 on #1c1c1e): the edge 4.32 on the group, 3.19 on the
+     chosen pill; the chosen pill neutral (a step lighter grey, the text colour), its ring and its radio the magenta
+     (a magenta tint was the loudest colour of the dark shell) */
+  --base-edge:#e0457f; --base-tint:#333336; --base-text:#f5f5f7; --base-hover:#303032;
+  --card:var(--surface);
+  --shadow-card:none;
+  --shadow-float:0 1px 3px rgba(0,0,0,.5), 0 4px 16px rgba(0,0,0,.5);
+  --shadow-thumb:0 3px 8px rgba(0,0,0,.3), 0 3px 1px rgba(0,0,0,.1);
+  --material:rgba(30,30,32,.72);
+  --chevron:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1.5 1.75 6 6.25l4.5-4.5' fill='none' stroke='%23a1a1a6' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
 }
+/* The lightboxes' text and paper (styles.css leaves the first two's colour and the last two's paper to their parents). */
+:where(:root[data-theme="dark"]) .cad-view-wrap, :where(:root[data-theme="dark"]) .cad-flat { color:var(--text); }
+:where(:root[data-theme="dark"]) .canvas-wrap, :where(:root[data-theme="dark"]) .cad-flat { background-color:var(--surface); }
 
 /* More contrast (the system setting): darker secondary text and lines, cards edged, links underlined. */
 @media (prefers-contrast: more) {
-  :root, .cad-view-wrap, .canvas-wrap, .stacked-canvas, .cad-flat {
+  :root, .cad-view-wrap, .canvas-wrap, .stacked-canvas, .cad-flat, .figure-tools, .figure-reset {
     --text-2:#424245; --separator:#86868b; --hairline:rgba(0,0,0,.4); --control-border:#6e6e73; --material:rgba(255,255,255,.96);
   }
   a { text-decoration:underline; }
 }
-@media (prefers-contrast: more) and (prefers-color-scheme: dark) {
-  :root { --text-2:#d1d1d6; --separator:#8e8e93; --hairline:rgba(255,255,255,.4); --control-border:#a1a1a6; --material:rgba(30,30,32,.96); }
+@media (prefers-contrast: more) {
+  :root:where([data-theme="dark"]) { --text-2:#d1d1d6; --separator:#8e8e93; --hairline:rgba(255,255,255,.4); --control-border:#a1a1a6; --material:rgba(30,30,32,.96); }
 }
 /* Less transparency (the system setting), or no backdrop filter: the material solid. */
 @media (prefers-reduced-transparency: reduce) {
-  :root, .cad-view-wrap, .canvas-wrap, .stacked-canvas, .cad-flat { --material:rgba(255,255,255,.96); --blur:none; }
+  :root, .cad-view-wrap, .canvas-wrap, .stacked-canvas, .cad-flat, .figure-tools, .figure-reset { --material:rgba(255,255,255,.96); --blur:none; }
 }
-@media (prefers-reduced-transparency: reduce) and (prefers-color-scheme: dark) { :root { --material:rgba(30,30,32,.96); } }
+@media (prefers-reduced-transparency: reduce) { :root:where([data-theme="dark"]) { --material:rgba(30,30,32,.96); } }
 @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
-  :root, .cad-view-wrap, .canvas-wrap, .stacked-canvas, .cad-flat { --material:rgba(255,255,255,.96); --blur:none; }
+  :root, .cad-view-wrap, .canvas-wrap, .stacked-canvas, .cad-flat, .figure-tools, .figure-reset { --material:rgba(255,255,255,.96); --blur:none; }
 }
 
 /* 2. Type: the system font, its size and leading left as styles.css has them (the drawings' captions inherit them). -- */
@@ -338,6 +340,28 @@ details > summary::before { content:""; display:inline-block; width:.75em; heigh
 .masthead-link:active { background:var(--fill-press); }
 .masthead-gh-name { font-size:14px; font-weight:600; }
 .masthead-gh-stats { gap:10px; font-size:12px; font-weight:500; color:var(--text-2-on-fill); font-variant-numeric:tabular-nums; }
+/* The look's toggle (2026-11-06; its box, its two marks and its room in styles.css): the community's grey pill, round,
+   its mark in the text colour; hovered and pressed as they are, at once; its ring for the keyboard as theirs.  Pressed
+   (aria-pressed, the dark look on) it keeps the pill: its sun says the state. */
+.masthead-theme { border-color:transparent; background:var(--fill); color:var(--text); }
+.masthead-theme:hover { background:var(--fill-hover); }
+.masthead-theme:active { background:var(--fill-press); }
+.masthead-theme:focus-visible { outline:2px solid var(--focus); outline-offset:2px; }
+/* The Library link (2026-11-05; its box in styles.css): a text link in the text colour, no fill at rest, the grey fill
+   hovered and the darker one pressed, at once; on library.html itself (aria-current) the grey fill, a selection state.
+   More contrast underlines it as every link (section 1's rule, which its own text-decoration outranks). */
+.masthead-library { color:var(--text); }
+.masthead-library:hover,.masthead-library[aria-current="page"] { background:var(--fill); }
+.masthead-library:active { background:var(--fill-press); }
+.masthead-library:focus-visible { outline:2px solid var(--focus); outline-offset:2px; }
+@media (prefers-contrast: more) { .masthead-library { text-decoration:underline; } }
+/* Below 360 px (an iPhone SE with Display Zoom is 320 px wide; the review of 2026-11-05): the title 22 px and the mode
+   switch's segments 14 px with 14 px sides, so the title clears the community links and the switch fits the 20 px
+   gutters (at 28 px and 16 / 22 px the page scrolled 35 px sideways at 320 px, on both pages).  360 px and up as before
+   (ui_checks' 360-720 px sweep). */
+@media (max-width:359px) { .masthead h1 { font-size:22px; } .mode-picker span { padding:11px 14px; font-size:14px; } }
+/* Step 1's file note naming a Library sensor (main.js libraryNote): its link the link blue, as the header's line. */
+.cad-file-note a { color:var(--link); }
 
 /* 10. The guide (plan 3.3) ------------------------------------------------------------------------------------------
    A setup assistant's list on the page's grey, the next step the one that stands out: its number the blue circle and
@@ -375,6 +399,24 @@ body[data-mode="cad"] .flow-guide { background:var(--bg); border-right-color:var
 .flow-substep.is-done .flow-sub-no { border-color:transparent; background:var(--fill); color:var(--text-2-on-fill); }
 .flow-substep.is-next button { color:var(--link); }
 .flow-substep.is-next .flow-sub-no { border-color:var(--accent); background:var(--accent); color:#fff; }
+/* The samples (styles.css's tiles): white cards on the guide's grey (dark: the surface), a hairline edge, the 3D view's
+   #f5f5f7 behind each thumbnail in either scheme (a lightbox, as the view it is drawn in); the one shown edged in the
+   action blue; hover the plain buttons' overlay, at once. */
+.sample-palette { border-top-color:var(--separator); }
+.sample-palette-title { font-size:15px; line-height:20px; font-weight:600; letter-spacing:-.01em; color:var(--text); }
+.sample-palette-hint { font-size:12px; line-height:16px; color:var(--text-2); }
+.sample { border-color:var(--hairline); border-radius:var(--r-md); background-color:var(--surface); color:var(--text); box-shadow:0 1px 2px rgba(0,0,0,.04); }
+.sample:hover { border-color:var(--separator); background-image:var(--hover-overlay); }
+.sample:active { background-image:var(--press-overlay); }
+.sample:focus-visible { outline:2px solid var(--focus); outline-offset:1px; }
+.sample.is-current { border-color:var(--accent); box-shadow:inset 0 0 0 1px var(--accent); }
+.sample img { border-radius:var(--r-xs); background:#f5f5f7; }
+.sample-name { font-size:12px; line-height:15px; font-weight:600; color:var(--text); }
+@media (min-width:760px) and (max-width:980px) { .sample-palette { border-left-color:var(--separator); } }
+@media (forced-colors: active) {
+  .sample.is-current { outline:2px solid Highlight; outline-offset:-2px; }
+  .sample img { forced-color-adjust:none; }
+}
 
 /* 11. The workspace (plan 3.4) --------------------------------------------------------------------------------------
    A white card (dark: the surface) with 18 px corners, a hairline edge and the card shadow, no overflow (the map's
@@ -416,7 +458,7 @@ body[data-mode="cad"] .flow-guide { background:var(--bg); border-right-color:var
    hovered the faint overlay (link 5.10 / 4.63), pressed the same in dark (the stronger one left the link at 3.79). */
 .cad-border-bar { gap:4px 6px; padding:6px 14px; background:var(--surface); }
 .cad-workspace .cad-border-bar button { min-height:28px; padding:0 10px; border-color:transparent; background:transparent; color:var(--link); font-size:13px; }
-@media (prefers-color-scheme: dark) { .cad-workspace .cad-border-bar button:active:not(:disabled) { background-image:var(--hover-overlay); } }
+:where(:root[data-theme="dark"]) .cad-workspace .cad-border-bar button:active:not(:disabled) { background-image:var(--hover-overlay); }
 .cad-workspace .cad-border-bar button:disabled { border-color:transparent; }
 /* The two red ones hovered and pressed on the error tint (4.60 / 5.03), not a grey that would take the red under 4.5. */
 .cad-workspace .cad-border-bar #cadBorderDelete:hover:not(:disabled),.cad-workspace .cad-border-bar #cadBorderDelete:active:not(:disabled),
@@ -478,7 +520,8 @@ body[data-mode="cad"] .flow-guide { background:var(--bg); border-right-color:var
 .cad-loading { background:var(--material); -webkit-backdrop-filter:var(--blur); backdrop-filter:var(--blur); color:var(--text); font-size:15px; font-weight:500; }
 .cad-spinner { border-color:var(--separator); border-top-color:var(--text-2); }
 
-/* Generate sensor (its pill: section 5): on the card, no strip of its own, under the help line. */
+/* Generate sensor (its pill: section 5): on the card, no strip of its own, under the 3D view (the help line between them
+   only while the border is edited, since 2026-11-06). */
 .cad-quick { padding:12px 20px; border-top:0; background:transparent; }
 
 /* 12. Advanced Customization (plan 3.5) -------------------------------------------------------------------------------
@@ -568,8 +611,8 @@ body[data-mode="cad"] .flow-guide { background:var(--bg); border-right-color:var
    White cards (dark: the surface) with 18 px corners, a hairline edge (a failing board's stays the error red:
    styles.css's .board-card.has-drc-failure is the more specific) and the card shadow, no overflow; 21 px titles, a
    20 px gutter.  What they draw are lightboxes, light in either scheme: the previews' white and dots, the oblique view's
-   and the stacked view's neutral grey gradient (155 degrees, as before), their captions only recoloured (their size,
-   place and padding are styles.css's: the checks keep the pin-1 rings off them).  Nothing is laid over the stacked view.
+   and the stacked view's neutral grey gradient (155 degrees, as before), the oblique view's caption only recoloured
+   (its size, place and padding are styles.css's).  Nothing is laid over the stacked view.
    Section 8 has the banners' and the tables' colours, section 5 the download buttons, section 6 the segments. */
 .board-card,.downloads { border-color:var(--hairline); border-radius:var(--r-lg); box-shadow:var(--shadow-card); }
 
@@ -585,16 +628,14 @@ body[data-mode="cad"] .flow-guide { background:var(--bg); border-right-color:var
 .mask-badge { color:var(--text); font-size:13px; }
 
 /* The board cards: the title and under it its line of facts (beside the 21 px title they wrapped at 1440 px, the Row
-   FPC's mid number), the bar of the tabs and the zoom, the preview, the legend.  The header and the bar keep
-   styles.css's lines. */
+   FPC's mid number), the preview with the tabs and the zoom in its frame (since 2026-11-06: the figures' controls,
+   below; no legend under it).  The header keeps styles.css's line. */
 .previews .board-card > header,.stacked-review > header { flex-direction:column; gap:2px; padding:14px 20px 12px; }
 .previews .board-card > header h2,.stacked-review > header h2 { align-self:auto; font-size:21px; line-height:1.19; font-weight:600; letter-spacing:.011em; }
 .previews .board-card > header span,.stacked-review > header span { color:var(--text-2); font-size:12px; line-height:1.4; text-align:left; text-wrap:pretty; }
-.preview-bar { gap:8px; padding:8px 20px; }
 /* The zoom: its three buttons one grey capsule (28 px, as the tabs' track; hairlines between them), each darker
-   hovered and pressed; the level after it in the secondary grey, as wide as its longest reading ("400.0× · 2419.0
-   px/mm"): the level's width never changes as it zooms, so the bar never re-wraps under the pointer (a level growing
-   past the room beside the tabs had moved the preview 36 px down mid-zoom, at 1600 px). */
+   hovered and pressed; the level after it in the secondary grey, as wide as its longest reading ("400.0×", the px/mm in
+   its tooltip since 2026-11-06): its chip's width never changes as it zooms. */
 .zoom-tools { gap:0; font-size:12px; }
 .zoom-tools button { min-width:28px; min-height:28px; padding:0 9px; border:1px solid transparent; border-radius:0; background:var(--fill); color:var(--text);
   font-size:12px; line-height:16px; font-weight:600; }
@@ -605,30 +646,32 @@ body[data-mode="cad"] .flow-guide { background:var(--bg); border-right-color:var
 .zoom-tools button:hover:not(:disabled) { background-color:var(--fill-hover); }
 .zoom-tools button:active:not(:disabled) { background-color:var(--fill-press); }
 .zoom-tools button:disabled { color:var(--disabled-text); }
-.zoom-tools output { min-width:148px; margin-left:10px; text-align:left; color:var(--text-2); }
+.zoom-tools output { min-width:6ch; margin-left:8px; text-align:left; color:var(--text-2); }
 /* The preview: white with grey dots (the white also an image layer, as the map's), its size and clipping styles.css's;
-   rounded at the card's foot when nothing follows it (no legend yet). */
+   rounded at the card's foot, which it is (no legend under it since the user's request of 2026-11-06). */
 .canvas-wrap { background-color:var(--surface); background-image:radial-gradient(#e8e8ed 1px,transparent 1px),linear-gradient(var(--surface),var(--surface));
   background-position:0 0; background-size:14px 14px,auto; }
-.board-card > .canvas-wrap:has(+ .layer-legend:empty) { border-radius:0 0 calc(var(--r-lg) - 1px) calc(var(--r-lg) - 1px); }
+.board-card > .canvas-wrap { border-radius:0 0 calc(var(--r-lg) - 1px) calc(var(--r-lg) - 1px); }
 .three-d-pane { background-image:linear-gradient(155deg,#f5f5f7,#e8e8ed); }
 .three-d-pane::after { color:#424245; background:rgba(255,255,255,.8); border-radius:var(--r-xs); }
-/* The legend: 12 px, the secondary grey; each swatch ringed (the dark brown stiffener's was lost on the dark card). */
-.layer-legend { gap:4px 14px; padding:10px 20px 12px; color:var(--text-2); font-size:12px; line-height:1.4; }
-.swatch { box-shadow:0 0 0 1px rgba(0,0,0,.12); }
 
-/* The stacked view: its height, its 3D and its overlays styles.css's; the neutral gradient, the caption recoloured.
-   Its keys inset chips (the teal and orange edges, the coin's grey, kept), its notes a small fold. */
+/* The stacked view: its height, its 3D and its overlays styles.css's; the neutral gradient (no keys, notes or caption
+   with it since 2026-11-06). */
 .stacked-canvas { background-image:linear-gradient(155deg,#f5f5f7,#e8e8ed); }
-.assembly-caption { color:#424245; }
-.orbit-hint { color:var(--text-2); font-size:12px; }
-.assembly-legend { gap:6px 8px; padding:10px 20px 12px; font-size:12px; line-height:1.4; }
-.assembly-key,.assembly-note { padding:4px 8px; border-radius:var(--r-xs); background:var(--inset); color:var(--text); }
-.assembly-key { border-radius:0 var(--r-xs) var(--r-xs) 0; font-weight:600; }
-.assembly-note { color:var(--text-2); }
-.assembly-more { margin:0 20px 12px; font-size:12px; }
-.assembly-more > summary { padding:4px 0 8px; color:var(--link); font-size:13px; font-weight:500; }
-.assembly-more > summary::before { background-color:currentColor; }
+/* The figures' controls in their frames (the user's request of 2026-11-06; styles.css places them, top left, Reset view
+   top right): frosted chips as the 3D view's material pills (its blur, a hairline ring, the floating shadow), so they
+   read over a drawing turned or zoomed under them, in the light palette wherever they sit (the lightboxes' list above):
+   the views' segmented control (its grey track over the material, the white thumb), the zoom's capsule with its level,
+   Reset view the zoom's grey over the material (never blue: it is no region's primary action). */
+.figure-tools .preview-tabs,.figure-tools .mode-switch,.figure-tools .zoom-tools,.figure-reset { background-color:var(--material);
+  -webkit-backdrop-filter:var(--blur); backdrop-filter:var(--blur); box-shadow:0 0 0 1px var(--hairline), var(--shadow-float); }
+.figure-tools .preview-tabs,.figure-tools .mode-switch { background-image:linear-gradient(var(--fill),var(--fill)); }
+.figure-tools .zoom-tools { padding-right:12px; border-radius:var(--r-pill); }
+.figure-reset { min-height:28px; padding:0 12px; border:1px solid transparent; border-radius:var(--r-pill); background-image:linear-gradient(var(--fill),var(--fill));
+  color:var(--text); font-size:12px; line-height:16px; font-weight:600; }
+.figure-reset:hover:not(:disabled) { background-image:linear-gradient(var(--fill-hover),var(--fill-hover)); }
+.figure-reset:active:not(:disabled) { background-image:linear-gradient(var(--fill-press),var(--fill-press)); }
+.figure-reset:disabled { color:var(--disabled-text); }
 
 /* The design checks: folded, a title row (17 px, its total 13 px: a pass the text colour after a green dot, section 4,
    a failure the error red), hovered the faint overlay; open, the tables on the well (their sizes styles.css's), the
@@ -756,6 +799,10 @@ body[data-mode="cad"] .flow-guide { background:var(--bg); border-right-color:var
 @media (max-width:980px) { .controls,body[data-mode="cad"] .flow-guide { border-bottom-color:var(--hairline); } }
 /* styles.css's links' 10 px (icons alone) up to 600 px, where it hides their names. */
 @media (max-width:600px) { .masthead-link { padding:0 10px; } }
+/* styles.css's room for the look's toggle (2026-11-06): Discord's mark alone with the icons' 10 px from 601 to 630 and
+   from 1101 to 1220 px, and the three circles up to 410 px (44 px stepping down to 32), with no padding. */
+@media (min-width:601px) and (max-width:630px), (min-width:1101px) and (max-width:1220px) { .masthead-discord { padding:0 10px; } }
+@media (max-width:410px) { .masthead-link { padding:0; } }
 /* On a phone: the header's text on the page's 20 px gutter (styles.css's); 16 px gutters inside the cards
    (Advanced Customization's groups 8 px in from the workspace's edge). */
 @media (max-width:520px) { .masthead { padding:12px 20px; }
@@ -772,7 +819,6 @@ body[data-mode="cad"] .flow-guide { background:var(--bg); border-right-color:var
   .cad-build .cad-actions .primary { max-width:100%; padding-top:7px; padding-bottom:7px; border-radius:18px; line-height:1.25; white-space:normal; }
   /* The results: 16 px gutters. */
   .previews .board-card > header,.stacked-review > header { padding:12px 16px 10px; }
-  .preview-bar { padding:8px 16px; } .layer-legend,.assembly-legend { padding-left:16px; padding-right:16px; } .assembly-more { margin-left:16px; margin-right:16px; }
   .drc-panel > summary { padding:14px 16px; } .drc-bar { padding-left:16px; padding-right:16px; } .downloads { padding:16px; }
   /* The two Gerber ZIPs one block, each the column's width (stacked at different widths they looked ragged). */
   .download-actions button.download-main { width:100%; } }
@@ -787,13 +833,12 @@ body[data-mode="cad"] .flow-guide { background:var(--bg); border-right-color:var
   .workbench.is-stale .canvas-wrap,.workbench.is-stale .stacked-canvas,.workbench.is-stale .drc-grid { transition:none; }
 }
 
-/* The dark shell: the legends' swatches ringed lighter (the stiffener's dark brown on the dark card).  Out of date (the
-   form changed), the previews and the stacked view stay lightboxes: styles.css's fade (half opacity, greyed) would
-   leave them a grey slab over the dark card, so they are opaque here and paled by the filter instead (contrast 1/3
-   then brightness 1.5 maps each channel to half way to white, as the half opacity does over the light card).  This
-   re-values styles.css's own stale opacity and filter there, adding none. */
-@media (prefers-color-scheme: dark) { .swatch { box-shadow:0 0 0 1px rgba(255,255,255,.3); }
-  .workbench.is-stale .canvas-wrap,.workbench.is-stale .stacked-canvas { opacity:1; filter:grayscale(.7) contrast(.3333) brightness(1.5); } }
+/* The dark shell: out of date (the form changed), the previews and the stacked view stay lightboxes: styles.css's fade
+   (half opacity, greyed) would leave them a grey slab over the dark card, so they are opaque here and paled by the
+   filter instead (contrast 1/3 then brightness 1.5 maps each channel to half way to white, as the half opacity does
+   over the light card).  This re-values styles.css's own stale opacity and filter there, adding none.  (The legends'
+   swatches it ringed lighter went with the board cards' legends on 2026-11-06.) */
+:where(:root[data-theme="dark"]) .workbench.is-stale .canvas-wrap,:where(:root[data-theme="dark"]) .workbench.is-stale .stacked-canvas { opacity:1; filter:grayscale(.7) contrast(.3333) brightness(1.5); }
 
 /* More contrast: the cards edged in the control border (here, after the cards' hairline; a failing board's red is the
    more specific). */
@@ -812,6 +857,8 @@ body[data-mode="cad"] .flow-guide { background:var(--bg); border-right-color:var
   .flow-step.is-done .flow-no,.flow-substep.is-done .flow-sub-no { forced-color-adjust:none; border-color:CanvasText; background:CanvasText; color:Canvas; }
   /* The workspace: the 3D view's pills edged (their shadow gone), Edit border on outlined, the status's dot. */
   .cad-view-tools,.cad-views,.cad-status { outline:1px solid CanvasText; }
+  /* The figures' controls in their frames edged too (their shadow gone, 2026-11-06). */
+  .figure-tools .preview-tabs,.figure-tools .mode-switch,.figure-tools .zoom-tools,.figure-reset { outline:1px solid CanvasText; }
   .cad-workspace button.cad-edit-border[aria-pressed="true"] { outline:2px solid Highlight; outline-offset:-2px; }
   #cadStatus::before { forced-color-adjust:none; background-color:CanvasText; }
   /* Advanced Customization: its groups edged (their fill and ring gone), Fit and Generate edged (their pills have no border: only

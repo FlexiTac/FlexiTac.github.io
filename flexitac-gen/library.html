@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; connect-src 'self' https://api.github.com; img-src 'self' data:; style-src 'self' 'unsafe-inline'; base-uri 'none'; form-action 'self'" />
+    <meta name="referrer" content="no-referrer" />
+    <meta name="flexitac-backend" content="browser" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Library · FlexiTac-Gen</title>
+    <!-- Light, or dark once the visitor turns it on (web/theme.js): set on <html> here, before the style sheets and
+         without defer, so the first paint is already in the visitor's look. -->
+    <script src="static/theme.js"></script>
+    <link rel="stylesheet" href="static/styles.css" />
+    <link rel="stylesheet" href="static/theme.css" />
+    <link rel="stylesheet" href="static/library.css" />
+  </head>
+  <body class="lib-page">
+    <!-- The Library (the user's requests of 2026-11-05 and 2026-11-06): sensors already fitted to open-source gripper
+         fingers, laid out as the Apple Store's: the title and its line, the grippers once each, four cards to a row,
+         each opening its 2 mm sensor whose page offers its pitches, then the UMI finger's shelf (its pitches and the
+         tapered tips); at #<id> a sensor's own page with Open in Gen by Surface (./?part=<id>) and its Gerber ZIPs.
+         web/library.js draws it from static/library/entries.json (tools/library_write.py); no engine and no Pyodide
+         here, and three.js on a sensor's page only, whose picture becomes a 3D view to turn (library.js imports
+         cad/library_view.js there, never on the grid; docs/LIBRARY_VIEW.md).  The header is index.html's: its title
+         block, and its right (the look's toggle and the community links), byte for byte (tests/test_library.py), the
+         mode switch as two links. -->
+    <header class="masthead">
+      <div class="masthead-title">
+        <h1>FlexiTac-Gen</h1>
+        <p class="masthead-tagline">A customizer for <a href="https://arxiv.org/abs/2604.28156" target="_blank" rel="noopener noreferrer">FlexiTac</a> sensors.
+          For assembly instructions and applications, see the <a href="https://flexitac.github.io/" target="_blank" rel="noopener noreferrer">FlexiTac website</a>.</p>
+      </div>
+      <!-- The two modes are the generator's (index.html): links here, in the mode switch's segments, so the header
+           keeps its geometry; neither is chosen on this page. -->
+      <nav class="mode-picker mode-links" aria-label="Mode"><a href="./#rect" title="A rectangular sensor: set its rows, columns and pitch"><span>Rectangular</span></a><a href="./" title="Load a 3D model (STL), pick the surface the sensor goes on, and fit the sensor to it"><span>Gen by Surface</span></a></nav>
+      <a class="masthead-library" href="library.html" aria-current="page"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true" focusable="false"><rect x="1.5" y="1.5" width="5.5" height="5.5" rx="1.2"/><rect x="9" y="1.5" width="5.5" height="5.5" rx="1.2"/><rect x="1.5" y="9" width="5.5" height="5.5" rx="1.2"/><rect x="9" y="9" width="5.5" height="5.5" rx="1.2"/></svg><span>Library</span></a>
+      <!-- The header's right (2026-11-06): the look's toggle, then the FlexiTac community.  The toggle (the user's request
+           of 2026-11-06: the page light by default, a small mark before GitHub switching to dark; web/theme.js) is a
+           moon while the page is light and a sun while it is dark (the style sheets show one by <html data-theme>),
+           pressed in dark; the choice is kept per visitor, for both pages.  Its marks are filled shapes, no stroke (a
+           stroked sun made Chromium raster the whole page a little differently, 1-3 levels on every antialiased edge). -->
+      <div class="masthead-end">
+        <button type="button" class="masthead-theme" id="themeToggle" aria-pressed="false" aria-label="Dark mode" title="Turn dark mode on"><svg class="theme-moon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M20.89 13.41A9 9 0 1 1 10.59 3.11 7.5 7.5 0 0 0 20.89 13.41Z"/></svg><svg class="theme-sun" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4.5"/><rect x="11" y="2" width="2" height="3" rx="1"/><rect x="11" y="19" width="2" height="3" rx="1"/><rect x="2" y="11" width="3" height="2" rx="1"/><rect x="19" y="11" width="3" height="2" rx="1"/><g transform="rotate(45 12 12)"><rect x="11" y="2" width="2" height="3" rx="1"/><rect x="11" y="19" width="2" height="3" rx="1"/><rect x="2" y="11" width="3" height="2" rx="1"/><rect x="19" y="11" width="3" height="2" rx="1"/></g></svg></button>
+        <!-- The FlexiTac community, as on https://flexitac.github.io/ (the user's requests of 2026-11-02): its GitHub, with
+             the repository's stars and forks, and Discord, their marks inline.  The counts are written into the page: by
+             app.py as it serves it (read from GitHub's API hourly; none with --no-github) and by tools/build_static_site.py
+             as it builds the static site, which refreshes them as it opens (web/backend.js).  Without them the card shows
+             the name alone. -->
+        <nav class="masthead-links" aria-label="FlexiTac community">
+          <a class="masthead-link masthead-github" href="https://github.com/FlexiTac/FlexiTac" target="_blank" rel="noopener noreferrer" aria-label="FlexiTac on GitHub: 164 stars, 17 forks" data-gh-badge><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true" focusable="false"><path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"/></svg><span class="masthead-gh-text"><span class="masthead-gh-name">FlexiTac</span><span class="masthead-gh-stats" data-gh-stats><span><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true" focusable="false"><path d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.751.751 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Zm0 2.445L6.615 5.5a.75.75 0 0 1-.564.41l-3.097.45 2.24 2.184a.75.75 0 0 1 .216.664l-.528 3.084 2.769-1.456a.75.75 0 0 1 .698 0l2.77 1.456-.53-3.084a.75.75 0 0 1 .216-.664l2.24-2.183-3.096-.45a.75.75 0 0 1-.564-.41L8 2.694Z"/></svg><span data-gh-stars>164</span></span><span><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true" focusable="false"><path d="M5 5.372v.878c0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75v-.878a2.25 2.25 0 1 1 1.5 0v.878a2.25 2.25 0 0 1-2.25 2.25h-1.5v2.128a2.251 2.251 0 1 1-1.5 0V8.5h-1.5A2.25 2.25 0 0 1 3.5 6.25v-.878a2.25 2.25 0 1 1 1.5 0ZM5 3.25a.75.75 0 1 0-1.5 0 .75.75 0 0 0 1.5 0Zm6.75.75a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm-3 8.75a.75.75 0 1 0-1.5 0 .75.75 0 0 0 1.5 0Z"/></svg><span data-gh-forks>17</span></span></span></span></a>
+          <a class="masthead-link masthead-discord" href="https://discord.gg/6gw887Vxms" target="_blank" rel="noopener noreferrer" aria-label="Join the FlexiTac Discord"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/></svg><span>Discord</span></a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="lib">
+      <section class="lib-hero" id="libHero" aria-labelledby="libTitle">
+        <h2 class="lib-title" id="libTitle">Library</h2>
+        <p class="lib-tagline"><span>Sensors already fitted to open&#8209;source gripper fingers.</span> <span class="lib-tagline-more">Open one in Gen&nbsp;by&nbsp;Surface, or download its FPC Gerbers.</span></p>
+      </section>
+      <p class="lib-note" id="libNote" role="status" hidden></p>
+      <!-- The grid: the grippers' section (#grippers, a card each), then the UMI finger's shelf; library.js fills it. -->
+      <div class="lib-grid" id="libGrid">
+        <div class="lib-shelves" id="libShelves"></div>
+      </div>
+      <!-- A sensor's own page (#<id>): its picture (the sensor on its part, Exploded or Assembled, since 2026-11-05), its
+           facts, Open in Gen by Surface and its downloads. -->
+      <article class="lib-detail" id="libDetail" aria-labelledby="libDetailTitle" hidden></article>
+      <p class="lib-status" id="libStatus" role="alert"></p>
+    </main>
+    <footer class="lib-footer">
+      <p>Part names are their makers' trademarks; FlexiTac is not affiliated with them. <a href="static/library/NOTICE.md">Sources and licences</a></p>
+    </footer>
+    <script src="static/library.js" defer></script>
+  </body>
+</html>

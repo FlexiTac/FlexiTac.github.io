@@ -1,0 +1,2309 @@
+{
+ "about": "The Library's index (library.html; Gen by Surface's ./?part=<id>): each part with its mesh and licence, each variant's sensor (proposal #1 of its fit) and the files of its fit.  Written by tools/library_write.py from parts.json and the fits; do not edit by hand.",
+ "families": {
+  "umi-tapers": {
+   "axes": [
+    {
+     "choices": [
+      {
+       "label": "Trapezoid",
+       "value": "trap"
+      },
+      {
+       "label": "Convex arc",
+       "value": "convex"
+      }
+     ],
+     "key": "shape",
+     "label": "Shape"
+    },
+    {
+     "choices": [
+      {
+       "label": "21.8",
+       "value": "21.8"
+      },
+      {
+       "label": "17.8",
+       "value": "17.8"
+      },
+      {
+       "label": "13.8",
+       "value": "13.8"
+      },
+      {
+       "label": "9.8",
+       "value": "9.8"
+      },
+      {
+       "label": "5.8",
+       "value": "5.8"
+      }
+     ],
+     "key": "tip_mm",
+     "label": "Tip width (mm)"
+    }
+   ],
+   "default": "umi-trap-tip13.8-2mm",
+   "grid": {
+    "convex|13.8": "umi-convex-tip13.8-2mm",
+    "convex|17.8": "umi-convex-tip17.8-2mm",
+    "convex|21.8": "umi-convex-tip21.8-2mm",
+    "convex|5.8": "umi-convex-tip5.8-2mm",
+    "convex|9.8": "umi-convex-tip9.8-2mm",
+    "trap|13.8": "umi-trap-tip13.8-2mm",
+    "trap|17.8": "umi-trap-tip17.8-2mm",
+    "trap|21.8": "umi-trap-tip21.8-2mm",
+    "trap|5.8": "umi-trap-tip5.8-2mm",
+    "trap|9.8": "umi-trap-tip9.8-2mm"
+   },
+   "h_mm": 75,
+   "lines": [
+    "Trapezoid or convex arc",
+    "5 tip widths \u00b7 2 mm pitch"
+   ],
+   "shelf": "umi-finray",
+   "title": "Tapered tips"
+  }
+ },
+ "format": "flexitac-library/v1",
+ "generator_version": "deterministic-sensor-core/0.4.0",
+ "order": [
+  "umi-finray",
+  "franka-hand",
+  "widowx-250",
+  "trossen-widowx-ai",
+  "arx-x5",
+  "i2rt-yam",
+  "unitree-dex1",
+  "makermods-metal"
+ ],
+ "parts": {
+  "arx-x5": {
+   "default": "arx-x5-2mm",
+   "family": null,
+   "finger": "gripper tip, HandUMI",
+   "license": {
+    "change": "unchanged",
+    "holder": "BrikHMP18 (HandUMI hardware)",
+    "source": "https://github.com/murobotics-ai/handumi-hw/blob/144827862d4e2d5cd2d331ce7eed1374d3c769df/hardware/STL/gripper_tips/ARX-X5-2023/ARX-X5-2023-LEFT-Gripper.stl",
+    "spdx": "Apache-2.0",
+    "text": "licenses/handumi-hw.txt"
+   },
+   "maker": "ARX Robotics",
+   "mesh": {
+    "bytes": 135284,
+    "facets": 2704,
+    "file": "meshes/arx-x5.stl",
+    "name": "arx-x5.stl",
+    "sha256": "5cf0e92353f4f5787b086eb518ff1d529ea41eb07502cdc3a2979766ccdd3018",
+    "unit": "mm"
+   },
+   "shelf": "Four pitches, 1 to 4 mm.",
+   "title": "ARX X5",
+   "variants": [
+    "arx-x5-1mm",
+    "arx-x5-2mm",
+    "arx-x5-3mm",
+    "arx-x5-4mm"
+   ]
+  },
+  "franka-hand": {
+   "default": "franka-hand-2mm",
+   "family": null,
+   "finger": "gripper finger pad",
+   "license": {
+    "change": "convex hull of finger_1.obj, m to mm, binary STL",
+    "holder": "Franka Robotics (franka_ros meshes) and Google DeepMind (MuJoCo Menagerie)",
+    "source": "https://github.com/google-deepmind/mujoco_menagerie/blob/f3b6013629c7b94f8ee93fd977b161fa8350f9bc/franka_emika_panda/assets/finger_1.obj",
+    "spdx": "Apache-2.0",
+    "text": "licenses/mujoco_menagerie-franka_emika_panda.txt"
+   },
+   "maker": "Franka Robotics",
+   "mesh": {
+    "bytes": 3984,
+    "facets": 78,
+    "file": "meshes/franka-hand.stl",
+    "name": "franka-hand.stl",
+    "sha256": "3ac26349fc85ab971b81696e31ac88955f45d065ddc1254de376fea9d89b6c2c",
+    "unit": "mm"
+   },
+   "shelf": "Four pitches, 1 to 2.5 mm.",
+   "title": "Franka Hand",
+   "variants": [
+    "franka-hand-1mm",
+    "franka-hand-1.5mm",
+    "franka-hand-2mm",
+    "franka-hand-2.5mm"
+   ]
+  },
+  "i2rt-yam": {
+   "default": "i2rt-yam-2mm",
+   "family": null,
+   "finger": "crank gripper tip",
+   "license": {
+    "change": "unchanged",
+    "holder": "I2RT Robotics",
+    "source": "https://github.com/i2rt-robotics/i2rt/blob/120c3c81400171174604e503943f8d1ebc891058/i2rt/robot_models/gripper/crank_4310/assets/tip_left.stl",
+    "spdx": "MIT",
+    "text": "licenses/i2rt.txt"
+   },
+   "maker": "I2RT Robotics",
+   "mesh": {
+    "bytes": 400084,
+    "facets": 8000,
+    "file": "meshes/i2rt-yam.stl",
+    "name": "i2rt-yam.stl",
+    "sha256": "b70f8c1e32ccfae03fec46ac10a0f04195347bc530ee761143a5d7c5bb07ae07",
+    "unit": "m"
+   },
+   "shelf": "Four pitches, 1 to 4 mm.",
+   "title": "I2RT YAM",
+   "variants": [
+    "i2rt-yam-1mm",
+    "i2rt-yam-2mm",
+    "i2rt-yam-3mm",
+    "i2rt-yam-4mm"
+   ]
+  },
+  "makermods-metal": {
+   "default": "makermods-metal-2mm",
+   "family": null,
+   "finger": "gripper tip, HandUMI",
+   "license": {
+    "change": "unchanged",
+    "holder": "BrikHMP18 (HandUMI hardware)",
+    "source": "https://github.com/murobotics-ai/handumi-hw/blob/144827862d4e2d5cd2d331ce7eed1374d3c769df/hardware/STL/gripper_tips/MakerMods-Metal/metal-arm-gripper-tip-left.stl",
+    "spdx": "Apache-2.0",
+    "text": "licenses/handumi-hw.txt"
+   },
+   "maker": "MakerMods",
+   "mesh": {
+    "bytes": 62684,
+    "facets": 1252,
+    "file": "meshes/makermods-metal.stl",
+    "name": "makermods-metal.stl",
+    "sha256": "f480c8fb9fbe5027ce0741436cd3c60c77702c2eec2b80d87f5829c4adca5925",
+    "unit": "m"
+   },
+   "shelf": "Four pitches, 1 to 3 mm.",
+   "title": "MakerMods Metal Arm",
+   "variants": [
+    "makermods-metal-1mm",
+    "makermods-metal-1.5mm",
+    "makermods-metal-2mm",
+    "makermods-metal-3mm"
+   ]
+  },
+  "trossen-widowx-ai": {
+   "default": "trossen-widowx-ai-2mm",
+   "family": null,
+   "finger": "gripper tip sock, HandUMI",
+   "license": {
+    "change": "unchanged",
+    "holder": "BrikHMP18 (HandUMI hardware)",
+    "source": "https://github.com/murobotics-ai/handumi-hw/blob/144827862d4e2d5cd2d331ce7eed1374d3c769df/hardware/STL/gripper_tips/Trossen-WidowXAI/WXAI-LEFT-Gripper-sock.stl",
+    "spdx": "Apache-2.0",
+    "text": "licenses/handumi-hw.txt"
+   },
+   "maker": "Trossen Robotics",
+   "mesh": {
+    "bytes": 3770084,
+    "facets": 75400,
+    "file": "meshes/trossen-widowx-ai.stl",
+    "name": "trossen-widowx-ai.stl",
+    "sha256": "7e2792c557d7e15681b0a3cb693b728931c620d34d326f9f5409ba966372ee8c",
+    "unit": "mm"
+   },
+   "shelf": "Four pitches, 1 to 3 mm.",
+   "title": "Trossen WidowX AI",
+   "variants": [
+    "trossen-widowx-ai-1mm",
+    "trossen-widowx-ai-1.5mm",
+    "trossen-widowx-ai-2mm",
+    "trossen-widowx-ai-3mm"
+   ]
+  },
+  "umi-convex-tip13.8": {
+   "default": "umi-convex-tip13.8-2mm",
+   "family": "umi-tapers",
+   "finger": "soft fin-ray finger, convex arc tip",
+   "license": {
+    "change": "tip cut (convex arc, h 75 mm, tip 13.8 mm) from UMI-Soft-Gripper-Finger.stl",
+    "holder": "BrikHMP18 (HandUMI hardware)",
+    "source": "https://github.com/murobotics-ai/handumi-hw/blob/144827862d4e2d5cd2d331ce7eed1374d3c769df/hardware/STL/gripper_tips/UMI-Gripper/UMI-Soft-Gripper-Finger.stl",
+    "spdx": "Apache-2.0",
+    "text": "licenses/handumi-hw.txt"
+   },
+   "maker": "UMI (Chi et al.), HandUMI replica",
+   "mesh": {
+    "bytes": 259484,
+    "facets": 5188,
+    "file": "meshes/umi-convex-tip13.8.stl",
+    "name": "umi-convex-tip13.8.stl",
+    "sha256": "0aa24fb4dbd23de90c14b498bbeee9888dd34a6ac473d4a9db544ab572840ee2",
+    "unit": "mm"
+   },
+   "shelf": null,
+   "title": "UMI Fin-Ray Gripper, tapered tip",
+   "variants": [
+    "umi-convex-tip13.8-2mm"
+   ]
+  },
+  "umi-convex-tip17.8": {
+   "default": "umi-convex-tip17.8-2mm",
+   "family": "umi-tapers",
+   "finger": "soft fin-ray finger, convex arc tip",
+   "license": {
+    "change": "tip cut (convex arc, h 75 mm, tip 17.8 mm) from UMI-Soft-Gripper-Finger.stl",
+    "holder": "BrikHMP18 (HandUMI hardware)",
+    "source": "https://github.com/murobotics-ai/handumi-hw/blob/144827862d4e2d5cd2d331ce7eed1374d3c769df/hardware/STL/gripper_tips/UMI-Gripper/UMI-Soft-Gripper-Finger.stl",
+    "spdx": "Apache-2.0",
+    "text": "licenses/handumi-hw.txt"
+   },
+   "maker": "UMI (Chi et al.), HandUMI replica",
+   "mesh": {
+    "bytes": 259484,
+    "facets": 5188,
+    "file": "meshes/umi-convex-tip17.8.stl",
+    "name": "umi-convex-tip17.8.stl",
+    "sha256": "e254c3fd40cc7e3c1a3c49683cb7f8829d473590d40c4270a408c30fb26ec8c3",
+    "unit": "mm"
+   },
+   "shelf": null,
+   "title": "UMI Fin-Ray Gripper, tapered tip",
+   "variants": [
+    "umi-convex-tip17.8-2mm"
+   ]
+  },
+  "umi-convex-tip21.8": {
+   "default": "umi-convex-tip21.8-2mm",
+   "family": "umi-tapers",
+   "finger": "soft fin-ray finger, convex arc tip",
+   "license": {
+    "change": "tip cut (convex arc, h 75 mm, tip 21.8 mm) from UMI-Soft-Gripper-Finger.stl",
+    "holder": "BrikHMP18 (HandUMI hardware)",
+    "source": "https://github.com/murobotics-ai/handumi-hw/blob/144827862d4e2d5cd2d331ce7eed1374d3c769df/hardware/STL/gripper_tips/UMI-Gripper/UMI-Soft-Gripper-Finger.stl",
+    "spdx": "Apache-2.0",
+    "text": "licenses/handumi-hw.txt"
+   },
+   "maker": "UMI (Chi et al.), HandUMI replica",
+   "mesh": {
+    "bytes": 259284,
+    "facets": 5184,
+    "file": "meshes/umi-convex-tip21.8.stl",
+    "name": "umi-convex-tip21.8.stl",
+    "sha256": "428e618e51772bd4882cc0fc1de132e4a1a8bff5d78fd9450fbf368bb95159e4",
+    "unit": "mm"
+   },
+   "shelf": null,
+   "title": "UMI Fin-Ray Gripper, tapered tip",
+   "variants": [
+    "umi-convex-tip21.8-2mm"
+   ]
+  },
+  "umi-convex-tip5.8": {
+   "default": "umi-convex-tip5.8-2mm",
+   "family": "umi-tapers",
+   "finger": "soft fin-ray finger, convex arc tip",
+   "license": {
+    "change": "tip cut (convex arc, h 75 mm, tip 5.8 mm) from UMI-Soft-Gripper-Finger.stl",
+    "holder": "BrikHMP18 (HandUMI hardware)",
+    "source": "https://github.com/murobotics-ai/handumi-hw/blob/144827862d4e2d5cd2d331ce7eed1374d3c769df/hardware/STL/gripper_tips/UMI-Gripper/UMI-Soft-Gripper-Finger.stl",
+    "spdx": "Apache-2.0",
+    "text": "licenses/handumi-hw.txt"
+   },
+   "maker": "UMI (Chi et al.), HandUMI replica",
+   "mesh": {
+    "bytes": 259484,
+    "facets": 5188,
+    "file": "meshes/umi-convex-tip5.8.stl",
+    "name": "umi-convex-tip5.8.stl",
+    "sha256": "d9562c18e2bc35af280f0d2f33577600a24c990098824df6718b66f17b1ab685",
+    "unit": "mm"
+   },
+   "shelf": null,
+   "title": "UMI Fin-Ray Gripper, tapered tip",
+   "variants": [
+    "umi-convex-tip5.8-2mm"
+   ]
+  },
+  "umi-convex-tip9.8": {
+   "default": "umi-convex-tip9.8-2mm",
+   "family": "umi-tapers",
+   "finger": "soft fin-ray finger, convex arc tip",
+   "license": {
+    "change": "tip cut (convex arc, h 75 mm, tip 9.8 mm) from UMI-Soft-Gripper-Finger.stl",
+    "holder": "BrikHMP18 (HandUMI hardware)",
+    "source": "https://github.com/murobotics-ai/handumi-hw/blob/144827862d4e2d5cd2d331ce7eed1374d3c769df/hardware/STL/gripper_tips/UMI-Gripper/UMI-Soft-Gripper-Finger.stl",
+    "spdx": "Apache-2.0",
+    "text": "licenses/handumi-hw.txt"
+   },
+   "maker": "UMI (Chi et al.), HandUMI replica",
+   "mesh": {
+    "bytes": 259484,
+    "facets": 5188,
+    "file": "meshes/umi-convex-tip9.8.stl",
+    "name": "umi-convex-tip9.8.stl",
+    "sha256": "3314dca59dd8260caf74ccb957d0ffe3c42e7267ad34f88affd2a818c5a702cb",
+    "unit": "mm"
+   },
+   "shelf": null,
+   "title": "UMI Fin-Ray Gripper, tapered tip",
+   "variants": [
+    "umi-convex-tip9.8-2mm"
+   ]
+  },
+  "umi-finray": {
+   "default": "umi-finray-2mm",
+   "family": null,
+   "finger": "soft fin-ray finger",
+   "license": {
+    "change": "unchanged",
+    "holder": "BrikHMP18 (HandUMI hardware)",
+    "source": "https://github.com/murobotics-ai/handumi-hw/blob/144827862d4e2d5cd2d331ce7eed1374d3c769df/hardware/STL/gripper_tips/UMI-Gripper/UMI-Soft-Gripper-Finger.stl",
+    "spdx": "Apache-2.0",
+    "text": "licenses/handumi-hw.txt"
+   },
+   "maker": "UMI (Chi et al.), HandUMI replica",
+   "mesh": {
+    "bytes": 181284,
+    "facets": 3624,
+    "file": "../vendor/umi/UMI-Soft-Gripper-Finger.stl",
+    "name": "UMI-Soft-Gripper-Finger.stl",
+    "sha256": "63331c666d485de462f3c7c80eb4200fd2bf98ac325095f5b0e8774a95dc8442",
+    "unit": "mm"
+   },
+   "shelf": "Four pitches, 1 to 3 mm, and tapered tips.",
+   "title": "UMI Fin-Ray Gripper",
+   "variants": [
+    "umi-finray-1mm",
+    "umi-finray-1.5mm",
+    "umi-finray-2mm",
+    "umi-finray-3mm"
+   ]
+  },
+  "umi-trap-tip13.8": {
+   "default": "umi-trap-tip13.8-2mm",
+   "family": "umi-tapers",
+   "finger": "soft fin-ray finger, trapezoid tip",
+   "license": {
+    "change": "tip cut (trapezoid, h 75 mm, tip 13.8 mm) from UMI-Soft-Gripper-Finger.stl",
+    "holder": "BrikHMP18 (HandUMI hardware)",
+    "source": "https://github.com/murobotics-ai/handumi-hw/blob/144827862d4e2d5cd2d331ce7eed1374d3c769df/hardware/STL/gripper_tips/UMI-Gripper/UMI-Soft-Gripper-Finger.stl",
+    "spdx": "Apache-2.0",
+    "text": "licenses/handumi-hw.txt"
+   },
+   "maker": "UMI (Chi et al.), HandUMI replica",
+   "mesh": {
+    "bytes": 183484,
+    "facets": 3668,
+    "file": "meshes/umi-trap-tip13.8.stl",
+    "name": "umi-trap-tip13.8.stl",
+    "sha256": "5c5c582158db5034865aef20390cf9f6c8abf59b74277f3b251dd0eb270cbbe7",
+    "unit": "mm"
+   },
+   "shelf": null,
+   "title": "UMI Fin-Ray Gripper, tapered tip",
+   "variants": [
+    "umi-trap-tip13.8-2mm"
+   ]
+  },
+  "umi-trap-tip17.8": {
+   "default": "umi-trap-tip17.8-2mm",
+   "family": "umi-tapers",
+   "finger": "soft fin-ray finger, trapezoid tip",
+   "license": {
+    "change": "tip cut (trapezoid, h 75 mm, tip 17.8 mm) from UMI-Soft-Gripper-Finger.stl",
+    "holder": "BrikHMP18 (HandUMI hardware)",
+    "source": "https://github.com/murobotics-ai/handumi-hw/blob/144827862d4e2d5cd2d331ce7eed1374d3c769df/hardware/STL/gripper_tips/UMI-Gripper/UMI-Soft-Gripper-Finger.stl",
+    "spdx": "Apache-2.0",
+    "text": "licenses/handumi-hw.txt"
+   },
+   "maker": "UMI (Chi et al.), HandUMI replica",
+   "mesh": {
+    "bytes": 182684,
+    "facets": 3652,
+    "file": "meshes/umi-trap-tip17.8.stl",
+    "name": "umi-trap-tip17.8.stl",
+    "sha256": "23a46a0071b4807e028333fe0053565f0bbd96c10aba4fc8bce83c6b56e80549",
+    "unit": "mm"
+   },
+   "shelf": null,
+   "title": "UMI Fin-Ray Gripper, tapered tip",
+   "variants": [
+    "umi-trap-tip17.8-2mm"
+   ]
+  },
+  "umi-trap-tip21.8": {
+   "default": "umi-trap-tip21.8-2mm",
+   "family": "umi-tapers",
+   "finger": "soft fin-ray finger, trapezoid tip",
+   "license": {
+    "change": "tip cut (trapezoid, h 75 mm, tip 21.8 mm) from UMI-Soft-Gripper-Finger.stl",
+    "holder": "BrikHMP18 (HandUMI hardware)",
+    "source": "https://github.com/murobotics-ai/handumi-hw/blob/144827862d4e2d5cd2d331ce7eed1374d3c769df/hardware/STL/gripper_tips/UMI-Gripper/UMI-Soft-Gripper-Finger.stl",
+    "spdx": "Apache-2.0",
+    "text": "licenses/handumi-hw.txt"
+   },
+   "maker": "UMI (Chi et al.), HandUMI replica",
+   "mesh": {
+    "bytes": 181384,
+    "facets": 3626,
+    "file": "meshes/umi-trap-tip21.8.stl",
+    "name": "umi-trap-tip21.8.stl",
+    "sha256": "6ee1d59992d71ec0207ba15798b97c6bfc0e3001ef1282969c601dda46da6f29",
+    "unit": "mm"
+   },
+   "shelf": null,
+   "title": "UMI Fin-Ray Gripper, tapered tip",
+   "variants": [
+    "umi-trap-tip21.8-2mm"
+   ]
+  },
+  "umi-trap-tip5.8": {
+   "default": "umi-trap-tip5.8-2mm",
+   "family": "umi-tapers",
+   "finger": "soft fin-ray finger, trapezoid tip",
+   "license": {
+    "change": "tip cut (trapezoid, h 75 mm, tip 5.8 mm) from UMI-Soft-Gripper-Finger.stl",
+    "holder": "BrikHMP18 (HandUMI hardware)",
+    "source": "https://github.com/murobotics-ai/handumi-hw/blob/144827862d4e2d5cd2d331ce7eed1374d3c769df/hardware/STL/gripper_tips/UMI-Gripper/UMI-Soft-Gripper-Finger.stl",
+    "spdx": "Apache-2.0",
+    "text": "licenses/handumi-hw.txt"
+   },
+   "maker": "UMI (Chi et al.), HandUMI replica",
+   "mesh": {
+    "bytes": 183084,
+    "facets": 3660,
+    "file": "meshes/umi-trap-tip5.8.stl",
+    "name": "umi-trap-tip5.8.stl",
+    "sha256": "aa0f328d24c5107df0f2b19768edfe0b997835d286f7bea688d9721f57eea7e8",
+    "unit": "mm"
+   },
+   "shelf": null,
+   "title": "UMI Fin-Ray Gripper, tapered tip",
+   "variants": [
+    "umi-trap-tip5.8-2mm"
+   ]
+  },
+  "umi-trap-tip9.8": {
+   "default": "umi-trap-tip9.8-2mm",
+   "family": "umi-tapers",
+   "finger": "soft fin-ray finger, trapezoid tip",
+   "license": {
+    "change": "tip cut (trapezoid, h 75 mm, tip 9.8 mm) from UMI-Soft-Gripper-Finger.stl",
+    "holder": "BrikHMP18 (HandUMI hardware)",
+    "source": "https://github.com/murobotics-ai/handumi-hw/blob/144827862d4e2d5cd2d331ce7eed1374d3c769df/hardware/STL/gripper_tips/UMI-Gripper/UMI-Soft-Gripper-Finger.stl",
+    "spdx": "Apache-2.0",
+    "text": "licenses/handumi-hw.txt"
+   },
+   "maker": "UMI (Chi et al.), HandUMI replica",
+   "mesh": {
+    "bytes": 184284,
+    "facets": 3684,
+    "file": "meshes/umi-trap-tip9.8.stl",
+    "name": "umi-trap-tip9.8.stl",
+    "sha256": "3cca74b0f6f70e3296bb4aa57ce537df5bac6eadbf90a2223e4e3be5b99a86bf",
+    "unit": "mm"
+   },
+   "shelf": null,
+   "title": "UMI Fin-Ray Gripper, tapered tip",
+   "variants": [
+    "umi-trap-tip9.8-2mm"
+   ]
+  },
+  "unitree-dex1": {
+   "default": "unitree-dex1-2mm",
+   "family": null,
+   "finger": "gripper finger",
+   "license": {
+    "change": "unchanged",
+    "holder": "HangZhou YuShu Technology Co., Ltd. (Unitree Robotics)",
+    "source": "https://github.com/unitreerobotics/unitree_ros/blob/b579bbe1671bf330e42f6fc1b9cd75a73b0879a7/robots/g1_description/meshes/Dex1_finger_link_1.STL",
+    "spdx": "BSD-3-Clause",
+    "text": "licenses/unitree_ros.txt"
+   },
+   "maker": "Unitree Robotics",
+   "mesh": {
+    "bytes": 313884,
+    "facets": 6276,
+    "file": "meshes/unitree-dex1.stl",
+    "name": "unitree-dex1.stl",
+    "sha256": "7cd2ff199556e3955547a34c75ed9ea777fb7d704fc98e7318d0f67e4aaedf5a",
+    "unit": "m"
+   },
+   "shelf": "Four pitches, 1 to 3 mm.",
+   "title": "Unitree Dex1-1",
+   "variants": [
+    "unitree-dex1-1mm",
+    "unitree-dex1-1.5mm",
+    "unitree-dex1-2mm",
+    "unitree-dex1-3mm"
+   ]
+  },
+  "widowx-250": {
+   "default": "widowx-250-2mm",
+   "family": null,
+   "finger": "gripper finger",
+   "license": {
+    "change": "unchanged",
+    "holder": "Trossen Robotics",
+    "source": "https://github.com/google-deepmind/mujoco_menagerie/blob/f3b6013629c7b94f8ee93fd977b161fa8350f9bc/trossen_wx250s/assets/wx250s_10_gripper_finger.stl",
+    "spdx": "BSD-3-Clause",
+    "text": "licenses/mujoco_menagerie-trossen_wx250s.txt"
+   },
+   "maker": "Trossen Robotics",
+   "mesh": {
+    "bytes": 22284,
+    "facets": 444,
+    "file": "meshes/widowx-250.stl",
+    "name": "widowx-250.stl",
+    "sha256": "6a459bd4ef07eb5c4687e258bd9564004e741437e2e668af7ed31964567d8f90",
+    "unit": "mm"
+   },
+   "shelf": "Four pitches, 1 to 3 mm.",
+   "title": "WidowX 250",
+   "variants": [
+    "widowx-250-1mm",
+    "widowx-250-1.5mm",
+    "widowx-250-2mm",
+    "widowx-250-3mm"
+   ]
+  }
+ },
+ "start": [
+  "umi-finray-2mm",
+  "franka-hand-2mm",
+  "widowx-250-2mm",
+  "trossen-widowx-ai-2mm",
+  "arx-x5-2mm",
+  "i2rt-yam-2mm",
+  "unitree-dex1-2mm",
+  "makermods-metal-2mm"
+ ],
+ "variants": {
+  "arx-x5-1mm": {
+   "badge": "Fine",
+   "build_id": "surface-32x26-d387cf38c447",
+   "centred": false,
+   "column_tail_mm": 52.889,
+   "columns": 26,
+   "field_mm": [
+    25.5,
+    31.5
+   ],
+   "fill": 0.5,
+   "fit": "fits/arx-x5-1mm.json",
+   "fit_sha256": "ab0a67ac20369d37be0e83609aaa076e38da02d4617f02767e5726df29881e90",
+   "fits_reader": null,
+   "image": {
+    "alt": "ARX X5, 1 mm on both fingers of the open gripper",
+    "assembled": {
+     "height": 800,
+     "src": "shots/arx-x5-1mm.assembled.webp",
+     "width": 1280
+    },
+    "exploded": {
+     "card": "shots/arx-x5-1mm.exploded.card.webp",
+     "height": 800,
+     "src": "shots/arx-x5-1mm.exploded.webp",
+     "width": 1280
+    }
+   },
+   "label": "ARX X5, 1 mm",
+   "part": "arx-x5",
+   "pitch_mm": 1,
+   "reader": "none",
+   "row_tail_mm": 52.889,
+   "rows": 32,
+   "symmetric_face": false,
+   "taxels": 562,
+   "view": {
+    "art": "art/arx-x5-1mm.json.gz",
+    "scene": "scenes/arx-x5.json"
+   }
+  },
+  "arx-x5-2mm": {
+   "badge": null,
+   "build_id": "surface-32x25-2909c6a6e34d",
+   "centred": false,
+   "column_tail_mm": 19.86,
+   "columns": 25,
+   "field_mm": [
+    49.0,
+    63.0
+   ],
+   "fill": 0.5,
+   "fit": "fits/arx-x5-2mm.json",
+   "fit_sha256": "41e4fd9616d5130371674b758a6d01827e62d2b99ff0d90fb814674dc168ebc4",
+   "fits_reader": null,
+   "image": {
+    "alt": "ARX X5, 2 mm on both fingers of the open gripper",
+    "assembled": {
+     "height": 800,
+     "src": "shots/arx-x5-2mm.assembled.webp",
+     "width": 1280
+    },
+    "exploded": {
+     "card": "shots/arx-x5-2mm.exploded.card.webp",
+     "height": 800,
+     "src": "shots/arx-x5-2mm.exploded.webp",
+     "width": 1280
+    }
+   },
+   "label": "ARX X5, 2 mm",
+   "part": "arx-x5",
+   "pitch_mm": 2,
+   "reader": "none",
+   "row_tail_mm": 19.86,
+   "rows": 32,
+   "symmetric_face": false,
+   "taxels": 424,
+   "view": {
+    "art": "art/arx-x5-2mm.json.gz",
+    "scene": "scenes/arx-x5.json"
+   }
+  },
+  "arx-x5-3mm": {
+   "badge": null,
+   "build_id": "surface-23x19-2e88c11f611e",
+   "centred": false,
+   "column_tail_mm": 15.907,
+   "columns": 19,
+   "field_mm": [
+    55.5,
+    67.5
+   ],
+   "fill": 0.5,
+   "fit": "fits/arx-x5-3mm.json",
+   "fit_sha256": "da877afccd3b0d6c1aefcfab7ccbedc34e0b6266e8c79bf108e4988e4717a811",
+   "fits_reader": null,
+   "image": {
+    "alt": "ARX X5, 3 mm on both fingers of the open gripper",
+    "assembled": {
+     "height": 800,
+     "src": "shots/arx-x5-3mm.assembled.webp",
+     "width": 1280
+    },
+    "exploded": {
+     "card": "shots/arx-x5-3mm.exploded.card.webp",
+     "height": 800,
+     "src": "shots/arx-x5-3mm.exploded.webp",
+     "width": 1280
+    }
+   },
+   "label": "ARX X5, 3 mm",
+   "part": "arx-x5",
+   "pitch_mm": 3,
+   "reader": "none",
+   "row_tail_mm": 15.907,
+   "rows": 23,
+   "symmetric_face": false,
+   "taxels": 214,
+   "view": {
+    "art": "art/arx-x5-3mm.json.gz",
+    "scene": "scenes/arx-x5.json"
+   }
+  },
+  "arx-x5-4mm": {
+   "badge": null,
+   "build_id": "surface-17x13-bed9167960fc",
+   "centred": false,
+   "column_tail_mm": 17.172,
+   "columns": 13,
+   "field_mm": [
+    50.0,
+    66.0
+   ],
+   "fill": 0.5,
+   "fit": "fits/arx-x5-4mm.json",
+   "fit_sha256": "9fd020196a76878d7e219053cea1f6692c8d7793cdbbef8b405ee45145696890",
+   "fits_reader": null,
+   "image": {
+    "alt": "ARX X5, 4 mm on both fingers of the open gripper",
+    "assembled": {
+     "height": 800,
+     "src": "shots/arx-x5-4mm.assembled.webp",
+     "width": 1280
+    },
+    "exploded": {
+     "card": "shots/arx-x5-4mm.exploded.card.webp",
+     "height": 800,
+     "src": "shots/arx-x5-4mm.exploded.webp",
+     "width": 1280
+    }
+   },
+   "label": "ARX X5, 4 mm",
+   "part": "arx-x5",
+   "pitch_mm": 4,
+   "reader": "none",
+   "row_tail_mm": 17.172,
+   "rows": 17,
+   "symmetric_face": false,
+   "taxels": 117,
+   "view": {
+    "art": "art/arx-x5-4mm.json.gz",
+    "scene": "scenes/arx-x5.json"
+   }
+  },
+  "franka-hand-1.5mm": {
+   "badge": null,
+   "build_id": "surface-11x11-689f162f2f63",
+   "centred": false,
+   "column_tail_mm": 17.793,
+   "columns": 11,
+   "field_mm": [
+    15.75,
+    15.75
+   ],
+   "fill": 0.5,
+   "fit": "fits/franka-hand-1.5mm.json",
+   "fit_sha256": "e1dba4177bc9515b7c21f4644fcdc49eace514d319363e715c924ffc068f4528",
+   "fits_reader": null,
+   "image": {
+    "alt": "Franka Hand, 1.5 mm on both fingers of the open gripper",
+    "assembled": {
+     "height": 800,
+     "src": "shots/franka-hand-1.5mm.assembled.webp",
+     "width": 1280
+    },
+    "exploded": {
+     "card": "shots/franka-hand-1.5mm.exploded.card.webp",
+     "height": 800,
+     "src": "shots/franka-hand-1.5mm.exploded.webp",
+     "width": 1280
+    }
+   },
+   "label": "Franka Hand, 1.5 mm",
+   "part": "franka-hand",
+   "pitch_mm": 1.5,
+   "reader": "none",
+   "row_tail_mm": 17.793,
+   "rows": 11,
+   "symmetric_face": false,
+   "taxels": 116,
+   "view": {
+    "art": "art/franka-hand-1.5mm.json.gz",
+    "scene": "scenes/franka-hand.json"
+   }
+  },
+  "franka-hand-1mm": {
+   "badge": "Fine",
+   "build_id": "surface-16x17-f4fc01f8c041",
+   "centred": false,
+   "column_tail_mm": 17.494,
+   "columns": 17,
+   "field_mm": [
+    16.5,
+    15.5
+   ],
+   "fill": 0.5,
+   "fit": "fits/franka-hand-1mm.json",
+   "fit_sha256": "c139adc22c266f7a65a5ea9b704dabb0ebfa58f5df2aad00301018f5119efaa3",
+   "fits_reader": null,
+   "image": {
+    "alt": "Franka Hand, 1 mm on both fingers of the open gripper",
+    "assembled": {
+     "height": 800,
+     "src": "shots/franka-hand-1mm.assembled.webp",
+     "width": 1280
+    },
+    "exploded": {
+     "card": "shots/franka-hand-1mm.exploded.card.webp",
+     "height": 800,
+     "src": "shots/franka-hand-1mm.exploded.webp",
+     "width": 1280
+    }
+   },
+   "label": "Franka Hand, 1 mm",
+   "part": "franka-hand",
+   "pitch_mm": 1,
+   "reader": "none",
+   "row_tail_mm": 17.494,
+   "rows": 16,
+   "symmetric_face": false,
+   "taxels": 258,
+   "view": {
+    "art": "art/franka-hand-1mm.json.gz",
+    "scene": "scenes/franka-hand.json"
+   }
+  },
+  "franka-hand-2.5mm": {
+   "badge": null,
+   "build_id": "surface-7x7-219eb060fc64",
+   "centred": false,
+   "column_tail_mm": 17.773,
+   "columns": 7,
+   "field_mm": [
+    16.25,
+    16.25
+   ],
+   "fill": 0.5,
+   "fit": "fits/franka-hand-2.5mm.json",
+   "fit_sha256": "05fb065b2d17f778eb1e05d4b4e641736c951c4b85b3f967b491debc9826fc08",
+   "fits_reader": null,
+   "image": {
+    "alt": "Franka Hand, 2.5 mm on both fingers of the open gripper",
+    "assembled": {
+     "height": 800,
+     "src": "shots/franka-hand-2.5mm.assembled.webp",
+     "width": 1280
+    },
+    "exploded": {
+     "card": "shots/franka-hand-2.5mm.exploded.card.webp",
+     "height": 800,
+     "src": "shots/franka-hand-2.5mm.exploded.webp",
+     "width": 1280
+    }
+   },
+   "label": "Franka Hand, 2.5 mm",
+   "part": "franka-hand",
+   "pitch_mm": 2.5,
+   "reader": "none",
+   "row_tail_mm": 17.773,
+   "rows": 7,
+   "symmetric_face": false,
+   "taxels": 45,
+   "view": {
+    "art": "art/franka-hand-2.5mm.json.gz",
+    "scene": "scenes/franka-hand.json"
+   }
+  },
+  "franka-hand-2mm": {
+   "badge": null,
+   "build_id": "surface-8x8-7d3333991a15",
+   "centred": false,
+   "column_tail_mm": 18.779,
+   "columns": 8,
+   "field_mm": [
+    15.0,
+    15.0
+   ],
+   "fill": 0.5,
+   "fit": "fits/franka-hand-2mm.json",
+   "fit_sha256": "f9d673a88f61a7efb49e5678627aa7f9e666608f7ccf363dc2161a7aed68507d",
+   "fits_reader": null,
+   "image": {
+    "alt": "Franka Hand, 2 mm on both fingers of the open gripper",
+    "assembled": {
+     "height": 800,
+     "src": "shots/franka-hand-2mm.assembled.webp",
+     "width": 1280
+    },
+    "exploded": {
+     "card": "shots/franka-hand-2mm.exploded.card.webp",
+     "height": 800,
+     "src": "shots/franka-hand-2mm.exploded.webp",
+     "width": 1280
+    }
+   },
+   "label": "Franka Hand, 2 mm",
+   "part": "franka-hand",
+   "pitch_mm": 2,
+   "reader": "none",
+   "row_tail_mm": 18.779,
+   "rows": 8,
+   "symmetric_face": false,
+   "taxels": 62,
+   "view": {
+    "art": "art/franka-hand-2mm.json.gz",
+    "scene": "scenes/franka-hand.json"
+   }
+  },
+  "i2rt-yam-1mm": {
+   "badge": "Fine",
+   "build_id": "surface-32x32-dd7be86a5052",
+   "centred": false,
+   "column_tail_mm": 51.626,
+   "columns": 32,
+   "field_mm": [
+    31.5,
+    31.5
+   ],
+   "fill": 0.5,
+   "fit": "fits/i2rt-yam-1mm.json",
+   "fit_sha256": "ec614c02b651b8d743f5b54dff2181170b1b42dee6c3d818fd57778c99c4eaab",
+   "fits_reader": null,
+   "image": {
+    "alt": "I2RT YAM, 1 mm on both fingers of the open gripper",
+    "assembled": {
+     "height": 800,
+     "src": "shots/i2rt-yam-1mm.assembled.webp",
+     "width": 1280
+    },
+    "exploded": {
+     "card": "shots/i2rt-yam-1mm.exploded.card.webp",
+     "height": 800,
+     "src": "shots/i2rt-yam-1mm.exploded.webp",
+     "width": 1280
+    }
+   },
+   "label": "I2RT YAM, 1 mm",
+   "part": "i2rt-yam",
+   "pitch_mm": 1,
+   "reader": "none",
+   "row_tail_mm": 51.626,
+   "rows": 32,
+   "symmetric_face": false,
+   "taxels": 761,
+   "view": {
+    "art": "art/i2rt-yam-1mm.json.gz",
+    "scene": "scenes/i2rt-yam.json"
+   }
+  },
+  "i2rt-yam-2mm": {
+   "badge": null,
+   "build_id": "surface-32x32-f99cfa65c746",
+   "centred": false,
+   "column_tail_mm": 18.248,
+   "columns": 32,
+   "field_mm": [
+    63.0,
+    63.0
+   ],
+   "fill": 0.5,
+   "fit": "fits/i2rt-yam-2mm.json",
+   "fit_sha256": "5d3327a1b03a62ba042de3a284d43ea04b9dad6304fb153b65e260f355b2a579",
+   "fits_reader": null,
+   "image": {
+    "alt": "I2RT YAM, 2 mm on both fingers of the open gripper",
+    "assembled": {
+     "height": 800,
+     "src": "shots/i2rt-yam-2mm.assembled.webp",
+     "width": 1280
+    },
+    "exploded": {
+     "card": "shots/i2rt-yam-2mm.exploded.card.webp",
+     "height": 800,
+     "src": "shots/i2rt-yam-2mm.exploded.webp",
+     "width": 1280
+    }
+   },
+   "label": "I2RT YAM, 2 mm",
+   "part": "i2rt-yam",
+   "pitch_mm": 2,
+   "reader": "none",
+   "row_tail_mm": 18.248,
+   "rows": 32,
+   "symmetric_face": false,
+   "taxels": 621,
+   "view": {
+    "art": "art/i2rt-yam-2mm.json.gz",
+    "scene": "scenes/i2rt-yam.json"
+   }
+  },
+  "i2rt-yam-3mm": {
+   "badge": null,
+   "build_id": "surface-23x23-11ed05f4e0e9",
+   "centred": false,
+   "column_tail_mm": 14.397,
+   "columns": 23,
+   "field_mm": [
+    67.5,
+    67.5
+   ],
+   "fill": 0.5,
+   "fit": "fits/i2rt-yam-3mm.json",
+   "fit_sha256": "e674d161d88c48e8a9b95aa466fbc52a93329e5ef7141c536f3c514697993063",
+   "fits_reader": null,
+   "image": {
+    "alt": "I2RT YAM, 3 mm on both fingers of the open gripper",
+    "assembled": {
+     "height": 800,
+     "src": "shots/i2rt-yam-3mm.assembled.webp",
+     "width": 1280
+    },
+    "exploded": {
+     "card": "shots/i2rt-yam-3mm.exploded.card.webp",
+     "height": 800,
+     "src": "shots/i2rt-yam-3mm.exploded.webp",
+     "width": 1280
+    }
+   },
+   "label": "I2RT YAM, 3 mm",
+   "part": "i2rt-yam",
+   "pitch_mm": 3,
+   "reader": "none",
+   "row_tail_mm": 14.397,
+   "rows": 23,
+   "symmetric_face": false,
+   "taxels": 312,
+   "view": {
+    "art": "art/i2rt-yam-3mm.json.gz",
+    "scene": "scenes/i2rt-yam.json"
+   }
+  },
+  "i2rt-yam-4mm": {
+   "badge": null,
+   "build_id": "surface-17x17-df23535bd385",
+   "centred": false,
+   "column_tail_mm": 14.797,
+   "columns": 17,
+   "field_mm": [
+    66.0,
+    66.0
+   ],
+   "fill": 0.5,
+   "fit": "fits/i2rt-yam-4mm.json",
+   "fit_sha256": "736918ffe6b2c224b4ac86ea5b4d393014790dbdea7a32da78d1dfe4b551683f",
+   "fits_reader": null,
+   "image": {
+    "alt": "I2RT YAM, 4 mm on both fingers of the open gripper",
+    "assembled": {
+     "height": 800,
+     "src": "shots/i2rt-yam-4mm.assembled.webp",
+     "width": 1280
+    },
+    "exploded": {
+     "card": "shots/i2rt-yam-4mm.exploded.card.webp",
+     "height": 800,
+     "src": "shots/i2rt-yam-4mm.exploded.webp",
+     "width": 1280
+    }
+   },
+   "label": "I2RT YAM, 4 mm",
+   "part": "i2rt-yam",
+   "pitch_mm": 4,
+   "reader": "none",
+   "row_tail_mm": 14.797,
+   "rows": 17,
+   "symmetric_face": false,
+   "taxels": 173,
+   "view": {
+    "art": "art/i2rt-yam-4mm.json.gz",
+    "scene": "scenes/i2rt-yam.json"
+   }
+  },
+  "makermods-metal-1.5mm": {
+   "badge": null,
+   "build_id": "surface-32x15-63204c3821cb",
+   "centred": true,
+   "column_tail_mm": 34.928,
+   "columns": 15,
+   "field_mm": [
+    21.75,
+    47.25
+   ],
+   "fill": 0.5,
+   "fit": "fits/makermods-metal-1.5mm.json",
+   "fit_sha256": "e582aebea77d7050ca0808af8a1d0eefdb507d624b6e12333e23f2549ce0c16f",
+   "fits_reader": null,
+   "image": {
+    "alt": "MakerMods Metal Arm, 1.5 mm on both fingertips on a plain rail",
+    "assembled": {
+     "height": 800,
+     "src": "shots/makermods-metal-1.5mm.assembled.webp",
+     "width": 1280
+    },
+    "exploded": {
+     "card": "shots/makermods-metal-1.5mm.exploded.card.webp",
+     "height": 800,
+     "src": "shots/makermods-metal-1.5mm.exploded.webp",
+     "width": 1280
+    }
+   },
+   "label": "MakerMods Metal Arm, 1.5 mm",
+   "part": "makermods-metal",
+   "pitch_mm": 1.5,
+   "reader": "none",
+   "row_tail_mm": 34.928,
+   "rows": 32,
+   "symmetric_face": true,
+   "taxels": 322,
+   "view": {
+    "art": "art/makermods-metal-1.5mm.json.gz",
+    "scene": "scenes/makermods-metal.json"
+   }
+  },
+  "makermods-metal-1mm": {
+   "badge": "Fine",
+   "build_id": "surface-32x19-3eb813284900",
+   "centred": true,
+   "column_tail_mm": 50.945,
+   "columns": 19,
+   "field_mm": [
+    18.5,
+    31.5
+   ],
+   "fill": 0.5,
+   "fit": "fits/makermods-metal-1mm.json",
+   "fit_sha256": "b39e3e69534fc6d285b987a3a9e682dc07c1498da1dabcd735db947c2cdce8df",
+   "fits_reader": null,
+   "image": {
+    "alt": "MakerMods Metal Arm, 1 mm on both fingertips on a plain rail",
+    "assembled": {
+     "height": 800,
+     "src": "shots/makermods-metal-1mm.assembled.webp",
+     "width": 1280
+    },
+    "exploded": {
+     "card": "shots/makermods-metal-1mm.exploded.card.webp",
+     "height": 800,
+     "src": "shots/makermods-metal-1mm.exploded.webp",
+     "width": 1280
+    }
+   },
+   "label": "MakerMods Metal Arm, 1 mm",
+   "part": "makermods-metal",
+   "pitch_mm": 1,
+   "reader": "none",
+   "row_tail_mm": 50.945,
+   "rows": 32,
+   "symmetric_face": true,
+   "taxels": 398,
+   "view": {
+    "art": "art/makermods-metal-1mm.json.gz",
+    "scene": "scenes/makermods-metal.json"
+   }
+  },
+  "makermods-metal-2mm": {
+   "badge": null,
+   "build_id": "surface-32x11-0e51fc8c2c00",
+   "centred": true,
+   "column_tail_mm": 19.336,
+   "columns": 11,
+   "field_mm": [
+    21.0,
+    63.0
+   ],
+   "fill": 0.5,
+   "fit": "fits/makermods-metal-2mm.json",
+   "fit_sha256": "32350ca03ffe1bd0b18b109ab4b8a7b98fcdc655d04f01955872c66ebe0298cd",
+   "fits_reader": null,
+   "image": {
+    "alt": "MakerMods Metal Arm, 2 mm on both fingertips on a plain rail",
+    "assembled": {
+     "height": 800,
+     "src": "shots/makermods-metal-2mm.assembled.webp",
+     "width": 1280
+    },
+    "exploded": {
+     "card": "shots/makermods-metal-2mm.exploded.card.webp",
+     "height": 800,
+     "src": "shots/makermods-metal-2mm.exploded.webp",
+     "width": 1280
+    }
+   },
+   "label": "MakerMods Metal Arm, 2 mm",
+   "part": "makermods-metal",
+   "pitch_mm": 2,
+   "reader": "none",
+   "row_tail_mm": 19.336,
+   "rows": 32,
+   "symmetric_face": true,
+   "taxels": 264,
+   "view": {
+    "art": "art/makermods-metal-2mm.json.gz",
+    "scene": "scenes/makermods-metal.json"
+   }
+  },
+  "makermods-metal-3mm": {
+   "badge": null,
+   "build_id": "surface-22x8-f1f8d070e8f4",
+   "centred": true,
+   "column_tail_mm": 18.326,
+   "columns": 8,
+   "field_mm": [
+    22.5,
+    64.5
+   ],
+   "fill": 0.5,
+   "fit": "fits/makermods-metal-3mm.json",
+   "fit_sha256": "4836757712dbc0529febdf47919bfed6003173db2a19d7dd3004350e3a3ca496",
+   "fits_reader": null,
+   "image": {
+    "alt": "MakerMods Metal Arm, 3 mm on both fingertips on a plain rail",
+    "assembled": {
+     "height": 800,
+     "src": "shots/makermods-metal-3mm.assembled.webp",
+     "width": 1280
+    },
+    "exploded": {
+     "card": "shots/makermods-metal-3mm.exploded.card.webp",
+     "height": 800,
+     "src": "shots/makermods-metal-3mm.exploded.webp",
+     "width": 1280
+    }
+   },
+   "label": "MakerMods Metal Arm, 3 mm",
+   "part": "makermods-metal",
+   "pitch_mm": 3,
+   "reader": "none",
+   "row_tail_mm": 18.326,
+   "rows": 22,
+   "symmetric_face": true,
+   "taxels": 124,
+   "view": {
+    "art": "art/makermods-metal-3mm.json.gz",
+    "scene": "scenes/makermods-metal.json"
+   }
+  },
+  "trossen-widowx-ai-1.5mm": {
+   "badge": null,
+   "build_id": "surface-32x22-1aa4b358103b",
+   "centred": false,
+   "column_tail_mm": 15.718,
+   "columns": 22,
+   "field_mm": [
+    32.25,
+    47.25
+   ],
+   "fill": 0.5,
+   "fit": "fits/trossen-widowx-ai-1.5mm.json",
+   "fit_sha256": "ec7714487cacac6811443a05e6b1df1b466112609f8993e989d869726ebbb16a",
+   "fits_reader": null,
+   "image": {
+    "alt": "Trossen WidowX AI, 1.5 mm on both fingers of the open gripper",
+    "assembled": {
+     "height": 800,
+     "src": "shots/trossen-widowx-ai-1.5mm.assembled.webp",
+     "width": 1280
+    },
+    "exploded": {
+     "card": "shots/trossen-widowx-ai-1.5mm.exploded.card.webp",
+     "height": 800,
+     "src": "shots/trossen-widowx-ai-1.5mm.exploded.webp",
+     "width": 1280
+    }
+   },
+   "label": "Trossen WidowX AI, 1.5 mm",
+   "part": "trossen-widowx-ai",
+   "pitch_mm": 1.5,
+   "reader": "none",
+   "row_tail_mm": 15.718,
+   "rows": 32,
+   "symmetric_face": false,
+   "taxels": 443,
+   "view": {
+    "art": "art/trossen-widowx-ai-1.5mm.json.gz",
+    "scene": "scenes/trossen-widowx-ai.json"
+   }
+  },
+  "trossen-widowx-ai-1mm": {
+   "badge": "Fine",
+   "build_id": "surface-32x25-cd7ee5fdf18e",
+   "centred": false,
+   "column_tail_mm": 31.932,
+   "columns": 25,
+   "field_mm": [
+    24.5,
+    31.5
+   ],
+   "fill": 0.5,
+   "fit": "fits/trossen-widowx-ai-1mm.json",
+   "fit_sha256": "bba27a4dc6ef98ce1bcbec3e539add9970c074d2d7e5801a7c42ef5dc57e3da5",
+   "fits_reader": null,
+   "image": {
+    "alt": "Trossen WidowX AI, 1 mm on both fingers of the open gripper",
+    "assembled": {
+     "height": 800,
+     "src": "shots/trossen-widowx-ai-1mm.assembled.webp",
+     "width": 1280
+    },
+    "exploded": {
+     "card": "shots/trossen-widowx-ai-1mm.exploded.card.webp",
+     "height": 800,
+     "src": "shots/trossen-widowx-ai-1mm.exploded.webp",
+     "width": 1280
+    }
+   },
+   "label": "Trossen WidowX AI, 1 mm",
+   "part": "trossen-widowx-ai",
+   "pitch_mm": 1,
+   "reader": "none",
+   "row_tail_mm": 31.932,
+   "rows": 32,
+   "symmetric_face": false,
+   "taxels": 535,
+   "view": {
+    "art": "art/trossen-widowx-ai-1mm.json.gz",
+    "scene": "scenes/trossen-widowx-ai.json"
+   }
+  },
+  "trossen-widowx-ai-2mm": {
+   "badge": null,
+   "build_id": "surface-24x16-cb567f0c5d2d",
+   "centred": false,
+   "column_tail_mm": 16.993,
+   "columns": 16,
+   "field_mm": [
+    31.0,
+    47.0
+   ],
+   "fill": 0.5,
+   "fit": "fits/trossen-widowx-ai-2mm.json",
+   "fit_sha256": "6e3613ad5c0bb12420e1fe72a25dce5cc838114d2c846a755cf752ced31391b0",
+   "fits_reader": null,
+   "image": {
+    "alt": "Trossen WidowX AI, 2 mm on both fingers of the open gripper",
+    "assembled": {
+     "height": 800,
+     "src": "shots/trossen-widowx-ai-2mm.assembled.webp",
+     "width": 1280
+    },
+    "exploded": {
+     "card": "shots/trossen-widowx-ai-2mm.exploded.card.webp",
+     "height": 800,
+     "src": "shots/trossen-widowx-ai-2mm.exploded.webp",
+     "width": 1280
+    }
+   },
+   "label": "Trossen WidowX AI, 2 mm",
+   "part": "trossen-widowx-ai",
+   "pitch_mm": 2,
+   "reader": "none",
+   "row_tail_mm": 16.993,
+   "rows": 24,
+   "symmetric_face": false,
+   "taxels": 245,
+   "view": {
+    "art": "art/trossen-widowx-ai-2mm.json.gz",
+    "scene": "scenes/trossen-widowx-ai.json"
+   }
+  },
+  "trossen-widowx-ai-3mm": {
+   "badge": null,
+   "build_id": "surface-16x11-9c4e1741c0f1",
+   "centred": false,
+   "column_tail_mm": 17.816,
+   "columns": 11,
+   "field_mm": [
+    31.5,
+    46.5
+   ],
+   "fill": 0.5,
+   "fit": "fits/trossen-widowx-ai-3mm.json",
+   "fit_sha256": "aaadec490c9ddd57d4f314c3db1c9f87680a54b85603caedd34161fe55caa831",
+   "fits_reader": null,
+   "image": {
+    "alt": "Trossen WidowX AI, 3 mm on both fingers of the open gripper",
+    "assembled": {
+     "height": 800,
+     "src": "shots/trossen-widowx-ai-3mm.assembled.webp",
+     "width": 1280
+    },
+    "exploded": {
+     "card": "shots/trossen-widowx-ai-3mm.exploded.card.webp",
+     "height": 800,
+     "src": "shots/trossen-widowx-ai-3mm.exploded.webp",
+     "width": 1280
+    }
+   },
+   "label": "Trossen WidowX AI, 3 mm",
+   "part": "trossen-widowx-ai",
+   "pitch_mm": 3,
+   "reader": "none",
+   "row_tail_mm": 17.816,
+   "rows": 16,
+   "symmetric_face": false,
+   "taxels": 107,
+   "view": {
+    "art": "art/trossen-widowx-ai-3mm.json.gz",
+    "scene": "scenes/trossen-widowx-ai.json"
+   }
+  },
+  "umi-convex-tip13.8-2mm": {
+   "badge": null,
+   "build_id": "surface-32x12-4cb9374144c8",
+   "centred": true,
+   "column_tail_mm": 70.498,
+   "columns": 12,
+   "field_mm": [
+    23.0,
+    63.0
+   ],
+   "fill": 0.5,
+   "fit": "fits/umi-convex-tip13.8-2mm.json",
+   "fit_sha256": "f5c7c91e461a7bf815bf7dec03dc3aa4ace2d1758d55ea43f7eb4db1f813b3c0",
+   "fits_reader": null,
+   "image": {
+    "alt": "UMI convex arc tip, 13.8 mm on the part",
+    "assembled": {
+     "height": 800,
+     "src": "shots/umi-convex-tip13.8-2mm.assembled.webp",
+     "width": 1280
+    },
+    "exploded": {
+     "card": "shots/umi-convex-tip13.8-2mm.exploded.card.webp",
+     "height": 800,
+     "src": "shots/umi-convex-tip13.8-2mm.exploded.webp",
+     "width": 1280
+    }
+   },
+   "label": "UMI convex arc tip, 13.8 mm",
+   "part": "umi-convex-tip13.8",
+   "pitch_mm": 2,
+   "reader": "none",
+   "row_tail_mm": 70.498,
+   "rows": 32,
+   "symmetric_face": true,
+   "taxels": 312,
+   "view": {
+    "art": "art/umi-convex-tip13.8-2mm.json.gz",
+    "scene": null
+   }
+  },
+  "umi-convex-tip17.8-2mm": {
+   "badge": null,
+   "build_id": "surface-32x12-88dcc0061ffb",
+   "centred": true,
+   "column_tail_mm": 70.498,
+   "columns": 12,
+   "field_mm": [
+    23.0,
+    63.0
+   ],
+   "fill": 0.5,
+   "fit": "fits/umi-convex-tip17.8-2mm.json",
+   "fit_sha256": "7f62b3d67427bfa5b475d56fbd55b186dce0fb9bfc2cdb5aafe64be9caa3817a",
+   "fits_reader": null,
+   "image": {
+    "alt": "UMI convex arc tip, 17.8 mm on the part",
+    "assembled": {
+     "height": 800,
+     "src": "shots/umi-convex-tip17.8-2mm.assembled.webp",
+     "width": 1280
+    },
+    "exploded": {
+     "card": "shots/umi-convex-tip17.8-2mm.exploded.card.webp",
+     "height": 800,
+     "src": "shots/umi-convex-tip17.8-2mm.exploded.webp",
+     "width": 1280
+    }
+   },
+   "label": "UMI convex arc tip, 17.8 mm",
+   "part": "umi-convex-tip17.8",
+   "pitch_mm": 2,
+   "reader": "none",
+   "row_tail_mm": 70.498,
+   "rows": 32,
+   "symmetric_face": true,
+   "taxels": 336,
+   "view": {
+    "art": "art/umi-convex-tip17.8-2mm.json.gz",
+    "scene": null
+   }
+  },
+  "umi-convex-tip21.8-2mm": {
+   "badge": null,
+   "build_id": "surface-32x12-7d835504aece",
+   "centred": true,
+   "column_tail_mm": 70.498,
+   "columns": 12,
+   "field_mm": [
+    23.0,
+    63.0
+   ],
+   "fill": 0.5,
+   "fit": "fits/umi-convex-tip21.8-2mm.json",
+   "fit_sha256": "a0b1858cd42b3e0934f80a99d322f56f4451c5a341112ae74210e87bc7c2a91f",
+   "fits_reader": null,
+   "image": {
+    "alt": "UMI convex arc tip, 21.8 mm on the part",
+    "assembled": {
+     "height": 800,
+     "src": "shots/umi-convex-tip21.8-2mm.assembled.webp",
+     "width": 1280
+    },
+    "exploded": {
+     "card": "shots/umi-convex-tip21.8-2mm.exploded.card.webp",
+     "height": 800,
+     "src": "shots/umi-convex-tip21.8-2mm.exploded.webp",
+     "width": 1280
+    }
+   },
+   "label": "UMI convex arc tip, 21.8 mm",
+   "part": "umi-convex-tip21.8",
+   "pitch_mm": 2,
+   "reader": "none",
+   "row_tail_mm": 70.498,
+   "rows": 32,
+   "symmetric_face": true,
+   "taxels": 360,
+   "view": {
+    "art": "art/umi-convex-tip21.8-2mm.json.gz",
+    "scene": null
+   }
+  },
+  "umi-convex-tip5.8-2mm": {
+   "badge": null,
+   "build_id": "surface-32x11-6c5ee79ebf58",
+   "centred": true,
+   "column_tail_mm": 70.336,
+   "columns": 11,
+   "field_mm": [
+    21.0,
+    63.0
+   ],
+   "fill": 0.5,
+   "fit": "fits/umi-convex-tip5.8-2mm.json",
+   "fit_sha256": "24282b687f3499e46ba306719543d532d98581f2916d01561a8b68ef81afaf95",
+   "fits_reader": null,
+   "image": {
+    "alt": "UMI convex arc tip, 5.8 mm on the part",
+    "assembled": {
+     "height": 800,
+     "src": "shots/umi-convex-tip5.8-2mm.assembled.webp",
+     "width": 1280
+    },
+    "exploded": {
+     "card": "shots/umi-convex-tip5.8-2mm.exploded.card.webp",
+     "height": 800,
+     "src": "shots/umi-convex-tip5.8-2mm.exploded.webp",
+     "width": 1280
+    }
+   },
+   "label": "UMI convex arc tip, 5.8 mm",
+   "part": "umi-convex-tip5.8",
+   "pitch_mm": 2,
+   "reader": "none",
+   "row_tail_mm": 70.336,
+   "rows": 32,
+   "symmetric_face": true,
+   "taxels": 262,
+   "view": {
+    "art": "art/umi-convex-tip5.8-2mm.json.gz",
+    "scene": null
+   }
+  },
+  "umi-convex-tip9.8-2mm": {
+   "badge": null,
+   "build_id": "surface-32x12-e3dfb9eb7e81",
+   "centred": true,
+   "column_tail_mm": 70.498,
+   "columns": 12,
+   "field_mm": [
+    23.0,
+    63.0
+   ],
+   "fill": 0.5,
+   "fit": "fits/umi-convex-tip9.8-2mm.json",
+   "fit_sha256": "5f685b7feacf79d9f291fbdde9cbb554f32c9d8d77f8dcfc8c098ca4c0831399",
+   "fits_reader": null,
+   "image": {
+    "alt": "UMI convex arc tip, 9.8 mm on the part",
+    "assembled": {
+     "height": 800,
+     "src": "shots/umi-convex-tip9.8-2mm.assembled.webp",
+     "width": 1280
+    },
+    "exploded": {
+     "card": "shots/umi-convex-tip9.8-2mm.exploded.card.webp",
+     "height": 800,
+     "src": "shots/umi-convex-tip9.8-2mm.exploded.webp",
+     "width": 1280
+    }
+   },
+   "label": "UMI convex arc tip, 9.8 mm",
+   "part": "umi-convex-tip9.8",
+   "pitch_mm": 2,
+   "reader": "none",
+   "row_tail_mm": 70.498,
+   "rows": 32,
+   "symmetric_face": true,
+   "taxels": 288,
+   "view": {
+    "art": "art/umi-convex-tip9.8-2mm.json.gz",
+    "scene": null
+   }
+  },
+  "umi-finray-1.5mm": {
+   "badge": null,
+   "build_id": "surface-32x17-5b221a9ddb1a",
+   "centred": true,
+   "column_tail_mm": 86.196,
+   "columns": 17,
+   "field_mm": [
+    24.75,
+    47.25
+   ],
+   "fill": 0.5,
+   "fit": "fits/umi-finray-1.5mm.json",
+   "fit_sha256": "bbda4cb4be8aa2907f6274657338e236653b598f5365b16a51bcdd6e7c2aa446",
+   "fits_reader": null,
+   "image": {
+    "alt": "UMI Fin-Ray Gripper, 1.5 mm on the part",
+    "assembled": {
+     "height": 800,
+     "src": "shots/umi-finray-1.5mm.assembled.webp",
+     "width": 1280
+    },
+    "exploded": {
+     "card": "shots/umi-finray-1.5mm.exploded.card.webp",
+     "height": 800,
+     "src": "shots/umi-finray-1.5mm.exploded.webp",
+     "width": 1280
+    }
+   },
+   "label": "UMI Fin-Ray Gripper, 1.5 mm",
+   "part": "umi-finray",
+   "pitch_mm": 1.5,
+   "reader": "none",
+   "row_tail_mm": 86.196,
+   "rows": 32,
+   "symmetric_face": true,
+   "taxels": 544,
+   "view": {
+    "art": "art/umi-finray-1.5mm.json.gz",
+    "scene": null
+   }
+  },
+  "umi-finray-1mm": {
+   "badge": "Fine",
+   "build_id": "surface-32x25-56dc8881a924",
+   "centred": true,
+   "column_tail_mm": 102.019,
+   "columns": 25,
+   "field_mm": [
+    24.5,
+    31.5
+   ],
+   "fill": 0.5,
+   "fit": "fits/umi-finray-1mm.json",
+   "fit_sha256": "4f70104841b71986253c54de3c573899c01faf087bbd5024956e1936faee210b",
+   "fits_reader": null,
+   "image": {
+    "alt": "UMI Fin-Ray Gripper, 1 mm on the part",
+    "assembled": {
+     "height": 800,
+     "src": "shots/umi-finray-1mm.assembled.webp",
+     "width": 1280
+    },
+    "exploded": {
+     "card": "shots/umi-finray-1mm.exploded.card.webp",
+     "height": 800,
+     "src": "shots/umi-finray-1mm.exploded.webp",
+     "width": 1280
+    }
+   },
+   "label": "UMI Fin-Ray Gripper, 1 mm",
+   "part": "umi-finray",
+   "pitch_mm": 1,
+   "reader": "none",
+   "row_tail_mm": 102.019,
+   "rows": 32,
+   "symmetric_face": true,
+   "taxels": 800,
+   "view": {
+    "art": "art/umi-finray-1mm.json.gz",
+    "scene": null
+   }
+  },
+  "umi-finray-2mm": {
+   "badge": null,
+   "build_id": "surface-32x12-083b8f742943",
+   "centred": true,
+   "column_tail_mm": 70.46,
+   "columns": 12,
+   "field_mm": [
+    23.0,
+    63.0
+   ],
+   "fill": 0.5,
+   "fit": "../vendor/umi/default-fit.json",
+   "fit_sha256": "cca7c5d986c02f89c913d47bf428ee0fb19c122c0475c042bd89ae3eb66e72a6",
+   "fits_reader": null,
+   "image": {
+    "alt": "UMI Fin-Ray Gripper, 2 mm on the part",
+    "assembled": {
+     "height": 800,
+     "src": "shots/umi-finray-2mm.assembled.webp",
+     "width": 1280
+    },
+    "exploded": {
+     "card": "shots/umi-finray-2mm.exploded.card.webp",
+     "height": 800,
+     "src": "shots/umi-finray-2mm.exploded.webp",
+     "width": 1280
+    }
+   },
+   "label": "UMI Fin-Ray Gripper, 2 mm",
+   "part": "umi-finray",
+   "pitch_mm": 2,
+   "reader": "none",
+   "row_tail_mm": 70.46,
+   "rows": 32,
+   "symmetric_face": true,
+   "taxels": 384,
+   "view": {
+    "art": "art/umi-finray-2mm.json.gz",
+    "scene": null
+   }
+  },
+  "umi-finray-3mm": {
+   "badge": null,
+   "build_id": "surface-21x8-b1004352a5d1",
+   "centred": true,
+   "column_tail_mm": 72.899,
+   "columns": 8,
+   "field_mm": [
+    22.5,
+    61.5
+   ],
+   "fill": 0.5,
+   "fit": "fits/umi-finray-3mm.json",
+   "fit_sha256": "5318de6b0ca1e20b38795a7aa580c7ca26bf2e0a0ccba4ef2b4856f24f3bedaa",
+   "fits_reader": null,
+   "image": {
+    "alt": "UMI Fin-Ray Gripper, 3 mm on the part",
+    "assembled": {
+     "height": 800,
+     "src": "shots/umi-finray-3mm.assembled.webp",
+     "width": 1280
+    },
+    "exploded": {
+     "card": "shots/umi-finray-3mm.exploded.card.webp",
+     "height": 800,
+     "src": "shots/umi-finray-3mm.exploded.webp",
+     "width": 1280
+    }
+   },
+   "label": "UMI Fin-Ray Gripper, 3 mm",
+   "part": "umi-finray",
+   "pitch_mm": 3,
+   "reader": "none",
+   "row_tail_mm": 72.899,
+   "rows": 21,
+   "symmetric_face": true,
+   "taxels": 168,
+   "view": {
+    "art": "art/umi-finray-3mm.json.gz",
+    "scene": null
+   }
+  },
+  "umi-trap-tip13.8-2mm": {
+   "badge": null,
+   "build_id": "surface-32x11-168582f38f42",
+   "centred": true,
+   "column_tail_mm": 70.586,
+   "columns": 11,
+   "field_mm": [
+    21.0,
+    63.0
+   ],
+   "fill": 0.5,
+   "fit": "fits/umi-trap-tip13.8-2mm.json",
+   "fit_sha256": "5f94304afdbb47c689356b0774baf880821d8c43c2fd06419489a79b46337c48",
+   "fits_reader": null,
+   "image": {
+    "alt": "UMI trapezoid tip, 13.8 mm on the part",
+    "assembled": {
+     "height": 800,
+     "src": "shots/umi-trap-tip13.8-2mm.assembled.webp",
+     "width": 1280
+    },
+    "exploded": {
+     "card": "shots/umi-trap-tip13.8-2mm.exploded.card.webp",
+     "height": 800,
+     "src": "shots/umi-trap-tip13.8-2mm.exploded.webp",
+     "width": 1280
+    }
+   },
+   "label": "UMI trapezoid tip, 13.8 mm",
+   "part": "umi-trap-tip13.8",
+   "pitch_mm": 2,
+   "reader": "none",
+   "row_tail_mm": 70.586,
+   "rows": 32,
+   "symmetric_face": true,
+   "taxels": 276,
+   "view": {
+    "art": "art/umi-trap-tip13.8-2mm.json.gz",
+    "scene": null
+   }
+  },
+  "umi-trap-tip17.8-2mm": {
+   "badge": null,
+   "build_id": "surface-32x11-5c364f28c111",
+   "centred": true,
+   "column_tail_mm": 70.586,
+   "columns": 11,
+   "field_mm": [
+    21.0,
+    63.0
+   ],
+   "fill": 0.5,
+   "fit": "fits/umi-trap-tip17.8-2mm.json",
+   "fit_sha256": "9a24a2f2f21c0fce5790e8fc75a433b393ecce9ae6efae7117b8de2fe0a018c5",
+   "fits_reader": null,
+   "image": {
+    "alt": "UMI trapezoid tip, 17.8 mm on the part",
+    "assembled": {
+     "height": 800,
+     "src": "shots/umi-trap-tip17.8-2mm.assembled.webp",
+     "width": 1280
+    },
+    "exploded": {
+     "card": "shots/umi-trap-tip17.8-2mm.exploded.card.webp",
+     "height": 800,
+     "src": "shots/umi-trap-tip17.8-2mm.exploded.webp",
+     "width": 1280
+    }
+   },
+   "label": "UMI trapezoid tip, 17.8 mm",
+   "part": "umi-trap-tip17.8",
+   "pitch_mm": 2,
+   "reader": "none",
+   "row_tail_mm": 70.586,
+   "rows": 32,
+   "symmetric_face": true,
+   "taxels": 314,
+   "view": {
+    "art": "art/umi-trap-tip17.8-2mm.json.gz",
+    "scene": null
+   }
+  },
+  "umi-trap-tip21.8-2mm": {
+   "badge": null,
+   "build_id": "surface-32x11-68d7d24e056f",
+   "centred": true,
+   "column_tail_mm": 70.586,
+   "columns": 11,
+   "field_mm": [
+    21.0,
+    63.0
+   ],
+   "fill": 0.5,
+   "fit": "fits/umi-trap-tip21.8-2mm.json",
+   "fit_sha256": "d712ab6d2b22668fe2735f1680e327e0269e0478161c8369328e9b0fc25dccc7",
+   "fits_reader": null,
+   "image": {
+    "alt": "UMI trapezoid tip, 21.8 mm on the part",
+    "assembled": {
+     "height": 800,
+     "src": "shots/umi-trap-tip21.8-2mm.assembled.webp",
+     "width": 1280
+    },
+    "exploded": {
+     "card": "shots/umi-trap-tip21.8-2mm.exploded.card.webp",
+     "height": 800,
+     "src": "shots/umi-trap-tip21.8-2mm.exploded.webp",
+     "width": 1280
+    }
+   },
+   "label": "UMI trapezoid tip, 21.8 mm",
+   "part": "umi-trap-tip21.8",
+   "pitch_mm": 2,
+   "reader": "none",
+   "row_tail_mm": 70.586,
+   "rows": 32,
+   "symmetric_face": true,
+   "taxels": 350,
+   "view": {
+    "art": "art/umi-trap-tip21.8-2mm.json.gz",
+    "scene": null
+   }
+  },
+  "umi-trap-tip5.8-2mm": {
+   "badge": null,
+   "build_id": "surface-32x11-8c34082adb12",
+   "centred": true,
+   "column_tail_mm": 70.586,
+   "columns": 11,
+   "field_mm": [
+    21.0,
+    63.0
+   ],
+   "fill": 0.5,
+   "fit": "fits/umi-trap-tip5.8-2mm.json",
+   "fit_sha256": "180f8dd81346365b588eb39e1b41db297975bc64c35044a236dcfad3d1acafe6",
+   "fits_reader": null,
+   "image": {
+    "alt": "UMI trapezoid tip, 5.8 mm on the part",
+    "assembled": {
+     "height": 800,
+     "src": "shots/umi-trap-tip5.8-2mm.assembled.webp",
+     "width": 1280
+    },
+    "exploded": {
+     "card": "shots/umi-trap-tip5.8-2mm.exploded.card.webp",
+     "height": 800,
+     "src": "shots/umi-trap-tip5.8-2mm.exploded.webp",
+     "width": 1280
+    }
+   },
+   "label": "UMI trapezoid tip, 5.8 mm",
+   "part": "umi-trap-tip5.8",
+   "pitch_mm": 2,
+   "reader": "none",
+   "row_tail_mm": 70.586,
+   "rows": 32,
+   "symmetric_face": true,
+   "taxels": 204,
+   "view": {
+    "art": "art/umi-trap-tip5.8-2mm.json.gz",
+    "scene": null
+   }
+  },
+  "umi-trap-tip9.8-2mm": {
+   "badge": null,
+   "build_id": "surface-32x11-557e60081323",
+   "centred": true,
+   "column_tail_mm": 70.586,
+   "columns": 11,
+   "field_mm": [
+    21.0,
+    63.0
+   ],
+   "fill": 0.5,
+   "fit": "fits/umi-trap-tip9.8-2mm.json",
+   "fit_sha256": "a6c19c0745c4344358b2569c053b4738247f55655ba9899102f99f622fc3e07b",
+   "fits_reader": null,
+   "image": {
+    "alt": "UMI trapezoid tip, 9.8 mm on the part",
+    "assembled": {
+     "height": 800,
+     "src": "shots/umi-trap-tip9.8-2mm.assembled.webp",
+     "width": 1280
+    },
+    "exploded": {
+     "card": "shots/umi-trap-tip9.8-2mm.exploded.card.webp",
+     "height": 800,
+     "src": "shots/umi-trap-tip9.8-2mm.exploded.webp",
+     "width": 1280
+    }
+   },
+   "label": "UMI trapezoid tip, 9.8 mm",
+   "part": "umi-trap-tip9.8",
+   "pitch_mm": 2,
+   "reader": "none",
+   "row_tail_mm": 70.586,
+   "rows": 32,
+   "symmetric_face": true,
+   "taxels": 240,
+   "view": {
+    "art": "art/umi-trap-tip9.8-2mm.json.gz",
+    "scene": null
+   }
+  },
+  "unitree-dex1-1.5mm": {
+   "badge": null,
+   "build_id": "surface-32x17-292a1ecb211e",
+   "centred": true,
+   "column_tail_mm": 16.046,
+   "columns": 17,
+   "field_mm": [
+    24.75,
+    47.25
+   ],
+   "fill": 0.5,
+   "fit": "fits/unitree-dex1-1.5mm.json",
+   "fit_sha256": "61ceefd2a37621209df4a78850f8bc2abf0449ace5c7652839af684cbf23c9bc",
+   "fits_reader": null,
+   "image": {
+    "alt": "Unitree Dex1-1, 1.5 mm on both fingers of the open gripper",
+    "assembled": {
+     "height": 800,
+     "src": "shots/unitree-dex1-1.5mm.assembled.webp",
+     "width": 1280
+    },
+    "exploded": {
+     "card": "shots/unitree-dex1-1.5mm.exploded.card.webp",
+     "height": 800,
+     "src": "shots/unitree-dex1-1.5mm.exploded.webp",
+     "width": 1280
+    }
+   },
+   "label": "Unitree Dex1-1, 1.5 mm",
+   "part": "unitree-dex1",
+   "pitch_mm": 1.5,
+   "reader": "none",
+   "row_tail_mm": 16.046,
+   "rows": 32,
+   "symmetric_face": true,
+   "taxels": 412,
+   "view": {
+    "art": "art/unitree-dex1-1.5mm.json.gz",
+    "scene": "scenes/unitree-dex1.json"
+   }
+  },
+  "unitree-dex1-1mm": {
+   "badge": "Fine",
+   "build_id": "surface-32x26-f3007aad2bd7",
+   "centred": true,
+   "column_tail_mm": 31.639,
+   "columns": 26,
+   "field_mm": [
+    25.5,
+    31.5
+   ],
+   "fill": 0.5,
+   "fit": "fits/unitree-dex1-1mm.json",
+   "fit_sha256": "9f86b8d238c815d1839a92b1a64f8cb77011b8bea782ac424347eafaef729192",
+   "fits_reader": null,
+   "image": {
+    "alt": "Unitree Dex1-1, 1 mm on both fingers of the open gripper",
+    "assembled": {
+     "height": 800,
+     "src": "shots/unitree-dex1-1mm.assembled.webp",
+     "width": 1280
+    },
+    "exploded": {
+     "card": "shots/unitree-dex1-1mm.exploded.card.webp",
+     "height": 800,
+     "src": "shots/unitree-dex1-1mm.exploded.webp",
+     "width": 1280
+    }
+   },
+   "label": "Unitree Dex1-1, 1 mm",
+   "part": "unitree-dex1",
+   "pitch_mm": 1,
+   "reader": "none",
+   "row_tail_mm": 31.639,
+   "rows": 32,
+   "symmetric_face": true,
+   "taxels": 538,
+   "view": {
+    "art": "art/unitree-dex1-1mm.json.gz",
+    "scene": "scenes/unitree-dex1.json"
+   }
+  },
+  "unitree-dex1-2mm": {
+   "badge": null,
+   "build_id": "surface-24x13-fb9d6bd1fe2c",
+   "centred": true,
+   "column_tail_mm": 17.005,
+   "columns": 13,
+   "field_mm": [
+    25.0,
+    47.0
+   ],
+   "fill": 0.5,
+   "fit": "fits/unitree-dex1-2mm.json",
+   "fit_sha256": "535986de75a6d988d6de3b4c03c2b4f11452eb1429f2b69283d0481ccac304ce",
+   "fits_reader": null,
+   "image": {
+    "alt": "Unitree Dex1-1, 2 mm on both fingers of the open gripper",
+    "assembled": {
+     "height": 800,
+     "src": "shots/unitree-dex1-2mm.assembled.webp",
+     "width": 1280
+    },
+    "exploded": {
+     "card": "shots/unitree-dex1-2mm.exploded.card.webp",
+     "height": 800,
+     "src": "shots/unitree-dex1-2mm.exploded.webp",
+     "width": 1280
+    }
+   },
+   "label": "Unitree Dex1-1, 2 mm",
+   "part": "unitree-dex1",
+   "pitch_mm": 2,
+   "reader": "none",
+   "row_tail_mm": 17.005,
+   "rows": 24,
+   "symmetric_face": true,
+   "taxels": 234,
+   "view": {
+    "art": "art/unitree-dex1-2mm.json.gz",
+    "scene": "scenes/unitree-dex1.json"
+   }
+  },
+  "unitree-dex1-3mm": {
+   "badge": null,
+   "build_id": "surface-16x9-e5a994e53503",
+   "centred": true,
+   "column_tail_mm": 18.453,
+   "columns": 9,
+   "field_mm": [
+    25.5,
+    46.5
+   ],
+   "fill": 0.5,
+   "fit": "fits/unitree-dex1-3mm.json",
+   "fit_sha256": "f852a682f4af46e18d920dae735e2344b27d0f1aea7f3b929274e9cf12d591a6",
+   "fits_reader": null,
+   "image": {
+    "alt": "Unitree Dex1-1, 3 mm on both fingers of the open gripper",
+    "assembled": {
+     "height": 800,
+     "src": "shots/unitree-dex1-3mm.assembled.webp",
+     "width": 1280
+    },
+    "exploded": {
+     "card": "shots/unitree-dex1-3mm.exploded.card.webp",
+     "height": 800,
+     "src": "shots/unitree-dex1-3mm.exploded.webp",
+     "width": 1280
+    }
+   },
+   "label": "Unitree Dex1-1, 3 mm",
+   "part": "unitree-dex1",
+   "pitch_mm": 3,
+   "reader": "none",
+   "row_tail_mm": 18.453,
+   "rows": 16,
+   "symmetric_face": true,
+   "taxels": 102,
+   "view": {
+    "art": "art/unitree-dex1-3mm.json.gz",
+    "scene": "scenes/unitree-dex1.json"
+   }
+  },
+  "widowx-250-1.5mm": {
+   "badge": null,
+   "build_id": "surface-17x17-b9e5e409ec81",
+   "centred": true,
+   "column_tail_mm": 17.64,
+   "columns": 17,
+   "field_mm": [
+    24.75,
+    24.75
+   ],
+   "fill": 0.5,
+   "fit": "fits/widowx-250-1.5mm.json",
+   "fit_sha256": "bac8b6305c42a588c20cd5abb2c04ffa41a3b5f018b8ed91788d2e5fa6c6e5e1",
+   "fits_reader": null,
+   "image": {
+    "alt": "WidowX 250, 1.5 mm on both fingers of the open gripper",
+    "assembled": {
+     "height": 800,
+     "src": "shots/widowx-250-1.5mm.assembled.webp",
+     "width": 1280
+    },
+    "exploded": {
+     "card": "shots/widowx-250-1.5mm.exploded.card.webp",
+     "height": 800,
+     "src": "shots/widowx-250-1.5mm.exploded.webp",
+     "width": 1280
+    }
+   },
+   "label": "WidowX 250, 1.5 mm",
+   "part": "widowx-250",
+   "pitch_mm": 1.5,
+   "reader": "none",
+   "row_tail_mm": 17.64,
+   "rows": 17,
+   "symmetric_face": true,
+   "taxels": 287,
+   "view": {
+    "art": "art/widowx-250-1.5mm.json.gz",
+    "scene": "scenes/widowx-250.json"
+   }
+  },
+  "widowx-250-1mm": {
+   "badge": "Fine",
+   "build_id": "surface-26x27-62928ed42a39",
+   "centred": true,
+   "column_tail_mm": 20.126,
+   "columns": 27,
+   "field_mm": [
+    26.5,
+    25.5
+   ],
+   "fill": 0.5,
+   "fit": "fits/widowx-250-1mm.json",
+   "fit_sha256": "33a8a21eba92505fe443b6e47f67d08195eeda8cbd0254c0b6f10b593ac323f6",
+   "fits_reader": null,
+   "image": {
+    "alt": "WidowX 250, 1 mm on both fingers of the open gripper",
+    "assembled": {
+     "height": 800,
+     "src": "shots/widowx-250-1mm.assembled.webp",
+     "width": 1280
+    },
+    "exploded": {
+     "card": "shots/widowx-250-1mm.exploded.card.webp",
+     "height": 800,
+     "src": "shots/widowx-250-1mm.exploded.webp",
+     "width": 1280
+    }
+   },
+   "label": "WidowX 250, 1 mm",
+   "part": "widowx-250",
+   "pitch_mm": 1,
+   "reader": "none",
+   "row_tail_mm": 20.126,
+   "rows": 26,
+   "symmetric_face": true,
+   "taxels": 664,
+   "view": {
+    "art": "art/widowx-250-1mm.json.gz",
+    "scene": "scenes/widowx-250.json"
+   }
+  },
+  "widowx-250-2mm": {
+   "badge": null,
+   "build_id": "surface-13x13-c86af2cbab4b",
+   "centred": true,
+   "column_tail_mm": 17.8,
+   "columns": 13,
+   "field_mm": [
+    25.0,
+    25.0
+   ],
+   "fill": 0.5,
+   "fit": "fits/widowx-250-2mm.json",
+   "fit_sha256": "52dbf3c8d63948799d91c5aece43d4af35cd22bff5404e6bad08483b8166fb28",
+   "fits_reader": null,
+   "image": {
+    "alt": "WidowX 250, 2 mm on both fingers of the open gripper",
+    "assembled": {
+     "height": 800,
+     "src": "shots/widowx-250-2mm.assembled.webp",
+     "width": 1280
+    },
+    "exploded": {
+     "card": "shots/widowx-250-2mm.exploded.card.webp",
+     "height": 800,
+     "src": "shots/widowx-250-2mm.exploded.webp",
+     "width": 1280
+    }
+   },
+   "label": "WidowX 250, 2 mm",
+   "part": "widowx-250",
+   "pitch_mm": 2,
+   "reader": "none",
+   "row_tail_mm": 17.8,
+   "rows": 13,
+   "symmetric_face": true,
+   "taxels": 165,
+   "view": {
+    "art": "art/widowx-250-2mm.json.gz",
+    "scene": "scenes/widowx-250.json"
+   }
+  },
+  "widowx-250-3mm": {
+   "badge": null,
+   "build_id": "surface-9x9-2bfc8af66d96",
+   "centred": true,
+   "column_tail_mm": 17.443,
+   "columns": 9,
+   "field_mm": [
+    25.5,
+    25.5
+   ],
+   "fill": 0.5,
+   "fit": "fits/widowx-250-3mm.json",
+   "fit_sha256": "bfc70cf664be701a4404c5077b9a4ba0110daaf0b228e6b73ea60cd0417823c8",
+   "fits_reader": null,
+   "image": {
+    "alt": "WidowX 250, 3 mm on both fingers of the open gripper",
+    "assembled": {
+     "height": 800,
+     "src": "shots/widowx-250-3mm.assembled.webp",
+     "width": 1280
+    },
+    "exploded": {
+     "card": "shots/widowx-250-3mm.exploded.card.webp",
+     "height": 800,
+     "src": "shots/widowx-250-3mm.exploded.webp",
+     "width": 1280
+    }
+   },
+   "label": "WidowX 250, 3 mm",
+   "part": "widowx-250",
+   "pitch_mm": 3,
+   "reader": "none",
+   "row_tail_mm": 17.443,
+   "rows": 9,
+   "symmetric_face": true,
+   "taxels": 75,
+   "view": {
+    "art": "art/widowx-250-3mm.json.gz",
+    "scene": "scenes/widowx-250.json"
+   }
+  }
+ }
+}

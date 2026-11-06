@@ -1,0 +1,3128 @@
+{
+ "about": "The Library's pictures (library.html's cards and sensor pages): each sensor of entries.json drawn by the Library's own 3D view (web/cad/library_view.js: Gen by Surface's sensor on the part, web/cad/onpart.js, and for a gripper its whole scene, web/cad/library_stage.js) at its Exploded and Assembled homes, with each file's bytes and SHA-256, the fit and build id it was shot from, the hashes of the figure's and the view's sources, the sensor's art (art/<id>.json.gz) and, for a gripper, its stage (its scene's hash and numbers).  A gripper is drawn whole (scenes/), the sensor finger's stack exploded and the near finger see-through in both views, its stack assembled.  Written by tools/browser/library_shots.py; tools/library_write.py writes entries.json's image and view from it.",
+ "format": "flexitac-library-shots/v1",
+ "shots": {
+  "arx-x5-1mm": {
+   "art": {
+    "build_id": "surface-32x26-d387cf38c447",
+    "bytes": 13233,
+    "json_sha256": "1b2c237d92fe8b726cdd03f7f65345bedb816613c57d472a08688c7218c588f0",
+    "path": "art/arx-x5-1mm.json.gz",
+    "sha256": "5d24ad2441d459eec42c628a9a834220ef061af125b4eb1aeac8a0c488df5d40"
+   },
+   "build_id": "surface-32x26-d387cf38c447",
+   "figure_sha256": "c82b4611bf35c5a4127d2f683ac749a52455fab64352d0ab3da9a373866d98a3",
+   "files": {
+    "assembled": {
+     "bytes": 32802,
+     "height": 800,
+     "path": "shots/arx-x5-1mm.assembled.webp",
+     "sha256": "cf2e0c5ab29b21d8d291a299a3b913d23b7410fe520580299cd8f514db9db8d6",
+     "width": 1280
+    },
+    "card": {
+     "bytes": 25240,
+     "height": 400,
+     "path": "shots/arx-x5-1mm.exploded.card.webp",
+     "sha256": "d0b8e6cbab25b9ff4dcaa80f874c1b6c09fcfcc9356541072d50d4c66e3fbce2",
+     "width": 640
+    },
+    "exploded": {
+     "bytes": 38704,
+     "height": 800,
+     "path": "shots/arx-x5-1mm.exploded.webp",
+     "sha256": "75d2bbffc1da4658e2ce9e1e8a09afb9dcfcc972363e6b72bb229188d4f7cf94",
+     "width": 1280
+    }
+   },
+   "fit_sha256": "ab0a67ac20369d37be0e83609aaa076e38da02d4617f02767e5726df29881e90",
+   "look": "photo",
+   "margins_px": {
+    "assembled": [
+     304,
+     52,
+     304,
+     52
+    ],
+    "exploded": [
+     278,
+     52,
+     278,
+     52
+    ]
+   },
+   "stage": {
+    "numbers": {
+     "assembled_opaque": 0,
+     "band_css": {
+      "contain": [
+       12,
+       44
+      ],
+      "cover": [
+       22,
+       83
+      ]
+     },
+     "card_px": [
+      40,
+      152
+     ],
+     "clearance_mm": {
+      "bodies": 5.2,
+      "other_finger": 12,
+      "stacks": 51.2
+     },
+     "drape_step_mm": 19.181,
+     "face_tilt_deg": 5.34,
+     "ghost_cover": 0.993,
+     "jaw_gap_mm": 88.732,
+     "near_seen": 1,
+     "opaque_max": 0,
+     "stacks_apart_px": 156.7,
+     "step_mm": 12.172,
+     "visible_min": 0.923
+    },
+    "scene": "scenes/arx-x5.json",
+    "scene_sha256": "5e41a2c841981d981826e52ec600ae59a914a371f4369199b20d0064a989ac99"
+   },
+   "view_sha256": "11171aecaa484d5b74f71edd5f2461a7bfd28b082917b7a70a4d7e4e073f38b8"
+  },
+  "arx-x5-2mm": {
+   "art": {
+    "build_id": "surface-32x25-2909c6a6e34d",
+    "bytes": 13479,
+    "json_sha256": "9f2db9acb24a26a468136f445d262c0eaea247d23194447c4fc11f91f2537331",
+    "path": "art/arx-x5-2mm.json.gz",
+    "sha256": "7763355dc54fd3d8dc852805fa5e128337809ee47cb3626df270f04be05b9211"
+   },
+   "build_id": "surface-32x25-2909c6a6e34d",
+   "figure_sha256": "c82b4611bf35c5a4127d2f683ac749a52455fab64352d0ab3da9a373866d98a3",
+   "files": {
+    "assembled": {
+     "bytes": 34822,
+     "height": 800,
+     "path": "shots/arx-x5-2mm.assembled.webp",
+     "sha256": "3add36ec85f335953f89dbb7ef9568437ea3142472b078488dfb7b2ea0c1c593",
+     "width": 1280
+    },
+    "card": {
+     "bytes": 25546,
+     "height": 400,
+     "path": "shots/arx-x5-2mm.exploded.card.webp",
+     "sha256": "a275e13bb7af25cc96926c2b118cce10c66f70e29f6fa1b66ead18bed3e4b55b",
+     "width": 640
+    },
+    "exploded": {
+     "bytes": 41316,
+     "height": 800,
+     "path": "shots/arx-x5-2mm.exploded.webp",
+     "sha256": "ab9f5390e98f20dc8ec60f7316a0f4e650250a835716bf2fd6d40622d39e8211",
+     "width": 1280
+    }
+   },
+   "fit_sha256": "41e4fd9616d5130371674b758a6d01827e62d2b99ff0d90fb814674dc168ebc4",
+   "look": "photo",
+   "margins_px": {
+    "assembled": [
+     311,
+     51,
+     311,
+     52
+    ],
+    "exploded": [
+     282,
+     52,
+     282,
+     52
+    ]
+   },
+   "stage": {
+    "numbers": {
+     "assembled_opaque": 0,
+     "band_css": {
+      "contain": [
+       21,
+       48
+      ],
+      "cover": [
+       40,
+       90
+      ]
+     },
+     "card_px": [
+      74,
+      164
+     ],
+     "clearance_mm": {
+      "bodies": 4.6,
+      "other_finger": 12,
+      "stacks": 51.1
+     },
+     "drape_step_mm": 32.107,
+     "face_tilt_deg": 7.737,
+     "ghost_cover": 0.992,
+     "jaw_gap_mm": 88.648,
+     "near_seen": 1,
+     "opaque_max": 0,
+     "stacks_apart_px": 121.9,
+     "step_mm": 12.119,
+     "visible_min": 0.64
+    },
+    "scene": "scenes/arx-x5.json",
+    "scene_sha256": "5e41a2c841981d981826e52ec600ae59a914a371f4369199b20d0064a989ac99"
+   },
+   "view_sha256": "11171aecaa484d5b74f71edd5f2461a7bfd28b082917b7a70a4d7e4e073f38b8"
+  },
+  "arx-x5-3mm": {
+   "art": {
+    "build_id": "surface-23x19-2e88c11f611e",
+    "bytes": 11066,
+    "json_sha256": "a1f8b2bd959bd5636dc63847a76437b5b3687d59fb7f82d97544b1fa0e29e24a",
+    "path": "art/arx-x5-3mm.json.gz",
+    "sha256": "0e3c50d76a7f81313225262a96736dd08e673aa480de13a2ee53548be837e72b"
+   },
+   "build_id": "surface-23x19-2e88c11f611e",
+   "figure_sha256": "c82b4611bf35c5a4127d2f683ac749a52455fab64352d0ab3da9a373866d98a3",
+   "files": {
+    "assembled": {
+     "bytes": 34546,
+     "height": 800,
+     "path": "shots/arx-x5-3mm.assembled.webp",
+     "sha256": "8e7e945f88cc75a9eb31c88a66ed6afceab1945930780df2515e614b3565a622",
+     "width": 1280
+    },
+    "card": {
+     "bytes": 25020,
+     "height": 400,
+     "path": "shots/arx-x5-3mm.exploded.card.webp",
+     "sha256": "135e6f51995405d52b176cf3b33a6b84d6bb9a407db21e5d43bb19ccd6e08a1a",
+     "width": 640
+    },
+    "exploded": {
+     "bytes": 40158,
+     "height": 800,
+     "path": "shots/arx-x5-3mm.exploded.webp",
+     "sha256": "d3df1344edbfb142688c3ed1074c820858a64ef9e5c07e584d7592ab4d799287",
+     "width": 1280
+    }
+   },
+   "fit_sha256": "da877afccd3b0d6c1aefcfab7ccbedc34e0b6266e8c79bf108e4988e4717a811",
+   "look": "photo",
+   "margins_px": {
+    "assembled": [
+     311,
+     51,
+     312,
+     52
+    ],
+    "exploded": [
+     282,
+     52,
+     283,
+     52
+    ]
+   },
+   "stage": {
+    "numbers": {
+     "assembled_opaque": 0,
+     "band_css": {
+      "contain": [
+       23,
+       49
+      ],
+      "cover": [
+       43,
+       92
+      ]
+     },
+     "card_px": [
+      79,
+      168
+     ],
+     "clearance_mm": {
+      "bodies": 4.5,
+      "other_finger": 12,
+      "stacks": 51.1
+     },
+     "drape_step_mm": 34.416,
+     "face_tilt_deg": 7.901,
+     "ghost_cover": 0.991,
+     "jaw_gap_mm": 88.606,
+     "near_seen": 1,
+     "opaque_max": 0,
+     "stacks_apart_px": 115.6,
+     "step_mm": 12.092,
+     "visible_min": 0.618
+    },
+    "scene": "scenes/arx-x5.json",
+    "scene_sha256": "5e41a2c841981d981826e52ec600ae59a914a371f4369199b20d0064a989ac99"
+   },
+   "view_sha256": "11171aecaa484d5b74f71edd5f2461a7bfd28b082917b7a70a4d7e4e073f38b8"
+  },
+  "arx-x5-4mm": {
+   "art": {
+    "build_id": "surface-17x13-bed9167960fc",
+    "bytes": 9000,
+    "json_sha256": "41f5e58dc6120273c5551376a2ee2896ba95b48ebec98e2a3202661a1e8647bf",
+    "path": "art/arx-x5-4mm.json.gz",
+    "sha256": "fd36df4230c4528ef11f904781d02f4f70420a1fc89ef500c6d8a965ebb200ee"
+   },
+   "build_id": "surface-17x13-bed9167960fc",
+   "figure_sha256": "c82b4611bf35c5a4127d2f683ac749a52455fab64352d0ab3da9a373866d98a3",
+   "files": {
+    "assembled": {
+     "bytes": 33440,
+     "height": 800,
+     "path": "shots/arx-x5-4mm.assembled.webp",
+     "sha256": "585095ebc299747d2a22654a3c9b62dab48f7516ef46a37f1fa21325ea50abfb",
+     "width": 1280
+    },
+    "card": {
+     "bytes": 24192,
+     "height": 400,
+     "path": "shots/arx-x5-4mm.exploded.card.webp",
+     "sha256": "fab5548849d9183008e2351d82d26a50b027e8ef9cf579df129c084bba743ce1",
+     "width": 640
+    },
+    "exploded": {
+     "bytes": 38398,
+     "height": 800,
+     "path": "shots/arx-x5-4mm.exploded.webp",
+     "sha256": "0ea0bc8d85d29d1b855a9b46e7d70a4ad797b66e08065052af7f75c8a926743d",
+     "width": 1280
+    }
+   },
+   "fit_sha256": "9fd020196a76878d7e219053cea1f6692c8d7793cdbbef8b405ee45145696890",
+   "look": "photo",
+   "margins_px": {
+    "assembled": [
+     311,
+     51,
+     312,
+     52
+    ],
+    "exploded": [
+     282,
+     52,
+     283,
+     52
+    ]
+   },
+   "stage": {
+    "numbers": {
+     "assembled_opaque": 0,
+     "band_css": {
+      "contain": [
+       21,
+       48
+      ],
+      "cover": [
+       40,
+       89
+      ]
+     },
+     "card_px": [
+      73,
+      164
+     ],
+     "clearance_mm": {
+      "bodies": 5,
+      "other_finger": 12,
+      "stacks": 51.2
+     },
+     "drape_step_mm": 30.592,
+     "face_tilt_deg": 7.875,
+     "ghost_cover": 0.993,
+     "jaw_gap_mm": 88.676,
+     "near_seen": 1,
+     "opaque_max": 0,
+     "stacks_apart_px": 123.3,
+     "step_mm": 12.136,
+     "visible_min": 0.632
+    },
+    "scene": "scenes/arx-x5.json",
+    "scene_sha256": "5e41a2c841981d981826e52ec600ae59a914a371f4369199b20d0064a989ac99"
+   },
+   "view_sha256": "11171aecaa484d5b74f71edd5f2461a7bfd28b082917b7a70a4d7e4e073f38b8"
+  },
+  "franka-hand-1.5mm": {
+   "art": {
+    "build_id": "surface-11x11-689f162f2f63",
+    "bytes": 6286,
+    "json_sha256": "11fd5f045daa344fadcff8d5cc34faf3e2daa041d671aa644d35ff4a0c81c9aa",
+    "path": "art/franka-hand-1.5mm.json.gz",
+    "sha256": "764cc7db0b82939c4b1aab1b7861eab5e997ce5ddbc976896f4901e8dbe56cb9"
+   },
+   "build_id": "surface-11x11-689f162f2f63",
+   "figure_sha256": "c82b4611bf35c5a4127d2f683ac749a52455fab64352d0ab3da9a373866d98a3",
+   "files": {
+    "assembled": {
+     "bytes": 26128,
+     "height": 800,
+     "path": "shots/franka-hand-1.5mm.assembled.webp",
+     "sha256": "a375b9fad7c592630f9dcc98006888610b0bf0dadf2fd3fff6d4f15784c9e5e2",
+     "width": 1280
+    },
+    "card": {
+     "bytes": 22812,
+     "height": 400,
+     "path": "shots/franka-hand-1.5mm.exploded.card.webp",
+     "sha256": "37351ccedae133f2712d2edf40fa6b08ac719b911a992ad72e613d3a996607a7",
+     "width": 640
+    },
+    "exploded": {
+     "bytes": 33360,
+     "height": 800,
+     "path": "shots/franka-hand-1.5mm.exploded.webp",
+     "sha256": "145250a03149b50b325de971815a84b5b9072f5b04e731c0d9360b573c8239ea",
+     "width": 1280
+    }
+   },
+   "fit_sha256": "e1dba4177bc9515b7c21f4644fcdc49eace514d319363e715c924ffc068f4528",
+   "look": "photo",
+   "margins_px": {
+    "assembled": [
+     278,
+     52,
+     278,
+     52
+    ],
+    "exploded": [
+     218,
+     52,
+     219,
+     52
+    ]
+   },
+   "stage": {
+    "numbers": {
+     "assembled_opaque": 0,
+     "band_css": {
+      "contain": [
+       7,
+       14
+      ],
+      "cover": [
+       12,
+       27
+      ]
+     },
+     "card_px": [
+      23,
+      49
+     ],
+     "clearance_mm": {
+      "bodies": 12,
+      "other_finger": 12,
+      "stacks": 45.8
+     },
+     "drape_step_mm": 11.014,
+     "face_tilt_deg": 0.027,
+     "ghost_cover": 0.976,
+     "jaw_gap_mm": 79.329,
+     "near_seen": 1,
+     "opaque_max": 0,
+     "stacks_apart_px": 156.5,
+     "step_mm": 10.856,
+     "visible_min": 0.989
+    },
+    "scene": "scenes/franka-hand.json",
+    "scene_sha256": "ab4282de502b916e4d3a279b4cff13ebb50cbe8f6cb73a34a81989236a8464f1"
+   },
+   "view_sha256": "11171aecaa484d5b74f71edd5f2461a7bfd28b082917b7a70a4d7e4e073f38b8"
+  },
+  "franka-hand-1mm": {
+   "art": {
+    "build_id": "surface-16x17-f4fc01f8c041",
+    "bytes": 8313,
+    "json_sha256": "145283d74f45039559858f212799591bf4640083504ddf6bfeac8b27ff021f30",
+    "path": "art/franka-hand-1mm.json.gz",
+    "sha256": "fb8fbf5936e9b0063c8d19f575263019b469cdabc16c4d4c71373c65070fabdc"
+   },
+   "build_id": "surface-16x17-f4fc01f8c041",
+   "figure_sha256": "c82b4611bf35c5a4127d2f683ac749a52455fab64352d0ab3da9a373866d98a3",
+   "files": {
+    "assembled": {
+     "bytes": 25932,
+     "height": 800,
+     "path": "shots/franka-hand-1mm.assembled.webp",
+     "sha256": "f6fd59bfeb9c7e863dc01c94debf9ab2c45c22d0fb7c5758d32cc19db05da7be",
+     "width": 1280
+    },
+    "card": {
+     "bytes": 22610,
+     "height": 400,
+     "path": "shots/franka-hand-1mm.exploded.card.webp",
+     "sha256": "930bbe0967e7a49ec19da466c7e71b664445bdbae38100cdf5022b656dfbbcc0",
+     "width": 640
+    },
+    "exploded": {
+     "bytes": 33478,
+     "height": 800,
+     "path": "shots/franka-hand-1mm.exploded.webp",
+     "sha256": "7bde296774423ef32ceb07572a715fec263d7c04dc92a394e94d7f7d27cf7ecb",
+     "width": 1280
+    }
+   },
+   "fit_sha256": "c139adc22c266f7a65a5ea9b704dabb0ebfa58f5df2aad00301018f5119efaa3",
+   "look": "photo",
+   "margins_px": {
+    "assembled": [
+     278,
+     52,
+     278,
+     52
+    ],
+    "exploded": [
+     218,
+     52,
+     219,
+     52
+    ]
+   },
+   "stage": {
+    "numbers": {
+     "assembled_opaque": 0,
+     "band_css": {
+      "contain": [
+       7,
+       14
+      ],
+      "cover": [
+       13,
+       27
+      ]
+     },
+     "card_px": [
+      23,
+      49
+     ],
+     "clearance_mm": {
+      "bodies": 12,
+      "other_finger": 12,
+      "stacks": 45.8
+     },
+     "drape_step_mm": 11.986,
+     "face_tilt_deg": 0.035,
+     "ghost_cover": 0.965,
+     "jaw_gap_mm": 79.332,
+     "near_seen": 1,
+     "opaque_max": 0,
+     "stacks_apart_px": 151.5,
+     "step_mm": 10.857,
+     "visible_min": 0.988
+    },
+    "scene": "scenes/franka-hand.json",
+    "scene_sha256": "ab4282de502b916e4d3a279b4cff13ebb50cbe8f6cb73a34a81989236a8464f1"
+   },
+   "view_sha256": "11171aecaa484d5b74f71edd5f2461a7bfd28b082917b7a70a4d7e4e073f38b8"
+  },
+  "franka-hand-2.5mm": {
+   "art": {
+    "build_id": "surface-7x7-219eb060fc64",
+    "bytes": 5438,
+    "json_sha256": "9e6329a2292ec026c73b4f917c325eedb839f9952a500e6078f34219c0b7d42a",
+    "path": "art/franka-hand-2.5mm.json.gz",
+    "sha256": "164f2753cde5c9c041e63c67a99d00779ff2fc4c45ffcc65e09619ef810af235"
+   },
+   "build_id": "surface-7x7-219eb060fc64",
+   "figure_sha256": "c82b4611bf35c5a4127d2f683ac749a52455fab64352d0ab3da9a373866d98a3",
+   "files": {
+    "assembled": {
+     "bytes": 25522,
+     "height": 800,
+     "path": "shots/franka-hand-2.5mm.assembled.webp",
+     "sha256": "30dc0d7d827eb47c98a15f7c616c38700e41952bf7b516e726131cd0038e9c8e",
+     "width": 1280
+    },
+    "card": {
+     "bytes": 22804,
+     "height": 400,
+     "path": "shots/franka-hand-2.5mm.exploded.card.webp",
+     "sha256": "f068ea39de1ee9f1201023dfa5a7de9562ad2261ade80b458697119891f3286a",
+     "width": 640
+    },
+    "exploded": {
+     "bytes": 33170,
+     "height": 800,
+     "path": "shots/franka-hand-2.5mm.exploded.webp",
+     "sha256": "2a93dbe9c832d28028da66befe233721f4b1eefdb8352f57f8d069d4c2fda01c",
+     "width": 1280
+    }
+   },
+   "fit_sha256": "05fb065b2d17f778eb1e05d4b4e641736c951c4b85b3f967b491debc9826fc08",
+   "look": "photo",
+   "margins_px": {
+    "assembled": [
+     278,
+     52,
+     278,
+     52
+    ],
+    "exploded": [
+     218,
+     52,
+     219,
+     52
+    ]
+   },
+   "stage": {
+    "numbers": {
+     "assembled_opaque": 0,
+     "band_css": {
+      "contain": [
+       7,
+       14
+      ],
+      "cover": [
+       12,
+       27
+      ]
+     },
+     "card_px": [
+      23,
+      49
+     ],
+     "clearance_mm": {
+      "bodies": 12,
+      "other_finger": 12,
+      "stacks": 46.3
+     },
+     "drape_step_mm": 10.691,
+     "face_tilt_deg": 0.024,
+     "ghost_cover": 0.973,
+     "jaw_gap_mm": 79.333,
+     "near_seen": 1,
+     "opaque_max": 0,
+     "stacks_apart_px": 157.5,
+     "step_mm": 10.691,
+     "visible_min": 0.975
+    },
+    "scene": "scenes/franka-hand.json",
+    "scene_sha256": "ab4282de502b916e4d3a279b4cff13ebb50cbe8f6cb73a34a81989236a8464f1"
+   },
+   "view_sha256": "11171aecaa484d5b74f71edd5f2461a7bfd28b082917b7a70a4d7e4e073f38b8"
+  },
+  "franka-hand-2mm": {
+   "art": {
+    "build_id": "surface-8x8-7d3333991a15",
+    "bytes": 5483,
+    "json_sha256": "ef5b496fb66038d8448bdfc2e459b10d30a1dab1c27557d59b00cf5ea386e9b6",
+    "path": "art/franka-hand-2mm.json.gz",
+    "sha256": "83b8bcc2971d12f24a70e4d1e6e13c0b540795e5ff7d842a2561fdc692c6cd09"
+   },
+   "build_id": "surface-8x8-7d3333991a15",
+   "figure_sha256": "c82b4611bf35c5a4127d2f683ac749a52455fab64352d0ab3da9a373866d98a3",
+   "files": {
+    "assembled": {
+     "bytes": 25506,
+     "height": 800,
+     "path": "shots/franka-hand-2mm.assembled.webp",
+     "sha256": "abdc3e6c89afb4a95759c27d2748b63be1b31c958a4e77501236de39cc40e9df",
+     "width": 1280
+    },
+    "card": {
+     "bytes": 22754,
+     "height": 400,
+     "path": "shots/franka-hand-2mm.exploded.card.webp",
+     "sha256": "ba2aa3bbfa6a58045933a20b0597e4bc65a48f9b68e19fcc0e74ebe6df65fb66",
+     "width": 640
+    },
+    "exploded": {
+     "bytes": 32860,
+     "height": 800,
+     "path": "shots/franka-hand-2mm.exploded.webp",
+     "sha256": "31bc4075244c8c45e2c9d890c6165dfa5b2f66c7368adda158267a28d4a259b7",
+     "width": 1280
+    }
+   },
+   "fit_sha256": "f9d673a88f61a7efb49e5678627aa7f9e666608f7ccf363dc2161a7aed68507d",
+   "look": "photo",
+   "margins_px": {
+    "assembled": [
+     278,
+     52,
+     278,
+     52
+    ],
+    "exploded": [
+     218,
+     52,
+     219,
+     52
+    ]
+   },
+   "stage": {
+    "numbers": {
+     "assembled_opaque": 0,
+     "band_css": {
+      "contain": [
+       6,
+       14
+      ],
+      "cover": [
+       12,
+       26
+      ]
+     },
+     "card_px": [
+      22,
+      48
+     ],
+     "clearance_mm": {
+      "bodies": 12,
+      "other_finger": 12,
+      "stacks": 47.9
+     },
+     "drape_step_mm": 10.153,
+     "face_tilt_deg": 0.022,
+     "ghost_cover": 0.98,
+     "jaw_gap_mm": 79.333,
+     "near_seen": 1,
+     "opaque_max": 0,
+     "stacks_apart_px": 164.1,
+     "step_mm": 10.153,
+     "visible_min": 0.982
+    },
+    "scene": "scenes/franka-hand.json",
+    "scene_sha256": "ab4282de502b916e4d3a279b4cff13ebb50cbe8f6cb73a34a81989236a8464f1"
+   },
+   "view_sha256": "11171aecaa484d5b74f71edd5f2461a7bfd28b082917b7a70a4d7e4e073f38b8"
+  },
+  "i2rt-yam-1mm": {
+   "art": {
+    "build_id": "surface-32x32-dd7be86a5052",
+    "bytes": 13854,
+    "json_sha256": "86cda442b77d69bc8ac8e482df75d48bed23566d0c64ea668f6c44ab1904a0d7",
+    "path": "art/i2rt-yam-1mm.json.gz",
+    "sha256": "4b7059b64c5c92a935ad917369078d4c3b229c8dcbd5dadbdc46fffb5144feaa"
+   },
+   "build_id": "surface-32x32-dd7be86a5052",
+   "figure_sha256": "c82b4611bf35c5a4127d2f683ac749a52455fab64352d0ab3da9a373866d98a3",
+   "files": {
+    "assembled": {
+     "bytes": 34108,
+     "height": 800,
+     "path": "shots/i2rt-yam-1mm.assembled.webp",
+     "sha256": "c2216c5ab7e2076604618f5e8a6725a837324922cdfc8b7421680de0729b40b1",
+     "width": 1280
+    },
+    "card": {
+     "bytes": 22178,
+     "height": 400,
+     "path": "shots/i2rt-yam-1mm.exploded.card.webp",
+     "sha256": "e78763b27b5b668222edaef5641b391a5b3cf688ec16c5e100a2f70a1d567501",
+     "width": 640
+    },
+    "exploded": {
+     "bytes": 37166,
+     "height": 800,
+     "path": "shots/i2rt-yam-1mm.exploded.webp",
+     "sha256": "b34bd61659fc2b5cf0ced5eb74038ec637140d6d8cc11a09ea9a144328495491",
+     "width": 1280
+    }
+   },
+   "fit_sha256": "ec614c02b651b8d743f5b54dff2181170b1b42dee6c3d818fd57778c99c4eaab",
+   "look": "photo",
+   "margins_px": {
+    "assembled": [
+     273,
+     52,
+     274,
+     52
+    ],
+    "exploded": [
+     268,
+     51,
+     268,
+     51
+    ]
+   },
+   "stage": {
+    "numbers": {
+     "assembled_opaque": 0,
+     "band_css": {
+      "contain": [
+       17,
+       50
+      ],
+      "cover": [
+       31,
+       94
+      ]
+     },
+     "card_px": [
+      58,
+      172
+     ],
+     "clearance_mm": {
+      "bodies": 12,
+      "other_finger": 12,
+      "stacks": 43
+     },
+     "drape_step_mm": 22.48,
+     "face_tilt_deg": 2.352,
+     "ghost_cover": 0.987,
+     "jaw_gap_mm": 74.547,
+     "near_seen": 1,
+     "opaque_max": 0,
+     "stacks_apart_px": 107,
+     "step_mm": 10.187,
+     "visible_min": 0.562
+    },
+    "scene": "scenes/i2rt-yam.json",
+    "scene_sha256": "09ca05a5ee1f69f44899a52e3e39dadb44c6f42fae0ab1425857bdf9e6226a68"
+   },
+   "view_sha256": "11171aecaa484d5b74f71edd5f2461a7bfd28b082917b7a70a4d7e4e073f38b8"
+  },
+  "i2rt-yam-2mm": {
+   "art": {
+    "build_id": "surface-32x32-f99cfa65c746",
+    "bytes": 14438,
+    "json_sha256": "27b2e39a82d96d2b31f32cfe464ba80207b35e38fde3e6e7cf19d716e12e3669",
+    "path": "art/i2rt-yam-2mm.json.gz",
+    "sha256": "d306268a47ff66c91321b66577de0d6a7f5e20d4978531af5d100f58b097f357"
+   },
+   "build_id": "surface-32x32-f99cfa65c746",
+   "figure_sha256": "c82b4611bf35c5a4127d2f683ac749a52455fab64352d0ab3da9a373866d98a3",
+   "files": {
+    "assembled": {
+     "bytes": 35340,
+     "height": 800,
+     "path": "shots/i2rt-yam-2mm.assembled.webp",
+     "sha256": "5f11f10541bf958789181210dc54bf837415463caffc6d588685b6024b1c21ed",
+     "width": 1280
+    },
+    "card": {
+     "bytes": 23510,
+     "height": 400,
+     "path": "shots/i2rt-yam-2mm.exploded.card.webp",
+     "sha256": "d4153d8b388e856c0295818467d9ba9353974c58cd5219f5e193d88bad05937a",
+     "width": 640
+    },
+    "exploded": {
+     "bytes": 38724,
+     "height": 800,
+     "path": "shots/i2rt-yam-2mm.exploded.webp",
+     "sha256": "0b8b48f5d517ee3813350c63dfad940e20cabd52b34c20e270a726118d25c19f",
+     "width": 1280
+    }
+   },
+   "fit_sha256": "5d3327a1b03a62ba042de3a284d43ea04b9dad6304fb153b65e260f355b2a579",
+   "look": "photo",
+   "margins_px": {
+    "assembled": [
+     274,
+     52,
+     275,
+     52
+    ],
+    "exploded": [
+     268,
+     50,
+     268,
+     51
+    ]
+   },
+   "stage": {
+    "numbers": {
+     "assembled_opaque": 0,
+     "band_css": {
+      "contain": [
+       28,
+       52
+      ],
+      "cover": [
+       52,
+       97
+      ]
+     },
+     "card_px": [
+      95,
+      178
+     ],
+     "clearance_mm": {
+      "bodies": 12,
+      "other_finger": 12,
+      "stacks": 42.7
+     },
+     "drape_step_mm": 40,
+     "face_tilt_deg": 3.153,
+     "ghost_cover": 0.983,
+     "jaw_gap_mm": 74.318,
+     "near_seen": 1,
+     "opaque_max": 0,
+     "stacks_apart_px": 31,
+     "step_mm": 10.04,
+     "visible_min": 0.366
+    },
+    "scene": "scenes/i2rt-yam.json",
+    "scene_sha256": "09ca05a5ee1f69f44899a52e3e39dadb44c6f42fae0ab1425857bdf9e6226a68"
+   },
+   "view_sha256": "11171aecaa484d5b74f71edd5f2461a7bfd28b082917b7a70a4d7e4e073f38b8"
+  },
+  "i2rt-yam-3mm": {
+   "art": {
+    "build_id": "surface-23x23-11ed05f4e0e9",
+    "bytes": 11378,
+    "json_sha256": "e74ef07e793da1e666d383a10898594c7f8643cc5f6759e3fd5b7ff299af4b95",
+    "path": "art/i2rt-yam-3mm.json.gz",
+    "sha256": "4545e0afc47ce66ba915512f1a5c6b486a2141c554d59c1c03ce1a85f9ecf4a4"
+   },
+   "build_id": "surface-23x23-11ed05f4e0e9",
+   "figure_sha256": "c82b4611bf35c5a4127d2f683ac749a52455fab64352d0ab3da9a373866d98a3",
+   "files": {
+    "assembled": {
+     "bytes": 34670,
+     "height": 800,
+     "path": "shots/i2rt-yam-3mm.assembled.webp",
+     "sha256": "8e68bfde29455fa90e17117141db6bdd4612e43216bdb75fdd68b4a3541dba83",
+     "width": 1280
+    },
+    "card": {
+     "bytes": 23184,
+     "height": 400,
+     "path": "shots/i2rt-yam-3mm.exploded.card.webp",
+     "sha256": "fa4c228d6180caa39d264c5224ba87d2f08a27a2578039a9d713b6a2dfa6b243",
+     "width": 640
+    },
+    "exploded": {
+     "bytes": 37958,
+     "height": 800,
+     "path": "shots/i2rt-yam-3mm.exploded.webp",
+     "sha256": "19bfbf91200fda644b5ca733be957f156f2d87c4246eb20f15c69b723a683e11",
+     "width": 1280
+    }
+   },
+   "fit_sha256": "e674d161d88c48e8a9b95aa466fbc52a93329e5ef7141c536f3c514697993063",
+   "look": "photo",
+   "margins_px": {
+    "assembled": [
+     274,
+     52,
+     275,
+     52
+    ],
+    "exploded": [
+     268,
+     50,
+     268,
+     51
+    ]
+   },
+   "stage": {
+    "numbers": {
+     "assembled_opaque": 0,
+     "band_css": {
+      "contain": [
+       28,
+       53
+      ],
+      "cover": [
+       52,
+       98
+      ]
+     },
+     "card_px": [
+      95,
+      180
+     ],
+     "clearance_mm": {
+      "bodies": 12,
+      "other_finger": 12,
+      "stacks": 42.7
+     },
+     "drape_step_mm": 40,
+     "face_tilt_deg": 3.185,
+     "ghost_cover": 0.988,
+     "jaw_gap_mm": 74.3,
+     "near_seen": 1,
+     "opaque_max": 0,
+     "stacks_apart_px": 25,
+     "step_mm": 10.029,
+     "visible_min": 0.373
+    },
+    "scene": "scenes/i2rt-yam.json",
+    "scene_sha256": "09ca05a5ee1f69f44899a52e3e39dadb44c6f42fae0ab1425857bdf9e6226a68"
+   },
+   "view_sha256": "11171aecaa484d5b74f71edd5f2461a7bfd28b082917b7a70a4d7e4e073f38b8"
+  },
+  "i2rt-yam-4mm": {
+   "art": {
+    "build_id": "surface-17x17-df23535bd385",
+    "bytes": 9154,
+    "json_sha256": "9928381e398203998546e2cc88e0ee623f5a9889e4dc19aa945a63cfd62d7b42",
+    "path": "art/i2rt-yam-4mm.json.gz",
+    "sha256": "814fbfd77c5519998a7d7a140069eb85b0dd184a3d9ae080e400513cf1ace4ec"
+   },
+   "build_id": "surface-17x17-df23535bd385",
+   "figure_sha256": "c82b4611bf35c5a4127d2f683ac749a52455fab64352d0ab3da9a373866d98a3",
+   "files": {
+    "assembled": {
+     "bytes": 34070,
+     "height": 800,
+     "path": "shots/i2rt-yam-4mm.assembled.webp",
+     "sha256": "b96db3535edf73b6d082cc591b975388fc1bfdf66640e866eff39fbd5e11c2fa",
+     "width": 1280
+    },
+    "card": {
+     "bytes": 22932,
+     "height": 400,
+     "path": "shots/i2rt-yam-4mm.exploded.card.webp",
+     "sha256": "f9be16b9bd19d9ad122744beb328203b9afa7b42d4a6104e9aeaa428e5801186",
+     "width": 640
+    },
+    "exploded": {
+     "bytes": 36722,
+     "height": 800,
+     "path": "shots/i2rt-yam-4mm.exploded.webp",
+     "sha256": "dab8351f7f01bcede2cdea79b023088e03a1753996b3eab6637350cb861d2463",
+     "width": 1280
+    }
+   },
+   "fit_sha256": "736918ffe6b2c224b4ac86ea5b4d393014790dbdea7a32da78d1dfe4b551683f",
+   "look": "photo",
+   "margins_px": {
+    "assembled": [
+     274,
+     52,
+     275,
+     52
+    ],
+    "exploded": [
+     268,
+     50,
+     268,
+     51
+    ]
+   },
+   "stage": {
+    "numbers": {
+     "assembled_opaque": 0,
+     "band_css": {
+      "contain": [
+       28,
+       52
+      ],
+      "cover": [
+       52,
+       98
+      ]
+     },
+     "card_px": [
+      95,
+      179
+     ],
+     "clearance_mm": {
+      "bodies": 12,
+      "other_finger": 12,
+      "stacks": 42.8
+     },
+     "drape_step_mm": 39.392,
+     "face_tilt_deg": 3.197,
+     "ghost_cover": 0.988,
+     "jaw_gap_mm": 74.331,
+     "near_seen": 1,
+     "opaque_max": 0,
+     "stacks_apart_px": 31,
+     "step_mm": 10.048,
+     "visible_min": 0.385
+    },
+    "scene": "scenes/i2rt-yam.json",
+    "scene_sha256": "09ca05a5ee1f69f44899a52e3e39dadb44c6f42fae0ab1425857bdf9e6226a68"
+   },
+   "view_sha256": "11171aecaa484d5b74f71edd5f2461a7bfd28b082917b7a70a4d7e4e073f38b8"
+  },
+  "makermods-metal-1.5mm": {
+   "art": {
+    "build_id": "surface-32x15-63204c3821cb",
+    "bytes": 12051,
+    "json_sha256": "f94d3194a45433fe81ea45654f8911eeb313c9a40f43b6815cbb282b48d904b6",
+    "path": "art/makermods-metal-1.5mm.json.gz",
+    "sha256": "ddf7fdf50286474fa998e3d629daf2f176b4e94aaf0011dac0bc5fc9d16d738c"
+   },
+   "build_id": "surface-32x15-63204c3821cb",
+   "figure_sha256": "c82b4611bf35c5a4127d2f683ac749a52455fab64352d0ab3da9a373866d98a3",
+   "files": {
+    "assembled": {
+     "bytes": 25028,
+     "height": 800,
+     "path": "shots/makermods-metal-1.5mm.assembled.webp",
+     "sha256": "dfe74ea79d6e94a05e38d6f86bc1fe26919fd2f77226fe9d6bc28bddbbcfc19c",
+     "width": 1280
+    },
+    "card": {
+     "bytes": 23518,
+     "height": 400,
+     "path": "shots/makermods-metal-1.5mm.exploded.card.webp",
+     "sha256": "81e7cae66f400252da8ae0c9ecfe8e394b5bdc8b389fa1e1f400fdc9fa0e85ac",
+     "width": 640
+    },
+    "exploded": {
+     "bytes": 33792,
+     "height": 800,
+     "path": "shots/makermods-metal-1.5mm.exploded.webp",
+     "sha256": "d1f0f59ce0e12f6cbc4d325b32a0756ef33f5acb0f34f30b1d16ab0fb26ffe56",
+     "width": 1280
+    }
+   },
+   "fit_sha256": "e582aebea77d7050ca0808af8a1d0eefdb507d624b6e12333e23f2549ce0c16f",
+   "look": "photo",
+   "margins_px": {
+    "assembled": [
+     300,
+     52,
+     301,
+     52
+    ],
+    "exploded": [
+     239,
+     52,
+     240,
+     52
+    ]
+   },
+   "stage": {
+    "numbers": {
+     "assembled_opaque": 0,
+     "band_css": {
+      "contain": [
+       11,
+       52
+      ],
+      "cover": [
+       20,
+       97
+      ]
+     },
+     "card_px": [
+      37,
+      177
+     ],
+     "clearance_mm": {
+      "bodies": 12,
+      "other_finger": 12,
+      "stacks": 55.1
+     },
+     "drape_step_mm": 17.24,
+     "face_tilt_deg": 3.585,
+     "ghost_cover": 0.987,
+     "jaw_gap_mm": 95.5,
+     "near_seen": 1,
+     "opaque_max": 0,
+     "stacks_apart_px": 211.5,
+     "step_mm": 13.12,
+     "visible_min": 0.952
+    },
+    "scene": "scenes/makermods-metal.json",
+    "scene_sha256": "fae064578c366f6142895278805735aec5addf0470cec14ea2d44402cbcf5660"
+   },
+   "view_sha256": "11171aecaa484d5b74f71edd5f2461a7bfd28b082917b7a70a4d7e4e073f38b8"
+  },
+  "makermods-metal-1mm": {
+   "art": {
+    "build_id": "surface-32x19-3eb813284900",
+    "bytes": 11329,
+    "json_sha256": "35f3a4c641794b4cc9377781f58be2da3608e5f27fd26a457c57375ff32e216d",
+    "path": "art/makermods-metal-1mm.json.gz",
+    "sha256": "e23034d337ba242f92acf3b30ae3c45f615a387b762b740bb87b128a097a8563"
+   },
+   "build_id": "surface-32x19-3eb813284900",
+   "figure_sha256": "c82b4611bf35c5a4127d2f683ac749a52455fab64352d0ab3da9a373866d98a3",
+   "files": {
+    "assembled": {
+     "bytes": 24540,
+     "height": 800,
+     "path": "shots/makermods-metal-1mm.assembled.webp",
+     "sha256": "a45fac5b0fcb1c35b1cca22a587a4f06729182719bce730ca7aca2f5ec6a258d",
+     "width": 1280
+    },
+    "card": {
+     "bytes": 23868,
+     "height": 400,
+     "path": "shots/makermods-metal-1mm.exploded.card.webp",
+     "sha256": "09a9381b216e8b3a4b914a5c2ce6569d456133922fd411f49de63001620979ff",
+     "width": 640
+    },
+    "exploded": {
+     "bytes": 33212,
+     "height": 800,
+     "path": "shots/makermods-metal-1mm.exploded.webp",
+     "sha256": "f21f80a7dce4faf532bcc4748ee84e6bd9f884f96a71ddf537c319cea4b21542",
+     "width": 1280
+    }
+   },
+   "fit_sha256": "b39e3e69534fc6d285b987a3a9e682dc07c1498da1dabcd735db947c2cdce8df",
+   "look": "photo",
+   "margins_px": {
+    "assembled": [
+     290,
+     52,
+     291,
+     52
+    ],
+    "exploded": [
+     231,
+     52,
+     231,
+     52
+    ]
+   },
+   "stage": {
+    "numbers": {
+     "assembled_opaque": 0,
+     "band_css": {
+      "contain": [
+       9,
+       52
+      ],
+      "cover": [
+       18,
+       97
+      ]
+     },
+     "card_px": [
+      33,
+      178
+     ],
+     "clearance_mm": {
+      "bodies": 12,
+      "other_finger": 12,
+      "stacks": 55.1
+     },
+     "drape_step_mm": 15.332,
+     "face_tilt_deg": 1.581,
+     "ghost_cover": 0.986,
+     "jaw_gap_mm": 95.5,
+     "near_seen": 1,
+     "opaque_max": 0,
+     "stacks_apart_px": 226.9,
+     "step_mm": 13.12,
+     "visible_min": 1
+    },
+    "scene": "scenes/makermods-metal.json",
+    "scene_sha256": "fae064578c366f6142895278805735aec5addf0470cec14ea2d44402cbcf5660"
+   },
+   "view_sha256": "11171aecaa484d5b74f71edd5f2461a7bfd28b082917b7a70a4d7e4e073f38b8"
+  },
+  "makermods-metal-2mm": {
+   "art": {
+    "build_id": "surface-32x11-0e51fc8c2c00",
+    "bytes": 9930,
+    "json_sha256": "90f03a7023b8d4f714de548e2b3c88cce6f6edfc8e7331a04d83bbdd72ae472b",
+    "path": "art/makermods-metal-2mm.json.gz",
+    "sha256": "70b1f7a44d24be36e4115fcb737a234aea3b1d68ea770b97403ca6bb253f6a4a"
+   },
+   "build_id": "surface-32x11-0e51fc8c2c00",
+   "figure_sha256": "c82b4611bf35c5a4127d2f683ac749a52455fab64352d0ab3da9a373866d98a3",
+   "files": {
+    "assembled": {
+     "bytes": 25104,
+     "height": 800,
+     "path": "shots/makermods-metal-2mm.assembled.webp",
+     "sha256": "b410d8eb979d8dad278732016cf964fc1304514c091a9465bcaa849b4a3b5d6d",
+     "width": 1280
+    },
+    "card": {
+     "bytes": 23294,
+     "height": 400,
+     "path": "shots/makermods-metal-2mm.exploded.card.webp",
+     "sha256": "7b34138ea733c669e83b66500ab5942a3a3282e709d60d900c794abaffc8b42b",
+     "width": 640
+    },
+    "exploded": {
+     "bytes": 33436,
+     "height": 800,
+     "path": "shots/makermods-metal-2mm.exploded.webp",
+     "sha256": "ef6629a2719bde3541ae2d68c2ecc693876ad83836389b9352dbd38948463e52",
+     "width": 1280
+    }
+   },
+   "fit_sha256": "32350ca03ffe1bd0b18b109ab4b8a7b98fcdc655d04f01955872c66ebe0298cd",
+   "look": "photo",
+   "margins_px": {
+    "assembled": [
+     304,
+     52,
+     305,
+     52
+    ],
+    "exploded": [
+     243,
+     52,
+     243,
+     52
+    ]
+   },
+   "stage": {
+    "numbers": {
+     "assembled_opaque": 0,
+     "band_css": {
+      "contain": [
+       11,
+       52
+      ],
+      "cover": [
+       21,
+       98
+      ]
+     },
+     "card_px": [
+      39,
+      179
+     ],
+     "clearance_mm": {
+      "bodies": 12,
+      "other_finger": 12,
+      "stacks": 55.1
+     },
+     "drape_step_mm": 16.953,
+     "face_tilt_deg": 4.421,
+     "ghost_cover": 0.993,
+     "jaw_gap_mm": 95.5,
+     "near_seen": 1,
+     "opaque_max": 0,
+     "stacks_apart_px": 211.5,
+     "step_mm": 13.12,
+     "visible_min": 0.893
+    },
+    "scene": "scenes/makermods-metal.json",
+    "scene_sha256": "fae064578c366f6142895278805735aec5addf0470cec14ea2d44402cbcf5660"
+   },
+   "view_sha256": "11171aecaa484d5b74f71edd5f2461a7bfd28b082917b7a70a4d7e4e073f38b8"
+  },
+  "makermods-metal-3mm": {
+   "art": {
+    "build_id": "surface-22x8-f1f8d070e8f4",
+    "bytes": 8221,
+    "json_sha256": "911ea5b1bc87e24e0aa0113cb64a2bf857631118724bfbb5651a524f096d04d3",
+    "path": "art/makermods-metal-3mm.json.gz",
+    "sha256": "bffdd01a310ad430150ac81efc6b0eaa53578740c2236f2eb34d5dcb3f4b3fbd"
+   },
+   "build_id": "surface-22x8-f1f8d070e8f4",
+   "figure_sha256": "c82b4611bf35c5a4127d2f683ac749a52455fab64352d0ab3da9a373866d98a3",
+   "files": {
+    "assembled": {
+     "bytes": 24292,
+     "height": 800,
+     "path": "shots/makermods-metal-3mm.assembled.webp",
+     "sha256": "792eaff5f7b9b8c9f8960d962dc935d6c986b9a8143aab0937502d2e4c53126a",
+     "width": 1280
+    },
+    "card": {
+     "bytes": 22688,
+     "height": 400,
+     "path": "shots/makermods-metal-3mm.exploded.card.webp",
+     "sha256": "7da1a4a043362167d76387846340924d162f1b4ca30cd9d7513d42aab8220d00",
+     "width": 640
+    },
+    "exploded": {
+     "bytes": 32580,
+     "height": 800,
+     "path": "shots/makermods-metal-3mm.exploded.webp",
+     "sha256": "79354f43ade401ba43f84aaf82a93c9b5d7e78e8cc81a2bdfbec846ace0642bc",
+     "width": 1280
+    }
+   },
+   "fit_sha256": "4836757712dbc0529febdf47919bfed6003173db2a19d7dd3004350e3a3ca496",
+   "look": "photo",
+   "margins_px": {
+    "assembled": [
+     306,
+     52,
+     306,
+     52
+    ],
+    "exploded": [
+     244,
+     52,
+     244,
+     52
+    ]
+   },
+   "stage": {
+    "numbers": {
+     "assembled_opaque": 0,
+     "band_css": {
+      "contain": [
+       12,
+       51
+      ],
+      "cover": [
+       22,
+       97
+      ]
+     },
+     "card_px": [
+      40,
+      177
+     ],
+     "clearance_mm": {
+      "bodies": 12,
+      "other_finger": 12,
+      "stacks": 55.1
+     },
+     "drape_step_mm": 16.288,
+     "face_tilt_deg": 4.684,
+     "ghost_cover": 0.993,
+     "jaw_gap_mm": 95.5,
+     "near_seen": 1,
+     "opaque_max": 0,
+     "stacks_apart_px": 213.3,
+     "step_mm": 13.12,
+     "visible_min": 0.888
+    },
+    "scene": "scenes/makermods-metal.json",
+    "scene_sha256": "fae064578c366f6142895278805735aec5addf0470cec14ea2d44402cbcf5660"
+   },
+   "view_sha256": "11171aecaa484d5b74f71edd5f2461a7bfd28b082917b7a70a4d7e4e073f38b8"
+  },
+  "trossen-widowx-ai-1.5mm": {
+   "art": {
+    "build_id": "surface-32x22-1aa4b358103b",
+    "bytes": 13740,
+    "json_sha256": "cd57458b17c80a1351d35b8cf7c8b69bbf1a225ea96118347d1610369cc3b1ff",
+    "path": "art/trossen-widowx-ai-1.5mm.json.gz",
+    "sha256": "5eff848a1ff287529504f8c932fd9b1d9dcb3e7ca1a588ecd23324768c3f826b"
+   },
+   "build_id": "surface-32x22-1aa4b358103b",
+   "figure_sha256": "c82b4611bf35c5a4127d2f683ac749a52455fab64352d0ab3da9a373866d98a3",
+   "files": {
+    "assembled": {
+     "bytes": 31864,
+     "height": 800,
+     "path": "shots/trossen-widowx-ai-1.5mm.assembled.webp",
+     "sha256": "d55d62fa5ec8b57ebe9e130dfb2afc61257803239b55ae730a00c10278d62904",
+     "width": 1280
+    },
+    "card": {
+     "bytes": 25196,
+     "height": 400,
+     "path": "shots/trossen-widowx-ai-1.5mm.exploded.card.webp",
+     "sha256": "12755dfe106f0c7de97d58839c8ef31693c9e267ed71741f22144ec48de3525b",
+     "width": 640
+    },
+    "exploded": {
+     "bytes": 39330,
+     "height": 800,
+     "path": "shots/trossen-widowx-ai-1.5mm.exploded.webp",
+     "sha256": "aa8856916ab74cfe143954e4ff5da58f0c68a8d17f5d324b2bcc3f715c11a7e8",
+     "width": 1280
+    }
+   },
+   "fit_sha256": "ec7714487cacac6811443a05e6b1df1b466112609f8993e989d869726ebbb16a",
+   "look": "photo",
+   "margins_px": {
+    "assembled": [
+     298,
+     52,
+     298,
+     52
+    ],
+    "exploded": [
+     265,
+     52,
+     265,
+     52
+    ]
+   },
+   "stage": {
+    "numbers": {
+     "assembled_opaque": 0,
+     "band_css": {
+      "contain": [
+       14,
+       35
+      ],
+      "cover": [
+       26,
+       66
+      ]
+     },
+     "card_px": [
+      47,
+      121
+     ],
+     "clearance_mm": {
+      "bodies": 12,
+      "other_finger": 12,
+      "stacks": 50.5
+     },
+     "drape_step_mm": 22.889,
+     "face_tilt_deg": 6.342,
+     "ghost_cover": 0.997,
+     "jaw_gap_mm": 87.5,
+     "near_seen": 1,
+     "opaque_max": 0,
+     "stacks_apart_px": 139.9,
+     "step_mm": 12,
+     "visible_min": 0.774
+    },
+    "scene": "scenes/trossen-widowx-ai.json",
+    "scene_sha256": "b76d96a144a87b975c0170b14a76ea6fbeb0557b4b2a08590572ce92d37e2b7c"
+   },
+   "view_sha256": "11171aecaa484d5b74f71edd5f2461a7bfd28b082917b7a70a4d7e4e073f38b8"
+  },
+  "trossen-widowx-ai-1mm": {
+   "art": {
+    "build_id": "surface-32x25-cd7ee5fdf18e",
+    "bytes": 13377,
+    "json_sha256": "1194179a588b4ab0ed8648137fc5b6b03cba2a245c1033dc52864f1a745bbb51",
+    "path": "art/trossen-widowx-ai-1mm.json.gz",
+    "sha256": "8e61bd748c333e36450b55f27a7f558ea3819a00a07d8686acbe58ce5756500b"
+   },
+   "build_id": "surface-32x25-cd7ee5fdf18e",
+   "figure_sha256": "c82b4611bf35c5a4127d2f683ac749a52455fab64352d0ab3da9a373866d98a3",
+   "files": {
+    "assembled": {
+     "bytes": 30966,
+     "height": 800,
+     "path": "shots/trossen-widowx-ai-1mm.assembled.webp",
+     "sha256": "d3894eb1f31e21461db74bbe9b63a086a32223c46cb42f540e015f8f953ab680",
+     "width": 1280
+    },
+    "card": {
+     "bytes": 24938,
+     "height": 400,
+     "path": "shots/trossen-widowx-ai-1mm.exploded.card.webp",
+     "sha256": "aedb50590d0048359e8546cdd5af25e976bf8b8d8767d71f0b99c440dba908b6",
+     "width": 640
+    },
+    "exploded": {
+     "bytes": 37080,
+     "height": 800,
+     "path": "shots/trossen-widowx-ai-1mm.exploded.webp",
+     "sha256": "cc9d461c8afcd6d15b00957f17a6cb52002f9cf9280a7e035a9299e2dd9f714c",
+     "width": 1280
+    }
+   },
+   "fit_sha256": "bba27a4dc6ef98ce1bcbec3e539add9970c074d2d7e5801a7c42ef5dc57e3da5",
+   "look": "photo",
+   "margins_px": {
+    "assembled": [
+     293,
+     52,
+     294,
+     52
+    ],
+    "exploded": [
+     262,
+     52,
+     263,
+     52
+    ]
+   },
+   "stage": {
+    "numbers": {
+     "assembled_opaque": 0,
+     "band_css": {
+      "contain": [
+       11,
+       33
+      ],
+      "cover": [
+       21,
+       61
+      ]
+     },
+     "card_px": [
+      38,
+      112
+     ],
+     "clearance_mm": {
+      "bodies": 12,
+      "other_finger": 12,
+      "stacks": 50.5
+     },
+     "drape_step_mm": 18.63,
+     "face_tilt_deg": 4.973,
+     "ghost_cover": 0.997,
+     "jaw_gap_mm": 87.5,
+     "near_seen": 1,
+     "opaque_max": 0,
+     "stacks_apart_px": 149.6,
+     "step_mm": 12,
+     "visible_min": 0.926
+    },
+    "scene": "scenes/trossen-widowx-ai.json",
+    "scene_sha256": "b76d96a144a87b975c0170b14a76ea6fbeb0557b4b2a08590572ce92d37e2b7c"
+   },
+   "view_sha256": "11171aecaa484d5b74f71edd5f2461a7bfd28b082917b7a70a4d7e4e073f38b8"
+  },
+  "trossen-widowx-ai-2mm": {
+   "art": {
+    "build_id": "surface-24x16-cb567f0c5d2d",
+    "bytes": 10946,
+    "json_sha256": "0c298ab30749c839a5b85b18c80a310c053f03f6a0523b14b9cc322c2e9670ce",
+    "path": "art/trossen-widowx-ai-2mm.json.gz",
+    "sha256": "ab339437d00d2732bff1099e72ba7267775ea9d1f898387d75bebfaed697d847"
+   },
+   "build_id": "surface-24x16-cb567f0c5d2d",
+   "figure_sha256": "c82b4611bf35c5a4127d2f683ac749a52455fab64352d0ab3da9a373866d98a3",
+   "files": {
+    "assembled": {
+     "bytes": 30846,
+     "height": 800,
+     "path": "shots/trossen-widowx-ai-2mm.assembled.webp",
+     "sha256": "70d1e90c1cb46cb0c3d38debe50e939d8164295a7241c1f3efbbc2c58f0ffc56",
+     "width": 1280
+    },
+    "card": {
+     "bytes": 25476,
+     "height": 400,
+     "path": "shots/trossen-widowx-ai-2mm.exploded.card.webp",
+     "sha256": "c0db1c33829b6350b7a5d242de84c34da2ad6458f5a6b35b777cc49212c2bbca",
+     "width": 640
+    },
+    "exploded": {
+     "bytes": 38210,
+     "height": 800,
+     "path": "shots/trossen-widowx-ai-2mm.exploded.webp",
+     "sha256": "2888fa293d5463bf125d682c051314cae459d23f307e7532c52b906ccfc15803",
+     "width": 1280
+    }
+   },
+   "fit_sha256": "6e3613ad5c0bb12420e1fe72a25dce5cc838114d2c846a755cf752ced31391b0",
+   "look": "photo",
+   "margins_px": {
+    "assembled": [
+     297,
+     52,
+     298,
+     52
+    ],
+    "exploded": [
+     264,
+     52,
+     265,
+     52
+    ]
+   },
+   "stage": {
+    "numbers": {
+     "assembled_opaque": 0,
+     "band_css": {
+      "contain": [
+       14,
+       35
+      ],
+      "cover": [
+       26,
+       66
+      ]
+     },
+     "card_px": [
+      47,
+      121
+     ],
+     "clearance_mm": {
+      "bodies": 12,
+      "other_finger": 12,
+      "stacks": 50.5
+     },
+     "drape_step_mm": 21.162,
+     "face_tilt_deg": 6.299,
+     "ghost_cover": 0.997,
+     "jaw_gap_mm": 87.5,
+     "near_seen": 1,
+     "opaque_max": 0,
+     "stacks_apart_px": 145.8,
+     "step_mm": 12,
+     "visible_min": 0.799
+    },
+    "scene": "scenes/trossen-widowx-ai.json",
+    "scene_sha256": "b76d96a144a87b975c0170b14a76ea6fbeb0557b4b2a08590572ce92d37e2b7c"
+   },
+   "view_sha256": "11171aecaa484d5b74f71edd5f2461a7bfd28b082917b7a70a4d7e4e073f38b8"
+  },
+  "trossen-widowx-ai-3mm": {
+   "art": {
+    "build_id": "surface-16x11-9c4e1741c0f1",
+    "bytes": 7479,
+    "json_sha256": "135d794a63ba95abff646cd86310a0f9b209ecd4c9dea48b26f744db7d089296",
+    "path": "art/trossen-widowx-ai-3mm.json.gz",
+    "sha256": "b0f45b7480b6cc3f6b69d8c5bdc01c1860bfbc74502f3a02bbf2c3713b04fe54"
+   },
+   "build_id": "surface-16x11-9c4e1741c0f1",
+   "figure_sha256": "c82b4611bf35c5a4127d2f683ac749a52455fab64352d0ab3da9a373866d98a3",
+   "files": {
+    "assembled": {
+     "bytes": 30312,
+     "height": 800,
+     "path": "shots/trossen-widowx-ai-3mm.assembled.webp",
+     "sha256": "f0e821d4c2e93fdcf9db0e63cf92536a70558a2e0080d2f58879d3a53c25590a",
+     "width": 1280
+    },
+    "card": {
+     "bytes": 25364,
+     "height": 400,
+     "path": "shots/trossen-widowx-ai-3mm.exploded.card.webp",
+     "sha256": "f7c39ef67d9abbd2092100e7f2209de7a1f35a2ab784719fb90e0bf52b6bfecb",
+     "width": 640
+    },
+    "exploded": {
+     "bytes": 37504,
+     "height": 800,
+     "path": "shots/trossen-widowx-ai-3mm.exploded.webp",
+     "sha256": "d9c1a801bf9e35c24ab66c4e3b023625400a8f9aa8faf470101f7815d400e2c2",
+     "width": 1280
+    }
+   },
+   "fit_sha256": "aaadec490c9ddd57d4f314c3db1c9f87680a54b85603caedd34161fe55caa831",
+   "look": "photo",
+   "margins_px": {
+    "assembled": [
+     298,
+     52,
+     298,
+     52
+    ],
+    "exploded": [
+     265,
+     52,
+     266,
+     52
+    ]
+   },
+   "stage": {
+    "numbers": {
+     "assembled_opaque": 0,
+     "band_css": {
+      "contain": [
+       14,
+       35
+      ],
+      "cover": [
+       26,
+       66
+      ]
+     },
+     "card_px": [
+      48,
+      120
+     ],
+     "clearance_mm": {
+      "bodies": 12,
+      "other_finger": 12,
+      "stacks": 50.5
+     },
+     "drape_step_mm": 20.281,
+     "face_tilt_deg": 6.4,
+     "ghost_cover": 0.998,
+     "jaw_gap_mm": 87.5,
+     "near_seen": 1,
+     "opaque_max": 0,
+     "stacks_apart_px": 149.2,
+     "step_mm": 12,
+     "visible_min": 0.803
+    },
+    "scene": "scenes/trossen-widowx-ai.json",
+    "scene_sha256": "b76d96a144a87b975c0170b14a76ea6fbeb0557b4b2a08590572ce92d37e2b7c"
+   },
+   "view_sha256": "11171aecaa484d5b74f71edd5f2461a7bfd28b082917b7a70a4d7e4e073f38b8"
+  },
+  "umi-convex-tip13.8-2mm": {
+   "art": {
+    "build_id": "surface-32x12-4cb9374144c8",
+    "bytes": 9927,
+    "json_sha256": "2cefb1b449b6c56c53d6f7b8dd52e2a5cf7b7a274952004c228f3502f0c840df",
+    "path": "art/umi-convex-tip13.8-2mm.json.gz",
+    "sha256": "3c1ae8fa77256842bfe5d5899a2dae99fba48ed673edcebbfee7c3736dd1a560"
+   },
+   "build_id": "surface-32x12-4cb9374144c8",
+   "figure_sha256": "c82b4611bf35c5a4127d2f683ac749a52455fab64352d0ab3da9a373866d98a3",
+   "files": {
+    "assembled": {
+     "bytes": 27644,
+     "height": 800,
+     "path": "shots/umi-convex-tip13.8-2mm.assembled.webp",
+     "sha256": "67dcb6b3225dad6bd0261ff5babcb332303e889a5920bda9b9cc1f8c0c28aa00",
+     "width": 1280
+    },
+    "card": {
+     "bytes": 14596,
+     "height": 400,
+     "path": "shots/umi-convex-tip13.8-2mm.exploded.card.webp",
+     "sha256": "ed2b9a7470dd928b7f471c952a19dbaf7db242f5f9f1bcc9ceb2db96089a75ff",
+     "width": 640
+    },
+    "exploded": {
+     "bytes": 30460,
+     "height": 800,
+     "path": "shots/umi-convex-tip13.8-2mm.exploded.webp",
+     "sha256": "4966ea72d37ac19d2e7c9556038f1ae6ce9ee853067b34a738b0ee8e78030474",
+     "width": 1280
+    }
+   },
+   "fit_sha256": "f5c7c91e461a7bf815bf7dec03dc3aa4ace2d1758d55ea43f7eb4db1f813b3c0",
+   "look": "photo",
+   "margins_px": {
+    "assembled": [
+     454,
+     51,
+     455,
+     52
+    ],
+    "exploded": [
+     484,
+     52,
+     484,
+     52
+    ]
+   },
+   "view_sha256": "11171aecaa484d5b74f71edd5f2461a7bfd28b082917b7a70a4d7e4e073f38b8"
+  },
+  "umi-convex-tip17.8-2mm": {
+   "art": {
+    "build_id": "surface-32x12-88dcc0061ffb",
+    "bytes": 9720,
+    "json_sha256": "f6837ecf49692a68bab9f75eda18a6c7cbf11d2fb2bf695d3422183d712129e0",
+    "path": "art/umi-convex-tip17.8-2mm.json.gz",
+    "sha256": "f69fe7b8229c6baab3017213f6ab44c34d75ea1e45db98edc3b3292ba61ef8a0"
+   },
+   "build_id": "surface-32x12-88dcc0061ffb",
+   "figure_sha256": "c82b4611bf35c5a4127d2f683ac749a52455fab64352d0ab3da9a373866d98a3",
+   "files": {
+    "assembled": {
+     "bytes": 27626,
+     "height": 800,
+     "path": "shots/umi-convex-tip17.8-2mm.assembled.webp",
+     "sha256": "daa5f489c68b446d9184a60f47b9937fdf212810c67b869fad9aafba15a6c853",
+     "width": 1280
+    },
+    "card": {
+     "bytes": 14694,
+     "height": 400,
+     "path": "shots/umi-convex-tip17.8-2mm.exploded.card.webp",
+     "sha256": "df7fc5345b2f6bcc7f71289151819a2dc7ebcf38fcafe74b18a16157e4d6a989",
+     "width": 640
+    },
+    "exploded": {
+     "bytes": 29892,
+     "height": 800,
+     "path": "shots/umi-convex-tip17.8-2mm.exploded.webp",
+     "sha256": "9b279d91546e721baae854ba931e589cc65f87e60b202ce6887c01a4139500ba",
+     "width": 1280
+    }
+   },
+   "fit_sha256": "7f62b3d67427bfa5b475d56fbd55b186dce0fb9bfc2cdb5aafe64be9caa3817a",
+   "look": "photo",
+   "margins_px": {
+    "assembled": [
+     450,
+     51,
+     450,
+     52
+    ],
+    "exploded": [
+     482,
+     52,
+     483,
+     52
+    ]
+   },
+   "view_sha256": "11171aecaa484d5b74f71edd5f2461a7bfd28b082917b7a70a4d7e4e073f38b8"
+  },
+  "umi-convex-tip21.8-2mm": {
+   "art": {
+    "build_id": "surface-32x12-7d835504aece",
+    "bytes": 9443,
+    "json_sha256": "d3b67c4eef9a478c8b3b36e5c33678c6f4498514edcd1246fb37e56383158a9d",
+    "path": "art/umi-convex-tip21.8-2mm.json.gz",
+    "sha256": "339214e6962821e42b252d75ce97c88b291c936c25a76986b6c795e54f562677"
+   },
+   "build_id": "surface-32x12-7d835504aece",
+   "figure_sha256": "c82b4611bf35c5a4127d2f683ac749a52455fab64352d0ab3da9a373866d98a3",
+   "files": {
+    "assembled": {
+     "bytes": 28424,
+     "height": 800,
+     "path": "shots/umi-convex-tip21.8-2mm.assembled.webp",
+     "sha256": "eb7ad1165b880441c5e26d5d873d67ff4797cca69af4f93fd3954b78627e220e",
+     "width": 1280
+    },
+    "card": {
+     "bytes": 14858,
+     "height": 400,
+     "path": "shots/umi-convex-tip21.8-2mm.exploded.card.webp",
+     "sha256": "e56ddf29a805c97e1ad589d27e692a619af32b5a84c3838dff3824a1b83b3615",
+     "width": 640
+    },
+    "exploded": {
+     "bytes": 30940,
+     "height": 800,
+     "path": "shots/umi-convex-tip21.8-2mm.exploded.webp",
+     "sha256": "bba8bb3afa2e56b7f43a9a39faa0c10a6d3935444393a8a6f870468c3e06536c",
+     "width": 1280
+    }
+   },
+   "fit_sha256": "a0b1858cd42b3e0934f80a99d322f56f4451c5a341112ae74210e87bc7c2a91f",
+   "look": "photo",
+   "margins_px": {
+    "assembled": [
+     444,
+     51,
+     445,
+     52
+    ],
+    "exploded": [
+     478,
+     52,
+     478,
+     52
+    ]
+   },
+   "view_sha256": "11171aecaa484d5b74f71edd5f2461a7bfd28b082917b7a70a4d7e4e073f38b8"
+  },
+  "umi-convex-tip5.8-2mm": {
+   "art": {
+    "build_id": "surface-32x11-6c5ee79ebf58",
+    "bytes": 10104,
+    "json_sha256": "499b9a3bc95783a540ef73bd871fce1b76b9f54bd5f06939a052b639c664c6bb",
+    "path": "art/umi-convex-tip5.8-2mm.json.gz",
+    "sha256": "9545b4a7f35b1cb337ec5f4f312d5773a9f3779d713b48ad22bc57053b39fdfa"
+   },
+   "build_id": "surface-32x11-6c5ee79ebf58",
+   "figure_sha256": "c82b4611bf35c5a4127d2f683ac749a52455fab64352d0ab3da9a373866d98a3",
+   "files": {
+    "assembled": {
+     "bytes": 27482,
+     "height": 800,
+     "path": "shots/umi-convex-tip5.8-2mm.assembled.webp",
+     "sha256": "dfc984c0516174f8f9e471bb6f5bb3f57338676c54b634f5282a7e9d2dc21c30",
+     "width": 1280
+    },
+    "card": {
+     "bytes": 14250,
+     "height": 400,
+     "path": "shots/umi-convex-tip5.8-2mm.exploded.card.webp",
+     "sha256": "608b4a0e0153168c92d4377dbcb6094eecbd3f12a89f0f75dc86944ca34fa206",
+     "width": 640
+    },
+    "exploded": {
+     "bytes": 29174,
+     "height": 800,
+     "path": "shots/umi-convex-tip5.8-2mm.exploded.webp",
+     "sha256": "1c5f70a76604d0857355db61354dbe96d06cff0e04db9b75c8fb1280713a743d",
+     "width": 1280
+    }
+   },
+   "fit_sha256": "24282b687f3499e46ba306719543d532d98581f2916d01561a8b68ef81afaf95",
+   "look": "photo",
+   "margins_px": {
+    "assembled": [
+     462,
+     51,
+     462,
+     51
+    ],
+    "exploded": [
+     487,
+     51,
+     488,
+     52
+    ]
+   },
+   "view_sha256": "11171aecaa484d5b74f71edd5f2461a7bfd28b082917b7a70a4d7e4e073f38b8"
+  },
+  "umi-convex-tip9.8-2mm": {
+   "art": {
+    "build_id": "surface-32x12-e3dfb9eb7e81",
+    "bytes": 10289,
+    "json_sha256": "415a74ac2b7c95e1374c0831a780fdad145a45bfef5eb7dba6961a8162f3b169",
+    "path": "art/umi-convex-tip9.8-2mm.json.gz",
+    "sha256": "5c14f1a4ae612029e24dd66ac7d5e5f452ac39e955d90f84fb70fcad906ce938"
+   },
+   "build_id": "surface-32x12-e3dfb9eb7e81",
+   "figure_sha256": "c82b4611bf35c5a4127d2f683ac749a52455fab64352d0ab3da9a373866d98a3",
+   "files": {
+    "assembled": {
+     "bytes": 27540,
+     "height": 800,
+     "path": "shots/umi-convex-tip9.8-2mm.assembled.webp",
+     "sha256": "2bcb237b98e8ba9d6b7423a3857d9cd6589ecefa5929b2d520af276a493e1724",
+     "width": 1280
+    },
+    "card": {
+     "bytes": 14432,
+     "height": 400,
+     "path": "shots/umi-convex-tip9.8-2mm.exploded.card.webp",
+     "sha256": "d53c8048b38ede005606027d2f754006cc285a92d01dc13cba46104bcc01c903",
+     "width": 640
+    },
+    "exploded": {
+     "bytes": 29768,
+     "height": 800,
+     "path": "shots/umi-convex-tip9.8-2mm.exploded.webp",
+     "sha256": "b621dc69979baf4983f67f0d67a342db7ee66fd62cb99fa30450d5262c2f4d7f",
+     "width": 1280
+    }
+   },
+   "fit_sha256": "5f685b7feacf79d9f291fbdde9cbb554f32c9d8d77f8dcfc8c098ca4c0831399",
+   "look": "photo",
+   "margins_px": {
+    "assembled": [
+     458,
+     51,
+     458,
+     52
+    ],
+    "exploded": [
+     487,
+     51,
+     487,
+     52
+    ]
+   },
+   "view_sha256": "11171aecaa484d5b74f71edd5f2461a7bfd28b082917b7a70a4d7e4e073f38b8"
+  },
+  "umi-finray-1.5mm": {
+   "art": {
+    "build_id": "surface-32x17-5b221a9ddb1a",
+    "bytes": 10624,
+    "json_sha256": "eba6885aa36f9569cd928bf2b8d0225a5c62ecf44c4f25dbe092326ac33b8084",
+    "path": "art/umi-finray-1.5mm.json.gz",
+    "sha256": "394ace9931213c01417d0d4826ad00645494c9c4bd6ac6c68a95cd5d31b576e9"
+   },
+   "build_id": "surface-32x17-5b221a9ddb1a",
+   "figure_sha256": "c82b4611bf35c5a4127d2f683ac749a52455fab64352d0ab3da9a373866d98a3",
+   "files": {
+    "assembled": {
+     "bytes": 29098,
+     "height": 800,
+     "path": "shots/umi-finray-1.5mm.assembled.webp",
+     "sha256": "cbef2e30ea53819e4baa23a7ff079c578923f337dc58805b3dfe57f62206b661",
+     "width": 1280
+    },
+    "card": {
+     "bytes": 14910,
+     "height": 400,
+     "path": "shots/umi-finray-1.5mm.exploded.card.webp",
+     "sha256": "9d609f0fca84132ac3854d3a7af975122548d328daf517f836f4bf77d0335ed7",
+     "width": 640
+    },
+    "exploded": {
+     "bytes": 31898,
+     "height": 800,
+     "path": "shots/umi-finray-1.5mm.exploded.webp",
+     "sha256": "864a2e63a5690c07ec13d1acb98f6920c0c9c80a5b227cae2b8c29675c1683e9",
+     "width": 1280
+    }
+   },
+   "fit_sha256": "bbda4cb4be8aa2907f6274657338e236653b598f5365b16a51bcdd6e7c2aa446",
+   "look": "photo",
+   "margins_px": {
+    "assembled": [
+     439,
+     50,
+     440,
+     51
+    ],
+    "exploded": [
+     473,
+     51,
+     474,
+     51
+    ]
+   },
+   "view_sha256": "11171aecaa484d5b74f71edd5f2461a7bfd28b082917b7a70a4d7e4e073f38b8"
+  },
+  "umi-finray-1mm": {
+   "art": {
+    "build_id": "surface-32x25-56dc8881a924",
+    "bytes": 11377,
+    "json_sha256": "9021f08a85e7be08201461deba4e0f21cb1546d0f9c6941a034b42bc6227339b",
+    "path": "art/umi-finray-1mm.json.gz",
+    "sha256": "de0c011969688517e207a7e0419266a10364867f7d64c186d44bc68b189b3ee5"
+   },
+   "build_id": "surface-32x25-56dc8881a924",
+   "figure_sha256": "c82b4611bf35c5a4127d2f683ac749a52455fab64352d0ab3da9a373866d98a3",
+   "files": {
+    "assembled": {
+     "bytes": 25680,
+     "height": 800,
+     "path": "shots/umi-finray-1mm.assembled.webp",
+     "sha256": "a196214f063868e9ff3d6c074aa566045bfcf33af5b466144635a8f5a80725a0",
+     "width": 1280
+    },
+    "card": {
+     "bytes": 15198,
+     "height": 400,
+     "path": "shots/umi-finray-1mm.exploded.card.webp",
+     "sha256": "3e065953ed7c2e60c45b675a6f76d5a2afe5f8eb451834e2086a718b15d25280",
+     "width": 640
+    },
+    "exploded": {
+     "bytes": 31704,
+     "height": 800,
+     "path": "shots/umi-finray-1mm.exploded.webp",
+     "sha256": "a51031b52f010d20543c2df41161cc20fe6ac2d4e814e58b55ee670727afbc64",
+     "width": 1280
+    }
+   },
+   "fit_sha256": "4f70104841b71986253c54de3c573899c01faf087bbd5024956e1936faee210b",
+   "look": "photo",
+   "margins_px": {
+    "assembled": [
+     439,
+     50,
+     439,
+     51
+    ],
+    "exploded": [
+     471,
+     51,
+     472,
+     52
+    ]
+   },
+   "view_sha256": "11171aecaa484d5b74f71edd5f2461a7bfd28b082917b7a70a4d7e4e073f38b8"
+  },
+  "umi-finray-2mm": {
+   "art": {
+    "build_id": "surface-32x12-083b8f742943",
+    "bytes": 9040,
+    "json_sha256": "2a3f0a3a3db79b27f13236c155e6ec3ce1c5e73b8ce0db4de3b1207faf0866c7",
+    "path": "art/umi-finray-2mm.json.gz",
+    "sha256": "5315ec4c2b345d5fef8c1a84ee7989ca9dfb772d4ddf88a72c1115ff766c435f"
+   },
+   "build_id": "surface-32x12-083b8f742943",
+   "figure_sha256": "c82b4611bf35c5a4127d2f683ac749a52455fab64352d0ab3da9a373866d98a3",
+   "files": {
+    "assembled": {
+     "bytes": 27854,
+     "height": 800,
+     "path": "shots/umi-finray-2mm.assembled.webp",
+     "sha256": "e72bf5ba7c1065905720b36a4707599c2df389fdc47af2083d99a0b9aa982cff",
+     "width": 1280
+    },
+    "card": {
+     "bytes": 14984,
+     "height": 400,
+     "path": "shots/umi-finray-2mm.exploded.card.webp",
+     "sha256": "6cadc0a3cb51803c27aeb65baa747d6abb5fdd99679f22703b73f4e1d0899741",
+     "width": 640
+    },
+    "exploded": {
+     "bytes": 31712,
+     "height": 800,
+     "path": "shots/umi-finray-2mm.exploded.webp",
+     "sha256": "c5525a0618a6e4a8ce8fbb31726f30c38d0d0841baf702fb7f42279cba164d5f",
+     "width": 1280
+    }
+   },
+   "fit_sha256": "cca7c5d986c02f89c913d47bf428ee0fb19c122c0475c042bd89ae3eb66e72a6",
+   "look": "photo",
+   "margins_px": {
+    "assembled": [
+     439,
+     51,
+     440,
+     52
+    ],
+    "exploded": [
+     473,
+     51,
+     473,
+     52
+    ]
+   },
+   "view_sha256": "11171aecaa484d5b74f71edd5f2461a7bfd28b082917b7a70a4d7e4e073f38b8"
+  },
+  "umi-finray-3mm": {
+   "art": {
+    "build_id": "surface-21x8-b1004352a5d1",
+    "bytes": 7379,
+    "json_sha256": "dd734c0af775cd0179d8ee34963d8594f8e630dc13a6f50e16dac50e7c69bdea",
+    "path": "art/umi-finray-3mm.json.gz",
+    "sha256": "5281fc330b2f624a1522e4801648fc2b4c8683ef8ee268c71a54be72b861b9e2"
+   },
+   "build_id": "surface-21x8-b1004352a5d1",
+   "figure_sha256": "c82b4611bf35c5a4127d2f683ac749a52455fab64352d0ab3da9a373866d98a3",
+   "files": {
+    "assembled": {
+     "bytes": 24036,
+     "height": 800,
+     "path": "shots/umi-finray-3mm.assembled.webp",
+     "sha256": "d21f11b994cc8fedade27ece4b63310510ec6bd3c8d5331921486229da1b6b1c",
+     "width": 1280
+    },
+    "card": {
+     "bytes": 15518,
+     "height": 400,
+     "path": "shots/umi-finray-3mm.exploded.card.webp",
+     "sha256": "78f83e8761a9d3ebee6844427efa952d5479d212df6d9455e3be23979cfc57c3",
+     "width": 640
+    },
+    "exploded": {
+     "bytes": 29512,
+     "height": 800,
+     "path": "shots/umi-finray-3mm.exploded.webp",
+     "sha256": "7a60329280a10f8c1e8059e5557658ff98006da449e591ef17204f6b6ff84f01",
+     "width": 1280
+    }
+   },
+   "fit_sha256": "5318de6b0ca1e20b38795a7aa580c7ca26bf2e0a0ccba4ef2b4856f24f3bedaa",
+   "look": "photo",
+   "margins_px": {
+    "assembled": [
+     448,
+     52,
+     448,
+     52
+    ],
+    "exploded": [
+     477,
+     51,
+     477,
+     52
+    ]
+   },
+   "view_sha256": "11171aecaa484d5b74f71edd5f2461a7bfd28b082917b7a70a4d7e4e073f38b8"
+  },
+  "umi-trap-tip13.8-2mm": {
+   "art": {
+    "build_id": "surface-32x11-168582f38f42",
+    "bytes": 9739,
+    "json_sha256": "d14dc0bd02918fba146fadb6a06a0b9ad5e0e145f0a946c7acd092d0c92f9f13",
+    "path": "art/umi-trap-tip13.8-2mm.json.gz",
+    "sha256": "6a900390c2b35d84682ad3d2ca1371290d773dbced2b3537abd11aee16d5507a"
+   },
+   "build_id": "surface-32x11-168582f38f42",
+   "figure_sha256": "c82b4611bf35c5a4127d2f683ac749a52455fab64352d0ab3da9a373866d98a3",
+   "files": {
+    "assembled": {
+     "bytes": 27392,
+     "height": 800,
+     "path": "shots/umi-trap-tip13.8-2mm.assembled.webp",
+     "sha256": "6ef273fc3a4aacad34658bdf7ac1221ef80843e493b689febd4360fda55befb4",
+     "width": 1280
+    },
+    "card": {
+     "bytes": 14648,
+     "height": 400,
+     "path": "shots/umi-trap-tip13.8-2mm.exploded.card.webp",
+     "sha256": "f01204a9ada9cef5f553b68a0d39da42ba88c2d02cefbd9b6a2927385a0bc0d4",
+     "width": 640
+    },
+    "exploded": {
+     "bytes": 29472,
+     "height": 800,
+     "path": "shots/umi-trap-tip13.8-2mm.exploded.webp",
+     "sha256": "79552bb2832184268f50a34534bd9894c2dbf550d62936d7cb017298d0baa8d6",
+     "width": 1280
+    }
+   },
+   "fit_sha256": "5f94304afdbb47c689356b0774baf880821d8c43c2fd06419489a79b46337c48",
+   "look": "photo",
+   "margins_px": {
+    "assembled": [
+     455,
+     50,
+     455,
+     51
+    ],
+    "exploded": [
+     483,
+     51,
+     483,
+     52
+    ]
+   },
+   "view_sha256": "11171aecaa484d5b74f71edd5f2461a7bfd28b082917b7a70a4d7e4e073f38b8"
+  },
+  "umi-trap-tip17.8-2mm": {
+   "art": {
+    "build_id": "surface-32x11-5c364f28c111",
+    "bytes": 9391,
+    "json_sha256": "fd6dec30d821bf17ed2751d017781368f57c3b6603ae36e907de6eabd9d3cfe1",
+    "path": "art/umi-trap-tip17.8-2mm.json.gz",
+    "sha256": "95bd93c478d5673fed155daf8a9de6c0dfffd4d9abd58d6c879ebfe9dbb4aa50"
+   },
+   "build_id": "surface-32x11-5c364f28c111",
+   "figure_sha256": "c82b4611bf35c5a4127d2f683ac749a52455fab64352d0ab3da9a373866d98a3",
+   "files": {
+    "assembled": {
+     "bytes": 26404,
+     "height": 800,
+     "path": "shots/umi-trap-tip17.8-2mm.assembled.webp",
+     "sha256": "29b9bf780d10d655e1b347c2651dfe7601dab6271394f774335f12ba61a72050",
+     "width": 1280
+    },
+    "card": {
+     "bytes": 14726,
+     "height": 400,
+     "path": "shots/umi-trap-tip17.8-2mm.exploded.card.webp",
+     "sha256": "219f19b5c844683e458dd401d8698db776b4ac271a9bf76e189deee1b111c519",
+     "width": 640
+    },
+    "exploded": {
+     "bytes": 30732,
+     "height": 800,
+     "path": "shots/umi-trap-tip17.8-2mm.exploded.webp",
+     "sha256": "396b56640aa455ac5f70bfc0b407d5f516dcfc57d719df5b836fc9747922e526",
+     "width": 1280
+    }
+   },
+   "fit_sha256": "9a24a2f2f21c0fce5790e8fc75a433b393ecce9ae6efae7117b8de2fe0a018c5",
+   "look": "photo",
+   "margins_px": {
+    "assembled": [
+     450,
+     50,
+     450,
+     51
+    ],
+    "exploded": [
+     476,
+     51,
+     477,
+     52
+    ]
+   },
+   "view_sha256": "11171aecaa484d5b74f71edd5f2461a7bfd28b082917b7a70a4d7e4e073f38b8"
+  },
+  "umi-trap-tip21.8-2mm": {
+   "art": {
+    "build_id": "surface-32x11-68d7d24e056f",
+    "bytes": 9273,
+    "json_sha256": "a1d967568ddbed68c8717b86fecc27a8b2f40dbeff23581080b4c32d2b5cf857",
+    "path": "art/umi-trap-tip21.8-2mm.json.gz",
+    "sha256": "1ee3a1a7eb4309b4fc1e59e41950ca3087c92482a2f3ceaaa1a78fce6a4eecdf"
+   },
+   "build_id": "surface-32x11-68d7d24e056f",
+   "figure_sha256": "c82b4611bf35c5a4127d2f683ac749a52455fab64352d0ab3da9a373866d98a3",
+   "files": {
+    "assembled": {
+     "bytes": 27964,
+     "height": 800,
+     "path": "shots/umi-trap-tip21.8-2mm.assembled.webp",
+     "sha256": "74b487bd489e66b94ff8c6b229c266deaea35c7a415cc94fc59706ca7937c05a",
+     "width": 1280
+    },
+    "card": {
+     "bytes": 14932,
+     "height": 400,
+     "path": "shots/umi-trap-tip21.8-2mm.exploded.card.webp",
+     "sha256": "8c05a89b8f42dfd5a3eba1a1b4234b011e07750f8adf5f92163dd334ab577964",
+     "width": 640
+    },
+    "exploded": {
+     "bytes": 31238,
+     "height": 800,
+     "path": "shots/umi-trap-tip21.8-2mm.exploded.webp",
+     "sha256": "4054da5810777b31d9599c3cca2cf387f28ea9c697d934ead569a2e2d14a6ba7",
+     "width": 1280
+    }
+   },
+   "fit_sha256": "d712ab6d2b22668fe2735f1680e327e0269e0478161c8369328e9b0fc25dccc7",
+   "look": "photo",
+   "margins_px": {
+    "assembled": [
+     445,
+     51,
+     445,
+     52
+    ],
+    "exploded": [
+     474,
+     51,
+     475,
+     52
+    ]
+   },
+   "view_sha256": "11171aecaa484d5b74f71edd5f2461a7bfd28b082917b7a70a4d7e4e073f38b8"
+  },
+  "umi-trap-tip5.8-2mm": {
+   "art": {
+    "build_id": "surface-32x11-8c34082adb12",
+    "bytes": 9944,
+    "json_sha256": "6562fe294f280c43e066254e67951089ccd01abd42af76e1bcdbdb7bf6b0b5e0",
+    "path": "art/umi-trap-tip5.8-2mm.json.gz",
+    "sha256": "d4b758c9931bbdb9a339334bc4dcfaa853d5a6609b4b91609383dd530c5bb68b"
+   },
+   "build_id": "surface-32x11-8c34082adb12",
+   "figure_sha256": "c82b4611bf35c5a4127d2f683ac749a52455fab64352d0ab3da9a373866d98a3",
+   "files": {
+    "assembled": {
+     "bytes": 24944,
+     "height": 800,
+     "path": "shots/umi-trap-tip5.8-2mm.assembled.webp",
+     "sha256": "68e96c0bde68e928537638c52bdd85ae55c06aea19920c94e3505138f3574627",
+     "width": 1280
+    },
+    "card": {
+     "bytes": 13894,
+     "height": 400,
+     "path": "shots/umi-trap-tip5.8-2mm.exploded.card.webp",
+     "sha256": "ba6aeb9b6a83fe5e7938f7488e65a3b384205a6222cdd4b881df018a89357e3d",
+     "width": 640
+    },
+    "exploded": {
+     "bytes": 28040,
+     "height": 800,
+     "path": "shots/umi-trap-tip5.8-2mm.exploded.webp",
+     "sha256": "77813872ef5e9d7df75a5896d7d3cfe12ee91c65a97a6d5eb9b2c59fb85873e7",
+     "width": 1280
+    }
+   },
+   "fit_sha256": "180f8dd81346365b588eb39e1b41db297975bc64c35044a236dcfad3d1acafe6",
+   "look": "photo",
+   "margins_px": {
+    "assembled": [
+     464,
+     50,
+     465,
+     51
+    ],
+    "exploded": [
+     489,
+     51,
+     489,
+     52
+    ]
+   },
+   "view_sha256": "11171aecaa484d5b74f71edd5f2461a7bfd28b082917b7a70a4d7e4e073f38b8"
+  },
+  "umi-trap-tip9.8-2mm": {
+   "art": {
+    "build_id": "surface-32x11-557e60081323",
+    "bytes": 10012,
+    "json_sha256": "20553f7a912e37e474f56250f41b2cd1d871a7bbadbda3a92147abd8f31c5765",
+    "path": "art/umi-trap-tip9.8-2mm.json.gz",
+    "sha256": "24cc93d07e11c053b3f900aad4d458687466e85d30b4f02449035f361daa24b4"
+   },
+   "build_id": "surface-32x11-557e60081323",
+   "figure_sha256": "c82b4611bf35c5a4127d2f683ac749a52455fab64352d0ab3da9a373866d98a3",
+   "files": {
+    "assembled": {
+     "bytes": 26200,
+     "height": 800,
+     "path": "shots/umi-trap-tip9.8-2mm.assembled.webp",
+     "sha256": "1d0e2c53fd9e596917ba73cce7e32b2d26df95633ae2d2a1ff9aa30220a74396",
+     "width": 1280
+    },
+    "card": {
+     "bytes": 14270,
+     "height": 400,
+     "path": "shots/umi-trap-tip9.8-2mm.exploded.card.webp",
+     "sha256": "31b4ada4d1a82693aed32be524f66ef3eab84df5e26883b1889519d9fb3e2bd5",
+     "width": 640
+    },
+    "exploded": {
+     "bytes": 29704,
+     "height": 800,
+     "path": "shots/umi-trap-tip9.8-2mm.exploded.webp",
+     "sha256": "3b2c732de304a3154a037b7864c19df2bb303fd1e4e17737d612085ca320c68f",
+     "width": 1280
+    }
+   },
+   "fit_sha256": "a6c19c0745c4344358b2569c053b4738247f55655ba9899102f99f622fc3e07b",
+   "look": "photo",
+   "margins_px": {
+    "assembled": [
+     460,
+     50,
+     460,
+     51
+    ],
+    "exploded": [
+     485,
+     51,
+     486,
+     51
+    ]
+   },
+   "view_sha256": "11171aecaa484d5b74f71edd5f2461a7bfd28b082917b7a70a4d7e4e073f38b8"
+  },
+  "unitree-dex1-1.5mm": {
+   "art": {
+    "build_id": "surface-32x17-292a1ecb211e",
+    "bytes": 12216,
+    "json_sha256": "4207dfa8d4d0e54159ff3c164515ebad5d9262204b6bb972c02b90dc06d54b47",
+    "path": "art/unitree-dex1-1.5mm.json.gz",
+    "sha256": "20ffe4f610408fea31856e6768ae11f4eb087af58dba66611e57825e7fa06abe"
+   },
+   "build_id": "surface-32x17-292a1ecb211e",
+   "figure_sha256": "c82b4611bf35c5a4127d2f683ac749a52455fab64352d0ab3da9a373866d98a3",
+   "files": {
+    "assembled": {
+     "bytes": 31470,
+     "height": 800,
+     "path": "shots/unitree-dex1-1.5mm.assembled.webp",
+     "sha256": "617b5fcc82dbf887a43bb38225dc4bd84a6305eb073069128b3402b843ca57b9",
+     "width": 1280
+    },
+    "card": {
+     "bytes": 26010,
+     "height": 400,
+     "path": "shots/unitree-dex1-1.5mm.exploded.card.webp",
+     "sha256": "b6465d84f7091bb283c5c9f9b46d08aab450434e0bc711da384cbdde89da4009",
+     "width": 640
+    },
+    "exploded": {
+     "bytes": 42238,
+     "height": 800,
+     "path": "shots/unitree-dex1-1.5mm.exploded.webp",
+     "sha256": "d924ed3d363383d1fc70aa18de4c79159deeb5cbcb9e741e7a84429173ccf088",
+     "width": 1280
+    }
+   },
+   "fit_sha256": "61ceefd2a37621209df4a78850f8bc2abf0449ace5c7652839af684cbf23c9bc",
+   "look": "photo",
+   "margins_px": {
+    "assembled": [
+     359,
+     51,
+     359,
+     52
+    ],
+    "exploded": [
+     338,
+     52,
+     338,
+     52
+    ]
+   },
+   "stage": {
+    "numbers": {
+     "assembled_opaque": 0,
+     "band_css": {
+      "contain": [
+       10,
+       37
+      ],
+      "cover": [
+       19,
+       69
+      ]
+     },
+     "card_px": [
+      36,
+      126
+     ],
+     "clearance_mm": {
+      "bodies": 12,
+      "other_finger": 12,
+      "stacks": 54.5
+     },
+     "drape_step_mm": 19.058,
+     "face_tilt_deg": 0.5,
+     "ghost_cover": 0.976,
+     "jaw_gap_mm": 94.422,
+     "near_seen": 1,
+     "opaque_max": 0,
+     "stacks_apart_px": 177,
+     "step_mm": 12.969,
+     "visible_min": 0.841
+    },
+    "scene": "scenes/unitree-dex1.json",
+    "scene_sha256": "f4fdb2ac0ae486a2f789047eab8b0c7e4b113ed3509ab3531230ab756af1c226"
+   },
+   "view_sha256": "11171aecaa484d5b74f71edd5f2461a7bfd28b082917b7a70a4d7e4e073f38b8"
+  },
+  "unitree-dex1-1mm": {
+   "art": {
+    "build_id": "surface-32x26-f3007aad2bd7",
+    "bytes": 13594,
+    "json_sha256": "aa8c8f3b078551e9a66c5274639e4efbcf82608550500b9f369bae6ca08a8a04",
+    "path": "art/unitree-dex1-1mm.json.gz",
+    "sha256": "8c2d00cf10bc225f6ea425cc3c06da5727f43c0214ae845d0359dad82c7e0cda"
+   },
+   "build_id": "surface-32x26-f3007aad2bd7",
+   "figure_sha256": "c82b4611bf35c5a4127d2f683ac749a52455fab64352d0ab3da9a373866d98a3",
+   "files": {
+    "assembled": {
+     "bytes": 31610,
+     "height": 800,
+     "path": "shots/unitree-dex1-1mm.assembled.webp",
+     "sha256": "f06fd744148b2af731ad74689c170772354c152513402b6eca3adbbe4b1b1baa",
+     "width": 1280
+    },
+    "card": {
+     "bytes": 25658,
+     "height": 400,
+     "path": "shots/unitree-dex1-1mm.exploded.card.webp",
+     "sha256": "63522c55c624b1ff5c1f1613bded7c5b9f9f2f35788f52546a2bebd5714c9eed",
+     "width": 640
+    },
+    "exploded": {
+     "bytes": 40192,
+     "height": 800,
+     "path": "shots/unitree-dex1-1mm.exploded.webp",
+     "sha256": "58414d7011c0b2cfda8f10477cbe3e944c34ba0ce1fa6becb18ac3a8ed4dd780",
+     "width": 1280
+    }
+   },
+   "fit_sha256": "9f86b8d238c815d1839a92b1a64f8cb77011b8bea782ac424347eafaef729192",
+   "look": "photo",
+   "margins_px": {
+    "assembled": [
+     359,
+     51,
+     359,
+     52
+    ],
+    "exploded": [
+     338,
+     52,
+     338,
+     52
+    ]
+   },
+   "stage": {
+    "numbers": {
+     "assembled_opaque": 0,
+     "band_css": {
+      "contain": [
+       10,
+       36
+      ],
+      "cover": [
+       19,
+       67
+      ]
+     },
+     "card_px": [
+      35,
+      123
+     ],
+     "clearance_mm": {
+      "bodies": 12,
+      "other_finger": 12,
+      "stacks": 54.5
+     },
+     "drape_step_mm": 19.18,
+     "face_tilt_deg": 0.5,
+     "ghost_cover": 0.984,
+     "jaw_gap_mm": 94.425,
+     "near_seen": 1,
+     "opaque_max": 0,
+     "stacks_apart_px": 185.8,
+     "step_mm": 12.969,
+     "visible_min": 0.925
+    },
+    "scene": "scenes/unitree-dex1.json",
+    "scene_sha256": "f4fdb2ac0ae486a2f789047eab8b0c7e4b113ed3509ab3531230ab756af1c226"
+   },
+   "view_sha256": "11171aecaa484d5b74f71edd5f2461a7bfd28b082917b7a70a4d7e4e073f38b8"
+  },
+  "unitree-dex1-2mm": {
+   "art": {
+    "build_id": "surface-24x13-fb9d6bd1fe2c",
+    "bytes": 10210,
+    "json_sha256": "bca97004fa4ede6c7c77cc0a4925cd7cedfa17bb100add4a973182937848926b",
+    "path": "art/unitree-dex1-2mm.json.gz",
+    "sha256": "f4d0b8cf87dcfe4fdbb046a54dc7522a2c0c521b2ad49fe27d1c28442de90240"
+   },
+   "build_id": "surface-24x13-fb9d6bd1fe2c",
+   "figure_sha256": "c82b4611bf35c5a4127d2f683ac749a52455fab64352d0ab3da9a373866d98a3",
+   "files": {
+    "assembled": {
+     "bytes": 30730,
+     "height": 800,
+     "path": "shots/unitree-dex1-2mm.assembled.webp",
+     "sha256": "d5037efe113d1b1cce39c89ee46fd271dd412418185157bb68a37b38f5984ec5",
+     "width": 1280
+    },
+    "card": {
+     "bytes": 26216,
+     "height": 400,
+     "path": "shots/unitree-dex1-2mm.exploded.card.webp",
+     "sha256": "7b425a7f0f8a60e7e1243d4b59575155ba09234bce51a703735de3f11c8eeb3e",
+     "width": 640
+    },
+    "exploded": {
+     "bytes": 40644,
+     "height": 800,
+     "path": "shots/unitree-dex1-2mm.exploded.webp",
+     "sha256": "c3f8c5773fc2579cb0bafd91bffe8bb1db91b570f3db0b50d5bb80034a66ba28",
+     "width": 1280
+    }
+   },
+   "fit_sha256": "535986de75a6d988d6de3b4c03c2b4f11452eb1429f2b69283d0481ccac304ce",
+   "look": "photo",
+   "margins_px": {
+    "assembled": [
+     359,
+     51,
+     359,
+     52
+    ],
+    "exploded": [
+     338,
+     52,
+     338,
+     52
+    ]
+   },
+   "stage": {
+    "numbers": {
+     "assembled_opaque": 0,
+     "band_css": {
+      "contain": [
+       10,
+       36
+      ],
+      "cover": [
+       19,
+       68
+      ]
+     },
+     "card_px": [
+      36,
+      125
+     ],
+     "clearance_mm": {
+      "bodies": 12,
+      "other_finger": 12,
+      "stacks": 54.5
+     },
+     "drape_step_mm": 17.986,
+     "face_tilt_deg": 0.5,
+     "ghost_cover": 0.976,
+     "jaw_gap_mm": 94.425,
+     "near_seen": 1,
+     "opaque_max": 0,
+     "stacks_apart_px": 180.7,
+     "step_mm": 12.97,
+     "visible_min": 0.849
+    },
+    "scene": "scenes/unitree-dex1.json",
+    "scene_sha256": "f4fdb2ac0ae486a2f789047eab8b0c7e4b113ed3509ab3531230ab756af1c226"
+   },
+   "view_sha256": "11171aecaa484d5b74f71edd5f2461a7bfd28b082917b7a70a4d7e4e073f38b8"
+  },
+  "unitree-dex1-3mm": {
+   "art": {
+    "build_id": "surface-16x9-e5a994e53503",
+    "bytes": 7167,
+    "json_sha256": "e4d2f59ab7faec8e30be26b99817ca2867d57031626f2954aaa081af3f1317a0",
+    "path": "art/unitree-dex1-3mm.json.gz",
+    "sha256": "2f093ff720dd07e2acd4cd449b353dcf7851bde0175b4509723a4c0de8b75c34"
+   },
+   "build_id": "surface-16x9-e5a994e53503",
+   "figure_sha256": "c82b4611bf35c5a4127d2f683ac749a52455fab64352d0ab3da9a373866d98a3",
+   "files": {
+    "assembled": {
+     "bytes": 30690,
+     "height": 800,
+     "path": "shots/unitree-dex1-3mm.assembled.webp",
+     "sha256": "57f13105a8b2e569e1ff409f7ab2a7832dd460f0c85350eea33cbbc3a9f22160",
+     "width": 1280
+    },
+    "card": {
+     "bytes": 26156,
+     "height": 400,
+     "path": "shots/unitree-dex1-3mm.exploded.card.webp",
+     "sha256": "5a072902c1f9434b2fb13c794900311ce3a45b08e7ae9a0c11c15308dad61c78",
+     "width": 640
+    },
+    "exploded": {
+     "bytes": 39428,
+     "height": 800,
+     "path": "shots/unitree-dex1-3mm.exploded.webp",
+     "sha256": "8cea49af53f3ca8fec17a0a37f5fe020857da3ebce11f114f2526e61d5e73fab",
+     "width": 1280
+    }
+   },
+   "fit_sha256": "f852a682f4af46e18d920dae735e2344b27d0f1aea7f3b929274e9cf12d591a6",
+   "look": "photo",
+   "margins_px": {
+    "assembled": [
+     359,
+     51,
+     359,
+     52
+    ],
+    "exploded": [
+     338,
+     52,
+     338,
+     52
+    ]
+   },
+   "stage": {
+    "numbers": {
+     "assembled_opaque": 0,
+     "band_css": {
+      "contain": [
+       10,
+       37
+      ],
+      "cover": [
+       19,
+       69
+      ]
+     },
+     "card_px": [
+      35,
+      126
+     ],
+     "clearance_mm": {
+      "bodies": 12,
+      "other_finger": 12,
+      "stacks": 54.5
+     },
+     "drape_step_mm": 17.073,
+     "face_tilt_deg": 0.5,
+     "ghost_cover": 0.985,
+     "jaw_gap_mm": 94.426,
+     "near_seen": 1,
+     "opaque_max": 0,
+     "stacks_apart_px": 183.7,
+     "step_mm": 12.97,
+     "visible_min": 0.864
+    },
+    "scene": "scenes/unitree-dex1.json",
+    "scene_sha256": "f4fdb2ac0ae486a2f789047eab8b0c7e4b113ed3509ab3531230ab756af1c226"
+   },
+   "view_sha256": "11171aecaa484d5b74f71edd5f2461a7bfd28b082917b7a70a4d7e4e073f38b8"
+  },
+  "widowx-250-1.5mm": {
+   "art": {
+    "build_id": "surface-17x17-b9e5e409ec81",
+    "bytes": 8300,
+    "json_sha256": "4b4cab3d72b021ef2fa831f30e82920e3528bba998969851f681f742ebf1071d",
+    "path": "art/widowx-250-1.5mm.json.gz",
+    "sha256": "f1faa79da1ca44cf55eeee2d2df6e8f2769b69194f9acd3d55335b1b476a07d1"
+   },
+   "build_id": "surface-17x17-b9e5e409ec81",
+   "figure_sha256": "c82b4611bf35c5a4127d2f683ac749a52455fab64352d0ab3da9a373866d98a3",
+   "files": {
+    "assembled": {
+     "bytes": 23432,
+     "height": 800,
+     "path": "shots/widowx-250-1.5mm.assembled.webp",
+     "sha256": "0aba1f4f94e5b0f55a8bc20063e44d67c7c2a466e18416ab4101e9804c9ae233",
+     "width": 1280
+    },
+    "card": {
+     "bytes": 20282,
+     "height": 400,
+     "path": "shots/widowx-250-1.5mm.exploded.card.webp",
+     "sha256": "31d316e13660bde0061deb85b42b4adae8da423823509daee868ae6b637020e2",
+     "width": 640
+    },
+    "exploded": {
+     "bytes": 28826,
+     "height": 800,
+     "path": "shots/widowx-250-1.5mm.exploded.webp",
+     "sha256": "5a0890e93cbe6acd41e1ef3b335e1a58c1fa24f71d019726c35e236a7703ca36",
+     "width": 1280
+    }
+   },
+   "fit_sha256": "bac8b6305c42a588c20cd5abb2c04ffa41a3b5f018b8ed91788d2e5fa6c6e5e1",
+   "look": "photo",
+   "margins_px": {
+    "assembled": [
+     380,
+     52,
+     380,
+     52
+    ],
+    "exploded": [
+     354,
+     52,
+     355,
+     52
+    ]
+   },
+   "stage": {
+    "numbers": {
+     "assembled_opaque": 0,
+     "band_css": {
+      "contain": [
+       14,
+       32
+      ],
+      "cover": [
+       26,
+       61
+      ]
+     },
+     "card_px": [
+      48,
+      111
+     ],
+     "clearance_mm": {
+      "bodies": 9.5,
+      "other_finger": 12,
+      "stacks": 32
+     },
+     "drape_step_mm": 16.848,
+     "face_tilt_deg": 0,
+     "ghost_cover": 0.987,
+     "jaw_gap_mm": 55.594,
+     "near_seen": 1,
+     "opaque_max": 0,
+     "stacks_apart_px": 99,
+     "step_mm": 7.533,
+     "visible_min": 0.549
+    },
+    "scene": "scenes/widowx-250.json",
+    "scene_sha256": "5a43d87e5f0171db7f1486213814bc5de7aca523dd4a3102b4421425805ce8ef"
+   },
+   "view_sha256": "11171aecaa484d5b74f71edd5f2461a7bfd28b082917b7a70a4d7e4e073f38b8"
+  },
+  "widowx-250-1mm": {
+   "art": {
+    "build_id": "surface-26x27-62928ed42a39",
+    "bytes": 11135,
+    "json_sha256": "bdfb1433ee468740ed883e284ba158bd25f3c00c0022de93b1bfda40c88c04dd",
+    "path": "art/widowx-250-1mm.json.gz",
+    "sha256": "c472cb6a66118a0c0232df10b64e62e991c9db9d548895dc85517755830e7e6d"
+   },
+   "build_id": "surface-26x27-62928ed42a39",
+   "figure_sha256": "c82b4611bf35c5a4127d2f683ac749a52455fab64352d0ab3da9a373866d98a3",
+   "files": {
+    "assembled": {
+     "bytes": 25120,
+     "height": 800,
+     "path": "shots/widowx-250-1mm.assembled.webp",
+     "sha256": "13909a95392768cb92e8694ce8653911631150e07009e7ac452e1f83e103ef1f",
+     "width": 1280
+    },
+    "card": {
+     "bytes": 20328,
+     "height": 400,
+     "path": "shots/widowx-250-1mm.exploded.card.webp",
+     "sha256": "d636263aa6c20b8fc791fc1657b241c85c395a5413af70f85ccfbf4d12e1ac89",
+     "width": 640
+    },
+    "exploded": {
+     "bytes": 30954,
+     "height": 800,
+     "path": "shots/widowx-250-1mm.exploded.webp",
+     "sha256": "736b3f943acaa45993e80ae888251870db389eeb8c0016f3e4af672e9e17e664",
+     "width": 1280
+    }
+   },
+   "fit_sha256": "33a8a21eba92505fe443b6e47f67d08195eeda8cbd0254c0b6f10b593ac323f6",
+   "look": "photo",
+   "margins_px": {
+    "assembled": [
+     380,
+     52,
+     380,
+     52
+    ],
+    "exploded": [
+     354,
+     52,
+     355,
+     52
+    ]
+   },
+   "stage": {
+    "numbers": {
+     "assembled_opaque": 0,
+     "band_css": {
+      "contain": [
+       14,
+       34
+      ],
+      "cover": [
+       26,
+       65
+      ]
+     },
+     "card_px": [
+      48,
+      118
+     ],
+     "clearance_mm": {
+      "bodies": 7.5,
+      "other_finger": 12,
+      "stacks": 32
+     },
+     "drape_step_mm": 18.889,
+     "face_tilt_deg": 0,
+     "ghost_cover": 0.984,
+     "jaw_gap_mm": 55.594,
+     "near_seen": 1,
+     "opaque_max": 0,
+     "stacks_apart_px": 89.8,
+     "step_mm": 7.533,
+     "visible_min": 0.518
+    },
+    "scene": "scenes/widowx-250.json",
+    "scene_sha256": "5a43d87e5f0171db7f1486213814bc5de7aca523dd4a3102b4421425805ce8ef"
+   },
+   "view_sha256": "11171aecaa484d5b74f71edd5f2461a7bfd28b082917b7a70a4d7e4e073f38b8"
+  },
+  "widowx-250-2mm": {
+   "art": {
+    "build_id": "surface-13x13-c86af2cbab4b",
+    "bytes": 6386,
+    "json_sha256": "56744b06117d97168836b063fb6440347ccc24a2f183d5ef2673a83e896174f7",
+    "path": "art/widowx-250-2mm.json.gz",
+    "sha256": "cded9649e7adbe50ef5efd751ebfca7c6225771125cee00b0da8de2ff95e5985"
+   },
+   "build_id": "surface-13x13-c86af2cbab4b",
+   "figure_sha256": "c82b4611bf35c5a4127d2f683ac749a52455fab64352d0ab3da9a373866d98a3",
+   "files": {
+    "assembled": {
+     "bytes": 23496,
+     "height": 800,
+     "path": "shots/widowx-250-2mm.assembled.webp",
+     "sha256": "0a0fa9c0e5aa51a21e4a2fcc43d9b058eae53a4ba98fe870d8b0c3d8de9096ba",
+     "width": 1280
+    },
+    "card": {
+     "bytes": 20352,
+     "height": 400,
+     "path": "shots/widowx-250-2mm.exploded.card.webp",
+     "sha256": "20235f1867c0ecd531654e48b49c8b271049ad9dfff3bc0cd9d099b6e20b640a",
+     "width": 640
+    },
+    "exploded": {
+     "bytes": 28730,
+     "height": 800,
+     "path": "shots/widowx-250-2mm.exploded.webp",
+     "sha256": "1e2a5acb9f48e9cda0c21a8a1ae4eab350d4cea279148f47df29ab135e3e6f7c",
+     "width": 1280
+    }
+   },
+   "fit_sha256": "52dbf3c8d63948799d91c5aece43d4af35cd22bff5404e6bad08483b8166fb28",
+   "look": "photo",
+   "margins_px": {
+    "assembled": [
+     380,
+     52,
+     380,
+     52
+    ],
+    "exploded": [
+     354,
+     52,
+     355,
+     52
+    ]
+   },
+   "stage": {
+    "numbers": {
+     "assembled_opaque": 0,
+     "band_css": {
+      "contain": [
+       14,
+       32
+      ],
+      "cover": [
+       26,
+       60
+      ]
+     },
+     "card_px": [
+      48,
+      111
+     ],
+     "clearance_mm": {
+      "bodies": 9.9,
+      "other_finger": 12,
+      "stacks": 32
+     },
+     "drape_step_mm": 16.382,
+     "face_tilt_deg": 0,
+     "ghost_cover": 0.988,
+     "jaw_gap_mm": 55.594,
+     "near_seen": 1,
+     "opaque_max": 0,
+     "stacks_apart_px": 100.5,
+     "step_mm": 7.533,
+     "visible_min": 0.55
+    },
+    "scene": "scenes/widowx-250.json",
+    "scene_sha256": "5a43d87e5f0171db7f1486213814bc5de7aca523dd4a3102b4421425805ce8ef"
+   },
+   "view_sha256": "11171aecaa484d5b74f71edd5f2461a7bfd28b082917b7a70a4d7e4e073f38b8"
+  },
+  "widowx-250-3mm": {
+   "art": {
+    "build_id": "surface-9x9-2bfc8af66d96",
+    "bytes": 5712,
+    "json_sha256": "464dad4fc233b263d638a1d032a46dc133062f4aee5ec8bcd18ce7e7a2224876",
+    "path": "art/widowx-250-3mm.json.gz",
+    "sha256": "72f2f0b889c0e9a84d227fdf7514af408a55e433dc54320503c205e43e39adce"
+   },
+   "build_id": "surface-9x9-2bfc8af66d96",
+   "figure_sha256": "c82b4611bf35c5a4127d2f683ac749a52455fab64352d0ab3da9a373866d98a3",
+   "files": {
+    "assembled": {
+     "bytes": 23012,
+     "height": 800,
+     "path": "shots/widowx-250-3mm.assembled.webp",
+     "sha256": "b05c78d2b3b93913aef768129587d2c67cf7f377edaa17e0292f45693d71d640",
+     "width": 1280
+    },
+    "card": {
+     "bytes": 20316,
+     "height": 400,
+     "path": "shots/widowx-250-3mm.exploded.card.webp",
+     "sha256": "86a68e8e9480d5f941ae90eab5d3ba1e04f7e3d4453d897ea068eee84b660975",
+     "width": 640
+    },
+    "exploded": {
+     "bytes": 27956,
+     "height": 800,
+     "path": "shots/widowx-250-3mm.exploded.webp",
+     "sha256": "e2eb89e9e175801eee5c72b7e03a03b19232d20cd279949e5dcf53c3aaf14682",
+     "width": 1280
+    }
+   },
+   "fit_sha256": "bfc70cf664be701a4404c5077b9a4ba0110daaf0b228e6b73ea60cd0417823c8",
+   "look": "photo",
+   "margins_px": {
+    "assembled": [
+     380,
+     52,
+     380,
+     52
+    ],
+    "exploded": [
+     354,
+     52,
+     355,
+     52
+    ]
+   },
+   "stage": {
+    "numbers": {
+     "assembled_opaque": 0,
+     "band_css": {
+      "contain": [
+       14,
+       32
+      ],
+      "cover": [
+       26,
+       60
+      ]
+     },
+     "card_px": [
+      47,
+      110
+     ],
+     "clearance_mm": {
+      "bodies": 9.5,
+      "other_finger": 12,
+      "stacks": 32
+     },
+     "drape_step_mm": 16.064,
+     "face_tilt_deg": 0,
+     "ghost_cover": 0.99,
+     "jaw_gap_mm": 55.594,
+     "near_seen": 1,
+     "opaque_max": 0,
+     "stacks_apart_px": 101.3,
+     "step_mm": 7.533,
+     "visible_min": 0.559
+    },
+    "scene": "scenes/widowx-250.json",
+    "scene_sha256": "5a43d87e5f0171db7f1486213814bc5de7aca523dd4a3102b4421425805ce8ef"
+   },
+   "view_sha256": "11171aecaa484d5b74f71edd5f2461a7bfd28b082917b7a70a4d7e4e073f38b8"
+  }
+ }
+}
