@@ -715,6 +715,45 @@ img[alt] {
   opacity: 1;
 }
 
+/* Launched state: green "Now live" badge (a link to FlexiTac-Gen), and the
+   call-to-action switches from Discord blurple to FlexiTac blue. */
+a.ft-app-live {
+  background: rgba(26, 127, 55, 0.1);
+  color: #17692f; /* 4.5:1+ on the tinted pill */
+}
+
+a.ft-app-live:hover {
+  background: rgba(26, 127, 55, 0.16);
+  color: #17692f;
+  opacity: 1;
+}
+
+.ft-app-live .ft-app-soon-dot,
+.ft-app-live .ft-app-soon-dot::after {
+  background: #2da44e;
+}
+
+.ft-app-cta-live {
+  background: linear-gradient(90deg, rgba(47, 111, 237, 0.1), rgba(47, 111, 237, 0.04));
+  border-color: rgba(47, 111, 237, 0.18);
+}
+
+.ft-app-cta-live .ft-app-cta-icon,
+.ft-app-cta-live .ft-app-cta-btn {
+  background: var(--ft-blue);
+}
+
+.ft-app-cta-live .ft-app-cta-btn:hover {
+  background: var(--ft-blue-dark);
+}
+
+.ft-app-cta-text a {
+  color: var(--ft-blue);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
 /* Hardware section */
 #hardware .title.is-5,
 #simulation .title.is-5,

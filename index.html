@@ -21,7 +21,7 @@
 
   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./static/css/bulma.min.css">
-  <link rel="stylesheet" href="./static/css/index.css?v=20261102c">
+  <link rel="stylesheet" href="./static/css/index.css?v=20261106a">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <!-- Academicons is only used below the fold — load it without blocking render -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css"
@@ -306,14 +306,14 @@
           </p>
         </div>
 
-        <!-- Customization app preview: two demo clips side by side, then a Discord beta call-to-action -->
+        <!-- Customization app (FlexiTac-Gen): live badge, steps, demo reel, then a launch call-to-action -->
         <div class="ft-app">
           <div class="ft-app-head">
             <div>
-              <p class="ft-app-eyebrow">Customization App</p>
+              <p class="ft-app-eyebrow">Customization App · FlexiTac-Gen</p>
               <h3 class="ft-app-title">Design a FlexiTac sensor for your own robot</h3>
             </div>
-            <span class="ft-app-soon"><span class="ft-app-soon-dot" aria-hidden="true"></span>Coming soon</span>
+            <a class="ft-app-soon ft-app-live" href="https://flexitac.github.io/flexitac-gen/" target="_blank" rel="noopener"><span class="ft-app-soon-dot" aria-hidden="true"></span>Now live</a>
           </div>
           <ol class="ft-app-steps">
             <li><span class="ft-app-step-num">1</span>Select your gripper</li>
@@ -322,7 +322,24 @@
             <li><span class="ft-app-step-num">4</span>Send to manufacture</li>
           </ol>
 
-          <!-- Demo clips hidden for now: <template> content is not rendered or downloaded.
+          <!-- FlexiTac-Gen demo reel: 13 designs, from UMI fingertips to a Unitree G1, each with its generated sensor -->
+          <div class="ft-app-demos">
+            <figure class="ft-app-window" style="--ar: 1.372;">
+              <div class="ft-app-bar">
+                <span class="ft-app-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+                <span class="ft-app-label">FlexiTac-Gen · 13 generated sensor designs, from fingertips to humanoids</span>
+                <button type="button" class="ft-app-expand" aria-label="Play the FlexiTac-Gen demo full screen">
+                  <i class="fa-solid fa-expand" aria-hidden="true"></i>
+                </button>
+              </div>
+              <video preload="none" muted autoplay loop playsinline width="1600" height="1166"
+                     poster="static/posters/app_flexitac_gen.jpg?v=1">
+                <source src="static/videos/app_flexitac_gen.mp4?v=1" type="video/mp4">
+              </video>
+            </figure>
+          </div>
+
+          <!-- Earlier demo clips, still hidden: <template> content is not rendered or downloaded.
                To show them again, remove the <template> wrapper (keep the inner div). -->
           <template id="ft-app-demos-hidden">
           <div class="ft-app-demos">
@@ -357,14 +374,15 @@
           </div>
           </template>
 
-          <div class="ft-app-cta">
-            <span class="ft-app-cta-icon" aria-hidden="true"><i class="fa-brands fa-discord"></i></span>
+          <div class="ft-app-cta ft-app-cta-live">
+            <span class="ft-app-cta-icon" aria-hidden="true"><i class="fa-solid fa-wand-magic-sparkles"></i></span>
             <p class="ft-app-cta-text">
-              <strong>Customization app coming soon.</strong>
-              Join our Discord to get the latest beta version.
+              <strong>FlexiTac-Gen is live.</strong>
+              Pick your gripper, generate the sensor, and get files ready to manufacture.
+              Questions? <a href="https://discord.gg/6gw887Vxms" target="_blank" rel="noopener">Join our Discord</a>.
             </p>
-            <a class="ft-app-cta-btn" href="https://discord.gg/6gw887Vxms" target="_blank" rel="noopener">
-              Join Discord <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+            <a class="ft-app-cta-btn" href="https://flexitac.github.io/flexitac-gen/" target="_blank" rel="noopener">
+              Open FlexiTac-Gen <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
             </a>
           </div>
         </div>
