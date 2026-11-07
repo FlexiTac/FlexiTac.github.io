@@ -21,7 +21,7 @@
 
   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./static/css/bulma.min.css">
-  <link rel="stylesheet" href="./static/css/index.css?v=20261106b">
+  <link rel="stylesheet" href="./static/css/index.css?v=20261106e">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <!-- Academicons is only used below the fold — load it without blocking render -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css"
@@ -54,11 +54,11 @@
     </div>
     <a class="ft-toc-link" href="#simulation">Simulation</a>
     <a class="ft-toc-link" href="#datacollection">System Designs</a>
+    <a class="ft-toc-link" href="#timeline">Timeline</a>
     <a class="ft-toc-link" href="#community">Community</a>
     <div class="ft-toc-subgroup" aria-label="Community subsections">
       <a class="ft-toc-link ft-toc-link-sub" href="#awesome-list">Awesome List</a>
     </div>
-    <a class="ft-toc-link" href="#timeline">Timeline</a>
     <a class="ft-toc-link" href="#qa">Q &amp; A</a>
   </div>
 </nav>
@@ -1036,6 +1036,522 @@
 
 
 <!-- =========================
+     Timeline
+========================= -->
+<section class="section is-small" id="timeline" aria-labelledby="ft-tl-title">
+  <!--
+    TIMELINE (v4.2) — one row per year, oldest at the top.
+    Each row = a label (year + caption + scroll buttons) and a lane: one ruler with the dated markers and,
+    under it, one small tile per work (media + short title + one short line). The ruler runs through the
+    year label and fades out after the row's last node, so a sparse year reads as room to grow.
+    All rows share one slot grid (desktop: 149px slots, 8px apart, each holding a 128px tile at its start),
+    so the markers line up from row to row; a lane that is wider than its column scrolls sideways.
+
+    Add a node:  copy an <li class="ft-tl-node ..."> of the same kind into that year's <ol class="ft-tl-items">,
+                 in date order (left -> right), then edit
+                   - <time datetime> on the ruler (marker: plain = paper, is-hollow = platform / hardware);
+                   - the media: <video muted loop playsinline preload="none" poster="..."> (NO autoplay: the
+                     page script plays it while it is on screen) or an <img loading="lazy">;
+                   - the title link: a short title (about 16 characters fits one line). Its href is the
+                     project website: "Details" in the pop-up goes there, and without JavaScript the tile
+                     simply opens it;
+                   - <p class="ft-tl-line">: one short line (about 50 characters at most; may be left out);
+                   - optional pill on the media (after the title in the DOM): <span class="ft-tl-pill">CoRL 2024</span>
+                     (a paper's venue, "Demo Track"), or <span class="ft-tl-pill is-live">Now live</span> for a
+                     platform release; add "is-foot" to move it off an is-contain teaser to the tile's foot (under
+                     a short line of at most two lines);
+                   - the <template class="ft-tl-detail"> inside the tile = what the pop-up shows (nothing in a
+                     template is rendered or downloaded until the pop-up opens):
+                       1. the large media: a <video src poster width height> or an <img src width height alt>
+                          (the original teaser at its real pixel size: an image is never shown larger than
+                          that, a video at most 1.4x);
+                       2. <p> meta line "date · venue · hardware";
+                       3. <h3> full title;
+                       4. <p> a few sentences of introduction;
+                       5. optional <a href="...">Paper</a> (the secondary link).
+                 Media: is-contain on .ft-tl-media shows the whole frame (white-background teasers);
+                 is-trim zooms past a letterbox baked into the video (VTAP).
+    Conference:  an <li class="ft-tl-node is-venue"> whose ruler label is a heading, "date · conference":
+                 <h4 class="ft-tl-stem"> ... <span class="ft-tl-event">ICRA 2026</span></h4>; give the marker one
+                 <i></i> per work (<i class="is-self"> = FlexiTac's own work). Its tiles stack vertically in
+                 <ul class="ft-tl-stack"> (same tile as everywhere, title = the paper's short title, but an <h5>:
+                 the papers sit under their conference's <h4>); the foot line under the stack says
+                 "N works · city". A big meeting uses <li class="ft-tl-node is-venue is-cluster"> with
+                 <ul class="ft-tl-stack is-cols">: two stacks of four side by side (the node is two slots wide;
+                 the first four <li> fill column 1 top to bottom, the next four column 2).
+                 On phones every stack runs sideways instead; its ruler label and foot stay pinned at the
+                 lane's left edge while its tiles scroll past.
+    Add a year:  copy a whole <li class="ft-tl-row"> block and change
+                   - the <h3 class="ft-tl-yr" id="ft-tl-yYYYY"> text and id, and the caption;
+                   - the lane id (id="ft-tl-lane-YYYY") and both buttons' aria-controls="ft-tl-lane-YYYY";
+                   - the list's aria-labelledby="ft-tl-yYYYY";
+                   - move class "is-now" (blue year + ruler) from the previous year's row to the new one.
+                 Rows never wrap: once a lane is wider than its column it scrolls sideways, and the timeline script
+                 (bottom of index.html) adds the fade, the ‹ › buttons and the focusable region by itself.
+  -->
+  <div class="container">
+    <div class="has-text-centered ft-tl-head">
+      <span class="tag is-link is-light is-rounded" style="margin-bottom:1rem;">Timeline</span>
+      <h2 class="title is-2 is-size-4-mobile" id="ft-tl-title">From One Sensor To An Ecosystem</h2>
+      <p class="ft-tl-lede">Each project tested one open question about low-cost tactile arrays, and each answer became part of an open platform.</p>
+      <p class="ft-tl-foot">Papers and releases are dated by first public appearance; conferences by when they meet.</p>
+    </div>
+
+    <ol class="ft-tl-rows" aria-label="FlexiTac timeline, 2023 to 2026, one row per year">
+
+      <!-- ======================= 2023–2024 ======================= -->
+      <li class="ft-tl-row" data-year="2023-2024">
+        <div class="ft-tl-label">
+          <h3 class="ft-tl-yr" id="ft-tl-y2024">2023–24</h3>
+          <p class="ft-tl-cap"><span>The question</span><span class="ft-tl-sep"> · </span><span>First proof</span></p>
+          <div class="ft-tl-nav" hidden>
+            <button type="button" class="ft-tl-navbtn" data-dir="-1" aria-controls="ft-tl-lane-2024" aria-label="Scroll back"><i class="fa-solid fa-chevron-left" aria-hidden="true"></i></button>
+            <button type="button" class="ft-tl-navbtn" data-dir="1" aria-controls="ft-tl-lane-2024" aria-label="Scroll forward"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></button>
+          </div>
+        </div>
+        <div class="ft-tl-lane" id="ft-tl-lane-2024">
+          <ol class="ft-tl-items" aria-labelledby="ft-tl-y2024">
+
+            <li class="ft-tl-node is-origin">
+              <p class="ft-tl-stem"><span class="ft-tl-mk is-ring" aria-hidden="true"></span><time datetime="2023-09">2023.09</time></p>
+              <div class="ft-tl-origin">
+                <h4 class="ft-tl-otitle">Work on <span class="ft-tl-nw">3D-ViTac</span> begins</h4>
+                <p class="ft-tl-oq"><span class="ft-tl-nw">Can a low-cost, flexible</span> <span class="ft-tl-nw">piezoresistive array make</span> <span class="ft-tl-nw">robot manipulation better?</span></p>
+              </div>
+            </li>
+
+            <li class="ft-tl-node is-paper">
+              <p class="ft-tl-stem"><span class="ft-tl-mk" aria-hidden="true"></span><time datetime="2024-10">2024.10</time></p>
+              <article class="ft-tl-card">
+                <div class="ft-tl-media"><img src="static/posters/timeline/3dvitac.jpg" width="560" height="315" loading="lazy" decoding="async"
+                     alt="3D-ViTac teaser: two robot hands with tactile pads turning touch into 3D tactile points"></div>
+                <h4 class="ft-tl-title"><a class="ft-tl-stretch" href="https://binghao-huang.github.io/3D-ViTac/" target="_blank" rel="noopener">3D-ViTac</a></h4>
+                <p class="ft-tl-line"><span class="ft-tl-nw">Low-cost</span> touch improves <span class="ft-tl-nw">fine-grained</span> manipulation.</p>
+                <span class="ft-tl-pill">CoRL 2024</span>
+                <template class="ft-tl-detail">
+                  <img src="static/posters/timeline/3dvitac.jpg" width="560" height="315"
+                       alt="3D-ViTac teaser: two robot hands with tactile pads turning touch into 3D tactile points, with fragile-object grasping and in-hand adjustment">
+                  <p>2024.10 · CoRL 2024 · FlexiTac V1</p>
+                  <h3>3D-ViTac: Learning Fine-Grained Manipulation with Visuo-Tactile Sensing</h3>
+                  <p>3D-ViTac fuses low-cost, flexible tactile sensors and vision into a unified 3D representation for
+                    diffusion policies, enabling precise bimanual manipulation that outperforms vision-only methods. Built on
+                    FlexiTac V1 (16×16 taxels at 3 mm).</p>
+                  <a href="https://arxiv.org/abs/2410.24091">Paper</a>
+                </template>
+              </article>
+            </li>
+
+          </ol>
+        </div>
+      </li>
+
+      <!-- ======================= 2025 ======================= -->
+      <li class="ft-tl-row" data-year="2025">
+        <div class="ft-tl-label">
+          <h3 class="ft-tl-yr" id="ft-tl-y2025">2025</h3>
+          <p class="ft-tl-cap"><span>Scaling up</span> <span>tactile data</span></p>
+          <div class="ft-tl-nav" hidden>
+            <button type="button" class="ft-tl-navbtn" data-dir="-1" aria-controls="ft-tl-lane-2025" aria-label="Scroll back"><i class="fa-solid fa-chevron-left" aria-hidden="true"></i></button>
+            <button type="button" class="ft-tl-navbtn" data-dir="1" aria-controls="ft-tl-lane-2025" aria-label="Scroll forward"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></button>
+          </div>
+        </div>
+        <div class="ft-tl-lane" id="ft-tl-lane-2025">
+          <ol class="ft-tl-items" aria-labelledby="ft-tl-y2025">
+
+            <li class="ft-tl-node is-platform">
+              <p class="ft-tl-stem"><span class="ft-tl-mk is-hollow" aria-hidden="true"></span><time datetime="2025">2025</time></p>
+              <article class="ft-tl-card">
+                <div class="ft-tl-media"><video muted loop playsinline preload="none" poster="static/posters/timeline/sensor_v2.jpg" width="1280" height="720" aria-hidden="true">
+                  <source src="static/videos/sensor_v2_test_1_compressed.mp4" type="video/mp4"></video></div>
+                <h4 class="ft-tl-title"><a class="ft-tl-stretch" href="#hardware-v2">FlexiTac V2</a></h4>
+                <p class="ft-tl-line">Flexible PCB replaces yarn: more robust, higher resolution.</p>
+                <template class="ft-tl-detail">
+                  <video src="static/videos/sensor_v2_test_1_compressed.mp4" poster="static/posters/timeline/sensor_v2.jpg" width="1280" height="720"
+                         aria-label="FlexiTac V2 sensors on a bimanual gripper, with live tactile maps on a monitor"></video>
+                  <p>2025 · Hardware</p>
+                  <h3>FlexiTac V2: flexible PCB instead of conductive yarn</h3>
+                  <p>FlexiTac V2 replaces V1's conductive yarn with a flexible printed circuit (FPC), making the sensor more
+                    robust and higher resolution: 32×12 taxels at 2 mm pitch, about 3 minutes and $2.5 per sensor piece to
+                    fabricate (V1: ~30 minutes and $5).</p>
+                </template>
+              </article>
+            </li>
+
+            <li class="ft-tl-node is-paper">
+              <p class="ft-tl-stem"><span class="ft-tl-mk" aria-hidden="true"></span><time datetime="2025-07">2025.07</time></p>
+              <article class="ft-tl-card">
+                <div class="ft-tl-media"><video muted loop playsinline preload="none" poster="static/posters/timeline/touchinthewild.jpg" width="1280" height="720" aria-hidden="true">
+                  <source src="static/videos/touchinthewild.mp4" type="video/mp4"></video></div>
+                <h4 class="ft-tl-title"><a class="ft-tl-stretch" href="https://binghao-huang.github.io/touch_in_the_wild/" target="_blank" rel="noopener">Touch in the Wild</a></h4>
+                <p class="ft-tl-line">Tactile data at scale, consistent across sensors.</p>
+                <span class="ft-tl-pill">NeurIPS 2025</span>
+                <template class="ft-tl-detail">
+                  <video src="static/videos/touchinthewild.mp4" poster="static/posters/timeline/touchinthewild.jpg" width="1280" height="720"
+                         aria-label="Fisheye views from a portable visuo-tactile gripper, recorded in many real-world places"></video>
+                  <p>2025.07 · NeurIPS 2025 · FlexiTac V2</p>
+                  <h3>Touch in the Wild: Learning Fine-Grained Manipulation with a Portable Visuo-Tactile Gripper</h3>
+                  <p>A portable, lightweight visuo-tactile gripper and a cross-modal representation learning framework that
+                    learn robust, fine-grained manipulation from in-the-wild human demonstrations — tactile data at scale, with
+                    readings consistent across sensor units.</p>
+                  <a href="https://arxiv.org/abs/2507.15062">Paper</a>
+                </template>
+              </article>
+            </li>
+
+            <li class="ft-tl-node is-paper">
+              <p class="ft-tl-stem"><span class="ft-tl-mk" aria-hidden="true"></span><time datetime="2025-10">2025.10</time></p>
+              <article class="ft-tl-card">
+                <div class="ft-tl-media"><video muted loop playsinline preload="none" poster="static/posters/timeline/vtrefine.jpg" width="1280" height="640" aria-hidden="true">
+                  <source src="static/videos/vtrefine.mp4" type="video/mp4"></video></div>
+                <h4 class="ft-tl-title"><a class="ft-tl-stretch" href="https://binghao-huang.github.io/vt_refine/" target="_blank" rel="noopener">VT-Refine</a></h4>
+                <p class="ft-tl-line"><span class="ft-tl-nw">Real-to-sim-to-real:</span> scale tactile data in simulation.</p>
+                <span class="ft-tl-pill">CoRL 2025</span>
+                <template class="ft-tl-detail">
+                  <video src="static/videos/vtrefine.mp4" poster="static/posters/timeline/vtrefine.jpg" width="1280" height="640"
+                         aria-label="Real and simulated bimanual grippers side by side, with their tactile readings"></video>
+                  <p>2025.10 · CoRL 2025 · FlexiTac V2</p>
+                  <h3>VT-Refine: Learning Bimanual Assembly with Visuo-Tactile Feedback via Simulation Fine-Tuning</h3>
+                  <p>VT-Refine trains a visuo-tactile diffusion policy on a few real demonstrations, then fine-tunes it in
+                    high-fidelity tactile simulation with reinforcement learning — real-to-sim-to-real for precise bimanual
+                    assembly.</p>
+                  <a href="https://openreview.net/forum?id=mV3W5givYb">Paper</a>
+                </template>
+              </article>
+            </li>
+
+          </ol>
+        </div>
+      </li>
+
+      <!-- ======================= 2026 (current year: is-now) ======================= -->
+      <li class="ft-tl-row is-now" data-year="2026">
+        <div class="ft-tl-label">
+          <h3 class="ft-tl-yr" id="ft-tl-y2026">2026</h3>
+          <p class="ft-tl-cap"><span>An open source</span> <span>ecosystem</span></p>
+          <div class="ft-tl-nav" hidden>
+            <button type="button" class="ft-tl-navbtn" data-dir="-1" aria-controls="ft-tl-lane-2026" aria-label="Scroll back"><i class="fa-solid fa-chevron-left" aria-hidden="true"></i></button>
+            <button type="button" class="ft-tl-navbtn" data-dir="1" aria-controls="ft-tl-lane-2026" aria-label="Scroll forward"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></button>
+          </div>
+        </div>
+        <div class="ft-tl-lane" id="ft-tl-lane-2026">
+          <ol class="ft-tl-items" aria-labelledby="ft-tl-y2026">
+
+            <li class="ft-tl-node is-platform">
+              <p class="ft-tl-stem"><span class="ft-tl-mk is-hollow" aria-hidden="true"></span><time datetime="2026-03">2026.03</time></p>
+              <article class="ft-tl-card">
+                <div class="ft-tl-media"><video muted loop playsinline preload="none" poster="static/posters/flexitac.jpg" width="1280" height="650" aria-hidden="true">
+                  <source src="static/videos/flexitac.mp4" type="video/mp4"></video></div>
+                <h4 class="ft-tl-title"><a class="ft-tl-stretch" href="https://github.com/FlexiTac/FlexiTac" target="_blank" rel="noopener">Fully open source</a></h4>
+                <p class="ft-tl-line">Firmware, software and fabrication guide on GitHub.</p>
+                <template class="ft-tl-detail">
+                  <video src="static/videos/flexitac.mp4" poster="static/posters/flexitac.jpg" width="1280" height="650"
+                         aria-label="FlexiTac sensors on a fingertip, a palm and a glove, each with its live tactile map"></video>
+                  <p>2026.03 · Platform</p>
+                  <h3>FlexiTac goes fully open source</h3>
+                  <p>FlexiTac goes fully open source: readout firmware, software and a step-by-step fabrication guide on
+                    GitHub. The FlexiTac paper followed on arXiv in April 2026.</p>
+                  <a href="https://arxiv.org/abs/2604.28156">Paper</a>
+                </template>
+              </article>
+            </li>
+
+            <li class="ft-tl-node is-platform">
+              <p class="ft-tl-stem"><span class="ft-tl-mk is-hollow" aria-hidden="true"></span><time datetime="2026-05">2026.05</time></p>
+              <article class="ft-tl-card">
+                <div class="ft-tl-media"><video muted loop playsinline preload="none" poster="static/posters/timeline/leflexitac.jpg" width="1100" height="600" aria-hidden="true">
+                  <source src="static/videos/leflexitac.mp4" type="video/mp4"></video></div>
+                <h4 class="ft-tl-title"><a class="ft-tl-stretch" href="https://tna001-ai.github.io/LeFlexiTac/index.html" target="_blank" rel="noopener">LeFlexiTac</a></h4>
+                <p class="ft-tl-line">Touch for LeRobot: a <span class="ft-tl-nw">drop-in</span> tactile path.</p>
+                <template class="ft-tl-detail">
+                  <video src="static/videos/leflexitac.mp4" poster="static/posters/timeline/leflexitac.jpg" width="1100" height="600"
+                         aria-label="LeRobot arm with FlexiTac fingertips running a fully autonomous policy, with its tactile and vision views"></video>
+                  <p>2026.05 · Platform</p>
+                  <h3>LeFlexiTac brings touch to LeRobot</h3>
+                  <p>LeFlexiTac adds FlexiTac tactile sensing to the LeRobot SO10X platform as a drop-in tactile path; adding
+                    touch improves success on contact-rich manipulation across ACT, Diffusion Policy, Pi0.5 and SmolVLA.</p>
+                </template>
+              </article>
+            </li>
+
+            <li class="ft-tl-node is-venue">
+              <h4 class="ft-tl-stem"><span class="ft-tl-mk is-count" aria-hidden="true"><i></i><i></i></span><time datetime="2026-06">2026.06</time><span class="ft-tl-event">ICRA 2026</span></h4>
+              <ul class="ft-tl-stack">
+                <li>
+                  <article class="ft-tl-card">
+                    <div class="ft-tl-media"><video muted loop playsinline preload="none" poster="static/posters/timeline/policyconsensus.jpg" width="640" height="360" aria-hidden="true">
+                      <source src="static/videos/policyconsensus.mp4" type="video/mp4"></video></div>
+                    <h5 class="ft-tl-title"><a class="ft-tl-stretch" href="https://policyconsensus.github.io/" target="_blank" rel="noopener">Policy Consensus</a></h5>
+                    <p class="ft-tl-line"><span class="ft-tl-nw">Per-modality</span> experts keep vision from drowning out touch.</p>
+                    <template class="ft-tl-detail">
+                      <video src="static/videos/policyconsensus.mp4" poster="static/posters/timeline/policyconsensus.jpg" width="640" height="360"
+                             aria-label="A person perturbs a robot arm while it packs an object into a bag"></video>
+                      <p>2026.06 · ICRA 2026</p>
+                      <h3>Multi-Modal Manipulation via Multi-Modal Policy Consensus</h3>
+                      <p>Factorizes multi-modal manipulation into per-modality diffusion experts combined by a learned
+                        consensus router, so vision does not overwhelm touch in contact-rich tasks.</p>
+                      <a href="https://arxiv.org/abs/2509.23468">Paper</a>
+                    </template>
+                  </article>
+                </li>
+                <li>
+                  <article class="ft-tl-card">
+                    <div class="ft-tl-media is-contain"><img src="static/posters/timeline/vitas.jpg" width="560" height="236" loading="lazy" decoding="async"
+                         alt="ViTaS setup: a Galaxea arm and gripper with a 3D-ViTac tactile sensor, and tactile maps with and without contact"></div>
+                    <h5 class="ft-tl-title"><a class="ft-tl-stretch" href="https://skyrainwind.github.io/ViTaS/index.html" target="_blank" rel="noopener">ViTaS</a></h5>
+                    <p class="ft-tl-line"><span class="ft-tl-nw">Soft-fusion</span> contrastive learning of vision and touch.</p>
+                    <template class="ft-tl-detail">
+                      <img src="static/posters/timeline/vitas.jpg" width="560" height="236"
+                           alt="ViTaS setup: a Galaxea A1 arm and G1 gripper with a 3D-ViTac tactile sensor, and tactile maps with and without contact">
+                      <p>2026.06 · ICRA 2026</p>
+                      <h3>ViTaS: Visual Tactile Soft Fusion Contrastive Learning for Visuomotor Learning</h3>
+                      <p>Soft Fusion Contrastive Learning plus a CVAE exploit both the alignment and the complementarity of
+                        vision and touch, evaluated on 12 simulated and 3 real-world tasks, including transparent and self-occluded
+                        objects.</p>
+                      <a href="https://arxiv.org/abs/2602.11643">Paper</a>
+                    </template>
+                  </article>
+                </li>
+              </ul>
+              <p class="ft-tl-vfoot">2 works · Vienna</p>
+            </li>
+
+            <li class="ft-tl-node is-venue">
+              <h4 class="ft-tl-stem"><span class="ft-tl-mk is-count" aria-hidden="true"><i></i><i></i><i></i></span><time datetime="2026-09">2026.09</time><span class="ft-tl-event">IROS 2026</span></h4>
+              <ul class="ft-tl-stack">
+                <li>
+                  <article class="ft-tl-card">
+                    <div class="ft-tl-media is-trim"><video muted loop playsinline preload="none" poster="static/posters/timeline/vtac.jpg" width="640" height="360" aria-hidden="true">
+                      <source src="static/videos/VTAC.mp4" type="video/mp4"></video></div>
+                    <h5 class="ft-tl-title"><a class="ft-tl-stretch" href="https://yuhao-zhou.com/vtap/index.html" target="_blank" rel="noopener">VTAP Gripper</a></h5>
+                    <p class="ft-tl-line">FlexiTac fingertips plus a <span class="ft-tl-nw">visuo-tactile</span> palm.</p>
+                    <template class="ft-tl-detail">
+                      <video src="static/videos/VTAC.mp4" poster="static/posters/timeline/vtac.jpg" width="640" height="360"
+                             aria-label="VTAP gripper with an active palm handing over a part, with its tactile readings"></video>
+                      <p>2026.09 · IROS 2026</p>
+                      <h3>VTAP Gripper: Synergizing Fingertip Sensing and a Visuo-Tactile Active Palm for Dexterous In-Hand Manipulation</h3>
+                      <p>A gripper that combines FlexiTac fingertip sensing with a visuo-tactile active palm for dexterous
+                        in-hand manipulation.</p>
+                      <a href="https://arxiv.org/abs/2607.15448">Paper</a>
+                    </template>
+                  </article>
+                </li>
+                <li>
+                  <article class="ft-tl-card">
+                    <div class="ft-tl-media"><img src="static/posters/timeline/quadruped.jpg" width="560" height="341" loading="lazy" decoding="async"
+                         alt="Quadruped robot with an arm picking fruit at a picnic on the grass"></div>
+                    <h5 class="ft-tl-title"><a class="ft-tl-stretch" href="https://arxiv.org/abs/2604.27224" target="_blank" rel="noopener">Tactile Quadruped</a></h5>
+                    <p class="ft-tl-line"><span class="ft-tl-nw">Tactile-aware</span> <span class="ft-tl-nw">loco-manipulation</span> on a quadruped.</p>
+                    <template class="ft-tl-detail">
+                      <img src="static/images/go2umitac.jpg" width="900" height="548"
+                           alt="Quadruped robot with an arm picking fruit at a picnic on the grass, with its tactile readings">
+                      <p>2026.09 · IROS 2026</p>
+                      <h3>Learning Tactile-Aware Quadrupedal Loco-Manipulation Policies</h3>
+                      <p>A hierarchical pipeline pairs visuotactile high-level policies learned from human demonstrations
+                        with simulation-trained whole-body control, improving contact-rich quadrupedal loco-manipulation by 28.54%
+                        on average over vision-only and visuotactile baselines.</p>
+                    </template>
+                  </article>
+                </li>
+                <li>
+                  <article class="ft-tl-card">
+                    <div class="ft-tl-media"><video muted loop playsinline preload="none" poster="static/posters/timeline/tacvla.jpg" width="1240" height="700" aria-hidden="true">
+                      <source src="static/videos/tacvla.mp4" type="video/mp4"></video></div>
+                    <h5 class="ft-tl-title"><a class="ft-tl-stretch" href="https://sites.google.com/view/tacvla" target="_blank" rel="noopener">TacVLA</a></h5>
+                    <p class="ft-tl-line"><span class="ft-tl-nw">Contact-aware</span> tactile tokens for VLA policies.</p>
+                    <template class="ft-tl-detail">
+                      <video src="static/videos/tacvla.mp4" poster="static/posters/timeline/tacvla.jpg" width="1240" height="700"
+                             aria-label="Grippers with tactile readings performing constraint-locked disassembly"></video>
+                      <p>2026.09 · IROS 2026</p>
+                      <h3>TacVLA: Contact-Aware Tactile Fusion for Robust Vision-Language-Action Manipulation</h3>
+                      <p>Adds tactile sensing to Vision-Language-Action models through a contact-aware gate that activates
+                        tactile tokens only on contact, improving robustness under occlusion and in fine-grained, contact-rich tasks.</p>
+                      <a href="https://arxiv.org/abs/2603.12665">Paper</a>
+                    </template>
+                  </article>
+                </li>
+              </ul>
+              <p class="ft-tl-vfoot">3 works · Pittsburgh</p>
+            </li>
+
+            <!-- 2026.11: CoRL 2026 (7 works) plus the FlexiTac-Gen release, as two stacks of four:
+                 column 1 = FlexiTac (Demo Track), FlexiTac-Gen, TacCoRL, WT-UMI; column 2 = DexFLEX, TAC-LOCO, ViTaForce, TactX -->
+            <li class="ft-tl-node is-venue is-cluster">
+              <h4 class="ft-tl-stem"><span class="ft-tl-mk is-count" aria-hidden="true"><i class="is-self"></i><i></i><i></i><i></i><i></i><i></i><i></i></span><time datetime="2026-11">2026.11</time><span class="ft-tl-event">CoRL 2026</span></h4>
+              <ul class="ft-tl-stack is-cols">
+                <li>
+                  <article class="ft-tl-card">
+                    <div class="ft-tl-media"><video muted loop playsinline preload="none" poster="static/posters/teaser.jpg" width="1280" height="720" aria-hidden="true">
+                      <source src="static/videos/teaser_tactile.mp4" type="video/mp4"></video></div>
+                    <h5 class="ft-tl-title"><a class="ft-tl-stretch" href="https://arxiv.org/abs/2604.28156" target="_blank" rel="noopener">FlexiTac</a></h5>
+                    <p class="ft-tl-line">The <span class="ft-tl-nw">open-source</span> platform itself.</p>
+                    <span class="ft-tl-pill">Demo Track</span>
+                    <template class="ft-tl-detail">
+                      <video src="static/videos/teaser_tactile.mp4" poster="static/posters/teaser.jpg" width="1280" height="720"
+                             aria-label="Bimanual grippers with FlexiTac sensors handle a pipette and a glass, with live tactile maps on a monitor"></video>
+                      <p>2026.11 · CoRL 2026 · Demo Track</p>
+                      <h3>FlexiTac: An Open-Source, Scalable Tactile Solution for Robotic Systems</h3>
+                      <p>The platform itself, presented in the CoRL 2026 Demo Track: a low-cost, open-source, scalable
+                        piezoresistive tactile sensing module with flexible FPC pads and a multi-channel readout.</p>
+                    </template>
+                  </article>
+                </li>
+                <li>
+                  <article class="ft-tl-card">
+                    <div class="ft-tl-media is-contain"><video muted loop playsinline preload="none" poster="static/posters/app_flexitac_gen.jpg?v=2" width="1600" height="1306" aria-hidden="true">
+                      <source src="static/videos/app_flexitac_gen.mp4?v=2" type="video/mp4"></video></div>
+                    <h5 class="ft-tl-title"><a class="ft-tl-stretch" href="https://flexitac.github.io/flexitac-gen/" target="_blank" rel="noopener">FlexiTac-Gen</a></h5>
+                    <p class="ft-tl-line">Design a sensor for your own robot.</p>
+                    <span class="ft-tl-pill is-live is-foot">Now live</span>
+                    <template class="ft-tl-detail">
+                      <video src="static/videos/app_flexitac_gen.mp4?v=2" poster="static/posters/app_flexitac_gen.jpg?v=2" width="1600" height="1306"
+                             aria-label="FlexiTac-Gen in the browser: generated FlexiTac sensors for a gripper, a Franka hand and fingertips"></video>
+                      <p>2026.11 · Platform · Now live</p>
+                      <h3>FlexiTac-Gen: design a sensor for your own robot</h3>
+                      <p>Design a FlexiTac sensor for your own robot: select a gripper, find the best resolution, generate the
+                        sensor and send it to manufacture — from fingertips to humanoids.</p>
+                    </template>
+                  </article>
+                </li>
+                <li>
+                  <article class="ft-tl-card">
+                    <div class="ft-tl-media"><video muted loop playsinline preload="none" poster="static/posters/timeline/taccorl.jpg" width="1281" height="712" aria-hidden="true">
+                      <source src="static/videos/taccorl.mp4" type="video/mp4"></video></div>
+                    <h5 class="ft-tl-title"><a class="ft-tl-stretch" href="https://tac-corl.github.io/" target="_blank" rel="noopener">TacCoRL</a></h5>
+                    <p class="ft-tl-line">Touch in VLA via <span class="ft-tl-nw">sim-real</span> <span class="ft-tl-nw">co-training</span>.</p>
+                    <template class="ft-tl-detail">
+                      <video src="static/videos/taccorl.mp4" poster="static/posters/timeline/taccorl.jpg" width="1281" height="712"
+                             aria-label="Simulated and real bimanual insertion tasks with tactile readings"></video>
+                      <p>2026.11 · CoRL 2026</p>
+                      <h3>TacCoRL: Integrating Tactile Feedback into VLA via Simulation</h3>
+                      <p>Injects tactile feedback into VLA policies through sim-real co-training and simulation-based RL,
+                        raising contact-rich bimanual success from 50% to 72.5% without real-world contact exploration.</p>
+                      <a href="https://arxiv.org/abs/2606.11743">Paper</a>
+                    </template>
+                  </article>
+                </li>
+                <li>
+                  <article class="ft-tl-card">
+                    <div class="ft-tl-media"><video muted loop playsinline preload="none" poster="static/posters/timeline/wtumi_beam.jpg" width="1098" height="618" aria-hidden="true">
+                      <source src="static/videos/wtumi_beam.mp4" type="video/mp4"></video></div>
+                    <h5 class="ft-tl-title"><a class="ft-tl-stretch" href="https://wt-umi.github.io/WTUMI/" target="_blank" rel="noopener">WT-UMI</a></h5>
+                    <p class="ft-tl-line"><span class="ft-tl-nw">Whole-body</span> tactile interface for humanoids.</p>
+                    <template class="ft-tl-detail">
+                      <video src="static/videos/wtumi_beam.mp4" poster="static/posters/timeline/wtumi_beam.jpg" width="1098" height="618"
+                             aria-label="Humanoid carrying a long tube with a person, with its left, chest and right tactile images"></video>
+                      <p>2026.11 · CoRL 2026</p>
+                      <h3>WT-UMI: Whole-Body Tactile UMI for Force-Supervised Humanoid Manipulation</h3>
+                      <p>A wearable whole-body tactile interface, with a force-supervised planner and admittance controller,
+                        that lets humanoids learn contact-rich, force-regulated manipulation from human and teleoperation data.</p>
+                      <a href="https://arxiv.org/abs/2606.13232">Paper</a>
+                    </template>
+                  </article>
+                </li>
+                <li>
+                  <article class="ft-tl-card">
+                    <div class="ft-tl-media"><video muted loop playsinline preload="none" poster="static/posters/timeline/dexflex.jpg" width="480" height="270" aria-hidden="true">
+                      <source src="static/videos/dexflex.mp4" type="video/mp4"></video></div>
+                    <h5 class="ft-tl-title"><a class="ft-tl-stretch" href="https://dex-flex.github.io/" target="_blank" rel="noopener">DexFLEX</a></h5>
+                    <p class="ft-tl-line"><span class="ft-tl-nw">Contact-aware</span> control for dexterous hands.</p>
+                    <template class="ft-tl-detail">
+                      <video src="static/videos/dexflex.mp4" poster="static/posters/timeline/dexflex.jpg" width="480" height="270"
+                             aria-label="Robot hand with tactile fingertips scooping with a tool"></video>
+                      <p>2026.11 · CoRL 2026</p>
+                      <h3>DexFLEX: Contact-Aware Foundation Controller for Command-Guided Dexterity</h3>
+                      <p>A contact-aware controller that treats fingertip-motion drafts as intent and picks contact-stable
+                        motion chunks, raising real-world teleoperation success from 29.2% to 78.3% on a LEAP hand with a 10×6
+                        FlexiTac array per fingertip.</p>
+                    </template>
+                  </article>
+                </li>
+                <li>
+                  <article class="ft-tl-card">
+                    <div class="ft-tl-media is-contain"><img src="static/posters/timeline/tacloco.jpg" width="560" height="226" loading="lazy" decoding="async"
+                         alt="Unitree Go2 quadruped with an arm and a tactile gripper, with its tactile readings"></div>
+                    <h5 class="ft-tl-title"><a class="ft-tl-stretch" href="https://arxiv.org/abs/2607.10132" target="_blank" rel="noopener">TAC-LOCO</a></h5>
+                    <p class="ft-tl-line">Tactile <span class="ft-tl-nw">whole-body</span> RL for a quadruped.</p>
+                    <template class="ft-tl-detail">
+                      <img src="static/images/tacloco.jpg" width="1400" height="565"
+                           alt="Unitree Go2 quadruped with an arm and a compliant tactile gripper, in dynamic loco-manipulation and tactile-informed grasp adaptation, with its tactile readings">
+                      <p>2026.11 · CoRL 2026</p>
+                      <h3>TAC-LOCO: Unified Whole-Body Control for Quadrupedal TACtile-Informed LOCO-Manipulation</h3>
+                      <p>A tactile-augmented, unified reinforcement-learning framework that fuses compliant-gripper tactile
+                        arrays with proprioception for whole-body control of a quadruped's legs, arm and gripper, cutting grasping
+                        force by 47% with an object drop rate under 1% on a Unitree Go2.</p>
+                    </template>
+                  </article>
+                </li>
+                <li>
+                  <article class="ft-tl-card">
+                    <div class="ft-tl-media"><img src="static/posters/timeline/vitaforce.jpg" width="560" height="325" loading="lazy" decoding="async"
+                         alt="ViTaForce data collection with a force/torque sensor, wrist camera and FlexiTac, and peg-in-hole tasks with tactile and force readings"></div>
+                    <h5 class="ft-tl-title"><a class="ft-tl-stretch" href="https://github.com/BG2CRW/vita-force" target="_blank" rel="noopener">ViTaForce</a></h5>
+                    <p class="ft-tl-line"><span class="ft-tl-nw">Vision–touch–force</span> pretraining for assembly.</p>
+                    <template class="ft-tl-detail">
+                      <img src="static/posters/timeline/vitaforce.jpg" width="560" height="325"
+                           alt="ViTaForce: data collection with a force/torque sensor, wrist camera, scene camera and FlexiTac, and peg-in-hole and peg reorientation tasks with tactile, force and torque readings">
+                      <p>2026.11 · CoRL 2026</p>
+                      <h3>ViTaForce: Pairwise Visuo-Tactile-Force Representation Learning for Contact-Rich Imitation Learning</h3>
+                      <p>Pretrains pairwise encoders on FlexiTac touch, wrist and scene vision, and end-effector wrench, then
+                        conditions a diffusion policy — 40 to 50 points above vision-only on precise assembly.</p>
+                    </template>
+                  </article>
+                </li>
+                <li>
+                  <article class="ft-tl-card">
+                    <div class="ft-tl-media"><video muted loop playsinline preload="none" poster="static/posters/timeline/tactx.jpg" width="960" height="540" aria-hidden="true">
+                      <source src="static/videos/tactx.mp4" type="video/mp4"></video></div>
+                    <h5 class="ft-tl-title"><a class="ft-tl-stretch" href="https://tactx-project.github.io/" target="_blank" rel="noopener">TactX</a></h5>
+                    <p class="ft-tl-line">One tactile representation across sensors.</p>
+                    <template class="ft-tl-detail">
+                      <video src="static/videos/tactx.mp4" poster="static/posters/timeline/tactx.jpg" width="960" height="540"
+                             aria-label="One gripper with a different tactile sensor on each finger (Daimon, FlexiTac, eFlesh) and their tactile readings"></video>
+                      <p>2026.11 · CoRL 2026</p>
+                      <h3>TactX: Learning Shared Tactile Representations Across Diverse Sensors</h3>
+                      <p>Aligns resistive (FlexiTac), magnetic and vision-based tactile sensors in one shared latent space, so a
+                        policy trained on one sensor transfers zero-shot to the others (27.5% → 45.9% average success).</p>
+                      <a href="https://arxiv.org/abs/2606.31236">Paper</a>
+                    </template>
+                  </article>
+                </li>
+              </ul>
+              <p class="ft-tl-vfoot">7 works · Austin</p>
+            </li>
+
+          </ol>
+        </div>
+      </li>
+    </ol>
+  </div>
+
+  <!-- Detail view: filled from a tile's <template class="ft-tl-detail"> by the timeline script; never shown without it. -->
+  <dialog class="ft-tl-dlg" aria-labelledby="ft-tl-d-title" aria-describedby="ft-tl-d-text">
+    <div class="ft-tl-d-panel">
+      <div class="ft-tl-d-bar">
+        <p class="ft-tl-d-ctx"></p>
+        <div class="ft-tl-d-nav">
+          <button type="button" class="ft-tl-d-btn" data-step="-1" aria-label="Previous"><i class="fa-solid fa-chevron-left" aria-hidden="true"></i></button>
+          <span class="ft-tl-d-pos"></span>
+          <button type="button" class="ft-tl-d-btn" data-step="1" aria-label="Next"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></button>
+        </div>
+        <button type="button" class="ft-tl-d-btn ft-tl-d-x" aria-label="Close" autofocus><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+      </div>
+      <div class="ft-tl-d-stage"></div>
+      <div class="ft-tl-d-body">
+        <p class="ft-tl-d-meta"></p>
+        <h2 class="ft-tl-d-title" id="ft-tl-d-title"></h2>
+        <p class="ft-tl-d-text" id="ft-tl-d-text"></p>
+        <p class="ft-tl-d-acts">
+          <a class="ft-tl-d-go" href="#timeline">Details<i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+          <a class="ft-tl-d-paper" href="#timeline" target="_blank" rel="noopener">Paper<i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
+        </p>
+      </div>
+      <p class="ft-tl-d-sr" aria-live="polite"></p>
+    </div>
+  </dialog>
+</section>
+
+
+<!-- =========================
      Visitor Map
 ========================= -->
 <section class="section" id="community">
@@ -1204,258 +1720,6 @@
   </div>
 </section>
 
-
-<!-- =========================
-     Timeline
-========================= -->
-<section class="section is-small" id="timeline" aria-labelledby="ft-tl-title">
-  <!--
-    TIMELINE (Y3 "small tiles") — one row per year, oldest at the top.
-    Each row = a label (year + caption + scroll buttons) and a lane: one ruler with the dated markers,
-    and one line of small tiles under it. The ruler runs through the year label and fades out after the
-    row's last node, so a sparse year reads as room to grow.
-
-    Add a node:  copy an <li class="ft-tl-node ..."> of the same kind into that year's
-                 <ol class="ft-tl-items">, in date order (left -> right). Edit its <time datetime>, image
-                 (static/posters/timeline/, 16:9, with width/height/alt, loading="lazy"), title link, line
-                 and footer. Keep the line to ~65 characters so it stays within 3 lines on a tile.
-                   is-paper     thumbnail + venue pill + title + line; footer = hardware tag + award. The tag
-                                is drawn on the ruler right after the node's YYYY.MM date (paper stems carry
-                                no city), so keep paper dates in YYYY.MM form.
-                   is-platform  thumbnail + title + line; footer = "Platform" chip or "Now live"
-                 Thumbnail fixes: <img class="is-trim"> zooms past a letterbox baked into the image;
-                 <img class="is-high"> keeps the top of the frame (heads) when a cell crops it.
-                   is-venue     thumbnail(s) + venue name + "N works" + picks + "Also ..." links; give the rail
-                                marker one <i></i> per work (<i class="is-self"> = FlexiTac's own work)
-                   is-beat      narrow text-led tile (V2 drawing, open-source repo); is-origin = epigraph
-                   is-wide      1.5-slot node (CoRL 2026)
-                 Rows never wrap: once a lane is wider than its column it scrolls sideways, and the timeline script
-                 (bottom of this file) adds the fade, the ‹ › buttons and the focusable region by itself.
-    Add a year:  copy a whole <li class="ft-tl-row"> block and change
-                   - the <h3 class="ft-tl-yr" id="ft-tl-yYYYY"> text and id, and the caption (a shared
-                     row is written short, e.g. "2023–24", so the ruler stub after it still reads as a rail);
-                   - the lane id (id="ft-tl-lane-YYYY") and both buttons' aria-controls="ft-tl-lane-YYYY";
-                   - the list's aria-labelledby="ft-tl-yYYYY";
-                   - move class "is-now" (blue year + ruler) from the previous year's row to the new one.
-                 The lane's region label and the buttons' labels are derived from the h3 by the timeline script.
-    Summary:     the dark "33 works" strip under the last row: update the count, the "as of" month,
-                 the 25 / 8 split (one <i> per work in .ft-tl-sum-bar, is-insp = inspired) and the venues.
-  -->
-  <div class="container">
-    <div class="has-text-centered ft-tl-head">
-      <span class="tag is-link is-light is-rounded" style="margin-bottom:1rem;">Timeline</span>
-      <h2 class="title is-2 is-size-4-mobile" id="ft-tl-title">From one sensor to an ecosystem</h2>
-      <p class="ft-tl-lede">Each project tested one open question about low-cost tactile arrays, and each answer became part of an open platform.</p>
-      <p class="ft-tl-foot">Papers and releases are dated by first public appearance; conferences by when they meet.</p>
-    </div>
-
-    <ol class="ft-tl-rows" aria-label="FlexiTac timeline, 2023 to 2026, one row per year">
-
-      <!-- ======================= 2023–2024 ======================= -->
-      <li class="ft-tl-row" data-year="2023-2024">
-        <div class="ft-tl-label">
-          <h3 class="ft-tl-yr" id="ft-tl-y2024">2023–24</h3>
-          <p class="ft-tl-cap"><span>The question</span><span class="ft-tl-sep"> · </span><span>First proof</span></p>
-          <div class="ft-tl-nav" hidden>
-            <button type="button" class="ft-tl-navbtn" data-dir="-1" aria-controls="ft-tl-lane-2024" aria-label="Scroll back"><i class="fa-solid fa-chevron-left" aria-hidden="true"></i></button>
-            <button type="button" class="ft-tl-navbtn" data-dir="1" aria-controls="ft-tl-lane-2024" aria-label="Scroll forward"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></button>
-          </div>
-        </div>
-        <div class="ft-tl-lane" id="ft-tl-lane-2024">
-          <ol class="ft-tl-items" aria-labelledby="ft-tl-y2024">
-
-            <li class="ft-tl-node is-origin">
-              <p class="ft-tl-stem"><span class="ft-tl-mk is-ring" aria-hidden="true"></span><time datetime="2023-09">2023.09</time></p>
-              <div class="ft-tl-origin">
-                <h4 class="ft-tl-otitle">Work on <span class="ft-tl-nw">3D-ViTac</span> begins</h4>
-                <p class="ft-tl-oq">Can a <span class="ft-tl-nw">low-cost,</span> <span class="ft-tl-nw">flexible piezoresistive</span> array make robot manipulation better?</p>
-              </div>
-            </li>
-
-            <li class="ft-tl-node is-paper">
-              <p class="ft-tl-stem"><span class="ft-tl-mk" aria-hidden="true"></span><time datetime="2024-10">2024.10</time></p>
-              <article class="ft-tl-card">
-                <div class="ft-tl-media"><img src="static/posters/timeline/3dvitac.jpg" width="560" height="315" loading="lazy" decoding="async"
-                     alt="3D-ViTac teaser: two robot hands with tactile pads turning touch into 3D tactile points"></div>
-                <h4 class="ft-tl-title"><a class="ft-tl-stretch" href="https://binghao-huang.github.io/3D-ViTac/" target="_blank" rel="noopener">3D-ViTac</a></h4>
-                <span class="ft-tl-venue">CoRL 2024</span>
-                <p class="ft-tl-line">Low-cost touch improves <span class="ft-tl-nw">fine-grained</span> manipulation.</p>
-                <p class="ft-tl-foot-row"><span class="ft-tl-hw">FlexiTac V1</span></p>
-              </article>
-            </li>
-
-          </ol>
-        </div>
-      </li>
-
-      <!-- ======================= 2025 ======================= -->
-      <li class="ft-tl-row" data-year="2025">
-        <div class="ft-tl-label">
-          <h3 class="ft-tl-yr" id="ft-tl-y2025">2025</h3>
-          <p class="ft-tl-cap"><span>Scaling up</span></p>
-          <div class="ft-tl-nav" hidden>
-            <button type="button" class="ft-tl-navbtn" data-dir="-1" aria-controls="ft-tl-lane-2025" aria-label="Scroll back"><i class="fa-solid fa-chevron-left" aria-hidden="true"></i></button>
-            <button type="button" class="ft-tl-navbtn" data-dir="1" aria-controls="ft-tl-lane-2025" aria-label="Scroll forward"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></button>
-          </div>
-        </div>
-        <div class="ft-tl-lane" id="ft-tl-lane-2025">
-          <ol class="ft-tl-items" aria-labelledby="ft-tl-y2025">
-
-            <li class="ft-tl-node is-beat">
-              <p class="ft-tl-stem"><span class="ft-tl-mk is-hollow" aria-hidden="true"></span><time datetime="2025">2025</time></p>
-              <article class="ft-tl-card">
-                <div class="ft-tl-media is-taxels" role="img" aria-label="32 × 12 taxel array, 2 mm pitch"><span class="ft-tl-array"></span><span class="ft-tl-array-cap">32 × 12 · 2 mm pitch</span></div>
-                <h4 class="ft-tl-title"><a class="ft-tl-stretch" href="#hardware-v2">FlexiTac V2: flexible PCB</a></h4>
-                <p class="ft-tl-line">FPC build: ~3 min and $2.5 per piece (from ~30 min, $5).</p>
-              </article>
-            </li>
-
-            <li class="ft-tl-node is-paper">
-              <p class="ft-tl-stem"><span class="ft-tl-mk" aria-hidden="true"></span><time datetime="2025-07">2025.07</time></p>
-              <article class="ft-tl-card">
-                <div class="ft-tl-media"><img src="static/posters/timeline/touchinthewild.jpg" width="560" height="315" loading="lazy" decoding="async"
-                     alt="Grid of fisheye views from a portable visuo-tactile gripper recorded in many real-world places"></div>
-                <h4 class="ft-tl-title"><a class="ft-tl-stretch" href="https://binghao-huang.github.io/touch_in_the_wild/" target="_blank" rel="noopener">Touch in the Wild</a></h4>
-                <span class="ft-tl-venue">NeurIPS 2025</span>
-                <p class="ft-tl-line">Tactile data at scale, consistent across sensors.</p>
-                <p class="ft-tl-foot-row"><span class="ft-tl-hw">FlexiTac V2</span>
-                  <span class="ft-tl-award"><i class="fa-solid fa-award" aria-hidden="true"></i> Best Demo · <span class="ft-tl-nw">RSS 2025 Workshop</span></span></p>
-              </article>
-            </li>
-
-            <li class="ft-tl-node is-paper">
-              <p class="ft-tl-stem"><span class="ft-tl-mk" aria-hidden="true"></span><time datetime="2025-10">2025.10</time></p>
-              <article class="ft-tl-card">
-                <div class="ft-tl-media"><img src="static/posters/timeline/vtrefine.jpg" width="560" height="280" loading="lazy" decoding="async"
-                     alt="Real and simulated bimanual grippers side by side with their tactile readings"></div>
-                <h4 class="ft-tl-title"><a class="ft-tl-stretch" href="https://binghao-huang.github.io/vt_refine/" target="_blank" rel="noopener">VT-Refine</a></h4>
-                <span class="ft-tl-venue">CoRL 2025</span>
-                <p class="ft-tl-line"><span class="ft-tl-nw">Real-to-sim-to-real:</span> scale tactile data in simulation.</p>
-                <p class="ft-tl-foot-row"><span class="ft-tl-hw">FlexiTac V2</span>
-                  <span class="ft-tl-award"><i class="fa-solid fa-award" aria-hidden="true"></i> Best Paper · <span class="ft-tl-nw">IROS 2025 Workshop</span></span></p>
-              </article>
-            </li>
-
-          </ol>
-        </div>
-      </li>
-
-      <!-- ======================= 2026 (current year: is-now) ======================= -->
-      <li class="ft-tl-row is-now" data-year="2026">
-        <div class="ft-tl-label">
-          <h3 class="ft-tl-yr" id="ft-tl-y2026">2026</h3>
-          <p class="ft-tl-cap"><span>An open platform</span></p>
-          <div class="ft-tl-nav" hidden>
-            <button type="button" class="ft-tl-navbtn" data-dir="-1" aria-controls="ft-tl-lane-2026" aria-label="Scroll back"><i class="fa-solid fa-chevron-left" aria-hidden="true"></i></button>
-            <button type="button" class="ft-tl-navbtn" data-dir="1" aria-controls="ft-tl-lane-2026" aria-label="Scroll forward"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></button>
-          </div>
-        </div>
-        <div class="ft-tl-lane" id="ft-tl-lane-2026">
-          <ol class="ft-tl-items" aria-labelledby="ft-tl-y2026">
-
-            <li class="ft-tl-node is-beat">
-              <p class="ft-tl-stem"><span class="ft-tl-mk is-hollow" aria-hidden="true"></span><time datetime="2026-03">2026.03</time></p>
-              <article class="ft-tl-card">
-                <div class="ft-tl-media is-repo" aria-hidden="true">
-                  <span class="ft-tl-repo-name"><i class="fa-brands fa-github"></i>FlexiTac/FlexiTac</span>
-                  <span class="ft-tl-repo-sub"><span class="ft-tl-nw">firmware · software</span><span class="ft-tl-repo-br"> · </span><span class="ft-tl-nw">fabrication</span></span>
-                </div>
-                <h4 class="ft-tl-title"><a class="ft-tl-stretch" href="https://github.com/FlexiTac/FlexiTac" target="_blank" rel="noopener">Fully open source</a></h4>
-                <p class="ft-tl-line">Firmware, software and fabrication guide on GitHub.</p>
-                <p class="ft-tl-foot-row"><span class="ft-tl-kind">Platform</span></p>
-              </article>
-            </li>
-
-            <li class="ft-tl-node is-platform">
-              <p class="ft-tl-stem"><span class="ft-tl-mk is-hollow" aria-hidden="true"></span><time datetime="2026-05">2026.05</time></p>
-              <article class="ft-tl-card">
-                <div class="ft-tl-media"><img src="static/posters/timeline/leflexitac.jpg" width="560" height="315" loading="lazy" decoding="async"
-                     alt="LeRobot arm with FlexiTac fingertips, its tactile and vision views shown on screen"></div>
-                <h4 class="ft-tl-title"><a class="ft-tl-stretch" href="https://tna001-ai.github.io/LeFlexiTac/index.html" target="_blank" rel="noopener">LeFlexiTac</a></h4>
-                <p class="ft-tl-line">Touch for LeRobot: <span class="ft-tl-nw">a drop-in</span> tactile path.</p>
-                <p class="ft-tl-foot-row"><span class="ft-tl-kind">Platform</span></p>
-              </article>
-            </li>
-
-            <li class="ft-tl-node is-venue">
-              <p class="ft-tl-stem"><span class="ft-tl-mk is-count" aria-hidden="true"><i></i><i></i></span><time datetime="2026-06">2026.06</time><span class="ft-tl-city">Vienna</span></p>
-              <article class="ft-tl-card">
-                <a class="ft-tl-media" href="https://policyconsensus.github.io/" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true"><img src="static/posters/timeline/policyconsensus.jpg" width="560" height="315" loading="lazy" decoding="async"
-                     alt="A person perturbs a robot arm while it packs an object into a bag"></a>
-                <div class="ft-tl-vhead"><h4 class="ft-tl-title">ICRA 2026</h4><span class="ft-tl-count">2 works</span></div>
-                <ul class="ft-tl-picks">
-                  <li><a href="https://policyconsensus.github.io/" target="_blank" rel="noopener">Multi-Modal Policy Consensus</a>
-                    <span class="ft-tl-award"><i class="fa-solid fa-award" aria-hidden="true"></i> Best Paper · <span class="ft-tl-nw">CVPR 2026 Workshop</span></span></li>
-                </ul>
-                <p class="ft-tl-also">Also <a href="https://binghao-huang.github.io/Awesome-FlexiTac/papers/vitas.html" target="_blank" rel="noopener">ViTaS</a></p>
-              </article>
-            </li>
-
-            <li class="ft-tl-node is-venue">
-              <p class="ft-tl-stem"><span class="ft-tl-mk is-count" aria-hidden="true"><i></i><i></i><i></i></span><time datetime="2026-09">2026.09</time><span class="ft-tl-city">Pittsburgh</span></p>
-              <article class="ft-tl-card">
-                <div class="ft-tl-media is-duo" aria-hidden="true">
-                  <a href="https://yuhao-zhou.com/vtap/index.html" target="_blank" rel="noopener" tabindex="-1"><img class="is-trim" src="static/posters/timeline/vtac.jpg" width="560" height="315" loading="lazy" decoding="async"
-                       alt="VTAP gripper with an active palm handing over a part"></a>
-                  <a href="https://arxiv.org/abs/2604.27224" target="_blank" rel="noopener" tabindex="-1"><img src="static/posters/timeline/quadruped.jpg" width="560" height="341" loading="lazy" decoding="async"
-                       alt="Quadruped robot with an arm picking fruit at a picnic on the grass"></a>
-                </div>
-                <div class="ft-tl-vhead"><h4 class="ft-tl-title">IROS 2026</h4><span class="ft-tl-count">3 works</span></div>
-                <ul class="ft-tl-picks">
-                  <li><a href="https://yuhao-zhou.com/vtap/index.html" target="_blank" rel="noopener">VTAP Gripper</a></li>
-                  <li><a href="https://arxiv.org/abs/2604.27224" target="_blank" rel="noopener">Quadrupedal Loco-Manipulation</a></li>
-                </ul>
-                <p class="ft-tl-also">Also <a href="https://binghao-huang.github.io/Awesome-FlexiTac/papers/tacvla.html" target="_blank" rel="noopener">TacVLA</a></p>
-              </article>
-            </li>
-
-            <li class="ft-tl-node is-venue is-wide">
-              <p class="ft-tl-stem"><span class="ft-tl-mk is-count" aria-hidden="true"><i class="is-self"></i><i></i><i></i><i></i><i></i><i></i><i></i></span><time datetime="2026-11">2026.11</time><span class="ft-tl-city">Austin</span></p>
-              <article class="ft-tl-card">
-                <div class="ft-tl-media is-mosaic" aria-hidden="true">
-                  <a href="https://arxiv.org/abs/2604.28156" target="_blank" rel="noopener" tabindex="-1"><img src="static/posters/timeline/flexitac_demo.jpg" width="560" height="284" loading="lazy" decoding="async" alt="FlexiTac sensors on a gripper, a palm and a glove with live tactile maps"></a>
-                  <a href="https://tac-corl.github.io/" target="_blank" rel="noopener" tabindex="-1"><img src="static/posters/timeline/taccorl.jpg" width="560" height="311" loading="lazy" decoding="async" alt="Simulated and real bimanual insertion tasks with tactile readings"></a>
-                  <a href="https://wt-umi.github.io/WTUMI/" target="_blank" rel="noopener" tabindex="-1"><img class="is-high" src="static/posters/timeline/wtumi_beam.jpg" width="560" height="315" loading="lazy" decoding="async" alt="Humanoid carrying a long tube with a person"></a>
-                  <a href="https://dex-flex.github.io/" target="_blank" rel="noopener" tabindex="-1"><img src="static/posters/timeline/dexflex.jpg" width="480" height="270" loading="lazy" decoding="async" alt="Robot hand with tactile fingertips scooping with a tool"></a>
-                </div>
-                <div class="ft-tl-vhead"><h4 class="ft-tl-title">CoRL 2026</h4><span class="ft-tl-count">7 works, <span class="ft-tl-nw">including FlexiTac</span></span></div>
-                <ul class="ft-tl-picks is-grid">
-                  <li><a href="https://arxiv.org/abs/2604.28156" target="_blank" rel="noopener">FlexiTac<span class="ft-tl-sub"><span class="ft-tl-sep"> · </span>Demo Track</span></a></li>
-                  <li><a href="https://tac-corl.github.io/" target="_blank" rel="noopener">TacCoRL</a></li>
-                  <li><a href="https://wt-umi.github.io/WTUMI/" target="_blank" rel="noopener">WT-UMI</a></li>
-                  <li><a href="https://dex-flex.github.io/" target="_blank" rel="noopener">DexFLEX</a></li>
-                </ul>
-                <p class="ft-tl-also">Also <a href="https://binghao-huang.github.io/Awesome-FlexiTac/papers/tacloco.html" target="_blank" rel="noopener">TAC-LOCO</a><span class="ft-tl-dot" aria-hidden="true"> · </span><a href="https://binghao-huang.github.io/Awesome-FlexiTac/papers/vitaforce.html" target="_blank" rel="noopener">ViTaForce</a><span class="ft-tl-dot" aria-hidden="true"> · </span><a href="https://binghao-huang.github.io/Awesome-FlexiTac/papers/tactx.html" target="_blank" rel="noopener">TactX</a></p>
-              </article>
-            </li>
-
-            <li class="ft-tl-node is-platform is-live">
-              <p class="ft-tl-stem"><span class="ft-tl-mk is-hollow" aria-hidden="true"></span><time datetime="2026-11">2026.11</time></p>
-              <article class="ft-tl-card">
-                <div class="ft-tl-media"><img src="static/posters/timeline/flexitac_gen.jpg" width="560" height="315" loading="lazy" decoding="async"
-                     alt="Humanoid torso with a generated FlexiTac chest sensor and its flexible circuit layout"></div>
-                <h4 class="ft-tl-title"><a class="ft-tl-stretch" href="https://flexitac.github.io/flexitac-gen/" target="_blank" rel="noopener">FlexiTac-Gen</a></h4>
-                <p class="ft-tl-line">Design a sensor for your own robot.</p>
-                <p class="ft-tl-foot-row"><span class="ft-tl-live">Now live</span></p>
-              </article>
-            </li>
-
-          </ol>
-        </div>
-      </li>
-    </ol>
-
-    <div class="ft-tl-summary">
-      <p class="ft-tl-sum-fig"><span class="ft-tl-sum-num">33</span> <span class="ft-tl-sum-unit">works</span> <span class="ft-tl-sum-asof">as of Nov 2026</span></p>
-      <div class="ft-tl-sum-viz">
-        <span class="ft-tl-sum-bar" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="is-insp"></i><i class="is-insp"></i><i class="is-insp"></i><i class="is-insp"></i><i class="is-insp"></i><i class="is-insp"></i><i class="is-insp"></i><i class="is-insp"></i></span>
-        <p class="ft-tl-sum-legend"><span>25 built with FlexiTac</span> <span>8 inspired by it</span></p>
-      </div>
-      <p class="ft-tl-sum-venues">Published at CoRL, NeurIPS, ICRA, IROS, ECCV, npj&nbsp;Robotics and more.</p>
-      <a class="ft-tl-cta" href="https://binghao-huang.github.io/Awesome-FlexiTac/" target="_blank" rel="noopener">Explore Awesome FlexiTac<i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
-    </div>
-  </div>
-</section>
 
 <!-- =========================
      Q&A Placeholder
@@ -1708,36 +1972,46 @@
     videos.forEach(v => io.observe(v));
   })();
 
-  // Timeline (Y3): progressive enhancement only.
+  // Timeline (v4.2): progressive enhancement only.
   // Without this script every lane still scrolls natively (trackpad, swipe, shift+wheel,
-  // scrollbar) and every tile is visible. With it, each lane that overflows gets:
-  // - ‹ › buttons that step to the next / previous hidden tile (aria-disabled at the ends,
-  //   so a focused button keeps its focus);
-  // - a soft edge fade that covers only a tile that is actually clipped (never a tile that
-  //   is fully in view), and never fades to fully transparent;
-  // - a focusable region (role=region) named after the row's <h3>, so arrow keys scroll it;
-  // - focus reveal: tabbing to a link inside a lane brings its whole tile into view.
-  // Lanes that fit get none of this. Labels come from each row's <h3>, so a new year only
-  // needs its markup (see the comment at the top of the section).
+  // scrollbar), every tile is visible and every tile is a plain link to its project.
+  // With it:
+  // - each lane that overflows gets ‹ › buttons that step to the next / previous hidden tile
+  //   (aria-disabled at the ends, so a focused button keeps its focus), a soft edge fade that
+  //   covers only a tile that is actually clipped, a focusable region named after the row's
+  //   <h3> (arrow keys scroll it) and focus reveal (tabbing to a tile brings it into view);
+  // - under prefers-reduced-motion the tiles' videos stay on their posters (the page-level
+  //   video observer above would otherwise play them);
+  // - a plain click on a tile opens the detail <dialog> built from the tile's
+  //   <template class="ft-tl-detail"> (large media, meta, full title, intro, Details -> the
+  //   tile's own link, optional Paper). ‹ › and ←/→ step through the nodes in date order;
+  //   Esc, the close button or a click on the backdrop close it, and focus returns to the
+  //   tile. The dialog's media is created only while it is open and is stopped on close.
+  //   Ctrl/Cmd/Shift/middle clicks keep the link's own behaviour.
   (function () {
     var root = document.getElementById('timeline');
     if (!root || !root.querySelectorAll || !window.requestAnimationFrame || !window.getComputedStyle) return;
     var mq = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : null;
     var updaters = [];
 
-    function behavior() { return mq && mq.matches ? 'auto' : 'smooth'; }
+    function reduced() { return !!(mq && mq.matches); }
+    function behavior() { return reduced() ? 'auto' : 'smooth'; }
+    function each(list, fn) { Array.prototype.forEach.call(list, fn); }
+    function text(el) { return el ? el.textContent.replace(/\s+/g, ' ').trim() : ''; }
 
-    [].forEach.call(root.querySelectorAll('.ft-tl-row'), function (row) {
+    /* ---------------- lanes ---------------- */
+    each(root.querySelectorAll('.ft-tl-row'), function (row) {
       var lane = row.querySelector('.ft-tl-lane');
       if (!lane || !lane.scrollTo) return;
       var nav = row.querySelector('.ft-tl-nav');
       var btns = nav ? nav.querySelectorAll('.ft-tl-navbtn') : [];
-      var yr = row.querySelector('.ft-tl-yr');
-      var name = yr ? yr.textContent.replace(/\s+/g, ' ').trim() : 'Timeline';
-      var nodes = lane.querySelectorAll('.ft-tl-node');
+      var name = text(row.querySelector('.ft-tl-yr')) || 'Timeline';
+      /* the units the eye sees: each tile and the epigraph (a slot is wider than its tile;
+         stacked tiles share a column on desktop and run sideways on phones) */
+      var units = lane.querySelectorAll('.ft-tl-card, .ft-tl-origin');
       var raf = 0;
 
-      [].forEach.call(btns, function (b) {
+      each(btns, function (b) {
         var back = Number(b.getAttribute('data-dir')) < 0;
         b.setAttribute('aria-label', 'Scroll ' + name + (back ? ' back' : ' forward'));
         if (lane.id) b.setAttribute('aria-controls', lane.id);
@@ -1748,13 +2022,19 @@
         return { l: parseFloat(cs.scrollPaddingLeft) || 0, r: parseFloat(cs.scrollPaddingRight) || 0,
                  f: parseFloat(getComputedStyle(root).getPropertyValue('--tl-fade')) || 28 };
       }
-      /* node extents in the lane's scroll coordinates */
+      /* unit extents in the lane's scroll coordinates, left to right (one entry per column) */
+      function span(el, lr, x) {
+        var r = el.getBoundingClientRect();
+        return { s: r.left - lr.left + x, e: r.right - lr.left + x };
+      }
       function geom() {
-        var lr = lane.getBoundingClientRect(), x = lane.scrollLeft;
-        return [].map.call(nodes, function (n) {
-          var r = n.getBoundingClientRect();
-          return { s: r.left - lr.left + x, e: r.right - lr.left + x };
+        var lr = lane.getBoundingClientRect(), x = lane.scrollLeft, out = [];
+        Array.prototype.forEach.call(units, function (u) {
+          var g = span(u, lr, x), last = out[out.length - 1];
+          if (last && Math.abs(last.s - g.s) < 1) last.e = Math.max(last.e, g.e);
+          else out.push(g);
         });
+        return out.sort(function (a, b) { return a.s - b.s; });
       }
       function setOff(b, off) { b.setAttribute('aria-disabled', off ? 'true' : 'false'); }
 
@@ -1811,29 +2091,26 @@
         }
         lane.scrollTo({ left: Math.max(0, Math.min(max, t)), behavior: behavior() });
       }
-      [].forEach.call(btns, function (b) {
+      each(btns, function (b) {
         b.addEventListener('click', function () {
           if (b.getAttribute('aria-disabled') === 'true') return;
           step(Number(b.getAttribute('data-dir')) || 1);
         });
       });
 
-      /* keyboard: a focused link's whole tile comes into view (works with scroll-snap,
-         because the target is the tile's own snap position or the lane's end) */
-      function reveal(n) {
+      /* keyboard: a focused tile comes into view; a tile's start is a snap position */
+      function reveal(el) {
         var w = lane.clientWidth, x = lane.scrollLeft, max = lane.scrollWidth - w;
-        var lr = lane.getBoundingClientRect(), r = n.getBoundingClientRect();
-        var s = r.left - lr.left + x, e = r.right - lr.left + x;
-        if (s >= x - 0.5 && e <= x + w + 0.5) return;
-        lane.scrollLeft = Math.max(0, Math.min(max, s - pad().l));
+        var g = span(el, lane.getBoundingClientRect(), x);
+        if (g.s >= x - 0.5 && g.e <= x + w + 0.5) return;
+        lane.scrollLeft = Math.max(0, Math.min(max, g.s - pad().l));
       }
       lane.addEventListener('focusin', function (ev) {
         var t = ev.target;
-        if (t === lane || !t.closest) return;
-        var n = t.closest('.ft-tl-node');
-        if (!n) return;
-        reveal(n);
-        requestAnimationFrame(function () { reveal(n); });
+        if (t === lane || !t.closest || !t.closest('.ft-tl-node')) return;
+        var el = t.closest('.ft-tl-card') || t;
+        reveal(el);
+        requestAnimationFrame(function () { reveal(el); });
       });
 
       lane.addEventListener('scroll', schedule, { passive: true });
@@ -1847,6 +2124,207 @@
     window.addEventListener('resize', all);
     window.addEventListener('load', all);
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(all);
+
+    /* ---------------- reduced motion: tile videos stay on their posters ----------------
+       The page observer plays every video near the viewport. Under reduced motion each tile
+       video is swapped for its poster image (nothing downloads); it comes back if the
+       preference is switched off again. */
+    var stills = [];
+    function motion() {
+      if (reduced()) {
+        each(root.querySelectorAll('.ft-tl-media > video'), function (v) {
+          var img = document.createElement('img');
+          img.src = v.getAttribute('poster') || '';
+          img.alt = '';
+          img.width = v.width; img.height = v.height;
+          img.decoding = 'async';
+          v.pause();
+          v.parentNode.replaceChild(img, v);
+          stills.push([v, img]);
+        });
+      } else {
+        stills.forEach(function (p) { if (p[1].parentNode) p[1].parentNode.replaceChild(p[0], p[1]); });
+        stills = [];
+      }
+    }
+    motion();
+    if (mq) {
+      if (mq.addEventListener) mq.addEventListener('change', motion);
+      else if (mq.addListener) mq.addListener(motion);
+    }
+
+    /* ---------------- detail dialog ---------------- */
+    var dlg = root.querySelector('.ft-tl-dlg');
+    if (!dlg || typeof dlg.showModal !== 'function' || !('content' in document.createElement('template'))) return;
+    function q(s) { return dlg.querySelector(s); }
+    var stage = q('.ft-tl-d-stage'), ctx = q('.ft-tl-d-ctx'), pos = q('.ft-tl-d-pos'),
+        meta = q('.ft-tl-d-meta'), title = q('.ft-tl-d-title'), intro = q('.ft-tl-d-text'),
+        go = q('.ft-tl-d-go'), paper = q('.ft-tl-d-paper'), live = q('.ft-tl-d-sr'),
+        prev = q('[data-step="-1"]'), next = q('[data-step="1"]'), shut = q('.ft-tl-d-x');
+    var items = [], cur = -1, giveBack = true, lock = null, resume = [];
+
+    each(root.querySelectorAll('.ft-tl-card'), function (card) {
+      var tpl = card.querySelector('template.ft-tl-detail'), a = card.querySelector('.ft-tl-stretch');
+      if (!tpl || !a || !tpl.content) return;
+      var row = card.closest ? card.closest('.ft-tl-row') : null;
+      var k = items.push({
+        a: a, tpl: tpl, name: text(a),
+        yr: row ? text(row.querySelector('.ft-tl-yr')) : '',
+        cap: row ? text(row.querySelector('.ft-tl-cap')) : ''
+      }) - 1;
+      a.setAttribute('aria-haspopup', 'dialog');
+      a.addEventListener('click', function (e) {
+        if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+        e.preventDefault();
+        open(k);
+      });
+    });
+    if (!items.length) return;
+
+    function stop() {
+      each(stage.querySelectorAll('video'), function (v) {
+        v.pause();
+        v.removeAttribute('src');
+        try { v.load(); } catch (e) {}           /* aborts the download */
+      });
+      stage.textContent = '';
+    }
+
+    function show(k) {
+      var it = items[k];
+      if (!it) return;
+      cur = k;
+      var f = it.tpl.content;
+      stop();
+      var m = f.querySelector('video, img');
+      if (m) {
+        m = m.cloneNode(true);
+        m.style.setProperty('--w', Number(m.getAttribute('width')) || 16);
+        m.style.setProperty('--h', Number(m.getAttribute('height')) || 9);
+        if (m.tagName === 'VIDEO') {
+          m.muted = true; m.setAttribute('muted', '');
+          m.loop = true; m.controls = true;
+          m.setAttribute('playsinline', '');
+          m.preload = 'auto';
+        } else {
+          m.decoding = 'async';
+        }
+        stage.appendChild(m);
+        if (m.tagName === 'VIDEO' && !reduced()) {
+          var p = m.play();
+          if (p && p.catch) p.catch(function () {});
+        }
+      }
+      stage.hidden = !m;
+      var ps = f.querySelectorAll('p');
+      meta.textContent = text(ps[0]);
+      title.textContent = text(f.querySelector('h1, h2, h3, h4, h5')) || it.name;
+      intro.textContent = text(ps[1]);
+      ctx.innerHTML = '';
+      var b = document.createElement('b');
+      b.textContent = it.yr;
+      var cp = document.createElement('span');
+      cp.textContent = it.cap;
+      ctx.appendChild(b);
+      ctx.appendChild(document.createTextNode(' '));   /* "2026 An open source ecosystem" when copied or read */
+      ctx.appendChild(cp);
+
+      var href = it.a.getAttribute('href');
+      go.setAttribute('href', href);
+      if (it.a.getAttribute('target')) { go.setAttribute('target', it.a.getAttribute('target')); go.setAttribute('rel', 'noopener'); }
+      else { go.removeAttribute('target'); go.removeAttribute('rel'); }
+      var pa = f.querySelector('a[href]');
+      if (pa) { paper.setAttribute('href', pa.getAttribute('href')); paper.hidden = false; }
+      else { paper.removeAttribute('href'); paper.hidden = true; }
+
+      pos.textContent = (k + 1) + ' / ' + items.length;
+      prev.setAttribute('aria-disabled', k === 0 ? 'true' : 'false');
+      next.setAttribute('aria-disabled', k === items.length - 1 ? 'true' : 'false');
+      prev.setAttribute('aria-label', k > 0 ? 'Previous: ' + items[k - 1].name : 'Previous');
+      next.setAttribute('aria-label', k < items.length - 1 ? 'Next: ' + items[k + 1].name : 'Next');
+      dlg.querySelector('.ft-tl-d-panel').scrollTop = 0;
+    }
+
+    function open(k) {
+      giveBack = true;
+      show(k);
+      if (dlg.open) return;
+      /* the page behind stays put: no scrolling under the dialog, no layout shift */
+      var de = document.documentElement, sb = window.innerWidth - de.clientWidth;
+      lock = [de.style.overflow, de.style.scrollbarGutter];
+      de.style.overflow = 'hidden';
+      if (sb > 0) de.style.scrollbarGutter = 'stable';
+      /* the timeline's own tiles pause behind the dialog */
+      resume = [];
+      each(root.querySelectorAll('.ft-tl-media > video'), function (v) { if (!v.paused) { v.pause(); resume.push(v); } });
+      dlg.showModal();
+      shut.focus();
+    }
+
+    function unlock() {
+      if (!lock) return;
+      var de = document.documentElement;
+      de.style.overflow = lock[0];
+      de.style.scrollbarGutter = lock[1];
+      lock = null;
+    }
+
+    function step(d) {
+      var k = cur + d;
+      if (k < 0 || k >= items.length) return;
+      show(k);
+      live.textContent = items[k].name + ', ' + (k + 1) + ' of ' + items.length;
+    }
+
+    prev.addEventListener('click', function () { if (prev.getAttribute('aria-disabled') !== 'true') step(-1); });
+    next.addEventListener('click', function () { if (next.getAttribute('aria-disabled') !== 'true') step(1); });
+    shut.addEventListener('click', function () { dlg.close(); });
+
+    dlg.addEventListener('keydown', function (e) {
+      if (e.altKey || e.ctrlKey || e.metaKey || e.shiftKey) return;
+      if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+      var t = e.target;
+      if (t && (t.tagName === 'VIDEO' || t.tagName === 'INPUT' || t.isContentEditable)) return;  /* seeking */
+      e.preventDefault();
+      step(e.key === 'ArrowLeft' ? -1 : 1);
+    });
+
+    /* backdrop: only a press that starts AND ends outside the panel closes it */
+    var downOut = false;
+    function outside(e) {
+      if (e.target !== dlg) return false;
+      var r = dlg.getBoundingClientRect();
+      return e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom;
+    }
+    dlg.addEventListener('pointerdown', function (e) { downOut = outside(e); });
+    dlg.addEventListener('click', function (e) {
+      if (downOut && outside(e)) dlg.close();
+      downOut = false;
+    });
+
+    /* Details on the same page (#hardware-v2): close, then go there */
+    go.addEventListener('click', function (e) {
+      var h = go.getAttribute('href') || '';
+      if (h.charAt(0) !== '#' || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+      e.preventDefault();
+      giveBack = false;
+      dlg.close();
+      unlock();
+      var t = document.getElementById(h.slice(1));
+      if (location.hash !== h) location.hash = h;
+      else if (t && t.scrollIntoView) t.scrollIntoView();
+    });
+
+    dlg.addEventListener('close', function () {
+      stop();
+      unlock();
+      live.textContent = '';
+      resume.forEach(function (v) { if (!reduced() && v.isConnected) { var p = v.play(); if (p && p.catch) p.catch(function () {}); } });
+      resume = [];
+      var it = items[cur];
+      if (giveBack && it) it.a.focus();
+      giveBack = true;
+    });
   })();
 
   // Customization app demos: the expand button (or a click on the clip) plays it

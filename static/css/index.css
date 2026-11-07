@@ -1677,49 +1677,59 @@ h2[style*="color: rgb(189, 189, 189);"] {
 
 /* ===== Timeline (replaces Related Works) ===== */
 /* =========================================================
-   Timeline — Y3 "Small tiles, 2026 in view" (ship version)
+   Timeline — v4.2 "Small tiles in full-width slots, detail on click"
    One row per year (2023–2024 share the first). Each row is a
-   label column + a lane of small vertical tiles under ONE ruler:
-   the ruler starts under the year numerals, carries the dated
-   markers and fades out after the row's last node.
-   Lanes never wrap; a lane wider than its column scrolls sideways.
-   Desktop column grid (1080px container, 972px lane):
-     label 96 | 12 | beat 130 | tile 149 ×4 | CoRL 202, gaps 8 = 968
-   so all six 2026 nodes are in view at >= 1216px.
+   label column + a lane of small tiles (media + short title +
+   one short line) under ONE ruler: the ruler starts under the
+   year numerals, carries the dated markers and fades out after
+   the row's last node. Lanes never wrap; a lane wider than its
+   column scrolls sideways.
+   All rows share one slot grid, so the markers line up from
+   row to row. Desktop (1080px container):
+     label 96 | 12 | lane 972
+     slot 149, 8 apart (pitch 157); the tile is 128 wide at the
+     slot's start, so 29px of air separates neighbouring tiles.
+     2026 = 6 slots × 149 + 5 × 8 = 934  (the full row fits)
+   The origin epigraph spans two slots. A conference stacks its
+   tiles vertically in its slot under "date · conference" on
+   the ruler; CoRL 2026 (+ the FlexiTac-Gen release) is two
+   such stacks of four, side by side, under one label.
+   A click on a tile opens the detail <dialog> (timeline script).
    Scoped to #timeline / .ft-tl-*.  Spacing: 4/8/12/16/24.
    ========================================================= */
 
 #timeline {
-  --tl-lab: 96px;           /* year label column                 */
-  --tl-cg: 12px;            /* label -> lane                      */
-  --tl-g: 8px;              /* between tiles                      */
-  --tl-w: 149px;            /* one tile                           */
-  --tl-m: 130px;            /* narrow beat / origin               */
-  --tl-wide: 202px;         /* CoRL 2026 (about 1.4 tiles)        */
-  --tl-stem: 17px;          /* rail row above the tiles           */
-  --tl-sg: 4px;             /* rail row -> tile                   */
-  --tl-card-h: 196px;       /* uniform tile height (desktop)      */
-  --tl-pad: 4px;            /* tile inset around the thumbnail    */
-  --tl-tx: 2px;             /* extra text inset inside the tile   */
-  --tl-thumb-h: calc((var(--tl-w) - 2px - 2 * var(--tl-pad)) * 0.5625);
-  --tl-tail: 96px;          /* ruler fade after the last node     */
-  --tl-fade: 32px;          /* max edge fade over a clipped tile  */
+  --tl-lab: 96px;           /* year label column                  */
+  --tl-cg: 12px;            /* label -> lane                       */
+  --tl-slot: 149px;         /* one node = one slot on the ruler    */
+  --tl-g: 8px;              /* between slots                       */
+  --tl-card: 128px;         /* the tile, at the start of its slot  */
+  --tl-sgap: 16px;          /* between stacked tiles               */
+  --tl-lines: 3;            /* tile line block height (in lines)   */
+  --tl-ow: calc(2 * var(--tl-slot) + var(--tl-g));   /* 2 slots  */
+  --tl-stem: 20px;          /* rail row above the tiles            */
+  --tl-sg: 4px;             /* rail row -> tile                    */
+  --tl-pad: 4px;            /* tile inset around the media         */
+  --tl-tail: 96px;          /* ruler fade after the last node      */
+  --tl-fade: 32px;          /* max edge fade over a clipped tile   */
   --tl-rail: rgba(18, 32, 51, 0.14);
   --tl-ink2: #2b3a4f;
   --tl-soft: #f1f4f9;
-  --tl-award: #b22222;
   --tl-dim: #b7c2d3;
-  --tl-r: 12px;
+  --tl-r: 10px;
 }
 #timeline .ft-tl-row.is-now { --tl-rail: rgba(47, 111, 237, 0.34); }
 
 #timeline ol,
 #timeline ul { list-style: none; margin: 0; padding: 0; }
 #timeline p,
+#timeline h2,
 #timeline h3,
-#timeline h4 { margin: 0; }
+#timeline h4,
+#timeline h5 { margin: 0; }
 #timeline .ft-tl-nw { white-space: nowrap; }
-#timeline .ft-tl-sep {
+#timeline .ft-tl-sep,
+#timeline .ft-tl-d-sr {
   position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; border: 0;
   overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap;
 }
@@ -1743,7 +1753,7 @@ h2[style*="color: rgb(189, 189, 189);"] {
 }
 
 /* ---------- rows: one ruler per row ---------- */
-#timeline .ft-tl-rows { display: flex; flex-direction: column; gap: 16px; }
+#timeline .ft-tl-rows { display: flex; flex-direction: column; gap: 24px; }
 #timeline .ft-tl-row {
   position: relative;
   display: grid;
@@ -1769,7 +1779,7 @@ h2[style*="color: rgb(189, 189, 189);"] {
   background: var(--ft-bg);
   font-family: 'Google Sans', sans-serif;
   font-weight: 600;            /* synthesised, like the site's titles: the row's anchor */
-  font-size: 1.0625rem;
+  font-size: 1.25rem;
   line-height: var(--tl-stem);
   letter-spacing: 0.01em;
   color: var(--ft-text);
@@ -1783,7 +1793,7 @@ h2[style*="color: rgb(189, 189, 189);"] {
   line-height: 1.4;
   color: var(--ft-muted);
 }
-#timeline .ft-tl-cap > span:not(.ft-tl-sep) { display: block; }
+#timeline .ft-tl-cap > span:not(.ft-tl-sep) { display: block; white-space: nowrap; }
 
 /* ---------- lane (scroll container) ---------- */
 #timeline .ft-tl-lane {
@@ -1795,13 +1805,13 @@ h2[style*="color: rgb(189, 189, 189);"] {
   overscroll-behavior-x: contain;
   scroll-snap-type: x proximity;
   scroll-padding-inline: 4px;
-  /* room for focus rings and the hairline shadow, without moving the tiles */
+  /* room for focus rings and the hover shadow, without moving the tiles */
   margin: -4px -4px -8px;
   padding: 4px 4px 8px;
   scrollbar-width: thin;
   scrollbar-color: rgba(18, 32, 51, 0.2) transparent;
 }
-/* edge fades (timeline script in index.html): only over a tile that is actually clipped, never to fully transparent */
+/* edge fades (timeline script): only over a tile that is actually clipped, never to fully transparent */
 #timeline .ft-tl-lane.is-overflow {
   -webkit-mask-image: linear-gradient(90deg, rgba(0, 0, 0, 0.22) 0, #000 var(--fade-l), #000 calc(100% - var(--fade-r)), rgba(0, 0, 0, 0.22) 100%);
   mask-image: linear-gradient(90deg, rgba(0, 0, 0, 0.22) 0, #000 var(--fade-l), #000 calc(100% - var(--fade-r)), rgba(0, 0, 0, 0.22) 100%);
@@ -1812,27 +1822,26 @@ h2[style*="color: rgb(189, 189, 189);"] {
 #timeline .ft-tl-items {
   position: relative;
   display: flex;
-  align-items: stretch;
+  align-items: flex-start;
   gap: var(--tl-g);
   width: max-content;
   min-width: 100%;
-  overflow-x: clip;           /* the ruler's fade-out never adds scroll width */
+  overflow-x: clip;           /* nothing on the ruler ever adds scroll width */
 }
 
-/* ---------- node ---------- */
+/* ---------- node = one grid column on the ruler ---------- */
 #timeline .ft-tl-node {
   position: relative;
-  flex: 0 0 var(--tl-w);
-  width: var(--tl-w);
+  flex: none;
+  width: var(--tl-slot);
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   gap: var(--tl-sg);
   scroll-snap-align: start;
 }
-#timeline .ft-tl-node.is-beat,
-#timeline .ft-tl-node.is-origin { flex-basis: var(--tl-m); width: var(--tl-m); }
-#timeline .ft-tl-node.is-wide { flex-basis: var(--tl-wide); width: var(--tl-wide); }
-#timeline .ft-tl-node.is-beat { --tl-tx: 0px; }
+#timeline .ft-tl-node.is-origin,
+#timeline .ft-tl-node.is-cluster { width: var(--tl-ow); }
 /* the ruler, node by node (across the gap to the next one) ... */
 #timeline .ft-tl-node::before {
   content: "";
@@ -1843,32 +1852,51 @@ h2[style*="color: rgb(189, 189, 189);"] {
   height: 1px;
   background: var(--tl-rail);
 }
-/* ... and fading out after the last one: room to grow */
-#timeline .ft-tl-node:last-child::before {
-  right: calc(-1 * var(--tl-tail));
-  background: linear-gradient(90deg, var(--tl-rail) calc(100% - var(--tl-tail)), transparent);
+/* ... and fading out after the last one: room to grow. The tail takes only the room left in
+   the lane (at most --tl-tail), so it always fades out completely and never adds scroll width. */
+#timeline .ft-tl-node:last-child::before { right: 0; }
+#timeline .ft-tl-items::after {
+  content: "";
+  flex: 1 1 0;
+  max-width: var(--tl-tail);
+  height: 1px;
+  margin: calc(var(--tl-stem) / 2 - 0.5px) 0 0 calc(-1 * var(--tl-g));
+  background: linear-gradient(90deg, var(--tl-rail), transparent);
 }
 
-/* stem: marker + date (+ city) on the ruler */
+/* stem: marker + date (+ conference) on the ruler */
 #timeline .ft-tl-stem {
   position: relative;
   display: flex;
   align-items: center;
   gap: 6px;
   height: var(--tl-stem);
-  font-size: 0.75rem;
+  font-size: 0.875rem;
   line-height: 1;
-  letter-spacing: 0.03em;
+  letter-spacing: 0.01em;
   color: var(--ft-muted);
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
 }
 #timeline .ft-tl-stem time { color: var(--tl-ink2); font-weight: 600; background: var(--ft-bg); padding-right: 5px; line-height: var(--tl-stem); }
-#timeline .ft-tl-stem time + .ft-tl-city { margin-left: -6px; }
-#timeline .ft-tl-city { padding-right: 5px; background: var(--ft-bg); line-height: var(--tl-stem); }
-#timeline .ft-tl-city::before { content: "·"; margin-right: 5px; color: #9aa6b6; }
+#timeline .ft-tl-stem time + .ft-tl-event { margin-left: -6px; }
+#timeline .ft-tl-event {
+  padding-right: 5px;
+  background: var(--ft-bg);
+  line-height: var(--tl-stem);
+  font-family: 'Google Sans', sans-serif;
+  font-weight: 600;
+  font-size: 0.8125rem;
+  letter-spacing: 0;
+  color: var(--ft-text);
+}
+#timeline .ft-tl-event::before {
+  content: "·";
+  content: "·" / "";            /* decorative: the heading reads "2026.06 ICRA 2026" */
+  margin-right: 4px; color: #9aa6b6; font-family: 'Noto Sans', sans-serif; font-weight: 400;
+}
 
-/* markers: ■ paper · □ platform/hardware · ○ origin · ▪▪ venue, one taxel per work */
+/* markers: ■ paper · □ platform/hardware · ○ origin · taxel array = conference, one taxel per work */
 #timeline .ft-tl-mk {
   flex: none;
   width: 8px; height: 8px;
@@ -1877,21 +1905,30 @@ h2[style*="color: rgb(189, 189, 189);"] {
 }
 #timeline .ft-tl-mk.is-ring { border-radius: 50%; background: var(--ft-bg); box-shadow: inset 0 0 0 2px var(--tl-ink2); }
 #timeline .ft-tl-mk.is-hollow { background: var(--ft-bg); box-shadow: inset 0 0 0 1.75px var(--ft-blue); }
-#timeline .ft-tl-mk.is-count { width: auto; height: auto; padding: 2px 0; background: var(--ft-bg); border-radius: 0; display: inline-flex; gap: 1.5px; }
-#timeline .ft-tl-mk.is-count i { width: 4.5px; height: 4.5px; border-radius: 1px; background: var(--ft-blue); }
-#timeline .ft-tl-mk.is-count + time { margin-left: -1px; }
+#timeline .ft-tl-mk.is-count {
+  width: auto; height: auto;
+  display: inline-grid;
+  grid-template-rows: repeat(2, 4px);
+  grid-auto-flow: column;
+  grid-auto-columns: 4px;
+  gap: 1px;
+  padding: 1px 0;
+  border-radius: 0;
+  background: var(--ft-bg);
+}
+#timeline .ft-tl-mk.is-count i { border-radius: 1px; background: var(--ft-blue); }
 #timeline .ft-tl-mk.is-count i.is-self { background: var(--ft-text); }
 
 /* ---------- tile ---------- */
 #timeline .ft-tl-card {
   position: relative;
-  flex: 1;
+  flex: none;
   display: flex;
   flex-direction: column;
+  width: var(--tl-card);
   min-width: 0;
-  min-height: var(--tl-card-h);
   container-type: inline-size;
-  padding: var(--tl-pad) var(--tl-pad) 6px;
+  padding: var(--tl-pad) var(--tl-pad) 7px;
   background: var(--ft-surface);
   border: 1px solid var(--ft-line);
   border-radius: var(--tl-r);
@@ -1899,11 +1936,13 @@ h2[style*="color: rgb(189, 189, 189);"] {
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 @media (hover: hover) {
-  #timeline .ft-tl-card:has(.ft-tl-stretch):hover {
+  #timeline .ft-tl-card:hover {
     border-color: rgba(47, 111, 237, 0.32);
     box-shadow: var(--ft-shadow-soft);
   }
-  #timeline .ft-tl-card:has(.ft-tl-stretch):hover .ft-tl-title { color: var(--ft-blue-dark); }
+  #timeline .ft-tl-card:hover .ft-tl-title { color: var(--ft-blue-dark); }
+  #timeline .ft-tl-card:hover .ft-tl-media > * { transform: scale(1.035); }
+  #timeline .ft-tl-card:hover .ft-tl-media.is-trim > * { transform: scale(1.19); }
 }
 
 #timeline .ft-tl-media {
@@ -1911,331 +1950,135 @@ h2[style*="color: rgb(189, 189, 189);"] {
   display: block;
   flex: none;
   aspect-ratio: 16 / 9;
-  border-radius: 8px;
+  border-radius: 6px;
   overflow: hidden;
   background: #eef2f8;
-  box-shadow: inset 0 0 0 1px var(--ft-line);
+  /* the hairline sits over the picture */
+  isolation: isolate;
 }
-#timeline .ft-tl-media img {
+#timeline .ft-tl-media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow: inset 0 0 0 1px rgba(18, 32, 51, 0.06);
+  pointer-events: none;
+}
+#timeline .ft-tl-media > video,
+#timeline .ft-tl-media > img {
   display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: 0;            /* the frame clips; override the site's img[alt] radius */
+  border-radius: 0;            /* the frame clips; override the site's img[alt] / video radius */
+  background: transparent;     /* the site paints videos black */
+  transition: transform 0.35s ease;
 }
-/* narrow and wide nodes keep the tiles' thumbnail height, so titles align across a row */
-#timeline .is-beat .ft-tl-media,
-#timeline .is-wide .ft-tl-media { aspect-ratio: auto; height: var(--tl-thumb-h); }
-/* is-trim: vtac.jpg has a letterbox baked in (21px of 315 top and bottom); the duo's portrait
-   cells crop the sides anyway, so a small zoom hides it. is-high: keep heads in a wide crop. */
-#timeline .ft-tl-media img.is-trim { transform: scale(1.16); }
-#timeline .ft-tl-media img.is-high { object-position: 50% 22%; }
+/* a teaser on white, shown whole (FlexiTac-Gen app, ViTaS figure, TAC-LOCO strip) */
+#timeline .ft-tl-media.is-contain { background: #fff; }
+#timeline .ft-tl-media.is-contain > video,
+#timeline .ft-tl-media.is-contain > img { object-fit: contain; }
+/* VTAP's video has a letterbox baked in (21 of 315 px top and bottom): zoom just past it */
+#timeline .ft-tl-media.is-trim > * { transform: scale(1.155); }
 
-#timeline .ft-tl-media.is-duo,
-#timeline .ft-tl-media.is-mosaic { display: grid; gap: 2px; background: var(--ft-surface); box-shadow: none; }
-#timeline .ft-tl-media.is-duo { grid-template-columns: 1fr 1fr; }
-#timeline .ft-tl-media.is-mosaic { grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; }
-#timeline .ft-tl-media.is-duo a,
-#timeline .ft-tl-media.is-mosaic a { display: block; min-width: 0; min-height: 0; overflow: hidden; background: #eef2f8; }
-
-/* V2: the 32 × 12 taxel array on its flexible PCB, drawn 1:1 in device pixels */
-#timeline .ft-tl-media.is-taxels {
-  --px: 2px;                   /* taxel pitch */
-  --dot: 1px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 7px;
-  background:
-    linear-gradient(rgba(18, 32, 51, 0.035) 1px, transparent 1px) 0 0 / 100% 10px,
-    #f3f6fb;
-}
-#timeline .ft-tl-array {
-  position: relative;
-  flex: none;
-  width: calc(32 * var(--px));
-  height: calc(12 * var(--px));
-  margin-right: 9px;           /* room for the tail */
-  box-sizing: content-box;
-  padding: 3px;
-  border-radius: 4px;
-  border: 1px solid rgba(47, 111, 237, 0.34);
-  background:
-    linear-gradient(90deg, transparent var(--dot), var(--ft-surface) var(--dot)) 3px 3px / var(--px) var(--px),
-    linear-gradient(transparent var(--dot), var(--ft-surface) var(--dot)) 3px 3px / var(--px) var(--px),
-    rgba(47, 111, 237, 0.42);
-  background-clip: content-box;
-}
-#timeline .ft-tl-array::before {   /* the FPC tail */
-  content: "";
-  position: absolute;
-  right: -10px;
-  top: calc(50% - 5px);
-  width: 9px; height: 10px;
-  border: 1px solid rgba(47, 111, 237, 0.34);
-  border-left: 0;
-  border-radius: 0 3px 3px 0;
-  background: var(--ft-surface);
-}
-#timeline .ft-tl-array::after {    /* a pressed contact */
-  content: "";
-  position: absolute;
-  inset: 3px;
-  background:
-    linear-gradient(90deg, transparent var(--dot), var(--ft-surface) var(--dot)) 0 0 / var(--px) var(--px),
-    linear-gradient(transparent var(--dot), var(--ft-surface) var(--dot)) 0 0 / var(--px) var(--px),
-    var(--ft-blue);
-  -webkit-mask-image: radial-gradient(ellipse 26% 52% at 62% 55%, #000 45%, transparent 100%);
-  mask-image: radial-gradient(ellipse 26% 52% at 62% 55%, #000 45%, transparent 100%);
-}
-#timeline .ft-tl-array-cap {
-  font-size: 0.75rem;
-  line-height: 1.2;
-  color: var(--ft-muted);
-  white-space: nowrap;
-}
-
-/* open source: the repository, on ink with a faint taxel field */
-#timeline .ft-tl-media.is-repo {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 4px;
-  padding: 0 5px;
-  text-align: center;
-  color: #fff;
-  background:
-    radial-gradient(circle, rgba(255, 255, 255, 0.1) 1px, transparent 1.3px) 0 0 / 6px 6px,
-    var(--ft-text);
-  box-shadow: none;
-}
-#timeline .ft-tl-repo-name {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  font-family: 'Google Sans', sans-serif;
-  font-weight: 600;
-  font-size: 0.75rem;
-  line-height: 1.2;
-  white-space: nowrap;
-}
-#timeline .ft-tl-repo-name .fa-github { font-size: 0.95rem; }
-#timeline .ft-tl-repo-sub {
-  font-size: 0.75rem;
-  line-height: 1.3;
-  color: var(--tl-dim);
-}
-#timeline .ft-tl-repo-br { display: block; height: 0; overflow: hidden; }   /* desktop: two lines, no dangling dot */
-
-/* text */
-#timeline .ft-tl-title,
-#timeline .ft-tl-vhead,
-#timeline .ft-tl-line,
-#timeline .ft-tl-picks,
-#timeline .ft-tl-also,
-#timeline .ft-tl-foot-row { padding-left: var(--tl-tx); padding-right: var(--tl-tx); }
+/* short title (one line at these lengths; a longer one wraps rather than being cut) */
 #timeline .ft-tl-title {
-  margin-top: 5px;
+  margin-top: 6px;
   font-family: 'Google Sans', sans-serif;
   font-weight: 600;
-  font-size: 0.92rem;
-  line-height: 1.18;
+  font-size: 0.8125rem;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
   color: var(--ft-text);
   text-wrap: balance;
+  overflow-wrap: anywhere;
   transition: color 0.2s ease;
 }
 #timeline .ft-tl-title a { color: inherit; }
-#timeline .ft-tl-stretch::after { content: ""; position: absolute; inset: 0; z-index: 1; border-radius: var(--tl-r); }
-#timeline .ft-tl-stretch:focus { outline: none; }
+/* one short line of meaning */
 #timeline .ft-tl-line {
-  margin-top: 2px;
-  font-size: 0.8rem;
-  line-height: 1.3;
+  margin-top: 3px;
+  min-height: calc(var(--tl-lines) * 1.38em);   /* equal tiles: stacks line up into rows */
+  font-size: 0.6875rem;
+  line-height: 1.38;
   color: var(--ft-muted);
-  text-wrap: balance;
+  text-wrap: pretty;
 }
+#timeline .ft-tl-stretch::after { content: ""; position: absolute; inset: 0; z-index: 3; border-radius: var(--tl-r); }
+#timeline .ft-tl-stretch:focus { outline: none; }
+#timeline .ft-tl-detail { display: none; }
 
-/* venue pill on the thumbnail (Awesome FlexiTac pattern); after the title in the DOM */
-#timeline .ft-tl-venue {
+/* pill on the media (Awesome FlexiTac pattern): venue or "Demo Track"; blue = a live platform release.
+   After the title in the DOM. */
+#timeline .ft-tl-pill {
   position: absolute;
   z-index: 2;
-  left: calc(var(--tl-pad) + 6px);
-  top: calc(var(--tl-pad) + 100cqw * 0.5625 - 24px);
+  left: calc(var(--tl-pad) + 4px);
+  top: calc(var(--tl-pad) + 100cqw * 0.5625 - 20px);
   pointer-events: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  height: 16px;
+  padding: 0 6px;
+  border-radius: 999px;
   font-family: 'Google Sans', sans-serif;
   font-weight: 600;
-  font-size: 0.75rem;
-  line-height: 18px;
+  font-size: 0.65rem;
+  line-height: 16px;
   letter-spacing: 0.02em;
   color: #fff;
-  background: rgba(18, 32, 51, 0.9);
-  border-radius: 999px;
-  padding: 0 8px;
-  box-shadow: 0 1px 4px rgba(18, 32, 51, 0.25);
+  background: rgba(18, 32, 51, 0.88);
+  box-shadow: 0 1px 3px rgba(18, 32, 51, 0.22);
   white-space: nowrap;
 }
-
-/* foot: award, chips — pinned to the tile's bottom so a row's tiles end together */
-#timeline .ft-tl-foot-row {
-  margin-top: auto;
-  padding-top: 4px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 4px;
-}
-/* hardware generation: a quiet label on the ruler, right after its own date
-   ("2024.10 ▪ FlexiTac V1"), so it groups with its node, never with the next marker.
-   In the DOM it follows the line (title -> line -> tag -> award). The offset is the
-   stem's marker (8) + gap (6) + a YYYY.MM date at this font size (3.92em), less the
-   card border, + 2px of slack; the 4px left padding then leaves a ~6px gap. */
-#timeline .ft-tl-card .ft-tl-hw {
-  position: absolute;
-  left: calc(15px + 3.92em);
-  top: calc(-1px - var(--tl-sg) - var(--tl-stem));
-  height: var(--tl-stem);
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  padding: 0 5px 0 4px;
-  background: var(--ft-bg);
-  font-size: 0.75rem;
-  font-weight: 500;
-  line-height: 1;
-  color: var(--tl-ink2);
-  white-space: nowrap;
-}
-#timeline .ft-tl-hw::before {
+#timeline .ft-tl-pill.is-live { background: var(--ft-blue); box-shadow: 0 1px 3px rgba(28, 79, 183, 0.35); }
+#timeline .ft-tl-pill.is-live::before {   /* the platform marker, in white */
   content: "";
   flex: none;
   width: 6px; height: 6px;
-  background:
-    linear-gradient(var(--ft-blue), var(--ft-blue)) 0 0 / 2.5px 2.5px no-repeat,
-    linear-gradient(var(--ft-blue), var(--ft-blue)) 3.5px 0 / 2.5px 2.5px no-repeat,
-    linear-gradient(var(--ft-blue), var(--ft-blue)) 0 3.5px / 2.5px 2.5px no-repeat,
-    linear-gradient(var(--ft-blue), var(--ft-blue)) 3.5px 3.5px / 2.5px 2.5px no-repeat;
-}
-#timeline .ft-tl-kind {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 0.75rem;
-  font-weight: 600;
-  line-height: 1.45;
-  color: var(--tl-ink2);
-  background: var(--tl-soft);
-  border-radius: 6px;
-  padding: 0 7px 0 6px;
-  white-space: nowrap;
-}
-#timeline .ft-tl-kind::before {
-  content: "";
-  flex: none;
-  width: 7px; height: 7px;
   border-radius: 1.5px;
-  box-shadow: inset 0 0 0 1.5px var(--ft-blue);
+  box-shadow: inset 0 0 0 1.5px #fff;
 }
-/* awards break at the "·": the venue part is one unit */
-#timeline .ft-tl-award {
-  display: block;
-  font-size: 0.75rem;
-  font-weight: 600;
-  line-height: 1.15;
-  color: var(--tl-award);
-}
-#timeline .ft-tl-award .fa-award { font-size: 0.7rem; }
-#timeline .ft-tl-live {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 0.75rem;
-  font-weight: 600;
-  line-height: 1.45;
-  color: var(--ft-blue-dark);
-}
-#timeline .ft-tl-live::before {
-  content: "";
-  width: 6px; height: 6px;
-  margin-left: 2px;
-  border-radius: 50%;
-  background: var(--ft-blue);
-  box-shadow: 0 0 0 3px rgba(47, 111, 237, 0.16);
-}
+/* is-foot: off a teaser shown whole (is-contain, where it would cover the picture) and into the
+   free last line of the tile's line block (FlexiTac-Gen) */
+#timeline .ft-tl-pill.is-foot { top: auto; bottom: 5px; left: calc(var(--tl-pad) + 1px); }
 
-/* venue tiles */
-#timeline .ft-tl-vhead {
-  margin-top: 5px;
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 2px 6px;
-  flex-wrap: wrap;
+/* ---------- conference: a stack of tiles under its ruler label ---------- */
+#timeline .ft-tl-stack { display: flex; flex-direction: column; gap: var(--tl-sgap); }
+#timeline .ft-tl-stack > li { display: grid; width: var(--tl-card); }   /* the tile fills its cell's height */
+/* a big meeting: two stacks of four side by side, one slot each (DOM order runs down column 1, then column 2) */
+#timeline .ft-tl-stack.is-cols {
+  display: grid;
+  grid-template-columns: repeat(2, var(--tl-slot));
+  grid-template-rows: repeat(4, auto);
+  grid-auto-flow: column;
+  gap: var(--tl-sgap) var(--tl-g);
 }
-#timeline .ft-tl-vhead .ft-tl-title { margin: 0; padding: 0; }
-#timeline .ft-tl-count {
-  font-size: 0.75rem;
-  font-weight: 600;
-  line-height: 1.2;
-  color: var(--tl-ink2);
-  white-space: nowrap;
+/* its one label covers both columns: a firmer stretch of ruler runs on from the label to the end
+   of column 2 (it starts under the label, which keeps its own background) */
+#timeline .ft-tl-node.is-cluster > .ft-tl-stem { z-index: 1; }
+#timeline .ft-tl-node.is-cluster::after {
+  content: "";
+  position: absolute;
+  left: var(--tl-card);
+  top: calc(var(--tl-stem) / 2 - 1px);
+  width: calc(var(--tl-slot) + var(--tl-g));
+  height: 2px;
+  border-radius: 1px;
+  background: rgba(47, 111, 237, 0.5);
 }
-#timeline .is-wide .ft-tl-vhead { flex-direction: column; align-items: flex-start; justify-content: flex-start; }
-#timeline .is-wide .ft-tl-count { white-space: normal; max-width: 100%; }
-#timeline .ft-tl-picks { margin-top: 2px; display: flex; flex-direction: column; gap: 2px; font-size: 0.8rem; line-height: 1.2; }
-#timeline .ft-tl-picks li { display: block; }
-#timeline .ft-tl-picks a {
-  font-family: 'Google Sans', sans-serif;
-  font-weight: 500;
-  font-size: 0.8rem;
-  line-height: 1.2;
-  color: var(--ft-blue-dark);
-}
-#timeline .ft-tl-picks li .ft-tl-award { margin-top: 2px; }
-#timeline .ft-tl-picks.is-grid { display: block; line-height: 1.25; }
-#timeline .ft-tl-picks.is-grid li { display: inline; }
-#timeline .ft-tl-picks.is-grid li:not(:last-child)::after { content: "·"; margin: 0 4px 0 5px; color: #9aa6b6; font-size: 0.8rem; }
-/* FlexiTac's own pick (+ Demo Track) gets its own line, so no line ends on a dangling "·" */
-#timeline .ft-tl-picks.is-grid li:first-child { display: block; }
-#timeline .ft-tl-picks.is-grid li:first-child::after { content: none; }
-#timeline .ft-tl-sub {
-  display: inline-block;
-  margin-left: 4px;
-  padding: 0 5px;
-  border-radius: 4px;
-  background: var(--tl-soft);
-  font-family: 'Noto Sans', sans-serif;
-  font-weight: 500;
-  font-size: 0.75rem;
+#timeline .ft-tl-vfoot {
+  margin-top: 4px;
+  font-size: 0.72rem;
   line-height: 1.35;
-  color: var(--tl-ink2);
-  vertical-align: 1px;
-}
-#timeline .ft-tl-also {
-  margin-top: auto;
-  padding-top: 4px;
-  font-size: 0.75rem;
-  line-height: 1.3;
   color: var(--ft-muted);
-}
-#timeline .ft-tl-also a {
-  color: var(--tl-ink2);
-  font-weight: 600;
-  text-decoration: underline;
-  text-decoration-color: rgba(18, 32, 51, 0.25);
-  text-underline-offset: 2px;
-}
-#timeline .ft-tl-dot { color: #9aa6b6; }
-@media (hover: hover) {
-  #timeline .ft-tl-picks a:hover { text-decoration: underline; text-underline-offset: 2px; }
-  #timeline .ft-tl-also a:hover { color: var(--ft-blue-dark); text-decoration-color: currentColor; }
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
 }
 
 /* origin: an epigraph, no tile */
-/* the question may run 4px into the gap after the column: at 0.8rem "flexible piezoresistive"
-   (128px) then stays one line and the question keeps to 4 lines */
-#timeline .ft-tl-origin { padding: 6px 0 0 2px; margin-right: -4px; }
+#timeline .ft-tl-origin { padding: 6px 4px 0 1px; }
 #timeline .ft-tl-otitle {
   font-family: 'Google Sans', sans-serif;
   font-weight: 400;
@@ -2259,9 +2102,10 @@ h2[style*="color: rgb(189, 189, 189);"] {
 }
 
 /* nav buttons (progressive enhancement; shown only while that lane overflows) */
-#timeline .ft-tl-nav { margin-top: auto; padding-top: 10px; display: flex; gap: 6px; }
+#timeline .ft-tl-nav { margin-top: 12px; display: flex; gap: 6px; }
 #timeline .ft-tl-nav[hidden] { display: none; }
-#timeline .ft-tl-navbtn {
+#timeline .ft-tl-navbtn,
+#timeline .ft-tl-d-btn {
   width: 30px; height: 30px;
   display: grid;
   place-items: center;
@@ -2273,184 +2117,234 @@ h2[style*="color: rgb(189, 189, 189);"] {
   font-size: 0.72rem;
   cursor: pointer;
   box-shadow: 0 1px 2px rgba(18, 32, 51, 0.05);
-  transition: border-color 0.15s ease, color 0.15s ease, opacity 0.15s ease;
+  transition: border-color 0.15s ease, color 0.15s ease, opacity 0.15s ease, background-color 0.15s ease;
 }
-#timeline .ft-tl-navbtn[aria-disabled="true"] { opacity: 0.38; cursor: default; box-shadow: none; }
+#timeline .ft-tl-navbtn[aria-disabled="true"],
+#timeline .ft-tl-d-btn[aria-disabled="true"] { opacity: 0.38; cursor: default; box-shadow: none; }
 @media (hover: hover) {
-  #timeline .ft-tl-navbtn:not([aria-disabled="true"]):hover { border-color: rgba(47, 111, 237, 0.45); color: var(--ft-blue-dark); }
+  #timeline .ft-tl-navbtn:not([aria-disabled="true"]):hover,
+  #timeline .ft-tl-d-btn:not([aria-disabled="true"]):hover { border-color: rgba(47, 111, 237, 0.45); color: var(--ft-blue-dark); }
 }
 
 /* focus */
 #timeline a:focus-visible,
 #timeline button:focus-visible { outline: 2px solid var(--ft-blue); outline-offset: 2px; border-radius: 4px; }
-#timeline .ft-tl-navbtn:focus-visible { border-radius: 50%; }
+#timeline .ft-tl-navbtn:focus-visible,
+#timeline .ft-tl-d-btn:focus-visible { border-radius: 50%; }
 #timeline .ft-tl-stretch:focus-visible { outline: none; }
-#timeline .ft-tl-stretch:focus-visible::after { outline: 2px solid var(--ft-blue); outline-offset: -1px; }
+#timeline .ft-tl-stretch:focus-visible::after { outline: 2px solid var(--ft-blue); outline-offset: 1px; }
 
 /* ---------- summary strip ---------- */
-#timeline .ft-tl-summary {
-  display: grid;
-  grid-template-columns: auto auto minmax(0, 1fr) auto;
-  grid-template-areas: "fig viz ven cta";
+
+/* =========================================================
+   Detail view: one native <dialog>, filled from the tile's
+   <template>. Desktop: a centred panel whose top stays put
+   while ‹ › step through the nodes; the media stage is a
+   fixed 16:9 frame, so only the text length changes the
+   height. Each picture is shown whole; an image never larger
+   than its own pixel size, a video at most 1.4x. Mobile: a
+   full-width bottom sheet.
+   ========================================================= */
+#timeline .ft-tl-dlg {
+  --d-pad: 12px;                                   /* stage inset                        */
+  --d-mh: clamp(180px, 100dvh - 380px, 440px);     /* stage height cap (short viewports) */
+  --d-top: max(16px, 50dvh - 360px);               /* fixed top: no jump while stepping  */
+  position: fixed;
+  inset: 0;
+  width: min(700px, calc(100vw - 32px));
+  max-width: none;
+  height: fit-content;
+  max-height: calc(100dvh - var(--d-top) - 16px);
+  margin: var(--d-top) auto auto;
+  padding: 0;
+  border: 0;
+  border-radius: 18px;
+  background: var(--ft-surface);
+  color: var(--ft-text);
+  box-shadow: 0 28px 70px rgba(9, 17, 30, 0.3), 0 2px 8px rgba(9, 17, 30, 0.12);
+  overflow: hidden;
+}
+#timeline .ft-tl-dlg[open] { display: flex; flex-direction: column; animation: ft-tl-d-in 0.24s cubic-bezier(0.2, 0.8, 0.2, 1); }
+#timeline .ft-tl-dlg::backdrop {
+  background: rgba(11, 19, 32, 0.56);
+  -webkit-backdrop-filter: blur(3px);
+  backdrop-filter: blur(3px);
+}
+#timeline .ft-tl-dlg[open]::backdrop { animation: ft-tl-d-fade 0.24s ease; }
+@keyframes ft-tl-d-in { from { opacity: 0; transform: translateY(12px) scale(0.985); } }
+@keyframes ft-tl-d-fade { from { opacity: 0; } }
+
+#timeline .ft-tl-d-panel {
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  container-type: inline-size;
+}
+#timeline .ft-tl-d-bar {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  display: flex;
   align-items: center;
-  column-gap: 28px;
-  margin-top: 24px;
-  padding: 5px 5px 5px 20px;
-  background: var(--ft-text);
-  border-radius: 14px;
+  gap: 8px;
+  padding: 10px var(--d-pad) 10px 24px;
+  background: var(--ft-surface);
 }
-#timeline .ft-tl-summary p { color: #fff; }
-#timeline .ft-tl-sum-fig {
-  grid-area: fig;
-  display: flex;
-  align-items: baseline;
-  gap: 6px;
-  white-space: nowrap;
-  font-family: 'Google Sans', sans-serif;
-  line-height: 1;
-}
-#timeline .ft-tl-sum-num { font-size: 1.85rem; font-weight: 600; letter-spacing: -0.01em; }
-#timeline .ft-tl-sum-unit { font-size: 1.05rem; font-weight: 500; }
-#timeline .ft-tl-sum-asof { margin-left: 6px; font-family: 'Noto Sans', sans-serif; font-size: 0.75rem; color: var(--tl-dim); }
-#timeline .ft-tl-sum-viz {
-  --sq: 7px;
-  --gp: 2px;
-  grid-area: viz;
-  display: grid;
-  gap: 5px;
-  width: max-content;
-  max-width: 100%;
+#timeline .ft-tl-d-ctx {
+  flex: 1 1 auto;
   min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 0.8rem;
+  line-height: 1.3;
+  color: var(--ft-muted);
 }
-#timeline .ft-tl-sum-bar { display: grid; grid-template-columns: repeat(33, minmax(0, var(--sq))); gap: var(--gp); }
-#timeline .ft-tl-sum-bar i { aspect-ratio: 1; border-radius: 1.5px; background: #7aa3f7; }
-#timeline .ft-tl-sum-bar i.is-insp { background: transparent; box-shadow: inset 0 0 0 1.25px #8d9bb0; }
-#timeline .ft-tl-sum-legend {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 2px 12px;
+#timeline .ft-tl-d-ctx b {
+  margin-right: 3px;                     /* + the space after it */
+  font-family: 'Google Sans', sans-serif;
+  font-weight: 600;
+  color: var(--ft-text);
+  font-variant-numeric: tabular-nums;
+}
+#timeline .ft-tl-d-nav { flex: none; display: flex; align-items: center; gap: 4px; }
+#timeline .ft-tl-d-pos {
+  min-width: 46px;
+  text-align: center;
   font-size: 0.75rem;
-  line-height: 1.25;
+  color: var(--ft-muted);
+  font-variant-numeric: tabular-nums;
 }
-#timeline .ft-tl-sum-legend span { white-space: nowrap; }
-#timeline .ft-tl-sum-legend span + span { margin-left: auto; }
-#timeline .ft-tl-summary .ft-tl-sum-legend { color: #d5dce7; }
-#timeline .ft-tl-summary .ft-tl-sum-venues { grid-area: ven; font-size: 0.8rem; line-height: 1.4; color: #c3ccd9; max-width: 250px; }
-#timeline .ft-tl-cta {
-  grid-area: cta;
+#timeline .ft-tl-d-btn { width: 32px; height: 32px; font-size: 0.75rem; }
+#timeline .ft-tl-d-nav::after {          /* a hairline between stepping and closing */
+  content: "";
+  width: 1px; height: 18px;
+  margin-left: 8px;
+  background: rgba(18, 32, 51, 0.12);
+}
+#timeline .ft-tl-d-x { font-size: 0.9rem; }
+
+#timeline .ft-tl-d-stage {
+  --d-sw: calc(100cqw - 2 * var(--d-pad));
+  --d-sh: min(var(--d-mh), var(--d-sw) * 0.5625);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: var(--d-sh);
+  margin: 0 var(--d-pad);
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--tl-soft);
+}
+#timeline .ft-tl-d-stage > video,
+#timeline .ft-tl-d-stage > img {
+  display: block;
+  flex: none;
+  width: min(100%, var(--w) * var(--up, 1) * 1px, var(--d-sh) * var(--w) / var(--h));
+  max-width: none;
+  height: auto;
+  aspect-ratio: var(--w) / var(--h);
+  object-fit: contain;
+  border-radius: 6px;
+  background: transparent;
+}
+/* footage may grow up to 1.4x its pixel size (DexFLEX 480 -> 672), so the low-res videos fill the
+   stage like their neighbours; figures with small text (images) stay at 1x */
+#timeline .ft-tl-d-stage > video { --up: 1.4; background: #0d1520; }
+
+#timeline .ft-tl-d-body { padding: 18px 24px 24px; }
+#timeline .ft-tl-d-meta {
+  font-size: 0.78rem;
+  line-height: 1.4;
+  letter-spacing: 0.02em;
+  color: var(--ft-muted);
+  font-variant-numeric: tabular-nums;
+}
+#timeline .ft-tl-d-title {
+  margin-top: 6px;
+  font-family: 'Google Sans', sans-serif;
+  font-weight: 600;
+  font-size: 1.3rem;
+  line-height: 1.25;
+  letter-spacing: -0.005em;
+  color: var(--ft-text);
+  text-wrap: balance;
+}
+#timeline .ft-tl-d-title:focus { outline: none; }
+#timeline .ft-tl-d-text {
+  margin-top: 10px;
+  max-width: 64ch;
+  font-size: 0.94rem;
+  line-height: 1.6;
+  color: #3b4a5f;
+  text-wrap: pretty;
+}
+#timeline .ft-tl-d-acts { margin-top: 18px; display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+#timeline .ft-tl-d-acts a {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  white-space: nowrap;
-  min-height: 38px;
+  min-height: 40px;
   padding: 0 16px;
-  border-radius: 9px;
-  background: var(--ft-blue);
-  color: #fff;
+  border-radius: 10px;
   font-family: 'Google Sans', sans-serif;
   font-weight: 500;
   font-size: 0.94rem;
-  transition: background-color 0.2s ease;
+  white-space: nowrap;
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
 }
-#timeline .ft-tl-cta:hover { background: var(--ft-blue-dark); color: #fff; }
-#timeline .ft-tl-cta:focus-visible { outline-color: #fff; border-radius: 9px; }
+#timeline .ft-tl-d-go { padding: 0 18px; background: var(--ft-blue); color: #fff; }
+#timeline .ft-tl-d-go:hover { background: var(--ft-blue-dark); color: #fff; }
+#timeline .ft-tl-d-go i { font-size: 0.85rem; }
+#timeline .ft-tl-d-paper { border: 1px solid rgba(18, 32, 51, 0.14); color: var(--ft-text); background: var(--ft-surface); }
+#timeline .ft-tl-d-paper i { font-size: 0.7rem; color: var(--ft-muted); }
+#timeline .ft-tl-d-paper:hover { border-color: rgba(47, 111, 237, 0.45); color: var(--ft-blue-dark); }
+#timeline .ft-tl-d-paper[hidden] { display: none; }
+#timeline .ft-tl-d-acts a:focus-visible { border-radius: 10px; }
 
 /* =========================================================
-   Touch targets: every link >= 36px tall at <= 1023px, and on
-   coarse pointers at any width (iPad landscape).
+   Touch targets: every small control >= 36px at <= 1023px,
+   and on coarse pointers at any width (iPad landscape).
    ========================================================= */
 @media screen and (max-width: 1023px), (pointer: coarse) {
-  #timeline .ft-tl-picks { gap: 0; margin-top: 2px; }
-  #timeline .ft-tl-picks a { display: flex; align-items: center; min-height: 36px; padding: 6px 0; }
-  #timeline .ft-tl-picks:not(.is-grid) li + li { border-top: 1px solid var(--ft-line); }
-  #timeline .ft-tl-picks li .ft-tl-award { margin: -2px 0 8px; }
-  #timeline .ft-tl-picks.is-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); column-gap: 10px; }
-  #timeline .ft-tl-picks.is-grid li { display: block; }
-  #timeline .ft-tl-picks.is-grid li:nth-child(n+3) { border-top: 1px solid var(--ft-line); }
-  #timeline .ft-tl-picks.is-grid li:not(:last-child)::after { content: none; }
-  #timeline .ft-tl-picks.is-grid a { flex-wrap: wrap; column-gap: 4px; }
-  #timeline .ft-tl-sub { margin-left: 0; }
-  #timeline .ft-tl-also { padding-top: 0; border-top: 1px solid var(--ft-line); }
-  #timeline .ft-tl-also a { display: inline-flex; align-items: center; min-height: 36px; }
   #timeline .ft-tl-navbtn { width: 36px; height: 36px; font-size: 0.8rem; }
   #timeline .ft-tl-nav { gap: 8px; }
+  #timeline .ft-tl-d-btn { width: 38px; height: 38px; font-size: 0.8rem; }
+  #timeline .ft-tl-d-x { font-size: 0.95rem; }
+  #timeline .ft-tl-d-acts a { min-height: 44px; }
 }
 
 /* =========================================================
-   Narrow desktop (1024–1123px): the 2026 lane overflows by
-   1124 − width. Near 1123 that is only a few px, which reads as
-   a glitch, so CoRL widens with the viewport and the last tile
-   (FlexiTac-Gen) always stays 48px clipped: a clear peek of
-   ~100px under the fade. At >= 1124 everything fits again.
-   ========================================================= */
-@media screen and (min-width: 1024px) and (max-width: 1123px) {
-  #timeline { --tl-wide: max(202px, calc(100vw - 870px)); }
-}
-
-/* =========================================================
-   Tablet (769–1023px): bigger tiles, 0.84rem lines.
-   Tiles are sized from the viewport so the 2026 lane's visible
-   edge always falls inside a tile, never on a gap. The lane
-   shows V = 100vw − 146px from its first tile (24px section
-   padding ×2, label 88, gap 14, less 4px lane padding).
-     769–879:  beat + 2 tiles + a 1/6-width peek of the third
-               (74–92px):  w = (V − 150 − 3·10) / 2.4
-     880–1023: beat + 3 tiles + a 60px peek of CoRL:
-               w = (V − 150 − 4·10 − 60) / 3
+   Tablet (769–1023px): same slots; the 2026 lane scrolls.
    ========================================================= */
 @media screen and (max-width: 1023px) {
-  #timeline {
-    --tl-lab: 88px;
-    --tl-cg: 14px;
-    --tl-g: 10px;
-    --tl-w: calc((100vw - 326px) / 2.4);
-    --tl-m: 150px;
-    --tl-wide: min(300px, calc(var(--tl-w) * 1.46));
-    --tl-stem: 20px;
-    --tl-card-h: 0px;
-  }
-  #timeline .ft-tl-title { font-size: 0.98rem; }
-  #timeline .ft-tl-line { font-size: 0.84rem; line-height: 1.42; }
-  #timeline .ft-tl-oq { font-size: 0.8rem; }
-  #timeline .ft-tl-picks a { font-size: 0.86rem; }
-  #timeline .ft-tl-media.is-repo { padding: 0 12px; }
-  #timeline .ft-tl-node.is-beat { align-self: flex-start; }   /* a beat keeps its own height */
-  #timeline .ft-tl-media.is-taxels { --px: 3px; --dot: 1.5px; }
+  #timeline { --tl-stem: 22px; }
 
-  #timeline .ft-tl-summary {
-    grid-template-columns: auto minmax(0, 1fr);
-    grid-template-areas: "fig cta" "viz ven";
-    row-gap: 14px;
-    column-gap: 24px;
-    padding: 16px;
-  }
-  #timeline .ft-tl-cta { justify-self: end; min-height: 44px; }
-  #timeline .ft-tl-summary .ft-tl-sum-venues { max-width: none; }
-}
-@media screen and (min-width: 880px) and (max-width: 1023px) {
-  #timeline { --tl-w: calc((100vw - 396px) / 3); }
 }
 
 /* =========================================================
    Mobile (<=768px): the label becomes a row header above its
-   lane; each lane is an edge-to-edge swipe track of compact
-   tiles (thumbnail beside the title, copy under both). Tiles are
-   capped at 300px and leave a ~52px peek of the next one.
+   lane; each lane is an edge-to-edge swipe track of 132px
+   tiles, 12px apart (two and a half in view at 390px). A
+   conference runs sideways under its ruler label (the CoRL
+   columns follow each other in one row: a tall stack would
+   leave most of a phone lane empty). The detail view becomes
+   a full-width bottom sheet.
    ========================================================= */
 @media screen and (max-width: 768px) {
   #timeline {
-    --tl-w: min(calc(100vw - 88px), 300px);
-    --tl-m: var(--tl-w);
-    --tl-wide: var(--tl-w);
+    --tl-slot: 132px;
+    --tl-card: 132px;
     --tl-g: 12px;
-    --tl-pad: 6px;
-    --tl-thumb: min(128px, calc(var(--tl-w) * 0.42));
+    --tl-ow: 196px;
     --tl-fade: 20px;
+    --tl-pad: 5px;
   }
   #timeline .ft-tl-head { margin-bottom: 1.25rem; }
-  #timeline .ft-tl-rows { gap: 22px; }
+  #timeline .ft-tl-rows { gap: 26px; }
   #timeline .ft-tl-row { display: block; }
   #timeline .ft-tl-row::before { content: none; }
   #timeline .ft-tl-label {
@@ -2462,7 +2356,7 @@ h2[style*="color: rgb(189, 189, 189);"] {
     row-gap: 1px;
     margin-bottom: 8px;
   }
-  #timeline .ft-tl-yr { grid-area: yr; justify-self: start; padding: 0; background: none; font-size: 1.15rem; line-height: 1.2; }
+  #timeline .ft-tl-yr { grid-area: yr; justify-self: start; padding: 0; background: none; font-size: 1.3rem; line-height: 1.2; }
   #timeline .ft-tl-cap { grid-area: cap; margin: 0; font-size: 0.8rem; line-height: 1.35; }
   #timeline .ft-tl-cap > span:not(.ft-tl-sep) { display: inline; white-space: nowrap; }
   #timeline .ft-tl-cap .ft-tl-sep { position: static; width: auto; height: auto; margin: 0; overflow: visible; clip: auto; white-space: normal; }
@@ -2473,63 +2367,62 @@ h2[style*="color: rgb(189, 189, 189);"] {
     scroll-padding-inline: 1.5rem;
     scroll-snap-type: x mandatory;
   }
-  #timeline .ft-tl-items { align-items: flex-start; }
+  #timeline .ft-tl-title { font-size: 0.84rem; }
+  #timeline .ft-tl-line { font-size: 0.75rem; line-height: 1.36; }
+  #timeline .ft-tl-pill { height: 17px; line-height: 17px; font-size: 0.6875rem; top: calc(var(--tl-pad) + 100cqw * 0.5625 - 22px); left: calc(var(--tl-pad) + 5px); }
+  #timeline .ft-tl-oq { font-size: 0.8rem; }
 
-  /* compact tile: thumbnail | title (+ venue pill); copy and footer full width */
-  #timeline .ft-tl-card {
-    display: grid;
-    grid-template-columns: var(--tl-thumb) minmax(0, 1fr);
-    grid-template-rows: auto 1fr auto auto auto;
-    column-gap: 10px;
-    align-content: start;
-    padding: 6px 6px 9px;
+  /* a conference runs sideways here (a tall stack would leave the lane mostly empty) */
+  #timeline .ft-tl-node.is-venue,
+  #timeline .ft-tl-node.is-cluster { width: auto; }
+  #timeline .ft-tl-stack,
+  #timeline .ft-tl-stack.is-cols { display: flex; flex-direction: row; gap: var(--tl-g); }
+  #timeline .ft-tl-stack > li { scroll-snap-align: start; }
+  /* ... with its label and foot pinned at the lane's start while its tiles scroll past
+     (left: 0 is the lane's padding edge, flush with the tiles) */
+  #timeline .ft-tl-node.is-venue > .ft-tl-stem,
+  #timeline .ft-tl-node.is-venue > .ft-tl-vfoot { position: sticky; left: 0; z-index: 1; width: max-content; }
+  #timeline .ft-tl-node.is-cluster::after { content: none; }
+
+  /* detail view: bottom sheet, media on top */
+  #timeline .ft-tl-dlg {
+    --d-pad: 10px;
+    --d-mh: 9999px;
+    width: 100%;
+    max-height: calc(100dvh - 24px);
+    margin: auto 0 0;
+    border-radius: 18px 18px 0 0;
   }
-  #timeline .ft-tl-media { grid-column: 1; grid-row: 1 / 3; }
-  #timeline .ft-tl-title { grid-column: 2; grid-row: 1; margin-top: 1px; padding: 0; font-size: 1.02rem; }
-  #timeline .ft-tl-venue { position: static; grid-column: 2; grid-row: 2; justify-self: start; align-self: start; margin-top: 6px; box-shadow: none; }
-  #timeline .ft-tl-line { grid-column: 1 / -1; grid-row: 3; margin-top: 8px; font-size: 0.875rem; }
-  #timeline .ft-tl-foot-row { grid-column: 1 / -1; grid-row: 4; padding-top: 6px; }
-  #timeline .ft-tl-award { font-size: 0.8rem; }
-  #timeline .ft-tl-vhead { grid-column: 2; grid-row: 1 / 3; margin: 0; padding: 1px 0 0; flex-direction: column; align-items: flex-start; justify-content: flex-start; gap: 4px; }
-  #timeline .ft-tl-picks { grid-column: 1 / -1; grid-row: 3; margin-top: 6px; }
-  #timeline .ft-tl-also { grid-column: 1 / -1; grid-row: 4; }
-  #timeline .is-wide .ft-tl-media { height: auto; aspect-ratio: 16 / 9; }
-  #timeline .ft-tl-media.is-mosaic { aspect-ratio: auto; height: 76px; }   /* each image link stays >= 36px tall */
-
-  /* beats: a short banner on top, then title and copy */
-  #timeline .is-beat .ft-tl-media { grid-column: 1 / -1; grid-row: 1; height: 64px; }
-  #timeline .is-beat .ft-tl-title { grid-column: 1 / -1; grid-row: 2; margin-top: 8px; padding: 0 var(--tl-tx); }
-  #timeline .is-beat .ft-tl-line { margin-top: 3px; }
-  #timeline .is-beat .ft-tl-media.is-taxels { flex-flow: row wrap; gap: 6px 18px; height: auto; min-height: 64px; padding: 8px 0; }
-  #timeline .ft-tl-media.is-repo { gap: 4px; padding: 0 14px; }
-  #timeline .ft-tl-repo-br { display: inline; height: auto; }
-  #timeline .ft-tl-repo-name { font-size: 0.86rem; gap: 7px; }
-  #timeline .ft-tl-repo-name .fa-github { font-size: 1.15rem; }
-
-  #timeline .ft-tl-origin { padding: 4px 2px 0; margin-right: 0; }
-  #timeline .ft-tl-otitle { font-size: 1rem; }
-  #timeline .ft-tl-oq { font-size: 0.84rem; margin-top: 6px; text-wrap: pretty; }
-  #timeline .ft-tl-oq .ft-tl-nw { white-space: normal; }   /* the desktop line groups are not needed here */
-  #timeline .ft-tl-oq::before { margin-bottom: 6px; }
-
-  #timeline .ft-tl-summary {
-    grid-template-columns: minmax(0, 1fr);
-    grid-template-areas: "fig" "viz" "ven" "cta";
-    row-gap: 12px;
-    margin-top: 16px;   /* the 2026 lane is as tall as its tallest tile, which already adds air here */
-  }
-  #timeline .ft-tl-cta { justify-self: stretch; }
+  #timeline .ft-tl-dlg[open] { animation-name: ft-tl-d-up; }
+  /* one sheet height for every node, so the bar and the actions stay put while stepping;
+     the actions dock at the bottom, within thumb reach */
+  #timeline .ft-tl-dlg { min-height: min(calc(100dvh - 24px), 600px); }
+  #timeline .ft-tl-d-panel { display: flex; flex-direction: column; }
+  #timeline .ft-tl-d-stage { flex: none; }
+  #timeline .ft-tl-d-bar { padding: 8px var(--d-pad) 8px 18px; }
+  #timeline .ft-tl-d-pos { min-width: 40px; }
+  #timeline .ft-tl-d-body { flex: 1 0 auto; display: flex; flex-direction: column; padding: 16px 18px calc(20px + env(safe-area-inset-bottom, 0px)); }
+  #timeline .ft-tl-d-title { font-size: 1.15rem; }
+  #timeline .ft-tl-d-text { font-size: 0.9rem; line-height: 1.55; }
+  #timeline .ft-tl-d-acts { margin-top: auto; padding-top: 16px; }
+  #timeline .ft-tl-d-go { flex: 1 1 auto; }
 }
-
-/* large phones / small tablets: two tiles side by side, still with a ~52px peek */
-@media screen and (min-width: 560px) and (max-width: 768px) {
-  #timeline { --tl-w: min(calc((100vw - 100px) / 2), 300px); }
+@media screen and (max-width: 480px) {
+  #timeline .ft-tl-d-ctx span { display: none; }   /* the year alone; the bar keeps room for ‹ n/N › and × */
 }
+@keyframes ft-tl-d-up { from { opacity: 0.6; transform: translateY(48px); } }
 
 @media (prefers-reduced-motion: reduce) {
   #timeline .ft-tl-card,
   #timeline .ft-tl-title,
+  #timeline .ft-tl-media > video,
+  #timeline .ft-tl-media > img,
   #timeline .ft-tl-navbtn,
-  #timeline .ft-tl-cta { transition: none; }
+  #timeline .ft-tl-d-btn,
+  #timeline .ft-tl-d-acts a { transition: none; }
+  #timeline .ft-tl-card:hover .ft-tl-media > * { transform: none; }
+  #timeline .ft-tl-card:hover .ft-tl-media.is-trim > * { transform: scale(1.155); }
+  #timeline .ft-tl-dlg[open],
+  #timeline .ft-tl-dlg[open]::backdrop { animation: none; }
 }
 /* ===== end Timeline ===== */
