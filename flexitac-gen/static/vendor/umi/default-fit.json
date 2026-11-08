@@ -144,8 +144,8 @@
   "ok": true,
   "proposals": [
    {
-    "build_id": "surface-32x12-38ff2814faf0",
-    "build_sha256": "38ff2814faf0e7012aef0ba3b19a7aea8b4d9f4d6a3f2515123e20e315cf2dc5",
+    "build_id": "surface-32x12-3713abf9ee10",
+    "build_sha256": "3713abf9ee10eb0d46013ad7674051fdcbb44cc08b0fcf0e7d54e93fa0a56b07",
     "design": {
      "channel_order": {
       "columns": "ascending",
@@ -936,7 +936,7 @@
       ]
      },
      "bottom_board": "columns",
-     "build_id": "surface-32x12-38ff2814faf0",
+     "build_id": "surface-32x12-3713abf9ee10",
      "design": {
       "channel_order": {
        "columns": "ascending",
@@ -1036,8 +1036,8 @@
     "rank": 1
    },
    {
-    "build_id": "surface-12x32-52402eebdbdf",
-    "build_sha256": "52402eebdbdf1b2a9a152673ed5eeb6e555df02cf20afbca53c1525024e9b5c2",
+    "build_id": "surface-12x32-0a3ec6c55a1c",
+    "build_sha256": "0a3ec6c55a1cd3c8dc4b276d5e6f04907b31dbeddfdb93bef92b039daeea8b62",
     "design": {
      "channel_order": {
       "columns": "ascending",
@@ -1796,7 +1796,7 @@
       ]
      },
      "bottom_board": "columns",
-     "build_id": "surface-12x32-52402eebdbdf",
+     "build_id": "surface-12x32-0a3ec6c55a1c",
      "design": {
       "channel_order": {
        "columns": "ascending",

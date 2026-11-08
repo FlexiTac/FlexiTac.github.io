@@ -585,7 +585,7 @@
  "variants": {
   "arx-x5-1mm": {
    "badge": "Fine",
-   "build_id": "surface-32x26-1b2b8fcf20b8",
+   "build_id": "surface-32x26-e32a3d71cbce",
    "centred": false,
    "column_tail_mm": 52.889,
    "columns": 26,
@@ -595,7 +595,7 @@
    ],
    "fill": 0.5,
    "fit": "fits/arx-x5-1mm.json",
-   "fit_sha256": "f3fd0d982507158bc100cb2c3658fcb7cea60251507a54cb7ee378038acdd2c2",
+   "fit_sha256": "a404a8ca9366fc5d03526436feb5335d0ae7d2398f6004aa2c32da4d1b691e9d",
    "fits_reader": null,
    "image": {
     "alt": "ARX X5, 1 mm on both fingers of the open gripper",
@@ -626,7 +626,7 @@
   },
   "arx-x5-2mm": {
    "badge": null,
-   "build_id": "surface-32x25-f86dce773ee4",
+   "build_id": "surface-32x25-b2efd64d84ca",
    "centred": false,
    "column_tail_mm": 19.86,
    "columns": 25,
@@ -636,7 +636,7 @@
    ],
    "fill": 0.5,
    "fit": "fits/arx-x5-2mm.json",
-   "fit_sha256": "0b82f3e32d1489edec238926e9088220b07d11f566502f17f70a775014f892f4",
+   "fit_sha256": "d2b068440a29fda1d0116b4a36111cf779c9d54b06b7d4367148c965a0d43981",
    "fits_reader": null,
    "image": {
     "alt": "ARX X5, 2 mm on both fingers of the open gripper",
@@ -667,7 +667,7 @@
   },
   "arx-x5-3mm": {
    "badge": null,
-   "build_id": "surface-23x19-abbdaa926a1a",
+   "build_id": "surface-23x19-15cb0acc221c",
    "centred": false,
    "column_tail_mm": 15.907,
    "columns": 19,
@@ -677,7 +677,7 @@
    ],
    "fill": 0.5,
    "fit": "fits/arx-x5-3mm.json",
-   "fit_sha256": "dfb76a3be770f117759f93ad957cd71931f6c584f6f170e55624e275b6f51da2",
+   "fit_sha256": "dc1b28c8fe9db0b549eeda30450cc45d26b5a2e137b3e0ec8b003deb8fda7f64",
    "fits_reader": null,
    "image": {
     "alt": "ARX X5, 3 mm on both fingers of the open gripper",
@@ -708,7 +708,7 @@
   },
   "arx-x5-4mm": {
    "badge": null,
-   "build_id": "surface-17x13-857d94ae8ca0",
+   "build_id": "surface-17x13-a03eb604d85b",
    "centred": false,
    "column_tail_mm": 17.172,
    "columns": 13,
@@ -718,7 +718,7 @@
    ],
    "fill": 0.5,
    "fit": "fits/arx-x5-4mm.json",
-   "fit_sha256": "6b931016f39b53c01affa0321db40dbf24dbd3ab25505af51e4335a5137519c5",
+   "fit_sha256": "15201e3861526377d174b0ec91b2841cc873cc6fd9df7365f0cd3e440f4bdd45",
    "fits_reader": null,
    "image": {
     "alt": "ARX X5, 4 mm on both fingers of the open gripper",
@@ -749,7 +749,7 @@
   },
   "franka-hand-1.5mm": {
    "badge": null,
-   "build_id": "surface-11x11-862174f9923b",
+   "build_id": "surface-11x11-7bf517dd2c9d",
    "centred": false,
    "column_tail_mm": 17.793,
    "columns": 11,
@@ -759,7 +759,7 @@
    ],
    "fill": 0.5,
    "fit": "fits/franka-hand-1.5mm.json",
-   "fit_sha256": "8d0940f7d175bcd21d871cff6ba6140d87b89f0d8234097d604e79384c0187f4",
+   "fit_sha256": "39790ee7a7f55f676de996793023883fcbc7297682be75c85af87f3a2df40bb4",
    "fits_reader": null,
    "image": {
     "alt": "Franka Hand, 1.5 mm on both fingers of the open gripper",
@@ -790,7 +790,7 @@
   },
   "franka-hand-1mm": {
    "badge": "Fine",
-   "build_id": "surface-16x17-a5adb4b6de19",
+   "build_id": "surface-16x17-798e1ad9ba88",
    "centred": false,
    "column_tail_mm": 17.494,
    "columns": 17,
@@ -800,7 +800,7 @@
    ],
    "fill": 0.5,
    "fit": "fits/franka-hand-1mm.json",
-   "fit_sha256": "a935239a7fd4b8b6e82822822ae0fc133466c6ea0d196d91437b71dec1152de8",
+   "fit_sha256": "5790cc409184af8e870e8d96b07e90576e90e919896e42dbe1a0f78050fde36d",
    "fits_reader": null,
    "image": {
     "alt": "Franka Hand, 1 mm on both fingers of the open gripper",
@@ -831,7 +831,7 @@
   },
   "franka-hand-2.5mm": {
    "badge": null,
-   "build_id": "surface-7x7-0d2c216bbe24",
+   "build_id": "surface-7x7-52a0c3422b28",
    "centred": false,
    "column_tail_mm": 17.773,
    "columns": 7,
@@ -841,7 +841,7 @@
    ],
    "fill": 0.5,
    "fit": "fits/franka-hand-2.5mm.json",
-   "fit_sha256": "26dc9fe22c3d35b91bfac7f049700b7ee7153461a3153731494ed77dfbf2bff7",
+   "fit_sha256": "dfa86fa22bcd2a2f87151d4f58e926ae4a14b8faeee4058a1b8d90ee09607dd0",
    "fits_reader": null,
    "image": {
     "alt": "Franka Hand, 2.5 mm on both fingers of the open gripper",
@@ -872,7 +872,7 @@
   },
   "franka-hand-2mm": {
    "badge": null,
-   "build_id": "surface-8x8-1ac1c1d0696d",
+   "build_id": "surface-8x8-5ddb84b3191b",
    "centred": false,
    "column_tail_mm": 18.779,
    "columns": 8,
@@ -882,7 +882,7 @@
    ],
    "fill": 0.5,
    "fit": "fits/franka-hand-2mm.json",
-   "fit_sha256": "8edc8ab488d0469d1b1d505706274dc7374fb52c9ac96d33859537affb3b18ed",
+   "fit_sha256": "a8bb130bbf4d23ff0bcd1ff7e47e6ed14d835beeaeb315c75a5131cb6b439765",
    "fits_reader": null,
    "image": {
     "alt": "Franka Hand, 2 mm on both fingers of the open gripper",
@@ -913,7 +913,7 @@
   },
   "i2rt-yam-1mm": {
    "badge": "Fine",
-   "build_id": "surface-32x32-958029ab83c1",
+   "build_id": "surface-32x32-9f9f07663e9f",
    "centred": false,
    "column_tail_mm": 51.626,
    "columns": 32,
@@ -923,7 +923,7 @@
    ],
    "fill": 0.5,
    "fit": "fits/i2rt-yam-1mm.json",
-   "fit_sha256": "ec252048ff9b7b9cd46e6b5af60a2b7454e6eb3649cbaf824677aa8b920caff8",
+   "fit_sha256": "2e82ad0a1b4f9888fafef2f5282cdd068e398e290e9effd543ff4c4a8331408f",
    "fits_reader": null,
    "image": {
     "alt": "I2RT YAM, 1 mm on both fingers of the open gripper",
@@ -954,7 +954,7 @@
   },
   "i2rt-yam-2mm": {
    "badge": null,
-   "build_id": "surface-32x32-34eefac6ad11",
+   "build_id": "surface-32x32-1f9ce2e33e3a",
    "centred": false,
    "column_tail_mm": 18.248,
    "columns": 32,
@@ -964,7 +964,7 @@
    ],
    "fill": 0.5,
    "fit": "fits/i2rt-yam-2mm.json",
-   "fit_sha256": "306fe0b4767ab33f88ba272381f755175080398b1aee6ee7b4b3fa9bd4b4d8cb",
+   "fit_sha256": "7a67d12d567236ecf1c38628afdfb6da41d49cde2436632cdd994f6206944d00",
    "fits_reader": null,
    "image": {
     "alt": "I2RT YAM, 2 mm on both fingers of the open gripper",
@@ -995,7 +995,7 @@
   },
   "i2rt-yam-3mm": {
    "badge": null,
-   "build_id": "surface-23x23-e64c2b2efbe4",
+   "build_id": "surface-23x23-f9259fe9fda6",
    "centred": false,
    "column_tail_mm": 14.397,
    "columns": 23,
@@ -1005,7 +1005,7 @@
    ],
    "fill": 0.5,
    "fit": "fits/i2rt-yam-3mm.json",
-   "fit_sha256": "7e7d2ab519a12911f8cd3cc0a240c1d1fbf1eaae23cb190252e02befdcf0701f",
+   "fit_sha256": "2b9b7643169a4140d5502a0ed0537a81e4b10478a18c56b3222bf427dbbcef3f",
    "fits_reader": null,
    "image": {
     "alt": "I2RT YAM, 3 mm on both fingers of the open gripper",
@@ -1036,7 +1036,7 @@
   },
   "i2rt-yam-4mm": {
    "badge": null,
-   "build_id": "surface-17x17-1554b68ffbe4",
+   "build_id": "surface-17x17-2af8d7fde405",
    "centred": false,
    "column_tail_mm": 14.797,
    "columns": 17,
@@ -1046,7 +1046,7 @@
    ],
    "fill": 0.5,
    "fit": "fits/i2rt-yam-4mm.json",
-   "fit_sha256": "0959bd2c85d5f7dad8b9dbb7444454618858c22bde1b98621f3178b4ba545964",
+   "fit_sha256": "22f8be95732931bda17526c1ebbc4d7829ecc3a5ed4aac2df0443a8cbcfff9c8",
    "fits_reader": null,
    "image": {
     "alt": "I2RT YAM, 4 mm on both fingers of the open gripper",
@@ -1077,7 +1077,7 @@
   },
   "makermods-metal-1.5mm": {
    "badge": null,
-   "build_id": "surface-32x15-584343a224cc",
+   "build_id": "surface-32x15-b8d412160ea2",
    "centred": true,
    "column_tail_mm": 34.928,
    "columns": 15,
@@ -1087,7 +1087,7 @@
    ],
    "fill": 0.5,
    "fit": "fits/makermods-metal-1.5mm.json",
-   "fit_sha256": "0c84b7369e0bae11a34168c706f74a2aed9f408dcda91713d44ddf51869972d3",
+   "fit_sha256": "8cbfb3f213a2b8a01951bf1de6c8fbc3879ef168ae8fe2786fd9074979278bc9",
    "fits_reader": null,
    "image": {
     "alt": "MakerMods Metal Arm, 1.5 mm on both fingertips on a plain rail",
@@ -1118,7 +1118,7 @@
   },
   "makermods-metal-1mm": {
    "badge": "Fine",
-   "build_id": "surface-32x19-a9f12c616d73",
+   "build_id": "surface-32x19-1f1818ea5463",
    "centred": true,
    "column_tail_mm": 50.945,
    "columns": 19,
@@ -1128,7 +1128,7 @@
    ],
    "fill": 0.5,
    "fit": "fits/makermods-metal-1mm.json",
-   "fit_sha256": "8a784441bbc8a5f1bccf449a0cee197c6a3ca9784035ccf247b91bcb1f763480",
+   "fit_sha256": "e3cf21a5600d4daa4fdc9f3b8915537b136781bcffe0c128d4a08e211d55300a",
    "fits_reader": null,
    "image": {
     "alt": "MakerMods Metal Arm, 1 mm on both fingertips on a plain rail",
@@ -1159,7 +1159,7 @@
   },
   "makermods-metal-2mm": {
    "badge": null,
-   "build_id": "surface-32x11-66a0a690c5a5",
+   "build_id": "surface-32x11-d65dee71ac18",
    "centred": true,
    "column_tail_mm": 19.336,
    "columns": 11,
@@ -1169,7 +1169,7 @@
    ],
    "fill": 0.5,
    "fit": "fits/makermods-metal-2mm.json",
-   "fit_sha256": "2b94f4767bbec8b2fd7a299324578c6650f2a4e3b6bcc4d024c946f85443c07f",
+   "fit_sha256": "ecff2e87cb7098783d6b2d9382e9e788e9838182cce5716fbcba0e5b6cf1f214",
    "fits_reader": null,
    "image": {
     "alt": "MakerMods Metal Arm, 2 mm on both fingertips on a plain rail",
@@ -1200,7 +1200,7 @@
   },
   "makermods-metal-3mm": {
    "badge": null,
-   "build_id": "surface-22x8-49d77605b721",
+   "build_id": "surface-22x8-dbe5c6b7f941",
    "centred": true,
    "column_tail_mm": 18.326,
    "columns": 8,
@@ -1210,7 +1210,7 @@
    ],
    "fill": 0.5,
    "fit": "fits/makermods-metal-3mm.json",
-   "fit_sha256": "15e34ad429e8b91686c8194a82b7708fb9dedbcf07cd7199dd743b81a854736d",
+   "fit_sha256": "67d1d939c853ba54136a23b27395f69516644547f5a530b967ee75cc0bec4efa",
    "fits_reader": null,
    "image": {
     "alt": "MakerMods Metal Arm, 3 mm on both fingertips on a plain rail",
@@ -1241,7 +1241,7 @@
   },
   "trossen-widowx-ai-1.5mm": {
    "badge": null,
-   "build_id": "surface-32x22-37a10808e66d",
+   "build_id": "surface-32x22-78af12034925",
    "centred": false,
    "column_tail_mm": 15.718,
    "columns": 22,
@@ -1251,7 +1251,7 @@
    ],
    "fill": 0.5,
    "fit": "fits/trossen-widowx-ai-1.5mm.json",
-   "fit_sha256": "935875d094eab679e6cc69c436dcc826babfc6051c1e4eb44abd705124419465",
+   "fit_sha256": "20da46165be4466a1694aeed617ac845e131629838e9a8d9d7a1bb19495458f6",
    "fits_reader": null,
    "image": {
     "alt": "Trossen WidowX AI, 1.5 mm on both fingers of the open gripper",
@@ -1282,7 +1282,7 @@
   },
   "trossen-widowx-ai-1mm": {
    "badge": "Fine",
-   "build_id": "surface-32x25-ae74126325ef",
+   "build_id": "surface-32x25-8ac3183a6340",
    "centred": false,
    "column_tail_mm": 31.932,
    "columns": 25,
@@ -1292,7 +1292,7 @@
    ],
    "fill": 0.5,
    "fit": "fits/trossen-widowx-ai-1mm.json",
-   "fit_sha256": "6b0c5bf0826a03407b89e01637ef570c82fe91c84729af52e46eb4b5c40b97a2",
+   "fit_sha256": "54747939006ccef72bc1d122a78e0006632d5585dc479763afb4dfe4b7572a93",
    "fits_reader": null,
    "image": {
     "alt": "Trossen WidowX AI, 1 mm on both fingers of the open gripper",
@@ -1323,7 +1323,7 @@
   },
   "trossen-widowx-ai-2mm": {
    "badge": null,
-   "build_id": "surface-24x16-aa1b0391082b",
+   "build_id": "surface-24x16-6243e8cd5f1a",
    "centred": false,
    "column_tail_mm": 16.993,
    "columns": 16,
@@ -1333,7 +1333,7 @@
    ],
    "fill": 0.5,
    "fit": "fits/trossen-widowx-ai-2mm.json",
-   "fit_sha256": "8b62a344707906cc605c814a92329b5eaa77341363e43d71f8352a0b2f1cffcf",
+   "fit_sha256": "5c7451e636c691a85ffa797b3d9c1f83066dd64d39b910c8fab17087a4ddd704",
    "fits_reader": null,
    "image": {
     "alt": "Trossen WidowX AI, 2 mm on both fingers of the open gripper",
@@ -1364,7 +1364,7 @@
   },
   "trossen-widowx-ai-3mm": {
    "badge": null,
-   "build_id": "surface-16x11-c00ef83387db",
+   "build_id": "surface-16x11-dafab6b1695b",
    "centred": false,
    "column_tail_mm": 17.816,
    "columns": 11,
@@ -1374,7 +1374,7 @@
    ],
    "fill": 0.5,
    "fit": "fits/trossen-widowx-ai-3mm.json",
-   "fit_sha256": "6d7665849df5eb7f29687b4f0eda0f779e1f0397c39dfcdc5113cf17cc4574ad",
+   "fit_sha256": "9573b5f3c92bcaa1a747bf142c9fbce10a3649e11293869038a724346e466e48",
    "fits_reader": null,
    "image": {
     "alt": "Trossen WidowX AI, 3 mm on both fingers of the open gripper",
@@ -1405,7 +1405,7 @@
   },
   "umi-convex-tip13.8-2mm": {
    "badge": null,
-   "build_id": "surface-32x12-a034302ef746",
+   "build_id": "surface-32x12-568f1bcff1cc",
    "centred": true,
    "column_tail_mm": 70.498,
    "columns": 12,
@@ -1415,7 +1415,7 @@
    ],
    "fill": 0.5,
    "fit": "fits/umi-convex-tip13.8-2mm.json",
-   "fit_sha256": "3e6f321f4040462dacd69f2c1062f589f9dd22e522d5ff3663cd43a512969c32",
+   "fit_sha256": "52952cf3dd982d204cf01e585ad1b30c037ec0a1589fa81d6d46c382d79ddb9c",
    "fits_reader": null,
    "image": {
     "alt": "UMI convex arc tip, 13.8 mm on the part",
@@ -1446,7 +1446,7 @@
   },
   "umi-convex-tip17.8-2mm": {
    "badge": null,
-   "build_id": "surface-32x12-6d1f5e05bf71",
+   "build_id": "surface-32x12-a4e852337e7a",
    "centred": true,
    "column_tail_mm": 70.498,
    "columns": 12,
@@ -1456,7 +1456,7 @@
    ],
    "fill": 0.5,
    "fit": "fits/umi-convex-tip17.8-2mm.json",
-   "fit_sha256": "cda4a2f49e7b216c04dcd63d1b7447cfd497f3d8d9d9b2869978b5cea26ee611",
+   "fit_sha256": "94e0715552e2ceb9bc1cb6629fec69c7211f14ce07ec0081a90a8c9a1d029114",
    "fits_reader": null,
    "image": {
     "alt": "UMI convex arc tip, 17.8 mm on the part",
@@ -1487,7 +1487,7 @@
   },
   "umi-convex-tip21.8-2mm": {
    "badge": null,
-   "build_id": "surface-32x12-aa51c2101766",
+   "build_id": "surface-32x12-a2448259d9c3",
    "centred": true,
    "column_tail_mm": 70.498,
    "columns": 12,
@@ -1497,7 +1497,7 @@
    ],
    "fill": 0.5,
    "fit": "fits/umi-convex-tip21.8-2mm.json",
-   "fit_sha256": "27cdfe655aab9cd0369bdf07663aede521ebd693c5b94045a283b230fbe708b3",
+   "fit_sha256": "9cf5f42251da93381e5d1660d4e69c19eb4a81e6a9afcf286869f7b31b30ad0e",
    "fits_reader": null,
    "image": {
     "alt": "UMI convex arc tip, 21.8 mm on the part",
@@ -1528,7 +1528,7 @@
   },
   "umi-convex-tip5.8-2mm": {
    "badge": null,
-   "build_id": "surface-32x11-fc12618f01c0",
+   "build_id": "surface-32x11-e1778282dbcd",
    "centred": true,
    "column_tail_mm": 70.336,
    "columns": 11,
@@ -1538,7 +1538,7 @@
    ],
    "fill": 0.5,
    "fit": "fits/umi-convex-tip5.8-2mm.json",
-   "fit_sha256": "80337a7522718a1ee2e8b54c9f049646000ad71acf586f124d64a8c818c709bc",
+   "fit_sha256": "9d8f9241a6370f8319e61c87b7b50a5b02f533b6ee94ca900e255e8fee9722fc",
    "fits_reader": null,
    "image": {
     "alt": "UMI convex arc tip, 5.8 mm on the part",
@@ -1569,7 +1569,7 @@
   },
   "umi-convex-tip9.8-2mm": {
    "badge": null,
-   "build_id": "surface-32x12-c87d9b1c4d73",
+   "build_id": "surface-32x12-7aea1fdee23c",
    "centred": true,
    "column_tail_mm": 70.498,
    "columns": 12,
@@ -1579,7 +1579,7 @@
    ],
    "fill": 0.5,
    "fit": "fits/umi-convex-tip9.8-2mm.json",
-   "fit_sha256": "52829092304fc59129f0e0110741edeaa93def1dd116261c45736d512885c343",
+   "fit_sha256": "2f4c6c11113541ec088375118efd97deb7943caa71af7f84db45e4fe7affaa92",
    "fits_reader": null,
    "image": {
     "alt": "UMI convex arc tip, 9.8 mm on the part",
@@ -1610,7 +1610,7 @@
   },
   "umi-finray-1.5mm": {
    "badge": null,
-   "build_id": "surface-32x17-8963ba729b38",
+   "build_id": "surface-32x17-23d2f6c5a920",
    "centred": true,
    "column_tail_mm": 86.196,
    "columns": 17,
@@ -1620,7 +1620,7 @@
    ],
    "fill": 0.5,
    "fit": "fits/umi-finray-1.5mm.json",
-   "fit_sha256": "07cc3ee1e73e180dce0ad7cf641f3eaf51636739acc8e8e60eed286c40a6d712",
+   "fit_sha256": "90a02212f4be1365c681fc36503c29db20e010edf72be3591a77780d45060ae4",
    "fits_reader": null,
    "image": {
     "alt": "UMI Fin-Ray Gripper, 1.5 mm on the part",
@@ -1651,7 +1651,7 @@
   },
   "umi-finray-1mm": {
    "badge": "Fine",
-   "build_id": "surface-32x25-82641c4b560c",
+   "build_id": "surface-32x25-3b48a66c2948",
    "centred": true,
    "column_tail_mm": 102.019,
    "columns": 25,
@@ -1661,7 +1661,7 @@
    ],
    "fill": 0.5,
    "fit": "fits/umi-finray-1mm.json",
-   "fit_sha256": "bcbed5e7e1adfa1e336698c4aad1db9eca7d26ca26ffee8d2eff6ce42a312659",
+   "fit_sha256": "7dd0290ea23d914f18158852b637e41a3e814d5d74cc564b43daafd2ebcf444b",
    "fits_reader": null,
    "image": {
     "alt": "UMI Fin-Ray Gripper, 1 mm on the part",
@@ -1692,7 +1692,7 @@
   },
   "umi-finray-2mm": {
    "badge": null,
-   "build_id": "surface-32x12-38ff2814faf0",
+   "build_id": "surface-32x12-3713abf9ee10",
    "centred": true,
    "column_tail_mm": 70.46,
    "columns": 12,
@@ -1702,7 +1702,7 @@
    ],
    "fill": 0.5,
    "fit": "../vendor/umi/default-fit.json",
-   "fit_sha256": "fb5c5288972dd22b714bd34aec6a58215964d3a6ef6f035e463959afd21784ca",
+   "fit_sha256": "488dc0a3ab81bd398bee635cad5ee3c782f7559826944643a41349c40e546e1a",
    "fits_reader": null,
    "image": {
     "alt": "UMI Fin-Ray Gripper, 2 mm on the part",
@@ -1733,7 +1733,7 @@
   },
   "umi-finray-3mm": {
    "badge": null,
-   "build_id": "surface-21x8-e75a5db676f5",
+   "build_id": "surface-21x8-4548f2e02ef6",
    "centred": true,
    "column_tail_mm": 72.899,
    "columns": 8,
@@ -1743,7 +1743,7 @@
    ],
    "fill": 0.5,
    "fit": "fits/umi-finray-3mm.json",
-   "fit_sha256": "7b4e0a6014a00f0f2af34f2ea47aef6a29c044b2112589dc99c64a13a01dc1a9",
+   "fit_sha256": "910d5174be2cbe52052c6d450a6511c4b309e4a8d293ea971b947ec441e5a414",
    "fits_reader": null,
    "image": {
     "alt": "UMI Fin-Ray Gripper, 3 mm on the part",
@@ -1774,7 +1774,7 @@
   },
   "umi-trap-tip13.8-2mm": {
    "badge": null,
-   "build_id": "surface-32x11-27622a79a750",
+   "build_id": "surface-32x11-3b33935dba27",
    "centred": true,
    "column_tail_mm": 70.586,
    "columns": 11,
@@ -1784,7 +1784,7 @@
    ],
    "fill": 0.5,
    "fit": "fits/umi-trap-tip13.8-2mm.json",
-   "fit_sha256": "6074eb52273584e109228148d07371766b59d582c3f51a9f588883406ddbfecf",
+   "fit_sha256": "1746c1eb70d6d51feccae1b932dc349d9d0ab64af87b964add7830c17372781d",
    "fits_reader": null,
    "image": {
     "alt": "UMI trapezoid tip, 13.8 mm on the part",
@@ -1815,7 +1815,7 @@
   },
   "umi-trap-tip17.8-2mm": {
    "badge": null,
-   "build_id": "surface-32x11-2ddc49b792b8",
+   "build_id": "surface-32x11-0081149cd3fc",
    "centred": true,
    "column_tail_mm": 70.586,
    "columns": 11,
@@ -1825,7 +1825,7 @@
    ],
    "fill": 0.5,
    "fit": "fits/umi-trap-tip17.8-2mm.json",
-   "fit_sha256": "03a76fdb0ca47d1ff60646dfc50925b8c7de004392dc10cf117e7dbc3ac52646",
+   "fit_sha256": "3fb0ad9481deef8f266eefd35adf72a6710dc3a9bb4e5a5d096a2973ac19de0e",
    "fits_reader": null,
    "image": {
     "alt": "UMI trapezoid tip, 17.8 mm on the part",
@@ -1856,7 +1856,7 @@
   },
   "umi-trap-tip21.8-2mm": {
    "badge": null,
-   "build_id": "surface-32x11-9b2bfedb5657",
+   "build_id": "surface-32x11-b71429b37fb2",
    "centred": true,
    "column_tail_mm": 70.586,
    "columns": 11,
@@ -1866,7 +1866,7 @@
    ],
    "fill": 0.5,
    "fit": "fits/umi-trap-tip21.8-2mm.json",
-   "fit_sha256": "116a7e207f328e11be5036f38aa82c7aaa8edd4f67c11a66ab4e1662ed8c565e",
+   "fit_sha256": "c3efa569930da76406473f94292e15d71f33cf63b4e21d77fbaa5dc2112f0928",
    "fits_reader": null,
    "image": {
     "alt": "UMI trapezoid tip, 21.8 mm on the part",
@@ -1897,7 +1897,7 @@
   },
   "umi-trap-tip5.8-2mm": {
    "badge": null,
-   "build_id": "surface-32x11-c0f9f03ccc7a",
+   "build_id": "surface-32x11-c3cf744e7a3c",
    "centred": true,
    "column_tail_mm": 70.586,
    "columns": 11,
@@ -1907,7 +1907,7 @@
    ],
    "fill": 0.5,
    "fit": "fits/umi-trap-tip5.8-2mm.json",
-   "fit_sha256": "79a4b0d77e09f3b2dee7f8a2f46371b5c77d2b0279967230ff7af92c90adf429",
+   "fit_sha256": "15b39e0564c34532b4ec80c1f761ccba5358e4da204974bd93ffad77dce90cac",
    "fits_reader": null,
    "image": {
     "alt": "UMI trapezoid tip, 5.8 mm on the part",
@@ -1938,7 +1938,7 @@
   },
   "umi-trap-tip9.8-2mm": {
    "badge": null,
-   "build_id": "surface-32x11-2b7d6823399c",
+   "build_id": "surface-32x11-11e36f96e75a",
    "centred": true,
    "column_tail_mm": 70.586,
    "columns": 11,
@@ -1948,7 +1948,7 @@
    ],
    "fill": 0.5,
    "fit": "fits/umi-trap-tip9.8-2mm.json",
-   "fit_sha256": "d755cd2b34810e46140f912174e6515074c7a630427c7d773cb27037b05b0385",
+   "fit_sha256": "73d4391e56d5a3af6bef03c08c9cfacb95ed6d263846c09c21077d6862f62920",
    "fits_reader": null,
    "image": {
     "alt": "UMI trapezoid tip, 9.8 mm on the part",
@@ -1979,7 +1979,7 @@
   },
   "unitree-dex1-1.5mm": {
    "badge": null,
-   "build_id": "surface-32x17-d4b9eb05e5ae",
+   "build_id": "surface-32x17-3e8e69693e7a",
    "centred": true,
    "column_tail_mm": 16.046,
    "columns": 17,
@@ -1989,7 +1989,7 @@
    ],
    "fill": 0.5,
    "fit": "fits/unitree-dex1-1.5mm.json",
-   "fit_sha256": "ebc197d85b01dfc66798288e18c2fb912f530203c375b85baa636658ec378a29",
+   "fit_sha256": "dd7bc613a86064506b8462e3a3b5c4714b562197e354d584cd78faf4c63d0c1c",
    "fits_reader": null,
    "image": {
     "alt": "Unitree Dex1-1, 1.5 mm on both fingers of the open gripper",
@@ -2020,7 +2020,7 @@
   },
   "unitree-dex1-1mm": {
    "badge": "Fine",
-   "build_id": "surface-32x26-fe111c6f103a",
+   "build_id": "surface-32x26-137d1c230c12",
    "centred": true,
    "column_tail_mm": 31.639,
    "columns": 26,
@@ -2030,7 +2030,7 @@
    ],
    "fill": 0.5,
    "fit": "fits/unitree-dex1-1mm.json",
-   "fit_sha256": "4f9c7ffe21908920bfb3582aee4a7e5e5cfaa97df714fff27098492440b9e8f0",
+   "fit_sha256": "4976be3db717d573ee31ee4f733ec56a3565aa5fa4d912c88e6578acbe53f026",
    "fits_reader": null,
    "image": {
     "alt": "Unitree Dex1-1, 1 mm on both fingers of the open gripper",
@@ -2061,7 +2061,7 @@
   },
   "unitree-dex1-2mm": {
    "badge": null,
-   "build_id": "surface-24x13-f6889c1d1b59",
+   "build_id": "surface-24x13-99778b7ec297",
    "centred": true,
    "column_tail_mm": 17.005,
    "columns": 13,
@@ -2071,7 +2071,7 @@
    ],
    "fill": 0.5,
    "fit": "fits/unitree-dex1-2mm.json",
-   "fit_sha256": "81274309e8919dfe4c194824d9c1c7576550cb26ff16c4e64ebc0c0eed796979",
+   "fit_sha256": "bb3391b7150caa29c6c8a370e471c9864cf4584143d41e1161283a3a40beea47",
    "fits_reader": null,
    "image": {
     "alt": "Unitree Dex1-1, 2 mm on both fingers of the open gripper",
@@ -2102,7 +2102,7 @@
   },
   "unitree-dex1-3mm": {
    "badge": null,
-   "build_id": "surface-16x9-97d15171542d",
+   "build_id": "surface-16x9-613817193a59",
    "centred": true,
    "column_tail_mm": 18.453,
    "columns": 9,
@@ -2112,7 +2112,7 @@
    ],
    "fill": 0.5,
    "fit": "fits/unitree-dex1-3mm.json",
-   "fit_sha256": "d0dc0f758840db461b1fe321897d49c7a490644220d0c51724df9aa0ff59967c",
+   "fit_sha256": "43ba47a0c4c188bb084baee5372595f0f71f4b9838f995e85aaaef58efaad742",
    "fits_reader": null,
    "image": {
     "alt": "Unitree Dex1-1, 3 mm on both fingers of the open gripper",
@@ -2143,7 +2143,7 @@
   },
   "widowx-250-1.5mm": {
    "badge": null,
-   "build_id": "surface-17x17-899c8a1fd232",
+   "build_id": "surface-17x17-fd7b59548583",
    "centred": true,
    "column_tail_mm": 17.64,
    "columns": 17,
@@ -2153,7 +2153,7 @@
    ],
    "fill": 0.5,
    "fit": "fits/widowx-250-1.5mm.json",
-   "fit_sha256": "a6db36b8af032a54a52049fe6c0746107df41acad04436bde9bfedd499e0ddea",
+   "fit_sha256": "b9437328f77af010d3b488461853071ae850b112b4a69aabbdae0a73d48e3bf8",
    "fits_reader": null,
    "image": {
     "alt": "WidowX 250, 1.5 mm on both fingers of the open gripper",
@@ -2184,7 +2184,7 @@
   },
   "widowx-250-1mm": {
    "badge": "Fine",
-   "build_id": "surface-26x27-00b579408d5f",
+   "build_id": "surface-26x27-7112a7cc7ced",
    "centred": true,
    "column_tail_mm": 20.126,
    "columns": 27,
@@ -2194,7 +2194,7 @@
    ],
    "fill": 0.5,
    "fit": "fits/widowx-250-1mm.json",
-   "fit_sha256": "c50a8a61291bee91b432bda30e842dc2716d201155138164b4d7091125119f1f",
+   "fit_sha256": "563841014bf7ef3f36f40e27cd267c7983f42bed45d92fcefb5df807fce966fb",
    "fits_reader": null,
    "image": {
     "alt": "WidowX 250, 1 mm on both fingers of the open gripper",
@@ -2225,7 +2225,7 @@
   },
   "widowx-250-2mm": {
    "badge": null,
-   "build_id": "surface-13x13-bb5a27712f98",
+   "build_id": "surface-13x13-374be7b22e8e",
    "centred": true,
    "column_tail_mm": 17.8,
    "columns": 13,
@@ -2235,7 +2235,7 @@
    ],
    "fill": 0.5,
    "fit": "fits/widowx-250-2mm.json",
-   "fit_sha256": "ec99a4dcebc95d7a19231a46cc129d89c80bf23df71eefb420bf15837b0acb93",
+   "fit_sha256": "ae0fd81b332f5abec899dac220eee47f93422bb6a13e2aceaf569adb0e258664",
    "fits_reader": null,
    "image": {
     "alt": "WidowX 250, 2 mm on both fingers of the open gripper",
@@ -2266,7 +2266,7 @@
   },
   "widowx-250-3mm": {
    "badge": null,
-   "build_id": "surface-9x9-6da100ae4f56",
+   "build_id": "surface-9x9-bad0f3f1d596",
    "centred": true,
    "column_tail_mm": 17.443,
    "columns": 9,
@@ -2276,7 +2276,7 @@
    ],
    "fill": 0.5,
    "fit": "fits/widowx-250-3mm.json",
-   "fit_sha256": "bbdfd6fb03eeb41e0afbc47d6650210a63d392de7606ac1f7a0fe6dd58a64499",
+   "fit_sha256": "eeaf92e0d0c8426162f42e9082277cc9e393b2364756e4d225a623778e37d261",
    "fits_reader": null,
    "image": {
     "alt": "WidowX 250, 3 mm on both fingers of the open gripper",

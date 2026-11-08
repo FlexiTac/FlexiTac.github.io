@@ -879,7 +879,7 @@
   }
   // The board's thickness in the 3D views (the user's request of 2026-10-30): the stack-up of its result (board.fpc.stackup:
   // core PI, copper, coverlay adhesive and coverlay, 0.11 mm) behind the copper side, which stays where it was (the views'
-  // registration and pin-1 rings are the copper side's), and the stiffener below that (0.225 mm).  To scale where that is
+  // registration and pin-1 rings are the copper side's), and the stiffener below that (0.1 mm).  To scale where that is
   // at least 2 px on screen, else drawn 2 px thick, the stiffener in proportion (styles.css --depth-px; the oblique
   // views' caption says so).  Their walls are rings along the outline, its cutouts and the stiffener's edge, so the top
   // FPC stays see-through over the field; the stiffener's outer face closes it.  styles.css lays each at its depth.
