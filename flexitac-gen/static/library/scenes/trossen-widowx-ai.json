@@ -2,7 +2,7 @@
  "format": "flexitac-library-scene/v1",
  "part": "trossen-widowx-ai",
  "part_mesh_sha256": "7e2792c557d7e15681b0a3cb693b728931c620d34d326f9f5409ba966372ee8c",
- "about": "Trossen WidowX AI at full opening: trossen_arm_description 1f36d47, urdf/generated/wxai/wxai_follower.urdf (BSD-3-Clause): left_carriage_joint and right_carriage_joint prismatic 0..0.044 m on link_6, q 44 mm.  The bodies are mujoco_menagerie f3b6013 trossen_wxai link_6.obj, carriage_left.obj and carriage_right.obj (BSD-3-Clause) and, on each carriage, the HandUMI backbone (handumi-hw 1448278, WXAI-LEFT-Gripper-backbone.stl, Apache-2.0) under its sock, the Library mesh.  The backbone's file frame is registered on the menagerie's gripper_left.obj, which sits at carriage_left's origin (iterative closest point from 24 axis-aligned starts, the rotation snapped to the axes; median 0.02 mm).  The other finger is the mirror image of this one (x -> -x across the plane half way between the jaws): the HandUMI RIGHT backbone and sock are the LEFT ones mirrored (median 0.011 mm), so its sensor is the mirror-image board.",
+ "about": "Trossen WidowX AI at full opening: trossen_arm_description 1f36d47, urdf/generated/wxai/wxai_follower.urdf (BSD-3-Clause): left_carriage_joint and right_carriage_joint prismatic 0..0.044 m on link_6, q 44 mm.  The bodies are mujoco_menagerie f3b6013 trossen_wxai link_6.obj, carriage_left.obj and carriage_right.obj (BSD-3-Clause) and, on each carriage, the HandUMI backbone (handumi-hw 1448278, WXAI-LEFT-Gripper-backbone.stl, Apache-2.0) under its sock, the Library mesh.  The backbone's file frame is registered on the menagerie's gripper_left.obj, which sits at carriage_left's origin (iterative closest point from 24 axis-aligned starts, the rotation snapped to the axes; median 0.02 mm).  The other finger is the mirror image of this one (x -> -x across the plane half way between the jaws): the HandUMI RIGHT backbone and sock are the LEFT ones mirrored (median 0.011 mm), so its sensor is the mirror-image board.  The looks: drawn after Trossen Robotics' store photos of the WidowX AI (2026-11-12): the matte black housing with its two end shells, the ground steel guide rail across its front, the black anodised wrist actuator behind it, the two matte black racks, the grained black finger backbones and the black silicone sock (the Library's part).  link_6 is shared out by boxes: the rail's six triangles, the housing (every triangle from 57 mm up its axis), the actuator (the rest).  The rail's holes and every screw are the project's own drawing, not the model's, as plain cylinders: on the rail the two empty counterbores 50 mm from its middle and the two black socket-head screws 30 mm from it (bodies/trossen-widowx-ai/drawn-rail-bores.stl, drawn-rail-holes.stl, drawn-rail-screws.stl, drawn-rail-sockets.stl), and the black button-head screw with its hex socket on each end shell's outer face (drawn-shell-screws.stl, drawn-shell-sockets.stl).  Not modelled: the rail's ends inside the hollow shells with their screws 70 mm out (the model's shells are solid and its rail stops at them), the fingers' three screws each (the backbone is HandUMI's, with four holes elsewhere), the carriage brackets, their boards, the pinion, cables and camera.",
  "frame": "the part's file axes, mm",
  "approach": [
   0.0,
@@ -47,10 +47,10 @@
  },
  "bodies": [
   {
-   "mesh": "bodies/trossen-widowx-ai/link_6.stl",
-   "sha256": "be82b4d7a19e00c7dcd21d4e5e4fee8a92f5f1c7f77af4563c2a6960f3afaf37",
-   "bytes": 36884,
-   "triangles": 736,
+   "mesh": "bodies/trossen-widowx-ai/link_6-rail.stl",
+   "sha256": "64d0951be887ffb0bd10e5ab699ff5711b7c7dd11d6a1543bcf863e8fb417ff2",
+   "bytes": 384,
+   "triangles": 6,
    "matrix": [
     [
      0.0,
@@ -77,7 +77,280 @@
      1.0
     ]
    ],
-   "finger": null
+   "finger": null,
+   "look": "rail-ground"
+  },
+  {
+   "mesh": "bodies/trossen-widowx-ai/link_6-housing.stl",
+   "sha256": "7820f6356662749317566f795d87ba2f7cc7971ad71a0a8e03a8095e79b99a89",
+   "bytes": 25784,
+   "triangles": 514,
+   "matrix": [
+    [
+     0.0,
+     1.0,
+     0.0,
+     -43.972
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     -0.011
+    ],
+    [
+     1.0,
+     0.0,
+     0.0,
+     -156.288
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": null,
+   "look": "shell-charcoal"
+  },
+  {
+   "mesh": "bodies/trossen-widowx-ai/drawn-rail-bores.stl",
+   "sha256": "9197e048f73db7cf49f58f8c349504c3de0ce1c4144de02ce2dfadd309ab1d9b",
+   "bytes": 4884,
+   "triangles": 96,
+   "matrix": [
+    [
+     0.0,
+     1.0,
+     0.0,
+     -43.972
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     -0.011
+    ],
+    [
+     1.0,
+     0.0,
+     0.0,
+     -156.288
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": null,
+   "look": "bore-steel"
+  },
+  {
+   "mesh": "bodies/trossen-widowx-ai/drawn-rail-holes.stl",
+   "sha256": "1e55389c6cb5c1ee593ec253609039c8174b53939572b5f0a8bcc9f238127aa8",
+   "bytes": 3284,
+   "triangles": 64,
+   "matrix": [
+    [
+     0.0,
+     1.0,
+     0.0,
+     -43.972
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     -0.011
+    ],
+    [
+     1.0,
+     0.0,
+     0.0,
+     -156.288
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": null,
+   "look": "hole-dark"
+  },
+  {
+   "mesh": "bodies/trossen-widowx-ai/drawn-rail-screws.stl",
+   "sha256": "654e98a2d10778c47fa90cd041134f9e27991a8b195921bd61ffd9b11f8e74ef",
+   "bytes": 4884,
+   "triangles": 96,
+   "matrix": [
+    [
+     0.0,
+     1.0,
+     0.0,
+     -43.972
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     -0.011
+    ],
+    [
+     1.0,
+     0.0,
+     0.0,
+     -156.288
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": null,
+   "look": "screw-black-oxide"
+  },
+  {
+   "mesh": "bodies/trossen-widowx-ai/drawn-rail-sockets.stl",
+   "sha256": "e066ba8066eac1ef5381fe69b1df086ff72211a48440c69e03c153770ab80d5c",
+   "bytes": 2484,
+   "triangles": 48,
+   "matrix": [
+    [
+     0.0,
+     1.0,
+     0.0,
+     -43.972
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     -0.011
+    ],
+    [
+     1.0,
+     0.0,
+     0.0,
+     -156.288
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": null,
+   "look": "hole-dark"
+  },
+  {
+   "mesh": "bodies/trossen-widowx-ai/drawn-shell-screws.stl",
+   "sha256": "6b31b754423c9b331828575860eef57c2dd0f209ac145c2b928d8396c44f9965",
+   "bytes": 4884,
+   "triangles": 96,
+   "matrix": [
+    [
+     0.0,
+     1.0,
+     0.0,
+     -43.972
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     -0.011
+    ],
+    [
+     1.0,
+     0.0,
+     0.0,
+     -156.288
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": null,
+   "look": "screw-black-oxide"
+  },
+  {
+   "mesh": "bodies/trossen-widowx-ai/drawn-shell-sockets.stl",
+   "sha256": "18a735d507f199d20e1dab5290c03ff73d3fcdb16dbc69417868c352eb23e82c",
+   "bytes": 2484,
+   "triangles": 48,
+   "matrix": [
+    [
+     0.0,
+     1.0,
+     0.0,
+     -43.972
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     -0.011
+    ],
+    [
+     1.0,
+     0.0,
+     0.0,
+     -156.288
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": null,
+   "look": "hole-dark"
+  },
+  {
+   "mesh": "bodies/trossen-widowx-ai/link_6-actuator.stl",
+   "sha256": "af3c76ad4439b9d319b3e03f88bc502c155f29cf20b6bcdec95bfbeb7fd7eb08",
+   "bytes": 10884,
+   "triangles": 216,
+   "matrix": [
+    [
+     0.0,
+     1.0,
+     0.0,
+     -43.972
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     -0.011
+    ],
+    [
+     1.0,
+     0.0,
+     0.0,
+     -156.288
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": null,
+   "look": "actuator-satin"
   },
   {
    "mesh": "bodies/trossen-widowx-ai/carriage_left.stl",
@@ -110,7 +383,8 @@
      1.0
     ]
    ],
-   "finger": null
+   "finger": null,
+   "look": "shell-charcoal"
   },
   {
    "mesh": "bodies/trossen-widowx-ai/carriage_right.stl",
@@ -143,7 +417,8 @@
      1.0
     ]
    ],
-   "finger": null
+   "finger": null,
+   "look": "shell-charcoal"
   },
   {
    "mesh": "bodies/trossen-widowx-ai/wxai-left-gripper-backbone.stl",
@@ -176,7 +451,8 @@
      1.0
     ]
    ],
-   "finger": "sensor"
+   "finger": "sensor",
+   "look": "plastic-black-matte"
   },
   {
    "mesh": "bodies/trossen-widowx-ai/wxai-left-gripper-backbone.stl",
@@ -209,9 +485,61 @@
      1.0
     ]
    ],
-   "finger": "mate"
+   "finger": "mate",
+   "look": "plastic-black-matte"
   }
  ],
+ "looks": {
+  "actuator-satin": {
+   "color": "#2a2b2f",
+   "metalness": 0.2,
+   "roughness": 0.65,
+   "env_intensity": 1.3
+  },
+  "bore-steel": {
+   "color": "#c8cbd0",
+   "metalness": 1,
+   "roughness": 0.9
+  },
+  "hole-dark": {
+   "color": "#222224",
+   "metalness": 0,
+   "roughness": 0.75,
+   "env_intensity": 1.4
+  },
+  "plastic-black-matte": {
+   "color": "#262628",
+   "metalness": 0,
+   "roughness": 0.75,
+   "env_intensity": 1.8
+  },
+  "rail-ground": {
+   "color": "#c2c5ca",
+   "metalness": 1,
+   "roughness": 0.7,
+   "env_intensity": 1.3
+  },
+  "screw-black-oxide": {
+   "color": "#3a3a3d",
+   "metalness": 0.25,
+   "roughness": 0.55,
+   "env_intensity": 1.5
+  },
+  "shell-charcoal": {
+   "color": "#414143",
+   "metalness": 0,
+   "roughness": 0.7,
+   "env_intensity": 1.3
+  },
+  "sock-silicone": {
+   "color": "#303032",
+   "metalness": 0,
+   "roughness": 0.8,
+   "env_intensity": 2.6
+  }
+ },
+ "part_look": "sock-silicone",
+ "smooth_deg": 35,
  "see_through": [
   "mate"
  ],

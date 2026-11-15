@@ -10,9 +10,15 @@
 // to the middle of its pane by a lens shift (camera.setViewOffset), as the shots tool moves each picture's
 // (tools/browser/library_shots.py centring()), so the view that replaces the picture shows the sensor where the picture
 // did; the shots tool's own page (shoot) reads the drawing where the figure frames it and moves it itself.
+// A placed sensor (docs/LIBRARY_VIEW.md "A placed sensor"; the Library's showcase, the user's request of 2026-11-12: the
+// original, hand-designed FlexiTac pad, which no fit of the generator places) is drawn from a placed record instead of a
+// variant's fit: show({base, id, placed, mode}), its face on the part given directly and its tails rolled round the part
+// (drape.js placedStack); every sensor of entries.json is drawn as before.
 
 import {createOnPartView} from "./onpart.js";
 import {buildStack} from "./drape.js";
+import {placedStack} from "./drape.js";
+import {FOV_DEG, FRAME_MARGIN} from "./drape.js";
 import {parseStl} from "./stl.js";
 import {libraryStage} from "./library_stage.js";
 
@@ -39,6 +45,17 @@ async function fetched(url, kind) {
   const stream = new Blob([bytes]).stream();
   const text = head[0] === 0x1f && head[1] === 0x8b ? stream.pipeThrough(new DecompressionStream("gzip")) : stream;
   return JSON.parse(await new Response(text).text());
+}
+
+function partLookOf(rules, partId, family) {
+  // The look scenes.json's rules give a part without a scene (docs/LIBRARY_VIEW.md "The looks"): part_looks names it
+  // by the part's id, else by its family's, as a look of the rules' looks or as the look itself; {look, smooth_deg
+  // (the rules' part_smooth_deg, or null: flat facets)}, or null (no rule: the part as Gen by Surface draws it).
+  const named = rules?.part_looks?.[partId] ?? (family ? rules?.part_looks?.[family] : undefined);
+  if (named === undefined) return null;
+  const spec = typeof named === "string" ? rules.looks?.[named] : named;
+  if (!spec) throw new Error(`the rules' part_looks names the look ${JSON.stringify(named)}, which is not a look of the rules`);
+  return {look: spec, smooth_deg: typeof rules.part_smooth_deg === "number" ? rules.part_smooth_deg : null};
 }
 
 function boxOf(positions, scale) {
@@ -71,13 +88,59 @@ export function createLibraryView(host, {probe = false, shoot = false, onState =
   const current = {serial: 0, drawn: false, id: null, build_id: null, gripper: false, ms: null, mode: "exploded"};
   // The drawing's move to the middle, per mode and drawing buffer ([dx, dy] device px), measured at each home.
   const offsets = new Map();
+  // Turned, the lens widened to keep the drawing whole (fitLens), at every change of the camera (a drag, a key, a home).
+  inner.controls.addEventListener("change", () => fitLens());
   // The files kept for the next sensor: the last part's STL (a pitch of the same part), the rules, the last scene's bodies.
   const cache = {part: null, rules: null, bodies: new Map()};
 
+  function fitLens() {
+    // Turned (a drag, the arrow keys), the drawing kept whole on the canvas (the verification of 2026-11-13: a third of a
+    // turn round, the YAM's base and the Franka's fingertips left it, since a turn keeps the home's distance): the lens
+    // widened just enough that every point the home frames (the stack's home, drape.js frameView's points) lies within
+    // the frame's margin (FRAME_MARGIN) where the lens shift puts it; never narrower than FOV_DEG, and FOV_DEG at a home,
+    // so the homes, their pictures and the shots tool's views are as they were.  The camera stays where it is (its lamp,
+    // near and far, the edge bands as at the home's distance).
+    const {camera, controls, view} = inner;
+    const home = view.stack?.home?.[view.mode];
+    let tan = Math.tan((FOV_DEG * Math.PI) / 360);
+    if (home && view.moved) {
+      const t = controls.target; const c = camera.position;
+      const distance = Math.hypot(c.x - t.x, c.y - t.y, c.z - t.z);
+      const d = [(c.x - t.x) / distance, (c.y - t.y) / distance, (c.z - t.z) / distance];
+      // The camera's axes as three.js's lookAt makes them: right = up x d, up' = d x right.
+      const u = [camera.up.x, camera.up.y, camera.up.z];
+      let right = [u[1] * d[2] - u[2] * d[1], u[2] * d[0] - u[0] * d[2], u[0] * d[1] - u[1] * d[0]];
+      const length = Math.hypot(...right);
+      right = right.map(value => value / length);
+      const up = [d[1] * right[2] - d[2] * right[1], d[2] * right[0] - d[0] * right[2], d[0] * right[1] - d[1] * right[0]];
+      // The lens shift in the frame's halves (setViewOffset(W, H, -dx, -dy): the drawing dx px right, dy px down), and
+      // each side's room: the margin less the shift toward it.
+      const shift = camera.view?.enabled ? [(-2 * camera.view.offsetX) / camera.view.fullWidth, (-2 * camera.view.offsetY) / camera.view.fullHeight] : [0, 0];
+      const m = 1 / FRAME_MARGIN;
+      const room = {right: m - shift[0], left: m + shift[0], top: m + shift[1], bottom: m - shift[1]};
+      if (length > 1e-9 && Math.min(room.right, room.left, room.top, room.bottom) > 0.05) {
+        const {points} = home;
+        for (let k = 0; k < points.length; k += 3) {
+          const p = [points[k] - t.x, points[k + 1] - t.y, points[k + 2] - t.z];
+          const depth = distance - (p[0] * d[0] + p[1] * d[1] + p[2] * d[2]);
+          if (!(depth > 0)) continue;
+          const x = p[0] * right[0] + p[1] * right[1] + p[2] * right[2]; const y = p[0] * up[0] + p[1] * up[1] + p[2] * up[2];
+          const across = (x > 0 ? x / room.right : -x / room.left) / camera.aspect; const high = y > 0 ? y / room.top : -y / room.bottom;
+          tan = Math.max(tan, Math.max(across, high) / depth);
+        }
+      }
+    }
+    const fov = view.moved ? (360 / Math.PI) * Math.atan(tan) : FOV_DEG;
+    if (camera.fov !== fov) {
+      camera.fov = fov;
+      camera.updateProjectionMatrix();
+    }
+  }
   function centre() {
     // At a home not yet measured (per mode and buffer): one render without the shift, one read of its alpha, the drawing's
     // box; then half each axis's difference of its margins, toward the larger (library_shots.py centring()), as a lens
     // shift kept while the view turns.  Turned, a mode or size not measured keeps the shift it has until its home.
+    if (inner) fitLens();
     if (shoot || !current.drawn || !inner || inner.view.lost) return;
     const {camera, renderer, render, view} = inner;
     const gl = renderer.getContext();
@@ -120,10 +183,15 @@ export function createLibraryView(host, {probe = false, shoot = false, onState =
       throw error;
     }
   }
+  function rulesOf(base) {
+    // scenes.json's rules, fetched once: the grippers' scenes are drawn by them, and they may give a part without a
+    // scene its look (part_looks).
+    if (!cache.rules) cache.rules = fetched(base + SCENES, "json").then(index => index.rules).catch(error => { cache.rules = null; throw error; });
+    return cache.rules;
+  }
   async function sceneOf(base, path) {
     // A gripper's scene with the rules and its bodies' positions (mm), the bodies kept for its next sensor.
-    if (!cache.rules) cache.rules = fetched(base + SCENES, "json").then(index => index.rules).catch(error => { cache.rules = null; throw error; });
-    const [data, rules] = await Promise.all([fetched(base + file(path), "json"), cache.rules]);
+    const [data, rules] = await Promise.all([fetched(base + file(path), "json"), rulesOf(base)]);
     const paths = [...new Set(data.bodies.map(body => file(body.mesh)))];
     const loaded = await Promise.all(paths.map(name => (cache.bodies.has(name) ? cache.bodies.get(name)
       : fetched(base + name, "bytes").then(bytes => parseStl(bytes).positions))));
@@ -134,34 +202,44 @@ export function createLibraryView(host, {probe = false, shoot = false, onState =
   /**
    * Draw sensor `id` (variant and part: entries.json's; base: the Library's folder) in `mode`: resolves true once drawn
    * at its home, false when a later show or clear came first; rejects when a file does not load or the boards cannot be
-   * laid on the fit's surface (the page keeps the picture).
+   * laid on the fit's surface (the page keeps the picture).  placed: a placed record (drape.js PLACED_FORMAT) in place
+   * of variant and part: its art (of its sensor, of no build), its mesh and its scene, if any, are its own paths
+   * (relative to base, as a variant's), and its face and wrap lay the boards (placedStack).
    */
-  async function show({base, id, variant, part, mode = current.mode}) {
+  async function show({base, id, variant, part, mode = current.mode, placed = null}) {
     const serial = (current.serial += 1);
     current.mode = mode === "assembled" ? "assembled" : "exploded";
     current.drawn = false;
     const started = performance.now();
-    const scenePath = variant.view?.scene || null;
-    const [fit, positions, art, given] = await Promise.all([fetched(base + file(variant.fit), "json"), partPositions(base + file(part.mesh.file)),
-      fetched(base + file(variant.view.art), "gzip"), scenePath ? sceneOf(base, scenePath) : null]);
+    const scenePath = (placed ? placed.scene : variant.view?.scene) || null;
+    const build = placed ? null : variant.build_id;
+    // (The rules' look of a part without a scene is by the part's id or family: a placed record names no part, so its
+    // mesh without a scene is drawn as Gen by Surface draws it; with a scene, in the scene's part_look.)
+    const [fit, positions, art, given, rules] = await Promise.all([placed ? null : fetched(base + file(variant.fit), "json"),
+      partPositions(base + file(placed ? placed.mesh.file : part.mesh.file)),
+      fetched(base + file(placed ? placed.art : variant.view.art), "gzip"), scenePath ? sceneOf(base, scenePath) : null,
+      scenePath || placed ? null : rulesOf(base)]);
     if (serial !== current.serial) return false;
-    if (art.format !== ART_FORMAT || art.id !== id || art.build_id !== variant.build_id) throw new Error(`the art of ${art.id} (${art.build_id}) is not this sensor's`);
-    const proposal = fit.reply?.proposals?.[0];
-    if (proposal?.build_id !== variant.build_id) throw new Error("the fit's proposal is not this sensor's build");
-    if (given && given.data.part !== variant.part) throw new Error(`the scene of ${given.data.part} is not this sensor's part`);
-    const scale = UNIT_SCALES_MM[fit.reply.mesh.unit];
+    if (art.format !== ART_FORMAT || art.id !== (placed ? placed.sensor : id) || art.build_id !== build) throw new Error(`the art of ${art.id} (${art.build_id}) is not this sensor's`);
+    const proposal = placed ? null : fit.reply?.proposals?.[0];
+    if (!placed && proposal?.build_id !== build) throw new Error("the fit's proposal is not this sensor's build");
+    if (given && (placed ? given.data.part_mesh_sha256 !== placed.mesh.sha256 : given.data.part !== variant.part)) throw new Error(`the scene of ${given.data.part} is not this sensor's part`);
+    const scale = UNIT_SCALES_MM[placed ? placed.mesh.unit : fit.reply.mesh.unit];
+    // (A fit's unit is the server's own; a placed record is written by hand, and a unit this page does not know would be
+    // drawn as millimetres.)
+    if (placed && !(scale > 0)) throw new Error(`the placed record's mesh unit ${placed.mesh.unit} is not one of ${Object.keys(UNIT_SCALES_MM).join(", ")}`);
     const boards = {row: {outline: art.boards.row.outline}, column: {outline: art.boards.column.outline}};
-    const stack = buildStack({selection: fit.reply.selection, vertices: {positions, scale}, placement: proposal.placement, arts: art, boards,
-      partBox: boxOf(positions, scale)});
-    if (!stack) throw new Error("the boards could not be laid on the fit's surface");
+    const laid = {vertices: {positions, scale}, arts: art, boards, partBox: boxOf(positions, scale)};
+    const stack = placed ? placedStack({placed, ...laid}) : buildStack({selection: fit.reply.selection, placement: proposal.placement, ...laid});
+    if (!stack) throw new Error(placed ? "the boards could not be laid on the placed record's face" : "the boards could not be laid on the fit's surface");
     const loaded = performance.now();
     // Each sensor opens at its home, in the mode asked for (or chosen since).
     inner.view.moved = false;
     if (figure.info().mode !== current.mode) figure.setMode(current.mode);
     const scene = given && {data: given.data, meshes: given.meshes, rules: given.rules, measure: shoot};
-    const shown = await figure.show({stack, positions, scene});
+    const shown = await figure.show({stack, positions, scene, partLook: given || placed ? null : partLookOf(rules, variant.part, part.family)});
     if (!shown || serial !== current.serial) return false;
-    Object.assign(current, {drawn: true, id, build_id: variant.build_id, gripper: Boolean(given),
+    Object.assign(current, {drawn: true, id, build_id: build, gripper: Boolean(given),
       ms: {load: Math.round(loaded - started), draw: Math.round(performance.now() - loaded)}});
     offsets.clear();
     centre();

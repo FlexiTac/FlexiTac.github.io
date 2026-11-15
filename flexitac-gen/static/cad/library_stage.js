@@ -20,6 +20,7 @@
 
 import * as THREE from "../vendor/three/three.module.js";
 import {FOV_DEG, HOME_UP, frameView} from "./drape.js";
+import {lookOf, measure as timed} from "./studio.js";
 
 const FRAME_SAMPLES = 6000;
 const FILM_LAMP = {aim: 1.5, out: 0.3};
@@ -28,6 +29,155 @@ const MODES = ["exploded", "assembled"];
 // The clearances' reach (mm): a field farther than this from a body or the other finger reads as this far (">12").
 const REACH_MM = 12;
 const CELL_MM = 6;
+
+// -- The looks (docs/LIBRARY_VIEW.md "The looks"; the user's request of 2026-11-12: every gripper coloured after photos of
+// the real product, with a metal's lustre) --------------------------------------------------------------------------------
+// A scene may name looks (its "looks": {name: {color, metalness, roughness, clearcoat, clearcoat_roughness,
+// env_intensity}}), one per body (a body's "look") and one for the part and its mate ("part_look"), and a crease angle
+// for smooth normals ("smooth_deg"); scenes.json's rules may name a look for a part without a scene ("part_looks").
+// Without them every solid is the part's grey with flat facets, the pixels of before.
+//
+// The gripper studio (GRIPPER_STUDIO): the environment the looks mirror, built here with studio.js's recipe (a room and
+// panels in the camera's frame, prefiltered by PMREMGenerator; rolled with the stack's normal as the sheets' studio is)
+// and numbers of its own, tuned on real bodies (the Franka Hand, the Unitree Dex1, the ARX X5; 2026-11-12).  studio.js's
+// STUDIO was made for the sheets: a grey room 0.3 to 0.5 bright above the horizon with softboxes three to five times
+// that, nothing dark above the horizon and nothing bright below it.  A metal is its reflections, so in it a polished
+// steel is a flat mid grey, and at the Library's homes (the camera 30 degrees above the gripper) every upright face of
+// a metal mirrors the room below and behind the camera: with a dark floor the Franka Hand's aluminium fingers were
+// black.  So this room is darker above (the flags: 0.22 overhead, 0.10 at the horizon) with softboxes and rim strips
+// 15 to 50 times the horizon, which give a metal its bright sweeps and dark bands, and lighter below (0.6: the white
+// table a product stands on), with a front bounce low behind the camera that the upright faces mirror and a fill on
+// the right.  The panels stay at 5 or below (at 8 to 12 a third of a brushed aluminium body clipped to white, and the
+// canvas is transparent over the card's light ground: a blown highlight is a hole in the drawing).  The looks also take
+// a share of its diffuse light (diffuse, of three.js's own irradiance from it; the sheets' studio gives none): with the
+// lights alone a white shell's faces turned from the key were a mid grey under a white top, with the whole of it the
+// shell was lost in the card's ground.  The floor, the front bounce and the share were raised after the reviews of
+// 2026-11-12 (0.38, 1.3 and 0.3 before): the Franka Hand's shell read #b1b3b7 on its broad face against the photos'
+// #cfcfd7 to #eeeeee, its aluminium fingers #9b9ea1 against #c1c3d0 to #d8d5d4, and a black rubber pad's face turned
+// from the key #08080a, darker than the film beside it; with these the shell is #cdd0d4 under a #eef0f3 top, the fingers
+// #c6c9cd, and a black is lifted by what it mirrors of the room (the blacks' env_intensity, docs/LIBRARY_VIEW.md).
+// 128 px a cube face, as STUDIO.  Made on the first drawing that has a look, once per WebGL context.
+const GRIPPER_STUDIO = {
+  room: {zenith: 0.22, horizon: 0.1, floor: 0.6},
+  radius: 10,
+  distance: 6,
+  size: 128,
+  diffuse: 0.45,
+  panels: [
+    {at: [-0.75, 0.6, -0.27], size: [6, 4], radiance: 3},     // back softbox
+    {at: [-0.49, 0.78, 0.39], size: [5, 3.5], radiance: 3.2}, // key
+    {at: [0.05, 1, 0.1], size: [3, 8], radiance: 1.6},        // overhead strip
+    {at: [0.8, -0.15, 0.6], size: [4, 6], radiance: 1},       // fill
+    {at: [-0.15, -0.8, 0.55], size: [8, 4], radiance: 2.2},   // front bounce
+    {at: [-0.85, 0.25, -0.5], size: [1, 9], radiance: 5},     // rim, left
+    {at: [0.85, 0.25, -0.5], size: [1, 9], radiance: 5},      // rim, right
+  ],
+};
+// The see-through finger's look: the part's matte dielectric in its look's colour (a ghost of a metal is not a mirror).
+const GHOST = {roughness: 0.6, metalness: 0};
+const {warnOnce, patched, reflections, reflectionsOnly} = lookOf("Library view", {studied: "library-view-studio", without: "the grippers are drawn"});
+// A look's shader: three.js's lights_fragment_maps with the environment's diffuse light at GRIPPER_STUDIO.diffuse of
+// its own (the same line studio.js's reflections-only edit removes; found in the vendored three.js as that one is), or,
+// where three.js's text has changed, studio.js's reflections only (itself the shader as three.js wrote it then).
+const STUDIO_LIT = reflections ? patched(THREE.ShaderChunk.lights_fragment_maps, [["iblIrradiance += getIBLIrradiance( geometryNormal );",
+  `iblIrradiance += ${GRIPPER_STUDIO.diffuse.toFixed(3)} * getIBLIrradiance( geometryNormal );`]], "the gripper studio's diffuse light") : null;
+const studioLit = fragment => (STUDIO_LIT === null ? reflectionsOnly(fragment)
+  : patched(fragment, [["#include <lights_fragment_maps>", STUDIO_LIT]], "the gripper studio's diffuse light") ?? fragment);
+
+function gripperStudio(renderer) {
+  // The gripper studio's render target, or null where studio.js's own cannot be had either (three.js's shader text
+  // changed, no half-float render target, or making it failed): the looks are then lit by the lights alone.
+  if (!reflections) return null;
+  const extensions = renderer.extensions;
+  if (!(extensions.has("EXT_color_buffer_float") || extensions.has("EXT_color_buffer_half_float"))) return null;
+  const started = performance.now();
+  const room = new THREE.Scene();
+  const pmrem = new THREE.PMREMGenerator(renderer);
+  try {
+    const sphere = new THREE.SphereGeometry(GRIPPER_STUDIO.radius, 32, 16);
+    const position = sphere.attributes.position;
+    const colors = new Float32Array(3 * position.count);
+    const {zenith, horizon, floor} = GRIPPER_STUDIO.room;
+    for (let k = 0; k < position.count; k += 1) {
+      const y = position.getY(k) / GRIPPER_STUDIO.radius;
+      colors.fill(y >= 0 ? horizon + (zenith - horizon) * Math.sqrt(y) : horizon + (floor - horizon) * Math.sqrt(-y), 3 * k, 3 * k + 3);
+    }
+    sphere.setAttribute("color", new THREE.BufferAttribute(colors, 3));
+    room.add(new THREE.Mesh(sphere, new THREE.MeshBasicMaterial({vertexColors: true, side: THREE.BackSide})));
+    for (const panel of GRIPPER_STUDIO.panels) {
+      const mesh = new THREE.Mesh(new THREE.PlaneGeometry(...panel.size),
+        new THREE.MeshBasicMaterial({color: new THREE.Color().setScalar(panel.radiance), side: THREE.DoubleSide}));
+      mesh.position.set(...panel.at).normalize().multiplyScalar(GRIPPER_STUDIO.distance);
+      mesh.lookAt(0, 0, 0);
+      room.add(mesh);
+    }
+    const target = pmrem.fromScene(room, 0.02, 0.1, 2 * GRIPPER_STUDIO.radius, {size: GRIPPER_STUDIO.size});
+    timed("library-view-studio", started);
+    return target;
+  } catch (error) {
+    warnOnce("gripper-studio", `the gripper studio could not be made (${error?.message || error}): the grippers are drawn without its reflections.`);
+    return null;
+  } finally {
+    pmrem.dispose();
+    room.traverse(node => { node.geometry?.dispose(); node.material?.dispose(); });
+  }
+}
+
+function lookMaterial(spec, studio, rotation) {
+  // A body's material of its look: MeshStandard (MeshPhysical only with a clear coat, which costs SwiftShader about
+  // 1.6 times a standard body's pixels), the look's sRGB colour, both sides and the part's polygon offset (as the part's
+  // own material: an STL's facets may face either way, the sheets lie on it), mirroring the gripper studio and taking
+  // its share of diffuse light (studioLit).
+  const coated = typeof spec.clearcoat === "number" && spec.clearcoat > 0;
+  const material = new (coated ? THREE.MeshPhysicalMaterial : THREE.MeshStandardMaterial)({color: new THREE.Color().setStyle(spec.color, THREE.SRGBColorSpace),
+    roughness: spec.roughness, metalness: spec.metalness, side: THREE.DoubleSide, polygonOffset: true, polygonOffsetFactor: 1, polygonOffsetUnits: 1});
+  if (coated) { material.clearcoat = spec.clearcoat; material.clearcoatRoughness = spec.clearcoat_roughness ?? 0; }
+  material.envMap = studio?.texture || null;
+  material.envMapRotation = rotation;
+  material.envMapIntensity = spec.env_intensity ?? 1;
+  material.onBeforeCompile = shader => { shader.fragmentShader = studioLit(shader.fragmentShader); };
+  material.customProgramCacheKey = () => (coated ? "library-look-coated" : "library-look");
+  return material;
+}
+
+function creased(positions, degrees, mm = 1) {
+  // Smooth normals for an STL's triangle soup (9 floats a facet): at each corner the area-weighted sum of the normals of
+  // the facets that share its point (to 1 um) and face within ``degrees`` of the corner's own facet, so a curved face
+  // shades as one surface and an edge sharper than the angle stays an edge.  ``mm``: one unit of ``positions`` in mm (the
+  // bodies' files are in mm; a part's own file may be in metres, where points a millimetre apart would else be one).
+  // {normals, points: how many points the corners share}.
+  const cell = 1e3 * mm;
+  const faces = positions.length / 9;
+  const fn = new Float32Array(3 * faces); const fa = new Float32Array(faces);
+  for (let f = 0; f < faces; f += 1) {
+    const i = 9 * f;
+    const ux = positions[i + 3] - positions[i], uy = positions[i + 4] - positions[i + 1], uz = positions[i + 5] - positions[i + 2];
+    const vx = positions[i + 6] - positions[i], vy = positions[i + 7] - positions[i + 1], vz = positions[i + 8] - positions[i + 2];
+    const x = uy * vz - uz * vy, y = uz * vx - ux * vz, z = ux * vy - uy * vx; const length = Math.hypot(x, y, z);
+    fa[f] = length;
+    if (length > 0) { fn[3 * f] = x / length; fn[3 * f + 1] = y / length; fn[3 * f + 2] = z / length; }
+  }
+  const at = new Map(); const keys = new Array(3 * faces);
+  for (let c = 0; c < 3 * faces; c += 1) {
+    const key = `${Math.round(positions[3 * c] * cell)},${Math.round(positions[3 * c + 1] * cell)},${Math.round(positions[3 * c + 2] * cell)}`;
+    keys[c] = key;
+    const list = at.get(key);
+    if (list) list.push((c / 3) | 0); else at.set(key, [(c / 3) | 0]);
+  }
+  const cos = Math.cos((degrees * Math.PI) / 180);
+  const normals = new Float32Array(positions.length);
+  for (let c = 0; c < 3 * faces; c += 1) {
+    const f = (c / 3) | 0; let x = 0, y = 0, z = 0;
+    for (const g of at.get(keys[c])) {
+      if (fn[3 * f] * fn[3 * g] + fn[3 * f + 1] * fn[3 * g + 1] + fn[3 * f + 2] * fn[3 * g + 2] < cos) continue;
+      x += fa[g] * fn[3 * g]; y += fa[g] * fn[3 * g + 1]; z += fa[g] * fn[3 * g + 2];
+    }
+    const length = Math.hypot(x, y, z);
+    if (length > 0) { normals[3 * c] = x / length; normals[3 * c + 1] = y / length; normals[3 * c + 2] = z / length; }
+    else { normals[3 * c] = fn[3 * f]; normals[3 * c + 1] = fn[3 * f + 1]; normals[3 * c + 2] = fn[3 * f + 2]; }
+  }
+  return {normals, points: at.size};
+}
 
 const m4 = rows => new THREE.Matrix4().set(...rows.flat());
 const r1 = x => Math.round(x * 10) / 10;
@@ -315,31 +465,107 @@ function numbersOf(measures, info) {
  */
 export function libraryStage() {
   return (internals, figure) => {
-    const {scene, camera, controls, canvas, look, partLook, view, place, render, filmMaterial} = internals;
+    const {scene, camera, controls, renderer, canvas, look, partLook, view, place, render, filmMaterial} = internals;
     // info: the scene's drawing (null without one); extras: what it added to the figure's scene; geometries: the bodies'
-    // (by their positions), kept from one show to the next of the same gripper (a pitch).
-    const state = {info: null, extras: null, rules: null, geometries: new Map(), lamps: {key: null}};
-    const ghostLook = new THREE.MeshStandardMaterial({color: partLook.color.clone(), roughness: 0.6, metalness: 0, transparent: true,
+    // (by their positions: {geometry, deg, its normals' crease angle}), kept from one show to the next of the same
+    // gripper (a pitch); studio: the gripper studio (undefined until a look asks for it, null where it cannot be had);
+    // dressed: the look the part's own material wears (null: the figure's); creases: the part's smooth normals by its
+    // positions, smoothed: the angle a part geometry's normals are at now, partPoints: how many points its corners share
+    // while they are smooth (null: flat).
+    const state = {info: null, extras: null, rules: null, geometries: new Map(), lamps: {key: null}, studio: undefined, dressed: null,
+      creases: new WeakMap(), smoothed: new WeakMap(), partPoints: null};
+    // The part's own material as the figure made it (onpart.js partMaterial: its colour, its matte dielectric, no
+    // environment, the contact shade's shader): what a look changes on it for a drawing is put back from here.
+    const plain = {color: partLook.color.clone(), roughness: partLook.roughness, metalness: partLook.metalness, envMap: partLook.envMap,
+      envMapIntensity: partLook.envMapIntensity, envMapRotation: partLook.envMapRotation, onBeforeCompile: partLook.onBeforeCompile,
+      customProgramCacheKey: partLook.customProgramCacheKey};
+    const ghostLook = new THREE.MeshStandardMaterial({color: partLook.color.clone(), ...GHOST, transparent: true,
       opacity: 1, depthWrite: false, side: THREE.DoubleSide});
     const ghostDepth = new THREE.MeshBasicMaterial({colorWrite: false, depthWrite: true, transparent: true, side: THREE.DoubleSide});
 
-    function geometryOf(positions) {
-      if (!state.geometries.has(positions)) {
-        const geometry = new THREE.BufferGeometry();
-        geometry.setAttribute("position", new THREE.BufferAttribute(positions, 3));
-        geometry.computeVertexNormals();
-        geometry.computeBoundingSphere();
-        state.geometries.set(positions, geometry);
-      }
-      return state.geometries.get(positions);
+    function geometryOf(positions, deg = null) {
+      // A body's geometry: flat facets (deg null, as before the looks) or smooth normals with the crease angle deg; made
+      // again (a new geometry, the old one disposed: it is in no drawing here) when the angle asked for is another.
+      const kept = state.geometries.get(positions);
+      if (kept && kept.deg === deg) return kept.geometry;
+      if (kept) kept.geometry.dispose();
+      const geometry = new THREE.BufferGeometry();
+      geometry.setAttribute("position", new THREE.BufferAttribute(positions, 3));
+      if (deg === null) geometry.computeVertexNormals();
+      else geometry.setAttribute("normal", new THREE.BufferAttribute(creased(positions, deg).normals, 3));
+      geometry.computeBoundingSphere();
+      state.geometries.set(positions, {geometry, deg});
+      return geometry;
     }
     function keepGeometries(kept) {
       // The bodies' geometries no longer drawn disposed.
-      for (const [positions, geometry] of state.geometries) {
+      for (const [positions, {geometry}] of state.geometries) {
         if (kept.has(positions)) continue;
         geometry.dispose();
         state.geometries.delete(positions);
       }
+    }
+
+    function studioOf() {
+      // The gripper studio, made when a drawing first has a look (and again after a lost context: below).
+      if (state.studio === undefined) state.studio = gripperStudio(renderer);
+      return state.studio;
+    }
+    function dress(spec) {
+      // The part's own material (the figure's one instance: the sensor finger's and its mate's, with the contact shade
+      // in its shader) in a look for this drawing, or (spec null) put back as the figure made it.  The figure's module
+      // is not touched: the look's colour, roughness and metalness are set on the material, the gripper studio becomes
+      // its environment (studioLit's edit put after the contact shade's), and all of it is taken back.
+      if (!spec && !state.dressed) return;
+      state.dressed = spec || null;
+      if (spec) {
+        partLook.color.setStyle(spec.color, THREE.SRGBColorSpace);
+        partLook.roughness = spec.roughness;
+        partLook.metalness = spec.metalness;
+        partLook.envMap = studioOf()?.texture || null;
+        partLook.envMapRotation = look.rotation;
+        partLook.envMapIntensity = spec.env_intensity ?? 1;
+        partLook.onBeforeCompile = (shader, gl) => {
+          plain.onBeforeCompile.call(partLook, shader, gl);
+          shader.fragmentShader = studioLit(shader.fragmentShader);
+        };
+        partLook.customProgramCacheKey = () => "on-part-contact-look";
+      } else {
+        partLook.color.copy(plain.color);
+        Object.assign(partLook, {roughness: plain.roughness, metalness: plain.metalness, envMap: plain.envMap, envMapIntensity: plain.envMapIntensity,
+          envMapRotation: plain.envMapRotation, onBeforeCompile: plain.onBeforeCompile, customProgramCacheKey: plain.customProgramCacheKey});
+      }
+      partLook.needsUpdate = true;
+    }
+    function smoothPart(deg = null) {
+      // The part's normals smooth at the crease angle deg, or flat (deg null, as the figure computed them): written
+      // into the normal attribute the figure made, in place (onpart.js: a new attribute on a drawn geometry made the
+      // reflective sheets vanish on SwiftShader), once per geometry and angle.
+      const geometry = view.part?.geometry;
+      if (!geometry || (state.smoothed.get(geometry) ?? null) === deg) return;
+      const normal = geometry.attributes.normal;
+      let points = null;
+      if (deg === null) geometry.computeVertexNormals();
+      else {
+        // The part's file units in mm: the scale of the matrix the figure gave it (drape.js partMatrix: the fit's unit).
+        const positions = geometry.attributes.position.array;
+        const mm = new THREE.Vector3().setFromMatrixColumn(view.part.matrix, 0).length();
+        let kept = state.creases.get(positions);
+        if (!kept || kept.deg !== deg || kept.mm !== mm) { kept = {deg, mm, ...creased(positions, deg, mm)}; state.creases.set(positions, kept); }
+        normal.array.set(kept.normals);
+        normal.needsUpdate = true;
+        points = kept.points;
+      }
+      state.smoothed.set(geometry, deg);
+      state.partPoints = points;
+    }
+    function lookSpec(looks, name, what) {
+      // A look by its name in ``looks`` (a scene's, or the rules'): its colour, metalness and roughness at least.
+      const spec = looks?.[name];
+      if (!spec || typeof spec.color !== "string" || typeof spec.metalness !== "number" || typeof spec.roughness !== "number") {
+        throw new Error(`library stage: ${what} names the look ${JSON.stringify(name)}, which is not a look of its looks`);
+      }
+      return spec;
     }
 
     function defaults() {
@@ -391,7 +617,9 @@ export function libraryStage() {
       const nest = stack.nest_mm;
       const old = stack.gap_mm;
       const step = Math.max(rules.min_step_mm, Math.min(old, (rules.gap_share * gap) / 3 - nest));
-      for (const name of LAYERS) {
+      // A placed stack (drape.js buildStack's lift: the Library's showcase) lays its exploded sheets again itself.
+      if (stack.respace) stack.respace(step);
+      else for (const name of LAYERS) {
         const sheet = stack.sheets[name]; const layer = sheet.layer;
         for (let k = 0; k < sheet.count; k += 1) {
           for (let a = 0; a < 3; a += 1) {
@@ -407,6 +635,13 @@ export function libraryStage() {
         if (!mesh) throw new Error(`library stage: the body ${body.mesh} is not loaded`);
         return {...body, positions: mesh, world: Pmm.clone().multiply(m4(body.matrix))};
       });
+      // The scene's looks (docs/LIBRARY_VIEW.md): each body's and the part's, by name; a name that is no look of the
+      // scene draws nothing (the writer's check refuses such a scene).  The part's material wears its look from here on.
+      const named = [...new Set(bodies.map(body => body.look).filter(name => name !== undefined && name !== null))];
+      const specs = Object.fromEntries(named.map(name => [name, lookSpec(data.looks, name, "a body")]));
+      const partSpec = data.part_look === undefined ? null : lookSpec(data.looks, data.part_look, "part_look");
+      const smooth = typeof data.smooth_deg === "number" ? data.smooth_deg : null;
+      dress(partSpec);
       const homes = {};
       for (const mode of MODES) {
         const points = [];
@@ -433,27 +668,35 @@ export function libraryStage() {
       controls._quatInverse.copy(controls._quat).invert();
       state.info = {gap_mm: gap, step_mm: step, drape_step_mm: old, kind: data.mate.kind, mate, Pmm, P, bodies, up, data,
         face_tilt_deg: tilt, explode: stack.explode, see_through: data.see_through || [], numbers: null, measures: null,
-        explodeMate: explodes.has("mate"), seeModes: new Set(rules.see_through_modes)};
+        explodeMate: explodes.has("mate"), seeModes: new Set(rules.see_through_modes), specs, partSpec, smooth};
     }
 
     function build(stack, given) {
       const group = new THREE.Group();
-      const {mate, P, bodies, data} = state.info;
+      const {mate, P, bodies, data, specs, partSpec, smooth} = state.info;
       const fingers = [];
+      // One material per look of the scene (its bodies'), mirroring the gripper studio under the sheets' rotation; a body
+      // without a look is the part's grey as before.  Each see-through finger's ghost takes its look's colour (ghosts).
+      const looks = new Map(Object.entries(specs).map(([name, spec]) => [name, lookMaterial(spec, studioOf(), look.rotation)]));
+      const tints = new Map(Object.entries(specs).map(([name, spec]) => [name, spec.color]));
       for (const body of bodies) {
-        const mesh = new THREE.Mesh(geometryOf(body.positions), partLook);
+        const mesh = new THREE.Mesh(geometryOf(body.positions, smooth), looks.get(body.look) || partLook);
         mesh.matrixAutoUpdate = false;
         mesh.matrix.copy(body.world);
         mesh.userData.finger = body.finger;
+        mesh.userData.tint = tints.get(body.look) || null;
         group.add(mesh);
         if (body.finger) fingers.push(mesh);
       }
+      smoothPart(smooth);
+      view.part.userData.tint = partSpec ? partSpec.color : null;
       keepGeometries(new Set(bodies.map(body => body.positions)));
       if (data.mate.part !== false) {
         const matePart = new THREE.Mesh(view.part.geometry, partLook);
         matePart.matrixAutoUpdate = false;
         matePart.matrix.copy(mate).multiply(P);
         matePart.userData.finger = "mate";
+        matePart.userData.tint = view.part.userData.tint;
         group.add(matePart);
         fingers.push(matePart);
       }
@@ -484,14 +727,16 @@ export function libraryStage() {
           const material = film ? filmMaterial(child.material.map, filmLook) : child.material;
           if (film) materials.push(material);
           const mesh = new THREE.Mesh(still ? (child.userData.edgeBand ? band : face) : child.geometry, material);
-          mesh.userData = {edgeBand: Boolean(child.userData.edgeBand), source: child, hidden: still && film};
+          // (A placed pad's film is seen through its boards' slots, assembled too: drape.js placedStack's film_seen.)
+          mesh.userData = {edgeBand: Boolean(child.userData.edgeBand), source: child, hidden: still && film && !stack.film_seen};
           copy.add(mesh);
         }
         second.add(copy);
       }
       group.add(second);
       scene.add(group);
-      state.extras = {group, second, fingers, materials, geometries, filmLook, ghosts: new Map(), mateInverse: mate.clone().invert(), see: new Set(state.info.see_through)};
+      state.extras = {group, second, fingers, materials, geometries, filmLook, ghosts: new Map(), mateInverse: mate.clone().invert(), see: new Set(state.info.see_through),
+        looks: [...looks.values()], ghostLooks: new Map()};
       state.lamps = {key: null};
       if (given.measure) {
         state.info.measures = measure(stack);
@@ -634,10 +879,26 @@ export function libraryStage() {
       return {cover: out, screen, clearance, sight, ms: Math.round(performance.now() - t0)};
     }
 
+    function ghostOf(tint) {
+      // The see-through material of a look's colour (tint: its sRGB "#rrggbb"; null: the part's grey, ghostLook itself):
+      // one per colour and drawing, a copy of ghostLook (its opacity the rules', set before any is made) in that colour.
+      if (!tint) return ghostLook;
+      const kept = state.extras.ghostLooks.get(tint);
+      if (kept) return kept;
+      const material = ghostLook.clone();
+      material.color.setStyle(tint, THREE.SRGBColorSpace);
+      // Never lighter than the part's own grey (ghostLook's): a white or bright metal look's ghost would be lost on the
+      // card's light ground.
+      const lightness = c => 0.2126 * c.r + 0.7152 * c.g + 0.0722 * c.b;
+      const over = lightness(material.color) / lightness(ghostLook.color);
+      if (over > 1) material.color.multiplyScalar(1 / over);
+      state.extras.ghostLooks.set(tint, material);
+      return material;
+    }
     function ghost(mesh) {
       if (state.extras.ghosts.has(mesh)) return state.extras.ghosts.get(mesh);
       const depth = new THREE.Mesh(mesh.geometry, ghostDepth); depth.matrixAutoUpdate = false; depth.matrix.copy(mesh.matrix); depth.renderOrder = 20;
-      const colour = new THREE.Mesh(mesh.geometry, ghostLook); colour.matrixAutoUpdate = false; colour.matrix.copy(mesh.matrix); colour.renderOrder = 21;
+      const colour = new THREE.Mesh(mesh.geometry, ghostOf(mesh.userData.tint)); colour.matrixAutoUpdate = false; colour.matrix.copy(mesh.matrix); colour.renderOrder = 21;
       state.extras.group.add(depth, colour);
       const pair = [depth, colour];
       state.extras.ghosts.set(mesh, pair);
@@ -714,19 +975,26 @@ export function libraryStage() {
       const extras = state.extras;
       state.extras = null;
       state.lamps = {key: null};
-      if (view.part) view.part.visible = true;
+      if (view.part) { view.part.visible = true; view.part.userData.tint = null; }
+      // The part as the figure draws it: its material's own values, its facets flat (a look's are this drawing's).
+      dress(null);
+      smoothPart(null);
       if (!extras) return;
       scene.remove(extras.group);
       if (dispose) {
         extras.materials.forEach(material => material.dispose());
         extras.geometries.forEach(geometry => geometry.dispose());
+        extras.looks.forEach(material => material.dispose());
+        extras.ghostLooks.forEach(material => material.dispose());
       }
     }
     // A lost context's extras and bodies dropped, never disposed, once it comes back (onpart.js's own listener first):
-    // their GL objects were the lost context's.
+    // their GL objects were the lost context's.  The gripper studio (a render target, lost with it) is made again if a
+    // drawing had asked for it, as onpart.js makes the sheets' again.
     canvas.addEventListener("webglcontextrestored", () => {
       clearExtras(false);
       state.geometries.clear();
+      if (state.studio !== undefined) state.studio = gripperStudio(renderer);
     });
 
     function report() {
@@ -734,7 +1002,10 @@ export function libraryStage() {
       return i && {gap_mm: r3(i.gap_mm), step_mm: r3(i.step_mm), drape_step_mm: r3(i.drape_step_mm), kind: i.kind, explode: i.explode,
         face_tilt_deg: r3(i.face_tilt_deg), see_through: i.see_through, camera: state.rules.camera, home: view.homes, numbers: i.numbers,
         explode_stacks: state.rules.explode_stacks, see_through_modes: state.rules.see_through_modes,
-        measures: i.measures};
+        measures: i.measures,
+        // What of the scene's looks is drawn (the checks' read): the bodies' looks by name, the part's, the crease angle
+        // and how many points the part's corners share at it.
+        looks: {bodies: Object.keys(i.specs).sort(), part: i.partSpec ? i.data.part_look : null, smooth_deg: i.smooth, part_points: state.partPoints}};
     }
 
     return {
@@ -744,7 +1015,16 @@ export function libraryStage() {
         if (!args.scene) {
           keepGeometries(new Set());
           defaults();
-          return figure.show(args);
+          // A part without a scene (the UMI finger and its tapered tips): the figure as Gen by Surface draws it, or, where
+          // scenes.json's rules give the part a look (args.partLook: {look, smooth_deg}), the part alone in that look.
+          const given = args.partLook || null;
+          if (!given) return figure.show(args);
+          dress(lookSpec({part: given.look}, "part", "the rules' part_looks"));
+          const result = await figure.show(args);
+          if (!result) return result;
+          smoothPart(typeof given.smooth_deg === "number" ? given.smooth_deg : null);
+          render();
+          return result;
         }
         prepare(args.stack, args.scene, args.positions);
         const result = await figure.show(args);

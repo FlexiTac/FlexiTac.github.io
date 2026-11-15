@@ -1,6 +1,6 @@
 {
  "format": "flexitac-library-scenes/v1",
- "about": "The Library's whole-gripper scenes (the user's request of 2026-11-05: the grippers that are not UMI fingers shown whole, a sensor on both fingers, the jaws fully open; the user's decision of 2026-11-06: one stack exploded, the sensor finger's, the near finger see-through in both views, its stack assembled): each gripper part's scene (scenes/<part>.json, its bodies in bodies/<part>/) and the rules every scene is drawn and checked by (docs/LIBRARY_VIEW.md).  The scenes map is written by the project's scene builder; the rules by hand, hashed into every gripper picture's record.",
+ "about": "The Library's whole-gripper scenes (the user's request of 2026-11-05: the grippers that are not UMI fingers shown whole, a sensor on both fingers, the jaws fully open; the user's decision of 2026-11-06: one stack exploded, the sensor finger's, the near finger see-through in both views, its stack assembled): each gripper part's scene (scenes/<part>.json, its bodies in bodies/<part>/) and the rules every scene is drawn and checked by (docs/LIBRARY_VIEW.md).  The scenes map is written by the project's scene builder; the rules by hand, hashed into every gripper picture's record.  Since 2026-11-12 the rules also give the parts that have no scene, the UMI finger and its tapered tips, their look (looks, part_looks): the real finger's orange TPU, a look of the rules' own (umi-tpu-orange) tuned on the finger against its photos; Gen by Surface keeps its grey part.",
  "rules": {
   "gap_share": 0.42,
   "min_step_mm": 2,
@@ -39,6 +39,18 @@
    "near_seen_min": 0.5,
    "card_min_px": 20,
    "ghost_cover_min": 0.02
+  },
+  "looks": {
+   "umi-tpu-orange": {
+    "color": "#e85a1c",
+    "metalness": 0,
+    "roughness": 0.85,
+    "env_intensity": 0.3
+   }
+  },
+  "part_looks": {
+   "umi-finray": "umi-tpu-orange",
+   "umi-tapers": "umi-tpu-orange"
   }
  },
  "scenes": {

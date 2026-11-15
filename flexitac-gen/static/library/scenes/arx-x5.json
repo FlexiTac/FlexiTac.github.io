@@ -2,7 +2,7 @@
  "format": "flexitac-library-scene/v1",
  "part": "arx-x5",
  "part_mesh_sha256": "5cf0e92353f4f5787b086eb518ff1d529ea41eb07502cdc3a2979766ccdd3018",
- "about": "ARX X5 at full opening: mujoco_menagerie f3b6013, arx_l5/arx_l5.xml (BSD-3-Clause): joint7 slide 0..0.044 m, q 44 mm.  The body is link6.obj, the whole hand (the housing, the gripper motor, the rails and the end stops; the jaws' racks run inside its rails and the HandUMI tips replace link7 and link8).  link6 is placed by the Library mesh, the HandUMI LEFT tip (handumi-hw 1448278), registered on link7 (iterative closest point, the rotation snapped to the axes; median 0.55 mm).  The other finger is the HandUMI RIGHT tip, the LEFT one's mirror image (z -> -z of their files, median 0.014 mm), on link8: the mirror across link6's plane between the jaws, so its sensor is the mirror-image board.",
+ "about": "ARX X5 at full opening: mujoco_menagerie f3b6013, arx_l5/arx_l5.xml (BSD-3-Clause): joint7 slide 0..0.044 m, q 44 mm.  The body is link6.obj, the whole hand (the housing, the gripper motor, the rails and the end stops; the jaws' racks run inside its rails and the HandUMI tips replace link7 and link8).  link6 is placed by the Library mesh, the HandUMI LEFT tip (handumi-hw 1448278), registered on link7 (iterative closest point, the rotation snapped to the axes; median 0.55 mm).  The other finger is the HandUMI RIGHT tip, the LEFT one's mirror image (z -> -z of their files, median 0.014 mm), on link8: the mirror across link6's plane between the jaws, so its sensor is the mirror-image board.  The looks: drawn after ARX's own photo of the X5 of 2023, the single-rail gripper (ARX5_beta images/image_6.png, 2026-11-12, and its neutral cut-out), and the assembly manual's two photos in white light: a black anodised motor can, flange, rail beam with its end stops and centre bridge, the ground steel guide rail as the one bright part, matte black fingers (the Library's part, HandUMI's printed tip).  The pinion's hub is hidden in every photo and is drawn black.  Three things are the project's own drawing, not the model's, which has no screw and no carriage and whose counterbores are open.  In the photo the gripper is closed and shows two of the rail's holes at each end: a black socket head in the outermost, and the next one as a plain dark disc (an empty hole in shadow or a head with no highlight: the photo does not tell); the four middle holes are hidden under the fingers.  So the two outermost holes hold a socket-head screw, a plain cylinder with a six-sided one for its socket (bodies/arx-x5/drawn-rail-screws.stl and drawn-rail-sockets.stl; at full opening, as here, they lie under the fingers' bases), and the six others a plain dark disc (drawn-rail-holes.stl), the four hidden ones assumed to be like their neighbour.  The red plastic end caps of the two linear carriages where the rail leaves each finger's base are plain boxes with the section of an MGN9C block, 20 x 8 mm, and its caps' 5 mm (drawn-caps-sensor.stl and drawn-caps-mate.stl; the mate's are see-through with their finger, as the carriage is a piece of the finger's link); the carriages' steel blocks lie inside the tips' bases here and are not drawn.  No rack, finger screw, cable, status light or lettering is modelled.",
  "frame": "the part's file axes, mm",
  "approach": [
   1.0,
@@ -47,10 +47,10 @@
  },
  "bodies": [
   {
-   "mesh": "bodies/arx-x5/link6.stl",
-   "sha256": "27f9dcff1ff5364068a9c4ef610d2f27d6e319e5423bd75e1c138819eb94635f",
-   "bytes": 335884,
-   "triangles": 6716,
+   "mesh": "bodies/arx-x5/link6-rail.stl",
+   "sha256": "08ace824d239458c93e0510da61cec7cc9e9dd95a25fd0c80e5275e0da813d14",
+   "bytes": 64784,
+   "triangles": 1294,
    "matrix": [
     [
      1.0,
@@ -77,9 +77,333 @@
      1.0
     ]
    ],
-   "finger": null
+   "finger": null,
+   "look": "rail-ground"
+  },
+  {
+   "mesh": "bodies/arx-x5/drawn-rail-screws.stl",
+   "sha256": "6882548bb0b9a413d2367501dd5019e13bcd0a8e70314535ebc354d59835b366",
+   "bytes": 4884,
+   "triangles": 96,
+   "matrix": [
+    [
+     1.0,
+     0.0,
+     0.0,
+     -81.73
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     -13.87
+    ],
+    [
+     0.0,
+     -1.0,
+     0.0,
+     81.952
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": null,
+   "look": "screw-black-oxide"
+  },
+  {
+   "mesh": "bodies/arx-x5/drawn-rail-sockets.stl",
+   "sha256": "f388048425dd99d1ae421e376d0f769a6b1fdfcc80c034102a7198070fac6a3c",
+   "bytes": 2484,
+   "triangles": 48,
+   "matrix": [
+    [
+     1.0,
+     0.0,
+     0.0,
+     -81.73
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     -13.87
+    ],
+    [
+     0.0,
+     -1.0,
+     0.0,
+     81.952
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": null,
+   "look": "hole-dark"
+  },
+  {
+   "mesh": "bodies/arx-x5/drawn-rail-holes.stl",
+   "sha256": "e48d9a286bd3fdff09ea0802786276d5294afbcec70f41935b13cfe9d90ac394",
+   "bytes": 12084,
+   "triangles": 240,
+   "matrix": [
+    [
+     1.0,
+     0.0,
+     0.0,
+     -81.73
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     -13.87
+    ],
+    [
+     0.0,
+     -1.0,
+     0.0,
+     81.952
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": null,
+   "look": "hole-dark"
+  },
+  {
+   "mesh": "bodies/arx-x5/link6-pinion.stl",
+   "sha256": "950f090867da94dc9d7a31a01086b728a4410b626eeb0ace4959ab5bd204c7e5",
+   "bytes": 39684,
+   "triangles": 792,
+   "matrix": [
+    [
+     1.0,
+     0.0,
+     0.0,
+     -81.73
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     -13.87
+    ],
+    [
+     0.0,
+     -1.0,
+     0.0,
+     81.952
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": null,
+   "look": "plastic-black-satin"
+  },
+  {
+   "mesh": "bodies/arx-x5/link6-beam.stl",
+   "sha256": "14e0cddf0209209b03b4709cd9a8c533fff1aa94dd7f212c19bb2dcd09a1e5f4",
+   "bytes": 64184,
+   "triangles": 1282,
+   "matrix": [
+    [
+     1.0,
+     0.0,
+     0.0,
+     -81.73
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     -13.87
+    ],
+    [
+     0.0,
+     -1.0,
+     0.0,
+     81.952
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": null,
+   "look": "anodized-black"
+  },
+  {
+   "mesh": "bodies/arx-x5/link6-motor.stl",
+   "sha256": "e0f33738f6cea4038fc8ff78220e14f351a60286b68cf4ab56f801ceac2a3df1",
+   "bytes": 167484,
+   "triangles": 3348,
+   "matrix": [
+    [
+     1.0,
+     0.0,
+     0.0,
+     -81.73
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     -13.87
+    ],
+    [
+     0.0,
+     -1.0,
+     0.0,
+     81.952
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": null,
+   "look": "can-blasted"
+  },
+  {
+   "mesh": "bodies/arx-x5/drawn-caps-sensor.stl",
+   "sha256": "a0e6d207e05984fe5ce32550458aa045a109abb853b1cb0ee8eba6b8cef87565",
+   "bytes": 1284,
+   "triangles": 24,
+   "matrix": [
+    [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     1.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": "sensor",
+   "look": "cap-red"
+  },
+  {
+   "mesh": "bodies/arx-x5/drawn-caps-mate.stl",
+   "sha256": "71bd7c36f882a906b04951afca79ad3103ba996c9c53561616f7d527b6e2fbc9",
+   "bytes": 1284,
+   "triangles": 24,
+   "matrix": [
+    [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     1.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": "mate",
+   "look": "cap-red"
   }
  ],
+ "looks": {
+  "anodized-black": {
+   "color": "#232428",
+   "metalness": 0.6,
+   "roughness": 0.45,
+   "env_intensity": 2.4
+  },
+  "can-blasted": {
+   "color": "#232428",
+   "metalness": 0.6,
+   "roughness": 0.7,
+   "env_intensity": 3.0
+  },
+  "cap-red": {
+   "color": "#b3262b",
+   "metalness": 0,
+   "roughness": 0.5
+  },
+  "finger-black": {
+   "color": "#2a2a2c",
+   "metalness": 0,
+   "roughness": 0.7,
+   "env_intensity": 1.4
+  },
+  "hole-dark": {
+   "color": "#262628",
+   "metalness": 0,
+   "roughness": 0.75,
+   "env_intensity": 1.2
+  },
+  "plastic-black-satin": {
+   "color": "#222224",
+   "metalness": 0,
+   "roughness": 0.4,
+   "env_intensity": 1.8
+  },
+  "rail-ground": {
+   "color": "#c9cbcd",
+   "metalness": 1,
+   "roughness": 0.45,
+   "env_intensity": 1.12
+  },
+  "screw-black-oxide": {
+   "color": "#232428",
+   "metalness": 0.6,
+   "roughness": 0.35,
+   "env_intensity": 2.4
+  }
+ },
+ "part_look": "finger-black",
+ "smooth_deg": 35,
  "see_through": [
   "mate"
  ],

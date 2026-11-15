@@ -14,6 +14,13 @@
 // its shelf's part, at #<family> its default sensor's page, where segmented controls of its axes (Shape, Tip width) pick
 // the sensor of its grid in place of the pitch; its parts have no shelf or card of their own.
 //
+// The showcase (the user's request of 2026-11-12: "在lib最上面一栏放置flexitac+xarm gripper的原始版本的visualization;
+// 这个版本是人手design的不是autogenerate"): the grid's first section is one large card, the original hand-designed
+// FlexiTac sensor on the xArm gripper, from static/library/showcase.json (docs/LIBRARY_VIEW.md: its title, its label,
+// one line, its pictures, its placed record); at #<its id> its own page, the 3D view of a sensor's page drawn from the
+// placed record, its link to the FlexiTac hardware tutorial and its sources.  It is no entry: no pitch, no Open in Gen
+// by Surface, no download of the generator's.  Without showcase.json the Library is the one of before.
+//
 // Motion as the generator's theme has it: none.  Every jump is instant (the native fragment jump, scrollBy and
 // scrollTo with the page's auto scrolling); the only scroll listener is the shelf's own, which only turns its arrows
 // on and off.  Every picture is slot(): a light 16:10 box with the sensor's picture once entries.json names one, else
@@ -38,6 +45,10 @@
   // sensor's page, the first the one it opens with.
   const CARD = [640, 400];
   const VIEWS = [["exploded", "Exploded"], ["assembled", "Assembled"]];
+  // The showcase's document (docs/LIBRARY_VIEW.md "The showcase's page") and the view its card shows and its page opens
+  // with: the gripper as built.
+  const SHOWCASE_FORMAT = "flexitac-library-showcase/v1";
+  const SHOWCASE_VIEW = "assembled";
   // The parts shown with a shelf of all their sensors (the user's request of 2026-11-06: the UMI finger alone), after the
   // grippers' section; every other part of entries.json's order is one card there, its pitches chosen on its sensor's
   // page.
@@ -46,7 +57,8 @@
   // index: entries.json; files: files.json (the static site); view: "grid" or "detail"; picture: the view a sensor's
   // page shows (VIEWS; kept as its pitch, shape or tip changes, the first again on each sensor's page opened); gridY and
   // opener: where the grid was and the card that opened a sensor's page (Back puts both back); syncs: each track's arrows.
-  const state = {index: null, files: null, filesError: null, filesLoad: null, view: null, picture: VIEWS[0][0], gridY: 0, opener: null, fromGrid: false, syncs: []};
+  // showcase: null, or {id, data: showcase.json, entry: what a sensor's variant is to slot(), gallery() and the 3D view}.
+  const state = {index: null, showcase: null, files: null, filesError: null, filesLoad: null, view: null, picture: VIEWS[0][0], gridY: 0, opener: null, fromGrid: false, syncs: []};
   history.scrollRestoration = "manual";
   // The page opened at an address of its own (a sensor's page shared or reloaded, a place of the grid): the grid's title,
   // tagline and footer wait for the first route (opened(), once entries.json is in, or its failure), which shows the page
@@ -108,7 +120,8 @@
   // -- the picture slot ----------------------------------------------------------------------------------------------
 
   function slot(variant, kind, view = VIEWS[0][0], missed = null) {
-    // One box for every picture (kind: card or detail): 16:10, light in both schemes (the generator's drawings are
+    // One box for every picture (kind: card, detail or showcase, the showcase's large card: its own card file at its own
+    // size, loaded at once as the grid's first picture): 16:10 (the showcase's 4:5), light in both schemes (the generator's drawings are
     // light boxes in the dark one too; the pictures are the figure alone on a transparent ground, so the box is theirs),
     // the picture contained and centred in it (library.css).  A card shows the Exploded picture's card file, lazily (the
     // grippers' lower row and the UMI shelf below them load as they come near) and decoded off the main thread, its width
@@ -117,14 +130,14 @@
     // placeholder (field()): never a broken image (missed, a sensor's page's: told which view failed).
     const box = el("div", {className: `lib-shot lib-shot-${kind}`});
     const image = variant.image;
-    const src = kind === "detail" ? image?.[view]?.src : image?.exploded?.card;
+    const src = kind === "detail" ? image?.[view]?.src : kind === "showcase" ? image?.card?.src : image?.exploded?.card;
     if (!src) {
       box.append(field(variant));
       return box;
     }
-    const [width, height] = kind === "detail" ? [image[view].width, image[view].height] : CARD;
+    const [width, height] = kind === "detail" ? [image[view].width, image[view].height] : kind === "showcase" ? [image.card.width, image.card.height] : CARD;
     const shown = el("img", {src: BASE + src, width, height, alt: image.alt || "", decoding: "async",
-      loading: kind === "detail" ? null : "lazy"});
+      loading: kind === "card" ? "lazy" : null});
     shown.addEventListener("error", () => {
       shown.replaceWith(field(variant));
       missed?.(view);
@@ -323,12 +336,39 @@
       el("div", {className: "lib-cards"}, parts.map(gripperCard)));
   }
 
+  function showcaseOf(data) {
+    // showcase.json as the page uses it, or null when it is not the showcase's document: its id (the page's address),
+    // and an entry that slot(), gallery() and the 3D view take as they take a sensor's variant (its pictures; no build;
+    // its view the placed record; the field of its pad for the placeholder).
+    if (data?.format !== SHOWCASE_FORMAT || typeof data.id !== "string" || !data.placed || !data.image || !data.tutorial?.href || !Array.isArray(data.sources)) return null;
+    const [columns, rows] = [data.sensor?.columns || 1, data.sensor?.rows || 1];
+    return {id: data.id, data, entry: {label: data.title, image: data.image, build_id: null, view: {scene: data.placed.scene, placed: data.placed},
+      field_mm: data.sensor?.field_mm || [1, 1], columns, rows}};
+  }
+  // A sensor's variant by its id, or the showcase's entry by the showcase's: what a page of its own shows.
+  const shown = id => (id && state.showcase?.id === id ? state.showcase.entry : state.index.variants[id]);
+
+  function showcaseCard() {
+    // The grid's first section (2026-11-12): one large card, its picture (the gripper as built, Assembled) beside its
+    // label, its title and one line; it opens the showcase's own page.  Its id is the grid's address of it (#showcase:
+    // its page's back link comes back to it).
+    const {id, data, entry} = state.showcase;
+    return el("section", {className: "lib-showcased", "aria-labelledby": "showcase-title"},
+      el("a", {className: "lib-card lib-showcase", id: "showcase", href: `#${id}`, "data-showcase": id, "aria-label": `${data.title}: ${data.label.toLowerCase()}`},
+        slot(entry, "showcase", SHOWCASE_VIEW),
+        el("span", {className: "lib-card-text"},
+          el("span", {className: "lib-badge"}, data.label),
+          el("h3", {className: "lib-showcase-title", id: "showcase-title"}, keep(data.title)),
+          el("span", {className: "lib-showcase-line"}, keep(data.text)))));
+  }
+
   function renderGrid() {
     const {index} = state;
     const parts = carded();
-    // The grippers' section first, then the shelves (the UMI finger's; the user's request of 2026-11-06): the page's
-    // order is its reading and Tab order.
+    // The showcase's card first (2026-11-12), then the grippers' section, then the shelves (the UMI finger's; the user's
+    // request of 2026-11-06): the page's order is its reading and Tab order.
     $("libShelves").replaceChildren(
+      ...(state.showcase ? [showcaseCard()] : []),
       ...(parts.length ? [grippers(parts)] : []),
       ...shelvedParts().map(part => shelf(`shelf-${part}`, `${index.parts[part].title}.`, index.parts[part].shelf, index.parts[part].variants, familiesOf(part))));
     // The card that opens a sensor's page: Back comes back to it.
@@ -427,6 +467,28 @@
     present(id);
   }
 
+  function renderShowcase() {
+    // The showcase's own page (2026-11-12): its picture in its frame with the Exploded | Assembled control (the 3D view
+    // drawn over it from the placed record), its label, its title and its one line, the FlexiTac hardware tutorial for
+    // its Gerbers (the showcase's own link, in showcase.json; a grey pill: the blue is Open in Gen by Surface's, which
+    // this page has not) and its sources with their notices.  No pitch, no generator downloads.
+    const {id, data, entry} = state.showcase;
+    $("libDetail").replaceChildren(
+      el("a", {className: "lib-back", href: "#showcase"}, chevron("left"), el("span", {}, "Library")),
+      el("div", {className: "lib-detail-body lib-detail-showcase"},
+        gallery(entry),
+        el("div", {className: "lib-info"},
+          el("p", {className: "lib-badge"}, data.label),
+          el("h2", {className: "lib-detail-title", id: "libDetailTitle", tabindex: "-1"}, whole(data.title)),
+          el("p", {className: "lib-detail-line"}, keep(data.text)),
+          el("div", {className: "lib-pills"},
+            el("a", {className: "lib-pill", href: data.tutorial.href, target: "_blank", rel: "noopener noreferrer"}, data.tutorial.label)),
+          el("p", {className: "lib-provenance"}, data.sources.flatMap((source, k) => [k ? " · " : null, `${source.text} (`,
+            el("a", {href: BASE + source.notice, target: "_blank", rel: "noopener"}, "notice"), ")"])))));
+    document.title = `${data.title} · ${PAGE_TITLE}`;
+    present(id);
+  }
+
   // -- a sensor's page in 3D -----------------------------------------------------------------------------------------
   // The user's request of 2026-11-05 ("lib 点进去具体的每个夹爪的时候, 那个图也做成可以三维旋转的"): on a sensor's page its
   // picture becomes a 3D view the visitor turns (./cad/library_view.js, docs/LIBRARY_VIEW.md: Gen by Surface's on-part
@@ -447,8 +509,9 @@
 
   function present(id) {
     // A sensor's page just drawn (renderDetail): with a view (its variant's "view") and no Save-Data, its picture's slot
-    // put in .lib-stage beside the view's host, and the sensor drawn there; the control turns the view too.
-    const variant = state.index.variants[id];
+    // put in .lib-stage beside the view's host, and the sensor drawn there; the control turns the view too.  (The
+    // showcase's page too: its entry's view is its placed record.)
+    const variant = shown(id);
     live.serial += 1;
     live.id = id;
     live.stage = null;
@@ -484,7 +547,7 @@
     // The sensor of live.id drawn in its page's .lib-stage, which is-live then shows it (the picture hidden under it).
     const serial = (live.serial += 1);
     const {id, stage} = live;
-    const variant = state.index.variants[id];
+    const variant = shown(id);
     if (live.lost) {
       setLive("lost", null);
       return;
@@ -502,6 +565,8 @@
           throw error;
         }
       }
+      // The showcase: its placed record in place of a variant and its part (docs/LIBRARY_VIEW.md "A placed sensor").
+      if (variant.view.placed) return live.view.show({base: BASE, id, placed: variant.view.placed, mode: state.picture});
       return live.view.show({base: BASE, id, variant, part: state.index.parts[variant.part], mode: state.picture});
     }).then(drawn => {
       if (!drawn || serial !== live.serial) return;
@@ -550,7 +615,7 @@
       node = el("pre", {id: "libViewState", hidden: true});
       document.body.append(node);
     }
-    const variant = live.id ? state.index.variants[live.id] : null;
+    const variant = live.id ? shown(live.id) : null;
     const [now, said] = live.status;
     const drawn = now === "drawn" ? live.view.info() : null;
     node.textContent = JSON.stringify({state: now, note: said, id: live.id, build_id: variant ? variant.build_id : null,
@@ -635,9 +700,9 @@
   }
 
   // -- routes --------------------------------------------------------------------------------------------------------
-  // '', #grippers and #gripper-<part> (a gripper's card), #shelf-<part> (a shelved part's: the UMI finger's): the grid;
-  // #<variant>: its page; #<part> and #<family>: its default variant's page (the address kept); anything else: the grid
-  // with a note.  The grid's addresses before 2026-11-06 still lead somewhere: #shelf-start ("Start here.") to the
+  // '', #showcase (the showcase's card), #grippers and #gripper-<part> (a gripper's card), #shelf-<part> (a shelved
+  // part's: the UMI finger's): the grid; #<the showcase's id>: its page; #<variant>: its page; #<part> and #<family>:
+  // its default variant's page (the address kept); anything else: the grid with a note.  The grid's addresses before 2026-11-06 still lead somewhere: #shelf-start ("Start here.") to the
   // grid's top, #shelf-<gripper> (its shelf, its tile's jump, its pages' back link) to its card, the address replaced by
   // the new one (no history entry).  A sensor's page opens at the top with its title focused; leaving it for the grid
   // by Back or Forward, or by the back link of the gripper whose card opened it, puts back where the grid was and
@@ -694,6 +759,23 @@
     $("libDetailTitle").focus({preventScroll: true});
   }
 
+  function showShowcase() {
+    // The showcase's page, opened as a sensor's is (the grid's place kept for Back), with the view its card shows.
+    if (state.view === "grid") {
+      state.gridY = window.scrollY;
+      state.fromGrid = true;
+    }
+    state.view = "detail";
+    state.picture = SHOWCASE_VIEW;
+    setNote("");
+    $("libHero").hidden = true;
+    $("libGrid").hidden = true;
+    $("libDetail").hidden = false;
+    renderShowcase();
+    window.scrollTo(0, 0);
+    $("libDetailTitle").focus({preventScroll: true});
+  }
+
   function route() {
     if (!state.index) return;
     opened();
@@ -704,11 +786,12 @@
     let id = "";
     try { id = decodeURIComponent(location.hash.slice(1)); } catch (error) { id = location.hash.slice(1); }
     const {variants, parts} = state.index;
+    if (state.showcase?.id === id) { showShowcase(); return; }
     if (Object.hasOwn(variants, id)) { showDetail(id); return; }
     if (Object.hasOwn(parts, id)) { showDetail(parts[id].default); return; }
     if (Object.hasOwn(state.index.families || {}, id)) { showDetail(state.index.families[id].default); return; }
     // The grid's places (a family's part has none); the older addresses replaced by their place now.
-    const places = new Set(["grippers", ...shelvedParts().map(part => `shelf-${part}`), ...carded().map(part => `gripper-${part}`)]);
+    const places = new Set([...(state.showcase ? ["showcase"] : []), "grippers", ...shelvedParts().map(part => `shelf-${part}`), ...carded().map(part => `gripper-${part}`)]);
     let place = id;
     if (id === "shelf-start") place = "";
     else if (id.startsWith("shelf-") && carded().includes(id.slice(6))) place = `gripper-${id.slice(6)}`;
@@ -723,7 +806,10 @@
 
   async function start() {
     try {
-      state.index = await json(`${BASE}entries.json`);
+      // showcase.json beside entries.json; a Library without it, or with another document there, has no showcase.
+      const [index, showcase] = await Promise.all([json(`${BASE}entries.json`), json(`${BASE}showcase.json`).catch(() => null)]);
+      state.index = index;
+      state.showcase = Object.hasOwn(index.variants, showcase?.id) || Object.hasOwn(index.parts, showcase?.id) ? null : showcaseOf(showcase);
       renderGrid();
     } catch (error) {
       state.index = null;

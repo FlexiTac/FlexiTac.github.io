@@ -1,0 +1,1645 @@
+{
+ "format": "flexitac-library-scene/v1",
+ "part": "umi-finray",
+ "part_mesh_sha256": "63331c666d485de462f3c7c80eb4200fd2bf98ac325095f5b0e8774a95dc8442",
+ "about": "FlexiTac on the xArm Gripper G1 with UMI soft fingers: the hand-designed setup, not a generated fit, posed as the FlexiTac Tactile Demo shows it: the links turned 24.35 degrees, so that the two sensors' centres are 55 mm apart (each finger 22.90 mm out, of 39.70 mm at the links' 45 degrees).  The gripper's twelve bodies (../vendor/ufactory-g1/) are UFACTORY's 3D model of the Gripper G1, the property of UFACTORY, used by the project owner's decision of 2026-11-12 and not covered by this repository's Apache-2.0 licence, split and decimated to within 0.1 mm by FlexiTac-Gen 2026 (that folder's NOTICE.md): the shell, the frame, the flange, the pivot pins, the four links, and each finger's coupler (the stock finger cut where the holder sits) and pins.  The two finger holders are HandUMI's UMI-RIGHT-Finger-Holder.stl (handumi-hw 1448278, Apache-2.0), decimated to within 0.1 mm, the left one its mirror image.  The part is the Library's UMI fin-ray finger as the gripper's left finger, bolted to the holder by its three holes (a rigid fit of the holes in the plane, 0.004 mm, which leans the finger 0.93 degrees): with the pad mounted as the FlexiTac team mount it, its straps cross the side face that looks the way of the shell's face without the logo, as on the gripper as built.  The linkage is a parallel four-bar: the right links turn about (35, 19.1) and (20, 34.1) mm of the model, their tips (-3, 54.9) mm from the pivots, and the fingers only translate; the numbers are the model's, not the real gripper's encoder positions.  The other finger is drawn as the mirror image across the gripper's middle plane, as the Tactile Demo draws it.  The gripper as built differs there (the owner's photo of it): its two holders are plain printed blocks that read as one part used twice, the second turned half a turn about the gripper's axis (bolt heads where the first shows its nuts), not HandUMI's holder and its mirror image.  Drawn by the project, as plain boxes and cylinders and no vendor's geometry (the files named drawn-): the heads of the shell's twelve black screws in their wells (the six on the logo's face as that photo shows them; the six on the other face, which no photo shows, in the wells the model has there), each holder's three bolt heads and nuts, the black block with its round cap in the shell's top slot, and behind each finger, placed by eye, a yellow extender board on the pad's two tails, each tail's end in one of its two sockets (the wide tail's at the board's upper edge; the Top FPC's tab through the board, which covers the strap that carries it), and from the lower socket a short stub of the white flat cable down the finger's back to its base.  The gripper as built has one small board for each tail.  The looks are the Library's base looks, each body's chosen after photos of the real gripper (black anodized links and flange), and seven looks of the showcase's own, each judged from both sides of the gripper: the shell's gloss white under a sharper clear coat, the printed parts' white (the frame's channel, the couplers and the holders), the pivot pins' brushed steel, the screws' matte black, the soft fingers' orange TPU (the Library's UMI rows' own), the extender boards' yellow and the flat cables' white.  The camera is the showcase's own, for this reason: at the rules' camera the far finger's pad is seen edge-on and its straps are on its far side; from the side of the shell's face without the logo, 60 degrees off the pad's normal and 20 degrees up, the pad's face, the straps crossing both fingers' side faces and the gripper's body are all seen; exploded, from the same side 70 degrees off the normal and 40 degrees up, so that the lifted layers are seen apart, not edge-on.  No finger is drawn see-through: the near finger hides nothing of the far one's pad from there.  The logo on the shell's other face is not drawn.",
+ "frame": "the part's file axes, mm",
+ "approach": [
+  0.016154444348,
+  0.0,
+  -0.99986950845
+ ],
+ "opening": {
+  "q_mm": 22.905,
+  "limit_mm": 39.699,
+  "joint": "the four-bar's links (each finger's shift across the jaws)",
+  "source": "the FlexiTac Tactile Demo's pose: the sensors' centres 55 mm apart, the links at 24.35 of 45 degrees"
+ },
+ "mate": {
+  "kind": "mirror",
+  "matrix": [
+   [
+    -0.999478068,
+    0.0,
+    -0.032304673,
+    -57.960330195
+   ],
+   [
+    0.0,
+    1.0,
+    0.0,
+    0.0
+   ],
+   [
+    -0.032304673,
+    0.0,
+    0.999478068,
+    -0.936439126
+   ],
+   [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  ],
+  "part": true
+ },
+ "bodies": [
+  {
+   "mesh": "bodies/flexitac-g1/umi-right-finger-holder.stl",
+   "sha256": "bed7997d234957cd874aecec2be76e133ab14b4cd652abe4c0491ee06fe469dd",
+   "bytes": 127284,
+   "triangles": 2544,
+   "matrix": [
+    [
+     0.999869508,
+     0.016154444,
+     0.0,
+     -41.324643391
+    ],
+    [
+     0.0,
+     0.0,
+     -1.0,
+     -15.3
+    ],
+    [
+     0.016154444,
+     -0.999869508,
+     0.0,
+     76.764087497
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": "sensor",
+   "look": "print-white"
+  },
+  {
+   "mesh": "bodies/flexitac-g1/umi-right-finger-holder.stl",
+   "sha256": "bed7997d234957cd874aecec2be76e133ab14b4cd652abe4c0491ee06fe469dd",
+   "bytes": 127284,
+   "triangles": 2544,
+   "matrix": [
+    [
+     -0.999869508,
+     0.016154444,
+     0.0,
+     -19.137094183
+    ],
+    [
+     0.0,
+     0.0,
+     -1.0,
+     -15.3
+    ],
+    [
+     -0.016154444,
+     -0.999869508,
+     0.0,
+     77.122561804
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": "mate",
+   "look": "print-white"
+  },
+  {
+   "mesh": "../vendor/ufactory-g1/body_shell.stl",
+   "sha256": "17f20591f7ad00a5c19f8f915404df71b9332e971007f5afd58dc0ee83196000",
+   "bytes": 1057184,
+   "triangles": 21142,
+   "matrix": [
+    [
+     -0.999869508,
+     0.016154444,
+     0.0,
+     -30.572574264
+    ],
+    [
+     0.0,
+     0.0,
+     -1.0,
+     -12.9
+    ],
+    [
+     -0.016154444,
+     -0.999869508,
+     0.0,
+     98.092977359
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": null,
+   "look": "shell-white-gloss"
+  },
+  {
+   "mesh": "../vendor/ufactory-g1/body_frame.stl",
+   "sha256": "c3fac3ded9752ee3101a4eb0752d687404ff87989601ed853ce9dbde1fe1201c",
+   "bytes": 50184,
+   "triangles": 1002,
+   "matrix": [
+    [
+     -0.999869508,
+     0.016154444,
+     0.0,
+     -30.572574264
+    ],
+    [
+     0.0,
+     0.0,
+     -1.0,
+     -12.9
+    ],
+    [
+     -0.016154444,
+     -0.999869508,
+     0.0,
+     98.092977359
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": null,
+   "look": "print-white"
+  },
+  {
+   "mesh": "../vendor/ufactory-g1/body_flange.stl",
+   "sha256": "53d5b7376b3b15bae4974e93f60fc565d487d32337c88163718ef9e58071038f",
+   "bytes": 71484,
+   "triangles": 1428,
+   "matrix": [
+    [
+     -0.999869508,
+     0.016154444,
+     0.0,
+     -30.572574264
+    ],
+    [
+     0.0,
+     0.0,
+     -1.0,
+     -12.9
+    ],
+    [
+     -0.016154444,
+     -0.999869508,
+     0.0,
+     98.092977359
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": null,
+   "look": "anodized-black"
+  },
+  {
+   "mesh": "../vendor/ufactory-g1/body_pins.stl",
+   "sha256": "0e36e3e656bc3a5b684f20fe87aa1e76d3956eb7cd52e60fb638de4d2458424f",
+   "bytes": 133984,
+   "triangles": 2678,
+   "matrix": [
+    [
+     -0.999869508,
+     0.016154444,
+     0.0,
+     -30.572574264
+    ],
+    [
+     0.0,
+     0.0,
+     -1.0,
+     -12.9
+    ],
+    [
+     -0.016154444,
+     -0.999869508,
+     0.0,
+     98.092977359
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": null,
+   "look": "steel-pin"
+  },
+  {
+   "mesh": "../vendor/ufactory-g1/link_r_outer.stl",
+   "sha256": "a30b4e83a108cdc8d3cafbbcdf4dc87e2c33828440f28776e2a601ce4ab40588",
+   "bytes": 123884,
+   "triangles": 2476,
+   "matrix": [
+    [
+     -0.917569161,
+     -0.3975762,
+     0.0,
+     -25.550831118
+    ],
+    [
+     0.0,
+     0.0,
+     -1.0,
+     -12.9
+    ],
+    [
+     0.3975762,
+     -0.917569161,
+     0.0,
+     82.040468164
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": null,
+   "look": "anodized-black"
+  },
+  {
+   "mesh": "../vendor/ufactory-g1/link_r_inner.stl",
+   "sha256": "6d095d76626f53a5a7af281e86051fe18665dca5a56f5e03c9c83a19ffa66299",
+   "bytes": 102384,
+   "triangles": 2046,
+   "matrix": [
+    [
+     -0.917569161,
+     -0.3975762,
+     0.0,
+     -18.110366237
+    ],
+    [
+     0.0,
+     0.0,
+     -1.0,
+     -12.9
+    ],
+    [
+     0.3975762,
+     -0.917569161,
+     0.0,
+     87.011922618
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": null,
+   "look": "anodized-black"
+  },
+  {
+   "mesh": "../vendor/ufactory-g1/link_l_outer.stl",
+   "sha256": "6ab58ca8f67ed33fd07016a82c606938c142ca283bc7ab04218b772783d7376c",
+   "bytes": 123684,
+   "triangles": 2472,
+   "matrix": [
+    [
+     -0.904246683,
+     0.427010464,
+     0.0,
+     -35.073125346
+    ],
+    [
+     0.0,
+     0.0,
+     -1.0,
+     -12.9
+    ],
+    [
+     -0.427010464,
+     -0.904246683,
+     0.0,
+     81.886620716
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": null,
+   "look": "anodized-black"
+  },
+  {
+   "mesh": "../vendor/ufactory-g1/link_l_inner.stl",
+   "sha256": "93f51a6a5713d5ccec58ec8548ef63855d7e20561dd152dc81f273e20b3f8ea0",
+   "bytes": 101984,
+   "triangles": 2038,
+   "matrix": [
+    [
+     -0.904246683,
+     0.427010464,
+     0.0,
+     -42.670308018
+    ],
+    [
+     0.0,
+     0.0,
+     -1.0,
+     -12.9
+    ],
+    [
+     -0.427010464,
+     -0.904246683,
+     0.0,
+     86.615118626
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": null,
+   "look": "anodized-black"
+  },
+  {
+   "mesh": "../vendor/ufactory-g1/finger_r_coupler.stl",
+   "sha256": "a8526adbd71aaaad6bfd7b109baabc7eeaecfccc40fedb42624210455f3d5c8b",
+   "bytes": 64034,
+   "triangles": 1279,
+   "matrix": [
+    [
+     -0.999869508,
+     0.016154444,
+     0.0,
+     -53.53328769
+    ],
+    [
+     0.0,
+     0.0,
+     -1.0,
+     -12.9
+    ],
+    [
+     -0.016154444,
+     -0.999869508,
+     0.0,
+     101.370074505
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": "mate",
+   "look": "print-white"
+  },
+  {
+   "mesh": "../vendor/ufactory-g1/finger_r_pins.stl",
+   "sha256": "8af3cc1ad160fcac75e4db0f5a1b2b5546aeecdcecb639dd87fdf5f678c3ddf0",
+   "bytes": 132584,
+   "triangles": 2650,
+   "matrix": [
+    [
+     -0.999869508,
+     0.016154444,
+     0.0,
+     -53.53328769
+    ],
+    [
+     0.0,
+     0.0,
+     -1.0,
+     -12.9
+    ],
+    [
+     -0.016154444,
+     -0.999869508,
+     0.0,
+     101.370074505
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": "mate",
+   "look": "steel-pin"
+  },
+  {
+   "mesh": "../vendor/ufactory-g1/finger_l_coupler.stl",
+   "sha256": "b9c13ced96553fb2ee8038ccb78354f1a1ad1098818c2d9e8084bd524d0de849",
+   "bytes": 63134,
+   "triangles": 1261,
+   "matrix": [
+    [
+     -0.999869508,
+     0.016154444,
+     0.0,
+     -7.729710323
+    ],
+    [
+     0.0,
+     0.0,
+     -1.0,
+     -12.9
+    ],
+    [
+     -0.016154444,
+     -0.999869508,
+     0.0,
+     102.110102414
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": "sensor",
+   "look": "print-white"
+  },
+  {
+   "mesh": "../vendor/ufactory-g1/finger_l_pins.stl",
+   "sha256": "be9bd6efe4aa156542836c82b13603a544760a88bab3e03f02afa8721841da9c",
+   "bytes": 151084,
+   "triangles": 3020,
+   "matrix": [
+    [
+     -0.999869508,
+     0.016154444,
+     0.0,
+     -7.729710323
+    ],
+    [
+     0.0,
+     0.0,
+     -1.0,
+     -12.9
+    ],
+    [
+     -0.016154444,
+     -0.999869508,
+     0.0,
+     102.110102414
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": "sensor",
+   "look": "steel-pin"
+  },
+  {
+   "mesh": "bodies/flexitac-g1/drawn-shell-screw.stl",
+   "sha256": "3e9be6a39e4c3324539b799a027ff2d11da071427abc9fdc4b18bbd11d218cdb",
+   "bytes": 3284,
+   "triangles": 64,
+   "matrix": [
+    [
+     -0.999869508,
+     0.016154444,
+     0.0,
+     -71.19524538
+    ],
+    [
+     0.0,
+     0.0,
+     -1.0,
+     -33.9
+    ],
+    [
+     -0.016154444,
+     -0.999869508,
+     0.0,
+     58.931630455
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": null,
+   "look": "screw-black"
+  },
+  {
+   "mesh": "bodies/flexitac-g1/drawn-shell-screw.stl",
+   "sha256": "3e9be6a39e4c3324539b799a027ff2d11da071427abc9fdc4b18bbd11d218cdb",
+   "bytes": 3284,
+   "triangles": 64,
+   "matrix": [
+    [
+     -0.999869508,
+     0.016154444,
+     0.0,
+     11.293989067
+    ],
+    [
+     0.0,
+     0.0,
+     -1.0,
+     -33.9
+    ],
+    [
+     -0.016154444,
+     -0.999869508,
+     0.0,
+     60.264372113
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": null,
+   "look": "screw-black"
+  },
+  {
+   "mesh": "bodies/flexitac-g1/drawn-shell-screw.stl",
+   "sha256": "3e9be6a39e4c3324539b799a027ff2d11da071427abc9fdc4b18bbd11d218cdb",
+   "bytes": 3284,
+   "triangles": 64,
+   "matrix": [
+    [
+     -0.999869508,
+     0.016154444,
+     0.0,
+     -71.623338155
+    ],
+    [
+     0.0,
+     0.0,
+     -1.0,
+     -33.9
+    ],
+    [
+     -0.016154444,
+     -0.999869508,
+     0.0,
+     85.428172429
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": null,
+   "look": "screw-black"
+  },
+  {
+   "mesh": "bodies/flexitac-g1/drawn-shell-screw.stl",
+   "sha256": "3e9be6a39e4c3324539b799a027ff2d11da071427abc9fdc4b18bbd11d218cdb",
+   "bytes": 3284,
+   "triangles": 64,
+   "matrix": [
+    [
+     -0.999869508,
+     0.016154444,
+     0.0,
+     10.865896292
+    ],
+    [
+     0.0,
+     0.0,
+     -1.0,
+     -33.9
+    ],
+    [
+     -0.016154444,
+     -0.999869508,
+     0.0,
+     86.760914087
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": null,
+   "look": "screw-black"
+  },
+  {
+   "mesh": "bodies/flexitac-g1/drawn-shell-screw.stl",
+   "sha256": "3e9be6a39e4c3324539b799a027ff2d11da071427abc9fdc4b18bbd11d218cdb",
+   "bytes": 3284,
+   "triangles": 64,
+   "matrix": [
+    [
+     -0.999869508,
+     0.016154444,
+     0.0,
+     -64.310519462
+    ],
+    [
+     0.0,
+     0.0,
+     -1.0,
+     -33.9
+    ],
+    [
+     -0.016154444,
+     -0.999869508,
+     0.0,
+     112.5498461
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": null,
+   "look": "screw-black"
+  },
+  {
+   "mesh": "bodies/flexitac-g1/drawn-shell-screw.stl",
+   "sha256": "3e9be6a39e4c3324539b799a027ff2d11da071427abc9fdc4b18bbd11d218cdb",
+   "bytes": 3284,
+   "triangles": 64,
+   "matrix": [
+    [
+     -0.999869508,
+     0.016154444,
+     0.0,
+     2.680737604
+    ],
+    [
+     0.0,
+     0.0,
+     -1.0,
+     -33.9
+    ],
+    [
+     -0.016154444,
+     -0.999869508,
+     0.0,
+     113.632193872
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": null,
+   "look": "screw-black"
+  },
+  {
+   "mesh": "bodies/flexitac-g1/drawn-shell-screw.stl",
+   "sha256": "3e9be6a39e4c3324539b799a027ff2d11da071427abc9fdc4b18bbd11d218cdb",
+   "bytes": 3284,
+   "triangles": 64,
+   "matrix": [
+    [
+     -0.999869508,
+     0.016154444,
+     0.0,
+     -71.19524538
+    ],
+    [
+     0.0,
+     0.0,
+     -1.0,
+     11.4
+    ],
+    [
+     -0.016154444,
+     -0.999869508,
+     0.0,
+     58.931630455
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": null,
+   "look": "screw-black"
+  },
+  {
+   "mesh": "bodies/flexitac-g1/drawn-shell-screw.stl",
+   "sha256": "3e9be6a39e4c3324539b799a027ff2d11da071427abc9fdc4b18bbd11d218cdb",
+   "bytes": 3284,
+   "triangles": 64,
+   "matrix": [
+    [
+     -0.999869508,
+     0.016154444,
+     0.0,
+     11.293989067
+    ],
+    [
+     0.0,
+     0.0,
+     -1.0,
+     11.4
+    ],
+    [
+     -0.016154444,
+     -0.999869508,
+     0.0,
+     60.264372113
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": null,
+   "look": "screw-black"
+  },
+  {
+   "mesh": "bodies/flexitac-g1/drawn-shell-screw.stl",
+   "sha256": "3e9be6a39e4c3324539b799a027ff2d11da071427abc9fdc4b18bbd11d218cdb",
+   "bytes": 3284,
+   "triangles": 64,
+   "matrix": [
+    [
+     -0.999869508,
+     0.016154444,
+     0.0,
+     -71.756612321
+    ],
+    [
+     0.0,
+     0.0,
+     -1.0,
+     11.4
+    ],
+    [
+     -0.016154444,
+     -0.999869508,
+     0.0,
+     93.677095873
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": null,
+   "look": "screw-black"
+  },
+  {
+   "mesh": "bodies/flexitac-g1/drawn-shell-screw.stl",
+   "sha256": "3e9be6a39e4c3324539b799a027ff2d11da071427abc9fdc4b18bbd11d218cdb",
+   "bytes": 3284,
+   "triangles": 64,
+   "matrix": [
+    [
+     -0.999869508,
+     0.016154444,
+     0.0,
+     10.732622126
+    ],
+    [
+     0.0,
+     0.0,
+     -1.0,
+     11.4
+    ],
+    [
+     -0.016154444,
+     -0.999869508,
+     0.0,
+     95.009837532
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": null,
+   "look": "screw-black"
+  },
+  {
+   "mesh": "bodies/flexitac-g1/drawn-shell-screw.stl",
+   "sha256": "3e9be6a39e4c3324539b799a027ff2d11da071427abc9fdc4b18bbd11d218cdb",
+   "bytes": 3284,
+   "triangles": 64,
+   "matrix": [
+    [
+     -0.999869508,
+     0.016154444,
+     0.0,
+     -64.310519462
+    ],
+    [
+     0.0,
+     0.0,
+     -1.0,
+     11.4
+    ],
+    [
+     -0.016154444,
+     -0.999869508,
+     0.0,
+     112.5498461
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": null,
+   "look": "screw-black"
+  },
+  {
+   "mesh": "bodies/flexitac-g1/drawn-shell-screw.stl",
+   "sha256": "3e9be6a39e4c3324539b799a027ff2d11da071427abc9fdc4b18bbd11d218cdb",
+   "bytes": 3284,
+   "triangles": 64,
+   "matrix": [
+    [
+     -0.999869508,
+     0.016154444,
+     0.0,
+     2.680737604
+    ],
+    [
+     0.0,
+     0.0,
+     -1.0,
+     11.4
+    ],
+    [
+     -0.016154444,
+     -0.999869508,
+     0.0,
+     113.632193872
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": null,
+   "look": "screw-black"
+  },
+  {
+   "mesh": "bodies/flexitac-g1/drawn-holder-bolt.stl",
+   "sha256": "4065ad795ec729b88544255a84ee9372498d6d8b7874504c1ecacbb9b119d3d8",
+   "bytes": 3284,
+   "triangles": 64,
+   "matrix": [
+    [
+     0.999869508,
+     0.016154444,
+     0.0,
+     5.002226148
+    ],
+    [
+     0.0,
+     0.0,
+     -1.0,
+     -28.9
+    ],
+    [
+     0.016154444,
+     -0.999869508,
+     0.0,
+     -4.998196955
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": "sensor",
+   "look": "screw-black"
+  },
+  {
+   "mesh": "bodies/flexitac-g1/drawn-holder-bolt.stl",
+   "sha256": "4065ad795ec729b88544255a84ee9372498d6d8b7874504c1ecacbb9b119d3d8",
+   "bytes": 3284,
+   "triangles": 64,
+   "matrix": [
+    [
+     0.999869508,
+     0.016154444,
+     0.0,
+     34.996228384
+    ],
+    [
+     0.0,
+     0.0,
+     -1.0,
+     -28.9
+    ],
+    [
+     0.016154444,
+     -0.999869508,
+     0.0,
+     -5.003661228
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": "sensor",
+   "look": "screw-black"
+  },
+  {
+   "mesh": "bodies/flexitac-g1/drawn-holder-bolt.stl",
+   "sha256": "4065ad795ec729b88544255a84ee9372498d6d8b7874504c1ecacbb9b119d3d8",
+   "bytes": 3284,
+   "triangles": 64,
+   "matrix": [
+    [
+     0.999869508,
+     0.016154444,
+     0.0,
+     35.001545467
+    ],
+    [
+     0.0,
+     0.0,
+     -1.0,
+     -28.9
+    ],
+    [
+     0.016154444,
+     -0.999869508,
+     0.0,
+     -39.998141817
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": "sensor",
+   "look": "screw-black"
+  },
+  {
+   "mesh": "bodies/flexitac-g1/drawn-holder-nut.stl",
+   "sha256": "19dfdb4cfc52e2aca385209251c9ae8bd063fcee2f776a8dc5540fc6e9ab7dcb",
+   "bytes": 1284,
+   "triangles": 24,
+   "matrix": [
+    [
+     0.999869508,
+     0.016154444,
+     0.0,
+     5.002226148
+    ],
+    [
+     0.0,
+     0.0,
+     -1.0,
+     5.9
+    ],
+    [
+     0.016154444,
+     -0.999869508,
+     0.0,
+     -4.998196955
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": "sensor",
+   "look": "screw-black"
+  },
+  {
+   "mesh": "bodies/flexitac-g1/drawn-holder-nut.stl",
+   "sha256": "19dfdb4cfc52e2aca385209251c9ae8bd063fcee2f776a8dc5540fc6e9ab7dcb",
+   "bytes": 1284,
+   "triangles": 24,
+   "matrix": [
+    [
+     0.999869508,
+     0.016154444,
+     0.0,
+     34.996228384
+    ],
+    [
+     0.0,
+     0.0,
+     -1.0,
+     5.9
+    ],
+    [
+     0.016154444,
+     -0.999869508,
+     0.0,
+     -5.003661228
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": "sensor",
+   "look": "screw-black"
+  },
+  {
+   "mesh": "bodies/flexitac-g1/drawn-holder-nut.stl",
+   "sha256": "19dfdb4cfc52e2aca385209251c9ae8bd063fcee2f776a8dc5540fc6e9ab7dcb",
+   "bytes": 1284,
+   "triangles": 24,
+   "matrix": [
+    [
+     0.999869508,
+     0.016154444,
+     0.0,
+     35.001545467
+    ],
+    [
+     0.0,
+     0.0,
+     -1.0,
+     5.9
+    ],
+    [
+     0.016154444,
+     -0.999869508,
+     0.0,
+     -39.998141817
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": "sensor",
+   "look": "screw-black"
+  },
+  {
+   "mesh": "bodies/flexitac-g1/drawn-holder-bolt.stl",
+   "sha256": "4065ad795ec729b88544255a84ee9372498d6d8b7874504c1ecacbb9b119d3d8",
+   "bytes": 3284,
+   "triangles": 64,
+   "matrix": [
+    [
+     -0.999869508,
+     0.016154444,
+     0.0,
+     -62.798480404
+    ],
+    [
+     0.0,
+     0.0,
+     -1.0,
+     -28.9
+    ],
+    [
+     -0.016154444,
+     -0.999869508,
+     0.0,
+     -6.093622639
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": "mate",
+   "look": "screw-black"
+  },
+  {
+   "mesh": "bodies/flexitac-g1/drawn-holder-bolt.stl",
+   "sha256": "4065ad795ec729b88544255a84ee9372498d6d8b7874504c1ecacbb9b119d3d8",
+   "bytes": 3284,
+   "triangles": 64,
+   "matrix": [
+    [
+     -0.999869508,
+     0.016154444,
+     0.0,
+     -92.776651285
+    ],
+    [
+     0.0,
+     0.0,
+     -1.0,
+     -28.9
+    ],
+    [
+     -0.016154444,
+     -0.999869508,
+     0.0,
+     -7.068030484
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": "mate",
+   "look": "screw-black"
+  },
+  {
+   "mesh": "bodies/flexitac-g1/drawn-holder-bolt.stl",
+   "sha256": "4065ad795ec729b88544255a84ee9372498d6d8b7874504c1ecacbb9b119d3d8",
+   "bytes": 3284,
+   "triangles": 64,
+   "matrix": [
+    [
+     -0.999869508,
+     0.016154444,
+     0.0,
+     -91.651480352
+    ],
+    [
+     0.0,
+     0.0,
+     -1.0,
+     -28.9
+    ],
+    [
+     -0.016154444,
+     -0.999869508,
+     0.0,
+     -42.044418096
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": "mate",
+   "look": "screw-black"
+  },
+  {
+   "mesh": "bodies/flexitac-g1/drawn-holder-nut.stl",
+   "sha256": "19dfdb4cfc52e2aca385209251c9ae8bd063fcee2f776a8dc5540fc6e9ab7dcb",
+   "bytes": 1284,
+   "triangles": 24,
+   "matrix": [
+    [
+     -0.999869508,
+     0.016154444,
+     0.0,
+     -62.798480404
+    ],
+    [
+     0.0,
+     0.0,
+     -1.0,
+     5.9
+    ],
+    [
+     -0.016154444,
+     -0.999869508,
+     0.0,
+     -6.093622639
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": "mate",
+   "look": "screw-black"
+  },
+  {
+   "mesh": "bodies/flexitac-g1/drawn-holder-nut.stl",
+   "sha256": "19dfdb4cfc52e2aca385209251c9ae8bd063fcee2f776a8dc5540fc6e9ab7dcb",
+   "bytes": 1284,
+   "triangles": 24,
+   "matrix": [
+    [
+     -0.999869508,
+     0.016154444,
+     0.0,
+     -92.776651285
+    ],
+    [
+     0.0,
+     0.0,
+     -1.0,
+     5.9
+    ],
+    [
+     -0.016154444,
+     -0.999869508,
+     0.0,
+     -7.068030484
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": "mate",
+   "look": "screw-black"
+  },
+  {
+   "mesh": "bodies/flexitac-g1/drawn-holder-nut.stl",
+   "sha256": "19dfdb4cfc52e2aca385209251c9ae8bd063fcee2f776a8dc5540fc6e9ab7dcb",
+   "bytes": 1284,
+   "triangles": 24,
+   "matrix": [
+    [
+     -0.999869508,
+     0.016154444,
+     0.0,
+     -91.651480352
+    ],
+    [
+     0.0,
+     0.0,
+     -1.0,
+     5.9
+    ],
+    [
+     -0.016154444,
+     -0.999869508,
+     0.0,
+     -42.044418096
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": "mate",
+   "look": "screw-black"
+  },
+  {
+   "mesh": "bodies/flexitac-g1/drawn-slot-block.stl",
+   "sha256": "4c931930fd990b0e76da2facd08e69b7d795b371264d58196b80b3b056685f0d",
+   "bytes": 5484,
+   "triangles": 108,
+   "matrix": [
+    [
+     -0.999869508,
+     0.016154444,
+     0.0,
+     -30.572574264
+    ],
+    [
+     0.0,
+     0.0,
+     -1.0,
+     -12.9
+    ],
+    [
+     -0.016154444,
+     -0.999869508,
+     0.0,
+     98.092977359
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": null,
+   "look": "anodized-black"
+  },
+  {
+   "mesh": "bodies/flexitac-g1/drawn-extender.stl",
+   "sha256": "ce9e3d2b69f27cb92a941e0580e2cd25c717f341515e9f022b3f5a8814b54559",
+   "bytes": 684,
+   "triangles": 12,
+   "matrix": [
+    [
+     0.929116079,
+     0.0,
+     0.369788199,
+     35.718
+    ],
+    [
+     0.0,
+     1.0,
+     0.0,
+     0.0
+    ],
+    [
+     -0.369788199,
+     0.0,
+     0.929116079,
+     -57.5
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": "sensor",
+   "look": "pcb-yellow"
+  },
+  {
+   "mesh": "bodies/flexitac-g1/drawn-extender-sockets.stl",
+   "sha256": "1fb0ee61d901a42382ed3ba2004b6e80912e45c99c31caff7e1ac7bbfd0fa042",
+   "bytes": 1284,
+   "triangles": 24,
+   "matrix": [
+    [
+     0.929116079,
+     0.0,
+     0.369788199,
+     35.718
+    ],
+    [
+     0.0,
+     1.0,
+     0.0,
+     0.0
+    ],
+    [
+     -0.369788199,
+     0.0,
+     0.929116079,
+     -57.5
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": "sensor",
+   "look": "ffc-white"
+  },
+  {
+   "mesh": "bodies/flexitac-g1/drawn-cable-stub.stl",
+   "sha256": "13d5a943386e3cb4a92e55d8b135a99a0ff3b765496633cd774c46f9757ac1e5",
+   "bytes": 684,
+   "triangles": 12,
+   "matrix": [
+    [
+     0.995002946,
+     0.0,
+     -0.09984557,
+     43.864489778
+    ],
+    [
+     0.0,
+     1.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.09984557,
+     0.0,
+     0.995002946,
+     -43.52163442
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": "sensor",
+   "look": "ffc-white"
+  },
+  {
+   "mesh": "bodies/flexitac-g1/drawn-extender.stl",
+   "sha256": "ce9e3d2b69f27cb92a941e0580e2cd25c717f341515e9f022b3f5a8814b54559",
+   "bytes": 684,
+   "triangles": 12,
+   "matrix": [
+    [
+     -0.916685256,
+     0.0,
+     -0.399609986,
+     -91.802169145
+    ],
+    [
+     0.0,
+     1.0,
+     0.0,
+     0.0
+    ],
+    [
+     -0.399609986,
+     0.0,
+     0.916685256,
+     -59.560286326
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": "mate",
+   "look": "pcb-yellow"
+  },
+  {
+   "mesh": "bodies/flexitac-g1/drawn-extender-sockets.stl",
+   "sha256": "1fb0ee61d901a42382ed3ba2004b6e80912e45c99c31caff7e1ac7bbfd0fa042",
+   "bytes": 1284,
+   "triangles": 24,
+   "matrix": [
+    [
+     -0.916685256,
+     0.0,
+     -0.399609986,
+     -91.802169145
+    ],
+    [
+     0.0,
+     1.0,
+     0.0,
+     0.0
+    ],
+    [
+     -0.399609986,
+     0.0,
+     0.916685256,
+     -59.560286326
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": "mate",
+   "look": "ffc-white"
+  },
+  {
+   "mesh": "bodies/flexitac-g1/drawn-cable-stub.stl",
+   "sha256": "13d5a943386e3cb4a92e55d8b135a99a0ff3b765496633cd774c46f9757ac1e5",
+   "bytes": 684,
+   "triangles": 12,
+   "matrix": [
+    [
+     -0.9977091,
+     0.0,
+     0.067650213,
+     -100.395973532
+    ],
+    [
+     0.0,
+     1.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.067650213,
+     0.0,
+     0.9977091,
+     -45.852386189
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": "mate",
+   "look": "ffc-white"
+  }
+ ],
+ "see_through": [],
+ "picture": "on both soft fingers of the open gripper",
+ "camera": {
+  "exploded": {
+   "tilt_deg": 70,
+   "elevation_deg": 40,
+   "front": -1
+  },
+  "assembled": {
+   "tilt_deg": 60,
+   "elevation_deg": 20,
+   "front": -1
+  }
+ },
+ "looks": {
+  "shell-white-gloss": {
+   "color": "#e2e4e6",
+   "metalness": 0,
+   "roughness": 0.1,
+   "clearcoat": 1,
+   "clearcoat_roughness": 0.02,
+   "env_intensity": 0.7
+  },
+  "print-white": {
+   "color": "#d8dadc",
+   "metalness": 0,
+   "roughness": 0.45
+  },
+  "anodized-black": {
+   "color": "#232428",
+   "metalness": 0.6,
+   "roughness": 0.45,
+   "env_intensity": 2.4
+  },
+  "steel-pin": {
+   "color": "#a0a2a4",
+   "metalness": 1,
+   "roughness": 0.7,
+   "env_intensity": 0.5
+  },
+  "screw-black": {
+   "color": "#232428",
+   "metalness": 0,
+   "roughness": 0.9,
+   "env_intensity": 1.9
+  },
+  "umi-tpu-orange": {
+   "color": "#e85a1c",
+   "metalness": 0,
+   "roughness": 0.85,
+   "env_intensity": 0.3
+  },
+  "pcb-yellow": {
+   "color": "#a08616",
+   "metalness": 0,
+   "roughness": 0.5
+  },
+  "ffc-white": {
+   "color": "#dedcd8",
+   "metalness": 0,
+   "roughness": 0.5
+  }
+ },
+ "part_look": "umi-tpu-orange",
+ "smooth_deg": 35
+}

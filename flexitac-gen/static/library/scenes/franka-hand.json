@@ -2,7 +2,7 @@
  "format": "flexitac-library-scene/v1",
  "part": "franka-hand",
  "part_mesh_sha256": "3ac26349fc85ab971b81696e31ac88955f45d065ddc1254de376fea9d89b6c2c",
- "about": "Franka Hand at full opening: mujoco_menagerie f3b6013, franka_emika_panda/hand.xml (Apache-2.0): finger_joint1/2 slide 0..0.04 m, q 40 mm.  The bodies are the hand's five visual meshes (hand_0..hand_4.obj) and, on each finger, finger_0.obj; the sensor finger's pad is the Library mesh (the convex hull of finger_1.obj).  The other finger is hand.xml's right_finger: the same finger turned 180 degrees about the hand's axis (its quat 0 0 0 1), so its sensor is the same board.  The whole hand is drawn.",
+ "about": "Franka Hand at full opening: mujoco_menagerie f3b6013, franka_emika_panda/hand.xml (Apache-2.0): finger_joint1/2 slide 0..0.04 m, q 40 mm.  The bodies are the hand's five visual meshes (hand_0..hand_4.obj) and, on each finger, finger_0.obj; the sensor finger's pad is the Library mesh (the convex hull of finger_1.obj).  The other finger is hand.xml's right_finger: the same finger turned 180 degrees about the hand's axis (its quat 0 0 0 1), so its sensor is the same board.  The whole hand is drawn.  The looks: drawn after franka.de's product render and Franka Research 3 photos (2026-11-12): the white satin shell, the brushed aluminium inlay strips, the turned aluminium flange, the milled aluminium fingers, the black plug and cable, the black rubber pad (the Library's part).  The screws are the project's own drawing, not the model's, as plain cylinders.  On each finger's outer face: two socket-head screws in their counterbores (where the model keeps two closed pockets inside the finger's solid, unseen) and the fingertip's screw, drawn once in the finger's frame and standing on both fingers (bodies/franka-hand/drawn-screws.stl and drawn-screw-bores.stl).  On the one broad face of the shell that the photos show (the plug on the right when the flange is up): the two small screws beside the inlay strip, on the fingers' side of it, 3.5 mm from its edge, a third and two thirds along it, their places read from the photos to about 2 mm (drawn-shell-screws.stl in drawn-shell-screw-seats.stl).  The other broad face is in no photo, so nothing is drawn on it.  No guide rail, lettering or pad groove is modelled.",
  "frame": "the part's file axes, mm",
  "approach": [
   0.0,
@@ -77,7 +77,8 @@
      1.0
     ]
    ],
-   "finger": null
+   "finger": null,
+   "look": "inlay-brushed"
   },
   {
    "mesh": "bodies/franka-hand/hand_1.stl",
@@ -110,7 +111,8 @@
      1.0
     ]
    ],
-   "finger": null
+   "finger": null,
+   "look": "plastic-black-matte"
   },
   {
    "mesh": "bodies/franka-hand/hand_2.stl",
@@ -143,7 +145,8 @@
      1.0
     ]
    ],
-   "finger": null
+   "finger": null,
+   "look": "plastic-black-satin"
   },
   {
    "mesh": "bodies/franka-hand/hand_3.stl",
@@ -176,7 +179,8 @@
      1.0
     ]
    ],
-   "finger": null
+   "finger": null,
+   "look": "shell-white"
   },
   {
    "mesh": "bodies/franka-hand/hand_4.stl",
@@ -209,11 +213,12 @@
      1.0
     ]
    ],
-   "finger": null
+   "finger": null,
+   "look": "flange-turned"
   },
   {
-   "mesh": "bodies/franka-hand/finger_0.stl",
-   "sha256": "3a4788747102666fbe3b298cd6290b1a219bcce0a5699a2ab7c8490317468491",
+   "mesh": "bodies/franka-hand/finger-body.stl",
+   "sha256": "8f9ed457aa02a857005a17df4b13a7faa0e651112e1121c8afe194e875dd478e",
    "bytes": 18184,
    "triangles": 362,
    "matrix": [
@@ -242,11 +247,80 @@
      1.0
     ]
    ],
-   "finger": "sensor"
+   "finger": "sensor",
+   "look": "anodized-natural"
   },
   {
-   "mesh": "bodies/franka-hand/finger_0.stl",
-   "sha256": "3a4788747102666fbe3b298cd6290b1a219bcce0a5699a2ab7c8490317468491",
+   "mesh": "bodies/franka-hand/drawn-screw-bores.stl",
+   "sha256": "8366ab877036a41d2bf6f7201e496e6092cfd0133b824417b763c77113af1c09",
+   "bytes": 18084,
+   "triangles": 360,
+   "matrix": [
+    [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     1.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": "sensor",
+   "look": "bore-dark"
+  },
+  {
+   "mesh": "bodies/franka-hand/drawn-screws.stl",
+   "sha256": "c8a2fcc2e94fae5d214b314cc21351a94ceac19148fd13e70e05b9fd01c3bc46",
+   "bytes": 14484,
+   "triangles": 288,
+   "matrix": [
+    [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     1.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": "sensor",
+   "look": "steel-ground"
+  },
+  {
+   "mesh": "bodies/franka-hand/finger-body.stl",
+   "sha256": "8f9ed457aa02a857005a17df4b13a7faa0e651112e1121c8afe194e875dd478e",
    "bytes": 18184,
    "triangles": 362,
    "matrix": [
@@ -275,9 +349,207 @@
      1.0
     ]
    ],
-   "finger": "mate"
+   "finger": "mate",
+   "look": "anodized-natural"
+  },
+  {
+   "mesh": "bodies/franka-hand/drawn-screw-bores.stl",
+   "sha256": "8366ab877036a41d2bf6f7201e496e6092cfd0133b824417b763c77113af1c09",
+   "bytes": 18084,
+   "triangles": 360,
+   "matrix": [
+    [
+     -1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     -1.0,
+     0.0,
+     -80.0
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": "mate",
+   "look": "bore-dark"
+  },
+  {
+   "mesh": "bodies/franka-hand/drawn-screws.stl",
+   "sha256": "c8a2fcc2e94fae5d214b314cc21351a94ceac19148fd13e70e05b9fd01c3bc46",
+   "bytes": 14484,
+   "triangles": 288,
+   "matrix": [
+    [
+     -1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     -1.0,
+     0.0,
+     -80.0
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": "mate",
+   "look": "steel-ground"
+  },
+  {
+   "mesh": "bodies/franka-hand/drawn-shell-screw-seats.stl",
+   "sha256": "400575236179d928a8deb6a5906150e9a49acaae673a70e91bf7f3b16cc9cdf3",
+   "bytes": 4884,
+   "triangles": 96,
+   "matrix": [
+    [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     1.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": null,
+   "look": "bore-dark"
+  },
+  {
+   "mesh": "bodies/franka-hand/drawn-shell-screws.stl",
+   "sha256": "f18f238f0c05459e25788df859c2eb459d6304d2388b2bed6be7d4740bdc5509",
+   "bytes": 4884,
+   "triangles": 96,
+   "matrix": [
+    [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     1.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": null,
+   "look": "screw-bright"
   }
  ],
+ "looks": {
+  "anodized-natural": {
+   "color": "#c9ccd0",
+   "metalness": 1,
+   "roughness": 0.45
+  },
+  "bore-dark": {
+   "color": "#2a2b2d",
+   "metalness": 0,
+   "roughness": 0.75,
+   "env_intensity": 1.8
+  },
+  "flange-turned": {
+   "color": "#cfd2d5",
+   "metalness": 1,
+   "roughness": 0.28
+  },
+  "inlay-brushed": {
+   "color": "#c6c9cd",
+   "metalness": 1,
+   "roughness": 0.4,
+   "env_intensity": 1.5
+  },
+  "plastic-black-matte": {
+   "color": "#262628",
+   "metalness": 0,
+   "roughness": 0.75,
+   "env_intensity": 1.8
+  },
+  "plastic-black-satin": {
+   "color": "#222224",
+   "metalness": 0,
+   "roughness": 0.4,
+   "env_intensity": 1.8
+  },
+  "rubber-black": {
+   "color": "#232325",
+   "metalness": 0,
+   "roughness": 0.92,
+   "env_intensity": 2.2
+  },
+  "screw-bright": {
+   "color": "#b4b7ba",
+   "metalness": 0.35,
+   "roughness": 0.5,
+   "env_intensity": 1.6
+  },
+  "shell-white": {
+   "color": "#dcdee1",
+   "metalness": 0,
+   "roughness": 0.45,
+   "env_intensity": 1.6
+  },
+  "steel-ground": {
+   "color": "#b4b7ba",
+   "metalness": 1,
+   "roughness": 0.35
+  }
+ },
+ "part_look": "rubber-black",
+ "smooth_deg": 35,
  "see_through": [
   "mate"
  ],

@@ -2,7 +2,7 @@
  "format": "flexitac-library-scene/v1",
  "part": "i2rt-yam",
  "part_mesh_sha256": "b70f8c1e32ccfae03fec46ac10a0f04195347bc530ee761143a5d7c5bb07ae07",
- "about": "I2RT YAM crank gripper at full opening: i2rt 120c3c8, i2rt/robot_models/gripper/crank_4310/crank_4310.xml (MIT): joint7/joint8 slide 0..0.039574 m, coupled, q 39.574 mm.  The bodies are gripper.stl (the motor, the rail plate, the crank and its links) and tip_right.stl, the other finger, where crank_4310.xml places them (pure translations); the Library mesh is tip_left.stl.  The other finger is another part whose contact face is tip_left's mirror image (x -> -x across the gripper's mid-plane, median 0.047 mm on the face): the mate is that mirror, its sensor the mirror-image board, and the finger drawn there is tip_right itself.",
+ "about": "I2RT YAM crank gripper at full opening: i2rt 120c3c8, i2rt/robot_models/gripper/crank_4310/crank_4310.xml (MIT): joint7/joint8 slide 0..0.039574 m, coupled, q 39.574 mm.  The bodies are gripper.stl (the motor, the rail plate, the crank and its links) and tip_right.stl, the other finger, where crank_4310.xml places them (pure translations); the Library mesh is tip_left.stl.  The other finger is another part whose contact face is tip_left's mirror image (x -> -x across the gripper's mid-plane, median 0.047 mm on the face): the mate is that mirror, its sensor the mirror-image board, and the finger drawn there is tip_right itself.  The looks: drawn after I2RT's photos of the crank gripper (the two product photos of doc.i2rt.com's YAM page and the shop's photos of the gripper and of its tips, 2026-11-12): the fingers of black sintered nylon (the Library's part, whose mesh also holds its carriage plate, bearing block and yoke, so all of it wears the one look), the bead-blasted black anodised rail plate and carriage plate, the black motor and crank, the ground steel rails with their duller sawn ends, the steel bearing block and crank rollers, the dark steel yoke.  Drawn by the project, not the model's (plain boxes and cylinders, bodies/i2rt-yam/drawn-<name>.stl): the green cap and the red seal at each end of both bearing blocks (drawn-block-caps.stl and drawn-block-seals.stl on the sensor finger, drawn-tip-right-caps.stl and drawn-tip-right-seals.stl on the other), the steel body of the sensor finger's bearing block over the model's own block (drawn-block.stl: the part has one look), six black screw heads on the rails, whose tops the model leaves plain (drawn-rail-screws.stl: 10, 30, 50 and 70 mm along each rail as the shop's top view shows them, the one under each bearing block left out), and the bright hub in the middle of the crank with its dark bore (drawn-crank-hub.stl, drawn-crank-hub-bore.stl: flat discs where the real hub lies in a bore).  Not modelled: the knurled rubber pad on the fingers' faces (under the sensor), the black screws of the plates and the fingers, the motor's connector.",
  "frame": "the part's file axes, mm",
  "approach": [
   0.0,
@@ -47,10 +47,10 @@
  },
  "bodies": [
   {
-   "mesh": "bodies/i2rt-yam/gripper.stl",
-   "sha256": "bc1a2a90fd9776866e4bbf901ee8572a78a1be2f2b055ff171819281120b401d",
-   "bytes": 107384,
-   "triangles": 2146,
+   "mesh": "bodies/i2rt-yam/crank-face.stl",
+   "sha256": "bbf2a3b8e70c81c7609f5db4aacbc3909c4f8674305a93a488d138ef292741a8",
+   "bytes": 3134,
+   "triangles": 61,
    "matrix": [
     [
      1.0,
@@ -77,13 +77,320 @@
      1.0
     ]
    ],
-   "finger": null
+   "finger": null,
+   "look": "crank-black"
   },
   {
-   "mesh": "bodies/i2rt-yam/tip_right.stl",
-   "sha256": "56839ed9d8f5c5a17d2e0dccae0c75769ba6f699270ba4bfb36eccc886b5400f",
-   "bytes": 173384,
-   "triangles": 3466,
+   "mesh": "bodies/i2rt-yam/crank-rollers.stl",
+   "sha256": "acbc5d7a84b4b88c41702ccf3a352a46ff1b3047af8082969a6e5bc5fe3468e6",
+   "bytes": 3834,
+   "triangles": 75,
+   "matrix": [
+    [
+     1.0,
+     0.0,
+     0.0,
+     -37.524
+    ],
+    [
+     0.0,
+     1.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": null,
+   "look": "bearing-steel"
+  },
+  {
+   "mesh": "bodies/i2rt-yam/crank.stl",
+   "sha256": "bdabeb2017a1f26fd900834fa885f3ca108a9c1f11b618638f40874fab03380d",
+   "bytes": 6584,
+   "triangles": 130,
+   "matrix": [
+    [
+     1.0,
+     0.0,
+     0.0,
+     -37.524
+    ],
+    [
+     0.0,
+     1.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": null,
+   "look": "crank-black"
+  },
+  {
+   "mesh": "bodies/i2rt-yam/rail-ends.stl",
+   "sha256": "26afd94c82c7718305fd1492434b6d174354aadfe1b360d6d5f75785072089ec",
+   "bytes": 3984,
+   "triangles": 78,
+   "matrix": [
+    [
+     1.0,
+     0.0,
+     0.0,
+     -37.524
+    ],
+    [
+     0.0,
+     1.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": null,
+   "look": "rail-cut"
+  },
+  {
+   "mesh": "bodies/i2rt-yam/rails.stl",
+   "sha256": "c333d6263efd1ef3601d11789db7b482b658dece5061ed7bea4c7657bd651eaa",
+   "bytes": 6584,
+   "triangles": 130,
+   "matrix": [
+    [
+     1.0,
+     0.0,
+     0.0,
+     -37.524
+    ],
+    [
+     0.0,
+     1.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": null,
+   "look": "bearing-steel"
+  },
+  {
+   "mesh": "bodies/i2rt-yam/motor.stl",
+   "sha256": "71d41ee97025d008602aa84a51a86bdad143317e1095b9eed5e69e1653c28ebf",
+   "bytes": 21384,
+   "triangles": 426,
+   "matrix": [
+    [
+     1.0,
+     0.0,
+     0.0,
+     -37.524
+    ],
+    [
+     0.0,
+     1.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": null,
+   "look": "motor-black"
+  },
+  {
+   "mesh": "bodies/i2rt-yam/drawn-rail-screws.stl",
+   "sha256": "75def21c7c5ad7e67d7ec95b411a2089dd9b4c56d4bdd09036ef45eafe01e36f",
+   "bytes": 9684,
+   "triangles": 192,
+   "matrix": [
+    [
+     1.0,
+     0.0,
+     0.0,
+     -37.524
+    ],
+    [
+     0.0,
+     1.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": null,
+   "look": "screw-black"
+  },
+  {
+   "mesh": "bodies/i2rt-yam/drawn-crank-hub.stl",
+   "sha256": "2201aaec324a09a1d74d67bc2ea494e5e6927c1f287b281eea86b8e0ed1c380a",
+   "bytes": 3284,
+   "triangles": 64,
+   "matrix": [
+    [
+     1.0,
+     0.0,
+     0.0,
+     -37.524
+    ],
+    [
+     0.0,
+     1.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": null,
+   "look": "hub-turned"
+  },
+  {
+   "mesh": "bodies/i2rt-yam/drawn-crank-hub-bore.stl",
+   "sha256": "899d9fd3676d8b59d406f30e34286cff6c2ec36a01288beb36151cdb46c35ee9",
+   "bytes": 1684,
+   "triangles": 32,
+   "matrix": [
+    [
+     1.0,
+     0.0,
+     0.0,
+     -37.524
+    ],
+    [
+     0.0,
+     1.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": null,
+   "look": "crank-black"
+  },
+  {
+   "mesh": "bodies/i2rt-yam/rail-plate.stl",
+   "sha256": "64611b6178fc6154959bffd5e658fd398c2c3f7e07f90ddf43afaa7b7c538035",
+   "bytes": 62384,
+   "triangles": 1246,
+   "matrix": [
+    [
+     1.0,
+     0.0,
+     0.0,
+     -37.524
+    ],
+    [
+     0.0,
+     1.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": null,
+   "look": "anodized-blasted"
+  },
+  {
+   "mesh": "bodies/i2rt-yam/tip-right-finger.stl",
+   "sha256": "4c0856986524a567000609bd9496d405d15f02b43c20fbaf62a17390ddb880a8",
+   "bytes": 140284,
+   "triangles": 2804,
    "matrix": [
     [
      1.0,
@@ -110,9 +417,347 @@
      1.0
     ]
    ],
-   "finger": "mate"
+   "finger": "mate",
+   "look": "finger-nylon"
+  },
+  {
+   "mesh": "bodies/i2rt-yam/tip-right-block.stl",
+   "sha256": "fd941994384807c764b1f71a72832d899e9683f3185804f8a55cee76113ca32d",
+   "bytes": 5734,
+   "triangles": 113,
+   "matrix": [
+    [
+     1.0,
+     0.0,
+     0.0,
+     -75.048
+    ],
+    [
+     0.0,
+     1.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": "mate",
+   "look": "bearing-steel"
+  },
+  {
+   "mesh": "bodies/i2rt-yam/tip-right-yoke.stl",
+   "sha256": "da3a20a58981d2edf932ce1b4e72e935eb237b75ea1a53e4fb69b688d43acf4b",
+   "bytes": 2934,
+   "triangles": 57,
+   "matrix": [
+    [
+     1.0,
+     0.0,
+     0.0,
+     -75.048
+    ],
+    [
+     0.0,
+     1.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": "mate",
+   "look": "yoke-steel"
+  },
+  {
+   "mesh": "bodies/i2rt-yam/drawn-tip-right-caps.stl",
+   "sha256": "7512b363d0a6f6d8aa03b226b75dc1f19fb3bff063e2f0fafbe1c3eda19079e7",
+   "bytes": 1284,
+   "triangles": 24,
+   "matrix": [
+    [
+     1.0,
+     0.0,
+     0.0,
+     -75.048
+    ],
+    [
+     0.0,
+     1.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": "mate",
+   "look": "cap-green"
+  },
+  {
+   "mesh": "bodies/i2rt-yam/drawn-tip-right-seals.stl",
+   "sha256": "357ab4dc1c5e44cadc0b56ba891dea21f63c90d832295f545ad7b03369bf89ce",
+   "bytes": 1284,
+   "triangles": 24,
+   "matrix": [
+    [
+     1.0,
+     0.0,
+     0.0,
+     -75.048
+    ],
+    [
+     0.0,
+     1.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": "mate",
+   "look": "seal-red"
+  },
+  {
+   "mesh": "bodies/i2rt-yam/tip-right-plate.stl",
+   "sha256": "be360bdc86dba2c6b5a04fb7280217ee23af28dcc4985f53d2badef5a4adadc4",
+   "bytes": 24684,
+   "triangles": 492,
+   "matrix": [
+    [
+     1.0,
+     0.0,
+     0.0,
+     -75.048
+    ],
+    [
+     0.0,
+     1.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": "mate",
+   "look": "anodized-blasted"
+  },
+  {
+   "mesh": "bodies/i2rt-yam/drawn-block.stl",
+   "sha256": "0fba598f27420a667121ea26f5a723a67b5106e6fd96a534d2342af16bbdfbdc",
+   "bytes": 684,
+   "triangles": 12,
+   "matrix": [
+    [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     1.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": "sensor",
+   "look": "bearing-steel"
+  },
+  {
+   "mesh": "bodies/i2rt-yam/drawn-block-caps.stl",
+   "sha256": "9e38177937c2175c29b44c5fab0e33075df394869e2ad0583dcf77b61048d983",
+   "bytes": 1284,
+   "triangles": 24,
+   "matrix": [
+    [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     1.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": "sensor",
+   "look": "cap-green"
+  },
+  {
+   "mesh": "bodies/i2rt-yam/drawn-block-seals.stl",
+   "sha256": "d590811b75b28537cd1b14dad850a2bd895296830c08bf517152e578b7c6014d",
+   "bytes": 1284,
+   "triangles": 24,
+   "matrix": [
+    [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     1.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": "sensor",
+   "look": "seal-red"
   }
  ],
+ "looks": {
+  "anodized-blasted": {
+   "color": "#2f3134",
+   "metalness": 0.2,
+   "roughness": 0.6,
+   "env_intensity": 2.4
+  },
+  "bearing-steel": {
+   "color": "#c9cbc9",
+   "metalness": 0.65,
+   "roughness": 0.45,
+   "env_intensity": 0.6
+  },
+  "cap-green": {
+   "color": "#3f9a6c",
+   "metalness": 0,
+   "roughness": 0.5
+  },
+  "crank-black": {
+   "color": "#28292d",
+   "metalness": 0.25,
+   "roughness": 0.4,
+   "env_intensity": 2.4
+  },
+  "finger-nylon": {
+   "color": "#2a2a2c",
+   "metalness": 0,
+   "roughness": 0.65,
+   "env_intensity": 2.2
+  },
+  "hub-turned": {
+   "color": "#c8ccca",
+   "metalness": 0.5,
+   "roughness": 0.3
+  },
+  "motor-black": {
+   "color": "#232428",
+   "metalness": 0.3,
+   "roughness": 0.6,
+   "env_intensity": 2.4
+  },
+  "rail-cut": {
+   "color": "#a8a199",
+   "metalness": 0.6,
+   "roughness": 0.6
+  },
+  "screw-black": {
+   "color": "#232428",
+   "metalness": 0.3,
+   "roughness": 0.5,
+   "env_intensity": 2.4
+  },
+  "seal-red": {
+   "color": "#c2352f",
+   "metalness": 0,
+   "roughness": 0.6
+  },
+  "yoke-steel": {
+   "color": "#4a4c4e",
+   "metalness": 1,
+   "roughness": 0.45
+  }
+ },
+ "part_look": "finger-nylon",
+ "smooth_deg": 35,
  "see_through": [
   "mate"
  ],

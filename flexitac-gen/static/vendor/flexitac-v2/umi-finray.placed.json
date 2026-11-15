@@ -1,0 +1,23 @@
+{
+  "format": "flexitac-library-placed/v1",
+  "id": "flexitac-v2-on-umi-finray",
+  "about": "The original FlexiTac V2 pad on the UMI fin-ray finger, as the FlexiTac team mount it (the hardware tutorial and the project page's photo of the assembled sensor): the Bottom FPC outward, the field's centre 37 mm from the fingertip in the middle of the 25.8 mm face, both tails leaving to the viewer's left with the fingertip up, rolled round the finger's side face onto its back.  Placed by hand, not fitted by the generator.",
+  "sensor": "flexitac-v2",
+  "art": "../vendor/flexitac-v2/art.json.gz",
+  "mesh": {
+    "file": "../vendor/umi/UMI-Soft-Gripper-Finger.stl",
+    "sha256": "63331c666d485de462f3c7c80eb4200fd2bf98ac325095f5b0e8774a95dc8442",
+    "unit": "mm"
+  },
+  "frame": "the mesh's file axes, mm",
+  "face": {
+    "origin": [0, -12.9, -86.364487],
+    "x": [0, 1, 0],
+    "y": [0, 0, -1]
+  },
+  "wrap": {
+    "side": "left",
+    "radius_mm": 2
+  },
+  "scene": null
+}

@@ -2,7 +2,7 @@
  "format": "flexitac-library-scene/v1",
  "part": "makermods-metal",
  "part_mesh_sha256": "f480c8fb9fbe5027ce0741436cd3c60c77702c2eec2b80d87f5829c4adca5925",
- "about": "MakerMods Metal Arm at full opening: its two HandUMI tips (handumi-hw 1448278, metal-arm-gripper-tip-left.stl, the Library mesh, Apache-2.0), 50 mm each (metal-python-ros bccf3c8, metal_ros2/src/metal_description/urdf/metal_with_gripper.urdf: joint7/joint8 0..0.05 m), the faces 96 mm apart.  The HandUMI tips are one file: the other tip is this one turned 180 degrees about the approach axis, 95.0 mm along x, so its sensor is the same board.  No MakerMods part is drawn (its licence is not clear): the tips stand on a plain rail drawn by the FlexiTac-Gen project, 170 x 26 x 10 mm, not MakerMods hardware.",
+ "about": "MakerMods Metal Arm at full opening: its two HandUMI tips (handumi-hw 1448278, metal-arm-gripper-tip-left.stl, the Library mesh, Apache-2.0), 50 mm each (metal-python-ros bccf3c8, metal_ros2/src/metal_description/urdf/metal_with_gripper.urdf: joint7/joint8 0..0.05 m), the faces 96 mm apart.  The HandUMI tips are one file: the other tip is this one turned 180 degrees about the approach axis, 95.0 mm along x, so its sensor is the same board.  No MakerMods part is drawn (its licence is not clear): the tips stand on a plain rail drawn by the FlexiTac-Gen project, 170 x 26 x 10 mm, not MakerMods hardware.  The looks: drawn after the maker's product photos of the Metal Arm (makermods.ai, 2026-11-12): the two jaws matte black resin, the cross beam black anodised aluminium, the linear guide rail on it bright ground steel.  The plain rail is drawn as that beam, and three things on it are the project's own drawing too, plain boxes and cylinders sized by eye from the photos, not MakerMods geometry: the steel guide rail as a strip 7 mm wide with rounded shoulders along the middle of the beam's top (bodies/makermods-metal/drawn-rail-steel.stl; the real rail is taller and carries the jaws on carriages, which are not drawn), its counterbored holes as dark discs every 15 mm (drawn-rail-bores.stl: the seven between the jaws, the two under the see-through jaw and the one in the open slot at the other jaw's back) and the beam's two end stops (drawn-end-stops.stl).  No gripper body, carriage, screw, camera mount or finger loop is drawn.",
  "frame": "the part's file axes, mm",
  "approach": [
   0.0,
@@ -77,9 +77,140 @@
      1.0
     ]
    ],
-   "finger": null
+   "finger": null,
+   "look": "beam-anodized"
+  },
+  {
+   "mesh": "bodies/makermods-metal/drawn-rail-steel.stl",
+   "sha256": "b80327b34f64f90ef1665fa9ccdb187de0dbf6c1f055201b2457008724329626",
+   "bytes": 6084,
+   "triangles": 120,
+   "matrix": [
+    [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     1.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": null,
+   "look": "rail-ground"
+  },
+  {
+   "mesh": "bodies/makermods-metal/drawn-rail-bores.stl",
+   "sha256": "28448e4ad66a436824f4270d744f79100835492493cbab3669d4787e72e2fecf",
+   "bytes": 16084,
+   "triangles": 320,
+   "matrix": [
+    [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     1.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": null,
+   "look": "plastic-black-matte"
+  },
+  {
+   "mesh": "bodies/makermods-metal/drawn-end-stops.stl",
+   "sha256": "d778af12fa2cf9f3b8b4b3d0ced4bcc891503ce313a617f1f1ee4a23f0f8e121",
+   "bytes": 1284,
+   "triangles": 24,
+   "matrix": [
+    [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     1.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": null,
+   "look": "beam-anodized"
   }
  ],
+ "looks": {
+  "beam-anodized": {
+   "color": "#2c2c32",
+   "metalness": 0.5,
+   "roughness": 0.8,
+   "env_intensity": 2.3
+  },
+  "jaw-resin": {
+   "color": "#3b3b41",
+   "metalness": 0,
+   "roughness": 0.8,
+   "env_intensity": 1.8
+  },
+  "plastic-black-matte": {
+   "color": "#262628",
+   "metalness": 0,
+   "roughness": 0.75,
+   "env_intensity": 1.8
+  },
+  "rail-ground": {
+   "color": "#b4b7ba",
+   "metalness": 1,
+   "roughness": 0.45,
+   "env_intensity": 0.7
+  }
+ },
+ "part_look": "jaw-resin",
+ "smooth_deg": 35,
  "see_through": [
   "mate"
  ],

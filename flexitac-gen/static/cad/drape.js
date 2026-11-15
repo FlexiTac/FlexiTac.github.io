@@ -321,6 +321,153 @@ function edgeGrid(edges) {
 }
 
 // --------------------------------------------------------------------------
+// A sheet placed on a flat face and rolled round the part (the Library's showcase)
+// --------------------------------------------------------------------------
+
+// The Library's showcase (docs/LIBRARY_VIEW.md "A placed sensor"; the user's request of 2026-11-12): the original,
+// hand-designed FlexiTac pad on the UMI finger, whose two tails are 58 mm long and, on the real finger, go round its
+// side face onto its back.  No fit of the generator places it: a placed record gives the face directly (PLACED_FORMAT:
+// face {origin, x, y} in the part's file axes, mm: the field's centre on the face, the base frame's x and y there, seen
+// from outside; the outward normal is x cross y), and its wrap {side: "left" | "right", radius_mm} says which side edge
+// of the part the sheet rolls over (left: toward -x) and how far off the part it bends.  wrapMapper is chartMapper's
+// kind of map for it; generated sensors never have one (buildStack's mapper argument).
+export const PLACED_FORMAT = "flexitac-library-placed/v1";
+// A face's axes must be unit vectors at right angles to this, and a bend's radius at least this (mm).
+const WRAP_UNIT_TOLERANCE = 1e-6;
+const WRAP_MIN_RADIUS_MM = 0.05;
+
+function upperHull(points) {
+  // The concave majorant of points (t, q) over t: its corners, t ascending (Andrew's monotone chain, the upper half).
+  const sorted = [...points].sort((a, b) => a[0] - b[0] || b[1] - a[1]);
+  const hull = [];
+  let last = null;
+  for (const point of sorted) {
+    if (last !== null && point[0] === last) continue;  // the deepest of each t came first
+    last = point[0];
+    while (hull.length >= 2) {
+      const [a, b] = [hull[hull.length - 2], hull[hull.length - 1]];
+      if ((b[0] - a[0]) * (point[1] - a[1]) - (b[1] - a[1]) * (point[0] - a[0]) >= 0) hull.pop();
+      else break;
+    }
+    hull.push(point);
+  }
+  return hull;
+}
+
+/**
+ * The map of a placed record (above) with a wrap: {xyz(uv) -> {xyz, on}, outward(uv), width_mm, wrap}, uv in mm on the
+ * face from its origin along its x and y; null when the record or the part cannot give one.  On the face (and beyond
+ * its other edges) it is the face's plane, to the last bit: origin + u x + v y, the outward normal x cross y.  Past the
+ * wrap's side edge (the part's farthest corner that way: on the UMI finger 12.9 mm from the middle of its 25.8 mm),
+ * each height v of the sheet rolls round the part's section there on its own, in the plane across y, keeping its
+ * length (the idea of learn-flexitac's fin figure, the other way round the finger):
+ *   - a quarter turn about the line radius_mm behind the side edge (the sheet leaves the face tangent to it);
+ *   - down the side, on the plane radius_mm off the part's side, as far as the fold line: the part's section seen
+ *     from that side, the concave majorant of its corners' depth behind the face against their height along y (on a
+ *     fin-ray finger its slanted, curved back; the majorant bridges a dip, as a taut strap does), never shallower than
+ *     radius_mm;
+ *   - a quarter turn about the fold line's point at that height, then across the back, radius_mm behind it.
+ * So a strap that crosses the side level stays level on the back, where the real, loosely looped tails end (the gold
+ * ends behind the finger above its base).  Up to the fold line the sheet is laid rigidly; past it a level line keeps
+ * its length and a slanted fold line shears the sheet (by the fold line's slope: a rectangle of the tail lies on the
+ * back as a parallelogram).  Every point of the roll is on: the sheet lies round the part.
+ * lifted(h) is the same map of the sheet held h mm off the face along its normal ({xyz(uv) -> xyz, outward(uv)}): the
+ * face's plane h higher, the side that much longer, so the tail comes back round the fold line by h and, lifted far
+ * enough, hangs flat beside the part.  buildStack explodes a placed stack so (each layer lifted, its tails following
+ * it: never through the part, nothing stretched), over width_mm, the part's width across the fold (not the unrolled
+ * sheet's).  wrap: {edge_mm, radius_mm, fold: [[y, depth], ...]}.
+ */
+export function wrapMapper(placed, vertices) {
+  const face = placed?.face; const wrap = placed?.wrap;
+  const vector = value => (Array.isArray(value) && value.length === 3 && value.every(Number.isFinite) ? value.map(Number) : null);
+  const O = vector(face?.origin); const X = vector(face?.x); const Y = vector(face?.y);
+  const side = wrap?.side === "left" ? -1 : wrap?.side === "right" ? 1 : 0;
+  const r = Number(wrap?.radius_mm);
+  const positions = vertices?.positions; const scale = Number(vertices?.scale) || 1;
+  if (!O || !X || !Y || !side || !(r >= WRAP_MIN_RADIUS_MM) || !positions?.length) return null;
+  if (Math.abs(norm3(X) - 1) > WRAP_UNIT_TOLERANCE || Math.abs(norm3(Y) - 1) > WRAP_UNIT_TOLERANCE || Math.abs(dot3(X, Y)) > WRAP_UNIT_TOLERANCE) return null;
+  const N = cross3(X, Y); const S = scale3(X, side);
+  // The part seen from the wrap's side: its reach past the origin (the side edge) and its section's fold line.
+  let edge = -Infinity;
+  const section = [];
+  for (let k = 0; k + 2 < positions.length; k += 3) {
+    const p = sub3([positions[k] * scale, positions[k + 1] * scale, positions[k + 2] * scale], O);
+    edge = Math.max(edge, dot3(p, S));
+    section.push([dot3(p, Y), -dot3(p, N)]);
+  }
+  const fold = upperHull(section);
+  if (!(edge > 0) || fold.length < 2) return null;
+  const quarter = (Math.PI / 2) * r;
+  const foldAt = t => {
+    // The fold line at height t: its depth behind the face (its end pieces run on; radius_mm at least) and its slope.
+    let k = 0;
+    while (k + 2 < fold.length && fold[k + 1][0] <= t) k += 1;
+    const [a, b] = [fold[k], fold[k + 1]];
+    const slope = (b[1] - a[1]) / (b[0] - a[0]);
+    const depth = a[1] + (t - a[0]) * slope;
+    return depth > r ? {depth, slope} : {depth: r, slope: 0};
+  };
+  const rolled = ([u, v], h = 0) => {
+    // {xyz, normal} of the sheet's point (u, v), the sheet h off the face: the face, the first quarter turn, the side,
+    // the second, the back; q is the depth behind the sheet's own face plane.
+    const at = (across, height, q) => add3(O, add3(add3(scale3(X, across), scale3(Y, height)), scale3(N, h - q)));
+    const d = side * u - edge;
+    if (!(d > 0)) { const flat = add3(O, add3(scale3(X, u), scale3(Y, v))); return {xyz: h ? add3(flat, scale3(N, h)) : flat, normal: N}; }
+    if (d <= quarter) {
+      const angle = d / r; const sin = Math.sin(angle); const cos = Math.cos(angle);
+      return {xyz: add3(at(side * edge, v, r), add3(scale3(S, r * sin), scale3(N, r * cos))), normal: add3(scale3(S, sin), scale3(N, cos))};
+    }
+    const q = r + d - quarter;
+    const line = foldAt(v);
+    const depth = line.depth + h; const slope = line.slope;
+    if (q <= depth) return {xyz: at(side * (edge + r), v, q), normal: S};
+    // Past the fold line, in the plane across y: about the fold line's point there, then across the back; the
+    // surface's normal leans with the fold line's slope.
+    const corner = at(side * edge, v, depth);
+    const past = q - depth;
+    const angle = Math.min(past / r, Math.PI / 2); const sin = Math.sin(angle); const cos = Math.cos(angle);
+    const normal = unit3(sub3(scale3(S, cos), scale3(add3(N, scale3(Y, slope)), sin)));
+    if (past <= quarter) return {xyz: add3(corner, add3(scale3(S, r * cos), scale3(N, -r * sin))), normal};
+    return {xyz: add3(corner, add3(scale3(N, -r), scale3(S, -(past - quarter)))), normal};
+  };
+  const finite = uv => Array.isArray(uv) && Number.isFinite(uv[0]) && Number.isFinite(uv[1]);
+  return {
+    width_mm: 2 * edge,
+    wrap: {edge_mm: edge, radius_mm: r, fold},
+    outward(uv) { return finite(uv) ? rolled(uv).normal : null; },
+    xyz(uv) { return finite(uv) ? {xyz: rolled(uv).xyz, on: true} : null; },
+    lifted(h) {
+      const lift = Math.max(0, Number(h) || 0);
+      return {outward: uv => (finite(uv) ? rolled(uv, lift).normal : null), xyz: uv => (finite(uv) ? rolled(uv, lift).xyz : null)};
+    },
+  };
+}
+
+/**
+ * The stack (buildStack) of a placed record (PLACED_FORMAT) on its part: the field's centre on the face's origin, the
+ * boards' x and y the face's, rolled as its wrap says (wrapMapper); null when something is missing.  arts, boards,
+ * vertices and partBox as buildStack's.
+ */
+export function placedStack({placed, vertices, arts, boards, partBox}) {
+  const region = arts?.boards?.row?.region;
+  const mapper = placed?.format === PLACED_FORMAT && Array.isArray(region) ? wrapMapper(placed, vertices) : null;
+  if (!mapper) return null;
+  // The base frame is the face's own, its origin the field's lower left corner.
+  const placement = {field_origin_base: [0, 0], field_origin_uv: [-region[2] / 2, -region[3] / 2], field_x_uv: [1, 0], field_y_uv: [0, 1]};
+  const stack = buildStack({vertices, placement, arts, boards, partBox, mapper});
+  if (!stack) return null;
+  // A board cut out over the field (the original pad's slots between its electrodes) shows the film through itself:
+  // onpart.js then draws the film's face assembled too.
+  const [x0, y0, x1, y1] = stack.sheets.film.box;
+  const over = sheet => sheet.rings.cutouts.some(ring => ring.some(point => {
+    const [bx, by] = svgToBase(sheet.art, stack.frame, point);
+    return bx > x0 && bx < x1 && by > y0 && by < y1;
+  }));
+  stack.film_seen = over(stack.sheets.bottom) || over(stack.sheets.top);
+  return stack;
+}
+
+// --------------------------------------------------------------------------
 // The sheets
 // --------------------------------------------------------------------------
 
@@ -451,10 +598,15 @@ function filmSheet(polygon, frame, mapper, h) {
  * {exploded, assembled}: {target, r, rAll} (world), on_surface {row, column}}, or null when something is missing.
  * selection: cad.fit.selection; vertices: {positions, scale}; placement: the mapped build's; arts: the "fpc:board-art"
  * reply; boards: the build's boards (their outlines); partBox: the part's STL box in mm [[x0, y0, z0], [x1, y1, z1]].
+ * mapper: none for a generated sensor (the fit's chart, chartMapper(selection, vertices)); a placed sensor's own
+ * (placedStack: wrapMapper's).  With it the explode is "lift": each layer's sheet lifted off the face by its layer's
+ * step (the mapper's lifted()), its tails hanging from it, over the mapper's width_mm at most; its sheets carry
+ * liftedNormals (their normals so exploded, which onpart.js then draws them with) and the stack respace(step), which
+ * lays the exploded sheets again for another step (the Library's stage, between a gripper's jaws).
  */
-export function buildStack({selection, vertices, placement, arts, boards, partBox}) {
+export function buildStack({selection, vertices, placement, arts, boards, partBox, mapper: placedMapper = null}) {
   const frame = fieldFrame(placement);
-  const mapper = frame && chartMapper(selection, vertices);
+  const mapper = frame && (placedMapper || chartMapper(selection, vertices));
   const keys = ["row", "column"];
   if (!mapper || !arts?.boards || !keys.every(key => arts.boards[key]?.region && arts.boards[key]?.view_box && boards?.[key])) return null;
   const topKey = keys.find(key => isTop(arts.boards[key])); const bottomKey = keys.find(key => !isTop(arts.boards[key]));
@@ -498,7 +650,7 @@ export function buildStack({selection, vertices, placement, arts, boards, partBo
       bx0 = Math.min(bx0, x); by0 = Math.min(by0, y); bx1 = Math.max(bx1, x); by1 = Math.max(by1, y);
     }
   }
-  const W = Math.min(bx1 - bx0, by1 - by0);
+  const W = Math.min(bx1 - bx0, by1 - by0, placedMapper?.width_mm ?? Infinity);
   const gap = Math.min(EXPLODE_MM[1], Math.max(EXPLODE_MM[0], EXPLODE_SHARE * W));
   const nest = Math.max(NEST_MIN_MM, NEST_SHARE * W);
   // The spread of the bottom sheet's normals on the part (in its outline) from N.
@@ -508,9 +660,9 @@ export function buildStack({selection, vertices, placement, arts, boards, partBo
     const cosine = bottom.normals[3 * k] * N[0] + bottom.normals[3 * k + 1] * N[1] + bottom.normals[3 * k + 2] * N[2];
     spread = Math.max(spread, Math.acos(Math.max(-1, Math.min(1, cosine))) / DEG);
   }
-  const explode = spread <= SPREAD_LIMIT_DEG ? "shift" : "normal";
+  const explode = placedMapper?.lifted ? "lift" : spread <= SPREAD_LIMIT_DEG ? "shift" : "normal";
   const inField = (sheet, k) => sheet.base[2 * k] >= ox && sheet.base[2 * k] <= ox + aw && sheet.base[2 * k + 1] >= oy && sheet.base[2 * k + 1] <= oy + ah;
-  const step = explode === "shift" ? gap : normalStep([sheets[bottomKey], film, sheets[topKey]], nest, NORMAL_EXPLODE_SHARE * gap, inField);
+  const step = explode !== "normal" ? gap : normalStep([sheets[bottomKey], film, sheets[topKey]], nest, NORMAL_EXPLODE_SHARE * gap, inField);
   const layers = {[bottomKey]: 1, film: 2, [topKey]: 3};
   const out = {};
   for (const [key, sheet] of [[bottomKey, sheets[bottomKey]], ["film", film], [topKey, sheets[topKey]]]) {
@@ -524,15 +676,41 @@ export function buildStack({selection, vertices, placement, arts, boards, partBo
     }
     out[layer === 2 ? "film" : layer === 1 ? "bottom" : "top"] = {...sheet, key, layer, art: key === "film" ? null : arts.boards[key], positions, assembled, normals};
   }
+  // A placed stack's explode (the lift): each sheet on the mapper's map of the sheet held layer x lift off the face,
+  // nested as assembled along its own normals there (the area-weighted sum of its triangles at each vertex).
+  const respace = explode === "lift" ? lift => {
+    for (const sheet of Object.values(out)) {
+      const held = placedMapper.lifted(sheet.layer * lift);
+      const q = new Float64Array(3 * sheet.count); const n = new Float64Array(3 * sheet.count);
+      for (let k = 0; k < sheet.count; k += 1) q.set(held.xyz(baseToUv(frame, [sheet.base[2 * k], sheet.base[2 * k + 1]])), 3 * k);
+      for (let i = 0; i < sheet.index.length; i += 3) {
+        const [a, b, c] = [sheet.index[i], sheet.index[i + 1], sheet.index[i + 2]];
+        const pa = [q[3 * a], q[3 * a + 1], q[3 * a + 2]];
+        const face = cross3(sub3([q[3 * b], q[3 * b + 1], q[3 * b + 2]], pa), sub3([q[3 * c], q[3 * c + 1], q[3 * c + 2]], pa));
+        for (const v of [a, b, c]) for (let axis = 0; axis < 3; axis += 1) n[3 * v + axis] += face[axis];
+      }
+      for (let k = 0; k < sheet.count; k += 1) {
+        const normal = unit3([n[3 * k], n[3 * k + 1], n[3 * k + 2]]) || N;
+        sheet.positions.set(toWorld(add3([q[3 * k], q[3 * k + 1], q[3 * k + 2]], scale3(normal, sheet.layer * nest))), 3 * k);
+        sheet.liftedNormals.set(rotate(normal), 3 * k);
+      }
+    }
+  } : null;
+  if (respace) {
+    for (const sheet of Object.values(out)) sheet.liftedNormals = new Float32Array(3 * sheet.count);
+    respace(step);
+  }
   // The part: STL file units to world, R (S p - c0), column-major.
   const s = Number(vertices.scale) || 1; const t = rotate(c0);
   const partMatrix = [X[0] * s, Y[0] * s, N[0] * s, 0, X[1] * s, Y[1] * s, N[1] * s, 0, X[2] * s, Y[2] * s, N[2] * s, 0, -t[0], -t[1], -t[2], 1];
   const home = {};
   const partPoints = sampledPart(vertices, toWorld);
   for (const mode of ["exploded", "assembled"]) home[mode] = framing(out, mode, partBox, toWorld, partPoints);
-  return {frame, world: {c0, X, Y, N}, partMatrix, gap_mm: r6(step), nest_mm: r6(nest), explode, spread_deg: r6(spread),
+  const stack = {frame, world: {c0, X, Y, N}, partMatrix, gap_mm: r6(step), nest_mm: r6(nest), explode, spread_deg: r6(spread),
     width_mm: r6(W),
     sheets: out, home, topKey, bottomKey, mapper, on_surface: {row: r6(sheets.row.onSurface), column: r6(sheets.column.onSurface)}};
+  if (respace) stack.respace = lift => { respace(lift); stack.gap_mm = r6(lift); };
+  return stack;
 }
 
 function sampledPart(vertices, toWorld) {

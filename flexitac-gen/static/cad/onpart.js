@@ -520,6 +520,9 @@ function bandOf(sheet) {
   const m = points.length;
   const surface = {exploded: new Float32Array(3 * m), assembled: new Float32Array(3 * m)};
   const normals = new Float32Array(3 * m);
+  // A placed sheet's normals when exploded (drape.js buildStack's lift: liftedNormals), so that the band of its hanging
+  // tails stands across them then, as the faces are drawn (the review of 2026-11-12); no other sheet has them.
+  const lifted = sheet.liftedNormals ? new Float32Array(3 * m) : null;
   const uvs = new Float32Array(4 * m);
   points.forEach(({st, hit}, k) => {
     const [a, b, c, wa, wb, wc] = hit;
@@ -533,6 +536,11 @@ function bandOf(sheet) {
     }
     length = Math.sqrt(length) || 1;
     for (let axis = 0; axis < 3; axis += 1) normals[3 * k + axis] /= length;
+    if (lifted) {
+      const n = [0, 1, 2].map(axis => wa * sheet.liftedNormals[3 * a + axis] + wb * sheet.liftedNormals[3 * b + axis] + wc * sheet.liftedNormals[3 * c + axis]);
+      const size = Math.hypot(...n) || 1;
+      for (let axis = 0; axis < 3; axis += 1) lifted[3 * k + axis] = n[axis] / size;
+    }
     uvs.set(st, 4 * k); uvs.set(st, 4 * k + 2);
   });
   // Two vertices a point (on the sheet, and the band's depth toward the part), two triangles a step: (top i, bottom i,
@@ -550,7 +558,7 @@ function bandOf(sheet) {
   geometry.setAttribute("normal", new THREE.BufferAttribute(new Float32Array(6 * m), 3));
   geometry.setAttribute("uv", new THREE.BufferAttribute(uvs, 2));
   geometry.setIndex(triangles);
-  return {geometry, surface, normals, runs: runsKept, count: m, depth: 0, mode: null, footprint};
+  return {geometry, surface, normals, lifted, runs: runsKept, count: m, depth: 0, mode: null, footprint};
 }
 
 function bandDepth(sheet, mode, nest, mmPerPx) {
@@ -561,11 +569,12 @@ function bandDepth(sheet, mode, nest, mmPerPx) {
 
 function fitBand(band, mode, depth) {
   // The band's vertices for the mode at this depth, and its normals: across the edge (the edge's direction crossed with
-  // the sheet's normal, as the triangles are wound), the same on both its rows.  In its own buffers, in place.
+  // the sheet's normal, as the triangles are wound), the same on both its rows.  In its own buffers, in place.  (A placed
+  // sheet's band has the exploded sheet's own normals too, bandOf's lifted.)
   if (!band?.geometry || (band.mode === mode && Math.abs(band.depth - depth) < 1e-6)) return;
   band.mode = mode;
   band.depth = depth;
-  const top = band.surface[mode]; const n = band.normals;
+  const top = band.surface[mode]; const n = mode !== "assembled" && band.lifted ? band.lifted : band.normals;
   const position = band.geometry.attributes.position.array; const normal = band.geometry.attributes.normal.array;
   for (let k = 0; k < band.count; k += 1) {
     for (let axis = 0; axis < 3; axis += 1) {
@@ -868,6 +877,9 @@ export function createOnPartView(host, {onViewChange = () => {}, onContext = () 
     // a frame for nothing); its edge band stays.
     const film = view.sheets?.children.find(group => group.userData.sheet === "film");
     if (film) film.children[0].visible = view.mode !== "assembled";
+    // A placed pad whose boards are cut out over the field (drape.js placedStack: film_seen; the Library's showcase)
+    // shows its film through them, assembled too.
+    if (film && view.stack?.film_seen) film.children[0].visible = true;
   }
   function ensureContact() {
     // The contact shade's footprint, made on the first Assembled of a drawing and kept until the next drawing
@@ -976,6 +988,10 @@ export function createOnPartView(host, {onViewChange = () => {}, onContext = () 
     geometry.setAttribute("position", new THREE.BufferAttribute(Float32Array.from(view.mode === "assembled" ? sheet.assembled : sheet.positions), 3)
       .setUsage(THREE.DynamicDrawUsage));
     geometry.setAttribute("normal", new THREE.BufferAttribute(sheet.normals, 3));
+    // A placed sheet (drape.js buildStack's lift: liftedNormals; the Library's showcase) hangs its tails otherwise when
+    // exploded: its normals are then the mode's, in a buffer of their own as its positions are.
+    if (sheet.liftedNormals) geometry.setAttribute("normal", new THREE.BufferAttribute(Float32Array.from(view.mode === "assembled" ? sheet.normals : sheet.liftedNormals), 3)
+      .setUsage(THREE.DynamicDrawUsage));
     geometry.setAttribute("uv", new THREE.BufferAttribute(sheet.uvs, 2));
     geometry.setIndex(new THREE.BufferAttribute(sheet.index, 1));
     geometry.computeBoundingSphere();
@@ -1306,6 +1322,11 @@ export function createOnPartView(host, {onViewChange = () => {}, onContext = () 
       const attribute = geometry.getAttribute("position");
       attribute.copyArray(view.mode === "assembled" ? sheet.assembled : sheet.positions);
       attribute.needsUpdate = true;
+      if (sheet.liftedNormals) {
+        const normal = geometry.getAttribute("normal");
+        normal.copyArray(view.mode === "assembled" ? sheet.normals : sheet.liftedNormals);
+        normal.needsUpdate = true;
+      }
       geometry.computeBoundingSphere();
     });
     if (view.sheets) view.sheetsMode = view.mode;

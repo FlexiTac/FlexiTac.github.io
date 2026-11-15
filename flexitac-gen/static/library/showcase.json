@@ -1,0 +1,144 @@
+{
+ "format": "flexitac-library-showcase/v1",
+ "about": "The Library's showcase (library.html's first card and its page; the user's request of 2026-11-12): the original, hand-designed FlexiTac sensor on the xArm gripper with UMI soft fingers.  It is no entry: no fit, no build, none of the generator's downloads.  The words are written by hand; \"placed\" is the pad's placed record (../vendor/flexitac-v2/umi-finray.placed.json) with the showcase's scene; \"image\" and \"shot\" are written by tools/browser/library_shots.py --showcase (the pictures in showcase/, their bytes and SHA-256, and what they were shot from); tools/library_write.py checks all of it (docs/LIBRARY_VIEW.md).",
+ "id": "flexitac-g1",
+ "title": "FlexiTac on xArm",
+ "label": "Hand-designed, not auto-generated",
+ "text": "The original FlexiTac sensor, 12 \u00d7 32 taxels at 2 mm, on the xArm gripper's soft fingers.",
+ "sensor": {
+  "rows": 32,
+  "columns": 12,
+  "pitch_mm": 2,
+  "field_mm": [
+   23,
+   63
+  ]
+ },
+ "placed": {
+  "format": "flexitac-library-placed/v1",
+  "id": "flexitac-v2-on-umi-finray",
+  "about": "The original FlexiTac V2 pad on the UMI fin-ray finger, as the FlexiTac team mount it (the hardware tutorial and the project page's photo of the assembled sensor): the Bottom FPC outward, the field's centre 37 mm from the fingertip in the middle of the 25.8 mm face, both tails leaving to the viewer's left with the fingertip up, rolled round the finger's side face onto its back.  Placed by hand, not fitted by the generator.",
+  "sensor": "flexitac-v2",
+  "art": "../vendor/flexitac-v2/art.json.gz",
+  "mesh": {
+   "file": "../vendor/umi/UMI-Soft-Gripper-Finger.stl",
+   "sha256": "63331c666d485de462f3c7c80eb4200fd2bf98ac325095f5b0e8774a95dc8442",
+   "unit": "mm"
+  },
+  "frame": "the mesh's file axes, mm",
+  "face": {
+   "origin": [
+    0,
+    -12.9,
+    -86.364487
+   ],
+   "x": [
+    0,
+    1,
+    0
+   ],
+   "y": [
+    0,
+    0,
+    -1
+   ]
+  },
+  "wrap": {
+   "side": "left",
+   "radius_mm": 2
+  },
+  "scene": "scenes/flexitac-g1.json"
+ },
+ "image": {
+  "exploded": {
+   "src": "showcase/flexitac-g1.exploded.webp",
+   "width": 1280,
+   "height": 1600,
+   "bytes": 93486,
+   "sha256": "fd18cb418d88fe602d5a434a303167ba338b6189a500fd519c545bb71498cd1a"
+  },
+  "assembled": {
+   "src": "showcase/flexitac-g1.assembled.webp",
+   "width": 1280,
+   "height": 1600,
+   "bytes": 74048,
+   "sha256": "4a112e424a3b048d79981861be6c66c058c219b361fc6e9fb2d3734205b6fa76"
+  },
+  "card": {
+   "src": "showcase/flexitac-g1.card.webp",
+   "width": 800,
+   "height": 1000,
+   "bytes": 55232,
+   "sha256": "94f916bbf023f251f23536f6ee595c6a58bd80c1e62f2e0498be70edb2905209"
+  },
+  "alt": "The hand-designed FlexiTac sensor on both soft fingers of the xArm gripper"
+ },
+ "shot": {
+  "scene": "scenes/flexitac-g1.json",
+  "scene_sha256": "de6e62b5f641308b42bc01a312a7c1acf567be7b8f862e0d77aec9e40ecc122d",
+  "art_sha256": "d25710d94993f05c4740978cf5d8293a8f35eac71521544804978bec471d3b7f",
+  "placed_sha256": "9b486c99c7eeb268fec5bc517f11f2b675158edd3836d94a278ae2016cec3773",
+  "figure_sha256": "e38217818ff99c16f8d898f74079f4297bb51b7613218839c04ae9f2a59ab1c1",
+  "view_sha256": "4da484c602131aba4c222d2404d468a6e824ae45217b8722a81dae4e6a344cd6",
+  "look": "photo",
+  "margins_px": {
+   "exploded": [
+    209,
+    102,
+    209,
+    103
+   ],
+   "assembled": [
+    276,
+    102,
+    277,
+    103
+   ]
+  },
+  "numbers": {
+   "jaw_gap_mm": 53.636,
+   "step_mm": 7.259,
+   "drape_step_mm": 14.19,
+   "face_tilt_deg": 0.926,
+   "visible_min": 0.524,
+   "opaque_max": 0.66,
+   "assembled_opaque": 0.19,
+   "ghost_cover": null,
+   "clearance_mm": {
+    "bodies": 12,
+    "other_finger": 12,
+    "stacks": 30.9
+   },
+   "card_px": [
+    98,
+    106
+   ],
+   "band_css": {
+    "contain": [
+     28,
+     31
+    ],
+    "cover": [
+     53,
+     58
+    ]
+   },
+   "near_seen": 0.321,
+   "stacks_apart_px": 55
+  }
+ },
+ "tutorial": {
+  "label": "FlexiTac hardware tutorial (Gerbers)",
+  "href": "https://docs.google.com/document/d/1bvz6AL7BUkhj4Dj7n9DFXTjnGIX4-ziN8-smiCKpVZU/"
+ },
+ "sources": [
+  {
+   "text": "Gripper: UFACTORY's 3D model, shown by the project owner's decision",
+   "notice": "../vendor/ufactory-g1/NOTICE.md"
+  },
+  {
+   "text": "Sensor: the FlexiTac V2 design, CC BY-NC 4.0",
+   "notice": "../vendor/flexitac-v2/NOTICE.md"
+  }
+ ]
+}

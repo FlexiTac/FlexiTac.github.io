@@ -2,7 +2,7 @@
  "format": "flexitac-library-scene/v1",
  "part": "widowx-250",
  "part_mesh_sha256": "6a459bd4ef07eb5c4687e258bd9564004e741437e2e668af7ed31964567d8f90",
- "about": "WidowX 250 at full opening: mujoco_menagerie f3b6013, trossen_wx250s/wx250s.xml (BSD-3-Clause): left_finger slide 0.015..0.037 m, q 37 mm (right_finger -0.037).  The bodies are wx250s_7_gripper and wx250s_9_gripper_bar where wx250s.xml places them (pos -0.02 0 0, quat 1 0 0 1) and wx250s_8_gripper_prop, which wx250s.xml declares but does not place, at the same pose (as the interbotix description places the horn).  The Library mesh is wx250s_10_gripper_finger.stl as the left finger draws it; the other finger is wx250s.xml's right finger: the same mesh turned 180 degrees about the approach axis, so its sensor is the same board.",
+ "about": "WidowX 250 at full opening: mujoco_menagerie f3b6013, trossen_wx250s/wx250s.xml (BSD-3-Clause): left_finger slide 0.015..0.037 m, q 37 mm (right_finger -0.037).  The bodies are wx250s_7_gripper and wx250s_9_gripper_bar where wx250s.xml places them (pos -0.02 0 0, quat 1 0 0 1) and wx250s_8_gripper_prop, which wx250s.xml declares but does not place, at the same pose (as the interbotix description places the horn).  The Library mesh is wx250s_10_gripper_finger.stl as the left finger draws it; the other finger is wx250s.xml's right finger: the same mesh turned 180 degrees about the approach axis, so its sensor is the same board.  The looks: drawn after Trossen Robotics' product photos of the WidowX 250 S (2026-11-12): a gripper that is black all over and differs by finish: the printed fingers and carriages (the Library's part), the black anodised 10 mm rail with its bare sawn ends, the speckled black plate and bracket, the moulded servo case, the servo horn.  Three things are the project's own drawing, not the model's: the rail's four slots, as dark strips along its faces that notch its sawn ends into the extrusion's cross (the model's rail is a plain square bar; bodies/widowx-250/drawn-bar-rail-slots.stl); the two silver button-head screws on the plate's face with their sockets (drawn-bar-plate-screws.stl, drawn-bar-plate-sockets.stl); and on each carriage's outer face the two brass heat-set inserts with their bores, as plain cylinders (drawn-inserts-sensor.stl, drawn-insert-bores-sensor.stl and the mate's two).  The curved links from the horn to the carriages, their pivot screw, the servo's label, vents and cable and the fingers' ribs are not modelled.",
  "frame": "the part's file axes, mm",
  "approach": [
   -1.0,
@@ -47,10 +47,10 @@
  },
  "bodies": [
   {
-   "mesh": "bodies/widowx-250/wx250s_7_gripper.stl",
-   "sha256": "4e4f1bb053c1946e5ba5c6d24dec9bbb9f29cb938654904a4996b618a042c5cf",
-   "bytes": 6284,
-   "triangles": 124,
+   "mesh": "bodies/widowx-250/gripper-bracket.stl",
+   "sha256": "a17b9a3ffed7d66e4958075600293e93fb3aef9c9efc7725f0a388dcc4ef7a20",
+   "bytes": 4884,
+   "triangles": 96,
    "matrix": [
     [
      0.0,
@@ -77,13 +77,14 @@
      1.0
     ]
    ],
-   "finger": null
+   "finger": null,
+   "look": "sheet-speckled"
   },
   {
-   "mesh": "bodies/widowx-250/wx250s_9_gripper_bar.stl",
-   "sha256": "aaa7b9b712cf789361fb2155a2a1ac54623bfe9c82aea2ba3ed8738447d17fd1",
-   "bytes": 9484,
-   "triangles": 188,
+   "mesh": "bodies/widowx-250/gripper-servo.stl",
+   "sha256": "4fece2e55cd8d4f1375d2ce46604b2d9f9f5696420137cbe10c10c1ca14fb021",
+   "bytes": 1484,
+   "triangles": 28,
    "matrix": [
     [
      0.0,
@@ -110,7 +111,212 @@
      1.0
     ]
    ],
-   "finger": null
+   "finger": null,
+   "look": "servo-case"
+  },
+  {
+   "mesh": "bodies/widowx-250/bar-plate.stl",
+   "sha256": "e4867f6d6f7ebd24f9a4035833cb93275680ed235396d7e7a3eaadbe4d7db74b",
+   "bytes": 5084,
+   "triangles": 100,
+   "matrix": [
+    [
+     0.0,
+     1.0,
+     0.0,
+     86.0
+    ],
+    [
+     -1.0,
+     0.0,
+     0.0,
+     42.0
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": null,
+   "look": "sheet-speckled"
+  },
+  {
+   "mesh": "bodies/widowx-250/bar-rail-ends.stl",
+   "sha256": "ca2b4559b05a10312d2b5c483a383f03609afa0a1807e721fb7c2e5c1c4d07a1",
+   "bytes": 284,
+   "triangles": 4,
+   "matrix": [
+    [
+     0.0,
+     1.0,
+     0.0,
+     86.0
+    ],
+    [
+     -1.0,
+     0.0,
+     0.0,
+     42.0
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": null,
+   "look": "rail-sawn"
+  },
+  {
+   "mesh": "bodies/widowx-250/bar-rail.stl",
+   "sha256": "1d971ae628673d43d1d6182e38e92a8ac6cc34dce91102c22e51e1b66e7bf17d",
+   "bytes": 4284,
+   "triangles": 84,
+   "matrix": [
+    [
+     0.0,
+     1.0,
+     0.0,
+     86.0
+    ],
+    [
+     -1.0,
+     0.0,
+     0.0,
+     42.0
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": null,
+   "look": "rail-anodized"
+  },
+  {
+   "mesh": "bodies/widowx-250/drawn-bar-rail-slots.stl",
+   "sha256": "c416b6ebb2e7dc92a87e68175011674ec813513389b9d1cf5d21a8986c9162ab",
+   "bytes": 2484,
+   "triangles": 48,
+   "matrix": [
+    [
+     0.0,
+     1.0,
+     0.0,
+     86.0
+    ],
+    [
+     -1.0,
+     0.0,
+     0.0,
+     42.0
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": null,
+   "look": "slot-shadow"
+  },
+  {
+   "mesh": "bodies/widowx-250/drawn-bar-plate-screws.stl",
+   "sha256": "b184453a7e2930f404fd7abbc111ed266c349917b4c15fbb66ada76118981af4",
+   "bytes": 4884,
+   "triangles": 96,
+   "matrix": [
+    [
+     0.0,
+     1.0,
+     0.0,
+     86.0
+    ],
+    [
+     -1.0,
+     0.0,
+     0.0,
+     42.0
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": null,
+   "look": "screw-zinc"
+  },
+  {
+   "mesh": "bodies/widowx-250/drawn-bar-plate-sockets.stl",
+   "sha256": "f89d3d53b0bb5fcb3a2704c34b80af8c8792c383f9c1ad4e8441a3bc3e1d4b1a",
+   "bytes": 2484,
+   "triangles": 48,
+   "matrix": [
+    [
+     0.0,
+     1.0,
+     0.0,
+     86.0
+    ],
+    [
+     -1.0,
+     0.0,
+     0.0,
+     42.0
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": null,
+   "look": "slot-shadow"
   },
   {
    "mesh": "bodies/widowx-250/wx250s_8_gripper_prop.stl",
@@ -143,9 +349,203 @@
      1.0
     ]
    ],
-   "finger": null
+   "finger": null,
+   "look": "horn-black"
+  },
+  {
+   "mesh": "bodies/widowx-250/drawn-inserts-sensor.stl",
+   "sha256": "5725c13ba1830adb8771d5259b6143c6253659c9115b9f67deaeafab6ea8f304",
+   "bytes": 4084,
+   "triangles": 80,
+   "matrix": [
+    [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     1.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": "sensor",
+   "look": "brass"
+  },
+  {
+   "mesh": "bodies/widowx-250/drawn-insert-bores-sensor.stl",
+   "sha256": "1dc45550c29ad87c9c0dc4deb9080884e4e9d628f8fd8d24eac1ebbaa2a23743",
+   "bytes": 2484,
+   "triangles": 48,
+   "matrix": [
+    [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     1.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": "sensor",
+   "look": "slot-shadow"
+  },
+  {
+   "mesh": "bodies/widowx-250/drawn-inserts-mate.stl",
+   "sha256": "39b1213d0dc407507bcb58e8a66608a80a180f41da786e91f643ca45a72da048",
+   "bytes": 4084,
+   "triangles": 80,
+   "matrix": [
+    [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     -1.0,
+     0.0,
+     84.0
+    ],
+    [
+     0.0,
+     0.0,
+     -1.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": "mate",
+   "look": "brass"
+  },
+  {
+   "mesh": "bodies/widowx-250/drawn-insert-bores-mate.stl",
+   "sha256": "55a333802b41eec261b4bca4690f9a6dd56ced933e2fa5b068c8d18dac5d0a21",
+   "bytes": 2484,
+   "triangles": 48,
+   "matrix": [
+    [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     -1.0,
+     0.0,
+     84.0
+    ],
+    [
+     0.0,
+     0.0,
+     -1.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": "mate",
+   "look": "slot-shadow"
   }
  ],
+ "looks": {
+  "brass": {
+   "color": "#c9a45c",
+   "metalness": 1,
+   "roughness": 0.35
+  },
+  "horn-black": {
+   "color": "#262628",
+   "metalness": 0,
+   "roughness": 0.75,
+   "env_intensity": 1.6
+  },
+  "print-layered": {
+   "color": "#2a2a2c",
+   "metalness": 0,
+   "roughness": 0.8,
+   "env_intensity": 2.6
+  },
+  "rail-anodized": {
+   "color": "#28292e",
+   "metalness": 0,
+   "roughness": 0.9,
+   "env_intensity": 2
+  },
+  "rail-sawn": {
+   "color": "#a9abae",
+   "metalness": 0.4,
+   "roughness": 0.6,
+   "env_intensity": 1.5
+  },
+  "screw-zinc": {
+   "color": "#a6a8ab",
+   "metalness": 1,
+   "roughness": 0.5,
+   "env_intensity": 0.8
+  },
+  "servo-case": {
+   "color": "#333335",
+   "metalness": 0,
+   "roughness": 0.8,
+   "env_intensity": 1.6
+  },
+  "sheet-speckled": {
+   "color": "#262628",
+   "metalness": 0,
+   "roughness": 0.85,
+   "env_intensity": 2
+  },
+  "slot-shadow": {
+   "color": "#1c1c1e",
+   "metalness": 0,
+   "roughness": 0.9,
+   "env_intensity": 2
+  }
+ },
+ "part_look": "print-layered",
+ "smooth_deg": 35,
  "see_through": [
   "mate"
  ],

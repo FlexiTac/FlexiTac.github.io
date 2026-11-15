@@ -6,7 +6,10 @@ folder so the app stays offline and keeps its Content Security Policy
 (`default-src 'self'`).  The UMI fin-ray finger, the page's default part, is
 served from `web/vendor/umi/` with its own notice.  The bodies the Library
 draws around the seven grippers' fingers, in its 3D view and its pictures,
-are tabled in their own section below.
+are tabled in their own section below.  The showcase at the top of the
+Library has a section of its own, after them: its gripper is UFACTORY's 3D
+model, which is not an open-source file and has its own notice,
+[`../vendor/ufactory-g1/NOTICE.md`](../vendor/ufactory-g1/NOTICE.md).
 
 ## Sources
 
@@ -109,13 +112,26 @@ below (`bodies/<part>/<name>.stl`) around the Library's part.
 - The MakerMods Metal Arm's pictures and 3D view show only its two HandUMI
   tips (the Library's part, and the same tip turned for the other finger),
   standing on `bodies/makermods-metal/rail.stl`: a plain rail drawn by the
-  FlexiTac-Gen project, not MakerMods hardware.  No MakerMods part is drawn.
+  FlexiTac-Gen project, not MakerMods hardware.  No MakerMods part is drawn:
+  the guide rail, its holes and the end stops on that rail are plain shapes
+  of the project's own too (`bodies/makermods-metal/drawn-*.stl`, under
+  Modified files below).
 - Each body below is a third-party file of the Sources above, taken at its
   pinned commit and modified as its Change column says (all written in
   millimetres, and all but one decimated with quadric error metrics: each
   surface kept within 0.5 mm of the upstream one both ways and facing its
   way within 15 degrees); the two licence texts at the end of the table
   serve these bodies alone.
+- A gripper is drawn after photos of the real product, each component in
+  its material's look.  Where one body holds several materials, its
+  triangles are shared out by material into several files: a row whose
+  Change says "split by look" is one of them, its triangles those of the
+  decimated body named there, none of them changed, and the note under
+  Modified files for that body describes them all.  A file named
+  `bodies/<part>/drawn-<name>.stl` is a plain shape (a box, a cylinder)
+  drawn by the FlexiTac-Gen project where a model lacks a component the
+  photos show; it is not the maker's geometry, and its scene's `about`
+  says what it stands for.
 
 ### Modified files
 
@@ -159,7 +175,22 @@ section 4(b)): it is mujoco_menagerie's
 `franka_emika_panda/assets/finger_0.obj` (SHA-256
 `215098c0fcdf7192f6c503a37cf49e3efecf8a9e1320f02b17c5584d89cc5b2c`), scaled
 from metres to millimetres and written as a binary STL, changed by the
-FlexiTac-Gen project in 2026.
+FlexiTac-Gen project in 2026.  The Library holds it as
+`bodies/franka-hand/finger-body.stl`: all its triangles, none of them
+changed, in one file of one look, beside the screws the project drew on it
+(below).
+
+`bodies/franka-hand/drawn-screws.stl`,
+`bodies/franka-hand/drawn-screw-bores.stl`,
+`bodies/franka-hand/drawn-shell-screws.stl` and
+`bodies/franka-hand/drawn-shell-screw-seats.stl` are not from the upstream
+model, which has no screw: they are plain cylinders drawn by the
+FlexiTac-Gen project in 2026 after photos of the hand (on each finger the
+two screws of its mount in their counterbores and the fingertip's screw,
+one file drawn on both fingers; on the one broad face of the shell that
+the photos show, the two small screws beside the inlay strip, in their
+seats), from the numbers of `tools/library_looks/franka-hand.json`.  They
+are the project's own drawing, not Franka Robotics' geometry.
 
 `bodies/widowx-250/wx250s_7_gripper.stl` is not the upstream file
 (BSD-3-Clause): it is mujoco_menagerie's
@@ -184,6 +215,21 @@ FlexiTac-Gen project in 2026.
 with quadric error metrics from 452 to 88 triangles, its surface within 0.26 mm
 of the upstream one both ways, written as a binary STL, changed by the
 FlexiTac-Gen project in 2026.
+
+`bodies/widowx-250/drawn-bar-rail-slots.stl`,
+`bodies/widowx-250/drawn-bar-plate-screws.stl`,
+`bodies/widowx-250/drawn-bar-plate-sockets.stl`,
+`bodies/widowx-250/drawn-inserts-sensor.stl`,
+`bodies/widowx-250/drawn-insert-bores-sensor.stl`,
+`bodies/widowx-250/drawn-inserts-mate.stl` and
+`bodies/widowx-250/drawn-insert-bores-mate.stl` are not from the upstream
+model, whose rail is a plain square bar and which has no screw and no insert:
+they are plain boxes and cylinders drawn by the FlexiTac-Gen project in 2026
+after photos of the gripper (the four slots of the rail's extrusion, which
+notch its sawn ends; the two button-head screws on the plate with their
+sockets; on each finger's carriage the two brass inserts with their bores),
+from the numbers of `tools/library_looks/widowx-250.json`.  They are the
+project's own drawing, not Trossen Robotics' geometry.
 
 `bodies/trossen-widowx-ai/link_6.stl` is not the upstream file (BSD-3-Clause):
 it is mujoco_menagerie's `trossen_wxai/assets/meshes/wxai/link_6.obj` (SHA-256
@@ -216,12 +262,40 @@ decimated with quadric error metrics from 186616 to 1508 triangles, its surface
 within 0.13 mm of the upstream one both ways, written as a binary STL, changed
 by the FlexiTac-Gen project in 2026.
 
+`bodies/trossen-widowx-ai/link_6.stl` is published as
+`bodies/trossen-widowx-ai/link_6-rail.stl`, `link_6-housing.stl` and
+`link_6-actuator.stl`: the same triangles, shared out by look (the table's
+rows).  `bodies/trossen-widowx-ai/drawn-rail-bores.stl`,
+`drawn-rail-holes.stl`, `drawn-rail-screws.stl`, `drawn-rail-sockets.stl`,
+`drawn-shell-screws.stl` and `drawn-shell-sockets.stl` are not from the
+upstream model, which has no screw and no hole in its rail: they are plain
+cylinders drawn by the FlexiTac-Gen project in 2026 after photos of the
+gripper (on the guide rail two empty counterbores and two black socket-head
+screws, on each end shell's outer face a black button-head screw with its hex
+socket), from the numbers of `tools/library_looks/trossen-widowx-ai.json`.
+They are the project's own drawing, not Trossen Robotics' geometry.
+
 `bodies/arx-x5/link6.stl` is not the upstream file (BSD-3-Clause): it is
 mujoco_menagerie's `arx_l5/assets/link6.obj` (SHA-256
 `57957e2a042277526ad29d84c608993431a1bdd9b19f71a24d2d161215f27587`), decimated
 with quadric error metrics from 12874 to 6716 triangles, its surface within
 0.41 mm of the upstream one both ways, scaled from metres to millimetres and
-written as a binary STL, changed by the FlexiTac-Gen project in 2026.
+written as a binary STL, changed by the FlexiTac-Gen project in 2026.  It is
+published shared out by material, its triangles unchanged, as
+`bodies/arx-x5/link6-rail.stl`, `bodies/arx-x5/link6-pinion.stl`,
+`bodies/arx-x5/link6-beam.stl` and `bodies/arx-x5/link6-motor.stl`.
+
+`bodies/arx-x5/drawn-rail-screws.stl`, `bodies/arx-x5/drawn-rail-sockets.stl`,
+`bodies/arx-x5/drawn-rail-holes.stl`, `bodies/arx-x5/drawn-caps-sensor.stl`
+and `bodies/arx-x5/drawn-caps-mate.stl` are not from the upstream model, which
+has no screw and no carriage: they are plain cylinders and boxes drawn by the
+FlexiTac-Gen project in 2026 after ARX's photo of the gripper (the socket-head
+screw in the outermost counterbore at each end of the guide rail, with its
+socket; a plain dark disc in each of the six other counterbores, as the photo
+shows the second hole from each end, the four it hides assumed to be alike;
+and the red end caps of the two linear carriages where the rail leaves each
+finger's base), from the numbers of `tools/library_looks/arx-x5.json`.  They
+are the project's own drawing, not ARX Robotics' geometry.
 
 `bodies/i2rt-yam/gripper.stl` is not the upstream file (MIT License): it is
 i2rt's `i2rt/robot_models/gripper/crank_4310/assets/gripper.stl` (SHA-256
@@ -237,6 +311,24 @@ with quadric error metrics from 8000 to 3466 triangles, its surface within 0.29
 mm of the upstream one both ways, scaled from metres to millimetres and written
 as a binary STL, changed by the FlexiTac-Gen project in 2026.
 
+`bodies/i2rt-yam/drawn-block.stl`, `bodies/i2rt-yam/drawn-block-caps.stl`,
+`bodies/i2rt-yam/drawn-block-seals.stl`,
+`bodies/i2rt-yam/drawn-tip-right-caps.stl`,
+`bodies/i2rt-yam/drawn-tip-right-seals.stl`,
+`bodies/i2rt-yam/drawn-rail-screws.stl`,
+`bodies/i2rt-yam/drawn-crank-hub.stl` and
+`bodies/i2rt-yam/drawn-crank-hub-bore.stl` are not from the upstream model,
+which has no screw, no hub and one plain shape for each bearing block: they
+are plain boxes and cylinders drawn by the FlexiTac-Gen project in 2026 after
+photos of the gripper (the green caps and red seals at the ends of both
+bearing blocks and the steel body of the sensor finger's, six screw heads on
+the rails, the crank's bright hub and its bore), from the numbers of
+`tools/library_looks/i2rt-yam.json`.  They are the project's own drawing, not
+I2RT Robotics' geometry.  The two decimated bodies described above,
+`bodies/i2rt-yam/gripper.stl` and `bodies/i2rt-yam/tip_right.stl`, are in the
+Library as the component files of the table below (split by look, their
+triangles unchanged), not under those two names.
+
 `bodies/unitree-dex1/dex1_base_link.stl` is not the upstream file
 (BSD-3-Clause): it is unitree_ros's
 `robots/g1_description/meshes/Dex1_base_link.STL` (SHA-256
@@ -244,6 +336,31 @@ as a binary STL, changed by the FlexiTac-Gen project in 2026.
 with quadric error metrics from 56498 to 22840 triangles, its surface within
 0.46 mm of the upstream one both ways, scaled from metres to millimetres and
 written as a binary STL, changed by the FlexiTac-Gen project in 2026.
+
+`bodies/unitree-dex1/drawn-rail-sensor.stl`,
+`bodies/unitree-dex1/drawn-rail-screws-sensor.stl`,
+`bodies/unitree-dex1/drawn-rail-mate.stl` and
+`bodies/unitree-dex1/drawn-rail-screws-mate.stl` are not files of the
+upstream model, whose finger mesh holds the guide rail, the rack and the
+jaw as one body of one colour: they are plain boxes and cylinders drawn by
+the FlexiTac-Gen project in 2026 after pictures of the gripper (on each
+finger the bright steel of its guide rail and of the rack's body, just proud
+of the model's own, the rail's two black cap screws that stand outside
+the block at full opening, and a small black plate behind the cover
+strip's open screw hole, which keeps the drawn steel from showing through
+it), from the numbers of
+`tools/library_looks/unitree-dex1.json`.  They are the project's own
+drawing, not Unitree Robotics' geometry.
+
+`bodies/makermods-metal/drawn-rail-steel.stl`,
+`bodies/makermods-metal/drawn-rail-bores.stl` and
+`bodies/makermods-metal/drawn-end-stops.stl` are not MakerMods files, and no
+MakerMods model was used to make them: they are plain boxes and cylinders
+drawn by the FlexiTac-Gen project in 2026 after photos of the gripper, on
+the project's own plain rail (the steel guide rail as a strip along the
+beam, its counterbored holes as dark discs, the beam's two end stops), sized
+by eye, from the numbers of `tools/library_looks/makermods-metal.json`.  They
+are the project's own drawing, not MakerMods' geometry.
 
 ### Bodies
 
@@ -254,20 +371,96 @@ written as a binary STL, changed by the FlexiTac-Gen project in 2026.
 | `bodies/franka-hand/hand_2.stl` | mujoco_menagerie `f3b6013`, `franka_emika_panda/assets/hand_2.obj` | Apache-2.0, `licenses/mujoco_menagerie-franka_emika_panda.txt` | modified: decimated (quadric error metrics, 0.22 mm), OBJ in metres to binary STL in millimetres | `19661cf24853021f5ffd679e06e166a746f981a7289669cfa48d6c3ba39b1fe0` |
 | `bodies/franka-hand/hand_3.stl` | mujoco_menagerie `f3b6013`, `franka_emika_panda/assets/hand_3.obj` | Apache-2.0, `licenses/mujoco_menagerie-franka_emika_panda.txt` | modified: decimated (quadric error metrics, 0.36 mm), OBJ in metres to binary STL in millimetres | `478989357bc67efb859a676a900f7442934c757db1a6d14dcd5e77076ac9836b` |
 | `bodies/franka-hand/hand_4.stl` | mujoco_menagerie `f3b6013`, `franka_emika_panda/assets/hand_4.obj` | Apache-2.0, `licenses/mujoco_menagerie-franka_emika_panda.txt` | modified: decimated (quadric error metrics, 0.43 mm), OBJ in metres to binary STL in millimetres | `d9d2fdc7966225a5ff56b05015a16dc243fe41f8c7aad7f13562ff8a0bc5bbf0` |
-| `bodies/franka-hand/finger_0.stl` | mujoco_menagerie `f3b6013`, `franka_emika_panda/assets/finger_0.obj` | Apache-2.0, `licenses/mujoco_menagerie-franka_emika_panda.txt` | modified: OBJ in metres to binary STL in millimetres | `3a4788747102666fbe3b298cd6290b1a219bcce0a5699a2ab7c8490317468491` |
-| `bodies/widowx-250/wx250s_7_gripper.stl` | mujoco_menagerie `f3b6013`, `trossen_wx250s/assets/wx250s_7_gripper.stl` | BSD-3-Clause, Trossen Robotics, `licenses/mujoco_menagerie-trossen_wx250s.txt` | modified: decimated (quadric error metrics, 0.37 mm) | `4e4f1bb053c1946e5ba5c6d24dec9bbb9f29cb938654904a4996b618a042c5cf` |
-| `bodies/widowx-250/wx250s_9_gripper_bar.stl` | mujoco_menagerie `f3b6013`, `trossen_wx250s/assets/wx250s_9_gripper_bar.stl` | BSD-3-Clause, Trossen Robotics, `licenses/mujoco_menagerie-trossen_wx250s.txt` | modified: decimated (quadric error metrics, 0.34 mm) | `aaa7b9b712cf789361fb2155a2a1ac54623bfe9c82aea2ba3ed8738447d17fd1` |
+| `bodies/franka-hand/finger-body.stl` | mujoco_menagerie `f3b6013`, `franka_emika_panda/assets/finger_0.obj` | Apache-2.0, `licenses/mujoco_menagerie-franka_emika_panda.txt` | modified: OBJ in metres to binary STL in millimetres; split by look, its triangles unchanged (the one file of finger_0.stl's) | `8f9ed457aa02a857005a17df4b13a7faa0e651112e1121c8afe194e875dd478e` |
+| `bodies/widowx-250/gripper-bracket.stl` | mujoco_menagerie `f3b6013`, `trossen_wx250s/assets/wx250s_7_gripper.stl` | BSD-3-Clause, Trossen Robotics, `licenses/mujoco_menagerie-trossen_wx250s.txt` | modified: decimated (quadric error metrics, 0.37 mm); split by look, its triangles unchanged (one of the 2 files of wx250s_7_gripper.stl's) | `a17b9a3ffed7d66e4958075600293e93fb3aef9c9efc7725f0a388dcc4ef7a20` |
+| `bodies/widowx-250/gripper-servo.stl` | mujoco_menagerie `f3b6013`, `trossen_wx250s/assets/wx250s_7_gripper.stl` | BSD-3-Clause, Trossen Robotics, `licenses/mujoco_menagerie-trossen_wx250s.txt` | modified: decimated (quadric error metrics, 0.37 mm); split by look, its triangles unchanged (one of the 2 files of wx250s_7_gripper.stl's) | `4fece2e55cd8d4f1375d2ce46604b2d9f9f5696420137cbe10c10c1ca14fb021` |
+| `bodies/widowx-250/bar-plate.stl` | mujoco_menagerie `f3b6013`, `trossen_wx250s/assets/wx250s_9_gripper_bar.stl` | BSD-3-Clause, Trossen Robotics, `licenses/mujoco_menagerie-trossen_wx250s.txt` | modified: decimated (quadric error metrics, 0.34 mm); split by look, its triangles unchanged (one of the 3 files of wx250s_9_gripper_bar.stl's) | `e4867f6d6f7ebd24f9a4035833cb93275680ed235396d7e7a3eaadbe4d7db74b` |
+| `bodies/widowx-250/bar-rail-ends.stl` | mujoco_menagerie `f3b6013`, `trossen_wx250s/assets/wx250s_9_gripper_bar.stl` | BSD-3-Clause, Trossen Robotics, `licenses/mujoco_menagerie-trossen_wx250s.txt` | modified: decimated (quadric error metrics, 0.34 mm); split by look, its triangles unchanged (one of the 3 files of wx250s_9_gripper_bar.stl's) | `ca2b4559b05a10312d2b5c483a383f03609afa0a1807e721fb7c2e5c1c4d07a1` |
+| `bodies/widowx-250/bar-rail.stl` | mujoco_menagerie `f3b6013`, `trossen_wx250s/assets/wx250s_9_gripper_bar.stl` | BSD-3-Clause, Trossen Robotics, `licenses/mujoco_menagerie-trossen_wx250s.txt` | modified: decimated (quadric error metrics, 0.34 mm); split by look, its triangles unchanged (one of the 3 files of wx250s_9_gripper_bar.stl's) | `1d971ae628673d43d1d6182e38e92a8ac6cc34dce91102c22e51e1b66e7bf17d` |
 | `bodies/widowx-250/wx250s_8_gripper_prop.stl` | mujoco_menagerie `f3b6013`, `trossen_wx250s/assets/wx250s_8_gripper_prop.stl` | BSD-3-Clause, Trossen Robotics, `licenses/mujoco_menagerie-trossen_wx250s.txt` | modified: decimated (quadric error metrics, 0.26 mm) | `0deb0cd3d6e310964ad3d446effaa41e19480b10c3435d478cbef71c3071fea5` |
-| `bodies/trossen-widowx-ai/link_6.stl` | mujoco_menagerie `f3b6013`, `trossen_wxai/assets/meshes/wxai/link_6.obj` | BSD-3-Clause, Trossen Robotics, `licenses/mujoco_menagerie-trossen_wxai.txt` | modified: decimated (quadric error metrics, 0.40 mm), OBJ in metres to binary STL in millimetres | `be82b4d7a19e00c7dcd21d4e5e4fee8a92f5f1c7f77af4563c2a6960f3afaf37` |
+| `bodies/trossen-widowx-ai/link_6-rail.stl` | mujoco_menagerie `f3b6013`, `trossen_wxai/assets/meshes/wxai/link_6.obj` | BSD-3-Clause, Trossen Robotics, `licenses/mujoco_menagerie-trossen_wxai.txt` | modified: decimated (quadric error metrics, 0.40 mm), OBJ in metres to binary STL in millimetres; split by look, its triangles unchanged (one of the 3 files of link_6.stl's) | `64d0951be887ffb0bd10e5ab699ff5711b7c7dd11d6a1543bcf863e8fb417ff2` |
+| `bodies/trossen-widowx-ai/link_6-housing.stl` | mujoco_menagerie `f3b6013`, `trossen_wxai/assets/meshes/wxai/link_6.obj` | BSD-3-Clause, Trossen Robotics, `licenses/mujoco_menagerie-trossen_wxai.txt` | modified: decimated (quadric error metrics, 0.40 mm), OBJ in metres to binary STL in millimetres; split by look, its triangles unchanged (one of the 3 files of link_6.stl's) | `7820f6356662749317566f795d87ba2f7cc7971ad71a0a8e03a8095e79b99a89` |
+| `bodies/trossen-widowx-ai/link_6-actuator.stl` | mujoco_menagerie `f3b6013`, `trossen_wxai/assets/meshes/wxai/link_6.obj` | BSD-3-Clause, Trossen Robotics, `licenses/mujoco_menagerie-trossen_wxai.txt` | modified: decimated (quadric error metrics, 0.40 mm), OBJ in metres to binary STL in millimetres; split by look, its triangles unchanged (one of the 3 files of link_6.stl's) | `af3c76ad4439b9d319b3e03f88bc502c155f29cf20b6bcdec95bfbeb7fd7eb08` |
 | `bodies/trossen-widowx-ai/carriage_left.stl` | mujoco_menagerie `f3b6013`, `trossen_wxai/assets/meshes/wxai/carriage_left.obj` | BSD-3-Clause, Trossen Robotics, `licenses/mujoco_menagerie-trossen_wxai.txt` | modified: decimated (quadric error metrics, 0.38 mm), OBJ in metres to binary STL in millimetres | `2d7261c67d20067c006bef6b5fbee06005505829c71a3ddbbd8359667c40021d` |
 | `bodies/trossen-widowx-ai/carriage_right.stl` | mujoco_menagerie `f3b6013`, `trossen_wxai/assets/meshes/wxai/carriage_right.obj` | BSD-3-Clause, Trossen Robotics, `licenses/mujoco_menagerie-trossen_wxai.txt` | modified: decimated (quadric error metrics, 0.37 mm), OBJ in metres to binary STL in millimetres | `ba52c7e0e9f23e33ab2acaf65a6514c41f8cfa78e9c2eb08bd55263f16eaba65` |
 | `bodies/trossen-widowx-ai/wxai-left-gripper-backbone.stl` | handumi-hw `1448278`, `hardware/STL/gripper_tips/Trossen-WidowXAI/WXAI-LEFT-Gripper-backbone.stl` | Apache-2.0, BrikHMP18 (HandUMI), `licenses/handumi-hw.txt` | modified: decimated (quadric error metrics, 0.13 mm) | `33bb42eb82f340536926a1c362021b064d21684e22d884021756bc89601674f8` |
-| `bodies/arx-x5/link6.stl` | mujoco_menagerie `f3b6013`, `arx_l5/assets/link6.obj` | BSD-3-Clause, ARXrobotics, `licenses/mujoco_menagerie-arx_l5.txt` | modified: decimated (quadric error metrics, 0.41 mm), OBJ in metres to binary STL in millimetres | `27f9dcff1ff5364068a9c4ef610d2f27d6e319e5423bd75e1c138819eb94635f` |
-| `bodies/i2rt-yam/gripper.stl` | i2rt `120c3c8`, `i2rt/robot_models/gripper/crank_4310/assets/gripper.stl` | MIT, I2RT Robotics, `licenses/i2rt.txt` | modified: decimated (quadric error metrics, 0.44 mm), STL in metres to binary STL in millimetres | `bc1a2a90fd9776866e4bbf901ee8572a78a1be2f2b055ff171819281120b401d` |
-| `bodies/i2rt-yam/tip_right.stl` | i2rt `120c3c8`, `i2rt/robot_models/gripper/crank_4310/assets/tip_right.stl` | MIT, I2RT Robotics, `licenses/i2rt.txt` | modified: decimated (quadric error metrics, 0.29 mm), STL in metres to binary STL in millimetres | `56839ed9d8f5c5a17d2e0dccae0c75769ba6f699270ba4bfb36eccc886b5400f` |
-| `bodies/unitree-dex1/dex1_base_link.stl` | unitree_ros `b579bbe`, `robots/g1_description/meshes/Dex1_base_link.STL` | BSD-3-Clause, HangZhou YuShu Technology (Unitree Robotics), `licenses/unitree_ros.txt` | modified: decimated (quadric error metrics, 0.46 mm), STL in metres to binary STL in millimetres | `fb5e81436c287e1ed6c35a7b1496706c285cd49b109be4e6e5b91ebef15d908f` |
+| `bodies/arx-x5/link6-rail.stl` | mujoco_menagerie `f3b6013`, `arx_l5/assets/link6.obj` | BSD-3-Clause, ARXrobotics, `licenses/mujoco_menagerie-arx_l5.txt` | modified: decimated (quadric error metrics, 0.41 mm), OBJ in metres to binary STL in millimetres; split by look, its triangles unchanged (one of the 4 files of link6.stl's) | `08ace824d239458c93e0510da61cec7cc9e9dd95a25fd0c80e5275e0da813d14` |
+| `bodies/arx-x5/link6-pinion.stl` | mujoco_menagerie `f3b6013`, `arx_l5/assets/link6.obj` | BSD-3-Clause, ARXrobotics, `licenses/mujoco_menagerie-arx_l5.txt` | modified: decimated (quadric error metrics, 0.41 mm), OBJ in metres to binary STL in millimetres; split by look, its triangles unchanged (one of the 4 files of link6.stl's) | `950f090867da94dc9d7a31a01086b728a4410b626eeb0ace4959ab5bd204c7e5` |
+| `bodies/arx-x5/link6-beam.stl` | mujoco_menagerie `f3b6013`, `arx_l5/assets/link6.obj` | BSD-3-Clause, ARXrobotics, `licenses/mujoco_menagerie-arx_l5.txt` | modified: decimated (quadric error metrics, 0.41 mm), OBJ in metres to binary STL in millimetres; split by look, its triangles unchanged (one of the 4 files of link6.stl's) | `14e0cddf0209209b03b4709cd9a8c533fff1aa94dd7f212c19bb2dcd09a1e5f4` |
+| `bodies/arx-x5/link6-motor.stl` | mujoco_menagerie `f3b6013`, `arx_l5/assets/link6.obj` | BSD-3-Clause, ARXrobotics, `licenses/mujoco_menagerie-arx_l5.txt` | modified: decimated (quadric error metrics, 0.41 mm), OBJ in metres to binary STL in millimetres; split by look, its triangles unchanged (one of the 4 files of link6.stl's) | `e0f33738f6cea4038fc8ff78220e14f351a60286b68cf4ab56f801ceac2a3df1` |
+| `bodies/i2rt-yam/crank-face.stl` | i2rt `120c3c8`, `i2rt/robot_models/gripper/crank_4310/assets/gripper.stl` | MIT, I2RT Robotics, `licenses/i2rt.txt` | modified: decimated (quadric error metrics, 0.44 mm), STL in metres to binary STL in millimetres; split by look, its triangles unchanged (one of the 7 files of gripper.stl's) | `bbf2a3b8e70c81c7609f5db4aacbc3909c4f8674305a93a488d138ef292741a8` |
+| `bodies/i2rt-yam/crank-rollers.stl` | i2rt `120c3c8`, `i2rt/robot_models/gripper/crank_4310/assets/gripper.stl` | MIT, I2RT Robotics, `licenses/i2rt.txt` | modified: decimated (quadric error metrics, 0.44 mm), STL in metres to binary STL in millimetres; split by look, its triangles unchanged (one of the 7 files of gripper.stl's) | `acbc5d7a84b4b88c41702ccf3a352a46ff1b3047af8082969a6e5bc5fe3468e6` |
+| `bodies/i2rt-yam/crank.stl` | i2rt `120c3c8`, `i2rt/robot_models/gripper/crank_4310/assets/gripper.stl` | MIT, I2RT Robotics, `licenses/i2rt.txt` | modified: decimated (quadric error metrics, 0.44 mm), STL in metres to binary STL in millimetres; split by look, its triangles unchanged (one of the 7 files of gripper.stl's) | `bdabeb2017a1f26fd900834fa885f3ca108a9c1f11b618638f40874fab03380d` |
+| `bodies/i2rt-yam/rail-ends.stl` | i2rt `120c3c8`, `i2rt/robot_models/gripper/crank_4310/assets/gripper.stl` | MIT, I2RT Robotics, `licenses/i2rt.txt` | modified: decimated (quadric error metrics, 0.44 mm), STL in metres to binary STL in millimetres; split by look, its triangles unchanged (one of the 7 files of gripper.stl's) | `26afd94c82c7718305fd1492434b6d174354aadfe1b360d6d5f75785072089ec` |
+| `bodies/i2rt-yam/rails.stl` | i2rt `120c3c8`, `i2rt/robot_models/gripper/crank_4310/assets/gripper.stl` | MIT, I2RT Robotics, `licenses/i2rt.txt` | modified: decimated (quadric error metrics, 0.44 mm), STL in metres to binary STL in millimetres; split by look, its triangles unchanged (one of the 7 files of gripper.stl's) | `c333d6263efd1ef3601d11789db7b482b658dece5061ed7bea4c7657bd651eaa` |
+| `bodies/i2rt-yam/motor.stl` | i2rt `120c3c8`, `i2rt/robot_models/gripper/crank_4310/assets/gripper.stl` | MIT, I2RT Robotics, `licenses/i2rt.txt` | modified: decimated (quadric error metrics, 0.44 mm), STL in metres to binary STL in millimetres; split by look, its triangles unchanged (one of the 7 files of gripper.stl's) | `71d41ee97025d008602aa84a51a86bdad143317e1095b9eed5e69e1653c28ebf` |
+| `bodies/i2rt-yam/rail-plate.stl` | i2rt `120c3c8`, `i2rt/robot_models/gripper/crank_4310/assets/gripper.stl` | MIT, I2RT Robotics, `licenses/i2rt.txt` | modified: decimated (quadric error metrics, 0.44 mm), STL in metres to binary STL in millimetres; split by look, its triangles unchanged (one of the 7 files of gripper.stl's) | `64611b6178fc6154959bffd5e658fd398c2c3f7e07f90ddf43afaa7b7c538035` |
+| `bodies/i2rt-yam/tip-right-finger.stl` | i2rt `120c3c8`, `i2rt/robot_models/gripper/crank_4310/assets/tip_right.stl` | MIT, I2RT Robotics, `licenses/i2rt.txt` | modified: decimated (quadric error metrics, 0.29 mm), STL in metres to binary STL in millimetres; split by look, its triangles unchanged (one of the 4 files of tip_right.stl's) | `4c0856986524a567000609bd9496d405d15f02b43c20fbaf62a17390ddb880a8` |
+| `bodies/i2rt-yam/tip-right-block.stl` | i2rt `120c3c8`, `i2rt/robot_models/gripper/crank_4310/assets/tip_right.stl` | MIT, I2RT Robotics, `licenses/i2rt.txt` | modified: decimated (quadric error metrics, 0.29 mm), STL in metres to binary STL in millimetres; split by look, its triangles unchanged (one of the 4 files of tip_right.stl's) | `fd941994384807c764b1f71a72832d899e9683f3185804f8a55cee76113ca32d` |
+| `bodies/i2rt-yam/tip-right-yoke.stl` | i2rt `120c3c8`, `i2rt/robot_models/gripper/crank_4310/assets/tip_right.stl` | MIT, I2RT Robotics, `licenses/i2rt.txt` | modified: decimated (quadric error metrics, 0.29 mm), STL in metres to binary STL in millimetres; split by look, its triangles unchanged (one of the 4 files of tip_right.stl's) | `da3a20a58981d2edf932ce1b4e72e935eb237b75ea1a53e4fb69b688d43acf4b` |
+| `bodies/i2rt-yam/tip-right-plate.stl` | i2rt `120c3c8`, `i2rt/robot_models/gripper/crank_4310/assets/tip_right.stl` | MIT, I2RT Robotics, `licenses/i2rt.txt` | modified: decimated (quadric error metrics, 0.29 mm), STL in metres to binary STL in millimetres; split by look, its triangles unchanged (one of the 4 files of tip_right.stl's) | `be360bdc86dba2c6b5a04fb7280217ee23af28dcc4985f53d2badef5a4adadc4` |
+| `bodies/unitree-dex1/dex1-motor.stl` | unitree_ros `b579bbe`, `robots/g1_description/meshes/Dex1_base_link.STL` | BSD-3-Clause, HangZhou YuShu Technology (Unitree Robotics), `licenses/unitree_ros.txt` | modified: decimated (quadric error metrics, 0.46 mm), STL in metres to binary STL in millimetres; split by look, its triangles unchanged (one of the 6 files of dex1_base_link.stl's) | `d207acadf15f83a32f684733bdbef6f089cf6d7b6435c2125745ccf065d01bb5` |
+| `bodies/unitree-dex1/dex1-block.stl` | unitree_ros `b579bbe`, `robots/g1_description/meshes/Dex1_base_link.STL` | BSD-3-Clause, HangZhou YuShu Technology (Unitree Robotics), `licenses/unitree_ros.txt` | modified: decimated (quadric error metrics, 0.46 mm), STL in metres to binary STL in millimetres; split by look, its triangles unchanged (one of the 6 files of dex1_base_link.stl's) | `24180c42cee18b1f634f2987b7e6ccd176f023864213c79f2621e86a4fc7d81e` |
+| `bodies/unitree-dex1/dex1-pinion.stl` | unitree_ros `b579bbe`, `robots/g1_description/meshes/Dex1_base_link.STL` | BSD-3-Clause, HangZhou YuShu Technology (Unitree Robotics), `licenses/unitree_ros.txt` | modified: decimated (quadric error metrics, 0.46 mm), STL in metres to binary STL in millimetres; split by look, its triangles unchanged (one of the 6 files of dex1_base_link.stl's) | `585d07d8881e628edae4ddb26cec453da601c82da55adc266f66b8395556c6a4` |
+| `bodies/unitree-dex1/dex1-carriages.stl` | unitree_ros `b579bbe`, `robots/g1_description/meshes/Dex1_base_link.STL` | BSD-3-Clause, HangZhou YuShu Technology (Unitree Robotics), `licenses/unitree_ros.txt` | modified: decimated (quadric error metrics, 0.46 mm), STL in metres to binary STL in millimetres; split by look, its triangles unchanged (one of the 6 files of dex1_base_link.stl's) | `4be3e98751bc4c6674065f2cfa41bf2e3876059b3bc3721014c22fbfbb552d90` |
+| `bodies/unitree-dex1/dex1-connector.stl` | unitree_ros `b579bbe`, `robots/g1_description/meshes/Dex1_base_link.STL` | BSD-3-Clause, HangZhou YuShu Technology (Unitree Robotics), `licenses/unitree_ros.txt` | modified: decimated (quadric error metrics, 0.46 mm), STL in metres to binary STL in millimetres; split by look, its triangles unchanged (one of the 6 files of dex1_base_link.stl's) | `b724dbd4fbf255b33f9c8ec6e3375f802c9877192053870ed7ad97cdbfe2b61b` |
+| `bodies/unitree-dex1/dex1-inside.stl` | unitree_ros `b579bbe`, `robots/g1_description/meshes/Dex1_base_link.STL` | BSD-3-Clause, HangZhou YuShu Technology (Unitree Robotics), `licenses/unitree_ros.txt` | modified: decimated (quadric error metrics, 0.46 mm), STL in metres to binary STL in millimetres; split by look, its triangles unchanged (one of the 6 files of dex1_base_link.stl's) | `59e4e588231afd9493b68aba4d3ce080d57c832c9b73c16a7d83780be97000dd` |
 | `licenses/mujoco_menagerie-trossen_wxai.txt` | mujoco_menagerie `f3b6013`, `trossen_wxai/LICENSE` | BSD-3-Clause, Trossen Robotics | unchanged | `110a998ebd9a901d31173892d43224f8f59f12ebfd6398b9f3dea0ee9a01ab16` |
 | `licenses/mujoco_menagerie-arx_l5.txt` | mujoco_menagerie `f3b6013`, `arx_l5/LICENSE` | BSD-3-Clause, ARXrobotics | unchanged | `11b6d7cd3c80b5eda4974f4fde6c08ec4c142bd9cb66f1b854974c25dab9cf22` |
+
+## The showcase
+
+The Library's first section shows the hand-designed FlexiTac sensor on the
+xArm Gripper G1 with UMI soft fingers (`scenes/flexitac-g1.json`, the
+showcase's own scene: it is no part of the Library, has no fit and none of
+the generator's downloads).  It is drawn from three sources:
+
+- the gripper: twelve meshes in `web/vendor/ufactory-g1/`, made from
+  UFACTORY's 3D model of the Gripper G1.  They are the property of UFACTORY,
+  used by the project owner's decision of 2026-11-12 and not under this
+  repository's Apache License 2.0; that folder's notice,
+  [`../vendor/ufactory-g1/NOTICE.md`](../vendor/ufactory-g1/NOTICE.md), tables
+  them and says what was changed.  No sensor, part or sample of the Library
+  uses them;
+- the two finger holders: HandUMI's `UMI-RIGHT-Finger-Holder.stl`, the body
+  below (the left holder is drawn as its mirror image);
+- the soft fingers: the UMI fin-ray finger, the page's default part
+  (`web/vendor/umi/`), unchanged, the other finger its mirror image;
+- the sensor: the original FlexiTac V2 pad, whose files in
+  `web/vendor/flexitac-v2/` are CC BY-NC 4.0 material of Columbia
+  University with their own notice,
+  [`../vendor/flexitac-v2/NOTICE.md`](../vendor/flexitac-v2/NOTICE.md).
+
+The seven files `bodies/flexitac-g1/drawn-<name>.stl` are plain boxes and
+cylinders drawn by the FlexiTac-Gen project, for what the models have only
+as holes or not at all, after the project owner's photo of the gripper as
+built where it shows them: a shell screw's head (`drawn-shell-screw.stl`;
+on the logo's face where that photo shows the screws, on the other face,
+which no photo shows, in the wells the vendor's model has there), a
+holder bolt's head and its nut (`drawn-holder-bolt.stl`,
+`drawn-holder-nut.stl`), the black block in the shell's top slot
+(`drawn-slot-block.stl`) and, behind each finger, the extender board on
+the sensor's tails, its two sockets round the tails' ends and a short stub
+of the flat cable (`drawn-extender.stl`, `drawn-extender-sockets.stl`,
+`drawn-cable-stub.stl`), placed by eye.  They are this project's own
+(Apache License 2.0, as the repository) and are neither UFACTORY's nor
+HandUMI's geometry.  `showcase.json` (the showcase's words and records) is
+this project's own too.  The three pictures in `showcase/` are the
+Library's own drawings of the scene above; they show UFACTORY's model and
+the FlexiTac V2 design, and those two notices say whose these are.
+
+`bodies/flexitac-g1/umi-right-finger-holder.stl` is not the upstream file
+(Apache License 2.0, section 4(b)): it is handumi-hw's
+`hardware/STL/gripper_tips/UMI-Gripper/UMI-RIGHT-Finger-Holder.stl` (SHA-256
+`80ebab13e5d84a4e83d80e4ff21fa660223fd98f0f83dc45055d7015b4e71c00`), decimated
+with quadric error metrics from 13504 to 2544 triangles, its surface within
+0.05 mm of the upstream one both ways (and each face within 15 degrees of the
+way it faced), written as a binary STL in millimetres, changed by the
+FlexiTac-Gen project in 2026.
+
+| File | Source at commit | Licence and holder | Change | SHA-256 |
+| --- | --- | --- | --- | --- |
+| `bodies/flexitac-g1/umi-right-finger-holder.stl` | handumi-hw `1448278`, `hardware/STL/gripper_tips/UMI-Gripper/UMI-RIGHT-Finger-Holder.stl` | Apache-2.0, BrikHMP18 (HandUMI), `licenses/handumi-hw.txt` | modified: decimated (quadric error metrics, 0.05 mm) | `bed7997d234957cd874aecec2be76e133ab14b4cd652abe4c0491ee06fe469dd` |
 
 ## This project's own files
 
@@ -279,13 +472,16 @@ FlexiTac-Gen's sensor on the part and shot by
 `art/<id>.json.gz` (each sensor's two boards as the generator draws them,
 for the 3D view, written by the same tool), `scenes/` (the grippers' scenes:
 where each body and the other finger stand, written by the project's scene
-builder) and `bodies/makermods-metal/rail.stl` (a plain rail drawn by the
-FlexiTac-Gen project, not MakerMods hardware) are the FlexiTac-Gen
+builder; their looks by `tools/library_split.py`; the showcase's, by
+`tools/library_showcase.py`),
+`bodies/makermods-metal/rail.stl` (a plain rail drawn by the FlexiTac-Gen
+project, not MakerMods hardware) and any `bodies/<part>/drawn-<name>.stl`
+(a plain shape drawn by the project, above) are the FlexiTac-Gen
 project's own, under its Apache License 2.0 (the repository's `LICENSE`).
 
 ## Trademarks
 
 The names of the grippers and of their makers (Franka, WidowX, Trossen,
-ARX, I2RT, YAM, Unitree, Dex1, MakerMods) are the trademarks of their
-owners; FlexiTac is not affiliated with them, and no holder of these files
+ARX, I2RT, YAM, Unitree, Dex1, MakerMods, UFACTORY, xArm) are the trademarks
+of their owners; FlexiTac is not affiliated with them, and no holder of these files
 endorses it or the sensors fitted to their parts.
