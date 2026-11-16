@@ -1,4 +1,4 @@
-/* FlexiTac-Gen's Apple-style theme (2026-11-04), over web/styles.css: index.html links it once, right after styles.css,
+/* FlexiTac-Gen's Apple-style theme (2026-11-04), over web/styles.css: each page links it once, right after styles.css,
    and without that line the page is as before (styles.css itself is never edited).
    - Each rule copies the styles.css selector it overrides: the same specificity, so this file wins by order.  A rule
      here also beats styles.css's later rules of the same specificity and its rules inside @media blocks, so whatever
@@ -348,7 +348,7 @@ details > summary::before { content:""; display:inline-block; width:.75em; heigh
 .masthead-theme:active { background:var(--fill-press); }
 .masthead-theme:focus-visible { outline:2px solid var(--focus); outline-offset:2px; }
 /* The Library link (2026-11-05; its box in styles.css): a text link in the text colour, no fill at rest, the grey fill
-   hovered and the darker one pressed, at once; on library.html itself (aria-current) the grey fill, a selection state.
+   hovered and the darker one pressed, at once; on the Library itself (aria-current) the grey fill, a selection state.
    More contrast underlines it as every link (section 1's rule, which its own text-decoration outranks). */
 .masthead-library { color:var(--text); }
 .masthead-library:hover,.masthead-library[aria-current="page"] { background:var(--fill); }
@@ -721,7 +721,7 @@ body[data-mode="cad"] .flow-guide { background:var(--bg); border-right-color:var
    group.  Labels stay over their inputs, two columns (one on a phone: styles.css).  Type: the two groups' titles 17 px
    (Advanced Customization as in Gen by Surface), their sections 15 px, More options' sections 13 px in the secondary grey,
    labels 13 px (500), inputs 15 px, hints and messages 12 px, the limits 11 px.  Every size is a margin or a padding
-   of the parts' own boxes: the order, the ids and the fields' places are index.html's. */
+   of the parts' own boxes: the order, the ids and the fields' places are gen.html's. */
 /* Sensor's group 12 px in (its last field's 11 px margin and 1 px under the inputs) and the column's top 16 px: Generate
    & validate ends 357 px down at 1440 x 900, above the 365 px of the page before the theme. */
 .controls { padding:16px 20px 20px; background:var(--bg); border-right-color:var(--hairline); }
@@ -785,6 +785,35 @@ body[data-mode="cad"] .flow-guide { background:var(--bg); border-right-color:var
 .locked dt { padding-right:12px; color:var(--text-2); }
 .locked dd { color:var(--text); font-weight:600; font-variant-numeric:tabular-nums; }
 .locked .hint { margin:8px 0 0; }
+
+/* 15. The footer (the user's request of 2026-11-15: "flexitac team的标注，类似于awesome flexitac最下面 ... 但色系和颜色要更
+   consistent to 当前页面") -------------------------------------------------------------------------------------------
+   Awesome-FlexiTac's footer (a dark navy band) in this page's own palette and type, on both pages (gen.html under
+   both modes, the Library, index.html, with its fine print first): the header's bar (--nav, black's step up in dark) under the
+   page's hairline, the header's side padding, so it closes the page as the header opens it.  The team on the left,
+   Community and Contact on the right (under the team below 735 px, the two side by side; on a phone, below 521 px,
+   one column, the community's three links on one line: side by side the address ran past a 390 px window's gutter),
+   their headings the guide's title (17 px, 600, the text colour), balanced where they wrap (the review of 2026-11-15:
+   "Maintained by the FlexiTac Team" had left "Team" alone on its second line in the team's narrow column from 735 to
+   about 880 px and on a 320 px phone), their text the secondary grey at 14 px, the year 12 px.  Links quiet: the
+   secondary grey (the team's the text colour), the text colour and underlined hovered, at once, with the page's focus
+   ring; underlined with more contrast.  Contrast (WCAG AA, test_web_theme's pairs and theme_checks): --text-2 4.91 on
+   --nav light, 7.03 dark; --text 16.3 / 16.6; the fine print's --link 5.39 / 6.00. */
+.site-footer { padding:36px clamp(24px,5vw,76px) 40px; border-top:1px solid var(--hairline); background:var(--nav); color:var(--text-2); font-size:14px; line-height:1.43; }
+.site-footer-main { display:grid; grid-template-columns:minmax(0,1fr) auto auto; gap:28px 64px; align-items:start; }
+.site-footer h2 { margin:0 0 10px; font-size:17px; line-height:1.29; font-weight:600; letter-spacing:-.022em; color:var(--text); text-wrap:balance; }
+.site-footer p { margin:0; }
+.site-footer p + p { margin-top:8px; }
+.site-footer ul { display:grid; gap:8px; margin:0; padding:0; list-style:none; }
+.site-footer a { color:var(--text-2); text-decoration:none; }
+.site-footer-title a { color:var(--text); }
+.site-footer a:hover { color:var(--text); text-decoration:underline; }
+.site-footer a:focus-visible { outline:2px solid var(--focus); outline-offset:2px; border-radius:2px; }
+.site-footer .site-footer-legal { margin-top:14px; font-size:12px; line-height:1.33; }
+@media (max-width:734px) { .site-footer-main { grid-template-columns:auto minmax(0,1fr); column-gap:48px; } .site-footer-team { grid-column:1 / -1; } }
+@media (max-width:520px) { .site-footer { padding:32px 20px 36px; } .site-footer-main { grid-template-columns:minmax(0,1fr); }
+  .site-footer ul { display:flex; flex-wrap:wrap; gap:8px 24px; } }
+@media (prefers-contrast: more) { .site-footer a { text-decoration:underline; } }
 
 /* Motion, the breakpoints and the media (last, so their conditions win) ---------------------------------------------
    Motion is feedback to the pointer and the keyboard only, never to the scroll or the page opening (plan 4):

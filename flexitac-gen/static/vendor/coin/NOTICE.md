@@ -17,6 +17,6 @@ the app stays offline and keeps its CSP (`img-src 'self' data:`).
 | --- | --- | --- |
 | `us-quarter-obverse.jpg` | cropped to the coin's edge (x 17..1980, y 7..1992), resized to 720 x 720 (Lanczos), white outside a circle of the full width, JPEG quality 84, progressive | `feb75c09a1b61ffa5fb5f1a7831b2d4c616bec1a0dc3e7732a9ef2d53bd1480d` |
 
-The app clips the photo to the coin's circle (`index.html` `#coin-clip`) and
+The app clips the photo to the coin's circle (`gen.html` `#coin-clip`) and
 draws it at the quarter's 24.26 mm in the board's millimetres; without the
 photo the coin is a plain metal disk of the same size.

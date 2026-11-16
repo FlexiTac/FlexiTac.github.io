@@ -1,18 +1,24 @@
-// The Library (library.html; the user's requests of 2026-11-05): sensors already fitted to open-source gripper fingers,
+// The Library (index.html, the site's first page since the user's decision of 2026-11-16, "是的 be first page"; library.html
+// before, which forwards here now; the user's requests of 2026-11-05): sensors already fitted to open-source gripper fingers,
 // laid out as the Apple Store's.  Everything comes from static/library/entries.json (tools/library_write.py): the title
 // and its line (the page's own), then each gripper once (the user's request of 2026-11-06: "只有umi finger在首页而可以
 // 显示重复,其他的夹爪后面就只出现一次,然后标注一下点进去我们有1-3mm customization"): the grippers' section, one card
 // each, four to a row (two on a phone), each its 2 mm sensor's picture, its name and its pitches' range to choose on its
-// page, then the UMI finger's shelf with its pitches, fine to coarse (SHELVED; after the grippers, the user's request of
-// 2026-11-06: "UMI Fin-Ray Gripper. ... 这个section可以放在夹爪的后面"); and at #<id> a sensor's own
-// page: its facts, its Pitch (every pitch of its gripper), Open in Gen by Surface (./?part=<id>, where main.js builds it
+// page, then the UMI finger's shelf (SHELVED; after the grippers, the user's request of 2026-11-06: "UMI Fin-Ray Gripper.
+// ... 这个section可以放在夹爪的后面"): since the user's request of 2026-11-16 ("后面这三种不是重复了吗 ... 我在这里更多想要体现umi
+// 不同shape我们都可以fit") one card per finger shape, the straight finger's as a gripper's (its pitches chosen on its page)
+// and then each card of its family's (the tapered tips'), side by side in a grid of three to a row (two on a phone; a
+// row that scrolled sideways until the review of that day), each picture framed on the fingertip; and at #<id> a sensor's own
+// page: its facts, its Pitch (every pitch of its gripper), Open in Gen by Surface (gen.html?part=<id>, where main.js builds it
 // from its shipped fit) and its Top and Bottom FPC Gerber ZIPs.  No engine runs here: on the static site (its pages
 // carry the flexitac-backend meta) the ZIPs were built with the site (static/library/files.json); under app.py each is
 // the server's export of the sensor's design.
 //
-// A family (entries.json families: the UMI finger's tapered tips, the user's requests of 2026-11-05) is one card closing
-// its shelf's part, at #<family> its default sensor's page, where segmented controls of its axes (Shape, Tip width) pick
-// the sensor of its grid in place of the pitch; its parts have no shelf or card of their own.
+// A family (entries.json families: the UMI finger's tapered tips, the user's requests of 2026-11-05) is its cards on its
+// shelf's part's shelf, after the part's own card (since 2026-11-16 one card per shape: Short taper, Convex arc tip,
+// Trapezoid tip, Concave arc tip, Pointed tip; one "Tapered tips" card before), at #<family> its default sensor's page.
+// A card opens its sensor's page, where segmented controls of its axes with more than one choice (Tip width, and the
+// Short taper's Shape) pick the sensor of its grid in place of the pitch; its parts have no shelf or card of their own.
 //
 // The showcase (the user's request of 2026-11-12: "在lib最上面一栏放置flexitac+xarm gripper的原始版本的visualization;
 // 这个版本是人手design的不是autogenerate"): the grid's first section is one large card, the original hand-designed
@@ -27,22 +33,28 @@
 // with showModal(): the top layer, the rest of the page inert, the focus kept inside), the grid where it was under it,
 // dimmed, the page not scrolling while it is open (library.css); its X, Escape and a press and release on the backdrop
 // close it (closeWindow()).  The address is as before: a card's link goes to #<id> and the window opens on that route,
-// so Back closes it and Forward opens it again, and library.html#<id> opened directly shows the Library with the
+// so Back closes it and Forward opens it again, and ./#<id> opened directly shows the Library with the
 // window over it; closing it goes back over the window's entries to the grid's (no new entry: Back after it goes where
 // it went before the window opened; the review of 2026-11-15: a new entry, with Android's Back a close request while the
 // window is open, had made Back close it and open it again for ever), or, opened at its own address, replaces its entry,
 // the address then the grid's place of its sensor as the page's back link's was, and focuses the card that opened it.
 //
-// Motion as the generator's theme has it: none.  Every jump is instant (the native fragment jump, scrollBy and
-// scrollTo with the page's auto scrolling); the only scroll listener is the shelf's own, which only turns its arrows
-// on and off.  Every picture is slot(): a light 16:10 box with the sensor's picture once entries.json names one, else
-// (or when its file does not load) a drawing of its field made here.  The pictures (the user's request of 2026-11-05,
-// "卡片上的图为手指+传感器叠加": the cards show the finger and the sensor on it) are the generator's on-part figure, shot
-// by the shots tool at its Exploded and its Assembled home on a transparent background: a card shows the Exploded one,
-// a sensor's page both, with a small switch between them.
+// Motion as the generator's theme has it: none, but for the 3D view's drag hint (the user's request of 2026-11-15:
+// "箭头能不能做成像schetchfab一样的动画"; dragHint), which sways and fades as Sketchfab's, still under reduced motion.
+// Every jump is instant (the native fragment jump, scrollIntoView and scrollTo with the page's auto scrolling); no scroll
+// listener (the UMI shelf's row had one for its arrows until 2026-11-16: nothing scrolls sideways now).  Every picture
+// is slot(): a light 16:10 box with the sensor's picture once entries.json names one, else (or when its file does not
+// load) a drawing of its field made here.  The pictures (the user's request of 2026-11-05, "卡片上的图为手指+传感器叠加":
+// the cards show the finger and the sensor on it) are the generator's on-part figure, shot by the shots tool at its
+// Exploded and its Assembled home on a transparent background: a gripper's card shows the Exploded one, a UMI shelf's
+// card the Assembled one framed on the fingertip (2026-11-16), a sensor's page both, with a small switch between them.
 "use strict";
 
 (() => {
+  // A generator's address of before opened here (./?part=<id>, ./#rect, ...; the Library is the first page since the
+  // user's decision of 2026-11-16): web/forward.js, run first in <head>, is sending it on to gen.html (<html
+  // data-forward>), so nothing of the Library's runs on this page (no route, no replaceState over its address).
+  if (document.documentElement.hasAttribute("data-forward")) return;
   const BASE = "static/library/";
   const SVG_NS = "http://www.w3.org/2000/svg";
   const KINDS = [["top-gerber", "Top FPC Gerber ZIP"], ["bottom-gerber", "Bottom FPC Gerber ZIP"]];
@@ -61,20 +73,25 @@
   // with: the gripper as built.
   const SHOWCASE_FORMAT = "flexitac-library-showcase/v1";
   const SHOWCASE_VIEW = "assembled";
-  // The parts shown with a shelf of all their sensors (the user's request of 2026-11-06: the UMI finger alone), after the
-  // grippers' section; every other part of entries.json's order is one card there, its pitches chosen on its sensor's
-  // page.
+  // The parts shown with a shelf of their own (the user's request of 2026-11-06: the UMI finger alone), after the
+  // grippers' section: the part's own card and its families' cards (its shapes, 2026-11-16); every other part of
+  // entries.json's order is one card in the grippers' section, its pitches chosen on its sensor's page.
   const SHELVED = ["umi-finray"];
+  // The view a shelf's cards show and its sensors' pages open with (the lead's review of the UMI shelf's shapes,
+  // 2026-11-16): from the Exploded home the fingertip's tapered end was foreshortened under the exploded layers, so the
+  // six shapes looked alike on their cards; assembled, the contact face's outline is the shape.  The grippers' cards and
+  // pages keep the Exploded picture.
+  const SHELF_VIEW = "assembled";
   const COUNTS = ["None", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Eleven", "Twelve"];
   // index: entries.json; files: files.json (the static site); view: "grid" or "detail" (the window open); picture: the
   // view a sensor's page shows (VIEWS; kept as its pitch, shape or tip changes, the first again on each sensor's page
   // opened); gridY and opener: where the grid was and the card that opened a sensor's page (closing the window puts both
   // back); place: the grid's place of the window's sensor (where closing it goes); depth: the window's entries of this
   // visit over the grid's, the current one among them (0: none under it, the window opened at its own address); closing:
-  // the place a close going back over them is for, until route() comes; syncs: each track's arrows.
+  // the place a close going back over them is for, until route() comes.
   // showcase: null, or {id, data: showcase.json, entry: what a sensor's variant is to slot(), gallery() and the 3D view}.
   const state = {index: null, showcase: null, files: null, filesError: null, filesLoad: null, view: null, picture: VIEWS[0][0], gridY: 0, opener: null, fromGrid: false,
-    place: null, depth: 0, closing: null, syncs: []};
+    place: null, depth: 0, closing: null};
   history.scrollRestoration = "manual";
   // This visit (the document's life: a reload is another), named in the marks route() sets on the history's entries, so
   // an entry's depth is believed only in the visit that pushed the entries under it.
@@ -114,22 +131,18 @@
   const fieldText = variant => `${fmt1(variant.field_mm[0])} × ${fmt1(variant.field_mm[1])} mm`;
   // A number and its "mm" on one line (a no-break space): a heading never breaks "A 2 / mm sensor" (the review of 2026-11-05).
   // Since the shelves' one wording (the user's decision of 2026-11-05: 'Four pitches, 1 to 3 mm.') the range is one unit
-  // too (it broke as "1 / to 3 mm" at 390 px and "1 to / 3 mm" at 600 px) and so is a family's clause after it ("and
-  // tapered tips": at 900 px the UMI heading broke as "..., and / tapered tips."), so a heading breaks between phrases.
-  const keep = text => String(text).replace(/(\d) mm\b/g, "$1\u00a0mm").replace(/(\d) to (\d)/g, "$1\u00a0to\u00a0$2")
-    .replace(/, and ([^,.]+)/g, (clause, words) => `, and\u00a0${words.replace(/ /g, "\u00a0")}`);
+  // too (it broke as "1 / to 3 mm" at 390 px and "1 to / 3 mm" at 600 px; a card's '5.8 to 21.8 mm' too), and so is the
+  // UMI shelf's range of shapes since 2026-11-16 ('straight to pointed': from 735 to 900 px it broke as "..., straight /
+  // to pointed."), and its count of shapes (the review of 2026-11-16: at 390 px it broke as "Six / finger shapes,"), so
+  // a heading breaks between phrases.  (Until 2026-11-16 a family's clause after the range, "and tapered tips", was one
+  // unit too.)
+  const keep = text => String(text).replace(/\b(\w+) finger shapes\b/g, "$1\u00a0finger\u00a0shapes")
+    .replace(/(\d) mm\b/g, "$1\u00a0mm").replace(/(\d|\bstraight) to (\w)/g, "$1\u00a0to\u00a0$2");
   const capital = text => text.charAt(0).toUpperCase() + text.slice(1);
   // A name's hyphens unbreakable (U+2011): its balanced lines never split "Fin-Ray" (the second review of 2026-11-05).
   const whole = text => String(text).replace(/-/g, "\u2011");
   const bytesText = bytes => (bytes >= 1e6 ? `${(bytes / 1e6).toFixed(1)} MB` : `${Math.max(1, Math.round(bytes / 1e3))} kB`);
   const readerText = name => (name === "32x16" ? "32 × 16 FlexiTac" : String(name).replace("x", " × "));
-  function chevron(direction) {
-    // The arrows' chevron, drawn in the text colour.
-    const drawing = svg("svg", {viewBox: "0 0 16 16", "aria-hidden": "true", focusable: "false", class: "lib-chevron"});
-    drawing.append(svg("path", {d: direction === "left" ? "M10 3 5 8l5 5" : "M6 3l5 5-5 5", fill: "none", stroke: "currentColor",
-      "stroke-width": 1.8, "stroke-linecap": "round", "stroke-linejoin": "round"}));
-    return drawing;
-  }
   async function json(url) {
     const answer = await fetch(url);
     if (!answer.ok) throw new Error(`HTTP ${answer.status}`);
@@ -149,12 +162,17 @@
     // placeholder (field()): never a broken image (missed, a sensor's page's: told which view failed).
     const box = el("div", {className: `lib-shot lib-shot-${kind}`});
     const image = variant.image;
-    const src = kind === "detail" ? image?.[view]?.src : kind === "showcase" ? image?.card?.src : image?.exploded?.card;
+    // A shelf's card asks for its Assembled picture (SHELF_VIEW): the 1280 x 800 file, scaled down by the browser (there
+    // is no Assembled card file), lazily as every card's.
+    const assembledCard = kind === "card" && view === "assembled";
+    const src = kind === "detail" ? image?.[view]?.src : kind === "showcase" ? image?.card?.src
+      : assembledCard ? image?.assembled?.src : image?.exploded?.card;
     if (!src) {
       box.append(field(variant));
       return box;
     }
-    const [width, height] = kind === "detail" ? [image[view].width, image[view].height] : kind === "showcase" ? [image.card.width, image.card.height] : CARD;
+    const [width, height] = kind === "detail" ? [image[view].width, image[view].height] : kind === "showcase" ? [image.card.width, image.card.height]
+      : assembledCard ? [image.assembled.width, image.assembled.height] : CARD;
     const shown = el("img", {src: BASE + src, width, height, alt: image.alt || "", decoding: "async",
       loading: kind === "card" ? "lazy" : null});
     shown.addEventListener("error", () => {
@@ -231,60 +249,6 @@
 
   // -- the grid: the grippers' cards, then the UMI finger's shelf ----------------------------------------------------
 
-  function scroller(track) {
-    // A row that scrolls sideways inside itself (never the page), with two arrows under it on the right: shown only
-    // while it overflows, each off at its end; a press moves it by its width less one gap, at once (the cards snap).
-    const left = el("button", {type: "button", className: "lib-arrow", "aria-label": "Scroll left"}, chevron("left"));
-    const right = el("button", {type: "button", className: "lib-arrow", "aria-label": "Scroll right"}, chevron("right"));
-    const arrows = el("div", {className: "lib-arrows", hidden: true}, left, right);
-    const step = sign => {
-      const style = getComputedStyle(track);
-      const inner = track.clientWidth - parseFloat(style.paddingLeft) - parseFloat(style.paddingRight);
-      track.scrollBy({left: sign * (inner - (parseFloat(style.columnGap) || 0))});
-    };
-    const sync = () => {
-      if (!track.clientWidth) return;  // not laid out
-      arrows.hidden = track.scrollWidth <= track.clientWidth + 1;
-      left.disabled = track.scrollLeft <= 1;
-      right.disabled = track.scrollLeft + track.clientWidth >= track.scrollWidth - 1;
-    };
-    left.addEventListener("click", () => step(-1));
-    right.addEventListener("click", () => step(1));
-    track.addEventListener("scroll", sync, {passive: true});
-    // A card Tabbed to that the row shows only in part (a browser scrolls a focused element into view only when none of
-    // it shows; the review of 2026-11-06: at 390 px the UMI shelf's 1.5 mm card had 192 of its 273 px past the window):
-    // the row moved the least that shows it whole inside its gutters (the cards then snap).  The keyboard's focus only
-    // (:focus-visible: a click's never moves a card from under the pointer), and the row only (the page stays put).
-    track.addEventListener("focusin", event => {
-      const card = [...track.children].find(child => child.contains(event.target));
-      if (!card || !event.target.matches(":focus-visible")) return;
-      const style = getComputedStyle(track); const box = card.getBoundingClientRect();
-      const inside = track.getBoundingClientRect().left + track.clientLeft;
-      const [start, end] = [inside + parseFloat(style.paddingLeft), inside + track.clientWidth - parseFloat(style.paddingRight)];
-      const shift = box.left < start ? box.left - start : box.right > end ? Math.min(box.right - end, box.left - start) : 0;
-      if (shift) track.scrollBy({left: shift});
-    });
-    state.syncs.push(sync);
-    return [track, arrows];
-  }
-
-  function card(id, badged = true) {
-    // A sensor's card on its gripper's shelf, whose heading names the gripper: the pitch is its name, as each product's
-    // own on the Apple Store's shelves (the review of 2026-11-05: four cards of one name, told apart by grey lines), the
-    // size, the taxels and the field under it, and its label for a screen reader names the gripper too.  The badge's
-    // line is kept, empty, on a shelf where another card has a badge (the names line up) and left out on one where none
-    // has (its second review).
-    const variant = state.index.variants[id];
-    const lines = [`${size(variant)} · ${variant.taxels} taxels`, `${fieldText(variant)} field`];
-    const named = `${variant.label}${variant.badge ? ` (${variant.badge.toLowerCase()})` : ""}: ${lines.join(", ")}`;
-    return el("a", {className: "lib-card", href: `#${id}`, "data-variant": id, "aria-label": named},
-      slot(variant, "card"),
-      el("span", {className: "lib-card-text"},
-        badged ? el("span", {className: "lib-badge"}, variant.badge || "") : null,
-        el("span", {className: "lib-card-name"}, `${variant.pitch_mm} mm pitch`),
-        lines.map(line => el("span", {className: "lib-card-line"}, line))));
-  }
-
   // A part's pitches' range, fine to coarse ('1 to 3 mm', '1 to 2.5 mm'; one pitch: '2 mm').
   function pitchRange(part) {
     const pitches = part.variants.map(id => state.index.variants[id].pitch_mm);
@@ -292,53 +256,82 @@
     return low === high ? `${low} mm` : `${low} to ${high} mm`;
   }
 
-  function gripperCard(partId) {
+  function tipShot(variant) {
+    // A shelf's card's picture (the UMI finger's shapes, the review of 2026-11-16): its sensor Assembled (SHELF_VIEW),
+    // framed on the fingertip (library.css .lib-shot-tip: the picture scaled about the tip inside its box), where the
+    // shapes differ; the whole finger at the Assembled home had left the taper a third of the picture's width.  The same
+    // file as the 3D view's home (no picture of its own); the placeholder, without one, unframed.
+    const box = slot(variant, "card", SHELF_VIEW);
+    box.classList.add("lib-shot-tip");
+    return box;
+  }
+
+  function gripperCard(partId, shelved = false) {
     // A gripper's one card in the grippers' section (the user's request of 2026-11-06: each gripper but the UMI finger
     // once on the page, its card saying that its page offers its pitches): its default (2 mm) sensor's picture, its
-    // name and two grey lines, as a shelf's card has, its range ('1 to 3 mm', the part's own) and 'Pick your pitch';
+    // name and two grey lines, its range ('1 to 3 mm', the part's own) and 'Pick your pitch';
     // it opens that sensor's page, whose Pitch shows the others.  Each line within a 360 px phone's card (116 px of
     // text at 14 px; the review of 2026-11-06: 'Pitch 1 to 2.5 mm', 124 px, left 'Pitch' alone on a line, and 'Pick
     // one inside' could be read as picking a gripper).  No badge line (no card here has one).  Its id is the grid's
     // address of the gripper (#gripper-<part>: a sensor's page's back link and the older #shelf-<part> come back to it).
+    // A shelved part's own card (the UMI finger's, first on its shelf since 2026-11-16, where its four pitches had been
+    // four cards: "后面这三种不是重复了吗，在第一个umi 1mm点进去，config就可以选择毫米数量") is the same card named by its
+    // shape ('Straight finger', the part's card), no id: its place is its shelf's.  (Called with one argument where a
+    // gripper's: map()'s index as ``shelved`` had taken every gripper's card but the first's id.)
     const part = state.index.parts[partId];
     const lines = [pitchRange(part), "Pick your pitch"];
-    return el("a", {className: "lib-card", id: `gripper-${partId}`, href: `#${part.default}`, "data-variant": part.default, "data-part": partId,
-      "aria-label": `${part.title}: ${lines.join(", ").toLowerCase()}`},
-      slot(state.index.variants[part.default], "card"),
+    const name = shelved ? part.card || part.title : part.title;
+    return el("a", {className: "lib-card", id: shelved ? null : `gripper-${partId}`, href: `#${part.default}`, "data-variant": part.default, "data-part": partId,
+      "aria-label": `${shelved ? `${part.title}, ${name}` : part.title}: ${lines.join(", ").toLowerCase()}`},
+      shelved ? tipShot(state.index.variants[part.default]) : slot(state.index.variants[part.default], "card"),
       el("span", {className: "lib-card-text"},
-        el("span", {className: "lib-card-name"}, whole(part.title)),
+        el("span", {className: "lib-card-name"}, whole(name)),
         lines.map(line => el("span", {className: "lib-card-line"}, keep(line)))));
   }
 
-  function familyCard(familyId) {
-    // A family's card (the tapered tips): its default sensor's picture, its title and its two lines, a jump to its page.
-    const family = state.index.families[familyId];
-    return el("a", {className: "lib-card", href: `#${familyId}`, "data-family": familyId},
-      slot(state.index.variants[family.default], "card"),
+  function shapeCard(familyId, shape) {
+    // A card of a family on its shelf (one finger shape, 2026-11-16): the picture of the sensor its page opens on, its
+    // title and its two lines as a gripper's card has ('5.8 to 21.8 mm', 'Pick your tip width'), a jump to that
+    // sensor's page; its label for a screen reader names the gripper too.
+    const shelfPart = state.index.parts[state.index.families[familyId].shelf];
+    return el("a", {className: "lib-card", href: `#${shape.default}`, "data-variant": shape.default, "data-family": familyId, "data-card": shape.key,
+      "aria-label": `${shelfPart.title}, ${shape.title}: ${shape.lines.join(", ").toLowerCase()}`},
+      tipShot(state.index.variants[shape.default]),
       el("span", {className: "lib-card-text"},
-        el("span", {className: "lib-badge"}, ""),
-        el("span", {className: "lib-card-name"}, family.title),
-        family.lines.map(line => el("span", {className: "lib-card-line"}, line))));
+        el("span", {className: "lib-card-name"}, shape.title),
+        shape.lines.map(line => el("span", {className: "lib-card-line"}, keep(line)))));
   }
 
   // A shelf's or a section's heading: its bold half and its grey half, in one wording ('<Title>. <the rest>.').
   const heading = (id, title, text) => el("h3", {className: "lib-shelf-title", id: `${id}-title`}, el("strong", {}, title), " ", el("span", {}, keep(text)));
 
-  function shelf(id, title, text, ids, families = []) {
-    const badged = ids.some(identifier => state.index.variants[identifier].badge);
-    return el("section", {className: "lib-shelf", id, "aria-labelledby": `${id}-title`}, heading(id, title, text),
-      scroller(el("div", {className: "lib-track"}, ids.map(identifier => card(identifier, badged)), families.map(familyCard))));
+  function shelf(partId, families = []) {
+    // A shelved part's shelf (the UMI finger's): its heading ('UMI Fin-Ray Gripper. Six finger shapes, straight to
+    // pointed.'), then its own card and its families' cards, in their order, side by side in a grid (the review of
+    // 2026-11-16: the shapes are there to be compared; in a row that scrolled sideways four were in view at 1440 px, one
+    // on a phone): three to a row from 735 px, two below (library.css), nothing scrolling sideways.
+    const part = state.index.parts[partId];
+    const id = `shelf-${partId}`;
+    return el("section", {className: "lib-shelf", id, "aria-labelledby": `${id}-title`}, heading(id, `${part.title}.`, part.shelf),
+      el("div", {className: "lib-cards"}, gripperCard(partId, true),
+        families.flatMap(familyId => state.index.families[familyId].cards.map(shape => shapeCard(familyId, shape)))));
   }
 
-  // The families whose card closes this part's shelf.
+  // The families whose cards follow this part's own on its shelf.
   const familiesOf = part => Object.keys(state.index.families || {}).filter(familyId => state.index.families[familyId].shelf === part);
-  // A part with a shelf: SHELVED's, and any part a family's card closes (a family's sensors have no card but it).
+  // A part with a shelf: SHELVED's, and any part a family's cards follow (a family's sensors have no card but its cards).
   const isShelved = part => SHELVED.includes(part) || familiesOf(part).length > 0;
   // The parts with a shelf, and those with one card in the grippers' section, in entries.json's order.
   const shelvedParts = () => state.index.order.filter(isShelved);
   const carded = () => state.index.order.filter(part => !isShelved(part));
   // Where a part is on the grid: its shelf, or its card in the grippers' section.
   const placeOf = part => (isShelved(part) ? `shelf-${part}` : `gripper-${part}`);
+  // The part a sensor's page is of on the grid: its own, or its family's shelf's (a tapered tip's: the UMI finger's).
+  const homeOf = id => {
+    const part = state.index.variants[id].part;
+    const family = state.index.parts[part].family;
+    return family ? state.index.families[family].shelf : part;
+  };
 
   function grippers(parts) {
     // The grippers but the shelved (the user's request of 2026-11-06, "其他夹爪的话,不需要每个夹爪一row,你就每个row放4个夹爪就
@@ -352,7 +345,7 @@
     const each = counts.size === 1 ? `, each fitted at ${word(count).toLowerCase()} ${count === 1 ? "pitch" : "pitches"}` : "";
     return el("section", {className: "lib-section lib-grippers", id: "grippers", "aria-labelledby": "grippers-title"},
       heading("grippers", "Grippers.", `${word(parts.length)}${each}.`),
-      el("div", {className: "lib-cards"}, parts.map(gripperCard)));
+      el("div", {className: "lib-cards"}, parts.map(part => gripperCard(part))));
   }
 
   function showcaseOf(data) {
@@ -373,7 +366,11 @@
     // click to the details ... a button called details") the card itself is no link: its picture and its Details pill
     // open the showcase's own page.  The picture's link repeats Details', so it is out of the Tab order and hidden from
     // assistive technology (Details is the card's one stop).  Its id is the grid's address of it (#showcase: its page's
-    // back link comes back to it, its Details focused).
+    // back link comes back to it, its Details focused).  After Details, since the user's decisions of 2026-11-15 and
+    // 2026-11-16 ("在flexitac on xarm的details 后面，多一个按钮，generate sensor by yourself with cad file", its name chosen:
+    // "Design your own"): a second pill opening Gen by Surface (gen.html) in this tab, where the visitor loads their own
+    // 3D model; the page's action blue (as Open in Gen by Surface, its one other use: both lead to Gen by Surface), Details'
+    // size, named for where it goes.
     const {id, data, entry} = state.showcase;
     return el("section", {className: "lib-showcased", "aria-labelledby": "showcase-title"},
       el("div", {className: "lib-card lib-showcase", id: "showcase"},
@@ -383,26 +380,23 @@
           el("h3", {className: "lib-showcase-title", id: "showcase-title"}, keep(data.title)),
           el("p", {className: "lib-showcase-line"}, keep(data.text)),
           el("div", {className: "lib-pills"},
-            el("a", {className: "lib-pill lib-showcase-details", href: `#${id}`, "data-showcase": id, "aria-label": `Details: ${data.title}`}, "Details")))));
+            el("a", {className: "lib-pill lib-showcase-details", href: `#${id}`, "data-showcase": id, "aria-label": `Details: ${data.title}`}, "Details"),
+            el("a", {className: "lib-pill lib-design", href: "gen.html", "aria-label": "Design your own sensor in Gen by Surface"}, "Design your own")))));
   }
 
   function renderGrid() {
-    const {index} = state;
     const parts = carded();
     // The showcase's card first (2026-11-12), then the grippers' section, then the shelves (the UMI finger's; the user's
     // request of 2026-11-06): the page's order is its reading and Tab order.
     $("libShelves").replaceChildren(
       ...(state.showcase ? [showcaseCard()] : []),
       ...(parts.length ? [grippers(parts)] : []),
-      ...shelvedParts().map(part => shelf(`shelf-${part}`, `${index.parts[part].title}.`, index.parts[part].shelf, index.parts[part].variants, familiesOf(part))));
+      ...shelvedParts().map(part => shelf(part, familiesOf(part))));
     // The card that opens a sensor's page: Back comes back to it (the showcase's: its Details, its picture's link or not).
     $("libShelves").addEventListener("click", event => {
       const opener = event.target.closest("a.lib-card, .lib-showcase");
       if (opener) state.opener = opener.querySelector(".lib-showcase-details") || opener;
     });
-    // Each row's arrows as the grid is laid out (since the window of 2026-11-15 the grid is never hidden: a window opened
-    // at its address shows it under it, its arrows set).
-    state.syncs.forEach(sync => sync());
   }
 
   // -- a sensor's own page -------------------------------------------------------------------------------------------
@@ -430,33 +424,41 @@
     return control;
   }
 
-  // A family sensor's choice on each axis (its grid key, 'trap|13.8', split).
-  const chosenOf = (family, id) => Object.keys(family.grid).find(key => family.grid[key] === id).split("|");
+  // A family sensor's card (the one whose grid holds it) and its choice on each of the card's axes (its grid key,
+  // 'trap|13.8', split).
+  const cardOf = (family, id) => family.cards.find(shape => Object.values(shape.grid).includes(id));
+  const chosenOf = (shape, id) => Object.keys(shape.grid).find(key => shape.grid[key] === id).split("|");
 
-  function familyControls(family, id) {
-    // Each axis of the family (Shape, Tip width): its choices, each the sensor of the grid with that choice and the
-    // others as they are.
-    const chosen = chosenOf(family, id);
-    return family.axes.map((axis, k) => segments(axis.label, `libAxis-${axis.key}`,
-      axis.choices.map(choice => [choice.value, choice.label, family.grid[chosen.map((value, j) => (j === k ? choice.value : value)).join("|")]]),
-      chosen[k]));
+  function familyControls(shape, id) {
+    // Each axis of the sensor's card with more than one choice (Tip width; the Short taper's Shape too): its choices,
+    // each the sensor of the card's grid with that choice and the others as they are.  An axis of one choice (a card's
+    // own shape) is no control: the card is that shape.
+    const chosen = chosenOf(shape, id);
+    return shape.axes.map((axis, k) => (axis.choices.length < 2 ? null : segments(axis.label, `libAxis-${axis.key}`,
+      axis.choices.map(choice => [choice.value, choice.label, shape.grid[chosen.map((value, j) => (j === k ? choice.value : value)).join("|")]]),
+      chosen[k])));
   }
 
   function renderDetail(id) {
     const {index} = state;
     const variant = index.variants[id];
     const part = index.parts[variant.part];
-    // A family's sensor: its axes in place of the pitch, its shelf the family's (the tapered tips': the UMI finger's).
+    // A family's sensor: its card's axes in place of the pitch, its shelf the family's (the tapered tips': the UMI
+    // finger's).
     const family = part.family ? index.families[part.family] : null;
-    const home = family ? family.shelf : variant.part;
-    const controls = family ? familyControls(family, id)
+    const shape = family ? cardOf(family, id) : null;
+    const home = homeOf(id);
+    // Its title its gripper's and, a family's sensor, its card's shape ('UMI Fin-Ray Gripper, concave arc tip'; the
+    // review of 2026-11-16: every tip's part is 'UMI Fin-Ray Gripper, tapered tip', so a shape's page did not name it).
+    const title = shape ? `${index.parts[home].title}, ${shape.title.toLowerCase()}` : part.title;
+    const controls = shape ? familyControls(shape, id)
       : [segments("Pitch", "libPitch", part.variants.map(other => [other, `${index.variants[other].pitch_mm} mm`, other]), id)];
     const reader = variant.fits_reader ? `none (one tail pin per line; the tails also fit the ${readerText(variant.fits_reader)} reader)` : "none (one tail pin per line)";
-    // The tapered tips' own fact: the shape and the width at the tip, over the family's taper height.
-    const chosen = family ? chosenOf(family, id) : [];
-    const picked = family ? Object.fromEntries(family.axes.map((axis, k) => [axis.key, axis.choices.find(item => item.value === chosen[k])])) : {};
-    const tip = family && family.h_mm && picked.shape && picked.tip_mm
-      ? [["Tip", `${picked.shape.label}, ${picked.tip_mm.label} mm at the tip, over the last ${family.h_mm} mm`]] : [];
+    // The tapered tips' own fact: the shape and the width at the tip, over the card's taper height.
+    const chosen = shape ? chosenOf(shape, id) : [];
+    const picked = shape ? Object.fromEntries(shape.axes.map((axis, k) => [axis.key, axis.choices.find(item => item.value === chosen[k])])) : {};
+    const tip = shape && shape.h_mm && picked.shape && picked.tip_mm
+      ? [["Tip", `${picked.shape.label}, ${picked.tip_mm.label} mm at the tip, over the last ${shape.h_mm} mm`]] : [];
     const facts = [
       ...tip,
       // Rows and columns named (the review of 2026-11-05: '26 × 27' alone did not say which was which).
@@ -476,13 +478,13 @@
       el("div", {className: "lib-detail-body"},
         gallery(variant),
         el("div", {className: "lib-info"},
-          el("h2", {className: "lib-detail-title", id: "libDetailTitle", tabindex: "-1"}, whole(part.title)),
+          el("h2", {className: "lib-detail-title", id: "libDetailTitle", tabindex: "-1"}, whole(title)),
           // The separator joined to the word before it (a no-break space): a line may end with it, never start with
           // it ("convex arc tip / · UMI", the review of 2026-11-05).
           el("p", {className: "lib-detail-line"}, `${capital(part.finger)}\u00a0· ${part.maker}`),
           controls,
           el("dl", {className: "lib-facts"}, facts.map(([name, value]) => el("div", {}, el("dt", {}, name), el("dd", {}, value)))),
-          el("a", {className: "lib-open", href: `./?part=${encodeURIComponent(id)}`}, "Open in Gen by Surface"),
+          el("a", {className: "lib-open", href: `gen.html?part=${encodeURIComponent(id)}`}, "Open in Gen by Surface"),
           downloads,
           el("p", {className: "lib-links"},
             el("a", {href: BASE + mesh.file, download: mesh.name}, `Part STL (${bytesText(mesh.bytes)})`), " · ",
@@ -535,8 +537,11 @@
   const PROBE = new URLSearchParams(location.search).get("probe");
   // host: the view's element (made once); view: library_view.js's (made once); load: its module; off and note: why this
   // browser has none ("unavailable"); lost: its context lost; serial: the drawing asked for last; id and its .lib-stage;
-  // status: [state, note] (off, loading, drawn, failed, unavailable or lost).
-  const live = {host: null, view: null, load: null, off: null, note: null, lost: false, serial: 0, id: null, stage: null, status: ["off", null]};
+  // status: [state, note] (off, loading, drawn, failed, unavailable or lost); hint: the drag hint in the host (dragHint;
+  // none on the shots tool's page); page: the gripper whose page the view is on (pageOf), and used: whether the visitor
+  // has used the view there (the hint hidden).
+  const live = {host: null, view: null, load: null, off: null, note: null, lost: false, serial: 0, id: null, stage: null, status: ["off", null],
+    hint: null, page: null, used: false};
 
   function present(id) {
     // A sensor's page just drawn (renderDetail): with a view (its variant's "view") and no Save-Data, its picture's slot
@@ -546,6 +551,13 @@
     live.serial += 1;
     live.id = id;
     live.stage = null;
+    // Another gripper's page (or the window opened again: rest() forgets the page) shows the drag hint again; a pitch,
+    // a shape or a tip of the same page keeps it as the visitor left it.
+    const page = pageOf(id);
+    if (page !== live.page) {
+      live.page = page;
+      live.used = false;
+    }
     if (!variant.view || navigator.connection?.saveData || live.off) {
       live.view?.clear();
       setLive(live.off || "off", live.off ? live.note : null);
@@ -565,13 +577,65 @@
 
   function liveHost(variant) {
     // The view's element, made once: a group the arrow keys and a drag turn, named by the picture's alt, described by
-    // its hint (for a screen reader: the canvas is hidden from it); the view's canvas goes in it.
+    // its hint (for a screen reader: the canvas is hidden from it), with the drag hint (dragHint; not on the shots tool's
+    // page); the view's canvas goes in it.  The visitor's use of it (used()): a mouse's or a pen's press of its main
+    // button, a key that turns it, a double click (a mouse's first click's press, a touch screen's double tap), and a
+    // touch once it has turned the view (viewNews; the review of 2026-11-15: on a phone the view is the first thing in
+    // the window and a vertical swipe over it scrolls the window's page, which had hidden the hint for the page, the view
+    // never turned; a right or middle click, which turns nothing, had hidden it too).  The hint as the page has it
+    // (present(): shown on a page anew).
     if (!live.host) {
+      live.hint = PROBE === "shoot" ? null : dragHint();
       live.host = el("div", {className: "lib-live", tabindex: 0, role: "group", "aria-describedby": "libLiveHint"},
-        el("span", {className: "lib-live-hint", id: "libLiveHint"}, "Drag, or use the arrow keys, to turn the sensor; 0 brings it back."));
+        el("span", {className: "lib-live-hint", id: "libLiveHint"}, "Drag, or use the arrow keys, to turn the sensor; 0 brings it back."),
+        live.hint);
+      live.host.addEventListener("pointerdown", event => {
+        if (event.pointerType !== "touch" && event.button === 0) used();
+      });
+      live.host.addEventListener("dblclick", used);
+      live.host.addEventListener("keydown", event => {
+        if (TURN_KEYS.includes(event.key) && !event.altKey && !event.ctrlKey && !event.metaKey) used();
+      });
     }
     live.host.setAttribute("aria-label", variant.image?.alt || variant.label);
+    live.host.classList.toggle("is-used", live.used);
+    live.hint?.classList.toggle("is-gone", live.used);
     return live.host;
+  }
+
+  // The keys that turn the view (onpart.js's; 0 brings it home, which is no turn).
+  const TURN_KEYS = ["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"];
+  // A gripper's page: the showcase's, or a part's (a family's for its tapered tips: a card's Tip width and Shape pick
+  // another part of the family on the same page).
+  const pageOf = id => (state.showcase?.id === id ? id : state.index.parts[state.index.variants[id].part].family || state.index.variants[id].part);
+
+  function dragHint() {
+    // The user's request of 2026-11-15 ("箭头能不能做成像schetchfab一样的动画": Sketchfab's "click & hold to rotate", in
+    // place of the turn's mark of that day): a pointing hand between two arrows over "Drag to rotate", drawn here (their
+    // picture is theirs), at the bottom centre of the view, swaying from side to side as a drag would (library.css
+    // .lib-drag): shown once the view is drawn (never over the picture), faded in, and faded out at the visitor's first
+    // use of the view on that page (used()); then its sway stopped (is-gone: nothing moves unseen).  For the eye alone
+    // (the host's hint says it in words); the pointer passes through it to the view.  The arrows block arrows, each one
+    // outline as the hand (since the review of 2026-11-15: one white cursor edged in ink on any part).
+    const drawing = svg("svg", {viewBox: "0 0 84 44", "aria-hidden": "true", focusable: "false"});
+    drawing.append(svg("path", {class: "lib-drag-arrow", d: "M22 12.6H11V8.4L3 15l8 6.6v-4.2h11ZM62 12.6h11V8.4l8 6.6-8 6.6v-4.2H62Z"}),
+      svg("path", {class: "lib-drag-hand", d: "M34.5 29.5V5.2a3.1 3.1 0 0 1 6.2 0V16a2.8 2.8 0 0 1 5.6 0v1.6a2.8 2.8 0 0 1 5.6 0v2.2a2.6 2.6 0 0 1 5.2 0v8.4"
+        + "c0 7.4-4.4 12.6-11 12.6h-3.4c-3.4 0-5.9-1.3-7.9-3.9l-5.6-7.3a2.75 2.75 0 0 1 4.1-3.6Z"}),
+      svg("path", {class: "lib-drag-crease", d: "M40.7 16v6.4M46.3 17.6v5.6M51.9 19.8v4.6"}));
+    const hint = el("span", {className: "lib-drag", "aria-hidden": "true"}, drawing, el("span", {className: "lib-drag-label"}, "Drag to rotate"));
+    hint.addEventListener("transitionend", event => {
+      if (event.propertyName === "opacity" && live.used) hint.classList.add("is-gone");
+    });
+    return hint;
+  }
+
+  function used() {
+    // The visitor's first use of the drawn view on its page (liveHost's, viewNews's): the drag hint fades out
+    // (library.css .lib-live.is-used) and stays hidden there, Exploded | Assembled, a pitch, a shape or a tip included,
+    // until another gripper's page or the window opened again (present()).
+    if (live.used || !live.stage?.classList.contains("is-live")) return;
+    live.used = true;
+    live.host.classList.add("is-used");
   }
 
   function draw() {
@@ -624,15 +688,19 @@
       live.lost = false;
       if (live.stage?.isConnected) draw();
     } else {
+      // Turned (a drag's end, a key): a use of the view, a touch's too (liveHost).
+      if (!live.used && live.view?.info().moved) used();
       setLive();
     }
   }
 
   function rest() {
-    // The grid shown: nothing drawn (the view kept for the next sensor's page).
+    // The grid shown: nothing drawn (the view kept for the next sensor's page), its page forgotten (the window opened
+    // again shows the drag hint again).
     live.serial += 1;
     live.id = null;
     live.stage = null;
+    live.page = null;
     live.view?.clear();
     setLive("off", null);
   }
@@ -802,9 +870,11 @@
 
   function showDetail(id) {
     opening();
-    // Each sensor's page opened (from a card, its address or Back) shows the Exploded picture first; its pitch, shape and
-    // tip controls keep the view chosen (renderDetail alone).
-    state.picture = VIEWS[0][0];
+    // Each sensor's page opened (from a card, its address or Back) shows its card's view first: a UMI shelf's sensor's
+    // Assembled (SHELF_VIEW; the review of 2026-11-16: from Exploded a shape's tapered end lay under the exploded layers,
+    // the shapes alike again), a gripper's Exploded; its pitch, shape and tip controls keep the view chosen (renderDetail
+    // alone).
+    state.picture = isShelved(homeOf(id)) ? SHELF_VIEW : VIEWS[0][0];
     setNote("");
     renderDetail(id);
     raise();
@@ -864,7 +934,9 @@
   }
 
   function route() {
-    if (!state.index) return;
+    // Nor at a hash web/forward.js is sending on to gen.html (./#rect over the open Library; its hashchange listener is
+    // the page's first: the review of 2026-11-16): no note of an unknown sensor, no replaceState over that address.
+    if (!state.index || document.documentElement.hasAttribute("data-forward")) return;
     opened();
     // An entry of the page's history it has been at (marked below) is Back's or Forward's; any other (a link, a typed
     // address, a window closed at its own address) is marked now, with this visit and its depth (state.depth): a
@@ -925,7 +997,6 @@
     }
     windowEvents();
     window.addEventListener("hashchange", route);
-    window.addEventListener("resize", () => state.syncs.forEach(sync => sync()));
     route();
   }
 

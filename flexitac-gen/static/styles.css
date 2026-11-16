@@ -240,7 +240,7 @@ input.fine-step::-webkit-inner-spin-button,input.fine-step::-webkit-outer-spin-b
 .mode-picker span { display:block; padding:11px 24px; font-size:1rem; font-weight:750; color:#d9efec; white-space:nowrap; }
 .mode-picker input:checked + span { background:#fff; color:#075c69; }
 .mode-picker input:focus-visible + span { outline:2px solid #77cbd1; outline-offset:-3px; }
-/* The Library link (library.html; the user's requests of 2026-11-05): a text link right after the mode switch, 12 px
+/* The Library link (./ since 2026-11-16; the user's requests of 2026-11-05): a text link right after the mode switch, 12 px
    after it (the grid's 30 px gap less 18), on the title's line, its own grid area; the line on FlexiTac spans all five.
    At 1100 px and below (the header's two lines, as before the link) it is a flex row that wraps: the title and the
    community links, a line break (the ::after), the mode switch and the Library link, then the line on FlexiTac; where
@@ -299,7 +299,7 @@ input.fine-step::-webkit-inner-spin-button,input.fine-step::-webkit-outer-spin-b
 .cad-workspace button:not(.primary) { border:1px solid #9eafb5; background:#fff; color:var(--ink); border-radius:5px; min-height:30px; padding:0 9px; font-weight:700; font-size:.72rem; cursor:pointer; }
 .cad-workspace button:not(.primary):disabled { color:#9aa5aa; border-color:#d1d8da; cursor:not-allowed; }
 .cad-workspace .primary { width:auto; padding:0 18px; }
-/* CAD mode's status at the 3D view's bottom right (index.html #cadStatus): "name loaded", or a warning, an error or
+/* CAD mode's status at the 3D view's bottom right (gen.html #cadStatus): "name loaded", or a warning, an error or
    the work under way; and the loading veil over the view (#cadLoading). */
 .cad-status { position:absolute; right:12px; bottom:12px; z-index:3; display:block; max-width:min(60%, 520px); padding:6px 10px; border-left:4px solid #607d8b;
   border-radius:4px; background:rgba(237,242,244,.94); box-shadow:0 1px 4px rgba(19,32,51,.12); font-size:.76rem; line-height:1.4; overflow-wrap:anywhere; }
@@ -315,7 +315,7 @@ input.fine-step::-webkit-inner-spin-button,input.fine-step::-webkit-outer-spin-b
 .cad-status.is-error { border-color:var(--error); background:#fff0ef; }
 .cad-main { display:grid; grid-template-columns:minmax(0,1fr); border-bottom:1px solid var(--line); }
 .cad-stage { display:flex; flex-direction:column; min-width:0; }
-/* Step 1's file and selection settings above the 3D view (index.html .cad-filebar). */
+/* Step 1's file and selection settings above the 3D view (gen.html .cad-filebar). */
 .cad-filebar { display:flex; flex-wrap:wrap; align-items:center; gap:8px 14px; padding:10px 12px; border-bottom:1px solid var(--line); background:#fbfdfd; }
 .cad-filebar-label { margin:0; font-size:.86rem; }
 .cad-filebar input[type="file"] { width:auto; max-width:330px; min-height:0; padding:4px 6px; }
@@ -324,7 +324,7 @@ input.fine-step::-webkit-inner-spin-button,input.fine-step::-webkit-outer-spin-b
 .cad-filebar .cad-more[open] { flex-basis:100%; }
 .cad-workspace > header h2 { display:flex; align-items:center; gap:9px; font-size:1.15rem; }
 .cad-title-hint { margin:4px 0 0; }
-/* The tools in the 3D view's window, on its left (index.html .cad-view-tools; the user's request of 2026-10-30): a
+/* The tools in the 3D view's window, on its left (gen.html .cad-view-tools; the user's request of 2026-10-30): a
    column of larger buttons over the view, beside it in the DOM so its clicks, double clicks and keys are not the view's. */
 .cad-view-wrap { position:relative; }
 .cad-view-tools { position:absolute; left:12px; top:12px; z-index:3; display:flex; flex-direction:column; align-items:stretch; gap:6px; width:max-content; }
@@ -337,7 +337,7 @@ input.fine-step::-webkit-inner-spin-button,input.fine-step::-webkit-outer-spin-b
 .cad-tools input:checked + span { background:#e3f4f2; border-color:#3aa3a8; color:#075c69; }
 .cad-tools input:focus-visible + span,.cad-view-tools button:focus-visible { outline:2px solid #77cbd1; outline-offset:1px; }
 .cad-workspace .cad-view-tools button:disabled { opacity:.55; cursor:not-allowed; }
-/* The camera in the 3D view's window, top right (index.html .cad-views; beside the view in the DOM, as the tools). */
+/* The camera in the 3D view's window, top right (gen.html .cad-views; beside the view in the DOM, as the tools). */
 .cad-views { position:absolute; right:12px; top:12px; z-index:3; display:flex; flex-wrap:wrap; justify-content:flex-end; gap:4px; max-width:calc(100% - 190px); }
 .cad-workspace .cad-views button { min-height:30px; padding:0 9px; border:1px solid #b9c8cc; border-radius:6px; background:rgba(255,255,255,.95);
   color:#33454d; font-size:.78rem; font-weight:750; box-shadow:0 1px 3px rgba(20,40,50,.14); }
@@ -389,7 +389,7 @@ input.fine-step::-webkit-inner-spin-button,input.fine-step::-webkit-outer-spin-b
 .cad-seg span { display:block; padding:4px 9px; border:1px solid #c7d3d7; border-radius:4px; background:#fff; color:var(--muted); font-size:.72rem; font-weight:700; }
 .cad-seg input:checked + span { color:#075c69; border-color:#7fc2c6; background:#eef9f8; }
 .cad-seg input:focus-visible + span { outline:2px solid #77cbd1; outline-offset:1px; }
-/* The base edge under the 3D view, across (index.html .cad-base; main.js renderSides): its choices as pills. */
+/* The base edge under the 3D view, across (gen.html .cad-base; main.js renderSides): its choices as pills. */
 .cad-base { padding:9px 12px 10px; border-top:1px solid var(--line); background:#fbfdfd; }
 .cad-base-title { margin:0 0 7px; display:flex; flex-wrap:wrap; align-items:baseline; gap:4px 9px; font-size:.82rem; }
 .cad-base-title .hint { margin:0; font-weight:500; }
@@ -416,7 +416,7 @@ input.fine-step::-webkit-inner-spin-button,input.fine-step::-webkit-outer-spin-b
 .cad-workspace input[aria-invalid="true"] { border-color:var(--error); background:#fff7f6; }
 .cad-actions { display:flex; flex-wrap:wrap; align-items:center; gap:10px 16px; margin-top:13px; }
 .cad-actions .hint { margin:0; flex:1 1 260px; }
-/* Step 2 side by side (index.html .cad-resolution): the settings, Fit and the proposals left, the flattened map right, in
+/* Step 2 side by side (gen.html .cad-resolution): the settings, Fit and the proposals left, the flattened map right, in
    sight while the left scrolls; the left takes the whole width until there is a map, and the two stack when narrow. */
 .cad-resolution { display:grid; grid-template-columns:minmax(0,1fr) minmax(300px,40%); border-bottom:1px solid var(--line); }
 .cad-resolution-main { min-width:0; }
@@ -472,7 +472,7 @@ input.fine-step::-webkit-inner-spin-button,input.fine-step::-webkit-outer-spin-b
 .cad-flat-svg .flat-border { fill:none; stroke:#1e88e5; stroke-width:2; vector-effect:non-scaling-stroke; }
 .cad-flat-svg .flat-border-out { fill:url(#cadFlatHatch); stroke:none; }
 .cad-flat-svg .flat-hatch { stroke:#546e7a; stroke-width:1; vector-effect:non-scaling-stroke; }
-/* Step 3 side by side (index.html .cad-build): Generate left, the build on the part and its files right; stacked when narrow. */
+/* Step 3 side by side (gen.html .cad-build): Generate left, the build on the part and its files right; stacked when narrow. */
 .cad-build { display:grid; grid-template-columns:max-content minmax(0,1fr); border-bottom:1px solid var(--line); }
 .cad-build > .cad-step { border-bottom:0; }
 .cad-build > .cad-verify { border-left:1px solid var(--line); grid-template-columns:minmax(0,1fr); gap:4px; }
@@ -526,7 +526,7 @@ details[open] > summary::before { transform:rotate(90deg); }
 .locked .profile-badge { margin:0 0 9px; font-size:.72rem; font-weight:750; color:#354454; }
 .controls .mask-note { margin:0 0 14px; }
 /* CAD mode has its own steps: the rectangular form stays in the page (Generate writes into it), out of sight. */
-/* Gen by Surface: the order of work on the page's left (index.html .flow-guide; main.js renderGuide), in sight from top
+/* Gen by Surface: the order of work on the page's left (gen.html .flow-guide; main.js renderGuide), in sight from top
    to bottom, each step scrolling to its part on the right; done (teal), next (blue), in view (its row lit). */
 body[data-mode="cad"] main { grid-template-columns:minmax(240px,280px) minmax(0,1fr); }
 .flow-guide { display:none; }
@@ -548,7 +548,7 @@ body[data-mode="cad"] .flow-guide { display:block; position:sticky; top:0; align
 .flow-text strong { display:block; margin-top:5px; font-size:.93rem; color:#20303a; }
 .flow-step.is-next .flow-text strong { color:#1d4ed8; }
 .flow-text > span { display:block; margin-top:3px; color:var(--muted); font-size:.76rem; line-height:1.45; }
-/* The samples under the steps (index.html #samplePalette, main.js loadSample; the user's request of 2026-11-06): two
+/* The samples under the steps (gen.html #samplePalette, main.js loadSample; the user's request of 2026-11-06): two
    columns of tiles, each a thumbnail and a name, dragged onto the 3D view or pressed; the one shown edged (is-current).
    On a narrow page (the guide above the workspace) one row that scrolls sideways, so the steps and the view stay near. */
 .sample-palette { margin:12px 4px 0; padding-top:10px; border-top:1px solid var(--line); }
@@ -608,7 +608,7 @@ body[data-mode="cad"] .flow-guide { display:block; position:sticky; top:0; align
   .sample-grid .sample { min-height:34px; padding-top:3px; padding-bottom:3px; }
 }
 #cadWorkspace,#cadStepConfig,#cadStepGenerate,#downloadsTitle { scroll-margin-top:14px; }
-/* The Gerber ZIPs, first among the downloads and set off (index.html .download-main). */
+/* The Gerber ZIPs, first among the downloads and set off (gen.html .download-main). */
 .download-actions button.download-main { min-height:42px; padding:0 16px; border-color:var(--accent); background:var(--accent); color:#fff; font-size:.86rem; font-weight:800; }
 .download-actions button.download-main:hover:not(:disabled) { background:#066d78; }
 .download-actions button.download-main:disabled { background:#e3eceb; border-color:#c9d6d8; color:#8a9a9e; }
@@ -698,7 +698,7 @@ body[data-look="photo"] .look-scope :is(.oblique-board,.stacked-canvas:not(.is-p
   transform:translateZ(calc(var(--thickness) * var(--rise) * 100cqw)); }
 .coin-layer-cast { backface-visibility:hidden; }
 /* Its shadow on the table turned about the coin's centre (app.js lightView, --coin-cast-turn) to fall away from the key as
-   the boards' do, whatever the turn (index.html #coin-cast offsets it down and to the right in the coin's own plane). */
+   the boards' do, whatever the turn (gen.html #coin-cast offsets it down and to the right in the coin's own plane). */
 .coin-plane .coin-layer-cast { transform:rotate(var(--coin-cast-turn,0deg)); }
 /* The face's gleam (app.js coinPlane): polished metal throws back the room, bright above its horizon and dark below; the
    gradient's angle undoes the view's spin and the horizon slides with the tilt, so it keeps to the room as the coin turns
@@ -712,7 +712,7 @@ body[data-look="photo"] .look-scope :is(.oblique-board,.stacked-canvas:not(.is-p
 .stacked-canvas.is-plan :is(.coin-plane,.coin-layer) { transform:none; }
 
 /* One step to a sensor (the user's request of 2026-11-02): the model and the sensor on it in sight, the rest under
-   "Advanced Customization" (index.html #cadCustomize, #formCustomize), the stacked view and the other files folded. */
+   "Advanced Customization" (gen.html #cadCustomize, #formCustomize), the stacked view and the other files folded. */
 .cad-quick { display:flex; align-items:center; padding:12px; border-top:1px solid var(--line); background:#f6fbfa; }
 .cad-workspace .cad-quick button.cad-quick-generate { width:auto; min-width:200px; min-height:46px; padding:0 26px; border:0; border-radius:6px; background:#0b5d9c;
   color:#fff; font-size:1rem; font-weight:800; cursor:pointer; }
@@ -741,7 +741,7 @@ body[data-look="photo"] .look-scope :is(.oblique-board,.stacked-canvas:not(.is-p
 .more-files[open] > summary { margin-bottom:10px; }
 .more-files .download-actions { justify-content:flex-start; }
 
-/* Advanced Customization in the guide (index.html #guideCustomize, #guideSubsteps; main.js syncGuideCustomize): a small
+/* Advanced Customization in the guide (gen.html #guideCustomize, #guideSubsteps; main.js syncGuideCustomize): a small
    switch under step 2, in step with the fold on the right; open, its two steps Fit and Generate, each done or next. */
 .flow-more { margin:0 0 4px 48px; }
 .flow-customize { padding:4px 11px; border:1px solid #9fc6cb; border-radius:999px; background:#fff; color:#075c69; font:inherit; font-size:.76rem; font-weight:750; cursor:pointer; }
@@ -759,7 +759,7 @@ body[data-look="photo"] .look-scope :is(.oblique-board,.stacked-canvas:not(.is-p
 .flow-substep.is-done .flow-sub-no { border-color:#075c69; background:#075c69; color:#fff; }
 .flow-substep.is-next .flow-sub-no { border-color:#2563eb; background:#2563eb; color:#fff; }
 
-/* The sensor on the part (the user's request of 2026-11-05; index.html .stack-figures, main.js 7b, web/cad/onpart.js): in
+/* The sensor on the part (the user's request of 2026-11-05; gen.html .stack-figures, main.js 7b, web/cad/onpart.js): in
    Gen by Surface the stacked card holds two figures, the registration (#stackedPreview, as before) and the sensor on the
    part (#sensorOnPart, a second .stacked-canvas: the same height, lightbox and stale fade, its WebGL canvas transparent
    over it), side by side where the card is 720 px wide or more (a container query: the card's width is not the
@@ -792,7 +792,7 @@ body[data-mode="cad"] .stack-figure.is-registration > .stacked-canvas { border-r
 .on-part-canvas[hidden] { display:none; }
 
 /* The figures' controls in their frames (the user's request of 2026-11-06: "这个可以把button做进示意图框里面放在左侧排列
-   更简洁; 同时字可以更简略; 而且可以统一, 3d view/2d view"; index.html .figure-tools): each figure's switch, then the 2D
+   更简洁; 同时字可以更简略; 而且可以统一, 3d view/2d view"; gen.html .figure-tools): each figure's switch, then the 2D
    view's zoom, over its frame's top left, 12 px in, in one row, the pointer through the row's gaps to the figure; Reset
    view over the top right (.figure-reset: the registration's 3D view, the sensor on the part).  What a figure draws at
    its home stays off them: a 2D view whose board would reach under them starts its window under them (app.js fitScene,

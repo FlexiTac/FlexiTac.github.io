@@ -1722,6 +1722,266 @@
    },
    "view_sha256": "19590425e1fdf666c8a742bb007ecebef4ba2c3becf991db79c83563a8fe05f0"
   },
+  "umi-concave-tip13.8-2mm": {
+   "art": {
+    "build_id": "surface-32x11-bfb94d585709",
+    "bytes": 9398,
+    "json_sha256": "611fbbe337436c93f4ca0646845fca18b0c2c7a40fa94e24aeea4a4bc70b2b25",
+    "path": "art/umi-concave-tip13.8-2mm.json.gz",
+    "sha256": "3446a0c9a3ec3f881fcc5c76a86a9fb592093e018bf02f449cb4a95dbda9ec9e"
+   },
+   "build_id": "surface-32x11-bfb94d585709",
+   "figure_sha256": "e38217818ff99c16f8d898f74079f4297bb51b7613218839c04ae9f2a59ab1c1",
+   "files": {
+    "assembled": {
+     "bytes": 26902,
+     "height": 800,
+     "path": "shots/umi-concave-tip13.8-2mm.assembled.webp",
+     "sha256": "fe07ab803d9739657e4f89920acdcd52741753cbf8f209e3053266ebccd7a406",
+     "width": 1280
+    },
+    "card": {
+     "bytes": 14434,
+     "height": 400,
+     "path": "shots/umi-concave-tip13.8-2mm.exploded.card.webp",
+     "sha256": "4d93de1c1a541f99f1c268fbebcf9f574bc852aeb712bad1d0ccaa3ce07bf192",
+     "width": 640
+    },
+    "exploded": {
+     "bytes": 30174,
+     "height": 800,
+     "path": "shots/umi-concave-tip13.8-2mm.exploded.webp",
+     "sha256": "a8b1f7efe80bebcd5da81e822374e477567c4f684449bf12d233162843707f52",
+     "width": 1280
+    }
+   },
+   "fit_sha256": "b72e37a0f4183f6848472af88e9b1a2ee575ca54160c9dd1b78c6d87be53fb3e",
+   "look": "photo",
+   "margins_px": {
+    "assembled": [
+     455,
+     51,
+     456,
+     52
+    ],
+    "exploded": [
+     483,
+     51,
+     484,
+     52
+    ]
+   },
+   "part_look_sha256": "c75a53c0f649488a94b4c5a49d5fdd38498d3c951434a6cc8a75d44846dde607",
+   "view_sha256": "19590425e1fdf666c8a742bb007ecebef4ba2c3becf991db79c83563a8fe05f0"
+  },
+  "umi-concave-tip17.8-2mm": {
+   "art": {
+    "build_id": "surface-32x11-f20b3f659cff",
+    "bytes": 9713,
+    "json_sha256": "84645306bfde31bc937a2c9549f1e5a20f855938cc5652f2b7acf2a917199ed8",
+    "path": "art/umi-concave-tip17.8-2mm.json.gz",
+    "sha256": "8f055d0b850e4feee9e077d5c645591db2a58025a6b80c16d890003e5cd1d8d9"
+   },
+   "build_id": "surface-32x11-f20b3f659cff",
+   "figure_sha256": "e38217818ff99c16f8d898f74079f4297bb51b7613218839c04ae9f2a59ab1c1",
+   "files": {
+    "assembled": {
+     "bytes": 25580,
+     "height": 800,
+     "path": "shots/umi-concave-tip17.8-2mm.assembled.webp",
+     "sha256": "187c16a4c22c655de303b1d52693c0a568a5da246c2da4cbb64619b22b42825f",
+     "width": 1280
+    },
+    "card": {
+     "bytes": 14800,
+     "height": 400,
+     "path": "shots/umi-concave-tip17.8-2mm.exploded.card.webp",
+     "sha256": "ddb802187f65f2c1fe5c6382b1077e6dbeac208287f603054399e641158081ac",
+     "width": 640
+    },
+    "exploded": {
+     "bytes": 30650,
+     "height": 800,
+     "path": "shots/umi-concave-tip17.8-2mm.exploded.webp",
+     "sha256": "07046682f545427b4fd32d4e7c9a14fbb54ab27a2c9f81e12deb95611304e73d",
+     "width": 1280
+    }
+   },
+   "fit_sha256": "9862f6607827bbcb14264f1e87fa1a57d31dbd5e1e9b02012b4fce52237196b7",
+   "look": "photo",
+   "margins_px": {
+    "assembled": [
+     450,
+     51,
+     450,
+     52
+    ],
+    "exploded": [
+     480,
+     51,
+     480,
+     52
+    ]
+   },
+   "part_look_sha256": "c75a53c0f649488a94b4c5a49d5fdd38498d3c951434a6cc8a75d44846dde607",
+   "view_sha256": "19590425e1fdf666c8a742bb007ecebef4ba2c3becf991db79c83563a8fe05f0"
+  },
+  "umi-concave-tip21.8-2mm": {
+   "art": {
+    "build_id": "surface-32x11-62d7fb2ed676",
+    "bytes": 9281,
+    "json_sha256": "c684fb2e82977b566fce3aa3b0b0830902c00b408fa3daf9b808a9df3a5ccdb6",
+    "path": "art/umi-concave-tip21.8-2mm.json.gz",
+    "sha256": "0c144f7dab004b79ebacdc821853b4a3b7b2f78f4a4e856a4e07d31f832b2528"
+   },
+   "build_id": "surface-32x11-62d7fb2ed676",
+   "figure_sha256": "e38217818ff99c16f8d898f74079f4297bb51b7613218839c04ae9f2a59ab1c1",
+   "files": {
+    "assembled": {
+     "bytes": 26452,
+     "height": 800,
+     "path": "shots/umi-concave-tip21.8-2mm.assembled.webp",
+     "sha256": "d72cac2a4dd2f2004e99170d76bb591e54e6f42596265b60aebd8d1e50bf425b",
+     "width": 1280
+    },
+    "card": {
+     "bytes": 14682,
+     "height": 400,
+     "path": "shots/umi-concave-tip21.8-2mm.exploded.card.webp",
+     "sha256": "6e77da24652b33c2359c33badc7f182ca6fe939777a5db6b0ef3d53bc6e4318a",
+     "width": 640
+    },
+    "exploded": {
+     "bytes": 31348,
+     "height": 800,
+     "path": "shots/umi-concave-tip21.8-2mm.exploded.webp",
+     "sha256": "b565dfab88cce17a6424a990a8a9af27da6d6e52771f469d68dffe9d78cea327",
+     "width": 1280
+    }
+   },
+   "fit_sha256": "45942a6ab6b3918761599a69be7fc05153bef444960870e573a8db92d3a2bf72",
+   "look": "photo",
+   "margins_px": {
+    "assembled": [
+     445,
+     51,
+     445,
+     52
+    ],
+    "exploded": [
+     478,
+     52,
+     478,
+     52
+    ]
+   },
+   "part_look_sha256": "c75a53c0f649488a94b4c5a49d5fdd38498d3c951434a6cc8a75d44846dde607",
+   "view_sha256": "19590425e1fdf666c8a742bb007ecebef4ba2c3becf991db79c83563a8fe05f0"
+  },
+  "umi-concave-tip5.8-2mm": {
+   "art": {
+    "build_id": "surface-32x9-30f809793c76",
+    "bytes": 9849,
+    "json_sha256": "99c300ff63e50dd1657f124dd4c901266ed8c6399cfa987bfdf713de922940da",
+    "path": "art/umi-concave-tip5.8-2mm.json.gz",
+    "sha256": "f441d2bbc07e71e27097316f7ac72e496f08775a02263a7ba5b577cb079d0b5e"
+   },
+   "build_id": "surface-32x9-30f809793c76",
+   "figure_sha256": "e38217818ff99c16f8d898f74079f4297bb51b7613218839c04ae9f2a59ab1c1",
+   "files": {
+    "assembled": {
+     "bytes": 26162,
+     "height": 800,
+     "path": "shots/umi-concave-tip5.8-2mm.assembled.webp",
+     "sha256": "e2f6ead06e7c4e6d22d22dcd7d3583c1bbc248501226d018162ae6232111b2b0",
+     "width": 1280
+    },
+    "card": {
+     "bytes": 14008,
+     "height": 400,
+     "path": "shots/umi-concave-tip5.8-2mm.exploded.card.webp",
+     "sha256": "52ec767d3c52921c72d4a072fd7fc7cb2b5d2f697700b3ff80a886a174688e7f",
+     "width": 640
+    },
+    "exploded": {
+     "bytes": 28012,
+     "height": 800,
+     "path": "shots/umi-concave-tip5.8-2mm.exploded.webp",
+     "sha256": "997a107cc08c9c86bf4d4469fec090a195d501019828c69333ca9038e7b9e633",
+     "width": 1280
+    }
+   },
+   "fit_sha256": "4f89ba1f0414cc076582a6c7ee9d5890a90366ea80349649f2d5d5457cea81cf",
+   "look": "photo",
+   "margins_px": {
+    "assembled": [
+     465,
+     51,
+     465,
+     52
+    ],
+    "exploded": [
+     487,
+     51,
+     488,
+     51
+    ]
+   },
+   "part_look_sha256": "c75a53c0f649488a94b4c5a49d5fdd38498d3c951434a6cc8a75d44846dde607",
+   "view_sha256": "19590425e1fdf666c8a742bb007ecebef4ba2c3becf991db79c83563a8fe05f0"
+  },
+  "umi-concave-tip9.8-2mm": {
+   "art": {
+    "build_id": "surface-32x9-ea37529f0b44",
+    "bytes": 9796,
+    "json_sha256": "34400ab0f6d6352e0a9f9b61a5a29872914601d86eb280678ba7408a56eca252",
+    "path": "art/umi-concave-tip9.8-2mm.json.gz",
+    "sha256": "b926899b1998241f99c797354e95a6b993e07fe7880adb1b0624b18447da3ae6"
+   },
+   "build_id": "surface-32x9-ea37529f0b44",
+   "figure_sha256": "e38217818ff99c16f8d898f74079f4297bb51b7613218839c04ae9f2a59ab1c1",
+   "files": {
+    "assembled": {
+     "bytes": 25694,
+     "height": 800,
+     "path": "shots/umi-concave-tip9.8-2mm.assembled.webp",
+     "sha256": "e540e9682c8cc0bbb88273e8769d6637295dd24c4588952bc7c3c6becd974ff5",
+     "width": 1280
+    },
+    "card": {
+     "bytes": 13998,
+     "height": 400,
+     "path": "shots/umi-concave-tip9.8-2mm.exploded.card.webp",
+     "sha256": "a2f1724299c418bae4200e1788c24f327f2d31941dd8e17b16e493bec5ff7479",
+     "width": 640
+    },
+    "exploded": {
+     "bytes": 28442,
+     "height": 800,
+     "path": "shots/umi-concave-tip9.8-2mm.exploded.webp",
+     "sha256": "cdbcf37b6dc92cd5be6a8e9b833c30e41ff8d93b932704db283476c4a7207369",
+     "width": 1280
+    }
+   },
+   "fit_sha256": "46be41265f76fc0a5b794903f630e083c64d175d9cd7d980f75a8306d6864b3c",
+   "look": "photo",
+   "margins_px": {
+    "assembled": [
+     461,
+     51,
+     461,
+     52
+    ],
+    "exploded": [
+     485,
+     51,
+     485,
+     51
+    ]
+   },
+   "part_look_sha256": "c75a53c0f649488a94b4c5a49d5fdd38498d3c951434a6cc8a75d44846dde607",
+   "view_sha256": "19590425e1fdf666c8a742bb007ecebef4ba2c3becf991db79c83563a8fe05f0"
+  },
   "umi-convex-tip13.8-2mm": {
    "art": {
     "build_id": "surface-32x12-568f1bcff1cc",
@@ -2184,6 +2444,578 @@
      477,
      51,
      477,
+     52
+    ]
+   },
+   "part_look_sha256": "c75a53c0f649488a94b4c5a49d5fdd38498d3c951434a6cc8a75d44846dde607",
+   "view_sha256": "19590425e1fdf666c8a742bb007ecebef4ba2c3becf991db79c83563a8fe05f0"
+  },
+  "umi-pointed-tip2-2mm": {
+   "art": {
+    "build_id": "surface-32x12-225658b2334b",
+    "bytes": 10363,
+    "json_sha256": "5ce221cb57530aec225839af6f0512d42560db961a8abfe6db38266f6d13f236",
+    "path": "art/umi-pointed-tip2-2mm.json.gz",
+    "sha256": "28faa43038cfe855325006f2b2a4cb861f354420e1842eb90b176e5bc65a457c"
+   },
+   "build_id": "surface-32x12-225658b2334b",
+   "figure_sha256": "e38217818ff99c16f8d898f74079f4297bb51b7613218839c04ae9f2a59ab1c1",
+   "files": {
+    "assembled": {
+     "bytes": 27566,
+     "height": 800,
+     "path": "shots/umi-pointed-tip2-2mm.assembled.webp",
+     "sha256": "8f4254a3e76f072267785a65f0ce823127665246b5585c07f65b7c6c6114d88a",
+     "width": 1280
+    },
+    "card": {
+     "bytes": 14332,
+     "height": 400,
+     "path": "shots/umi-pointed-tip2-2mm.exploded.card.webp",
+     "sha256": "25e12f8195ca026296909be57707be3dc32f631847e2d22b5694b2eeeb05e7c4",
+     "width": 640
+    },
+    "exploded": {
+     "bytes": 30092,
+     "height": 800,
+     "path": "shots/umi-pointed-tip2-2mm.exploded.webp",
+     "sha256": "425da3460970d3a1589d5ec97f77edc22ed99766a686a49992acc749539cb7d0",
+     "width": 1280
+    }
+   },
+   "fit_sha256": "45d6d9bae3bdfbac3e2dc58194e4c0537c1200c9450a4f5e535fb6dc358491d1",
+   "look": "photo",
+   "margins_px": {
+    "assembled": [
+     457,
+     51,
+     458,
+     51
+    ],
+    "exploded": [
+     485,
+     51,
+     486,
+     52
+    ]
+   },
+   "part_look_sha256": "c75a53c0f649488a94b4c5a49d5fdd38498d3c951434a6cc8a75d44846dde607",
+   "view_sha256": "19590425e1fdf666c8a742bb007ecebef4ba2c3becf991db79c83563a8fe05f0"
+  },
+  "umi-short-convex-tip13.8-2mm": {
+   "art": {
+    "build_id": "surface-32x12-2d739fe25b69",
+    "bytes": 9921,
+    "json_sha256": "3ca2d9198a124cc023d451d3b95282c63e315f571ddf16dff05d54309736422d",
+    "path": "art/umi-short-convex-tip13.8-2mm.json.gz",
+    "sha256": "075409a4712d5b2d35ceabd653c86a23044d177bd5eb813e237e8cb39075c70a"
+   },
+   "build_id": "surface-32x12-2d739fe25b69",
+   "figure_sha256": "e38217818ff99c16f8d898f74079f4297bb51b7613218839c04ae9f2a59ab1c1",
+   "files": {
+    "assembled": {
+     "bytes": 27642,
+     "height": 800,
+     "path": "shots/umi-short-convex-tip13.8-2mm.assembled.webp",
+     "sha256": "f2561d7297f7bea24242da5071b1b9b172b8be3daf5ac0695ae3910783bd71e4",
+     "width": 1280
+    },
+    "card": {
+     "bytes": 14734,
+     "height": 400,
+     "path": "shots/umi-short-convex-tip13.8-2mm.exploded.card.webp",
+     "sha256": "0ab155576a2a848a229cd6bfe8f819b37add0f52dda0488fcb1bdead34601b59",
+     "width": 640
+    },
+    "exploded": {
+     "bytes": 31004,
+     "height": 800,
+     "path": "shots/umi-short-convex-tip13.8-2mm.exploded.webp",
+     "sha256": "e2c3a20998402d090a67d8b1db8b31756542254fc00a4baca0fc5f206f62c54a",
+     "width": 1280
+    }
+   },
+   "fit_sha256": "b154d1327e32935faa0833f46378f31e0434de34ec838512d473f47b6d85a9a9",
+   "look": "photo",
+   "margins_px": {
+    "assembled": [
+     452,
+     51,
+     452,
+     52
+    ],
+    "exploded": [
+     481,
+     51,
+     481,
+     52
+    ]
+   },
+   "part_look_sha256": "c75a53c0f649488a94b4c5a49d5fdd38498d3c951434a6cc8a75d44846dde607",
+   "view_sha256": "19590425e1fdf666c8a742bb007ecebef4ba2c3becf991db79c83563a8fe05f0"
+  },
+  "umi-short-convex-tip17.8-2mm": {
+   "art": {
+    "build_id": "surface-32x12-94ed1318b98d",
+    "bytes": 9612,
+    "json_sha256": "8fa99b431071471136bca0f38ee7a08917600f8f799e22b7ed638bde546a38d5",
+    "path": "art/umi-short-convex-tip17.8-2mm.json.gz",
+    "sha256": "42ce56f3885ba515cb90de33d79e8185a6b7c859b179cdadbd489f174cab8b17"
+   },
+   "build_id": "surface-32x12-94ed1318b98d",
+   "figure_sha256": "e38217818ff99c16f8d898f74079f4297bb51b7613218839c04ae9f2a59ab1c1",
+   "files": {
+    "assembled": {
+     "bytes": 26252,
+     "height": 800,
+     "path": "shots/umi-short-convex-tip17.8-2mm.assembled.webp",
+     "sha256": "ecc0ab80d67786fd7c41a330f23162fc9f62c02b9db17e3fe25cf3d4940aff33",
+     "width": 1280
+    },
+    "card": {
+     "bytes": 14848,
+     "height": 400,
+     "path": "shots/umi-short-convex-tip17.8-2mm.exploded.card.webp",
+     "sha256": "23199f06679b5b17587c598ce736879e94fbb28e78e901fe9bc7d5a48f63dfba",
+     "width": 640
+    },
+    "exploded": {
+     "bytes": 31372,
+     "height": 800,
+     "path": "shots/umi-short-convex-tip17.8-2mm.exploded.webp",
+     "sha256": "958073c5ffdfd405645b07c3ccd182cadde19f4c8a0b5638a2ed95d15204aebe",
+     "width": 1280
+    }
+   },
+   "fit_sha256": "edb64c3d2781184773c9f4a6f92db7e43b8485603d51a28a80490cbbf8eac233",
+   "look": "photo",
+   "margins_px": {
+    "assembled": [
+     448,
+     51,
+     449,
+     52
+    ],
+    "exploded": [
+     479,
+     52,
+     479,
+     52
+    ]
+   },
+   "part_look_sha256": "c75a53c0f649488a94b4c5a49d5fdd38498d3c951434a6cc8a75d44846dde607",
+   "view_sha256": "19590425e1fdf666c8a742bb007ecebef4ba2c3becf991db79c83563a8fe05f0"
+  },
+  "umi-short-convex-tip21.8-2mm": {
+   "art": {
+    "build_id": "surface-32x12-342fbab32928",
+    "bytes": 9332,
+    "json_sha256": "ebda8186345c933be932091efbe23062b74c06e27ca77b5de521ecbe057fea73",
+    "path": "art/umi-short-convex-tip21.8-2mm.json.gz",
+    "sha256": "f33d018b276babc4b96e5c868d0dcc124bc1a5511e4006b47a52b660becb669c"
+   },
+   "build_id": "surface-32x12-342fbab32928",
+   "figure_sha256": "e38217818ff99c16f8d898f74079f4297bb51b7613218839c04ae9f2a59ab1c1",
+   "files": {
+    "assembled": {
+     "bytes": 27248,
+     "height": 800,
+     "path": "shots/umi-short-convex-tip21.8-2mm.assembled.webp",
+     "sha256": "672733c7a0ba5dc51daee2d99d8190ad57724c57ce2607e8c89704451ff3866a",
+     "width": 1280
+    },
+    "card": {
+     "bytes": 14982,
+     "height": 400,
+     "path": "shots/umi-short-convex-tip21.8-2mm.exploded.card.webp",
+     "sha256": "e779974c67630e9a525cf40f84f60fa04f6e3d4d350caafd692a5c5ecbee736e",
+     "width": 640
+    },
+    "exploded": {
+     "bytes": 31622,
+     "height": 800,
+     "path": "shots/umi-short-convex-tip21.8-2mm.exploded.webp",
+     "sha256": "625192769296f82ba5cec6e74a0c773778fe644f7cd0b1540ecdc5a2b51ab3ee",
+     "width": 1280
+    }
+   },
+   "fit_sha256": "cf2573ec7f8656174a02e84abcbc6417fdc989d6ecfdb509c2906a506d6f80d1",
+   "look": "photo",
+   "margins_px": {
+    "assembled": [
+     444,
+     51,
+     445,
+     52
+    ],
+    "exploded": [
+     477,
+     52,
+     478,
+     52
+    ]
+   },
+   "part_look_sha256": "c75a53c0f649488a94b4c5a49d5fdd38498d3c951434a6cc8a75d44846dde607",
+   "view_sha256": "19590425e1fdf666c8a742bb007ecebef4ba2c3becf991db79c83563a8fe05f0"
+  },
+  "umi-short-convex-tip5.8-2mm": {
+   "art": {
+    "build_id": "surface-32x12-c9006c20cab8",
+    "bytes": 11067,
+    "json_sha256": "25aa405565eac6f021551c2be94ee297d8c7ef475280dcef7a86a866e1b0e3d2",
+    "path": "art/umi-short-convex-tip5.8-2mm.json.gz",
+    "sha256": "a96500866540a80b144cd7a6cce1d958bbb873a14337789394998ae22c6e2eb0"
+   },
+   "build_id": "surface-32x12-c9006c20cab8",
+   "figure_sha256": "e38217818ff99c16f8d898f74079f4297bb51b7613218839c04ae9f2a59ab1c1",
+   "files": {
+    "assembled": {
+     "bytes": 26588,
+     "height": 800,
+     "path": "shots/umi-short-convex-tip5.8-2mm.assembled.webp",
+     "sha256": "a3485e5cd39b263fb7bb1834a3ec72555c74fe06a08a5a611fe8b3f986995997",
+     "width": 1280
+    },
+    "card": {
+     "bytes": 14656,
+     "height": 400,
+     "path": "shots/umi-short-convex-tip5.8-2mm.exploded.card.webp",
+     "sha256": "af8d16f74ecb27e67a1bb60c11048c5fc51443e2d657812f10a9f2d1d7ef23a7",
+     "width": 640
+    },
+    "exploded": {
+     "bytes": 30432,
+     "height": 800,
+     "path": "shots/umi-short-convex-tip5.8-2mm.exploded.webp",
+     "sha256": "ad7a84c7b5231d42098fc24dfce0e47fb16558813ae95a7d05fd380d8dd15fde",
+     "width": 1280
+    }
+   },
+   "fit_sha256": "a79a7ef72db981ac69ef957dfd6d5ac3afea6065aa182a594587ec5c40e612f0",
+   "look": "photo",
+   "margins_px": {
+    "assembled": [
+     453,
+     51,
+     453,
+     52
+    ],
+    "exploded": [
+     482,
+     52,
+     482,
+     52
+    ]
+   },
+   "part_look_sha256": "c75a53c0f649488a94b4c5a49d5fdd38498d3c951434a6cc8a75d44846dde607",
+   "view_sha256": "19590425e1fdf666c8a742bb007ecebef4ba2c3becf991db79c83563a8fe05f0"
+  },
+  "umi-short-convex-tip9.8-2mm": {
+   "art": {
+    "build_id": "surface-32x12-104ecbf19cc9",
+    "bytes": 10062,
+    "json_sha256": "580e7df7f9f3bf71a549562814eda8b2080f51255a0e8a700613160133609a0f",
+    "path": "art/umi-short-convex-tip9.8-2mm.json.gz",
+    "sha256": "d0a51b1f3b87cb89d13c08f52e75b66c500b8acfc18feba8ff7c6df4173542a5"
+   },
+   "build_id": "surface-32x12-104ecbf19cc9",
+   "figure_sha256": "e38217818ff99c16f8d898f74079f4297bb51b7613218839c04ae9f2a59ab1c1",
+   "files": {
+    "assembled": {
+     "bytes": 26230,
+     "height": 800,
+     "path": "shots/umi-short-convex-tip9.8-2mm.assembled.webp",
+     "sha256": "8d1962dd1a6e68497b4da5f30c6d786d3d775c013e6f453b5e5c7fe0b1ede249",
+     "width": 1280
+    },
+    "card": {
+     "bytes": 14524,
+     "height": 400,
+     "path": "shots/umi-short-convex-tip9.8-2mm.exploded.card.webp",
+     "sha256": "fc4a0ebee7332914f868390a96aeba1df54d4a6cc0e159f0e1a775f112ff51d4",
+     "width": 640
+    },
+    "exploded": {
+     "bytes": 30766,
+     "height": 800,
+     "path": "shots/umi-short-convex-tip9.8-2mm.exploded.webp",
+     "sha256": "d4b10089fd616fc8708fc8be8e9a6d9eec9a3bda49e9fcc2bf9cc96b8efbf1f1",
+     "width": 1280
+    }
+   },
+   "fit_sha256": "7e9fc74833ebe3f6ccc18c142cbb086d6e2c9f44bd81c388a1f3f53d58a4cd6d",
+   "look": "photo",
+   "margins_px": {
+    "assembled": [
+     453,
+     51,
+     453,
+     52
+    ],
+    "exploded": [
+     482,
+     51,
+     482,
+     52
+    ]
+   },
+   "part_look_sha256": "c75a53c0f649488a94b4c5a49d5fdd38498d3c951434a6cc8a75d44846dde607",
+   "view_sha256": "19590425e1fdf666c8a742bb007ecebef4ba2c3becf991db79c83563a8fe05f0"
+  },
+  "umi-short-trap-tip13.8-2mm": {
+   "art": {
+    "build_id": "surface-32x12-9293aa782072",
+    "bytes": 9920,
+    "json_sha256": "3a343659107e34557f025f9aed898cc940f0b5b312aad8b7891e70b7ebdbe5d2",
+    "path": "art/umi-short-trap-tip13.8-2mm.json.gz",
+    "sha256": "58b91eb8f5c38c8d432f41e2fbde279fd86bb0c303f05164613892094ff1dd59"
+   },
+   "build_id": "surface-32x12-9293aa782072",
+   "figure_sha256": "e38217818ff99c16f8d898f74079f4297bb51b7613218839c04ae9f2a59ab1c1",
+   "files": {
+    "assembled": {
+     "bytes": 27136,
+     "height": 800,
+     "path": "shots/umi-short-trap-tip13.8-2mm.assembled.webp",
+     "sha256": "52582611e511cc11a5c17cf4336accedf018a9aff2bfde0975f3fb2a983e2b33",
+     "width": 1280
+    },
+    "card": {
+     "bytes": 14626,
+     "height": 400,
+     "path": "shots/umi-short-trap-tip13.8-2mm.exploded.card.webp",
+     "sha256": "dc591a8b201d7712ebd27c1d24bef814b5d43057820a31538b897a4eb46ae730",
+     "width": 640
+    },
+    "exploded": {
+     "bytes": 30554,
+     "height": 800,
+     "path": "shots/umi-short-trap-tip13.8-2mm.exploded.webp",
+     "sha256": "61af7007c08602dc7903eb9f2318beed63e90e77d1b0a8a728b08e03c4fa33f6",
+     "width": 1280
+    }
+   },
+   "fit_sha256": "62d53cba2acae5f8f502c726096ee49421f0bfa54b9adc732b88573598989eaf",
+   "look": "photo",
+   "margins_px": {
+    "assembled": [
+     454,
+     51,
+     455,
+     52
+    ],
+    "exploded": [
+     483,
+     52,
+     483,
+     52
+    ]
+   },
+   "part_look_sha256": "c75a53c0f649488a94b4c5a49d5fdd38498d3c951434a6cc8a75d44846dde607",
+   "view_sha256": "19590425e1fdf666c8a742bb007ecebef4ba2c3becf991db79c83563a8fe05f0"
+  },
+  "umi-short-trap-tip17.8-2mm": {
+   "art": {
+    "build_id": "surface-32x12-cdebb8ebe8e3",
+    "bytes": 9716,
+    "json_sha256": "c3ff5e88d1ca3ec81ffade7c70295140dd2ce567bdb9b80fa0a76b620503625c",
+    "path": "art/umi-short-trap-tip17.8-2mm.json.gz",
+    "sha256": "f46607f520f0c34ec1c74087dbb514d687cba618330a3ecdd7f6cc92c5945fa5"
+   },
+   "build_id": "surface-32x12-cdebb8ebe8e3",
+   "figure_sha256": "e38217818ff99c16f8d898f74079f4297bb51b7613218839c04ae9f2a59ab1c1",
+   "files": {
+    "assembled": {
+     "bytes": 27606,
+     "height": 800,
+     "path": "shots/umi-short-trap-tip17.8-2mm.assembled.webp",
+     "sha256": "ffebe953bd65dc6364049ed56b11fa61d9e0e287f7734593d2597aef7f7ae8f7",
+     "width": 1280
+    },
+    "card": {
+     "bytes": 14686,
+     "height": 400,
+     "path": "shots/umi-short-trap-tip17.8-2mm.exploded.card.webp",
+     "sha256": "b8cfeb8cb4b695a76079b201ab213a957ecf310e7a4a53d78460f56a75d3b9a2",
+     "width": 640
+    },
+    "exploded": {
+     "bytes": 31272,
+     "height": 800,
+     "path": "shots/umi-short-trap-tip17.8-2mm.exploded.webp",
+     "sha256": "19d17c1939af3c4f9ea24b0760f5bfe11a598f1b8c60fda46667d142bc6bb638",
+     "width": 1280
+    }
+   },
+   "fit_sha256": "7e66f885e910cf4378513c3eb4059939f23d40859dd8daae85e0f0e75c033fa8",
+   "look": "photo",
+   "margins_px": {
+    "assembled": [
+     450,
+     51,
+     450,
+     52
+    ],
+    "exploded": [
+     481,
+     51,
+     482,
+     52
+    ]
+   },
+   "part_look_sha256": "c75a53c0f649488a94b4c5a49d5fdd38498d3c951434a6cc8a75d44846dde607",
+   "view_sha256": "19590425e1fdf666c8a742bb007ecebef4ba2c3becf991db79c83563a8fe05f0"
+  },
+  "umi-short-trap-tip21.8-2mm": {
+   "art": {
+    "build_id": "surface-32x12-a813c264bd0f",
+    "bytes": 9440,
+    "json_sha256": "5fee490de80748535a1b08c55f730672228ab8054c96442a053272b30570fc86",
+    "path": "art/umi-short-trap-tip21.8-2mm.json.gz",
+    "sha256": "d693accaa76b6760fbd3e8996822f27e2723ba4e45a900a54761544a108d3d32"
+   },
+   "build_id": "surface-32x12-a813c264bd0f",
+   "figure_sha256": "e38217818ff99c16f8d898f74079f4297bb51b7613218839c04ae9f2a59ab1c1",
+   "files": {
+    "assembled": {
+     "bytes": 26414,
+     "height": 800,
+     "path": "shots/umi-short-trap-tip21.8-2mm.assembled.webp",
+     "sha256": "57ef07606e0e8c9de363a7eab4fe7df9111082b9330263f6e1b91f325d190529",
+     "width": 1280
+    },
+    "card": {
+     "bytes": 14944,
+     "height": 400,
+     "path": "shots/umi-short-trap-tip21.8-2mm.exploded.card.webp",
+     "sha256": "6650a940242c6b6ffd27bb75b8f3842475909350fc618095ba5e90ac09b279d0",
+     "width": 640
+    },
+    "exploded": {
+     "bytes": 31624,
+     "height": 800,
+     "path": "shots/umi-short-trap-tip21.8-2mm.exploded.webp",
+     "sha256": "b084db0bd951dd29038c5e9aa3b3cbd4f16aed8ff7e52841e0c32c8486d7f9a3",
+     "width": 1280
+    }
+   },
+   "fit_sha256": "b5ac00c094f532b2082847b75bab1bcfcf8352f15bc7b5a5b3f1f5aa2a875a82",
+   "look": "photo",
+   "margins_px": {
+    "assembled": [
+     444,
+     51,
+     445,
+     52
+    ],
+    "exploded": [
+     477,
+     52,
+     478,
+     52
+    ]
+   },
+   "part_look_sha256": "c75a53c0f649488a94b4c5a49d5fdd38498d3c951434a6cc8a75d44846dde607",
+   "view_sha256": "19590425e1fdf666c8a742bb007ecebef4ba2c3becf991db79c83563a8fe05f0"
+  },
+  "umi-short-trap-tip5.8-2mm": {
+   "art": {
+    "build_id": "surface-32x12-b6c8e235bf0a",
+    "bytes": 10258,
+    "json_sha256": "90bd2a9d6ba1b7f6c9328a9e09487b6e37f51b92409ddb6f82d17df7e5d81823",
+    "path": "art/umi-short-trap-tip5.8-2mm.json.gz",
+    "sha256": "047b5c1d5b34ae98648b85ff3c69aff7ce4af9e84151782bb09b2ba00db04f6c"
+   },
+   "build_id": "surface-32x12-b6c8e235bf0a",
+   "figure_sha256": "e38217818ff99c16f8d898f74079f4297bb51b7613218839c04ae9f2a59ab1c1",
+   "files": {
+    "assembled": {
+     "bytes": 26260,
+     "height": 800,
+     "path": "shots/umi-short-trap-tip5.8-2mm.assembled.webp",
+     "sha256": "8572c0cfba67dfd6b482c8eec0f0045e1f1823a27b0a9a874895e9a60207caf3",
+     "width": 1280
+    },
+    "card": {
+     "bytes": 14292,
+     "height": 400,
+     "path": "shots/umi-short-trap-tip5.8-2mm.exploded.card.webp",
+     "sha256": "a48d3fd55aa9affe8659d282bc252ec44ed3f612a99a443000bfc14c9dd91b40",
+     "width": 640
+    },
+    "exploded": {
+     "bytes": 29656,
+     "height": 800,
+     "path": "shots/umi-short-trap-tip5.8-2mm.exploded.webp",
+     "sha256": "bf13dc037103524e78684575fb2596958122f628b576ee6dcbbf65734f28dc70",
+     "width": 1280
+    }
+   },
+   "fit_sha256": "9744bf8d6ecc9a731b94c40865597533c4f2031acdfafd56f0e787686f089b01",
+   "look": "photo",
+   "margins_px": {
+    "assembled": [
+     458,
+     51,
+     459,
+     52
+    ],
+    "exploded": [
+     486,
+     52,
+     486,
+     52
+    ]
+   },
+   "part_look_sha256": "c75a53c0f649488a94b4c5a49d5fdd38498d3c951434a6cc8a75d44846dde607",
+   "view_sha256": "19590425e1fdf666c8a742bb007ecebef4ba2c3becf991db79c83563a8fe05f0"
+  },
+  "umi-short-trap-tip9.8-2mm": {
+   "art": {
+    "build_id": "surface-32x12-c31187be42da",
+    "bytes": 10180,
+    "json_sha256": "514e9748816f25fc7b8c1e59b4dca21817e470a3dbabb3cd085812bc8f14a99d",
+    "path": "art/umi-short-trap-tip9.8-2mm.json.gz",
+    "sha256": "f5d34355984a3b921c30774c4ccae4746056d4cb6ec4b70d3b1144b2e271c94d"
+   },
+   "build_id": "surface-32x12-c31187be42da",
+   "figure_sha256": "e38217818ff99c16f8d898f74079f4297bb51b7613218839c04ae9f2a59ab1c1",
+   "files": {
+    "assembled": {
+     "bytes": 27258,
+     "height": 800,
+     "path": "shots/umi-short-trap-tip9.8-2mm.assembled.webp",
+     "sha256": "67ebddaa1fe126a397a9a824c39c442c12c1389ab4305a1fc562b712bd64af9a",
+     "width": 1280
+    },
+    "card": {
+     "bytes": 14446,
+     "height": 400,
+     "path": "shots/umi-short-trap-tip9.8-2mm.exploded.card.webp",
+     "sha256": "39dad751f77fc71b1a490a37fdb47e0fb17172642e7fdef8a187ad4c396250d8",
+     "width": 640
+    },
+    "exploded": {
+     "bytes": 30342,
+     "height": 800,
+     "path": "shots/umi-short-trap-tip9.8-2mm.exploded.webp",
+     "sha256": "e96e24a637dd03d845134dfea4ba39c640a4188072cd071051c85321314f86f1",
+     "width": 1280
+    }
+   },
+   "fit_sha256": "ace88a1b25b97c7074fb6bf28aa6e09053839131f63a255a38e869e4b4ec55d1",
+   "look": "photo",
+   "margins_px": {
+    "assembled": [
+     458,
+     51,
+     458,
+     52
+    ],
+    "exploded": [
+     485,
+     51,
+     485,
      52
     ]
    },

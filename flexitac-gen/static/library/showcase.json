@@ -1,10 +1,10 @@
 {
  "format": "flexitac-library-showcase/v1",
- "about": "The Library's showcase (library.html's first card and its page; the user's request of 2026-11-12): the original, hand-designed FlexiTac sensor on the xArm gripper with UMI soft fingers.  It is no entry: no fit, no build, none of the generator's downloads.  The words are written by hand; \"placed\" is the pad's placed record (../vendor/flexitac-v2/umi-finray.placed.json) with the showcase's scene; \"image\" and \"shot\" are written by tools/browser/library_shots.py --showcase (the pictures in showcase/, their bytes and SHA-256, and what they were shot from); tools/library_write.py checks all of it (docs/LIBRARY_VIEW.md).",
+ "about": "The Library's showcase (the Library's first card, index.html, and its page; the user's request of 2026-11-12): the original, hand-designed FlexiTac sensor on the xArm gripper with UMI soft fingers.  It is no entry: no fit, no build, none of the generator's downloads.  The words are written by hand; \"placed\" is the pad's placed record (../vendor/flexitac-v2/umi-finray.placed.json) with the showcase's scene; \"image\" and \"shot\" are written by tools/browser/library_shots.py --showcase (the pictures in showcase/, their bytes and SHA-256, and what they were shot from); tools/library_write.py checks all of it (docs/LIBRARY_VIEW.md).",
  "id": "flexitac-g1",
  "title": "FlexiTac on xArm",
  "label": "Original FlexiTac \u00b7 Hand-designed, pre-agent",
- "text": "FlexiTac PCBs make tactile sensors accessible, reliable and standardized.",
+ "text": "Using flexible PCB to make tactile sensors accessible, reliable and standardized.",
  "detail": "The original FlexiTac sensor, 12 \u00d7 32 taxels at 2 mm, on the xArm gripper's soft fingers.",
  "sensor": {
   "rows": 32,

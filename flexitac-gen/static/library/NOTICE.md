@@ -1,6 +1,6 @@
 # The Library's gripper parts
 
-The Library (`library.html`, and Gen by Surface at `./?part=<id>`) shows sensors
+The Library (the first page, `./`, and Gen by Surface at `gen.html?part=<id>`) shows sensors
 already fitted to these gripper fingers; their files are served from this
 folder so the app stays offline and keeps its Content Security Policy
 (`default-src 'self'`).  The UMI fin-ray finger, the page's default part, is
@@ -58,15 +58,21 @@ by the FlexiTac-Gen project in 2026.  The stock pad's face is cross-grooved
 (V-grooves 4.5 mm wide and 1.6 mm deep); a laminated sensor bridges the
 grooves, so its face is the hull's plane.
 
-The ten `meshes/umi-trap-tip<w>.stl` and `meshes/umi-convex-tip<w>.stl` are
-not upstream files either (Apache License 2.0, section 4(b)): each is the
+The twenty-six `meshes/umi-<kind>-tip<w>.stl` (`<kind>` one of `trap`,
+`convex`, `concave`, `short-trap`, `short-convex` and `pointed`) are not
+upstream files either (Apache License 2.0, section 4(b)): each is the
 HandUMI `UMI-Soft-Gripper-Finger.stl` (SHA-256
 `63331c666d485de462f3c7c80eb4200fd2bf98ac325095f5b0e8774a95dc8442`) with
-its last 75 mm above the tip narrowed, symmetrically, to a tip of `<w>` mm
-(21.8, 17.8, 13.8, 9.8 or 5.8): straight sides (a trapezoid) or circular-arc
-sides tangent to the full width where the taper starts (a convex arc), cut
-through the whole finger, the part above the taper unchanged; written as a
-binary STL in millimetres, changed by the FlexiTac-Gen project in 2026.
+its last 75 mm above the tip (40 mm for `short-trap` and `short-convex`,
+50 mm for `pointed`) narrowed, symmetrically, to a tip of `<w>` mm (21.8,
+17.8, 13.8, 9.8 or 5.8; 2 for `pointed`): straight sides (a trapezoid:
+`trap`, `short-trap`), circular-arc sides tangent to the full width where
+the taper starts (a convex arc: `convex`, `short-convex`, and `pointed`,
+whose two arcs meet at its point) or circular-arc sides tangent to the
+finger's axis at the tip (a concave arc: `concave`), cut through the whole
+finger, the part above the taper unchanged; written as a binary STL in
+millimetres, changed by the FlexiTac-Gen project in 2026 (the trapezoid and
+convex arc tips over 75 mm on 2026-11-05, the others on 2026-11-16).
 
 ## Files
 
@@ -79,16 +85,32 @@ binary STL in millimetres, changed by the FlexiTac-Gen project in 2026.
 | `meshes/i2rt-yam.stl` | i2rt `120c3c8`, `i2rt/robot_models/gripper/crank_4310/assets/tip_left.stl` | MIT, I2RT Robotics, `licenses/i2rt.txt` | unchanged | `b70f8c1e32ccfae03fec46ac10a0f04195347bc530ee761143a5d7c5bb07ae07` |
 | `meshes/unitree-dex1.stl` | unitree_ros `b579bbe`, `robots/g1_description/meshes/Dex1_finger_link_1.STL` | BSD-3-Clause, HangZhou YuShu Technology (Unitree Robotics), `licenses/unitree_ros.txt` | unchanged | `7cd2ff199556e3955547a34c75ed9ea777fb7d704fc98e7318d0f67e4aaedf5a` |
 | `meshes/makermods-metal.stl` | handumi-hw `1448278`, `hardware/STL/gripper_tips/MakerMods-Metal/metal-arm-gripper-tip-left.stl` | Apache-2.0, BrikHMP18 (HandUMI), `licenses/handumi-hw.txt` | unchanged | `f480c8fb9fbe5027ce0741436cd3c60c77702c2eec2b80d87f5829c4adca5925` |
-| `meshes/umi-trap-tip21.8.stl` | handumi-hw `1448278`, `hardware/STL/gripper_tips/UMI-Gripper/UMI-Soft-Gripper-Finger.stl` | Apache-2.0, BrikHMP18 (HandUMI), `licenses/handumi-hw.txt` | modified: tip cut (trapezoid, h 75 mm, tip 21.8 mm) from UMI-Soft-Gripper-Finger.stl | `6ee1d59992d71ec0207ba15798b97c6bfc0e3001ef1282969c601dda46da6f29` |
-| `meshes/umi-trap-tip17.8.stl` | handumi-hw `1448278`, `hardware/STL/gripper_tips/UMI-Gripper/UMI-Soft-Gripper-Finger.stl` | Apache-2.0, BrikHMP18 (HandUMI), `licenses/handumi-hw.txt` | modified: tip cut (trapezoid, h 75 mm, tip 17.8 mm) from UMI-Soft-Gripper-Finger.stl | `23a46a0071b4807e028333fe0053565f0bbd96c10aba4fc8bce83c6b56e80549` |
-| `meshes/umi-trap-tip13.8.stl` | handumi-hw `1448278`, `hardware/STL/gripper_tips/UMI-Gripper/UMI-Soft-Gripper-Finger.stl` | Apache-2.0, BrikHMP18 (HandUMI), `licenses/handumi-hw.txt` | modified: tip cut (trapezoid, h 75 mm, tip 13.8 mm) from UMI-Soft-Gripper-Finger.stl | `5c5c582158db5034865aef20390cf9f6c8abf59b74277f3b251dd0eb270cbbe7` |
-| `meshes/umi-trap-tip9.8.stl` | handumi-hw `1448278`, `hardware/STL/gripper_tips/UMI-Gripper/UMI-Soft-Gripper-Finger.stl` | Apache-2.0, BrikHMP18 (HandUMI), `licenses/handumi-hw.txt` | modified: tip cut (trapezoid, h 75 mm, tip 9.8 mm) from UMI-Soft-Gripper-Finger.stl | `3cca74b0f6f70e3296bb4aa57ce537df5bac6eadbf90a2223e4e3be5b99a86bf` |
-| `meshes/umi-trap-tip5.8.stl` | handumi-hw `1448278`, `hardware/STL/gripper_tips/UMI-Gripper/UMI-Soft-Gripper-Finger.stl` | Apache-2.0, BrikHMP18 (HandUMI), `licenses/handumi-hw.txt` | modified: tip cut (trapezoid, h 75 mm, tip 5.8 mm) from UMI-Soft-Gripper-Finger.stl | `aa0f328d24c5107df0f2b19768edfe0b997835d286f7bea688d9721f57eea7e8` |
+| `meshes/umi-short-trap-tip21.8.stl` | handumi-hw `1448278`, `hardware/STL/gripper_tips/UMI-Gripper/UMI-Soft-Gripper-Finger.stl` | Apache-2.0, BrikHMP18 (HandUMI), `licenses/handumi-hw.txt` | modified: tip cut (trapezoid, h 40 mm, tip 21.8 mm) from UMI-Soft-Gripper-Finger.stl | `d6bc8d807035eac4d3910f20bca4d11b6b50d1bd61bd618a8cb983b348c76141` |
+| `meshes/umi-short-trap-tip17.8.stl` | handumi-hw `1448278`, `hardware/STL/gripper_tips/UMI-Gripper/UMI-Soft-Gripper-Finger.stl` | Apache-2.0, BrikHMP18 (HandUMI), `licenses/handumi-hw.txt` | modified: tip cut (trapezoid, h 40 mm, tip 17.8 mm) from UMI-Soft-Gripper-Finger.stl | `81bcbbe8c5ce3f3b4dea48eb2a8f0d91402277f849ae096ae054f1aeb2c3db74` |
+| `meshes/umi-short-trap-tip13.8.stl` | handumi-hw `1448278`, `hardware/STL/gripper_tips/UMI-Gripper/UMI-Soft-Gripper-Finger.stl` | Apache-2.0, BrikHMP18 (HandUMI), `licenses/handumi-hw.txt` | modified: tip cut (trapezoid, h 40 mm, tip 13.8 mm) from UMI-Soft-Gripper-Finger.stl | `9d6813150101f93fd2ddeaad7b6f1a97356cc329866fa1aea9b52d30c6e3a197` |
+| `meshes/umi-short-trap-tip9.8.stl` | handumi-hw `1448278`, `hardware/STL/gripper_tips/UMI-Gripper/UMI-Soft-Gripper-Finger.stl` | Apache-2.0, BrikHMP18 (HandUMI), `licenses/handumi-hw.txt` | modified: tip cut (trapezoid, h 40 mm, tip 9.8 mm) from UMI-Soft-Gripper-Finger.stl | `89bd2cb2c996d580f1e7f5f6fcc23d145faecd63e458433152e1a5fb677eeae1` |
+| `meshes/umi-short-trap-tip5.8.stl` | handumi-hw `1448278`, `hardware/STL/gripper_tips/UMI-Gripper/UMI-Soft-Gripper-Finger.stl` | Apache-2.0, BrikHMP18 (HandUMI), `licenses/handumi-hw.txt` | modified: tip cut (trapezoid, h 40 mm, tip 5.8 mm) from UMI-Soft-Gripper-Finger.stl | `8f54771416e432855ec0f1c827ab79c7932c1819578243468cde9ac140fecec8` |
+| `meshes/umi-short-convex-tip21.8.stl` | handumi-hw `1448278`, `hardware/STL/gripper_tips/UMI-Gripper/UMI-Soft-Gripper-Finger.stl` | Apache-2.0, BrikHMP18 (HandUMI), `licenses/handumi-hw.txt` | modified: tip cut (convex arc, h 40 mm, tip 21.8 mm) from UMI-Soft-Gripper-Finger.stl | `34399e92ef2a3d554205df20f4e28e8dcd064c10cc16bbdd3199d08579f8349c` |
+| `meshes/umi-short-convex-tip17.8.stl` | handumi-hw `1448278`, `hardware/STL/gripper_tips/UMI-Gripper/UMI-Soft-Gripper-Finger.stl` | Apache-2.0, BrikHMP18 (HandUMI), `licenses/handumi-hw.txt` | modified: tip cut (convex arc, h 40 mm, tip 17.8 mm) from UMI-Soft-Gripper-Finger.stl | `bfba38d06565c605333a5ab6a777366dcec44c4c2e88ae4972cb7204ac742fcf` |
+| `meshes/umi-short-convex-tip13.8.stl` | handumi-hw `1448278`, `hardware/STL/gripper_tips/UMI-Gripper/UMI-Soft-Gripper-Finger.stl` | Apache-2.0, BrikHMP18 (HandUMI), `licenses/handumi-hw.txt` | modified: tip cut (convex arc, h 40 mm, tip 13.8 mm) from UMI-Soft-Gripper-Finger.stl | `5becdc111e92694f98b3485d3a843f0ec936a04dd792d683d03b6a60c6ee84f0` |
+| `meshes/umi-short-convex-tip9.8.stl` | handumi-hw `1448278`, `hardware/STL/gripper_tips/UMI-Gripper/UMI-Soft-Gripper-Finger.stl` | Apache-2.0, BrikHMP18 (HandUMI), `licenses/handumi-hw.txt` | modified: tip cut (convex arc, h 40 mm, tip 9.8 mm) from UMI-Soft-Gripper-Finger.stl | `976e8e54cdb39d88339bca6876c0562313eb99689c11e05aa5ee2e66cebc159a` |
+| `meshes/umi-short-convex-tip5.8.stl` | handumi-hw `1448278`, `hardware/STL/gripper_tips/UMI-Gripper/UMI-Soft-Gripper-Finger.stl` | Apache-2.0, BrikHMP18 (HandUMI), `licenses/handumi-hw.txt` | modified: tip cut (convex arc, h 40 mm, tip 5.8 mm) from UMI-Soft-Gripper-Finger.stl | `ace3a48ccf990c63e917c205b6f4cda209c0ae2fcbd6a189ba333eec30896f8c` |
 | `meshes/umi-convex-tip21.8.stl` | handumi-hw `1448278`, `hardware/STL/gripper_tips/UMI-Gripper/UMI-Soft-Gripper-Finger.stl` | Apache-2.0, BrikHMP18 (HandUMI), `licenses/handumi-hw.txt` | modified: tip cut (convex arc, h 75 mm, tip 21.8 mm) from UMI-Soft-Gripper-Finger.stl | `428e618e51772bd4882cc0fc1de132e4a1a8bff5d78fd9450fbf368bb95159e4` |
 | `meshes/umi-convex-tip17.8.stl` | handumi-hw `1448278`, `hardware/STL/gripper_tips/UMI-Gripper/UMI-Soft-Gripper-Finger.stl` | Apache-2.0, BrikHMP18 (HandUMI), `licenses/handumi-hw.txt` | modified: tip cut (convex arc, h 75 mm, tip 17.8 mm) from UMI-Soft-Gripper-Finger.stl | `e254c3fd40cc7e3c1a3c49683cb7f8829d473590d40c4270a408c30fb26ec8c3` |
 | `meshes/umi-convex-tip13.8.stl` | handumi-hw `1448278`, `hardware/STL/gripper_tips/UMI-Gripper/UMI-Soft-Gripper-Finger.stl` | Apache-2.0, BrikHMP18 (HandUMI), `licenses/handumi-hw.txt` | modified: tip cut (convex arc, h 75 mm, tip 13.8 mm) from UMI-Soft-Gripper-Finger.stl | `0aa24fb4dbd23de90c14b498bbeee9888dd34a6ac473d4a9db544ab572840ee2` |
 | `meshes/umi-convex-tip9.8.stl` | handumi-hw `1448278`, `hardware/STL/gripper_tips/UMI-Gripper/UMI-Soft-Gripper-Finger.stl` | Apache-2.0, BrikHMP18 (HandUMI), `licenses/handumi-hw.txt` | modified: tip cut (convex arc, h 75 mm, tip 9.8 mm) from UMI-Soft-Gripper-Finger.stl | `3314dca59dd8260caf74ccb957d0ffe3c42e7267ad34f88affd2a818c5a702cb` |
 | `meshes/umi-convex-tip5.8.stl` | handumi-hw `1448278`, `hardware/STL/gripper_tips/UMI-Gripper/UMI-Soft-Gripper-Finger.stl` | Apache-2.0, BrikHMP18 (HandUMI), `licenses/handumi-hw.txt` | modified: tip cut (convex arc, h 75 mm, tip 5.8 mm) from UMI-Soft-Gripper-Finger.stl | `d9562c18e2bc35af280f0d2f33577600a24c990098824df6718b66f17b1ab685` |
+| `meshes/umi-trap-tip21.8.stl` | handumi-hw `1448278`, `hardware/STL/gripper_tips/UMI-Gripper/UMI-Soft-Gripper-Finger.stl` | Apache-2.0, BrikHMP18 (HandUMI), `licenses/handumi-hw.txt` | modified: tip cut (trapezoid, h 75 mm, tip 21.8 mm) from UMI-Soft-Gripper-Finger.stl | `6ee1d59992d71ec0207ba15798b97c6bfc0e3001ef1282969c601dda46da6f29` |
+| `meshes/umi-trap-tip17.8.stl` | handumi-hw `1448278`, `hardware/STL/gripper_tips/UMI-Gripper/UMI-Soft-Gripper-Finger.stl` | Apache-2.0, BrikHMP18 (HandUMI), `licenses/handumi-hw.txt` | modified: tip cut (trapezoid, h 75 mm, tip 17.8 mm) from UMI-Soft-Gripper-Finger.stl | `23a46a0071b4807e028333fe0053565f0bbd96c10aba4fc8bce83c6b56e80549` |
+| `meshes/umi-trap-tip13.8.stl` | handumi-hw `1448278`, `hardware/STL/gripper_tips/UMI-Gripper/UMI-Soft-Gripper-Finger.stl` | Apache-2.0, BrikHMP18 (HandUMI), `licenses/handumi-hw.txt` | modified: tip cut (trapezoid, h 75 mm, tip 13.8 mm) from UMI-Soft-Gripper-Finger.stl | `5c5c582158db5034865aef20390cf9f6c8abf59b74277f3b251dd0eb270cbbe7` |
+| `meshes/umi-trap-tip9.8.stl` | handumi-hw `1448278`, `hardware/STL/gripper_tips/UMI-Gripper/UMI-Soft-Gripper-Finger.stl` | Apache-2.0, BrikHMP18 (HandUMI), `licenses/handumi-hw.txt` | modified: tip cut (trapezoid, h 75 mm, tip 9.8 mm) from UMI-Soft-Gripper-Finger.stl | `3cca74b0f6f70e3296bb4aa57ce537df5bac6eadbf90a2223e4e3be5b99a86bf` |
+| `meshes/umi-trap-tip5.8.stl` | handumi-hw `1448278`, `hardware/STL/gripper_tips/UMI-Gripper/UMI-Soft-Gripper-Finger.stl` | Apache-2.0, BrikHMP18 (HandUMI), `licenses/handumi-hw.txt` | modified: tip cut (trapezoid, h 75 mm, tip 5.8 mm) from UMI-Soft-Gripper-Finger.stl | `aa0f328d24c5107df0f2b19768edfe0b997835d286f7bea688d9721f57eea7e8` |
+| `meshes/umi-concave-tip21.8.stl` | handumi-hw `1448278`, `hardware/STL/gripper_tips/UMI-Gripper/UMI-Soft-Gripper-Finger.stl` | Apache-2.0, BrikHMP18 (HandUMI), `licenses/handumi-hw.txt` | modified: tip cut (concave arc, h 75 mm, tip 21.8 mm) from UMI-Soft-Gripper-Finger.stl | `e9e817b7cc1d142d466dc1811b07d47ccd7bc3819aaeee14bfdc976aa9eea2a3` |
+| `meshes/umi-concave-tip17.8.stl` | handumi-hw `1448278`, `hardware/STL/gripper_tips/UMI-Gripper/UMI-Soft-Gripper-Finger.stl` | Apache-2.0, BrikHMP18 (HandUMI), `licenses/handumi-hw.txt` | modified: tip cut (concave arc, h 75 mm, tip 17.8 mm) from UMI-Soft-Gripper-Finger.stl | `4a70cc098e201d2af4fa81940ed6aac126c99367e01926b5e42f1ba11abe6934` |
+| `meshes/umi-concave-tip13.8.stl` | handumi-hw `1448278`, `hardware/STL/gripper_tips/UMI-Gripper/UMI-Soft-Gripper-Finger.stl` | Apache-2.0, BrikHMP18 (HandUMI), `licenses/handumi-hw.txt` | modified: tip cut (concave arc, h 75 mm, tip 13.8 mm) from UMI-Soft-Gripper-Finger.stl | `a51dfcef0a0d53a88ad6bf9af0334fb6c7c7463e49f2b89a04909ef3a2411c13` |
+| `meshes/umi-concave-tip9.8.stl` | handumi-hw `1448278`, `hardware/STL/gripper_tips/UMI-Gripper/UMI-Soft-Gripper-Finger.stl` | Apache-2.0, BrikHMP18 (HandUMI), `licenses/handumi-hw.txt` | modified: tip cut (concave arc, h 75 mm, tip 9.8 mm) from UMI-Soft-Gripper-Finger.stl | `e2692fc9f689582d3455755757e04365bcad50eccea2f0bf42e3668d901a6fb0` |
+| `meshes/umi-concave-tip5.8.stl` | handumi-hw `1448278`, `hardware/STL/gripper_tips/UMI-Gripper/UMI-Soft-Gripper-Finger.stl` | Apache-2.0, BrikHMP18 (HandUMI), `licenses/handumi-hw.txt` | modified: tip cut (concave arc, h 75 mm, tip 5.8 mm) from UMI-Soft-Gripper-Finger.stl | `21594d26b53f30378cb35047f59e7ba1c5fa36846ffa020b974607fa32be0e60` |
+| `meshes/umi-pointed-tip2.stl` | handumi-hw `1448278`, `hardware/STL/gripper_tips/UMI-Gripper/UMI-Soft-Gripper-Finger.stl` | Apache-2.0, BrikHMP18 (HandUMI), `licenses/handumi-hw.txt` | modified: tip cut (convex arc, h 50 mm, tip 2 mm) from UMI-Soft-Gripper-Finger.stl | `4633bdbf0ef61c87e5ffd50ba02dfd61b4c587d062236a4bca83d123e67fd831` |
 | `licenses/handumi-hw.txt` | handumi-hw `1448278`, `LICENSE` (the same file as `web/vendor/umi/LICENSE`) | Apache-2.0 | unchanged | `2fc33ff0cc150ee1b1a71db5763a8b7c3732ede5edac98ef0ce532ee3405981a` |
 | `licenses/mujoco_menagerie-franka_emika_panda.txt` | mujoco_menagerie `f3b6013`, `franka_emika_panda/LICENSE` | Apache-2.0 | unchanged | `a6cba85bc92e0cff7a450b1d873c0eaa2e9fc96bf472df0247a26bec77bf3ff9` |
 | `licenses/mujoco_menagerie-trossen_wx250s.txt` | mujoco_menagerie `f3b6013`, `trossen_wx250s/LICENSE` | BSD-3-Clause, Trossen Robotics | unchanged | `21868447315ac2b10e592d08958c1035b19a32cf39e9165b23033f68390098cb` |

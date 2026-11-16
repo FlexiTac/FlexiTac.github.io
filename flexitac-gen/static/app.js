@@ -35,7 +35,7 @@
   const PIN1_STEPS = [[[0, 0], [0, 0]], [[1, 0], [0, 0]], [[1, 0], [-1, 0]], [[1, 0], [0, 1]], [[1, 0], [0, -1]], [[-1, 0], [0, 0]],
     [[0, 0], [-1, 0]], [[-1, 0], [1, 0]], [[0, 0], [1, 0]], [[0, 1], [1, 0]], [[0, -1], [1, 0]], [[0, 1], [-1, 0]], [[0, -1], [-1, 0]]];
   const OBLIQUE_MARGIN_PX = 16;
-  // A figure's controls over its frame's top left (index.html .figure-tools, the user's request of 2026-11-06): what it
+  // A figure's controls over its frame's top left (gen.html .figure-tools, the user's request of 2026-11-06): what it
   // draws at its home keeps CONTROLS_CLEAR_PX clear of them; a 2D view's window that must start under them starts
   // FIGURE_ROOM_PX under them (its padding on the other sides, the pin-1 ring's room).
   const CONTROLS_CLEAR_PX = 4;
@@ -845,7 +845,7 @@
       rings: [...svg.querySelectorAll(":scope > .pin1-ring")].map(ring => [Number(ring.getAttribute("cx")), Number(ring.getAttribute("cy"))])};
   }
   function controlsBox(frame) {
-    // The box on screen of a figure's controls in its frame (index.html .figure-tools: the chips shown), or null.
+    // The box on screen of a figure's controls in its frame (gen.html .figure-tools: the chips shown), or null.
     const chips = [...(frame?.querySelectorAll(":scope > .figure-tools > *") || [])].map(chip => chip.getBoundingClientRect())
       .filter(box => box.width > 0 && box.height > 0);
     if (!chips.length) return null;
@@ -1237,7 +1237,7 @@
   }
   const SHADOW_LONGEST = 2.5;  // a grazing key's shadow on screen, in its length at the home view
   const SHADOW_REACH = 3.5;    // its offset in the board's plane, in the same unit
-  const COIN_CAST_DEG = Math.atan2(1.15, 0.75) / DEG;  // index.html #coin-cast's offset, in the coin's plane
+  const COIN_CAST_DEG = Math.atan2(1.15, 0.75) / DEG;  // gen.html #coin-cast's offset, in the coin's plane
   function castShadows(target, tilt, spin) {
     // The view's shadows (styles.css --shadow-u, --shadow-v, --shadow-k of each board's shadow leaf; the coin's cast
     // layer's --coin-cast-turn): on a plane under
@@ -1273,7 +1273,7 @@
   // it), or Diagram (the server SVG's own colours).  The server SVG is never changed: each copy gains the look's extra
   // layers (class lk, hidden in Diagram), built from its own elements: the gaps (the copper's closing, outside the
   // windows), the traces' edges, the stiffener over the copper, the ENIG (the copper within the openings) and a grain.
-  // Shared gradients and filters are in index.html's .look-defs.
+  // Shared gradients and filters are in gen.html's .look-defs.
 
   const LOOKS = ["photo", "diagram"];
   const LOOK_KEY = "fpc-customizer.look";
@@ -1356,7 +1356,7 @@
   // -- board art for the sensor on the part ---------------------------------------------------
   // Gen by Surface's stacked card shows the sensor on the part beside the registration (web/cad/onpart.js; the user's
   // request of 2026-11-05): each board's two sides as textures on its sheet.  A texture is an SVG drawn as an image,
-  // which neither the page's CSS nor index.html's .look-defs reach, so "fpc:board-art" (main.js asks, as for a template's
+  // which neither the page's CSS nor gen.html's .look-defs reach, so "fpc:board-art" (main.js asks, as for a template's
   // limits) answers each board's copper side (boardSvg, the look's layers added) and its polyimide side (boardBackSvg) as
   // standalone SVG documents: the look's rules of styles.css inlined (lookCss), the paints of .look-defs copied in, the
   // label, the pin-1 marker and every ARIA attribute left out, sized in pixels for the raster (preserveAspectRatio none:
@@ -1965,7 +1965,7 @@
     sizePin1Rings(target);
   }
   function clearPlanOfControls(target) {
-    // The plan view under its frame's controls (index.html .figure-tools, the user's request of 2026-11-06): where its
+    // The plan view under its frame's controls (gen.html .figure-tools, the user's request of 2026-11-06): where its
     // scene as styles.css sizes it would put a board's outline or a pin-1 ring (3 PIN1_RING_PX round its triangle: the
     // ring and a step apart, separatePin1Rings) within CONTROLS_CLEAR_PX of them, the scene shrinks about its centre (the
     // pane centres it; --plan-fit scales styles.css's width) until they clear the controls by that much; else, and in the

@@ -1,17 +1,19 @@
 // The page's look, light or dark (the user's request of 2026-11-06: "做成默认白色,然后右上角github前面一个小标志可以切换黑白"):
 // light for every visitor, whatever the system's light or dark setting says; dark only once the visitor turns it on with
-// the header's toggle (#themeToggle, right before the GitHub card, on index.html and library.html).  web/theme.css and
-// web/library.css hang their dark rules on <html data-theme="dark">; this file sets that attribute.
+// the header's toggle (#themeToggle, right before the GitHub card, on gen.html and the Library, index.html).  web/theme.css
+// and web/library.css hang their dark rules on <html data-theme="dark">; this file sets that attribute.
 //
-// Both pages load it in <head>, before their style sheets and without defer, so the attribute is on <html> before
+// Every page loads it in <head> (gen.html, the Library, index.html, and since 2026-11-16 the forwarding page,
+// library.html), before their style sheets and without defer, so the attribute is on <html> before
 // <body> is parsed and so before the first paint: a visitor who chose dark never sees a frame of the light page (the
 // page's CSP allows no inline script, hence a file of its own).  The choice is kept per visitor in localStorage
 // (THEME_KEY, "dark" or "light", shared by the two pages, as app.js's look is); without storage (a private window,
 // blocked site data) the page opens light and the toggle still switches it for that page.  The toggle's icon (a moon
 // in light, a sun in dark) follows the attribute in the style sheets; its aria-pressed and tooltip are set here.
 //
-// Being the one script that runs before the first paint, it also marks the Library opened at an address of its own
-// (library.html, its <meta name="flexitac-page" content="library">, at #<id>: a sensor's page shared or reloaded, a
+// Being the one script that runs before the first paint (but the Library's web/forward.js, which runs first and may leave
+// the page, since 2026-11-16), it also marks the Library opened at an address of its own (index.html, library.html
+// before 2026-11-16; its <meta name="flexitac-page" content="library">, at #<id>: a sensor's page shared or reloaded, a
 // place of the grid) with <html data-lib-place>, under which library.css hides the grid's title, tagline and footer
 // until library.js's first route clears it and shows the page the address names (the review of 2026-11-06: hidden by
 // the deferred library.js as it ran, a frame of the grid's title over the footer had still been painted on 7 of 16 such

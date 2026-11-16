@@ -1,69 +1,275 @@
 {
- "about": "The Library's index (library.html; Gen by Surface's ./?part=<id>): each part with its mesh and licence, each variant's sensor (proposal #1 of its fit) and the files of its fit.  Written by tools/library_write.py from parts.json and the fits; do not edit by hand.",
+ "about": "The Library's index (the first page, index.html; Gen by Surface's gen.html?part=<id>): each part with its mesh and licence, each variant's sensor (proposal #1 of its fit) and the files of its fit.  Written by tools/library_write.py from parts.json and the fits; do not edit by hand.",
  "families": {
   "umi-tapers": {
-   "axes": [
+   "cards": [
     {
-     "choices": [
+     "axes": [
       {
-       "label": "Trapezoid",
-       "value": "trap"
+       "choices": [
+        {
+         "label": "Trapezoid",
+         "value": "trap"
+        },
+        {
+         "label": "Convex arc",
+         "value": "convex"
+        }
+       ],
+       "key": "shape",
+       "label": "Shape"
       },
       {
-       "label": "Convex arc",
-       "value": "convex"
+       "choices": [
+        {
+         "label": "21.8",
+         "value": "21.8"
+        },
+        {
+         "label": "17.8",
+         "value": "17.8"
+        },
+        {
+         "label": "13.8",
+         "value": "13.8"
+        },
+        {
+         "label": "9.8",
+         "value": "9.8"
+        },
+        {
+         "label": "5.8",
+         "value": "5.8"
+        }
+       ],
+       "key": "tip_mm",
+       "label": "Tip width (mm)"
       }
      ],
-     "key": "shape",
-     "label": "Shape"
+     "default": "umi-short-trap-tip9.8-2mm",
+     "grid": {
+      "convex|13.8": "umi-short-convex-tip13.8-2mm",
+      "convex|17.8": "umi-short-convex-tip17.8-2mm",
+      "convex|21.8": "umi-short-convex-tip21.8-2mm",
+      "convex|5.8": "umi-short-convex-tip5.8-2mm",
+      "convex|9.8": "umi-short-convex-tip9.8-2mm",
+      "trap|13.8": "umi-short-trap-tip13.8-2mm",
+      "trap|17.8": "umi-short-trap-tip17.8-2mm",
+      "trap|21.8": "umi-short-trap-tip21.8-2mm",
+      "trap|5.8": "umi-short-trap-tip5.8-2mm",
+      "trap|9.8": "umi-short-trap-tip9.8-2mm"
+     },
+     "h_mm": 40,
+     "key": "short",
+     "lines": [
+      "5.8 to 21.8 mm",
+      "Pick shape and width"
+     ],
+     "title": "Short taper"
     },
     {
-     "choices": [
+     "axes": [
       {
-       "label": "21.8",
-       "value": "21.8"
+       "choices": [
+        {
+         "label": "Convex arc",
+         "value": "convex"
+        }
+       ],
+       "key": "shape",
+       "label": "Shape"
       },
       {
-       "label": "17.8",
-       "value": "17.8"
-      },
-      {
-       "label": "13.8",
-       "value": "13.8"
-      },
-      {
-       "label": "9.8",
-       "value": "9.8"
-      },
-      {
-       "label": "5.8",
-       "value": "5.8"
+       "choices": [
+        {
+         "label": "21.8",
+         "value": "21.8"
+        },
+        {
+         "label": "17.8",
+         "value": "17.8"
+        },
+        {
+         "label": "13.8",
+         "value": "13.8"
+        },
+        {
+         "label": "9.8",
+         "value": "9.8"
+        },
+        {
+         "label": "5.8",
+         "value": "5.8"
+        }
+       ],
+       "key": "tip_mm",
+       "label": "Tip width (mm)"
       }
      ],
-     "key": "tip_mm",
-     "label": "Tip width (mm)"
+     "default": "umi-convex-tip9.8-2mm",
+     "grid": {
+      "convex|13.8": "umi-convex-tip13.8-2mm",
+      "convex|17.8": "umi-convex-tip17.8-2mm",
+      "convex|21.8": "umi-convex-tip21.8-2mm",
+      "convex|5.8": "umi-convex-tip5.8-2mm",
+      "convex|9.8": "umi-convex-tip9.8-2mm"
+     },
+     "h_mm": 75,
+     "key": "convex",
+     "lines": [
+      "5.8 to 21.8 mm",
+      "Pick your tip width"
+     ],
+     "title": "Convex arc tip"
+    },
+    {
+     "axes": [
+      {
+       "choices": [
+        {
+         "label": "Trapezoid",
+         "value": "trap"
+        }
+       ],
+       "key": "shape",
+       "label": "Shape"
+      },
+      {
+       "choices": [
+        {
+         "label": "21.8",
+         "value": "21.8"
+        },
+        {
+         "label": "17.8",
+         "value": "17.8"
+        },
+        {
+         "label": "13.8",
+         "value": "13.8"
+        },
+        {
+         "label": "9.8",
+         "value": "9.8"
+        },
+        {
+         "label": "5.8",
+         "value": "5.8"
+        }
+       ],
+       "key": "tip_mm",
+       "label": "Tip width (mm)"
+      }
+     ],
+     "default": "umi-trap-tip9.8-2mm",
+     "grid": {
+      "trap|13.8": "umi-trap-tip13.8-2mm",
+      "trap|17.8": "umi-trap-tip17.8-2mm",
+      "trap|21.8": "umi-trap-tip21.8-2mm",
+      "trap|5.8": "umi-trap-tip5.8-2mm",
+      "trap|9.8": "umi-trap-tip9.8-2mm"
+     },
+     "h_mm": 75,
+     "key": "trap",
+     "lines": [
+      "5.8 to 21.8 mm",
+      "Pick your tip width"
+     ],
+     "title": "Trapezoid tip"
+    },
+    {
+     "axes": [
+      {
+       "choices": [
+        {
+         "label": "Concave arc",
+         "value": "concave"
+        }
+       ],
+       "key": "shape",
+       "label": "Shape"
+      },
+      {
+       "choices": [
+        {
+         "label": "21.8",
+         "value": "21.8"
+        },
+        {
+         "label": "17.8",
+         "value": "17.8"
+        },
+        {
+         "label": "13.8",
+         "value": "13.8"
+        },
+        {
+         "label": "9.8",
+         "value": "9.8"
+        },
+        {
+         "label": "5.8",
+         "value": "5.8"
+        }
+       ],
+       "key": "tip_mm",
+       "label": "Tip width (mm)"
+      }
+     ],
+     "default": "umi-concave-tip9.8-2mm",
+     "grid": {
+      "concave|13.8": "umi-concave-tip13.8-2mm",
+      "concave|17.8": "umi-concave-tip17.8-2mm",
+      "concave|21.8": "umi-concave-tip21.8-2mm",
+      "concave|5.8": "umi-concave-tip5.8-2mm",
+      "concave|9.8": "umi-concave-tip9.8-2mm"
+     },
+     "h_mm": 75,
+     "key": "concave",
+     "lines": [
+      "5.8 to 21.8 mm",
+      "Pick your tip width"
+     ],
+     "title": "Concave arc tip"
+    },
+    {
+     "axes": [
+      {
+       "choices": [
+        {
+         "label": "Pointed",
+         "value": "pointed"
+        }
+       ],
+       "key": "shape",
+       "label": "Shape"
+      },
+      {
+       "choices": [
+        {
+         "label": "2",
+         "value": "2"
+        }
+       ],
+       "key": "tip_mm",
+       "label": "Tip width (mm)"
+      }
+     ],
+     "default": "umi-pointed-tip2-2mm",
+     "grid": {
+      "pointed|2": "umi-pointed-tip2-2mm"
+     },
+     "h_mm": 50,
+     "key": "pointed",
+     "lines": [
+      "2 mm tip",
+      "2 mm pitch"
+     ],
+     "title": "Pointed tip"
     }
    ],
    "default": "umi-trap-tip13.8-2mm",
-   "grid": {
-    "convex|13.8": "umi-convex-tip13.8-2mm",
-    "convex|17.8": "umi-convex-tip17.8-2mm",
-    "convex|21.8": "umi-convex-tip21.8-2mm",
-    "convex|5.8": "umi-convex-tip5.8-2mm",
-    "convex|9.8": "umi-convex-tip9.8-2mm",
-    "trap|13.8": "umi-trap-tip13.8-2mm",
-    "trap|17.8": "umi-trap-tip17.8-2mm",
-    "trap|21.8": "umi-trap-tip21.8-2mm",
-    "trap|5.8": "umi-trap-tip5.8-2mm",
-    "trap|9.8": "umi-trap-tip9.8-2mm"
-   },
-   "h_mm": 75,
-   "lines": [
-    "Trapezoid or convex arc",
-    "5 tip widths \u00b7 2 mm pitch"
-   ],
-   "shelf": "umi-finray",
-   "title": "Tapered tips"
+   "shelf": "umi-finray"
   }
  },
  "format": "flexitac-library/v1",
@@ -80,6 +286,7 @@
  ],
  "parts": {
   "arx-x5": {
+   "card": null,
    "default": "arx-x5-2mm",
    "family": null,
    "finger": "gripper tip, HandUMI",
@@ -109,6 +316,7 @@
    ]
   },
   "franka-hand": {
+   "card": null,
    "default": "franka-hand-2mm",
    "family": null,
    "finger": "gripper finger pad",
@@ -138,6 +346,7 @@
    ]
   },
   "i2rt-yam": {
+   "card": null,
    "default": "i2rt-yam-2mm",
    "family": null,
    "finger": "crank gripper tip",
@@ -167,6 +376,7 @@
    ]
   },
   "makermods-metal": {
+   "card": null,
    "default": "makermods-metal-2mm",
    "family": null,
    "finger": "gripper tip, HandUMI",
@@ -196,6 +406,7 @@
    ]
   },
   "trossen-widowx-ai": {
+   "card": null,
    "default": "trossen-widowx-ai-2mm",
    "family": null,
    "finger": "gripper tip sock, HandUMI",
@@ -224,7 +435,143 @@
     "trossen-widowx-ai-3mm"
    ]
   },
+  "umi-concave-tip13.8": {
+   "card": null,
+   "default": "umi-concave-tip13.8-2mm",
+   "family": "umi-tapers",
+   "finger": "soft fin-ray finger, concave arc tip",
+   "license": {
+    "change": "tip cut (concave arc, h 75 mm, tip 13.8 mm) from UMI-Soft-Gripper-Finger.stl",
+    "holder": "BrikHMP18 (HandUMI hardware)",
+    "source": "https://github.com/murobotics-ai/handumi-hw/blob/144827862d4e2d5cd2d331ce7eed1374d3c769df/hardware/STL/gripper_tips/UMI-Gripper/UMI-Soft-Gripper-Finger.stl",
+    "spdx": "Apache-2.0",
+    "text": "licenses/handumi-hw.txt"
+   },
+   "maker": "UMI (Chi et al.), HandUMI replica",
+   "mesh": {
+    "bytes": 259484,
+    "facets": 5188,
+    "file": "meshes/umi-concave-tip13.8.stl",
+    "name": "umi-concave-tip13.8.stl",
+    "sha256": "a51dfcef0a0d53a88ad6bf9af0334fb6c7c7463e49f2b89a04909ef3a2411c13",
+    "unit": "mm"
+   },
+   "shelf": null,
+   "title": "UMI Fin-Ray Gripper, tapered tip",
+   "variants": [
+    "umi-concave-tip13.8-2mm"
+   ]
+  },
+  "umi-concave-tip17.8": {
+   "card": null,
+   "default": "umi-concave-tip17.8-2mm",
+   "family": "umi-tapers",
+   "finger": "soft fin-ray finger, concave arc tip",
+   "license": {
+    "change": "tip cut (concave arc, h 75 mm, tip 17.8 mm) from UMI-Soft-Gripper-Finger.stl",
+    "holder": "BrikHMP18 (HandUMI hardware)",
+    "source": "https://github.com/murobotics-ai/handumi-hw/blob/144827862d4e2d5cd2d331ce7eed1374d3c769df/hardware/STL/gripper_tips/UMI-Gripper/UMI-Soft-Gripper-Finger.stl",
+    "spdx": "Apache-2.0",
+    "text": "licenses/handumi-hw.txt"
+   },
+   "maker": "UMI (Chi et al.), HandUMI replica",
+   "mesh": {
+    "bytes": 259484,
+    "facets": 5188,
+    "file": "meshes/umi-concave-tip17.8.stl",
+    "name": "umi-concave-tip17.8.stl",
+    "sha256": "4a70cc098e201d2af4fa81940ed6aac126c99367e01926b5e42f1ba11abe6934",
+    "unit": "mm"
+   },
+   "shelf": null,
+   "title": "UMI Fin-Ray Gripper, tapered tip",
+   "variants": [
+    "umi-concave-tip17.8-2mm"
+   ]
+  },
+  "umi-concave-tip21.8": {
+   "card": null,
+   "default": "umi-concave-tip21.8-2mm",
+   "family": "umi-tapers",
+   "finger": "soft fin-ray finger, concave arc tip",
+   "license": {
+    "change": "tip cut (concave arc, h 75 mm, tip 21.8 mm) from UMI-Soft-Gripper-Finger.stl",
+    "holder": "BrikHMP18 (HandUMI hardware)",
+    "source": "https://github.com/murobotics-ai/handumi-hw/blob/144827862d4e2d5cd2d331ce7eed1374d3c769df/hardware/STL/gripper_tips/UMI-Gripper/UMI-Soft-Gripper-Finger.stl",
+    "spdx": "Apache-2.0",
+    "text": "licenses/handumi-hw.txt"
+   },
+   "maker": "UMI (Chi et al.), HandUMI replica",
+   "mesh": {
+    "bytes": 259484,
+    "facets": 5188,
+    "file": "meshes/umi-concave-tip21.8.stl",
+    "name": "umi-concave-tip21.8.stl",
+    "sha256": "e9e817b7cc1d142d466dc1811b07d47ccd7bc3819aaeee14bfdc976aa9eea2a3",
+    "unit": "mm"
+   },
+   "shelf": null,
+   "title": "UMI Fin-Ray Gripper, tapered tip",
+   "variants": [
+    "umi-concave-tip21.8-2mm"
+   ]
+  },
+  "umi-concave-tip5.8": {
+   "card": null,
+   "default": "umi-concave-tip5.8-2mm",
+   "family": "umi-tapers",
+   "finger": "soft fin-ray finger, concave arc tip",
+   "license": {
+    "change": "tip cut (concave arc, h 75 mm, tip 5.8 mm) from UMI-Soft-Gripper-Finger.stl",
+    "holder": "BrikHMP18 (HandUMI hardware)",
+    "source": "https://github.com/murobotics-ai/handumi-hw/blob/144827862d4e2d5cd2d331ce7eed1374d3c769df/hardware/STL/gripper_tips/UMI-Gripper/UMI-Soft-Gripper-Finger.stl",
+    "spdx": "Apache-2.0",
+    "text": "licenses/handumi-hw.txt"
+   },
+   "maker": "UMI (Chi et al.), HandUMI replica",
+   "mesh": {
+    "bytes": 259484,
+    "facets": 5188,
+    "file": "meshes/umi-concave-tip5.8.stl",
+    "name": "umi-concave-tip5.8.stl",
+    "sha256": "21594d26b53f30378cb35047f59e7ba1c5fa36846ffa020b974607fa32be0e60",
+    "unit": "mm"
+   },
+   "shelf": null,
+   "title": "UMI Fin-Ray Gripper, tapered tip",
+   "variants": [
+    "umi-concave-tip5.8-2mm"
+   ]
+  },
+  "umi-concave-tip9.8": {
+   "card": null,
+   "default": "umi-concave-tip9.8-2mm",
+   "family": "umi-tapers",
+   "finger": "soft fin-ray finger, concave arc tip",
+   "license": {
+    "change": "tip cut (concave arc, h 75 mm, tip 9.8 mm) from UMI-Soft-Gripper-Finger.stl",
+    "holder": "BrikHMP18 (HandUMI hardware)",
+    "source": "https://github.com/murobotics-ai/handumi-hw/blob/144827862d4e2d5cd2d331ce7eed1374d3c769df/hardware/STL/gripper_tips/UMI-Gripper/UMI-Soft-Gripper-Finger.stl",
+    "spdx": "Apache-2.0",
+    "text": "licenses/handumi-hw.txt"
+   },
+   "maker": "UMI (Chi et al.), HandUMI replica",
+   "mesh": {
+    "bytes": 259484,
+    "facets": 5188,
+    "file": "meshes/umi-concave-tip9.8.stl",
+    "name": "umi-concave-tip9.8.stl",
+    "sha256": "e2692fc9f689582d3455755757e04365bcad50eccea2f0bf42e3668d901a6fb0",
+    "unit": "mm"
+   },
+   "shelf": null,
+   "title": "UMI Fin-Ray Gripper, tapered tip",
+   "variants": [
+    "umi-concave-tip9.8-2mm"
+   ]
+  },
   "umi-convex-tip13.8": {
+   "card": null,
    "default": "umi-convex-tip13.8-2mm",
    "family": "umi-tapers",
    "finger": "soft fin-ray finger, convex arc tip",
@@ -251,6 +598,7 @@
    ]
   },
   "umi-convex-tip17.8": {
+   "card": null,
    "default": "umi-convex-tip17.8-2mm",
    "family": "umi-tapers",
    "finger": "soft fin-ray finger, convex arc tip",
@@ -277,6 +625,7 @@
    ]
   },
   "umi-convex-tip21.8": {
+   "card": null,
    "default": "umi-convex-tip21.8-2mm",
    "family": "umi-tapers",
    "finger": "soft fin-ray finger, convex arc tip",
@@ -303,6 +652,7 @@
    ]
   },
   "umi-convex-tip5.8": {
+   "card": null,
    "default": "umi-convex-tip5.8-2mm",
    "family": "umi-tapers",
    "finger": "soft fin-ray finger, convex arc tip",
@@ -329,6 +679,7 @@
    ]
   },
   "umi-convex-tip9.8": {
+   "card": null,
    "default": "umi-convex-tip9.8-2mm",
    "family": "umi-tapers",
    "finger": "soft fin-ray finger, convex arc tip",
@@ -355,6 +706,7 @@
    ]
   },
   "umi-finray": {
+   "card": "Straight finger",
    "default": "umi-finray-2mm",
    "family": null,
    "finger": "soft fin-ray finger",
@@ -374,7 +726,7 @@
     "sha256": "63331c666d485de462f3c7c80eb4200fd2bf98ac325095f5b0e8774a95dc8442",
     "unit": "mm"
    },
-   "shelf": "Four pitches, 1 to 3 mm, and tapered tips.",
+   "shelf": "Six finger shapes, straight to pointed.",
    "title": "UMI Fin-Ray Gripper",
    "variants": [
     "umi-finray-1mm",
@@ -383,7 +735,305 @@
     "umi-finray-3mm"
    ]
   },
+  "umi-pointed-tip2": {
+   "card": null,
+   "default": "umi-pointed-tip2-2mm",
+   "family": "umi-tapers",
+   "finger": "soft fin-ray finger, pointed tip",
+   "license": {
+    "change": "tip cut (convex arc, h 50 mm, tip 2 mm) from UMI-Soft-Gripper-Finger.stl",
+    "holder": "BrikHMP18 (HandUMI hardware)",
+    "source": "https://github.com/murobotics-ai/handumi-hw/blob/144827862d4e2d5cd2d331ce7eed1374d3c769df/hardware/STL/gripper_tips/UMI-Gripper/UMI-Soft-Gripper-Finger.stl",
+    "spdx": "Apache-2.0",
+    "text": "licenses/handumi-hw.txt"
+   },
+   "maker": "UMI (Chi et al.), HandUMI replica",
+   "mesh": {
+    "bytes": 252884,
+    "facets": 5056,
+    "file": "meshes/umi-pointed-tip2.stl",
+    "name": "umi-pointed-tip2.stl",
+    "sha256": "4633bdbf0ef61c87e5ffd50ba02dfd61b4c587d062236a4bca83d123e67fd831",
+    "unit": "mm"
+   },
+   "shelf": null,
+   "title": "UMI Fin-Ray Gripper, tapered tip",
+   "variants": [
+    "umi-pointed-tip2-2mm"
+   ]
+  },
+  "umi-short-convex-tip13.8": {
+   "card": null,
+   "default": "umi-short-convex-tip13.8-2mm",
+   "family": "umi-tapers",
+   "finger": "soft fin-ray finger, short convex arc tip",
+   "license": {
+    "change": "tip cut (convex arc, h 40 mm, tip 13.8 mm) from UMI-Soft-Gripper-Finger.stl",
+    "holder": "BrikHMP18 (HandUMI hardware)",
+    "source": "https://github.com/murobotics-ai/handumi-hw/blob/144827862d4e2d5cd2d331ce7eed1374d3c769df/hardware/STL/gripper_tips/UMI-Gripper/UMI-Soft-Gripper-Finger.stl",
+    "spdx": "Apache-2.0",
+    "text": "licenses/handumi-hw.txt"
+   },
+   "maker": "UMI (Chi et al.), HandUMI replica",
+   "mesh": {
+    "bytes": 246684,
+    "facets": 4932,
+    "file": "meshes/umi-short-convex-tip13.8.stl",
+    "name": "umi-short-convex-tip13.8.stl",
+    "sha256": "5becdc111e92694f98b3485d3a843f0ec936a04dd792d683d03b6a60c6ee84f0",
+    "unit": "mm"
+   },
+   "shelf": null,
+   "title": "UMI Fin-Ray Gripper, tapered tip",
+   "variants": [
+    "umi-short-convex-tip13.8-2mm"
+   ]
+  },
+  "umi-short-convex-tip17.8": {
+   "card": null,
+   "default": "umi-short-convex-tip17.8-2mm",
+   "family": "umi-tapers",
+   "finger": "soft fin-ray finger, short convex arc tip",
+   "license": {
+    "change": "tip cut (convex arc, h 40 mm, tip 17.8 mm) from UMI-Soft-Gripper-Finger.stl",
+    "holder": "BrikHMP18 (HandUMI hardware)",
+    "source": "https://github.com/murobotics-ai/handumi-hw/blob/144827862d4e2d5cd2d331ce7eed1374d3c769df/hardware/STL/gripper_tips/UMI-Gripper/UMI-Soft-Gripper-Finger.stl",
+    "spdx": "Apache-2.0",
+    "text": "licenses/handumi-hw.txt"
+   },
+   "maker": "UMI (Chi et al.), HandUMI replica",
+   "mesh": {
+    "bytes": 246684,
+    "facets": 4932,
+    "file": "meshes/umi-short-convex-tip17.8.stl",
+    "name": "umi-short-convex-tip17.8.stl",
+    "sha256": "bfba38d06565c605333a5ab6a777366dcec44c4c2e88ae4972cb7204ac742fcf",
+    "unit": "mm"
+   },
+   "shelf": null,
+   "title": "UMI Fin-Ray Gripper, tapered tip",
+   "variants": [
+    "umi-short-convex-tip17.8-2mm"
+   ]
+  },
+  "umi-short-convex-tip21.8": {
+   "card": null,
+   "default": "umi-short-convex-tip21.8-2mm",
+   "family": "umi-tapers",
+   "finger": "soft fin-ray finger, short convex arc tip",
+   "license": {
+    "change": "tip cut (convex arc, h 40 mm, tip 21.8 mm) from UMI-Soft-Gripper-Finger.stl",
+    "holder": "BrikHMP18 (HandUMI hardware)",
+    "source": "https://github.com/murobotics-ai/handumi-hw/blob/144827862d4e2d5cd2d331ce7eed1374d3c769df/hardware/STL/gripper_tips/UMI-Gripper/UMI-Soft-Gripper-Finger.stl",
+    "spdx": "Apache-2.0",
+    "text": "licenses/handumi-hw.txt"
+   },
+   "maker": "UMI (Chi et al.), HandUMI replica",
+   "mesh": {
+    "bytes": 246684,
+    "facets": 4932,
+    "file": "meshes/umi-short-convex-tip21.8.stl",
+    "name": "umi-short-convex-tip21.8.stl",
+    "sha256": "34399e92ef2a3d554205df20f4e28e8dcd064c10cc16bbdd3199d08579f8349c",
+    "unit": "mm"
+   },
+   "shelf": null,
+   "title": "UMI Fin-Ray Gripper, tapered tip",
+   "variants": [
+    "umi-short-convex-tip21.8-2mm"
+   ]
+  },
+  "umi-short-convex-tip5.8": {
+   "card": null,
+   "default": "umi-short-convex-tip5.8-2mm",
+   "family": "umi-tapers",
+   "finger": "soft fin-ray finger, short convex arc tip",
+   "license": {
+    "change": "tip cut (convex arc, h 40 mm, tip 5.8 mm) from UMI-Soft-Gripper-Finger.stl",
+    "holder": "BrikHMP18 (HandUMI hardware)",
+    "source": "https://github.com/murobotics-ai/handumi-hw/blob/144827862d4e2d5cd2d331ce7eed1374d3c769df/hardware/STL/gripper_tips/UMI-Gripper/UMI-Soft-Gripper-Finger.stl",
+    "spdx": "Apache-2.0",
+    "text": "licenses/handumi-hw.txt"
+   },
+   "maker": "UMI (Chi et al.), HandUMI replica",
+   "mesh": {
+    "bytes": 246684,
+    "facets": 4932,
+    "file": "meshes/umi-short-convex-tip5.8.stl",
+    "name": "umi-short-convex-tip5.8.stl",
+    "sha256": "ace3a48ccf990c63e917c205b6f4cda209c0ae2fcbd6a189ba333eec30896f8c",
+    "unit": "mm"
+   },
+   "shelf": null,
+   "title": "UMI Fin-Ray Gripper, tapered tip",
+   "variants": [
+    "umi-short-convex-tip5.8-2mm"
+   ]
+  },
+  "umi-short-convex-tip9.8": {
+   "card": null,
+   "default": "umi-short-convex-tip9.8-2mm",
+   "family": "umi-tapers",
+   "finger": "soft fin-ray finger, short convex arc tip",
+   "license": {
+    "change": "tip cut (convex arc, h 40 mm, tip 9.8 mm) from UMI-Soft-Gripper-Finger.stl",
+    "holder": "BrikHMP18 (HandUMI hardware)",
+    "source": "https://github.com/murobotics-ai/handumi-hw/blob/144827862d4e2d5cd2d331ce7eed1374d3c769df/hardware/STL/gripper_tips/UMI-Gripper/UMI-Soft-Gripper-Finger.stl",
+    "spdx": "Apache-2.0",
+    "text": "licenses/handumi-hw.txt"
+   },
+   "maker": "UMI (Chi et al.), HandUMI replica",
+   "mesh": {
+    "bytes": 246684,
+    "facets": 4932,
+    "file": "meshes/umi-short-convex-tip9.8.stl",
+    "name": "umi-short-convex-tip9.8.stl",
+    "sha256": "976e8e54cdb39d88339bca6876c0562313eb99689c11e05aa5ee2e66cebc159a",
+    "unit": "mm"
+   },
+   "shelf": null,
+   "title": "UMI Fin-Ray Gripper, tapered tip",
+   "variants": [
+    "umi-short-convex-tip9.8-2mm"
+   ]
+  },
+  "umi-short-trap-tip13.8": {
+   "card": null,
+   "default": "umi-short-trap-tip13.8-2mm",
+   "family": "umi-tapers",
+   "finger": "soft fin-ray finger, short trapezoid tip",
+   "license": {
+    "change": "tip cut (trapezoid, h 40 mm, tip 13.8 mm) from UMI-Soft-Gripper-Finger.stl",
+    "holder": "BrikHMP18 (HandUMI hardware)",
+    "source": "https://github.com/murobotics-ai/handumi-hw/blob/144827862d4e2d5cd2d331ce7eed1374d3c769df/hardware/STL/gripper_tips/UMI-Gripper/UMI-Soft-Gripper-Finger.stl",
+    "spdx": "Apache-2.0",
+    "text": "licenses/handumi-hw.txt"
+   },
+   "maker": "UMI (Chi et al.), HandUMI replica",
+   "mesh": {
+    "bytes": 186384,
+    "facets": 3726,
+    "file": "meshes/umi-short-trap-tip13.8.stl",
+    "name": "umi-short-trap-tip13.8.stl",
+    "sha256": "9d6813150101f93fd2ddeaad7b6f1a97356cc329866fa1aea9b52d30c6e3a197",
+    "unit": "mm"
+   },
+   "shelf": null,
+   "title": "UMI Fin-Ray Gripper, tapered tip",
+   "variants": [
+    "umi-short-trap-tip13.8-2mm"
+   ]
+  },
+  "umi-short-trap-tip17.8": {
+   "card": null,
+   "default": "umi-short-trap-tip17.8-2mm",
+   "family": "umi-tapers",
+   "finger": "soft fin-ray finger, short trapezoid tip",
+   "license": {
+    "change": "tip cut (trapezoid, h 40 mm, tip 17.8 mm) from UMI-Soft-Gripper-Finger.stl",
+    "holder": "BrikHMP18 (HandUMI hardware)",
+    "source": "https://github.com/murobotics-ai/handumi-hw/blob/144827862d4e2d5cd2d331ce7eed1374d3c769df/hardware/STL/gripper_tips/UMI-Gripper/UMI-Soft-Gripper-Finger.stl",
+    "spdx": "Apache-2.0",
+    "text": "licenses/handumi-hw.txt"
+   },
+   "maker": "UMI (Chi et al.), HandUMI replica",
+   "mesh": {
+    "bytes": 186484,
+    "facets": 3728,
+    "file": "meshes/umi-short-trap-tip17.8.stl",
+    "name": "umi-short-trap-tip17.8.stl",
+    "sha256": "81bcbbe8c5ce3f3b4dea48eb2a8f0d91402277f849ae096ae054f1aeb2c3db74",
+    "unit": "mm"
+   },
+   "shelf": null,
+   "title": "UMI Fin-Ray Gripper, tapered tip",
+   "variants": [
+    "umi-short-trap-tip17.8-2mm"
+   ]
+  },
+  "umi-short-trap-tip21.8": {
+   "card": null,
+   "default": "umi-short-trap-tip21.8-2mm",
+   "family": "umi-tapers",
+   "finger": "soft fin-ray finger, short trapezoid tip",
+   "license": {
+    "change": "tip cut (trapezoid, h 40 mm, tip 21.8 mm) from UMI-Soft-Gripper-Finger.stl",
+    "holder": "BrikHMP18 (HandUMI hardware)",
+    "source": "https://github.com/murobotics-ai/handumi-hw/blob/144827862d4e2d5cd2d331ce7eed1374d3c769df/hardware/STL/gripper_tips/UMI-Gripper/UMI-Soft-Gripper-Finger.stl",
+    "spdx": "Apache-2.0",
+    "text": "licenses/handumi-hw.txt"
+   },
+   "maker": "UMI (Chi et al.), HandUMI replica",
+   "mesh": {
+    "bytes": 186184,
+    "facets": 3722,
+    "file": "meshes/umi-short-trap-tip21.8.stl",
+    "name": "umi-short-trap-tip21.8.stl",
+    "sha256": "d6bc8d807035eac4d3910f20bca4d11b6b50d1bd61bd618a8cb983b348c76141",
+    "unit": "mm"
+   },
+   "shelf": null,
+   "title": "UMI Fin-Ray Gripper, tapered tip",
+   "variants": [
+    "umi-short-trap-tip21.8-2mm"
+   ]
+  },
+  "umi-short-trap-tip5.8": {
+   "card": null,
+   "default": "umi-short-trap-tip5.8-2mm",
+   "family": "umi-tapers",
+   "finger": "soft fin-ray finger, short trapezoid tip",
+   "license": {
+    "change": "tip cut (trapezoid, h 40 mm, tip 5.8 mm) from UMI-Soft-Gripper-Finger.stl",
+    "holder": "BrikHMP18 (HandUMI hardware)",
+    "source": "https://github.com/murobotics-ai/handumi-hw/blob/144827862d4e2d5cd2d331ce7eed1374d3c769df/hardware/STL/gripper_tips/UMI-Gripper/UMI-Soft-Gripper-Finger.stl",
+    "spdx": "Apache-2.0",
+    "text": "licenses/handumi-hw.txt"
+   },
+   "maker": "UMI (Chi et al.), HandUMI replica",
+   "mesh": {
+    "bytes": 187984,
+    "facets": 3758,
+    "file": "meshes/umi-short-trap-tip5.8.stl",
+    "name": "umi-short-trap-tip5.8.stl",
+    "sha256": "8f54771416e432855ec0f1c827ab79c7932c1819578243468cde9ac140fecec8",
+    "unit": "mm"
+   },
+   "shelf": null,
+   "title": "UMI Fin-Ray Gripper, tapered tip",
+   "variants": [
+    "umi-short-trap-tip5.8-2mm"
+   ]
+  },
+  "umi-short-trap-tip9.8": {
+   "card": null,
+   "default": "umi-short-trap-tip9.8-2mm",
+   "family": "umi-tapers",
+   "finger": "soft fin-ray finger, short trapezoid tip",
+   "license": {
+    "change": "tip cut (trapezoid, h 40 mm, tip 9.8 mm) from UMI-Soft-Gripper-Finger.stl",
+    "holder": "BrikHMP18 (HandUMI hardware)",
+    "source": "https://github.com/murobotics-ai/handumi-hw/blob/144827862d4e2d5cd2d331ce7eed1374d3c769df/hardware/STL/gripper_tips/UMI-Gripper/UMI-Soft-Gripper-Finger.stl",
+    "spdx": "Apache-2.0",
+    "text": "licenses/handumi-hw.txt"
+   },
+   "maker": "UMI (Chi et al.), HandUMI replica",
+   "mesh": {
+    "bytes": 185484,
+    "facets": 3708,
+    "file": "meshes/umi-short-trap-tip9.8.stl",
+    "name": "umi-short-trap-tip9.8.stl",
+    "sha256": "89bd2cb2c996d580f1e7f5f6fcc23d145faecd63e458433152e1a5fb677eeae1",
+    "unit": "mm"
+   },
+   "shelf": null,
+   "title": "UMI Fin-Ray Gripper, tapered tip",
+   "variants": [
+    "umi-short-trap-tip9.8-2mm"
+   ]
+  },
   "umi-trap-tip13.8": {
+   "card": null,
    "default": "umi-trap-tip13.8-2mm",
    "family": "umi-tapers",
    "finger": "soft fin-ray finger, trapezoid tip",
@@ -410,6 +1060,7 @@
    ]
   },
   "umi-trap-tip17.8": {
+   "card": null,
    "default": "umi-trap-tip17.8-2mm",
    "family": "umi-tapers",
    "finger": "soft fin-ray finger, trapezoid tip",
@@ -436,6 +1087,7 @@
    ]
   },
   "umi-trap-tip21.8": {
+   "card": null,
    "default": "umi-trap-tip21.8-2mm",
    "family": "umi-tapers",
    "finger": "soft fin-ray finger, trapezoid tip",
@@ -462,6 +1114,7 @@
    ]
   },
   "umi-trap-tip5.8": {
+   "card": null,
    "default": "umi-trap-tip5.8-2mm",
    "family": "umi-tapers",
    "finger": "soft fin-ray finger, trapezoid tip",
@@ -488,6 +1141,7 @@
    ]
   },
   "umi-trap-tip9.8": {
+   "card": null,
    "default": "umi-trap-tip9.8-2mm",
    "family": "umi-tapers",
    "finger": "soft fin-ray finger, trapezoid tip",
@@ -514,6 +1168,7 @@
    ]
   },
   "unitree-dex1": {
+   "card": null,
    "default": "unitree-dex1-2mm",
    "family": null,
    "finger": "gripper finger",
@@ -543,6 +1198,7 @@
    ]
   },
   "widowx-250": {
+   "card": null,
    "default": "widowx-250-2mm",
    "family": null,
    "finger": "gripper finger",
@@ -1403,6 +2059,211 @@
     "scene": "scenes/trossen-widowx-ai.json"
    }
   },
+  "umi-concave-tip13.8-2mm": {
+   "badge": null,
+   "build_id": "surface-32x11-bfb94d585709",
+   "centred": true,
+   "column_tail_mm": 70.586,
+   "columns": 11,
+   "field_mm": [
+    21.0,
+    63.0
+   ],
+   "fill": 0.5,
+   "fit": "fits/umi-concave-tip13.8-2mm.json",
+   "fit_sha256": "b72e37a0f4183f6848472af88e9b1a2ee575ca54160c9dd1b78c6d87be53fb3e",
+   "fits_reader": null,
+   "image": {
+    "alt": "UMI concave arc tip, 13.8 mm on the part",
+    "assembled": {
+     "height": 800,
+     "src": "shots/umi-concave-tip13.8-2mm.assembled.webp",
+     "width": 1280
+    },
+    "exploded": {
+     "card": "shots/umi-concave-tip13.8-2mm.exploded.card.webp",
+     "height": 800,
+     "src": "shots/umi-concave-tip13.8-2mm.exploded.webp",
+     "width": 1280
+    }
+   },
+   "label": "UMI concave arc tip, 13.8 mm",
+   "part": "umi-concave-tip13.8",
+   "pitch_mm": 2,
+   "reader": "none",
+   "row_tail_mm": 70.586,
+   "rows": 32,
+   "symmetric_face": true,
+   "taxels": 238,
+   "view": {
+    "art": "art/umi-concave-tip13.8-2mm.json.gz",
+    "scene": null
+   }
+  },
+  "umi-concave-tip17.8-2mm": {
+   "badge": null,
+   "build_id": "surface-32x11-f20b3f659cff",
+   "centred": true,
+   "column_tail_mm": 70.586,
+   "columns": 11,
+   "field_mm": [
+    21.0,
+    63.0
+   ],
+   "fill": 0.5,
+   "fit": "fits/umi-concave-tip17.8-2mm.json",
+   "fit_sha256": "9862f6607827bbcb14264f1e87fa1a57d31dbd5e1e9b02012b4fce52237196b7",
+   "fits_reader": null,
+   "image": {
+    "alt": "UMI concave arc tip, 17.8 mm on the part",
+    "assembled": {
+     "height": 800,
+     "src": "shots/umi-concave-tip17.8-2mm.assembled.webp",
+     "width": 1280
+    },
+    "exploded": {
+     "card": "shots/umi-concave-tip17.8-2mm.exploded.card.webp",
+     "height": 800,
+     "src": "shots/umi-concave-tip17.8-2mm.exploded.webp",
+     "width": 1280
+    }
+   },
+   "label": "UMI concave arc tip, 17.8 mm",
+   "part": "umi-concave-tip17.8",
+   "pitch_mm": 2,
+   "reader": "none",
+   "row_tail_mm": 70.586,
+   "rows": 32,
+   "symmetric_face": true,
+   "taxels": 288,
+   "view": {
+    "art": "art/umi-concave-tip17.8-2mm.json.gz",
+    "scene": null
+   }
+  },
+  "umi-concave-tip21.8-2mm": {
+   "badge": null,
+   "build_id": "surface-32x11-62d7fb2ed676",
+   "centred": true,
+   "column_tail_mm": 70.586,
+   "columns": 11,
+   "field_mm": [
+    21.0,
+    63.0
+   ],
+   "fill": 0.5,
+   "fit": "fits/umi-concave-tip21.8-2mm.json",
+   "fit_sha256": "45942a6ab6b3918761599a69be7fc05153bef444960870e573a8db92d3a2bf72",
+   "fits_reader": null,
+   "image": {
+    "alt": "UMI concave arc tip, 21.8 mm on the part",
+    "assembled": {
+     "height": 800,
+     "src": "shots/umi-concave-tip21.8-2mm.assembled.webp",
+     "width": 1280
+    },
+    "exploded": {
+     "card": "shots/umi-concave-tip21.8-2mm.exploded.card.webp",
+     "height": 800,
+     "src": "shots/umi-concave-tip21.8-2mm.exploded.webp",
+     "width": 1280
+    }
+   },
+   "label": "UMI concave arc tip, 21.8 mm",
+   "part": "umi-concave-tip21.8",
+   "pitch_mm": 2,
+   "reader": "none",
+   "row_tail_mm": 70.586,
+   "rows": 32,
+   "symmetric_face": true,
+   "taxels": 336,
+   "view": {
+    "art": "art/umi-concave-tip21.8-2mm.json.gz",
+    "scene": null
+   }
+  },
+  "umi-concave-tip5.8-2mm": {
+   "badge": null,
+   "build_id": "surface-32x9-30f809793c76",
+   "centred": true,
+   "column_tail_mm": 70.261,
+   "columns": 9,
+   "field_mm": [
+    17.0,
+    63.0
+   ],
+   "fill": 0.5,
+   "fit": "fits/umi-concave-tip5.8-2mm.json",
+   "fit_sha256": "4f89ba1f0414cc076582a6c7ee9d5890a90366ea80349649f2d5d5457cea81cf",
+   "fits_reader": null,
+   "image": {
+    "alt": "UMI concave arc tip, 5.8 mm on the part",
+    "assembled": {
+     "height": 800,
+     "src": "shots/umi-concave-tip5.8-2mm.assembled.webp",
+     "width": 1280
+    },
+    "exploded": {
+     "card": "shots/umi-concave-tip5.8-2mm.exploded.card.webp",
+     "height": 800,
+     "src": "shots/umi-concave-tip5.8-2mm.exploded.webp",
+     "width": 1280
+    }
+   },
+   "label": "UMI concave arc tip, 5.8 mm",
+   "part": "umi-concave-tip5.8",
+   "pitch_mm": 2,
+   "reader": "none",
+   "row_tail_mm": 70.261,
+   "rows": 32,
+   "symmetric_face": true,
+   "taxels": 144,
+   "view": {
+    "art": "art/umi-concave-tip5.8-2mm.json.gz",
+    "scene": null
+   }
+  },
+  "umi-concave-tip9.8-2mm": {
+   "badge": null,
+   "build_id": "surface-32x9-ea37529f0b44",
+   "centred": true,
+   "column_tail_mm": 70.761,
+   "columns": 9,
+   "field_mm": [
+    17.0,
+    63.0
+   ],
+   "fill": 0.5,
+   "fit": "fits/umi-concave-tip9.8-2mm.json",
+   "fit_sha256": "46be41265f76fc0a5b794903f630e083c64d175d9cd7d980f75a8306d6864b3c",
+   "fits_reader": null,
+   "image": {
+    "alt": "UMI concave arc tip, 9.8 mm on the part",
+    "assembled": {
+     "height": 800,
+     "src": "shots/umi-concave-tip9.8-2mm.assembled.webp",
+     "width": 1280
+    },
+    "exploded": {
+     "card": "shots/umi-concave-tip9.8-2mm.exploded.card.webp",
+     "height": 800,
+     "src": "shots/umi-concave-tip9.8-2mm.exploded.webp",
+     "width": 1280
+    }
+   },
+   "label": "UMI concave arc tip, 9.8 mm",
+   "part": "umi-concave-tip9.8",
+   "pitch_mm": 2,
+   "reader": "none",
+   "row_tail_mm": 70.761,
+   "rows": 32,
+   "symmetric_face": true,
+   "taxels": 190,
+   "view": {
+    "art": "art/umi-concave-tip9.8-2mm.json.gz",
+    "scene": null
+   }
+  },
   "umi-convex-tip13.8-2mm": {
    "badge": null,
    "build_id": "surface-32x12-568f1bcff1cc",
@@ -1769,6 +2630,457 @@
    "taxels": 168,
    "view": {
     "art": "art/umi-finray-3mm.json.gz",
+    "scene": null
+   }
+  },
+  "umi-pointed-tip2-2mm": {
+   "badge": null,
+   "build_id": "surface-32x12-225658b2334b",
+   "centred": true,
+   "column_tail_mm": 69.998,
+   "columns": 12,
+   "field_mm": [
+    23.0,
+    63.0
+   ],
+   "fill": 0.5,
+   "fit": "fits/umi-pointed-tip2-2mm.json",
+   "fit_sha256": "45d6d9bae3bdfbac3e2dc58194e4c0537c1200c9450a4f5e535fb6dc358491d1",
+   "fits_reader": null,
+   "image": {
+    "alt": "UMI pointed tip, 2 mm on the part",
+    "assembled": {
+     "height": 800,
+     "src": "shots/umi-pointed-tip2-2mm.assembled.webp",
+     "width": 1280
+    },
+    "exploded": {
+     "card": "shots/umi-pointed-tip2-2mm.exploded.card.webp",
+     "height": 800,
+     "src": "shots/umi-pointed-tip2-2mm.exploded.webp",
+     "width": 1280
+    }
+   },
+   "label": "UMI pointed tip, 2 mm",
+   "part": "umi-pointed-tip2",
+   "pitch_mm": 2,
+   "reader": "none",
+   "row_tail_mm": 69.998,
+   "rows": 32,
+   "symmetric_face": true,
+   "taxels": 296,
+   "view": {
+    "art": "art/umi-pointed-tip2-2mm.json.gz",
+    "scene": null
+   }
+  },
+  "umi-short-convex-tip13.8-2mm": {
+   "badge": null,
+   "build_id": "surface-32x12-2d739fe25b69",
+   "centred": true,
+   "column_tail_mm": 70.498,
+   "columns": 12,
+   "field_mm": [
+    23.0,
+    63.0
+   ],
+   "fill": 0.5,
+   "fit": "fits/umi-short-convex-tip13.8-2mm.json",
+   "fit_sha256": "b154d1327e32935faa0833f46378f31e0434de34ec838512d473f47b6d85a9a9",
+   "fits_reader": null,
+   "image": {
+    "alt": "UMI short convex, 13.8 mm on the part",
+    "assembled": {
+     "height": 800,
+     "src": "shots/umi-short-convex-tip13.8-2mm.assembled.webp",
+     "width": 1280
+    },
+    "exploded": {
+     "card": "shots/umi-short-convex-tip13.8-2mm.exploded.card.webp",
+     "height": 800,
+     "src": "shots/umi-short-convex-tip13.8-2mm.exploded.webp",
+     "width": 1280
+    }
+   },
+   "label": "UMI short convex, 13.8 mm",
+   "part": "umi-short-convex-tip13.8",
+   "pitch_mm": 2,
+   "reader": "none",
+   "row_tail_mm": 70.498,
+   "rows": 32,
+   "symmetric_face": true,
+   "taxels": 346,
+   "view": {
+    "art": "art/umi-short-convex-tip13.8-2mm.json.gz",
+    "scene": null
+   }
+  },
+  "umi-short-convex-tip17.8-2mm": {
+   "badge": null,
+   "build_id": "surface-32x12-94ed1318b98d",
+   "centred": true,
+   "column_tail_mm": 70.498,
+   "columns": 12,
+   "field_mm": [
+    23.0,
+    63.0
+   ],
+   "fill": 0.5,
+   "fit": "fits/umi-short-convex-tip17.8-2mm.json",
+   "fit_sha256": "edb64c3d2781184773c9f4a6f92db7e43b8485603d51a28a80490cbbf8eac233",
+   "fits_reader": null,
+   "image": {
+    "alt": "UMI short convex, 17.8 mm on the part",
+    "assembled": {
+     "height": 800,
+     "src": "shots/umi-short-convex-tip17.8-2mm.assembled.webp",
+     "width": 1280
+    },
+    "exploded": {
+     "card": "shots/umi-short-convex-tip17.8-2mm.exploded.card.webp",
+     "height": 800,
+     "src": "shots/umi-short-convex-tip17.8-2mm.exploded.webp",
+     "width": 1280
+    }
+   },
+   "label": "UMI short convex, 17.8 mm",
+   "part": "umi-short-convex-tip17.8",
+   "pitch_mm": 2,
+   "reader": "none",
+   "row_tail_mm": 70.498,
+   "rows": 32,
+   "symmetric_face": true,
+   "taxels": 360,
+   "view": {
+    "art": "art/umi-short-convex-tip17.8-2mm.json.gz",
+    "scene": null
+   }
+  },
+  "umi-short-convex-tip21.8-2mm": {
+   "badge": null,
+   "build_id": "surface-32x12-342fbab32928",
+   "centred": true,
+   "column_tail_mm": 70.498,
+   "columns": 12,
+   "field_mm": [
+    23.0,
+    63.0
+   ],
+   "fill": 0.5,
+   "fit": "fits/umi-short-convex-tip21.8-2mm.json",
+   "fit_sha256": "cf2573ec7f8656174a02e84abcbc6417fdc989d6ecfdb509c2906a506d6f80d1",
+   "fits_reader": null,
+   "image": {
+    "alt": "UMI short convex, 21.8 mm on the part",
+    "assembled": {
+     "height": 800,
+     "src": "shots/umi-short-convex-tip21.8-2mm.assembled.webp",
+     "width": 1280
+    },
+    "exploded": {
+     "card": "shots/umi-short-convex-tip21.8-2mm.exploded.card.webp",
+     "height": 800,
+     "src": "shots/umi-short-convex-tip21.8-2mm.exploded.webp",
+     "width": 1280
+    }
+   },
+   "label": "UMI short convex, 21.8 mm",
+   "part": "umi-short-convex-tip21.8",
+   "pitch_mm": 2,
+   "reader": "none",
+   "row_tail_mm": 70.498,
+   "rows": 32,
+   "symmetric_face": true,
+   "taxels": 372,
+   "view": {
+    "art": "art/umi-short-convex-tip21.8-2mm.json.gz",
+    "scene": null
+   }
+  },
+  "umi-short-convex-tip5.8-2mm": {
+   "badge": null,
+   "build_id": "surface-32x12-c9006c20cab8",
+   "centred": true,
+   "column_tail_mm": 70.498,
+   "columns": 12,
+   "field_mm": [
+    23.0,
+    63.0
+   ],
+   "fill": 0.5,
+   "fit": "fits/umi-short-convex-tip5.8-2mm.json",
+   "fit_sha256": "a79a7ef72db981ac69ef957dfd6d5ac3afea6065aa182a594587ec5c40e612f0",
+   "fits_reader": null,
+   "image": {
+    "alt": "UMI short convex, 5.8 mm on the part",
+    "assembled": {
+     "height": 800,
+     "src": "shots/umi-short-convex-tip5.8-2mm.assembled.webp",
+     "width": 1280
+    },
+    "exploded": {
+     "card": "shots/umi-short-convex-tip5.8-2mm.exploded.card.webp",
+     "height": 800,
+     "src": "shots/umi-short-convex-tip5.8-2mm.exploded.webp",
+     "width": 1280
+    }
+   },
+   "label": "UMI short convex, 5.8 mm",
+   "part": "umi-short-convex-tip5.8",
+   "pitch_mm": 2,
+   "reader": "none",
+   "row_tail_mm": 70.498,
+   "rows": 32,
+   "symmetric_face": true,
+   "taxels": 322,
+   "view": {
+    "art": "art/umi-short-convex-tip5.8-2mm.json.gz",
+    "scene": null
+   }
+  },
+  "umi-short-convex-tip9.8-2mm": {
+   "badge": null,
+   "build_id": "surface-32x12-104ecbf19cc9",
+   "centred": true,
+   "column_tail_mm": 70.498,
+   "columns": 12,
+   "field_mm": [
+    23.0,
+    63.0
+   ],
+   "fill": 0.5,
+   "fit": "fits/umi-short-convex-tip9.8-2mm.json",
+   "fit_sha256": "7e9fc74833ebe3f6ccc18c142cbb086d6e2c9f44bd81c388a1f3f53d58a4cd6d",
+   "fits_reader": null,
+   "image": {
+    "alt": "UMI short convex, 9.8 mm on the part",
+    "assembled": {
+     "height": 800,
+     "src": "shots/umi-short-convex-tip9.8-2mm.assembled.webp",
+     "width": 1280
+    },
+    "exploded": {
+     "card": "shots/umi-short-convex-tip9.8-2mm.exploded.card.webp",
+     "height": 800,
+     "src": "shots/umi-short-convex-tip9.8-2mm.exploded.webp",
+     "width": 1280
+    }
+   },
+   "label": "UMI short convex, 9.8 mm",
+   "part": "umi-short-convex-tip9.8",
+   "pitch_mm": 2,
+   "reader": "none",
+   "row_tail_mm": 70.498,
+   "rows": 32,
+   "symmetric_face": true,
+   "taxels": 334,
+   "view": {
+    "art": "art/umi-short-convex-tip9.8-2mm.json.gz",
+    "scene": null
+   }
+  },
+  "umi-short-trap-tip13.8-2mm": {
+   "badge": null,
+   "build_id": "surface-32x12-9293aa782072",
+   "centred": true,
+   "column_tail_mm": 70.498,
+   "columns": 12,
+   "field_mm": [
+    23.0,
+    63.0
+   ],
+   "fill": 0.5,
+   "fit": "fits/umi-short-trap-tip13.8-2mm.json",
+   "fit_sha256": "62d53cba2acae5f8f502c726096ee49421f0bfa54b9adc732b88573598989eaf",
+   "fits_reader": null,
+   "image": {
+    "alt": "UMI short trapezoid, 13.8 mm on the part",
+    "assembled": {
+     "height": 800,
+     "src": "shots/umi-short-trap-tip13.8-2mm.assembled.webp",
+     "width": 1280
+    },
+    "exploded": {
+     "card": "shots/umi-short-trap-tip13.8-2mm.exploded.card.webp",
+     "height": 800,
+     "src": "shots/umi-short-trap-tip13.8-2mm.exploded.webp",
+     "width": 1280
+    }
+   },
+   "label": "UMI short trapezoid, 13.8 mm",
+   "part": "umi-short-trap-tip13.8",
+   "pitch_mm": 2,
+   "reader": "none",
+   "row_tail_mm": 70.498,
+   "rows": 32,
+   "symmetric_face": true,
+   "taxels": 324,
+   "view": {
+    "art": "art/umi-short-trap-tip13.8-2mm.json.gz",
+    "scene": null
+   }
+  },
+  "umi-short-trap-tip17.8-2mm": {
+   "badge": null,
+   "build_id": "surface-32x12-cdebb8ebe8e3",
+   "centred": true,
+   "column_tail_mm": 70.498,
+   "columns": 12,
+   "field_mm": [
+    23.0,
+    63.0
+   ],
+   "fill": 0.5,
+   "fit": "fits/umi-short-trap-tip17.8-2mm.json",
+   "fit_sha256": "7e66f885e910cf4378513c3eb4059939f23d40859dd8daae85e0f0e75c033fa8",
+   "fits_reader": null,
+   "image": {
+    "alt": "UMI short trapezoid, 17.8 mm on the part",
+    "assembled": {
+     "height": 800,
+     "src": "shots/umi-short-trap-tip17.8-2mm.assembled.webp",
+     "width": 1280
+    },
+    "exploded": {
+     "card": "shots/umi-short-trap-tip17.8-2mm.exploded.card.webp",
+     "height": 800,
+     "src": "shots/umi-short-trap-tip17.8-2mm.exploded.webp",
+     "width": 1280
+    }
+   },
+   "label": "UMI short trapezoid, 17.8 mm",
+   "part": "umi-short-trap-tip17.8",
+   "pitch_mm": 2,
+   "reader": "none",
+   "row_tail_mm": 70.498,
+   "rows": 32,
+   "symmetric_face": true,
+   "taxels": 344,
+   "view": {
+    "art": "art/umi-short-trap-tip17.8-2mm.json.gz",
+    "scene": null
+   }
+  },
+  "umi-short-trap-tip21.8-2mm": {
+   "badge": null,
+   "build_id": "surface-32x12-a813c264bd0f",
+   "centred": true,
+   "column_tail_mm": 70.498,
+   "columns": 12,
+   "field_mm": [
+    23.0,
+    63.0
+   ],
+   "fill": 0.5,
+   "fit": "fits/umi-short-trap-tip21.8-2mm.json",
+   "fit_sha256": "b5ac00c094f532b2082847b75bab1bcfcf8352f15bc7b5a5b3f1f5aa2a875a82",
+   "fits_reader": null,
+   "image": {
+    "alt": "UMI short trapezoid, 21.8 mm on the part",
+    "assembled": {
+     "height": 800,
+     "src": "shots/umi-short-trap-tip21.8-2mm.assembled.webp",
+     "width": 1280
+    },
+    "exploded": {
+     "card": "shots/umi-short-trap-tip21.8-2mm.exploded.card.webp",
+     "height": 800,
+     "src": "shots/umi-short-trap-tip21.8-2mm.exploded.webp",
+     "width": 1280
+    }
+   },
+   "label": "UMI short trapezoid, 21.8 mm",
+   "part": "umi-short-trap-tip21.8",
+   "pitch_mm": 2,
+   "reader": "none",
+   "row_tail_mm": 70.498,
+   "rows": 32,
+   "symmetric_face": true,
+   "taxels": 362,
+   "view": {
+    "art": "art/umi-short-trap-tip21.8-2mm.json.gz",
+    "scene": null
+   }
+  },
+  "umi-short-trap-tip5.8-2mm": {
+   "badge": null,
+   "build_id": "surface-32x12-b6c8e235bf0a",
+   "centred": true,
+   "column_tail_mm": 69.998,
+   "columns": 12,
+   "field_mm": [
+    23.0,
+    63.0
+   ],
+   "fill": 0.5,
+   "fit": "fits/umi-short-trap-tip5.8-2mm.json",
+   "fit_sha256": "9744bf8d6ecc9a731b94c40865597533c4f2031acdfafd56f0e787686f089b01",
+   "fits_reader": null,
+   "image": {
+    "alt": "UMI short trapezoid, 5.8 mm on the part",
+    "assembled": {
+     "height": 800,
+     "src": "shots/umi-short-trap-tip5.8-2mm.assembled.webp",
+     "width": 1280
+    },
+    "exploded": {
+     "card": "shots/umi-short-trap-tip5.8-2mm.exploded.card.webp",
+     "height": 800,
+     "src": "shots/umi-short-trap-tip5.8-2mm.exploded.webp",
+     "width": 1280
+    }
+   },
+   "label": "UMI short trapezoid, 5.8 mm",
+   "part": "umi-short-trap-tip5.8",
+   "pitch_mm": 2,
+   "reader": "none",
+   "row_tail_mm": 69.998,
+   "rows": 32,
+   "symmetric_face": true,
+   "taxels": 294,
+   "view": {
+    "art": "art/umi-short-trap-tip5.8-2mm.json.gz",
+    "scene": null
+   }
+  },
+  "umi-short-trap-tip9.8-2mm": {
+   "badge": null,
+   "build_id": "surface-32x12-c31187be42da",
+   "centred": true,
+   "column_tail_mm": 70.498,
+   "columns": 12,
+   "field_mm": [
+    23.0,
+    63.0
+   ],
+   "fill": 0.5,
+   "fit": "fits/umi-short-trap-tip9.8-2mm.json",
+   "fit_sha256": "ace88a1b25b97c7074fb6bf28aa6e09053839131f63a255a38e869e4b4ec55d1",
+   "fits_reader": null,
+   "image": {
+    "alt": "UMI short trapezoid, 9.8 mm on the part",
+    "assembled": {
+     "height": 800,
+     "src": "shots/umi-short-trap-tip9.8-2mm.assembled.webp",
+     "width": 1280
+    },
+    "exploded": {
+     "card": "shots/umi-short-trap-tip9.8-2mm.exploded.card.webp",
+     "height": 800,
+     "src": "shots/umi-short-trap-tip9.8-2mm.exploded.webp",
+     "width": 1280
+    }
+   },
+   "label": "UMI short trapezoid, 9.8 mm",
+   "part": "umi-short-trap-tip9.8",
+   "pitch_mm": 2,
+   "reader": "none",
+   "row_tail_mm": 70.498,
+   "rows": 32,
+   "symmetric_face": true,
+   "taxels": 308,
+   "view": {
+    "art": "art/umi-short-trap-tip9.8-2mm.json.gz",
     "scene": null
    }
   },

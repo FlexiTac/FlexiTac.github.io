@@ -1,15 +1,15 @@
 {
   "generator_version": "deterministic-sensor-core/0.4.0",
-  "engine_zip_sha256": "2840463ab52c69ec73215dfea9c93a887385203b227990b493dbee7398c65ee8",
+  "engine_zip_sha256": "8de3e71a8954355a3fe4921be2ceb0917f70c06a0f7b09a7685e8c295c2baf69",
   "github": {
     "stars": 187,
     "forks": 19
   },
   "library": {
-    "variants": 42,
-    "files_json_sha256": "aaaf8c88dcd54cffb656cd99dccc57a732dd7105358736d5b9bbf99cde891eae",
-    "pictured": 42,
-    "viewed": 42,
+    "variants": 58,
+    "files_json_sha256": "00ded33fcd186ff8b7871ab2cf2ae4f766b4358d7778bf5e0223b69dbfd7d3ba",
+    "pictured": 58,
+    "viewed": 58,
     "showcase": "flexitac-g1"
   },
   "pyodide": {

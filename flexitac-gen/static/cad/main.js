@@ -40,7 +40,8 @@ const FIT_MAX_COLUMNS = 64;
 // at once.  The fit takes at most 32 rows and 32 columns (Max rows / columns; the template allows more).
 const DEFAULT_PART = {url: "static/vendor/umi/UMI-Soft-Gripper-Finger.stl", name: "UMI-Soft-Gripper-Finger.stl",
   fit: "static/vendor/umi/default-fit.json", tipSide: 2, borderMm: 65};
-// The Library (library.html; the user's requests of 2026-11-05): ./?part=<id> opens one of its sensors here in place of
+// The Library (./, the first page since 2026-11-16; the user's requests of 2026-11-05): ?part=<id> opens one of its
+// sensors here (gen.html?part=<id>; ./?part=<id> before 2026-11-16, which web/forward.js sends here) in place of
 // DEFAULT_PART (<id> a variant, or a part or a family meaning its default variant, entries.json): the part's mesh and its shipped
 // fit (static/library/fits/<id>.json, tools/library_write.py: the request this page sends for it, which runFit then
 // takes as DEFAULT_PART's), its sensor built at once from that request's own selection, base, border and options
@@ -48,11 +49,11 @@ const DEFAULT_PART = {url: "static/vendor/umi/UMI-Soft-Gripper-Finger.stl", name
 // ?part goes from the address and the options it set go back.  An unknown id: DEFAULT_PART, with a warning.
 const LIBRARY_INDEX = "static/library/entries.json";
 const LIBRARY_ID = new URLSearchParams(location.search).get("part") || "";
-// The samples under the step guide (index.html #samplePalette; the user's request of 2026-11-06): a tile dragged onto
+// The samples under the step guide (gen.html #samplePalette; the user's request of 2026-11-06): a tile dragged onto
 // the 3D view (its id in the drag's SAMPLE_TYPE data) or pressed loads its part into the 3D view and nothing more
 // (loadSample; the user's later request of 2026-11-06: no face selected, no sensor built, only the default part's is):
-// the visitor clicks the face and presses Generate sensor, as for their own file.  ./?sample=<id> does the same (the
-// address says the sample shown, ./?part's way; a reload shows it again).  static/samples/samples.json gives each one's
+// the visitor clicks the face and presses Generate sensor, as for their own file.  gen.html?sample=<id> does the same (the
+// address says the sample shown, ?part's way; a reload shows it again).  static/samples/samples.json gives each one's
 // Library sensor (step 1's note names it) and, for a whole gripper, its own mesh (the Library finger's facets first:
 // figurePart and sampleView know that finger by them).
 const SAMPLES_INDEX = "static/samples/samples.json";
@@ -87,8 +88,8 @@ const cad = {
   defaultPart: "idle", defaultBuild: "idle",
   // The default part's shipped fit ({request, reply}) and where the last fit came from (the server or that file).
   defaultFit: null, fitSource: null,
-  // The Library's sensor shown in its place (./?part=<id>): {id, label, part, fitError, options: the controls it set,
-  // {id: value}}, or null; a sample's (./?sample=<id>) carries sample: {id, name, gripper, camera, partFacets}, no fit
+  // The Library's sensor shown in its place (gen.html?part=<id>): {id, label, part, fitError, options: the controls it set,
+  // {id: value}}, or null; a sample's (gen.html?sample=<id>) carries sample: {id, name, gripper, camera, partFacets}, no fit
   // and no options (its part is loaded alone).
   entry: null,
   // The sample on its way (loadSample): {id, load: the cad.seq.load it answers to, loadFile's once its mesh is read},
@@ -404,7 +405,7 @@ function onCustomizeToggle() {
 }
 
 function renderGuide() {
-  // The order of work (index.html #cadGuide, the page's left column in Gen by Surface): each step done, the first one
+  // The order of work (gen.html #cadGuide, the page's left column in Gen by Surface): each step done, the first one
   // not done next (markGuideHere marks the one in view).
   // Three steps since 2026-11-02: a model in, the sensor on it (built, mapped and checked), the Gerbers out.
   const done = [Boolean(cad.inspect), Boolean(cad.map?.ok && downloadsReady()), false];
@@ -433,12 +434,27 @@ function syncGuideCustomize() {
   markGuideHere();
 }
 
+// The end of the work: <main>'s bottom in the window.  Since the FlexiTac team's footer (the user's request of 2026-11-15,
+// gen.html's footer under <main>) the page goes on below it; the guide takes the work's end where it took the page's
+// (markGuideHere, goTo), so it behaves as before the footer: whole in sight after each of its scrolls, its last step lit
+// at the end.
+const workEnd = () => document.querySelector("main").getBoundingClientRect().bottom;
+
+function goTo(target) {
+  // A part of the page brought to the window's top (less its scroll margin), as scrollIntoView's start did, but never
+  // past the work's end (the page's end before the footer): the sticky guide is never pushed up by the footer.
+  if (!target) return;
+  const margin = parseFloat(getComputedStyle(target).scrollMarginTop) || 0;
+  const by = Math.min(target.getBoundingClientRect().top - margin, workEnd() - window.innerHeight);
+  window.scrollTo({top: Math.max(0, window.scrollY + by), behavior: window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth"});
+}
+
 function markGuideHere() {
   // The step whose part of the page is in view: the last one whose part starts above a third of the window (the last
-  // one at the page's end, whose part may not reach so high).
+  // one at the work's end, whose part may not reach so high).
   const steps = [...document.querySelectorAll("#cadGuide .flow-step")];
   const line = window.innerHeight / 3;
-  const atEnd = window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 2;
+  const atEnd = workEnd() <= window.innerHeight + 2;
   let here = 0;
   steps.forEach((step, index) => {
     const target = $(step.querySelector("[data-go]")?.dataset.go || "");
@@ -558,8 +574,8 @@ function syncFitLimits() {
 // -- 1. file ----------------------------------------------------------------------
 
 async function loadDefaultPart() {
-  // CAD mode's part until the user chooses one (DEFAULT_PART, the Library's sensor of ./?part=<id>, or the sample of
-  // ./?sample=<id>): fetched once, and dropped when a file came meanwhile.  The default part's and a Library sensor's
+  // CAD mode's part until the user chooses one (DEFAULT_PART, the Library's sensor of ?part=<id>, or the sample of
+  // gen.html?sample=<id>): fetched once, and dropped when a file came meanwhile.  The default part's and a Library sensor's
   // sensor is built at once (buildDefaultSensor); a sample's part is loaded alone, as loadSample leaves it.
   if (cad.defaultPart !== "idle" || cad.mesh) return;
   cad.defaultPart = "loading";
@@ -611,7 +627,7 @@ async function loadDefaultPart() {
 }
 
 async function libraryPart(id, {fallback = true} = {}) {
-  // The Library's sensor <id> (a variant id, or a part id or a family id meaning its default variant, as library.html#<id>
+  // The Library's sensor <id> (a variant id, or a part id or a family id meaning its default variant, as the Library's #<id>
   // takes them: ?part=umi-tapers the tapered tips' default, the review of 2026-11-05) as the default part: its mesh,
   // its fit and its entry.  An unknown id or no index: DEFAULT_PART, the reason, and ?part dropped from the address
   // (without fallback, a sample's lookup: null for an unknown id, the error thrown).
@@ -648,21 +664,23 @@ function dropPartParameter() {
 }
 
 function libraryNote() {
-  // Step 1's file note (index.html #cadFileNote): while a Library sensor is shown "From the Library: <label>" (one line;
-  // the Library in a new tab, at that sensor), else its own text (the user's of 2026-10-31).  The label's pitch and its
-  // "mm" are joined by a no-break space, so where the note wraps (a phone) "mm" is not left alone on its last line (the
-  // review of 2026-11-05).
+  // Step 1's file note (gen.html #cadFileNote): while a Library sensor is shown "From the Library: <label>" (one line;
+  // the Library at that sensor, in this tab as the header's link since the user's request of 2026-11-15: "从gen by
+  // surface跳到lib,会重开一个页面，这个改掉，改成直接跳过去 不重开页面"; ./#<id> since the Library is the first page, the
+  // user's decision of 2026-11-16, library.html#<id> before), else its own text (the user's of 2026-10-31).
+  // The label's pitch and its "mm" are joined by a no-break space, so where the note wraps (a phone) "mm" is not left
+  // alone on its last line (the review of 2026-11-05).
   const note = $("cadFileNote");
   if (!("text" in note.dataset)) note.dataset.text = note.textContent;
   if (!cad.entry) { note.textContent = note.dataset.text; return; }
   // A sample: its name, a whole gripper's said so (no sensor of the Library's is built for it, so no pitch is named: the
   // user's request of 2026-11-06).
   if (cad.entry.sample) { note.textContent = `Sample: ${cad.entry.sample.name}${cad.entry.sample.gripper ? ", whole gripper" : ""}`; return; }
-  note.replaceChildren("From the ", el("a", {href: `library.html#${cad.entry.id}`, target: "_blank", rel: "noopener"}, "Library"), `: ${cad.entry.label.replace(/ mm$/, "\u00a0mm")}`);
+  note.replaceChildren("From the ", el("a", {href: `./#${cad.entry.id}`}, "Library"), `: ${cad.entry.label.replace(/ mm$/, "\u00a0mm")}`);
 }
 
 function controlDefault(control) {
-  // A Resolution control's own default (index.html's): a select's defaultSelected option (else its first), an input's
+  // A Resolution control's own default (gen.html's): a select's defaultSelected option (else its first), an input's
   // defaultValue.
   return control.tagName === "SELECT" ? ([...control.options].find(option => option.defaultSelected) || control.options[0]).value : control.defaultValue;
 }
@@ -1163,7 +1181,7 @@ function shownExit() {
   return borderEdited() ? uvSegmentParts(cad.border.uv, index) : edgeRuns()[index] || null;
 }
 function viewClear() {
-  // The bands of the 3D view its tools cover (index.html .cad-view-tools on the left, .cad-views on the top right): a
+  // The bands of the 3D view its tools cover (gen.html .cad-view-tools on the left, .cad-views on the top right): a
   // framed selection keeps clear of them.
   const view = $("cadView").getBoundingClientRect();
   const tools = $("cadViewTools").getBoundingClientRect(); const camera = document.querySelector(".cad-views")?.getBoundingClientRect();
@@ -2836,7 +2854,7 @@ function download(kind) {
   else if (kind === "wrap") saveBlob(`${id}-wrap-template.svg`, map.wrap_svg, "image/svg+xml");
 }
 
-// -- samples (index.html #samplePalette; the user's request of 2026-11-06) ----------------------------------------
+// -- samples (gen.html #samplePalette; the user's request of 2026-11-06) ----------------------------------------
 
 let samplesIndex = null;
 async function sampleLookup(id) {
@@ -2857,7 +2875,7 @@ async function sampleLookup(id) {
 }
 
 async function samplePart(id) {
-  // ./?sample=<id> as the page opens (loadDefaultPart): the sample, or DEFAULT_PART with the reason and ?sample dropped.
+  // gen.html?sample=<id> as the page opens (loadDefaultPart): the sample, or DEFAULT_PART with the reason and ?sample dropped.
   try {
     return {...(await sampleLookup(id)), missing: ""};
   } catch (error) {
@@ -2867,7 +2885,7 @@ async function samplePart(id) {
 }
 
 function sampleAddress(id) {
-  // ./?sample=<id> in the address (replaceState; ?part goes, every other parameter and the hash kept): a reload shows it.
+  // gen.html?sample=<id> in the address (replaceState; ?part goes, every other parameter and the hash kept): a reload shows it.
   const pairs = location.search.slice(1).split("&").filter(pair => pair !== "" && !["part", "sample"].includes(pair.split("=")[0]));
   pairs.push(`sample=${encodeURIComponent(id)}`);
   history.replaceState(history.state, "", `${location.pathname}?${pairs.join("&")}${location.hash}`);
@@ -2890,7 +2908,7 @@ async function loadSample(id) {
   // A sample's tile dropped on the 3D view or pressed: its part loaded into the 3D view as the default part is (loadFile
   // as the default file) and nothing more (the user's request of 2026-11-06): no face selected, no sensor built, the
   // options as they are (a Library sensor's ?part shown before still has its own put back, leaveLibrary); the visitor
-  // clicks the face and presses Generate sensor, as for their own file.  The address becomes ./?sample=<id>.  The
+  // clicks the face and presses Generate sensor, as for their own file.  The address becomes gen.html?sample=<id>.  The
   // newest press wins (the user's own file and Remove model drop it too), but the model shown stays until this sample's
   // mesh is in hand: a sample not loaded (its files unavailable, Rectangular chosen meanwhile) leaves the page as it
   // was, with a warning.  The sample on its way is not asked again; the one shown is framed again rather than reloaded
@@ -3070,7 +3088,7 @@ function wire() {
     // Opens (or folds) Advanced Customization on the right; the toggle event brings the guide in step (syncGuideCustomize).
     const fold = $("cadCustomize");
     fold.open = !fold.open;
-    if (fold.open) fold.scrollIntoView({behavior: window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start"});
+    if (fold.open) goTo(fold);
   });
 
   $("cadEditBorder").addEventListener("click", () => setEditing(!cad.editing));
@@ -3117,8 +3135,7 @@ function wire() {
   $("cadSaveWrap").addEventListener("click", () => download("wrap"));
   $("cadProbe").addEventListener("input", updateProbe);
   $("cadPick").addEventListener("change", event => pickSurface(event.target.value));
-  document.querySelectorAll("[data-go]").forEach(button => button.addEventListener("click", () =>
-    $(button.dataset.go)?.scrollIntoView({behavior: window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start"})));
+  document.querySelectorAll("[data-go]").forEach(button => button.addEventListener("click", () => goTo($(button.dataset.go))));
   let guideFrame = 0;
   const followScroll = () => { if (!guideFrame) guideFrame = requestAnimationFrame(() => { guideFrame = 0; markGuideHere(); }); };
   window.addEventListener("scroll", followScroll, {passive: true});

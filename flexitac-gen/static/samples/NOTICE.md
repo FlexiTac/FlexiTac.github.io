@@ -1,6 +1,6 @@
 # Gen by Surface's samples
 
-The step guide's "Try a sample" (Gen by Surface, `index.html`; the list is
+The step guide's "Try a sample" (Gen by Surface, `gen.html`; the list is
 `samples.json`) offers eight parts a visitor drags onto the 3D view, or
 clicks, to put a sensor on (the part loads alone; the visitor clicks the
 face and presses Generate sensor).  Six of them are Library fingers,

@@ -1,6 +1,6 @@
 # The xArm Gripper G1's 3D model (the Library's showcase)
 
-The Library's first section (`library.html`) is a showcase: the hand-designed
+The Library's first section (`index.html`, the site's first page) is a showcase: the hand-designed
 FlexiTac sensor on UFACTORY's xArm Gripper G1 with UMI soft fingers.  The
 twelve meshes in this folder draw that gripper, and nothing else uses them:
 no sensor, part, sample or download of the generator.  They are served from

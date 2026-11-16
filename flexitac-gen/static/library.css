@@ -1,37 +1,39 @@
-/* The Library (library.html, web/library.js; the user's requests of 2026-11-05), over web/styles.css and web/theme.css:
-   the theme's tokens, light and dark, and its rule of colour (the action blue fills only the page's one primary action,
-   Open in Gen by Surface; selections are the grey thumb; no green fill), laid out as the Apple Store: the title with its
+/* The Library (index.html since 2026-11-16, library.html before; web/library.js; the user's requests of 2026-11-05), over
+   web/styles.css and web/theme.css: the theme's tokens, light and dark, and its rule of colour (the action blue fills only
+   the page's primary action, Open in Gen by Surface, and since 2026-11-16 the showcase's Design your own, which leads
+   there too; selections are the grey thumb; no green fill), laid out as the Apple Store: the title with its
    line on the right, the grippers' cards four to a row, then the UMI finger's shelf of cards that scrolls sideways
    inside itself, never the page (both 2026-11-06), and a sensor's own page, in a window over the grid since 2026-11-15.
    Nothing moves on its own: no transition or animation, every jump instant (the page's scrolling is the browser's auto),
-   hover and press change at once.  No @import, no url() but data:, nothing fixed or sticky (the window is a modal
-   dialog, which the browser lays in its top layer). */
+   hover and press change at once; one exception, the user's request of 2026-11-15 ("箭头能不能做成像schetchfab一样的动画"):
+   the 3D view's drag hint sways and fades as Sketchfab's (.lib-drag), off under prefers-reduced-motion.  No @import,
+   no url() but data:, nothing fixed or sticky (the window is a modal dialog, which the browser lays in its top layer). */
 
 /* The page: block, its side padding the header's (the shelves' rows reach the window's edges, their cards start on it). */
 main.lib { --lib-gutter:clamp(24px,5vw,76px); --lib-gap:20px; display:block; max-width:none; min-height:0; margin:0; padding:0 var(--lib-gutter) 56px; }
 .lib h2,.lib h3,.lib p,.lib dl,.lib dd { margin:0; }
 .lib a { color:var(--link); }
 
-/* The mode switch as two links (the header's geometry is index.html's): the segments' spans, no thumb on this page. */
+/* The mode switch as two links (the header's geometry is gen.html's): the segments' spans, no thumb on this page. */
 .mode-links a { display:block; border-radius:var(--r-pill); color:var(--text); text-decoration:none; }
 .mode-links a:hover span { background:var(--fill); }
 .mode-links a:active span { background:var(--fill-press); }
 .mode-links a:focus-visible { outline:2px solid var(--focus); outline-offset:-2px; }
 
 /* The title and its line: "Library" large on the left, the line on the right (stacked below 735 px).  The title the
-   Store's 80 px from 1100 px (64 px, then 40 px below 735 px) and the line two lines at 1440 px (21 px below 1100 px), so
-   the title leads (the review of 2026-11-05: at 48 px against three lines of 24 px the line outweighed it).  From 1100 px
-   each of its halves is a line of its own, as the Store's breaks between its phrases (its second review: the grey half
-   began with a lone "Open" at the end of the first line); narrower, its lines are balanced.  Its lines end on the
-   gutter (right-aligned beside the title; library.html writes "open-source" with a no-break hyphen): left-aligned,
-   balanced lines left a third of the hero empty on their right from 1024 to 1280 px (the review of 2026-11-05). */
+   Store's 80 px from 1100 px (64 px, then 40 px below 735 px).  The line, since the user's request of 2026-11-15
+   ("Pre-generated examples · Download Gerbers · Send to fab", as a small heading with arrows; the two sentences before it
+   were long for what they said): the three steps as a list, 21 px (19 px below 1100 px, so two lines beside the 64 px
+   title at 735 px; 17 px below 735 px), a grey arrow after each but the
+   last (hidden from screen readers: the list says the steps), a step never broken inside (index.html writes
+   "Pre-generated" with a no-break hyphen), so a narrower line wraps after an arrow.  Its lines end on the gutter
+   (right-aligned beside the title; the review of 2026-11-05), left-aligned when stacked below 735 px. */
 .lib-hero { display:flex; align-items:flex-end; justify-content:space-between; gap:24px 48px; padding:44px 0 28px; }
 .lib-title { font-size:80px; line-height:1.05; font-weight:600; letter-spacing:-.015em; color:var(--text); }
-.lib-tagline { max-width:860px; font-size:24px; line-height:1.17; font-weight:600; letter-spacing:.009em; color:var(--text); text-align:right; text-wrap:balance; }
-.lib-tagline-more { color:var(--text-2); }
-@media (min-width:1100px) { .lib-tagline-more { display:block; } }
-/* From 1100 to 1279 px the line 21 px, as below 1100 px: two lines from 1200 px, where at 24 px each half wrapped (four). */
-@media (min-width:1100px) and (max-width:1279px) { .lib-tagline { font-size:21px; } }
+.lib-tagline { max-width:860px; font-size:21px; line-height:1.24; font-weight:600; letter-spacing:.011em; color:var(--text); }
+.lib-steps { display:flex; flex-wrap:wrap; justify-content:flex-end; margin:0; padding:0; list-style:none; }
+.lib-steps li { white-space:nowrap; }
+.lib-steps li:not(:last-child)::after { content:"\2192"; content:"\2192" / ""; margin:0 .5em; color:var(--text-3); font-weight:400; }
 .lib-note { margin:0 0 20px; padding:10px 14px; border-radius:var(--r-md); background:var(--fill); color:var(--text); font-size:15px; }
 .lib-status { color:var(--text); font-size:17px; }
 .lib-status:not(:empty) { padding:20px 0; }
@@ -41,50 +43,30 @@ main.lib { --lib-gutter:clamp(24px,5vw,76px); --lib-gap:20px; display:block; max
    fills the box contained and centred, its light the box's in the dark scheme too. */
 .lib-shot { aspect-ratio:16 / 10; border-radius:var(--r-md); background:#f5f5f7; overflow:hidden; }
 .lib-shot > svg,.lib-shot > img { display:block; width:100%; height:100%; object-fit:contain; }
+/* A UMI shelf's card's picture framed on the fingertip (the review of 2026-11-16; library.js tipShot()): the Assembled
+   home, the whole finger at an angle, scaled 2.2 times about the tip's corner of the picture inside its box (which clips
+   it), so the tapered end and the sensor on it fill the card, the tip clear of the box's top; the same file, its bytes
+   the 3D view's home.  At a 1440 px window's card (406 px) the picture is drawn 893 px wide from its 1280. */
+.lib-shot-tip > img { transform:scale(2.2); transform-origin:41% 3%; }
 .lib-field { fill:#fff; stroke:#c7c7cc; stroke-width:1; vector-effect:non-scaling-stroke; }
 .lib-lines line { stroke:#86868b; stroke-opacity:.55; stroke-width:1; vector-effect:non-scaling-stroke; }
 /* A sensor's page's picture framed as a card (on the page's grey the light box alone would not show). */
 .lib-frame { display:block; padding:6px; border-radius:var(--r-lg); background:var(--surface); box-shadow:var(--shadow-card); }
 
-/* A row that scrolls sideways: as wide as the window (the gutter is its padding), snapping to a card at the gutter;
-   room above and below for the cards' shadows; no scroll bar (the arrows and a swipe move it). */
-.lib-track { display:flex; gap:var(--lib-gap); margin:0 calc(-1 * var(--lib-gutter)); padding:8px var(--lib-gutter) 28px; overflow-x:auto; overflow-y:hidden;
-  overscroll-behavior-x:contain; scroll-snap-type:x mandatory; scroll-padding:0 var(--lib-gutter); scrollbar-width:none; }
-.lib-track::-webkit-scrollbar { display:none; }
-.lib-track > * { flex:none; scroll-snap-align:start; }
-/* Tabbed to, a shelf's card comes into the window with its focus ring and room round it, as the grippers' cards (the
-   verification of 2026-11-06: at 390 and 360 px the UMI shelf's card stopped flush with the window's bottom, its ring
-   cut); sideways none, so it snaps at the gutter as before. */
-.lib-track > .lib-card { scroll-margin:16px 0; }
-.lib-arrows { display:flex; justify-content:flex-end; gap:12px; margin:-12px 0 0; }
-/* A shelf whose arrows are hidden keeps their room (36 px less the 12 px they rise into the track), so every shelf is
-   as far from the next one with or without them (the review of 2026-11-05: 79 px after a shelf with arrows, 57 px
-   after one without, at 1440 px). */
-.lib-shelf:has(> .lib-arrows[hidden]) > .lib-track { padding-bottom:calc(28px + 24px); }
-.lib-arrow { display:grid; place-items:center; width:36px; height:36px; padding:0; border:0; border-radius:50%; background:var(--fill); color:var(--text); cursor:pointer; }
-.lib-arrow:hover:not(:disabled) { background:var(--fill-hover); }
-.lib-arrow:active:not(:disabled) { background:var(--fill-press); }
-.lib-arrow:disabled { color:var(--text-3); cursor:default; }
-.lib-arrow:focus-visible { outline:2px solid var(--focus); outline-offset:2px; }
-/* Tabbed to, an arrow comes into sight with its ring and room round it, as a card does (at 390 x 844 it sat on the
-   window's bottom edge, its ring cut; the review of 2026-11-06). */
-.lib-arrow { scroll-margin:16px; }
-.lib-chevron { width:16px; height:16px; }
-
 /* The shelves: the heading's bold half and its grey half (wrapped pretty: its lines filled, no word alone on the last;
-   balanced, a two-line heading took half the row, the review of 2026-11-05), then the cards.  A jump puts the shelf's top at the window's (its heading 28 px below it): the shelf above, its arrows
-   included, out of sight (a 12 px margin showed them cut at the window's top; the review of 2026-11-05).  The grippers'
-   section (.lib-section, 2026-11-06: a grid, not a row, the grid's first) is spaced and jumped to as a shelf: the UMI
-   shelf's heading 56 px below the grid's last row (the cards' 28 px and the shelf's), as far as the grippers' heading
-   is below the title's line from 735 px. */
+   balanced, a two-line heading took half the row, the review of 2026-11-05), then the cards.  A jump puts the shelf's
+   top at the window's (its heading 28 px below it): the shelf above out of sight (a 12 px margin showed it cut at the
+   window's top; the review of 2026-11-05).  The grippers' section (.lib-section, 2026-11-06: a grid, not a row, the
+   grid's first) is spaced and jumped to as a shelf: the UMI shelf's heading 56 px below the grid's last row (the cards'
+   28 px and the shelf's), as far as the grippers' heading is below the title's line from 735 px. */
 .lib-shelf,.lib-section { padding-top:28px; scroll-margin-top:0; }
 .lib-shelf-title { font-size:28px; line-height:1.14; font-weight:600; letter-spacing:.007em; color:var(--text); text-wrap:pretty; }
 .lib-shelf-title strong { font-weight:600; }
 .lib-shelf-title span { color:var(--text-2); }
 
 /* A card: white (the dark card in the dark scheme), 18 px corners, a soft shadow and a stronger one hovered, at once;
-   no blue; four in view from 1100 px, three from 735 px, below that 78 % of the row (the next one shows). */
-.lib .lib-card { display:flex; flex-direction:column; width:calc((100% - 3 * var(--lib-gap)) / 4); padding:6px; border-radius:var(--r-lg); background:var(--surface);
+   no blue; a cell of its grid (the showcase's as wide as the row). */
+.lib .lib-card { display:flex; flex-direction:column; padding:6px; border-radius:var(--r-lg); background:var(--surface);
   box-shadow:var(--shadow-card); color:var(--text); text-decoration:none; }
 .lib a.lib-card:hover { box-shadow:var(--shadow-float); }
 .lib-card:focus-visible { outline:2px solid var(--focus); outline-offset:2px; }
@@ -93,15 +75,17 @@ main.lib { --lib-gutter:clamp(24px,5vw,76px); --lib-gap:20px; display:block; max
 .lib-card-name { margin:2px 0 4px; font-size:17px; line-height:1.24; font-weight:600; letter-spacing:-.022em; }
 .lib-card-line { font-size:14px; line-height:1.43; color:var(--text-2); font-variant-numeric:tabular-nums; }
 
-/* The grippers' section (the user's request of 2026-11-06): one card per gripper, four to a row (4 + 3, from the left),
-   each the width of a shelf's card in view from 1100 px (a quarter of the row less the gaps) and as its look; two to
-   a row below 735 px, never three (it would leave 3 + 3 + 1).  It turns at the shelf's own 735 px, so its cards are
-   never wider than the UMI shelf's below it (the review of 2026-11-06: turning at 768 px, from 735 to 767 px its cards
-   were 321 to 335 px over the shelf's 207 to 217 px, the grippers 1,397 px tall at 744 px).  At 735 px four to a row
-   are 150 px cards with 114 px of text, a 360 px phone's 116 px: its lines on one line each, a two-word name on two
-   ("Franka / Hand"), as there.  It wraps: nothing scrolls sideways.  Its cards' room above and below is the shelf's
-   track's (8 px, 28 px); its names and lines balanced ("Trossen / WidowX AI"). */
+/* The grippers' section (the user's request of 2026-11-06): one card per gripper, four to a row (4 + 3, from the left);
+   two to a row below 735 px, never three (it would leave 3 + 3 + 1; the review of 2026-11-06: turning at 768 px, the
+   grippers were 1,397 px tall at 744 px).  At 735 px four to a row are 150 px cards with 114 px of text, a 360 px
+   phone's 116 px: its lines on one line each, a two-word name on two ("Franka / Hand"), as there.  It wraps: nothing
+   scrolls sideways.  Its cards' room above and below 8 px and 28 px (their shadows'); its names and lines balanced
+   ("Trossen / WidowX AI").  The UMI shelf (since the review of 2026-11-16, a row that scrolled sideways before) is the
+   same grid three to a row from 735 px: its six shapes side by side in two rows (4 + 2 would leave a row half empty),
+   each card a third of the row (418 px at 1440 px, the grippers' 309 px), its picture framed on the tip; two to a row
+   below, as the grippers'. */
 .lib-cards { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:var(--lib-gap); padding:8px 0 28px; }
+@media (min-width:735px) { .lib-shelf > .lib-cards { grid-template-columns:repeat(3,minmax(0,1fr)); } }
 /* Tabbed to, a card of the lower rows comes into sight with its focus ring (2 px, 2 px off) and room round it, not
    flush with the window's edge. */
 .lib .lib-cards > .lib-card { width:auto; min-width:0; scroll-margin:16px 0; }
@@ -186,12 +170,49 @@ main.lib { --lib-gutter:clamp(24px,5vw,76px); --lib-gap:20px; display:block; max
 .lib-stage.is-live img,.lib-stage.is-live svg { visibility:hidden; }
 .lib-live:focus-visible { outline:2px solid var(--focus); outline-offset:2px; }
 .lib-live-hint { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; }
+/* The drag hint (the user's request of 2026-11-15: "箭头能不能做成像schetchfab一样的动画", Sketchfab's "click & hold to
+   rotate" in place of the turn's mark of that day; library.js dragHint): a pointing hand between two arrows over "Drag to
+   rotate", at the bottom centre of the view, inside it; the page's own drawing, made for its light box (#f5f5f7 in either
+   scheme): Sketchfab's white hand on a dark halo is for its dark viewer, this is its mirror for a light one, the hand and
+   both arrows one white cursor edged in the page's ink (since the review of 2026-11-15: the ink's arrows at 72 % had
+   been grey on black over the black bases the hint mostly lies on, legible only through a glow, a smudge on a phone;
+   Sketchfab's block arrows in the hand's material read on every base), a hairline of white glow and a soft shadow to
+   lift it off the gripper, the label the ink at 85 % with a white glow, so it reads on the box and on white, orange and
+   black parts alike, with no box of its own; three treatments were tried on the real views at 1440 and 390 px (this,
+   Sketchfab's white on a dark halo, a frosted chip with the label inside) and this one read best.
+   Its size is the view's, not the window's (the review of 2026-11-15: sized by the window's width, a 3:1 view 685 px wide
+   on a tablet and the showcase's tall view on a phone had the smallest hint, a 900 px window's 355 x 222 px view the
+   largest, over its whole base): the host is a size container (lib-live) and the drawing 13.4 % of its height, 44 px
+   tall from a 328 px view (the drawing 84 x 44 px, 98 x 62 px with its label; a 1440 x 900 window's view is 330 px
+   tall, the showcase's 335 to 548 px everywhere) down to 28 px (54 x 28 px; the 3:1 view of a 390 px phone is 113 px
+   tall), its distance from the bottom (14 px at most) and its sway (30 px either way at most) in proportion; its label
+   only on a view 270 px tall or more (a short view keeps its gripper in sight: a 1024 x 768 window's 255 px, every 3:1
+   view).  Shown once the view is drawn (is-live; never over the picture), faded in (opacity, .2 s); while shown it sways
+   either way as a drag would (Sketchfab's 5 s ease-in-out); at the visitor's first use of the view (is-used) it fades
+   out (.5 s after .5 s, still swaying), then its sway stops (is-gone, library.js on the fade's end).  The pointer passes
+   through it (a drag begun on it turns the view); its drawing follows the hint, not the picture's rule
+   (.lib-stage.is-live svg).  The page's one motion of its own (the exception of 2026-11-15 to this sheet's rule): off
+   under reduced motion, the hint still and gone at once. */
+.lib-live { container:lib-live / size; }
+.lib-drag { position:absolute; left:0; right:0; bottom:calc(var(--lib-hint) * 14 / 44); z-index:1; display:flex; flex-direction:column; align-items:center; gap:2px; width:max-content;
+  margin:0 auto; pointer-events:none; opacity:0; transition:opacity .2s ease; --lib-hint:clamp(28px,13.4cqh,44px); --lib-sway:calc(var(--lib-hint) * 30 / 44); }
+.lib-drag svg { display:block; width:auto; height:var(--lib-hint); aspect-ratio:84 / 44; overflow:visible; filter:drop-shadow(0 0 1px rgba(255,255,255,.9)) drop-shadow(0 1px 2px rgba(0,0,0,.22)); }
+.lib-drag-hand,.lib-drag-arrow { fill:rgba(255,255,255,.94); stroke:#1d1d1f; stroke-width:1.5; stroke-linejoin:round; }
+.lib-drag-crease { fill:none; stroke:#1d1d1f; stroke-width:1.1; stroke-linecap:round; }
+.lib-drag-label { font-size:12px; line-height:16px; font-weight:600; letter-spacing:.01em; color:rgba(29,29,31,.85); text-shadow:0 0 2px #fff, 0 0 4px #fff, 0 0 8px rgba(255,255,255,.85); white-space:nowrap; }
+.lib-stage.is-live .lib-drag { opacity:1; animation:lib-drag-sway 5s ease-in-out infinite; }
+.lib-stage.is-live .lib-drag svg { visibility:inherit; }
+.lib-live.is-used .lib-drag { opacity:0; transition:opacity .5s ease .5s; }
+.lib-stage.is-live .lib-drag.is-gone { animation:none; }
+@keyframes lib-drag-sway { 0%, 100% { transform:translateX(calc(-1 * var(--lib-sway))); } 50% { transform:translateX(var(--lib-sway)); } }
+@container lib-live (max-height:269px) { .lib-drag-label { display:none; } }
+@media (prefers-reduced-motion: reduce) { .lib-drag,.lib-live.is-used .lib-drag { transition:none; } .lib-stage.is-live .lib-drag { animation:none; } }
 .lib-facts { display:grid; gap:8px; padding:14px 0; border-top:1px solid var(--separator); border-bottom:1px solid var(--separator); }
 .lib-facts div { display:grid; grid-template-columns:72px minmax(0,1fr); gap:12px; font-size:15px; line-height:1.4; }
 .lib-facts dt { color:var(--text-2); }
 .lib-facts dd { color:var(--text); font-variant-numeric:tabular-nums; }
 .lib-facts code { font-family:var(--font-mono); font-size:13px; overflow-wrap:anywhere; }
-/* Open in Gen by Surface: the page's one blue fill. */
+/* Open in Gen by Surface: the page's blue fill (and the showcase's Design your own since 2026-11-16, below). */
 .lib .lib-open { display:inline-flex; align-items:center; justify-content:center; align-self:flex-start; min-height:44px; padding:0 22px; border-radius:var(--r-pill);
   background:var(--accent); color:#fff; font-size:17px; font-weight:600; letter-spacing:-.01em; text-decoration:none; }
 .lib .lib-open:hover { background:var(--accent-hover); }
@@ -215,16 +236,19 @@ main.lib { --lib-gutter:clamp(24px,5vw,76px); --lib-gap:20px; display:block; max
 /* The source ("mujoco_menagerie at f3b6013") on one line. */
 .lib-provenance a { white-space:nowrap; }
 
-/* The footer: the trademark line and the notice. */
-.lib-footer { padding:18px clamp(24px,5vw,76px) 28px; border-top:1px solid var(--hairline); color:var(--text-2); font-size:12px; line-height:1.4; }
-.lib-footer p { margin:0; }
-.lib-footer a { color:var(--link); }
+/* The fine print (the trademark line and the notice), since the user's request of 2026-11-15 the first row of the
+   FlexiTac team's footer (theme.css section 15): a footnote over a hairline, as Apple's footers have theirs, the
+   notice the link blue. */
+.site-footer .lib-footer { margin:0 0 28px; padding:0 0 20px; border-bottom:1px solid var(--hairline); color:var(--text-2); font-size:12px; line-height:1.4; }
+.site-footer .lib-footer a { color:var(--link); }
+.site-footer .lib-footer a:hover { color:var(--link); }
 /* The page opened at an address of its own (theme.js's data-lib-place, set before the first paint): the grid's title,
-   tagline and footer wait for library.js's first route, which clears it (the review of 2026-11-06). */
-:root[data-lib-place] #libHero,:root[data-lib-place] .lib-footer { display:none; }
+   tagline and footer (the team's since 2026-11-15, the fine print in it) wait for library.js's first route, which
+   clears it (the review of 2026-11-06). */
+:root[data-lib-place] #libHero,:root[data-lib-place] .site-footer { display:none; }
 
 /* More contrast: the page's links underlined as the theme's (the cards, pills and Open are boxes). */
-@media (prefers-contrast: more) { .mode-links a span,.lib-links a,.lib-provenance a,.lib-footer a { text-decoration:underline; } }
+@media (prefers-contrast: more) { .mode-links a span,.lib-links a,.lib-provenance a,.site-footer .lib-footer a { text-decoration:underline; } }
 /* The dark scheme (the header's toggle on, <html data-theme="dark">): the cards have no shadow there (the theme's), so a
    hairline edges them, and the window. */
 :where(:root[data-theme="dark"]) .lib .lib-card,:where(:root[data-theme="dark"]) .lib-frame { box-shadow:inset 0 0 0 1px var(--hairline); } :where(:root[data-theme="dark"]) .lib a.lib-card:hover { box-shadow:inset 0 0 0 1px var(--separator); }
@@ -237,7 +261,7 @@ main.lib { --lib-gutter:clamp(24px,5vw,76px); --lib-gap:20px; display:block; max
    to 32 px more each there).  Below 735 px the line is 17 px under a tighter title, so a phone's first screen reaches
    the grippers' first row (it took five lines of 21 px there). */
 @media (max-width:1279px) { .lib-detail-body { gap:32px; } }
-@media (max-width:1099px) { .lib .lib-card { width:calc((100% - 2 * var(--lib-gap)) / 3); } .lib-shelf-title { font-size:24px; } .lib-title { font-size:64px; } .lib-tagline { font-size:21px; } }
+@media (max-width:1099px) { .lib-shelf-title { font-size:24px; } .lib-title { font-size:64px; } .lib-tagline { font-size:19px; } }
 /* Below 900 px (one column) Open in Gen by Surface and the downloads come right after the pitch, before the facts, so
    a phone's first screen holds the page's action (the review of 2026-11-05: Open was at 934 px on a 390 x 844 phone). */
 @media (max-width:899px) { .lib-detail-body { grid-template-columns:minmax(0,1fr); gap:24px; } .lib .lib-open,.lib .lib-pill { align-self:stretch; width:100%; }
@@ -260,8 +284,8 @@ main.lib { --lib-gutter:clamp(24px,5vw,76px); --lib-gap:20px; display:block; max
    screen. */
 @media (max-width:899px) { .lib-detail:has(.lib-view) .lib-detail-body { gap:16px; } .lib-detail:has(.lib-view) .lib-info { gap:12px; } }
 @media (max-width:734px) { main.lib { --lib-gap:16px; } .lib-hero { flex-direction:column; align-items:flex-start; gap:12px; padding:24px 0 12px; } .lib-title { font-size:40px; }
-  .lib-tagline { font-size:17px; line-height:1.29; text-align:left; } .lib .lib-card { width:78%; } .lib-shelf-title { font-size:21px; } .lib-detail-title { font-size:32px; } }
-@media (max-width:520px) { main.lib { --lib-gutter:20px; } .lib-footer { padding:16px 20px 24px; } }
+  .lib-tagline { font-size:17px; line-height:1.29; justify-content:flex-start; } .lib-shelf-title { font-size:21px; } .lib-detail-title { font-size:32px; } }
+@media (max-width:520px) { main.lib { --lib-gutter:20px; } }
 
 /* The showcase (the user's request of 2026-11-12: the original, hand-designed FlexiTac sensor on the xArm gripper at
    the top of the Library; library.js showcaseCard() and renderShowcase()).  On the grid, the first section: one card as
@@ -285,6 +309,14 @@ main.lib { --lib-gutter:clamp(24px,5vw,76px); --lib-gap:20px; display:block; max
 .lib-showcase .lib-pills { flex-direction:row; margin-top:8px; }
 .lib .lib-showcase .lib-pill { align-self:flex-start; width:auto; }
 .lib-showcase-details { scroll-margin:16px 0; }
+/* Design your own (the user's decisions of 2026-11-15 and 2026-11-16: "在flexitac on xarm的details 后面，多一个按钮，generate
+   sensor by yourself with cad file", named "Design your own"): after Details, Gen by Surface for the visitor's own 3D model.
+   Details' pill and size in the page's action blue, the colour's second use on the page (Open in Gen by Surface's; both
+   lead to Gen by Surface), hovered and pressed as Open, its focus ring the page's.  Beside Details at every width it
+   fits in (a phone's card too, from 320 px), else under it on the left, each its own width (the pills wrap). */
+.lib .lib-showcase .lib-design { background:var(--accent); color:#fff; }
+.lib .lib-showcase .lib-design:hover { background:var(--accent-hover); }
+.lib .lib-showcase .lib-design:active { background:var(--accent-press); }
 @media (max-width:1099px) { .lib-showcase-title { font-size:40px; } .lib-showcase-line { font-size:19px; } }
 @media (max-width:734px) { .lib .lib-showcase { flex-direction:column; align-items:stretch; } .lib-showcase-pic { width:60%; align-self:center; }
   .lib-showcase .lib-card-text { gap:4px; padding:14px 12px 16px; } .lib-showcase-title { font-size:28px; } .lib-showcase-line { font-size:17px; }
