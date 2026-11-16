@@ -1090,7 +1090,7 @@
    "fit_sha256": "8cbfb3f213a2b8a01951bf1de6c8fbc3879ef168ae8fe2786fd9074979278bc9",
    "fits_reader": null,
    "image": {
-    "alt": "MakerMods Metal Arm, 1.5 mm on both fingertips on a plain rail",
+    "alt": "MakerMods Metal Arm, 1.5 mm on both fingertips of the open gripper",
     "assembled": {
      "height": 800,
      "src": "shots/makermods-metal-1.5mm.assembled.webp",
@@ -1131,7 +1131,7 @@
    "fit_sha256": "e3cf21a5600d4daa4fdc9f3b8915537b136781bcffe0c128d4a08e211d55300a",
    "fits_reader": null,
    "image": {
-    "alt": "MakerMods Metal Arm, 1 mm on both fingertips on a plain rail",
+    "alt": "MakerMods Metal Arm, 1 mm on both fingertips of the open gripper",
     "assembled": {
      "height": 800,
      "src": "shots/makermods-metal-1mm.assembled.webp",
@@ -1172,7 +1172,7 @@
    "fit_sha256": "ecff2e87cb7098783d6b2d9382e9e788e9838182cce5716fbcba0e5b6cf1f214",
    "fits_reader": null,
    "image": {
-    "alt": "MakerMods Metal Arm, 2 mm on both fingertips on a plain rail",
+    "alt": "MakerMods Metal Arm, 2 mm on both fingertips of the open gripper",
     "assembled": {
      "height": 800,
      "src": "shots/makermods-metal-2mm.assembled.webp",
@@ -1213,7 +1213,7 @@
    "fit_sha256": "67d1d939c853ba54136a23b27395f69516644547f5a530b967ee75cc0bec4efa",
    "fits_reader": null,
    "image": {
-    "alt": "MakerMods Metal Arm, 3 mm on both fingertips on a plain rail",
+    "alt": "MakerMods Metal Arm, 3 mm on both fingertips of the open gripper",
     "assembled": {
      "height": 800,
      "src": "shots/makermods-metal-3mm.assembled.webp",

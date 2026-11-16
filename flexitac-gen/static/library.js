@@ -21,6 +21,18 @@
 // placed record, its link to the FlexiTac hardware tutorial and its sources.  It is no entry: no pitch, no Open in Gen
 // by Surface, no download of the generator's.  Without showcase.json the Library is the one of before.
 //
+// The window (the user's request of 2026-11-15: "after we click for all cards to details, we may not jump to a new page.
+// lets bump our to a large window, and if you click the "x" of right top conrner, it will close and back show lib"):
+// a sensor's page and the showcase's are drawn in a large window over the Library (#libWindow, a modal <dialog> opened
+// with showModal(): the top layer, the rest of the page inert, the focus kept inside), the grid where it was under it,
+// dimmed, the page not scrolling while it is open (library.css); its X, Escape and a press and release on the backdrop
+// close it (closeWindow()).  The address is as before: a card's link goes to #<id> and the window opens on that route,
+// so Back closes it and Forward opens it again, and library.html#<id> opened directly shows the Library with the
+// window over it; closing it goes back over the window's entries to the grid's (no new entry: Back after it goes where
+// it went before the window opened; the review of 2026-11-15: a new entry, with Android's Back a close request while the
+// window is open, had made Back close it and open it again for ever), or, opened at its own address, replaces its entry,
+// the address then the grid's place of its sensor as the page's back link's was, and focuses the card that opened it.
+//
 // Motion as the generator's theme has it: none.  Every jump is instant (the native fragment jump, scrollBy and
 // scrollTo with the page's auto scrolling); the only scroll listener is the shelf's own, which only turns its arrows
 // on and off.  Every picture is slot(): a light 16:10 box with the sensor's picture once entries.json names one, else
@@ -54,12 +66,19 @@
   // page.
   const SHELVED = ["umi-finray"];
   const COUNTS = ["None", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Eleven", "Twelve"];
-  // index: entries.json; files: files.json (the static site); view: "grid" or "detail"; picture: the view a sensor's
-  // page shows (VIEWS; kept as its pitch, shape or tip changes, the first again on each sensor's page opened); gridY and
-  // opener: where the grid was and the card that opened a sensor's page (Back puts both back); syncs: each track's arrows.
+  // index: entries.json; files: files.json (the static site); view: "grid" or "detail" (the window open); picture: the
+  // view a sensor's page shows (VIEWS; kept as its pitch, shape or tip changes, the first again on each sensor's page
+  // opened); gridY and opener: where the grid was and the card that opened a sensor's page (closing the window puts both
+  // back); place: the grid's place of the window's sensor (where closing it goes); depth: the window's entries of this
+  // visit over the grid's, the current one among them (0: none under it, the window opened at its own address); closing:
+  // the place a close going back over them is for, until route() comes; syncs: each track's arrows.
   // showcase: null, or {id, data: showcase.json, entry: what a sensor's variant is to slot(), gallery() and the 3D view}.
-  const state = {index: null, showcase: null, files: null, filesError: null, filesLoad: null, view: null, picture: VIEWS[0][0], gridY: 0, opener: null, fromGrid: false, syncs: []};
+  const state = {index: null, showcase: null, files: null, filesError: null, filesLoad: null, view: null, picture: VIEWS[0][0], gridY: 0, opener: null, fromGrid: false,
+    place: null, depth: 0, closing: null, syncs: []};
   history.scrollRestoration = "manual";
+  // This visit (the document's life: a reload is another), named in the marks route() sets on the history's entries, so
+  // an entry's depth is believed only in the visit that pushed the entries under it.
+  const VISIT = `${Date.now().toString(36)}-${Math.random().toString(36).slice(2)}`;
   // The page opened at an address of its own (a sensor's page shared or reloaded, a place of the grid): the grid's title,
   // tagline and footer wait for the first route (opened(), once entries.json is in, or its failure), which shows the page
   // the address names (the review of 2026-11-06: a sensor's page opened directly had first shown the grid's title over
@@ -105,7 +124,7 @@
   const bytesText = bytes => (bytes >= 1e6 ? `${(bytes / 1e6).toFixed(1)} MB` : `${Math.max(1, Math.round(bytes / 1e3))} kB`);
   const readerText = name => (name === "32x16" ? "32 × 16 FlexiTac" : String(name).replace("x", " × "));
   function chevron(direction) {
-    // The arrows' and the back link's chevron, drawn in the text colour.
+    // The arrows' chevron, drawn in the text colour.
     const drawing = svg("svg", {viewBox: "0 0 16 16", "aria-hidden": "true", focusable: "false", class: "lib-chevron"});
     drawing.append(svg("path", {d: direction === "left" ? "M10 3 5 8l5 5" : "M6 3l5 5-5 5", fill: "none", stroke: "currentColor",
       "stroke-width": 1.8, "stroke-linecap": "round", "stroke-linejoin": "round"}));
@@ -224,7 +243,7 @@
       track.scrollBy({left: sign * (inner - (parseFloat(style.columnGap) || 0))});
     };
     const sync = () => {
-      if (!track.clientWidth) return;  // hidden (a sensor's page is shown)
+      if (!track.clientWidth) return;  // not laid out
       arrows.hidden = track.scrollWidth <= track.clientWidth + 1;
       left.disabled = track.scrollLeft <= 1;
       right.disabled = track.scrollLeft + track.clientWidth >= track.scrollWidth - 1;
@@ -349,17 +368,22 @@
   const shown = id => (id && state.showcase?.id === id ? state.showcase.entry : state.index.variants[id]);
 
   function showcaseCard() {
-    // The grid's first section (2026-11-12): one large card, its picture (the gripper as built, Assembled) beside its
-    // label, its title and one line; it opens the showcase's own page.  Its id is the grid's address of it (#showcase:
-    // its page's back link comes back to it).
+    // The grid's first section (2026-11-12): one large card, its picture (the gripper as built, Assembled; on the left
+    // since 2026-11-15) beside its label, its title, one line and Details.  Since the user's request of 2026-11-15 ("make only the image that can
+    // click to the details ... a button called details") the card itself is no link: its picture and its Details pill
+    // open the showcase's own page.  The picture's link repeats Details', so it is out of the Tab order and hidden from
+    // assistive technology (Details is the card's one stop).  Its id is the grid's address of it (#showcase: its page's
+    // back link comes back to it, its Details focused).
     const {id, data, entry} = state.showcase;
     return el("section", {className: "lib-showcased", "aria-labelledby": "showcase-title"},
-      el("a", {className: "lib-card lib-showcase", id: "showcase", href: `#${id}`, "data-showcase": id, "aria-label": `${data.title}: ${data.label.toLowerCase()}`},
-        slot(entry, "showcase", SHOWCASE_VIEW),
-        el("span", {className: "lib-card-text"},
-          el("span", {className: "lib-badge"}, data.label),
+      el("div", {className: "lib-card lib-showcase", id: "showcase"},
+        el("a", {className: "lib-showcase-pic", href: `#${id}`, tabindex: "-1", "aria-hidden": "true"}, slot(entry, "showcase", SHOWCASE_VIEW)),
+        el("div", {className: "lib-card-text"},
+          el("p", {className: "lib-badge"}, data.label),
           el("h3", {className: "lib-showcase-title", id: "showcase-title"}, keep(data.title)),
-          el("span", {className: "lib-showcase-line"}, keep(data.text)))));
+          el("p", {className: "lib-showcase-line"}, keep(data.text)),
+          el("div", {className: "lib-pills"},
+            el("a", {className: "lib-pill lib-showcase-details", href: `#${id}`, "data-showcase": id, "aria-label": `Details: ${data.title}`}, "Details")))));
   }
 
   function renderGrid() {
@@ -371,11 +395,14 @@
       ...(state.showcase ? [showcaseCard()] : []),
       ...(parts.length ? [grippers(parts)] : []),
       ...shelvedParts().map(part => shelf(`shelf-${part}`, `${index.parts[part].title}.`, index.parts[part].shelf, index.parts[part].variants, familiesOf(part))));
-    // The card that opens a sensor's page: Back comes back to it.
+    // The card that opens a sensor's page: Back comes back to it (the showcase's: its Details, its picture's link or not).
     $("libShelves").addEventListener("click", event => {
-      const opener = event.target.closest("a.lib-card");
-      if (opener) state.opener = opener;
+      const opener = event.target.closest("a.lib-card, .lib-showcase");
+      if (opener) state.opener = opener.querySelector(".lib-showcase-details") || opener;
     });
+    // Each row's arrows as the grid is laid out (since the window of 2026-11-15 the grid is never hidden: a window opened
+    // at its address shows it under it, its arrows set).
+    state.syncs.forEach(sync => sync());
   }
 
   // -- a sensor's own page -------------------------------------------------------------------------------------------
@@ -388,14 +415,15 @@
 
   function segments(legend, name, choices, checked) {
     // A segmented control (the mode switch's look: a grey track, the chosen one a white thumb, never blue); a change
-    // replaces the address (no history entry: Back still goes to the grid) and the page, the same control focused.
+    // replaces the address (no history entry: Back still goes to the grid; the entry's mark kept, its depth with it) and
+    // the page, the same control focused.
     const control = el("fieldset", {className: "lib-seg"}, el("legend", {}, legend),
       el("div", {className: "lib-seg-track"}, choices.map(([value, label, target]) => el("label", {},
         el("input", {type: "radio", name, value, checked: value === checked, "data-target": target}),
         el("span", {}, label)))));
     control.addEventListener("change", event => {
       const target = event.target.dataset.target;
-      history.replaceState(null, "", `#${target}`);
+      history.replaceState(history.state, "", `#${target}`);
       renderDetail(target);
       $("libDetail").querySelector(`input[name="${name}"]:checked`)?.focus();
     });
@@ -441,9 +469,10 @@
     ];
     const downloads = el("div", {className: "lib-downloads"});
     const mesh = part.mesh; const license = part.license;
+    // Closing the window goes to where its gripper is on the grid: the UMI finger's shelf, another gripper's card (the
+    // page's back link's address, 2026-11-06; the window's X since 2026-11-15).
+    state.place = placeOf(home);
     $("libDetail").replaceChildren(
-      // Back to where its gripper is on the grid: the UMI finger's shelf, another gripper's card (2026-11-06).
-      el("a", {className: "lib-back", href: `#${placeOf(home)}`}, chevron("left"), el("span", {}, index.parts[home].title)),
       el("div", {className: "lib-detail-body"},
         gallery(variant),
         el("div", {className: "lib-info"},
@@ -469,18 +498,20 @@
 
   function renderShowcase() {
     // The showcase's own page (2026-11-12): its picture in its frame with the Exploded | Assembled control (the 3D view
-    // drawn over it from the placed record), its label, its title and its one line, the FlexiTac hardware tutorial for
+    // drawn over it from the placed record), its label, its title, its one line and its line of detail (the sensor's size
+    // and fingers, 2026-11-15: the card's line no longer says them), the FlexiTac hardware tutorial for
     // its Gerbers (the showcase's own link, in showcase.json; a grey pill: the blue is Open in Gen by Surface's, which
     // this page has not) and its sources with their notices.  No pitch, no generator downloads.
     const {id, data, entry} = state.showcase;
+    state.place = "showcase";
     $("libDetail").replaceChildren(
-      el("a", {className: "lib-back", href: "#showcase"}, chevron("left"), el("span", {}, "Library")),
       el("div", {className: "lib-detail-body lib-detail-showcase"},
         gallery(entry),
         el("div", {className: "lib-info"},
           el("p", {className: "lib-badge"}, data.label),
           el("h2", {className: "lib-detail-title", id: "libDetailTitle", tabindex: "-1"}, whole(data.title)),
           el("p", {className: "lib-detail-line"}, keep(data.text)),
+          el("p", {className: "lib-showcase-detail"}, keep(data.detail)),
           el("div", {className: "lib-pills"},
             el("a", {className: "lib-pill", href: data.tutorial.href, target: "_blank", rel: "noopener noreferrer"}, data.tutorial.label)),
           el("p", {className: "lib-provenance"}, data.sources.flatMap((source, k) => [k ? " · " : null, `${source.text} (`,
@@ -704,10 +735,14 @@
   // part's: the UMI finger's): the grid; #<the showcase's id>: its page; #<variant>: its page; #<part> and #<family>:
   // its default variant's page (the address kept); anything else: the grid with a note.  The grid's addresses before 2026-11-06 still lead somewhere: #shelf-start ("Start here.") to the
   // grid's top, #shelf-<gripper> (its shelf, its tile's jump, its pages' back link) to its card, the address replaced by
-  // the new one (no history entry).  A sensor's page opens at the top with its title focused; leaving it for the grid
-  // by Back or Forward, or by the back link of the gripper whose card opened it, puts back where the grid was and
-  // focuses that card; otherwise (opened from outside, or another gripper's page reached by Back) the shelf's address
-  // scrolls to the shelf, a card's to the card, in the middle of the window and focused.
+  // the new one (no history entry).  A sensor's page opens in the window (2026-11-15) at its top with its title focused,
+  // the grid where it was under it; leaving it for the grid by Back or Forward, or by closing the window opened by the
+  // card of its gripper (the window's place holds the card: as the page's back link did), keeps the grid where it was
+  // and focuses that card; otherwise (opened from outside, or another gripper's page reached by Back) the shelf's
+  // address scrolls to the shelf, a card's to the card, in the middle of the window and focused.
+
+  // The window (2026-11-15): its dialog, opened over the grid by raise() and closed by showGrid().
+  const WINDOW = $("libWindow");
 
   function setNote(text) {
     $("libNote").textContent = text;
@@ -719,21 +754,20 @@
     state.view = "grid";
     document.title = PAGE_TITLE;
     rest();
-    $("libDetail").hidden = true;
-    $("libHero").hidden = false;
-    $("libGrid").hidden = false;
-    state.syncs.forEach(sync => sync());
+    if (WINDOW.open) WINDOW.close();
     // Leaving a sensor's page opened from the grid, the grid where it was and the card that opened the page focused
-    // when Back or Forward comes to the grid (traversed) or the place asked for holds that card (its back link); else
-    // the place asked for (the review of 2026-11-06: the back link of a page reached by Back focused another card).
+    // when Back or Forward comes to the grid (traversed) or the place asked for holds that card (the window closed, as
+    // its back link did); else the place asked for (the review of 2026-11-06: the back link of a page reached by Back
+    // focused another card).
     if (back && state.fromGrid && (traversed || !target || target.contains(state.opener))) {
       window.scrollTo(0, state.gridY);
       state.opener?.focus({preventScroll: true});
     } else if (target?.matches(".lib-card")) {
-      // The card focused is the grid's place now: Back or Forward to the grid focuses it again.
-      state.opener = target;
+      // The card focused is the grid's place now: Back or Forward to the grid focuses it again (the showcase's card is
+      // no link: its Details).
+      state.opener = target.querySelector(".lib-showcase-details") || target;
       target.scrollIntoView({block: "center"});
-      target.focus({preventScroll: true});
+      state.opener.focus({preventScroll: true});
     } else if (target) {
       target.scrollIntoView({block: "start"});
     } else if (back) {
@@ -741,51 +775,121 @@
     }
   }
 
-  function showDetail(id) {
+  function opening() {
+    // A sensor's page about to show in the window: opened from the grid, where the grid was is kept (closing the window
+    // or Back comes back to it; the grid stays shown under the window, which does not move it).
     if (state.view === "grid") {
       state.gridY = window.scrollY;
       state.fromGrid = true;
     }
     state.view = "detail";
+  }
+
+  function raise() {
+    // The page just drawn in the window: the window shown (once: a pitch, Back or Forward between two pages keeps it),
+    // its content at its top, its title focused (for a screen reader; no ring), the grid where it was.  The width a scroll
+    // bar takes (0 for an overlay one: a phone's, a Mac's, the checks' headless browser's) is measured first: the page
+    // makes it up on its right while it cannot scroll (library.css --lib-bar), so the grid under the window keeps its
+    // width and its place, and the backdrop dims the whole screen (the review of 2026-11-15: the bar's room kept by
+    // scrollbar-gutter had stayed bright beside the backdrop, and 100vw, the page's gutter with it, had shrunk by it).
+    if (!WINDOW.open) {
+      ROOT.style.setProperty("--lib-bar", `${Math.max(0, window.innerWidth - ROOT.clientWidth)}px`);
+      WINDOW.showModal();
+    }
+    $("libWindowBody").scrollTop = 0;
+    $("libDetailTitle").focus({preventScroll: true});
+  }
+
+  function showDetail(id) {
+    opening();
     // Each sensor's page opened (from a card, its address or Back) shows the Exploded picture first; its pitch, shape and
     // tip controls keep the view chosen (renderDetail alone).
     state.picture = VIEWS[0][0];
     setNote("");
-    $("libHero").hidden = true;
-    $("libGrid").hidden = true;
-    $("libDetail").hidden = false;
     renderDetail(id);
-    window.scrollTo(0, 0);
-    $("libDetailTitle").focus({preventScroll: true});
+    raise();
   }
 
   function showShowcase() {
-    // The showcase's page, opened as a sensor's is (the grid's place kept for Back), with the view its card shows.
-    if (state.view === "grid") {
-      state.gridY = window.scrollY;
-      state.fromGrid = true;
-    }
-    state.view = "detail";
+    // The showcase's page, opened as a sensor's is (the grid's place kept for closing it), with the view its card shows.
+    opening();
     state.picture = SHOWCASE_VIEW;
     setNote("");
-    $("libHero").hidden = true;
-    $("libGrid").hidden = true;
-    $("libDetail").hidden = false;
     renderShowcase();
-    window.scrollTo(0, 0);
-    $("libDetailTitle").focus({preventScroll: true});
+    raise();
+  }
+
+  function closeWindow() {
+    // The window's X, Escape (and Android's Back, a close request while it is open) and a press and release on its
+    // backdrop (2026-11-15).  Opened from the grid of this visit: back over the window's entries to the grid's
+    // (history.go; route() closes it there, the grid where it was, the card that opened it focused, and makes that
+    // entry's address the grid's place of the window's sensor, state.place: its gripper's card, the UMI finger's shelf,
+    // the showcase's card, as the page's back link's was), so no new entry: Back after it goes where it went before the
+    // window opened (the review of 2026-11-15: a new entry here, with Android's Back a close request while the window is
+    // open, had made each Back close it and the next open it again).  Opened at its own address (a shared link, a
+    // reload): its entry replaced by that place, and route() as a link's hashchange would.  Neither jumps: the grid
+    // stays where it is.  Once: a close on its way (its cancel and then its close event, say) asks no second.
+    if (state.view !== "detail" || state.closing) return;
+    if (state.depth > 0) {
+      state.closing = state.place;
+      history.go(-state.depth);
+      return;
+    }
+    history.replaceState(null, "", `#${state.place}`);
+    route();
+  }
+
+  function windowEvents() {
+    // Escape (the dialog's cancel) closes it as the X does; a dialog closed by the browser itself (a cancel it does not
+    // ask for, as a second Escape with no press between) closes as it would have.  The backdrop: a press that begins
+    // and ends outside the window's box (the dialog is the target of both), never a drag begun inside it, as a turn of
+    // the 3D view released over the backdrop, nor a double-click's second click (the review of 2026-11-15: a card
+    // double-clicked where the backdrop then lies, beside the window or under it, had opened it and closed it at once).
+    $("libClose").addEventListener("click", closeWindow);
+    WINDOW.addEventListener("cancel", event => {
+      event.preventDefault();
+      closeWindow();
+    });
+    WINDOW.addEventListener("close", () => { if (!WINDOW.open && state.view === "detail") closeWindow(); });
+    const outside = event => {
+      const box = WINDOW.getBoundingClientRect();
+      return event.target === WINDOW && (event.clientX < box.left || event.clientX >= box.right || event.clientY < box.top || event.clientY >= box.bottom);
+    };
+    let pressed = false;
+    WINDOW.addEventListener("pointerdown", event => { pressed = outside(event); });
+    WINDOW.addEventListener("click", event => {
+      if (pressed && event.detail < 2 && outside(event)) closeWindow();
+      pressed = false;
+    });
   }
 
   function route() {
     if (!state.index) return;
     opened();
-    // An entry of the page's history it has been at (marked below) is Back's or Forward's; any other (a link, a back
-    // link, a typed address) is marked now.
-    const traversed = history.state?.library === true;
-    if (!traversed) history.replaceState({library: true}, "");
+    // An entry of the page's history it has been at (marked below) is Back's or Forward's; any other (a link, a typed
+    // address, a window closed at its own address) is marked now, with this visit and its depth (state.depth): a
+    // window's entry reached from the grid 1, from a window's entry of depth n n + 1, else 0 (the window opened at its
+    // own address, or reached from such a window); the grid's 0.  An entry marked in another visit (before a reload)
+    // has none.
+    const mark = history.state;
+    const traversed = mark?.library === true;
+    const closing = state.closing;
+    state.closing = null;
     let id = "";
     try { id = decodeURIComponent(location.hash.slice(1)); } catch (error) { id = location.hash.slice(1); }
     const {variants, parts} = state.index;
+    const windowed = state.showcase?.id === id || [variants, parts, state.index.families || {}].some(kind => Object.hasOwn(kind, id));
+    if (closing && !windowed) {
+      // A close come back over the window's entries to the grid's: its address the window's place now, and the grid
+      // shown as the page's back link showed it (closeWindow(); not as Back's: a window itself reached by Back, from a
+      // place of the grid typed or linked over it, focuses its own card, not that place's).
+      history.replaceState(mark, "", `#${closing}`);
+      id = closing;
+    }
+    if (!windowed) state.depth = 0;
+    else if (traversed) state.depth = mark.visit === VISIT ? mark.depth || 0 : 0;
+    else state.depth = state.view === "grid" ? 1 : state.view === "detail" && state.depth > 0 ? state.depth + 1 : 0;
+    if (!traversed) history.replaceState({library: true, visit: VISIT, depth: state.depth}, "");
     if (state.showcase?.id === id) { showShowcase(); return; }
     if (Object.hasOwn(variants, id)) { showDetail(id); return; }
     if (Object.hasOwn(parts, id)) { showDetail(parts[id].default); return; }
@@ -795,10 +899,10 @@
     let place = id;
     if (id === "shelf-start") place = "";
     else if (id.startsWith("shelf-") && carded().includes(id.slice(6))) place = `gripper-${id.slice(6)}`;
-    if (place !== id) history.replaceState({library: true}, "", place ? `#${place}` : location.pathname + location.search);
+    if (place !== id) history.replaceState(history.state, "", place ? `#${place}` : location.pathname + location.search);
     const known = !place || places.has(place);
     setNote(known ? "" : `No sensor in the library is named ${id}.`);
-    showGrid(place && known ? $(place) : null, traversed);
+    showGrid(place && known ? $(place) : null, traversed && !closing);
     // The note is above the grid, and "Start here." was the grid's first shelf: an unknown id, or #shelf-start, typed
     // while the grid is scrolled down shows the top at once (instant; the native jump has no element of that id to go to).
     if (!known || id === "shelf-start") window.scrollTo(0, 0);
@@ -819,6 +923,7 @@
       $("libStatus").textContent = `The library could not be loaded (${error.message}). Gen by Surface and Rectangular still work.`;
       return;
     }
+    windowEvents();
     window.addEventListener("hashchange", route);
     window.addEventListener("resize", () => state.syncs.forEach(sync => sync()));
     route();

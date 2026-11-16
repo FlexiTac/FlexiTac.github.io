@@ -2,9 +2,10 @@
    the theme's tokens, light and dark, and its rule of colour (the action blue fills only the page's one primary action,
    Open in Gen by Surface; selections are the grey thumb; no green fill), laid out as the Apple Store: the title with its
    line on the right, the grippers' cards four to a row, then the UMI finger's shelf of cards that scrolls sideways
-   inside itself, never the page (both 2026-11-06), and a sensor's own page.  Nothing moves on its own: no transition or
-   animation, every jump instant (the page's scrolling is the browser's auto), hover and press change at once.  No
-   @import, no url() but data:, nothing fixed or sticky. */
+   inside itself, never the page (both 2026-11-06), and a sensor's own page, in a window over the grid since 2026-11-15.
+   Nothing moves on its own: no transition or animation, every jump instant (the page's scrolling is the browser's auto),
+   hover and press change at once.  No @import, no url() but data:, nothing fixed or sticky (the window is a modal
+   dialog, which the browser lays in its top layer). */
 
 /* The page: block, its side padding the header's (the shelves' rows reach the window's edges, their cards start on it). */
 main.lib { --lib-gutter:clamp(24px,5vw,76px); --lib-gap:20px; display:block; max-width:none; min-height:0; margin:0; padding:0 var(--lib-gutter) 56px; }
@@ -85,7 +86,7 @@ main.lib { --lib-gutter:clamp(24px,5vw,76px); --lib-gap:20px; display:block; max
    no blue; four in view from 1100 px, three from 735 px, below that 78 % of the row (the next one shows). */
 .lib .lib-card { display:flex; flex-direction:column; width:calc((100% - 3 * var(--lib-gap)) / 4); padding:6px; border-radius:var(--r-lg); background:var(--surface);
   box-shadow:var(--shadow-card); color:var(--text); text-decoration:none; }
-.lib .lib-card:hover { box-shadow:var(--shadow-float); }
+.lib a.lib-card:hover { box-shadow:var(--shadow-float); }
 .lib-card:focus-visible { outline:2px solid var(--focus); outline-offset:2px; }
 .lib-card-text { display:flex; flex-direction:column; gap:2px; padding:12px 12px 14px; }
 .lib-badge { min-height:16px; font-size:12px; line-height:16px; font-weight:600; letter-spacing:.06em; text-transform:uppercase; color:var(--text-2); }
@@ -109,11 +110,41 @@ main.lib { --lib-gutter:clamp(24px,5vw,76px); --lib-gap:20px; display:block; max
 /* Below 360 px the text's sides 6 px, not 12 px: at 320 px "MakerMods" (107 px) ran 11 px past a 96 px line. */
 @media (max-width:359px) { .lib-cards .lib-card-text { padding-left:6px; padding-right:6px; } }
 
-/* A sensor's page: the back link, then the picture (7) and the facts (5) side by side from 900 px. */
-.lib-detail { padding:24px 0 8px; }
-.lib .lib-back { display:inline-flex; align-items:center; gap:4px; min-height:32px; color:var(--link); font-size:17px; text-decoration:none; }
-.lib .lib-back:hover span { text-decoration:underline; }
-.lib-detail-body { display:grid; grid-template-columns:minmax(0,7fr) minmax(0,5fr); gap:48px; align-items:start; margin-top:16px; }
+/* The window (the user's request of 2026-11-15: "after we click for all cards to details, we may not jump to a new page.
+   lets bump our to a large window, and if you click the "x" of right top conrner, it will close and back show lib";
+   library.js raise() and closeWindow()): a modal dialog over the Library, in the cards' own look (white, the dark card
+   in the dark scheme with its hairline, 18 px corners, the theme's floating shadow), as wide as the content up to
+   1200 px, as tall as its page up to the window less the gutters, its top a gutter below the window's (a pitch that
+   changes its height never moves its top); its page scrolls inside it (contained: never the page behind, which does
+   not scroll while it is open: the width its scroll bar took, library.js's --lib-bar, 0 for an overlay one, made up on
+   the page's right, so nothing under it moves and the backdrop dims the whole screen; the review of 2026-11-15 found
+   scrollbar-gutter's room left bright and 100vw shrunk by it); the backdrop dims the grid in both schemes.  Below
+   735 px, and on a screen less than 501 px tall (a phone held sideways, where a card within the gutters was 306 px
+   tall: the review of 2026-11-15), it fills the screen, a sheet, with no shadow (the dark scheme's hairline would
+   frame the screen).  Its X (the header's toggle's look: a round grey button, its mark in the text colour, hovered and
+   pressed at once, the page's focus ring) at its top right, over its page's corner, which scrolls under it: its grey
+   laid on the window's white, so nothing shows through it.  The page's top leaves the X its room. */
+.lib-window { box-sizing:border-box; width:min(1200px, calc(100vw - 2 * var(--lib-gutter))); max-width:none; height:fit-content;
+  max-height:calc(100vh - 2 * var(--lib-gutter)); max-height:calc(100dvh - 2 * var(--lib-gutter)); margin:var(--lib-gutter) auto auto; padding:0; border:0;
+  border-radius:var(--r-lg); background:var(--surface); color:var(--text); box-shadow:var(--shadow-float); overflow:hidden; }
+.lib-window[open] { display:flex; flex-direction:column; }
+.lib-window::backdrop { background:rgba(0,0,0,.45); }
+:root:has(.lib-window[open]) { overflow:hidden; padding-right:var(--lib-bar,0px); }
+.lib-window-body { flex:1 1 auto; min-height:0; overflow-x:hidden; overflow-y:auto; overscroll-behavior:contain; padding:56px clamp(20px,2.5vw,40px) 40px; }
+.lib .lib-close { position:absolute; top:16px; right:16px; z-index:1; display:grid; place-items:center; width:36px; height:36px; margin:0; padding:0; border:0;
+  border-radius:50%; background:linear-gradient(var(--fill),var(--fill)) var(--surface); color:var(--text); cursor:pointer; }
+.lib .lib-close:hover { background:linear-gradient(var(--fill-hover),var(--fill-hover)) var(--surface); }
+.lib .lib-close:active { background:linear-gradient(var(--fill-press),var(--fill-press)) var(--surface); }
+.lib-close:focus-visible { outline:2px solid var(--focus); outline-offset:2px; }
+.lib-close svg { width:16px; height:16px; }
+@media (max-width:734px), (max-height:500px) { .lib-window { width:100vw; height:100%; max-height:none; margin:0; border-radius:0; box-shadow:none; }
+  .lib-window-body { padding:56px var(--lib-gutter) 32px; } .lib .lib-close { top:12px; right:12px; } }
+
+/* A sensor's page: the picture and the facts side by side from 900 px, evenly (7 to 5 as a page of its own from 1280 px
+   until the window of 2026-11-15: in a window of at most 1200 px its facts' column was 440 px at 1440 px, its pills
+   stacked from 1024 to 1440 px and more of its facts and titles wrapped, the review of 2026-11-15; evenly, with the
+   window's sides 40 px at most, it is 540 px there and 520 px at 1280 px, the page's 520 and 460 px of before). */
+.lib-detail-body { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:48px; align-items:start; }
 .lib-info { display:flex; flex-direction:column; gap:16px; }
 /* The title and the line under it balanced: no word alone on the last line (the second review of 2026-11-05). */
 .lib-detail-title { font-size:40px; line-height:1.1; font-weight:600; letter-spacing:0; color:var(--text); text-wrap:balance; }
@@ -193,16 +224,19 @@ main.lib { --lib-gutter:clamp(24px,5vw,76px); --lib-gap:20px; display:block; max
 :root[data-lib-place] #libHero,:root[data-lib-place] .lib-footer { display:none; }
 
 /* More contrast: the page's links underlined as the theme's (the cards, pills and Open are boxes). */
-@media (prefers-contrast: more) { .mode-links a span,.lib .lib-back span,.lib-links a,.lib-provenance a,.lib-footer a { text-decoration:underline; } }
+@media (prefers-contrast: more) { .mode-links a span,.lib-links a,.lib-provenance a,.lib-footer a { text-decoration:underline; } }
 /* The dark scheme (the header's toggle on, <html data-theme="dark">): the cards have no shadow there (the theme's), so a
-   hairline edges them. */
-:where(:root[data-theme="dark"]) .lib .lib-card,:where(:root[data-theme="dark"]) .lib-frame { box-shadow:inset 0 0 0 1px var(--hairline); } :where(:root[data-theme="dark"]) .lib .lib-card:hover { box-shadow:inset 0 0 0 1px var(--separator); }
+   hairline edges them, and the window. */
+:where(:root[data-theme="dark"]) .lib .lib-card,:where(:root[data-theme="dark"]) .lib-frame { box-shadow:inset 0 0 0 1px var(--hairline); } :where(:root[data-theme="dark"]) .lib a.lib-card:hover { box-shadow:inset 0 0 0 1px var(--separator); }
+:where(:root[data-theme="dark"]) .lib-window { box-shadow:inset 0 0 0 1px var(--hairline), var(--shadow-float); }
+@media (max-width:734px), (max-height:500px) { :where(:root[data-theme="dark"]) .lib-window { box-shadow:none; } }
 
-/* Narrower windows.  From 900 to 1279 px a sensor's page splits its width evenly: at 7 to 5 its facts wrapped at 900 px
-   and its two pills stacked up to about 1230 px (the second review of 2026-11-05); evenly they are side by side from
-   about 1020 px.  Below 735 px the line is 17 px under a tighter title, so a phone's first screen reaches the grippers'
-   first row (it took five lines of 21 px there). */
-@media (max-width:1279px) { .lib-detail-body { grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:32px; } }
+/* Narrower windows.  Below 1280 px a sensor's page's two columns are 32 px apart (its split even since the second
+   review of 2026-11-05: at 7 to 5 its facts wrapped at 900 px and its two pills stacked up to about 1230 px; evenly
+   they were side by side from about 1020 px as a page, and are from about 1100 px in the window, whose sides take 20
+   to 32 px more each there).  Below 735 px the line is 17 px under a tighter title, so a phone's first screen reaches
+   the grippers' first row (it took five lines of 21 px there). */
+@media (max-width:1279px) { .lib-detail-body { gap:32px; } }
 @media (max-width:1099px) { .lib .lib-card { width:calc((100% - 2 * var(--lib-gap)) / 3); } .lib-shelf-title { font-size:24px; } .lib-title { font-size:64px; } .lib-tagline { font-size:21px; } }
 /* Below 900 px (one column) Open in Gen by Surface and the downloads come right after the pitch, before the facts, so
    a phone's first screen holds the page's action (the review of 2026-11-05: Open was at 934 px on a 390 x 844 phone). */
@@ -214,17 +248,17 @@ main.lib { --lib-gutter:clamp(24px,5vw,76px); --lib-gap:20px; display:block; max
    sensor's page and on the Tapered tips' (a three-line title and two controls: 88 px below it at 16:10, 11 px inside
    at 3:1; 5:2 left it 12 px below), and in a 360 x 740 one's on every gripper's.  The 3D figure of the sensor on the
    part that a later stage puts here is then 113 px tall at 390 px, 89 px at 320 px and 266 px at 899 px.  On lower
-   phones (375 x 667, 320 x 640) the header's 239 px leave too little: a two-line title's Open stays below the first
-   screen unless the picture were at most 58 px tall at 375 px (31 px at 320 px), a tapered tip's even with none. */
+   phones (375 x 667, 320 x 640) the header's 239 px left too little until the window of 2026-11-15, a sheet with no
+   header above the page: since then Open is in the first screen there too, and at 320 x 568 on every gripper's. */
 @media (max-width:899px) { .lib-shot-detail { aspect-ratio:3 / 1; } }
 /* With pictures (2026-11-05) the frame holds the Exploded | Assembled control under the picture too, 36 px more, which
-   would put the Tapered tips' Open 25 px below a 390 x 844 phone's first screen; so there, with the control, the page
-   is tighter round the picture and between the title's items (the page's top 24 to 16 px, the picture 16 to 12 px
-   under the back link and 24 to 16 px above the title, the four gaps from the title to Open 16 to 12 px: 36 px in
-   all), its Open where it was without pictures (11 px inside at 390 x 844), and the picture keeps its 3:1 band.
-   Without a picture (no control) the page is as before. */
-@media (max-width:899px) { .lib-detail:has(.lib-view) { padding-top:16px; } .lib-detail:has(.lib-view) .lib-detail-body { margin-top:12px; gap:16px; }
-  .lib-detail:has(.lib-view) .lib-info { gap:12px; } }
+   would have put the Tapered tips' Open 25 px below a 390 x 844 phone's first screen under the header; so there, with
+   the control, the page is tighter round the picture and between the title's items (the picture 24 to 16 px above the
+   title, the four gaps from the title to Open 16 to 12 px; until 2026-11-15 also the page's top and the room under its
+   back link, which the window has not), and the picture keeps its 3:1 band.  Without a picture (no control) the page
+   is as before.  In the window (2026-11-15) the header is not above the page, so Open is far inside the sheet's first
+   screen. */
+@media (max-width:899px) { .lib-detail:has(.lib-view) .lib-detail-body { gap:16px; } .lib-detail:has(.lib-view) .lib-info { gap:12px; } }
 @media (max-width:734px) { main.lib { --lib-gap:16px; } .lib-hero { flex-direction:column; align-items:flex-start; gap:12px; padding:24px 0 12px; } .lib-title { font-size:40px; }
   .lib-tagline { font-size:17px; line-height:1.29; text-align:left; } .lib .lib-card { width:78%; } .lib-shelf-title { font-size:21px; } .lib-detail-title { font-size:32px; } }
 @media (max-width:520px) { main.lib { --lib-gutter:20px; } .lib-footer { padding:16px 20px 24px; } }
@@ -232,20 +266,29 @@ main.lib { --lib-gutter:clamp(24px,5vw,76px); --lib-gap:20px; display:block; max
 /* The showcase (the user's request of 2026-11-12: the original, hand-designed FlexiTac sensor on the xArm gripper at
    the top of the Library; library.js showcaseCard() and renderShowcase()).  On the grid, the first section: one card as
    wide as the row, its picture (a 4:5 box: the gripper stands upright and fills it, where a 16:10 box left four fifths
-   of itself empty) on the right and its label, its title and one line beside it, in the cards' own look (white, the
-   soft shadow, no blue); below 735 px the picture on top, the text under it, as every card.  Its room above and below
-   is the grippers' cards' (8 px, 28 px), and Tabbed to it comes into the window with its ring as they do; its section
-   is spaced as a shelf (28 px above: the grippers' heading 56 px below the card, as the UMI shelf's is below the
-   grippers' last row). */
+   of itself empty) on the left (since 2026-11-15: "picture put to the left, and the words just next to the picture";
+   on the right before) and its label, its title, one line and Details just beside it, in the cards' own look
+   (white, the soft shadow, no blue); below 735 px the picture on top, the text under it, as every card.  Since the
+   user's request of 2026-11-15 ("xarm can be smaller ... make only the image that can click to the details") the
+   picture is a fifth of the row (30 % before), never under 220 px or over 300 px, and 60 % of a phone's card, centred;
+   the card is no link, so it does not lift when hovered (the lift is a linked card's, a.lib-card): its picture and its Details pill (a grey pill, as the page's
+   tutorial) open the page, and Details stays its own size in every width.  Its room above and below is the grippers'
+   cards' (8 px, 28 px), and Tabbed to, Details comes into the window with its ring; its section is spaced as a shelf
+   (28 px above: the grippers' heading 56 px below the card, as the UMI shelf's is below the grippers' last row). */
 .lib-showcased { padding-top:28px; }
 .lib .lib-showcase { flex-direction:row; align-items:center; width:auto; margin:8px 0 28px; scroll-margin:16px 0; }
-.lib-shot-showcase { flex:none; order:1; width:30%; aspect-ratio:4 / 5; }
-.lib-showcase .lib-card-text { flex:1 1 0; min-width:0; gap:10px; padding:24px clamp(24px,5vw,72px); }
+.lib-showcase-pic { flex:none; display:block; width:clamp(220px, 20%, 300px); border-radius:var(--r-md); }
+.lib-shot-showcase { aspect-ratio:4 / 5; }
+.lib-showcase .lib-card-text { flex:1 1 0; min-width:0; gap:10px; padding:24px clamp(24px,3vw,40px); }
 .lib-showcase-title { font-size:48px; line-height:1.08; font-weight:600; letter-spacing:-.012em; color:var(--text); text-wrap:balance; }
 .lib-showcase-line { max-width:30em; font-size:21px; line-height:1.3; color:var(--text-2); text-wrap:pretty; }
+.lib-showcase .lib-pills { flex-direction:row; margin-top:8px; }
+.lib .lib-showcase .lib-pill { align-self:flex-start; width:auto; }
+.lib-showcase-details { scroll-margin:16px 0; }
 @media (max-width:1099px) { .lib-showcase-title { font-size:40px; } .lib-showcase-line { font-size:19px; } }
-@media (max-width:734px) { .lib .lib-showcase { flex-direction:column; align-items:stretch; } .lib-shot-showcase { order:0; width:auto; }
-  .lib-showcase .lib-card-text { gap:4px; padding:14px 12px 16px; } .lib-showcase-title { font-size:28px; } .lib-showcase-line { font-size:17px; } }
+@media (max-width:734px) { .lib .lib-showcase { flex-direction:column; align-items:stretch; } .lib-showcase-pic { width:60%; align-self:center; }
+  .lib-showcase .lib-card-text { gap:4px; padding:14px 12px 16px; } .lib-showcase-title { font-size:28px; } .lib-showcase-line { font-size:17px; }
+  .lib-showcase .lib-pills { margin-top:10px; } }
 /* Its own page: the 3D view's box 4:5 too (a sensor's is 16:10, and 3:1 in one column so that Open in Gen by Surface
    stays in a phone's first screen: this page has no such action), beside its words from 900 px (5 to 7: the box no
    taller than a 900 px window), in one column below, never wider than 440 px there (at 899 px a box as wide as the
@@ -255,3 +298,4 @@ main.lib { --lib-gutter:clamp(24px,5vw,76px); --lib-gap:20px; display:block; max
 @media (min-width:900px) { .lib-detail-body.lib-detail-showcase { grid-template-columns:minmax(0,5fr) minmax(0,7fr); } }
 @media (max-width:899px) { .lib-detail-showcase .lib-frame { width:100%; max-width:440px; justify-self:center; } .lib-detail-showcase .lib-info > * { order:0; } }
 .lib-detail-showcase .lib-badge { margin-bottom:-8px; }
+.lib-showcase-detail { margin-top:-8px; font-size:15px; line-height:1.4; color:var(--text-2); text-wrap:pretty; }

@@ -75,6 +75,15 @@ const GRIPPER_STUDIO = {
 };
 // The see-through finger's look: the part's matte dielectric in its look's colour (a ghost of a metal is not a mirror).
 const GHOST = {roughness: 0.6, metalness: 0};
+// The pad's tint (docs/LIBRARY_VIEW.md "Parts without a scene"; the user's decision of 2026-11-14, "you can do it
+// darken"): assembled, the finished sensor's pad on the UMI finger is a dark olive-brown in every photo of it, the black
+// film seen through the top FPC's amber polyimide between its copper, where the Library drew the top FPC's art alone, a
+// bright amber that read as one block with the orange finger.  For a part the rules give a look, their part_pad
+// ({color, opacity}) lays the film's own sheet once more, PAD.lift_mm over the top FPC (one nest above the film: the
+// layers' spacing), its outline the film's texture's alpha, in that colour at that opacity, lit by the figure's lights
+// (no studio), satin as the boards' coverlay (PAD.roughness), in Assembled only: the top FPC's traces seen faintly
+// through it, its border, its tails, the edges and Exploded as they were.  Gen by Surface draws no pad.
+const PAD = {lift_mm: 0.02, roughness: 0.45};
 const {warnOnce, patched, reflections, reflectionsOnly} = lookOf("Library view", {studied: "library-view-studio", without: "the grippers are drawn"});
 // A look's shader: three.js's lights_fragment_maps with the environment's diffuse light at GRIPPER_STUDIO.diffuse of
 // its own (the same line studio.js's reflections-only edit removes; found in the vendored three.js as that one is), or,
@@ -473,7 +482,7 @@ export function libraryStage() {
     // positions, smoothed: the angle a part geometry's normals are at now, partPoints: how many points its corners share
     // while they are smooth (null: flat).
     const state = {info: null, extras: null, rules: null, geometries: new Map(), lamps: {key: null}, studio: undefined, dressed: null,
-      creases: new WeakMap(), smoothed: new WeakMap(), partPoints: null};
+      creases: new WeakMap(), smoothed: new WeakMap(), partPoints: null, pad: null};
     // The part's own material as the figure made it (onpart.js partMaterial: its colour, its matte dielectric, no
     // environment, the contact shade's shader): what a look changes on it for a drawing is put back from here.
     const plain = {color: partLook.color.clone(), roughness: partLook.roughness, metalness: partLook.metalness, envMap: partLook.envMap,
@@ -566,6 +575,37 @@ export function libraryStage() {
         throw new Error(`library stage: ${what} names the look ${JSON.stringify(name)}, which is not a look of its looks`);
       }
       return spec;
+    }
+    function layPad(stack, spec) {
+      // The pad's tint (PAD) on the drawing just shown: the film's sheet at its assembled place, lifted one nest and
+      // PAD.lift_mm along its normals (over the top FPC), its texture's alpha its outline; shown in Assembled only
+      // (scene.onBeforeRender).  Nothing where the film was not drawn.
+      const film = stack.sheets.film;
+      const map = view.sheets?.children.find(group => group.userData.sheet === "film")?.children[0]?.material?.map;
+      if (!film || !map) return;
+      const lift = (stack.nest_mm || 0.25) + PAD.lift_mm;
+      const position = new Float32Array(film.assembled.length);
+      for (let i = 0; i < position.length; i += 1) position[i] = film.assembled[i] + lift * film.normals[i];
+      const geometry = new THREE.BufferGeometry();
+      geometry.setAttribute("position", new THREE.BufferAttribute(position, 3));
+      geometry.setAttribute("normal", new THREE.BufferAttribute(film.normals, 3));
+      geometry.setAttribute("uv", new THREE.BufferAttribute(film.uvs, 2));
+      geometry.setIndex(new THREE.BufferAttribute(film.index, 1));
+      geometry.computeBoundingSphere();
+      const material = new THREE.MeshStandardMaterial({color: new THREE.Color().setStyle(spec.color, THREE.SRGBColorSpace), map, roughness: PAD.roughness,
+        metalness: 0, transparent: true, opacity: spec.opacity, depthWrite: false, side: THREE.DoubleSide});
+      state.pad = new THREE.Mesh(geometry, material);
+      state.pad.renderOrder = 4;
+      state.pad.visible = view.mode === "assembled";
+      scene.add(state.pad);
+    }
+    function clearPad(dispose = true) {
+      // The pad's tint taken down (dispose false: a lost context's, only dropped); its texture is the film's, the figure's.
+      const pad = state.pad;
+      state.pad = null;
+      if (!pad) return;
+      scene.remove(pad);
+      if (dispose) { pad.geometry.dispose(); pad.material.dispose(); }
     }
 
     function defaults() {
@@ -931,8 +971,10 @@ export function libraryStage() {
 
     // Each frame of a gripper's drawing: stack 2's layers ordered as the camera sees them (its sheets shown as stack 1's
     // are), the see-through fingers (in the rules' see_through_modes), both films' lamps (onpart.js's recipe at each film), the studio rolled
-    // about the line of sight so the stack's normal is up in it, as at drape.js's homes.  Nothing without a scene.
+    // about the line of sight so the stack's normal is up in it, as at drape.js's homes.  Without a scene only the pad's
+    // tint, shown in Assembled alone.
     scene.onBeforeRender = () => {
+      if (state.pad) state.pad.visible = view.mode === "assembled";
       const extras = state.extras;
       if (!extras || !view.stack) return;
       const local = camera.position.clone().applyMatrix4(extras.mateInverse); const target = controls.target.clone().applyMatrix4(extras.mateInverse);
@@ -979,6 +1021,7 @@ export function libraryStage() {
       // The part as the figure draws it: its material's own values, its facets flat (a look's are this drawing's).
       dress(null);
       smoothPart(null);
+      clearPad(dispose);
       if (!extras) return;
       scene.remove(extras.group);
       if (dispose) {
@@ -1016,13 +1059,15 @@ export function libraryStage() {
           keepGeometries(new Set());
           defaults();
           // A part without a scene (the UMI finger and its tapered tips): the figure as Gen by Surface draws it, or, where
-          // scenes.json's rules give the part a look (args.partLook: {look, smooth_deg}), the part alone in that look.
+          // scenes.json's rules give the part a look (args.partLook: {look, smooth_deg, pad}), the part alone in that look
+          // and, with the rules' part_pad, the pad's tint over the film (layPad).
           const given = args.partLook || null;
           if (!given) return figure.show(args);
           dress(lookSpec({part: given.look}, "part", "the rules' part_looks"));
           const result = await figure.show(args);
           if (!result) return result;
           smoothPart(typeof given.smooth_deg === "number" ? given.smooth_deg : null);
+          if (given.pad) layPad(args.stack, given.pad);
           render();
           return result;
         }

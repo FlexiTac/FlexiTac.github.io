@@ -109,13 +109,15 @@ below (`bodies/<part>/<name>.stl`) around the Library's part.
   mirror image of the board.  That board is not the entry's Gerbers, which
   make the board of the Library's part only.  On the other four grippers
   the other finger is the same part turned, with the same board.
-- The MakerMods Metal Arm's pictures and 3D view show only its two HandUMI
-  tips (the Library's part, and the same tip turned for the other finger),
+- The MakerMods Metal Arm's pictures and 3D view show its two HandUMI tips
+  (the Library's part, and the same tip turned for the other finger),
   standing on `bodies/makermods-metal/rail.stl`: a plain rail drawn by the
-  FlexiTac-Gen project, not MakerMods hardware.  No MakerMods part is drawn:
-  the guide rail, its holes and the end stops on that rail are plain shapes
-  of the project's own too (`bodies/makermods-metal/drawn-*.stl`, under
-  Modified files below).
+  FlexiTac-Gen project, not MakerMods hardware.  No MakerMods file is used:
+  the rest of the gripper drawn there (the beam's walls and end stops, the
+  guide rail and its holes, the housing and motor can, the camera's mount
+  and lens) is plain shapes of the project's own too, drawn by eye after
+  the maker's photos, not MakerMods' 3D model or hardware
+  (`bodies/makermods-metal/drawn-*.stl`, under Modified files below).
 - Each body below is a third-party file of the Sources above, taken at its
   pinned commit and modified as its Change column says (all written in
   millimetres, and all but one decimated with quadric error metrics: each
@@ -353,14 +355,21 @@ it), from the numbers of
 drawing, not Unitree Robotics' geometry.
 
 `bodies/makermods-metal/drawn-rail-steel.stl`,
-`bodies/makermods-metal/drawn-rail-bores.stl` and
-`bodies/makermods-metal/drawn-end-stops.stl` are not MakerMods files, and no
-MakerMods model was used to make them: they are plain boxes and cylinders
-drawn by the FlexiTac-Gen project in 2026 after photos of the gripper, on
-the project's own plain rail (the steel guide rail as a strip along the
-beam, its counterbored holes as dark discs, the beam's two end stops), sized
-by eye, from the numbers of `tools/library_looks/makermods-metal.json`.  They
-are the project's own drawing, not MakerMods' geometry.
+`bodies/makermods-metal/drawn-rail-bores.stl`,
+`bodies/makermods-metal/drawn-beam-walls.stl`,
+`bodies/makermods-metal/drawn-end-stops.stl`,
+`bodies/makermods-metal/drawn-housing.stl`,
+`bodies/makermods-metal/drawn-camera-mount.stl` and
+`bodies/makermods-metal/drawn-camera-lens.stl` are not MakerMods files, and
+no MakerMods model was used, traced or measured to make them: they are plain
+boxes, cylinders and prisms drawn by the FlexiTac-Gen project in 2026 by eye
+after the maker's product photos of the gripper and its published stroke,
+round the project's own plain rail (the beam's two walls and end stops, the
+steel guide rail on its floor with its counterbored holes, the gripper's
+housing and motor can behind it, the printed camera mount, the camera's
+housing, barrel and lens), from the numbers of
+`tools/library_looks/makermods-metal.json`.  They are the project's own
+drawing, not MakerMods' 3D model, geometry or hardware.
 
 ### Bodies
 

@@ -3,8 +3,9 @@
  "about": "The Library's showcase (library.html's first card and its page; the user's request of 2026-11-12): the original, hand-designed FlexiTac sensor on the xArm gripper with UMI soft fingers.  It is no entry: no fit, no build, none of the generator's downloads.  The words are written by hand; \"placed\" is the pad's placed record (../vendor/flexitac-v2/umi-finray.placed.json) with the showcase's scene; \"image\" and \"shot\" are written by tools/browser/library_shots.py --showcase (the pictures in showcase/, their bytes and SHA-256, and what they were shot from); tools/library_write.py checks all of it (docs/LIBRARY_VIEW.md).",
  "id": "flexitac-g1",
  "title": "FlexiTac on xArm",
- "label": "Hand-designed, not auto-generated",
- "text": "The original FlexiTac sensor, 12 \u00d7 32 taxels at 2 mm, on the xArm gripper's soft fingers.",
+ "label": "Original FlexiTac \u00b7 Hand-designed, pre-agent",
+ "text": "FlexiTac PCBs make tactile sensors accessible, reliable and standardized.",
+ "detail": "The original FlexiTac sensor, 12 \u00d7 32 taxels at 2 mm, on the xArm gripper's soft fingers.",
  "sensor": {
   "rows": 32,
   "columns": 12,
@@ -75,11 +76,11 @@
  },
  "shot": {
   "scene": "scenes/flexitac-g1.json",
-  "scene_sha256": "de6e62b5f641308b42bc01a312a7c1acf567be7b8f862e0d77aec9e40ecc122d",
+  "scene_sha256": "d40f956c380e235bacc978c53196bed139c23be9ad7c36b7c9143055411b0414",
   "art_sha256": "d25710d94993f05c4740978cf5d8293a8f35eac71521544804978bec471d3b7f",
   "placed_sha256": "9b486c99c7eeb268fec5bc517f11f2b675158edd3836d94a278ae2016cec3773",
   "figure_sha256": "e38217818ff99c16f8d898f74079f4297bb51b7613218839c04ae9f2a59ab1c1",
-  "view_sha256": "4da484c602131aba4c222d2404d468a6e824ae45217b8722a81dae4e6a344cd6",
+  "view_sha256": "19590425e1fdf666c8a742bb007ecebef4ba2c3becf991db79c83563a8fe05f0",
   "look": "photo",
   "margins_px": {
    "exploded": [

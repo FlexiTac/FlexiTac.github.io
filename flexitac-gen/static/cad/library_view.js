@@ -50,12 +50,13 @@ async function fetched(url, kind) {
 function partLookOf(rules, partId, family) {
   // The look scenes.json's rules give a part without a scene (docs/LIBRARY_VIEW.md "The looks"): part_looks names it
   // by the part's id, else by its family's, as a look of the rules' looks or as the look itself; {look, smooth_deg
-  // (the rules' part_smooth_deg, or null: flat facets)}, or null (no rule: the part as Gen by Surface draws it).
+  // (the rules' part_smooth_deg, or null: flat facets), pad (the rules' part_pad: the assembled pad's tint, or null)},
+  // or null (no rule: the part as Gen by Surface draws it).
   const named = rules?.part_looks?.[partId] ?? (family ? rules?.part_looks?.[family] : undefined);
   if (named === undefined) return null;
   const spec = typeof named === "string" ? rules.looks?.[named] : named;
   if (!spec) throw new Error(`the rules' part_looks names the look ${JSON.stringify(named)}, which is not a look of the rules`);
-  return {look: spec, smooth_deg: typeof rules.part_smooth_deg === "number" ? rules.part_smooth_deg : null};
+  return {look: spec, smooth_deg: typeof rules.part_smooth_deg === "number" ? rules.part_smooth_deg : null, pad: rules.part_pad || null};
 }
 
 function boxOf(positions, scale) {

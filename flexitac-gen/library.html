@@ -21,8 +21,8 @@
     <!-- The Library (the user's requests of 2026-11-05 and 2026-11-06): sensors already fitted to open-source gripper
          fingers, laid out as the Apple Store's: the title and its line, the grippers once each, four cards to a row,
          each opening its 2 mm sensor whose page offers its pitches, then the UMI finger's shelf (its pitches and the
-         tapered tips); at #<id> a sensor's own page with Open in Gen by Surface (./?part=<id>) and its Gerber ZIPs.
-         web/library.js draws it from static/library/entries.json (tools/library_write.py); no engine and no Pyodide
+         tapered tips); at #<id> a sensor's own page with Open in Gen by Surface (./?part=<id>) and its Gerber ZIPs, in
+         a window over the Library since 2026-11-15.  web/library.js draws it from static/library/entries.json (tools/library_write.py); no engine and no Pyodide
          here, and three.js on a sensor's page only, whose picture becomes a 3D view to turn (library.js imports
          cad/library_view.js there, never on the grid; docs/LIBRARY_VIEW.md).  The header is index.html's: its title
          block, and its right (the look's toggle and the community links), byte for byte (tests/test_library.py), the
@@ -67,8 +67,16 @@
         <div class="lib-shelves" id="libShelves"></div>
       </div>
       <!-- A sensor's own page (#<id>): its picture (the sensor on its part, Exploded or Assembled, since 2026-11-05), its
-           facts, Open in Gen by Surface and its downloads. -->
-      <article class="lib-detail" id="libDetail" aria-labelledby="libDetailTitle" hidden></article>
+           facts, Open in Gen by Surface and its downloads.  Since the user's request of 2026-11-15 ("we may not jump to a
+           new page ... a large window, and if you click the x of right top corner, it will close and back show lib") a
+           large window over the Library (a modal dialog: library.js opens it with showModal()), its content scrolling
+           inside it, its X at its top right closing it. -->
+      <dialog class="lib-window" id="libWindow" aria-labelledby="libDetailTitle">
+        <button type="button" class="lib-close" id="libClose" aria-label="Close"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true" focusable="false"><g transform="rotate(45 8 8)"><rect x="7.1" y="1.5" width="1.8" height="13" rx=".9"/><rect x="1.5" y="7.1" width="13" height="1.8" rx=".9"/></g></svg></button>
+        <div class="lib-window-body" id="libWindowBody">
+          <div class="lib-detail" id="libDetail"></div>
+        </div>
+      </dialog>
       <p class="lib-status" id="libStatus" role="alert"></p>
     </main>
     <footer class="lib-footer">

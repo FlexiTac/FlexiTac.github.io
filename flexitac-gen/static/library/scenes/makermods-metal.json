@@ -2,7 +2,7 @@
  "format": "flexitac-library-scene/v1",
  "part": "makermods-metal",
  "part_mesh_sha256": "f480c8fb9fbe5027ce0741436cd3c60c77702c2eec2b80d87f5829c4adca5925",
- "about": "MakerMods Metal Arm at full opening: its two HandUMI tips (handumi-hw 1448278, metal-arm-gripper-tip-left.stl, the Library mesh, Apache-2.0), 50 mm each (metal-python-ros bccf3c8, metal_ros2/src/metal_description/urdf/metal_with_gripper.urdf: joint7/joint8 0..0.05 m), the faces 96 mm apart.  The HandUMI tips are one file: the other tip is this one turned 180 degrees about the approach axis, 95.0 mm along x, so its sensor is the same board.  No MakerMods part is drawn (its licence is not clear): the tips stand on a plain rail drawn by the FlexiTac-Gen project, 170 x 26 x 10 mm, not MakerMods hardware.  The looks: drawn after the maker's product photos of the Metal Arm (makermods.ai, 2026-11-12): the two jaws matte black resin, the cross beam black anodised aluminium, the linear guide rail on it bright ground steel.  The plain rail is drawn as that beam, and three things on it are the project's own drawing too, plain boxes and cylinders sized by eye from the photos, not MakerMods geometry: the steel guide rail as a strip 7 mm wide with rounded shoulders along the middle of the beam's top (bodies/makermods-metal/drawn-rail-steel.stl; the real rail is taller and carries the jaws on carriages, which are not drawn), its counterbored holes as dark discs every 15 mm (drawn-rail-bores.stl: the seven between the jaws, the two under the see-through jaw and the one in the open slot at the other jaw's back) and the beam's two end stops (drawn-end-stops.stl).  No gripper body, carriage, screw, camera mount or finger loop is drawn.",
+ "about": "MakerMods Metal Arm at full opening: its two HandUMI tips (handumi-hw 1448278, metal-arm-gripper-tip-left.stl, the Library mesh, Apache-2.0), 50 mm each (metal-python-ros bccf3c8, metal_ros2/src/metal_description/urdf/metal_with_gripper.urdf: joint7/joint8 0..0.05 m), the faces 96 mm apart.  The HandUMI tips are one file: the other tip is this one turned 180 degrees about the approach axis, 95.0 mm along x, so its sensor is the same board.  No MakerMods file is used (its licence is not clear): the tips stand on a plain rail drawn by the FlexiTac-Gen project, 158 x 26 x 12 mm, no longer than the open jaws need, not MakerMods hardware, and the rest of the gripper is the project's own drawing too.  The looks: drawn after the maker's product photos of the Metal Arm (makermods.ai, 2026-11-12): the two jaws matte black resin, the cross beam and the gripper's body black anodised aluminium, the linear guide rail ground steel, the camera's mount and housing black print.  The gripper's body is the project's own drawing, by eye after those photos and the maker's published 0 to 95 mm stroke (the user's decision of 2026-11-14), in plain boxes, cylinders and prisms: not MakerMods' 3D model or hardware, and no MakerMods model was used, traced or measured for it.  The plain rail is the beam, a C-channel with its two walls (bodies/makermods-metal/drawn-beam-walls.stl) and two end stops (drawn-end-stops.stl); on its floor the steel guide rail with rounded shoulders (drawn-rail-steel.stl) and its counterbored holes as dark hexagons every 20 mm (drawn-rail-bores.stl); behind the beam the gripper's housing, a chamfered block and its motor can (drawn-housing.stl); beside them the printed camera mount, its bracket, the camera's flat housing and lens barrel (drawn-camera-mount.stl), and the lens (drawn-camera-lens.stl).  The carriages, the screws, the finger loops and the cables are not drawn, and the jaws are HandUMI's replica tips.",
  "frame": "the part's file axes, mm",
  "approach": [
   0.0,
@@ -48,7 +48,7 @@
  "bodies": [
   {
    "mesh": "bodies/makermods-metal/rail.stl",
-   "sha256": "5e7fb69b93bc051ce01619729dee5d70b8578369b03355712f05ceff262f6a89",
+   "sha256": "9ecc75d35672a1734053293c52773861cd6ca03fca7f9561243d5b265498c745",
    "bytes": 684,
    "triangles": 12,
    "matrix": [
@@ -82,9 +82,9 @@
   },
   {
    "mesh": "bodies/makermods-metal/drawn-rail-steel.stl",
-   "sha256": "b80327b34f64f90ef1665fa9ccdb187de0dbf6c1f055201b2457008724329626",
-   "bytes": 6084,
-   "triangles": 120,
+   "sha256": "51e2b87e65020a04624af35050ea18611309134b5364198e1166ad1634df9659",
+   "bytes": 2284,
+   "triangles": 44,
    "matrix": [
     [
      1.0,
@@ -116,9 +116,9 @@
   },
   {
    "mesh": "bodies/makermods-metal/drawn-rail-bores.stl",
-   "sha256": "28448e4ad66a436824f4270d744f79100835492493cbab3669d4787e72e2fecf",
-   "bytes": 16084,
-   "triangles": 320,
+   "sha256": "6fd90a9bbfc986ca4b75bf1c17a7d7892f17b74df3f45b3bfc469704c05e9fb9",
+   "bytes": 8084,
+   "triangles": 160,
    "matrix": [
     [
      1.0,
@@ -149,10 +149,10 @@
    "look": "plastic-black-matte"
   },
   {
-   "mesh": "bodies/makermods-metal/drawn-end-stops.stl",
-   "sha256": "d778af12fa2cf9f3b8b4b3d0ced4bcc891503ce313a617f1f1ee4a23f0f8e121",
-   "bytes": 1284,
-   "triangles": 24,
+   "mesh": "bodies/makermods-metal/drawn-beam-walls.stl",
+   "sha256": "70a77f6a8d2f1a8166152847f56dc280edccead9cf19a819c202c3598eb4a337",
+   "bytes": 1684,
+   "triangles": 32,
    "matrix": [
     [
      1.0,
@@ -181,20 +181,168 @@
    ],
    "finger": null,
    "look": "beam-anodized"
+  },
+  {
+   "mesh": "bodies/makermods-metal/drawn-end-stops.stl",
+   "sha256": "7f6de41ff60d9686fda1e14ab1d85da243bedab80212e82d41248b7dfa6e0eb6",
+   "bytes": 1684,
+   "triangles": 32,
+   "matrix": [
+    [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     1.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": null,
+   "look": "beam-anodized"
+  },
+  {
+   "mesh": "bodies/makermods-metal/drawn-housing.stl",
+   "sha256": "c99419e3e7b90327a5787520833f3bfaa0d9dd6ac53e15ec96fabbca4ed53a63",
+   "bytes": 6284,
+   "triangles": 124,
+   "matrix": [
+    [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     1.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": null,
+   "look": "housing-anodized"
+  },
+  {
+   "mesh": "bodies/makermods-metal/drawn-camera-mount.stl",
+   "sha256": "e1580778286a4b48bf0720962c21379a8eeb208aa8f39a625c2baf23f2aae000",
+   "bytes": 5284,
+   "triangles": 104,
+   "matrix": [
+    [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     1.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": null,
+   "look": "print-black"
+  },
+  {
+   "mesh": "bodies/makermods-metal/drawn-camera-lens.stl",
+   "sha256": "a539d45660ba6cde4a58b0ec7e0768ff474c9653790433e381c5fd6009f64a09",
+   "bytes": 2284,
+   "triangles": 44,
+   "matrix": [
+    [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     1.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": null,
+   "look": "lens-glass"
   }
  ],
  "looks": {
   "beam-anodized": {
    "color": "#2c2c32",
    "metalness": 0.5,
-   "roughness": 0.8,
-   "env_intensity": 2.3
+   "roughness": 0.7,
+   "env_intensity": 2.8
+  },
+  "housing-anodized": {
+   "color": "#2a2b30",
+   "metalness": 0.4,
+   "roughness": 0.6,
+   "env_intensity": 2.6
   },
   "jaw-resin": {
-   "color": "#3b3b41",
+   "color": "#313134",
    "metalness": 0,
    "roughness": 0.8,
    "env_intensity": 1.8
+  },
+  "lens-glass": {
+   "color": "#1e1f24",
+   "metalness": 0,
+   "roughness": 0.45,
+   "env_intensity": 1.6
   },
   "plastic-black-matte": {
    "color": "#262628",
@@ -202,11 +350,17 @@
    "roughness": 0.75,
    "env_intensity": 1.8
   },
+  "print-black": {
+   "color": "#2a2a2c",
+   "metalness": 0,
+   "roughness": 0.65,
+   "env_intensity": 1.5
+  },
   "rail-ground": {
    "color": "#b4b7ba",
    "metalness": 1,
    "roughness": 0.45,
-   "env_intensity": 0.7
+   "env_intensity": 0.8
   }
  },
  "part_look": "jaw-resin",
@@ -214,5 +368,5 @@
  "see_through": [
   "mate"
  ],
- "picture": "on both fingertips on a plain rail"
+ "picture": "on both fingertips of the open gripper"
 }
