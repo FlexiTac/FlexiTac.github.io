@@ -55,6 +55,24 @@
   "part_pad": {
    "color": "#545a3a",
    "opacity": 0.65
+  },
+  "part_homes": {
+   "umi-finray": {
+    "approach": [
+     0,
+     0,
+     -1
+    ],
+    "explode_share": 0.8
+   },
+   "umi-tapers": {
+    "approach": [
+     0,
+     0,
+     -1
+    ],
+    "explode_share": 0.8
+   }
   }
  },
  "scenes": {

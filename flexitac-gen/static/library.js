@@ -7,9 +7,9 @@
 // page, then the UMI finger's shelf (SHELVED; after the grippers, the user's request of 2026-11-06: "UMI Fin-Ray Gripper.
 // ... 这个section可以放在夹爪的后面"): since the user's request of 2026-11-16 ("后面这三种不是重复了吗 ... 我在这里更多想要体现umi
 // 不同shape我们都可以fit") one card per finger shape, the straight finger's as a gripper's (its pitches chosen on its page)
-// and then each card of its family's (the tapered tips'), side by side in a grid of three to a row (two on a phone; a
-// row that scrolled sideways until the review of that day), each picture framed on the fingertip; and at #<id> a sensor's own
-// page: its facts, its Pitch (every pitch of its gripper), Open in Gen by Surface (gen.html?part=<id>, where main.js builds it
+// and then each card of its family's (the tapered tips'), in the grippers' grid (four to a row, two below 735 px), each
+// card its Exploded card file at the grippers' homes, as a gripper's (the user's request later that day: "这样所有card都是
+// 对齐的，大小对齐，空间朝向对齐"); and at #<id> a sensor's own page: its facts, its Pitch (every pitch of its gripper), Open in Gen by Surface (gen.html?part=<id>, where main.js builds it
 // from its shipped fit) and its Top and Bottom FPC Gerber ZIPs.  No engine runs here: on the static site (its pages
 // carry the flexitac-backend meta) the ZIPs were built with the site (static/library/files.json); under app.py each is
 // the server's export of the sensor's design.
@@ -45,9 +45,9 @@
 // listener (the UMI shelf's row had one for its arrows until 2026-11-16: nothing scrolls sideways now).  Every picture
 // is slot(): a light 16:10 box with the sensor's picture once entries.json names one, else (or when its file does not
 // load) a drawing of its field made here.  The pictures (the user's request of 2026-11-05, "卡片上的图为手指+传感器叠加":
-// the cards show the finger and the sensor on it) are the generator's on-part figure, shot by the shots tool at its
-// Exploded and its Assembled home on a transparent background: a gripper's card shows the Exploded one, a UMI shelf's
-// card the Assembled one framed on the fingertip (2026-11-16), a sensor's page both, with a small switch between them.
+// the cards show the finger and the sensor on it) are the Library's 3D view at its Exploded and its Assembled home, shot
+// by the shots tool on a transparent background: every card shows the Exploded one (the UMI finger's at the grippers'
+// homes since 2026-11-16), a sensor's page both, with a small switch between them.
 "use strict";
 
 (() => {
@@ -77,11 +77,6 @@
   // grippers' section: the part's own card and its families' cards (its shapes, 2026-11-16); every other part of
   // entries.json's order is one card in the grippers' section, its pitches chosen on its sensor's page.
   const SHELVED = ["umi-finray"];
-  // The view a shelf's cards show and its sensors' pages open with (the lead's review of the UMI shelf's shapes,
-  // 2026-11-16): from the Exploded home the fingertip's tapered end was foreshortened under the exploded layers, so the
-  // six shapes looked alike on their cards; assembled, the contact face's outline is the shape.  The grippers' cards and
-  // pages keep the Exploded picture.
-  const SHELF_VIEW = "assembled";
   const COUNTS = ["None", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Eleven", "Twelve"];
   // index: entries.json; files: files.json (the static site); view: "grid" or "detail" (the window open); picture: the
   // view a sensor's page shows (VIEWS; kept as its pitch, shape or tip changes, the first again on each sensor's page
@@ -162,17 +157,14 @@
     // placeholder (field()): never a broken image (missed, a sensor's page's: told which view failed).
     const box = el("div", {className: `lib-shot lib-shot-${kind}`});
     const image = variant.image;
-    // A shelf's card asks for its Assembled picture (SHELF_VIEW): the 1280 x 800 file, scaled down by the browser (there
-    // is no Assembled card file), lazily as every card's.
-    const assembledCard = kind === "card" && view === "assembled";
-    const src = kind === "detail" ? image?.[view]?.src : kind === "showcase" ? image?.card?.src
-      : assembledCard ? image?.assembled?.src : image?.exploded?.card;
+    // (Every card its Exploded card file, the UMI shelf's too since the user's request of 2026-11-16: "图一中umicard图太大
+    // ... 这样所有card都是对齐的，大小对齐，空间朝向对齐"; its Assembled picture framed on the tip before.)
+    const src = kind === "detail" ? image?.[view]?.src : kind === "showcase" ? image?.card?.src : image?.exploded?.card;
     if (!src) {
       box.append(field(variant));
       return box;
     }
-    const [width, height] = kind === "detail" ? [image[view].width, image[view].height] : kind === "showcase" ? [image.card.width, image.card.height]
-      : assembledCard ? [image.assembled.width, image.assembled.height] : CARD;
+    const [width, height] = kind === "detail" ? [image[view].width, image[view].height] : kind === "showcase" ? [image.card.width, image.card.height] : CARD;
     const shown = el("img", {src: BASE + src, width, height, alt: image.alt || "", decoding: "async",
       loading: kind === "card" ? "lazy" : null});
     shown.addEventListener("error", () => {
@@ -256,16 +248,6 @@
     return low === high ? `${low} mm` : `${low} to ${high} mm`;
   }
 
-  function tipShot(variant) {
-    // A shelf's card's picture (the UMI finger's shapes, the review of 2026-11-16): its sensor Assembled (SHELF_VIEW),
-    // framed on the fingertip (library.css .lib-shot-tip: the picture scaled about the tip inside its box), where the
-    // shapes differ; the whole finger at the Assembled home had left the taper a third of the picture's width.  The same
-    // file as the 3D view's home (no picture of its own); the placeholder, without one, unframed.
-    const box = slot(variant, "card", SHELF_VIEW);
-    box.classList.add("lib-shot-tip");
-    return box;
-  }
-
   function gripperCard(partId, shelved = false) {
     // A gripper's one card in the grippers' section (the user's request of 2026-11-06: each gripper but the UMI finger
     // once on the page, its card saying that its page offers its pitches): its default (2 mm) sensor's picture, its
@@ -283,7 +265,7 @@
     const name = shelved ? part.card || part.title : part.title;
     return el("a", {className: "lib-card", id: shelved ? null : `gripper-${partId}`, href: `#${part.default}`, "data-variant": part.default, "data-part": partId,
       "aria-label": `${shelved ? `${part.title}, ${name}` : part.title}: ${lines.join(", ").toLowerCase()}`},
-      shelved ? tipShot(state.index.variants[part.default]) : slot(state.index.variants[part.default], "card"),
+      slot(state.index.variants[part.default], "card"),
       el("span", {className: "lib-card-text"},
         el("span", {className: "lib-card-name"}, whole(name)),
         lines.map(line => el("span", {className: "lib-card-line"}, keep(line)))));
@@ -296,7 +278,7 @@
     const shelfPart = state.index.parts[state.index.families[familyId].shelf];
     return el("a", {className: "lib-card", href: `#${shape.default}`, "data-variant": shape.default, "data-family": familyId, "data-card": shape.key,
       "aria-label": `${shelfPart.title}, ${shape.title}: ${shape.lines.join(", ").toLowerCase()}`},
-      tipShot(state.index.variants[shape.default]),
+      slot(state.index.variants[shape.default], "card"),
       el("span", {className: "lib-card-text"},
         el("span", {className: "lib-card-name"}, shape.title),
         shape.lines.map(line => el("span", {className: "lib-card-line"}, keep(line)))));
@@ -307,9 +289,9 @@
 
   function shelf(partId, families = []) {
     // A shelved part's shelf (the UMI finger's): its heading ('UMI Fin-Ray Gripper. Six finger shapes, straight to
-    // pointed.'), then its own card and its families' cards, in their order, side by side in a grid (the review of
-    // 2026-11-16: the shapes are there to be compared; in a row that scrolled sideways four were in view at 1440 px, one
-    // on a phone): three to a row from 735 px, two below (library.css), nothing scrolling sideways.
+    // pointed.'), then its own card and its families' cards, in their order, in the grippers' grid (.lib-cards: four to
+    // a row, two below 735 px; each card a gripper card's size, the user's request of 2026-11-16), nothing scrolling
+    // sideways.
     const part = state.index.parts[partId];
     const id = `shelf-${partId}`;
     return el("section", {className: "lib-shelf", id, "aria-labelledby": `${id}-title`}, heading(id, `${part.title}.`, part.shelf),
@@ -870,11 +852,10 @@
 
   function showDetail(id) {
     opening();
-    // Each sensor's page opened (from a card, its address or Back) shows its card's view first: a UMI shelf's sensor's
-    // Assembled (SHELF_VIEW; the review of 2026-11-16: from Exploded a shape's tapered end lay under the exploded layers,
-    // the shapes alike again), a gripper's Exploded; its pitch, shape and tip controls keep the view chosen (renderDetail
-    // alone).
-    state.picture = isShelved(homeOf(id)) ? SHELF_VIEW : VIEWS[0][0];
+    // Each sensor's page opened (from a card, its address or Back) shows its card's view first, Exploded (a UMI shelf's
+    // too since the user's request of 2026-11-16: every card Exploded at the grippers' homes; Assembled before); its
+    // pitch, shape and tip controls keep the view chosen (renderDetail alone).
+    state.picture = VIEWS[0][0];
     setNote("");
     renderDetail(id);
     raise();

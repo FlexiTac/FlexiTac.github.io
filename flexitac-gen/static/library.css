@@ -43,11 +43,6 @@ main.lib { --lib-gutter:clamp(24px,5vw,76px); --lib-gap:20px; display:block; max
    fills the box contained and centred, its light the box's in the dark scheme too. */
 .lib-shot { aspect-ratio:16 / 10; border-radius:var(--r-md); background:#f5f5f7; overflow:hidden; }
 .lib-shot > svg,.lib-shot > img { display:block; width:100%; height:100%; object-fit:contain; }
-/* A UMI shelf's card's picture framed on the fingertip (the review of 2026-11-16; library.js tipShot()): the Assembled
-   home, the whole finger at an angle, scaled 2.2 times about the tip's corner of the picture inside its box (which clips
-   it), so the tapered end and the sensor on it fill the card, the tip clear of the box's top; the same file, its bytes
-   the 3D view's home.  At a 1440 px window's card (406 px) the picture is drawn 893 px wide from its 1280. */
-.lib-shot-tip > img { transform:scale(2.2); transform-origin:41% 3%; }
 .lib-field { fill:#fff; stroke:#c7c7cc; stroke-width:1; vector-effect:non-scaling-stroke; }
 .lib-lines line { stroke:#86868b; stroke-opacity:.55; stroke-width:1; vector-effect:non-scaling-stroke; }
 /* A sensor's page's picture framed as a card (on the page's grey the light box alone would not show). */
@@ -80,12 +75,10 @@ main.lib { --lib-gutter:clamp(24px,5vw,76px); --lib-gap:20px; display:block; max
    grippers were 1,397 px tall at 744 px).  At 735 px four to a row are 150 px cards with 114 px of text, a 360 px
    phone's 116 px: its lines on one line each, a two-word name on two ("Franka / Hand"), as there.  It wraps: nothing
    scrolls sideways.  Its cards' room above and below 8 px and 28 px (their shadows'); its names and lines balanced
-   ("Trossen / WidowX AI").  The UMI shelf (since the review of 2026-11-16, a row that scrolled sideways before) is the
-   same grid three to a row from 735 px: its six shapes side by side in two rows (4 + 2 would leave a row half empty),
-   each card a third of the row (418 px at 1440 px, the grippers' 309 px), its picture framed on the tip; two to a row
-   below, as the grippers'. */
+   ("Trossen / WidowX AI").  The UMI shelf (a row that scrolled sideways until the review of 2026-11-16, then three to a
+   row) is the same grid, four to a row and two below 735 px (4 + 2): since the user's request of 2026-11-16 ("确保你要和
+   上面的card大小保持一致") its cards are a gripper's card's size at every width. */
 .lib-cards { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:var(--lib-gap); padding:8px 0 28px; }
-@media (min-width:735px) { .lib-shelf > .lib-cards { grid-template-columns:repeat(3,minmax(0,1fr)); } }
 /* Tabbed to, a card of the lower rows comes into sight with its focus ring (2 px, 2 px off) and room round it, not
    flush with the window's edge. */
 .lib .lib-cards > .lib-card { width:auto; min-width:0; scroll-margin:16px 0; }

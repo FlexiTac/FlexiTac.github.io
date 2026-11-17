@@ -191,6 +191,7 @@ function creased(positions, degrees, mm = 1) {
 const m4 = rows => new THREE.Matrix4().set(...rows.flat());
 const r1 = x => Math.round(x * 10) / 10;
 const r3 = x => Math.round(x * 1000) / 1000;
+const r6 = x => Math.round(x * 1e6) / 1e6;
 
 function sample(positions, matrix, most, out) {
   const count = positions.length / 3; const step = Math.max(1, Math.ceil(count / most));
@@ -482,7 +483,7 @@ export function libraryStage() {
     // positions, smoothed: the angle a part geometry's normals are at now, partPoints: how many points its corners share
     // while they are smooth (null: flat).
     const state = {info: null, extras: null, rules: null, geometries: new Map(), lamps: {key: null}, studio: undefined, dressed: null,
-      creases: new WeakMap(), smoothed: new WeakMap(), partPoints: null, pad: null};
+      creases: new WeakMap(), smoothed: new WeakMap(), partPoints: null, pad: null, aimed: null};
     // The part's own material as the figure made it (onpart.js partMaterial: its colour, its matte dielectric, no
     // environment, the contact shade's shader): what a look changes on it for a drawing is put back from here.
     const plain = {color: partLook.color.clone(), roughness: partLook.roughness, metalness: partLook.metalness, envMap: partLook.envMap,
@@ -613,9 +614,55 @@ export function libraryStage() {
       // OrbitControls' frame of it (its constructor's: the one private access, _quat and _quatInverse).
       view.homes = null;
       state.info = null;
+      state.aimed = null;
       camera.up.set(...HOME_UP);
       controls._quat.setFromUnitVectors(camera.up, new THREE.Vector3(0, 1, 0));
       controls._quatInverse.copy(controls._quat).invert();
+    }
+
+    function aim(stack, home, positions) {
+      // A part without a scene at the grippers' homes (docs/LIBRARY_VIEW.md "Parts without a scene"; the user's request
+      // of 2026-11-16: the UMI finger seen as the grippers' fingers are, so no card asks the eye to turn the gripper
+      // again): the camera's up the part's approach axis (home.approach, the rules' part_homes, in its file's axes),
+      // each mode's direction the rules' camera about the face's normal (direction(), a gripper's: elevation_deg above
+      // the plane across the approach axis, tilt_deg off the normal, from the front), as prepare() sets a gripper's.  Its
+      // stack explodes home.explode_share of the boards' narrower side a layer along the normal (drape.js's own
+      // EXPLODE_SHARE, 0.55, left the bottom FPC against the finger's face, seen nearly edge-on from this side), and the
+      // drawing's frame is a gripper's (prepare()): the whole part and the sheets.
+      const P = new THREE.Matrix4().fromArray(stack.partMatrix);
+      const up = new THREE.Vector3(...home.approach).transformDirection(P);
+      const normal = new THREE.Vector3(0, 0, 1);
+      const old = stack.gap_mm;
+      const step = home.explode_share * stack.width_mm;
+      const shift = stack.explode === "shift";
+      for (const name of LAYERS) {
+        const sheet = stack.sheets[name];
+        for (let i = 0; i < sheet.positions.length; i += 1) {
+          sheet.positions[i] = shift ? sheet.assembled[i] + (i % 3 === 2 ? sheet.layer * step : 0)
+            : sheet.assembled[i] + ((sheet.positions[i] - sheet.assembled[i]) * step) / old;
+        }
+      }
+      stack.gap_mm = Math.round(step * 1e6) / 1e6;
+      for (const mode of MODES) {
+        const points = [];
+        sample(positions, P, 3000, points);
+        for (const name of LAYERS) {
+          const sheet = stack.sheets[name];
+          sheetPoints(sheet, mode === "assembled" ? sheet.assembled : sheet.positions, null, points);
+        }
+        const all = new Float32Array(points);
+        const low = [Infinity, Infinity, Infinity]; const high = [-Infinity, -Infinity, -Infinity];
+        for (let k = 0; k < all.length; k += 3) for (let a = 0; a < 3; a += 1) { low[a] = Math.min(low[a], all[k + a]); high[a] = Math.max(high[a], all[k + a]); }
+        const centre = [0, 1, 2].map(a => (low[a] + high[a]) / 2);
+        let rAll = 1;
+        for (let k = 0; k < all.length; k += 3) rAll = Math.max(rAll, Math.hypot(all[k] - centre[0], all[k + 1] - centre[1], all[k + 2] - centre[2]));
+        stack.home[mode] = {centre, points: all, rAll};
+      }
+      view.homes = {exploded: direction(home.camera.exploded, up, normal).toArray(), assembled: direction(home.camera.assembled, up, normal).toArray()};
+      camera.up.copy(up);
+      controls._quat.setFromUnitVectors(camera.up, new THREE.Vector3(0, 1, 0));
+      controls._quatInverse.copy(controls._quat).invert();
+      state.aimed = {up, home, step_mm: stack.gap_mm, drape_step_mm: old, lamp: null, key: null};
     }
 
     function prepare(stack, given, positions) {
@@ -971,10 +1018,29 @@ export function libraryStage() {
 
     // Each frame of a gripper's drawing: stack 2's layers ordered as the camera sees them (its sheets shown as stack 1's
     // are), the see-through fingers (in the rules' see_through_modes), both films' lamps (onpart.js's recipe at each film), the studio rolled
-    // about the line of sight so the stack's normal is up in it, as at drape.js's homes.  Without a scene only the pad's
-    // tint, shown in Assembled alone.
+    // about the line of sight so the stack's normal is up in it, as at drape.js's homes.  Without a scene the pad's
+    // tint, shown in Assembled alone, and at the grippers' homes (aim()) the film's lamp and the studio's roll as a
+    // gripper's stack 1 has them (the figure's own lamp is aimed from its own home).
     scene.onBeforeRender = () => {
       if (state.pad) state.pad.visible = view.mode === "assembled";
+      const aimed = state.aimed;
+      if (aimed && !state.extras && view.stack) {
+        const key = `${view.mode}:${camera.position.toArray().map(a => a.toFixed(3))}`;
+        if (aimed.key !== key) {
+          aimed.key = key;
+          const film = view.stack.sheets.film;
+          const one = [];
+          sheetPoints(film, view.mode === "assembled" ? film.assembled : film.positions, null, one, 4000);
+          aimed.lamp = new THREE.Vector3();
+          lampAt(one, new THREE.Vector3(0, 0, 1), aimed.lamp);
+        }
+        look.filmLamp.value.copy(aimed.lamp);
+        camera.updateMatrixWorld();
+        const n = new THREE.Vector3(0, 0, 1).transformDirection(camera.matrixWorldInverse);
+        const roll = Math.atan2(-n.x, n.y);
+        look.rotation.setFromQuaternion(camera.quaternion.clone().multiply(new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(0, 0, 1), roll)));
+        return;
+      }
       const extras = state.extras;
       if (!extras || !view.stack) return;
       const local = camera.position.clone().applyMatrix4(extras.mateInverse); const target = controls.target.clone().applyMatrix4(extras.mateInverse);
@@ -1042,8 +1108,15 @@ export function libraryStage() {
 
     function report() {
       const i = state.info;
+      // A part without a scene at the grippers' homes (aim()): its home, its camera's up and its explode (no numbers: the
+      // stage measures a gripper's scene alone).
+      const aimed = state.aimed;
+      if (!i && aimed) {
+        return {home: view.homes, up: aimed.up.toArray().map(r6), camera: aimed.home.camera, approach: aimed.home.approach,
+          explode_share: aimed.home.explode_share, step_mm: r3(aimed.step_mm), drape_step_mm: r3(aimed.drape_step_mm), numbers: null};
+      }
       return i && {gap_mm: r3(i.gap_mm), step_mm: r3(i.step_mm), drape_step_mm: r3(i.drape_step_mm), kind: i.kind, explode: i.explode,
-        face_tilt_deg: r3(i.face_tilt_deg), see_through: i.see_through, camera: state.rules.camera, home: view.homes, numbers: i.numbers,
+        face_tilt_deg: r3(i.face_tilt_deg), see_through: i.see_through, camera: state.rules.camera, home: view.homes, up: i.up.toArray().map(r6), numbers: i.numbers,
         explode_stacks: state.rules.explode_stacks, see_through_modes: state.rules.see_through_modes,
         measures: i.measures,
         // What of the scene's looks is drawn (the checks' read): the bodies' looks by name, the part's, the crease angle
@@ -1060,7 +1133,9 @@ export function libraryStage() {
           defaults();
           // A part without a scene (the UMI finger and its tapered tips): the figure as Gen by Surface draws it, or, where
           // scenes.json's rules give the part a look (args.partLook: {look, smooth_deg, pad}), the part alone in that look
-          // and, with the rules' part_pad, the pad's tint over the film (layPad).
+          // and, with the rules' part_pad, the pad's tint over the film (layPad); where they give it a home
+          // (args.partHome: {approach, explode_share, camera}), at the grippers' homes (aim()).
+          if (args.partHome) aim(args.stack, args.partHome, args.positions);
           const given = args.partLook || null;
           if (!given) return figure.show(args);
           dress(lookSpec({part: given.look}, "part", "the rules' part_looks"));

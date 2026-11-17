@@ -59,6 +59,20 @@ function partLookOf(rules, partId, family) {
   return {look: spec, smooth_deg: typeof rules.part_smooth_deg === "number" ? rules.part_smooth_deg : null, pad: rules.part_pad || null};
 }
 
+function partHomeOf(rules, partId, family) {
+  // The home scenes.json's rules give a part without a scene (docs/LIBRARY_VIEW.md "Parts without a scene"; the user's
+  // request of 2026-11-16: the UMI finger seen as the grippers' fingers are): part_homes names it by the part's id, else
+  // by its family's, {approach: its fingers' approach axis in its file's axes, explode_share}; {approach, explode_share,
+  // camera: the rules' camera, the grippers' homes}, or null (no rule: Gen by Surface's figure's homes and explode).
+  const home = rules?.part_homes?.[partId] ?? (family ? rules?.part_homes?.[family] : undefined);
+  if (home === undefined) return null;
+  const {approach, explode_share: share} = home || {};
+  if (!Array.isArray(approach) || approach.length !== 3 || !approach.every(Number.isFinite) || !(share > 0) || !rules.camera) {
+    throw new Error(`the rules' part_homes of ${partId} is not {approach, explode_share} with the rules' camera`);
+  }
+  return {approach, explode_share: share, camera: rules.camera};
+}
+
 function boxOf(positions, scale) {
   // The part's box in mm (main.js partBox's).
   const low = [Infinity, Infinity, Infinity]; const high = [-Infinity, -Infinity, -Infinity];
@@ -238,7 +252,8 @@ export function createLibraryView(host, {probe = false, shoot = false, onState =
     inner.view.moved = false;
     if (figure.info().mode !== current.mode) figure.setMode(current.mode);
     const scene = given && {data: given.data, meshes: given.meshes, rules: given.rules, measure: shoot};
-    const shown = await figure.show({stack, positions, scene, partLook: given || placed ? null : partLookOf(rules, variant.part, part.family)});
+    const own = given || placed ? null : {look: partLookOf(rules, variant.part, part.family), home: partHomeOf(rules, variant.part, part.family)};
+    const shown = await figure.show({stack, positions, scene, partLook: own?.look ?? null, partHome: own?.home ?? null});
     if (!shown || serial !== current.serial) return false;
     Object.assign(current, {drawn: true, id, build_id: build, gripper: Boolean(given),
       ms: {load: Math.round(loaded - started), draw: Math.round(performance.now() - loaded)}});
