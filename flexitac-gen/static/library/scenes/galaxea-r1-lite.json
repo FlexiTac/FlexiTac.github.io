@@ -1,0 +1,184 @@
+{
+ "format": "flexitac-library-scene/v1",
+ "part": "galaxea-r1-lite",
+ "part_mesh_sha256": "9e486d5bfa8bd512e272bed6e5df92e8f9d12de796ee03139f5b9618b55fa79b",
+ "about": "Galaxea R1 Lite's G1 gripper at full opening: GalaxeaManipSim abe7f51, galaxea_sim/assets/r1_lite/robot.urdf (Apache-2.0): left_gripper_finger_joint1 prismatic 0..0.05 m and left_gripper_finger_joint2 -0.05..0 m, q 50 mm each, the faces 100 mm apart.  The body is left_gripper_link.STL (the motor can and the plate with the fingers' rails).  The Library mesh is left_gripper_finger_link1.STL (the finger and its carriage); the other finger, left_gripper_finger_link2, is that finger turned 180 degrees about the approach axis (0.00002 mm), so its sensor is the same board.  The URDF draws the OBJ copies of these meshes, the same triangles (0.0008 mm).  The looks: drawn after Galaxea's own pictures of the G1 gripper (the G1 Gripper's product picture on galaxea-dynamics.com, the R1 Lite's product picture there, and the G1's drawings in Galaxea's A1 hardware guide), 2026-11-17: a black anodised aluminium gripper, the motor can and the plate it stands on, and two dark grey fingers of a fine grained matt finish (no page or guide of Galaxea's read gives their material: the A1 hardware guide gives the G1's sizes, stroke and rated force).  The Library's part, the finger's mesh, also holds its carriage (the block at the finger's root, standing on the plate, and the bar in the notch at the base of its face) and its rack, under the plate's slot; the pictures show the carriage black, so on the sensor's finger the project draws plain boxes in the carriage's black just over them (bodies/galaxea-r1-lite/drawn-carriage-sensor.stl, the project's own): the block, the bar and the fillet between them 0.06 mm proud, and the rack where its slot shows it (the slot's opening through the plate's 3 mm top filled to 0.06 mm over the rack, 1.5 mm under the plate's top) and where it rises under the block.  The other finger, always see-through, keeps its carriage and rack in its ghost as before: black boxes there only doubled the ghost (a lighter block on the plate, and its rack's box showed through the plate's top).  Not modelled: the fingers' steel screws, the carriage's screw holes, the plate's screws.",
+ "frame": "the part's file axes, mm",
+ "approach": [
+  1.0,
+  0.0,
+  0.0
+ ],
+ "opening": {
+  "q_mm": 50.0,
+  "limit_mm": 50.0,
+  "joint": "left_gripper_finger_joint1/2 (prismatic y)",
+  "source": "GalaxeaManipSim abe7f51, galaxea_sim/assets/r1_lite/robot.urdf: left_gripper_finger_joint1 limit 0 0.05 m"
+ },
+ "mate": {
+  "kind": "turned",
+  "matrix": [
+   [
+    1.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   [
+    0.0,
+    -1.0,
+    0.0,
+    -126.906
+   ],
+   [
+    0.0,
+    0.0,
+    -1.0,
+    -0.24118
+   ],
+   [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  ],
+  "part": true
+ },
+ "bodies": [
+  {
+   "mesh": "bodies/galaxea-r1-lite/gripper-motor.stl",
+   "sha256": "afd686144aef1074f93d60af6ff60c1aa27c6f08ba4a3f9f1efabaaa36515a9f",
+   "bytes": 29684,
+   "triangles": 592,
+   "matrix": [
+    [
+     1.0,
+     0.0,
+     0.0,
+     -36.89
+    ],
+    [
+     0.0,
+     1.0,
+     0.0,
+     -63.453
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     -0.12059
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": null,
+   "look": "can-black"
+  },
+  {
+   "mesh": "bodies/galaxea-r1-lite/gripper-plate.stl",
+   "sha256": "8840c9a0f17bb44bc9f072c80a2866bbe76b24d076ef45512258d5c2aef3b70f",
+   "bytes": 47584,
+   "triangles": 950,
+   "matrix": [
+    [
+     1.0,
+     0.0,
+     0.0,
+     -36.89
+    ],
+    [
+     0.0,
+     1.0,
+     0.0,
+     -63.453
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     -0.12059
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": null,
+   "look": "plate-black"
+  },
+  {
+   "mesh": "bodies/galaxea-r1-lite/drawn-carriage-sensor.stl",
+   "sha256": "9c731166d405a1fdf9ac19e65165e400d58844b82adfcce74550e08581b51506",
+   "bytes": 3084,
+   "triangles": 60,
+   "matrix": [
+    [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     1.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": "sensor",
+   "look": "carriage-black"
+  }
+ ],
+ "looks": {
+  "can-black": {
+   "color": "#232428",
+   "metalness": 0.6,
+   "roughness": 0.45,
+   "env_intensity": 2.4
+  },
+  "carriage-black": {
+   "color": "#232428",
+   "metalness": 0.6,
+   "roughness": 0.45,
+   "env_intensity": 2.4
+  },
+  "finger-grey": {
+   "color": "#6e7074",
+   "metalness": 0,
+   "roughness": 0.8,
+   "env_intensity": 1.2
+  },
+  "plate-black": {
+   "color": "#232428",
+   "metalness": 0.6,
+   "roughness": 0.45,
+   "env_intensity": 2.4
+  }
+ },
+ "part_look": "finger-grey",
+ "smooth_deg": 35,
+ "see_through": [
+  "mate"
+ ],
+ "picture": "on both fingers of the open gripper"
+}

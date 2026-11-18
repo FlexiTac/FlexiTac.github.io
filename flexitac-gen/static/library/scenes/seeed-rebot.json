@@ -1,0 +1,364 @@
+{
+ "format": "flexitac-library-scene/v1",
+ "part": "seeed-rebot",
+ "part_mesh_sha256": "56f349cadcf7bab472ed454f02d2013b603cfafe95bd7a25298aeb3e025fa81b",
+ "about": "Seeed reBot DevArm at full opening: mujoco_menagerie f3b6013, seeed_rebot_devarm/seeed_rebot_devarm.xml (MIT, Seeed Studio): joint_left/joint_right slide 0..0.05 m on one rack and pinion, q 50 mm (the contact faces 100.15 mm apart).  The bodies are gripper_end's cnc7 (the bracket and the MGN9 rail) and pla7_green (the printed rail supports and end stops), and on each finger cnc_left (the slider extension and the rack); gripper_end's motor_7, the RS-00 actuator, is drawn by the project (below).  The Library mesh is gripper_left's pla_left.STL (the printed finger on its MGN9 carriage) with its contact face's two 1.85 mm pockets capped, in mm.  The other finger is gripper_right: gripper_left turned 180 degrees about the approach axis (0.000 mm, its pla_right.STL and cnc_right.STL), so its sensor is the same board.  The looks: drawn after Seeed Studio's photos of the reBot Arm B601-RS gripper (the Seeed wiki's B601-RS guides: the arm at its zero pose, rs_0pos, and the gripper over a test-tube rack, 00-task-overview-rs-en; 2026-11-17) and its bill of materials (reBot-DevArm's hardware README: the fingers printed in black ABS, the rail supports and end stops in green PLA, the bracket, slider extensions and racks CNC-machined aluminium 5052, anodised or sandblasted, an MGN9 rail): the black printed fingers on their slider blocks, the bead-blasted aluminium of the bracket plate and the slider extensions, the ground steel rail, the lime-green printed supports, and the gripper's RS-00 actuator, a black can.  The actuator is the project's own drawing, not the model's file: plain cylinders and boxes to the sizes of the model's motor_7 (its can 57 mm across and 52 mm long on a 63 mm base ring 15 mm long, its two plug housings), whose 26 480 triangles keep 20 629 within 0.5 mm, 1.03 MB, over the Library's budget for the bodies (bodies/seeed-rebot/drawn-motor-can.stl, drawn-motor-base.stl and drawn-motor-plugs.stl).  The fingers' carriages are the part's own black; the screws and the cables are not drawn.",
+ "frame": "the part's file axes, mm",
+ "approach": [
+  0.0,
+  -1.0,
+  0.0
+ ],
+ "opening": {
+  "q_mm": 50.0,
+  "limit_mm": 50.0,
+  "joint": "joint_left/joint_right (slide, coupled)",
+  "source": "mujoco_menagerie f3b6013, seeed_rebot_devarm/seeed_rebot_devarm.xml: joint_left range 0 0.05 m"
+ },
+ "mate": {
+  "kind": "turned",
+  "matrix": [
+   [
+    -1.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   [
+    0.0,
+    1.0,
+    0.0,
+    0.0
+   ],
+   [
+    0.0,
+    0.0,
+    -1.0,
+    -100.14677
+   ],
+   [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  ],
+  "part": true
+ },
+ "bodies": [
+  {
+   "mesh": "bodies/seeed-rebot/cnc7-rail.stl",
+   "sha256": "b6d933eb1d77a2ed23b40ccd176a785acc3eb2b63e772b5c6d3a8a5d3d9e6738",
+   "bytes": 54284,
+   "triangles": 1084,
+   "matrix": [
+    [
+     0.0,
+     0.0,
+     1.0,
+     0.0
+    ],
+    [
+     -1.0,
+     0.0,
+     0.0,
+     -41.939
+    ],
+    [
+     0.0,
+     -1.0,
+     0.0,
+     -50.073385
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": null,
+   "look": "rail-steel"
+  },
+  {
+   "mesh": "bodies/seeed-rebot/cnc7-plate.stl",
+   "sha256": "13a42f862a2dd8ee1c8775bb83f275fa62fe6f86c3d36ca031fcddcb5c44da28",
+   "bytes": 51984,
+   "triangles": 1038,
+   "matrix": [
+    [
+     0.0,
+     0.0,
+     1.0,
+     0.0
+    ],
+    [
+     -1.0,
+     0.0,
+     0.0,
+     -41.939
+    ],
+    [
+     0.0,
+     -1.0,
+     0.0,
+     -50.073385
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": null,
+   "look": "alu-blasted"
+  },
+  {
+   "mesh": "bodies/seeed-rebot/drawn-motor-can.stl",
+   "sha256": "1178d8c9fde0b00820152a45370b79f2891de992173f14afd05e007e4d8e29d9",
+   "bytes": 9684,
+   "triangles": 192,
+   "matrix": [
+    [
+     0.0,
+     0.0,
+     1.0,
+     0.0
+    ],
+    [
+     -1.0,
+     0.0,
+     0.0,
+     -41.939
+    ],
+    [
+     0.0,
+     -1.0,
+     0.0,
+     -50.073385
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": null,
+   "look": "motor-black"
+  },
+  {
+   "mesh": "bodies/seeed-rebot/drawn-motor-base.stl",
+   "sha256": "55acdc6f4c35de29cc39198dc8f251a42b8c5b3de5357402c34c0121955d2337",
+   "bytes": 9684,
+   "triangles": 192,
+   "matrix": [
+    [
+     0.0,
+     0.0,
+     1.0,
+     0.0
+    ],
+    [
+     -1.0,
+     0.0,
+     0.0,
+     -41.939
+    ],
+    [
+     0.0,
+     -1.0,
+     0.0,
+     -50.073385
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": null,
+   "look": "motor-black"
+  },
+  {
+   "mesh": "bodies/seeed-rebot/drawn-motor-plugs.stl",
+   "sha256": "4f2c39d7c98fcc678093958296c0f80f5ff79798bfc9ffdad2843a8ba2f136f3",
+   "bytes": 1284,
+   "triangles": 24,
+   "matrix": [
+    [
+     0.0,
+     0.0,
+     1.0,
+     0.0
+    ],
+    [
+     -1.0,
+     0.0,
+     0.0,
+     -41.939
+    ],
+    [
+     0.0,
+     -1.0,
+     0.0,
+     -50.073385
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": null,
+   "look": "plastic-black-satin"
+  },
+  {
+   "mesh": "bodies/seeed-rebot/pla7_green.stl",
+   "sha256": "6ec046829bfb334c5c1ee44b24ce9d64379d4d29f0d03da4751a9390b7730009",
+   "bytes": 37084,
+   "triangles": 740,
+   "matrix": [
+    [
+     0.0,
+     0.0,
+     1.0,
+     0.0
+    ],
+    [
+     -1.0,
+     0.0,
+     0.0,
+     -41.939
+    ],
+    [
+     0.0,
+     -1.0,
+     0.0,
+     -50.073385
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": null,
+   "look": "pla-lime"
+  },
+  {
+   "mesh": "bodies/seeed-rebot/cnc_left.stl",
+   "sha256": "412dfbd8b9469da5ff657aee3266a2e5c6767797d1f4d72930f6c0db86d6e7cc",
+   "bytes": 52284,
+   "triangles": 1044,
+   "matrix": [
+    [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     1.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": "sensor",
+   "look": "alu-blasted"
+  },
+  {
+   "mesh": "bodies/seeed-rebot/cnc_left.stl",
+   "sha256": "412dfbd8b9469da5ff657aee3266a2e5c6767797d1f4d72930f6c0db86d6e7cc",
+   "bytes": 52284,
+   "triangles": 1044,
+   "matrix": [
+    [
+     -1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     1.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     -1.0,
+     -100.14677
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": "mate",
+   "look": "alu-blasted"
+  }
+ ],
+ "looks": {
+  "abs-black": {
+   "color": "#2a2a2c",
+   "metalness": 0,
+   "roughness": 0.75,
+   "env_intensity": 2.4
+  },
+  "alu-blasted": {
+   "color": "#b4b7ba",
+   "metalness": 1,
+   "roughness": 0.55
+  },
+  "motor-black": {
+   "color": "#2a2b2f",
+   "metalness": 0.45,
+   "roughness": 0.65,
+   "env_intensity": 2.6
+  },
+  "pla-lime": {
+   "color": "#c2d446",
+   "metalness": 0,
+   "roughness": 0.7
+  },
+  "plastic-black-satin": {
+   "color": "#222224",
+   "metalness": 0,
+   "roughness": 0.4,
+   "env_intensity": 1.8
+  },
+  "rail-steel": {
+   "color": "#b4b7ba",
+   "metalness": 1,
+   "roughness": 0.45,
+   "env_intensity": 0.8
+  }
+ },
+ "part_look": "abs-black",
+ "smooth_deg": 35,
+ "see_through": [
+  "mate"
+ ],
+ "picture": "on both fingers of the open gripper"
+}

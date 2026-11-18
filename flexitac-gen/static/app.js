@@ -537,6 +537,29 @@
       : stale ? `Downloads are disabled: the form no longer matches build ${id}. Regenerate first.`
         : ready ? `Build ${id}. Every file name starts with this build id.`
           : "Downloads are enabled only for a valid build that matches the form.";
+    showBoard();
+  }
+  function showBoard() {
+    // Ordering and fabrication (the user's request of 2026-11-17, "gen也加入reading board"): the reading board the form's
+    // sensor plugs into (web/boards.js tailsBoard: its rows and columns, the Library's rule, while each tail is one pin
+    // per line; the board with the connectors its tails were sized to, a Reader or connector pins chosen: the review of
+    // 2026-11-17), its bundle (Gerber, BOM, pick and place) and licence beside the guide, following every change of the
+    // design (a fit applied, an edit).  A static file: never disabled with the build's downloads.  The pieces' dot never
+    // starts a line (a no-break space before it, as library.js's lines).
+    const boards = window.FlexiTacBoards;
+    const cell = $("readingBoard");
+    if (!boards || !cell) return;
+    const number = id => ($(id).value.trim() === "" ? null : Number($(id).value));
+    const seen = boards.tailsBoard(number("rows"), number("columns"), number("rowPins"), number("columnPins"));
+    const board = seen?.board;
+    const key = board ? board.id : seen ? `none: ${seen.why}` : "";
+    if (cell.dataset.board === key) return;
+    cell.dataset.board = key;
+    const size = `ZIP, ${Math.max(1, Math.round((board?.bytes || 0) / 1e3))} kB`;
+    cell.replaceChildren(...(board ? [el("span", {}, board.label), "\u00a0· ",
+      el("a", {href: boards.href(board), download: board.file, "data-board": board.id, "aria-label": `Reading board ${board.label}, ${size}`}, size), "\u00a0· ",
+      el("a", {href: boards.NOTICE, target: "_blank", rel: "noopener"}, "CC BY-NC 4.0")]
+      : [seen ? `none (${seen.why})` : "—"]));
   }
   function renderStaleDetail() {
     const id = state.result?.manifest?.build_id;

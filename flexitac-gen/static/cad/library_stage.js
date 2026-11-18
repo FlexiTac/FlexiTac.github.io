@@ -17,6 +17,11 @@
 // them).  Its measures (a software depth raster for what covers each layer, exact distances for the clearances) run only
 // when the scene asks (the shots tool's ?probe=shoot), never for a visitor; info().stage reports them as the pictures'
 // records keep them (the names of docs/LIBRARY_VIEW.md).  No fetch, no global: everything comes in the show's arguments.
+// A hand (2026-11-17, the user's words: a sensor on every finger; the Allegro Hand, the LEAP Hand and the Unitree Dex3-1,
+// one mechanism since their merge that day): a scene's optional extra_fingers are its further fingers, each the part
+// again under its matrix, opaque, with a still copy of the stack, measured (its top FPC seen, its field clear of every
+// body and finger but its own fingertip and its own links, a body's finger "extra<k>"); a scene without them is drawn
+// and measured as before.
 
 import * as THREE from "../vendor/three/three.module.js";
 import {FOV_DEG, HOME_UP, frameView} from "./drape.js";
@@ -458,14 +463,17 @@ function numbersOf(measures, info) {
   const capped = value => (typeof value === "number" ? Math.min(REACH_MM, value) : REACH_MM);
   const least = keys => Math.min(...MODES.flatMap(mode => keys.map(key => capped(measures.clearance[mode][key]))));
   const ghosts = info.see_through;
+  // A hand's further stacks (2026-11-17): their fields' clearance among the bodies', and their top FPCs' least seen share.
+  const further = (info.extras || []).map((extra, k) => `stack${k + 3}`);
   return {jaw_gap_mm: r3(info.gap_mm), step_mm: r3(info.step_mm), drape_step_mm: r3(info.drape_step_mm), face_tilt_deg: r3(info.face_tilt_deg),
     visible_min: r3(Math.min(...moving.map(layer => layer.visible))), opaque_max: r3(Math.max(...exploded.map(layer => layer.opaque))),
     assembled_opaque: r3(measures.cover.assembled["stack1.top"].opaque),
     ghost_cover: ghosts.length ? r3(Math.max(...exploded.flatMap(layer => ghosts.map(role => layer[role])))) : null,
-    clearance_mm: {bodies: r1(least(["stack1_body", "stack2_body"])), other_finger: r1(least(["stack1_mate", "stack2_sensor"])),
+    clearance_mm: {bodies: r1(least(["stack1_body", "stack2_body", ...further.map(label => `${label}_body`)])), other_finger: r1(least(["stack1_mate", "stack2_sensor"])),
       stacks: r1(measures.clearance.exploded.stacks)},
     card_px: measures.screen.card_px, band_css: {contain: measures.screen.band_contain_css, cover: measures.screen.band_cover_css},
-    near_seen: info.explodeMate ? null : r3(Math.min(...near.map(layer => layer.visible))), stacks_apart_px: measures.screen.stacks_apart_px};
+    near_seen: info.explodeMate ? null : r3(Math.min(...near.map(layer => layer.visible))), stacks_apart_px: measures.screen.stacks_apart_px,
+    ...(further.length ? {extra_seen: r3(Math.min(...MODES.flatMap(mode => further.map(label => measures.cover[mode][`${label}.top`].visible))))} : {})};
 }
 
 /**
@@ -685,6 +693,9 @@ export function libraryStage() {
       const s = new THREE.Vector3().setFromMatrixColumn(P, 0).length();
       const Pmm = P.clone().multiply(new THREE.Matrix4().makeScale(1 / s, 1 / s, 1 / s));
       const mate = Pmm.clone().multiply(m4(data.mate.matrix)).multiply(Pmm.clone().invert());
+      // A hand's further fingers (the scene's optional extra_fingers, 2026-11-17: the hands' middle and ring fingers),
+      // each the part again under its matrix with a still copy of the stack: the mate's way, never exploded or see-through.
+      const extras = (data.extra_fingers || []).map(finger => Pmm.clone().multiply(m4(finger.matrix)).multiply(Pmm.clone().invert()));
       const up = new THREE.Vector3(...data.approach).transformDirection(Pmm);
       const normal = new THREE.Vector3(0, 0, 1);
       const tilt = (Math.asin(Math.min(1, Math.abs(normal.dot(up)))) * 180) / Math.PI;
@@ -735,10 +746,12 @@ export function libraryStage() {
         for (const body of bodies) sample(body.positions, body.world, FRAME_SAMPLES / Math.max(1, bodies.length), points);
         sample(positions, P, 3000, points);
         if (data.mate.part !== false) sample(positions, mate.clone().multiply(P), 3000, points);
+        for (const extra of extras) sample(positions, extra.clone().multiply(P), 3000, points);
         for (const name of LAYERS) {
           const sheet = stack.sheets[name]; const array = mode === "assembled" ? sheet.assembled : sheet.positions;
           sheetPoints(sheet, array, null, points);
           sheetPoints(sheet, explodes.has("mate") ? array : sheet.assembled, mate, points);
+          for (const extra of extras) sheetPoints(sheet, sheet.assembled, extra, points);
         }
         const all = new Float32Array(points);
         const low = [Infinity, Infinity, Infinity]; const high = [-Infinity, -Infinity, -Infinity];
@@ -753,7 +766,7 @@ export function libraryStage() {
       camera.up.copy(up);
       controls._quat.setFromUnitVectors(camera.up, new THREE.Vector3(0, 1, 0));
       controls._quatInverse.copy(controls._quat).invert();
-      state.info = {gap_mm: gap, step_mm: step, drape_step_mm: old, kind: data.mate.kind, mate, Pmm, P, bodies, up, data,
+      state.info = {gap_mm: gap, step_mm: step, drape_step_mm: old, kind: data.mate.kind, mate, extras, Pmm, P, bodies, up, data,
         face_tilt_deg: tilt, explode: stack.explode, see_through: data.see_through || [], numbers: null, measures: null,
         explodeMate: explodes.has("mate"), seeModes: new Set(rules.see_through_modes), specs, partSpec, smooth};
     }
@@ -789,40 +802,56 @@ export function libraryStage() {
       }
       view.part.userData.finger = "sensor";
       fingers.push(view.part);
+      // A hand's further fingers (extra_fingers, 2026-11-17): the part again, opaque in every mode (no finger role: never
+      // see-through, measured as a body).
+      for (const extra of state.info.extras) {
+        const extraPart = new THREE.Mesh(view.part.geometry, partLook);
+        extraPart.matrixAutoUpdate = false;
+        extraPart.matrix.copy(extra).multiply(P);
+        extraPart.userData.finger = null;
+        group.add(extraPart);
+      }
       // The second stack: the first one's board materials under the mate matrix (its geometries the first one's when it
       // explodes too, else its own, assembled: below); its film its own material (its own lamp, aimed at it).
-      const second = new THREE.Group();
-      second.matrixAutoUpdate = false;
-      second.matrix.copy(mate);
       const filmLook = {environment: look.environment, rotation: look.rotation, filmLamp: {value: new THREE.Vector3()}};
       const materials = [];
-      // The second stack shares the first one's geometries only when it explodes too; else each layer's face and edge band
-      // are its own, assembled (made once: it never moves), the film's face hidden (as onpart.js filmFace hides it assembled).
-      const still = !state.info.explodeMate;
       const geometries = [];
       const nest = stack.nest_mm || 0.25;
-      for (const layer of view.sheets.children) {
-        const copy = new THREE.Group();
-        copy.userData = {sheet: layer.userData.sheet};
-        const sheet = layer.userData.data;
-        const face = still ? assembledFace(sheet) : null;
-        const band = still ? assembledBand(layer.userData.band, (sheet.art ? sheet.layer || 1 : 1) * nest) : null;
-        if (face) geometries.push(face);
-        if (band) geometries.push(band);
-        for (const child of layer.children) {
-          const film = layer.userData.sheet === "film" && !child.userData.edgeBand;
-          const material = film ? filmMaterial(child.material.map, filmLook) : child.material;
-          if (film) materials.push(material);
-          const mesh = new THREE.Mesh(still ? (child.userData.edgeBand ? band : face) : child.geometry, material);
-          // (A placed pad's film is seen through its boards' slots, assembled too: drape.js placedStack's film_seen.)
-          mesh.userData = {edgeBand: Boolean(child.userData.edgeBand), source: child, hidden: still && film && !stack.film_seen};
-          copy.add(mesh);
+      function stackCopy(matrix, still) {
+        // The stack again under a matrix.  It shares the first one's geometries only when it explodes too; else each
+        // layer's face and edge band are its own, assembled (made once: it never moves), the film's face hidden (as
+        // onpart.js filmFace hides it assembled).
+        const copies = new THREE.Group();
+        copies.matrixAutoUpdate = false;
+        copies.matrix.copy(matrix);
+        for (const layer of view.sheets.children) {
+          const copy = new THREE.Group();
+          copy.userData = {sheet: layer.userData.sheet};
+          const sheet = layer.userData.data;
+          const face = still ? assembledFace(sheet) : null;
+          const band = still ? assembledBand(layer.userData.band, (sheet.art ? sheet.layer || 1 : 1) * nest) : null;
+          if (face) geometries.push(face);
+          if (band) geometries.push(band);
+          for (const child of layer.children) {
+            const film = layer.userData.sheet === "film" && !child.userData.edgeBand;
+            const material = film ? filmMaterial(child.material.map, filmLook) : child.material;
+            if (film) materials.push(material);
+            const mesh = new THREE.Mesh(still ? (child.userData.edgeBand ? band : face) : child.geometry, material);
+            // (A placed pad's film is seen through its boards' slots, assembled too: drape.js placedStack's film_seen.)
+            mesh.userData = {edgeBand: Boolean(child.userData.edgeBand), source: child, hidden: still && film && !stack.film_seen};
+            copy.add(mesh);
+          }
+          copies.add(copy);
         }
-        second.add(copy);
+        return copies;
       }
+      const second = stackCopy(mate, !state.info.explodeMate);
       group.add(second);
+      // Each further finger's stack: still in both modes, its layers ordered as the second's are.
+      const others = state.info.extras.map(extra => ({group: stackCopy(extra, true), inverse: extra.clone().invert()}));
+      for (const other of others) group.add(other.group);
       scene.add(group);
-      state.extras = {group, second, fingers, materials, geometries, filmLook, ghosts: new Map(), mateInverse: mate.clone().invert(), see: new Set(state.info.see_through),
+      state.extras = {group, second, others, fingers, materials, geometries, filmLook, ghosts: new Map(), mateInverse: mate.clone().invert(), see: new Set(state.info.see_through),
         looks: [...looks.values()], ghostLooks: new Map()};
       state.lamps = {key: null};
       if (given.measure) {
@@ -843,11 +872,24 @@ export function libraryStage() {
       const [W, H] = rules.measure_px;
       const tol = rules.depth_tol_mm;
       const roles = {body: [], sensor: [], mate: []};
-      for (const body of bodies) roles[body.finger || "body"].push({positions: body.positions, index: null, matrix: body.world});
+      // (A body of a further finger, its finger "extra<k>" (the LEAP and Allegro Hands' links, 2026-11-17), is an opaque body that its
+      // own finger's stack is not held apart from, as the sensor's and the mate's own bodies are not from theirs.)
+      for (const body of bodies) {
+        const own = /^extra\d+$/.test(body.finger || "") ? Number(body.finger.slice(5)) : 0;
+        roles[own || !body.finger ? "body" : body.finger].push({positions: body.positions, index: null, matrix: body.world, extra: own});
+      }
       const partPositions = view.part.geometry.attributes.position.array;
       const partIndex = view.part.geometry.index ? view.part.geometry.index.array : null;
       roles.sensor.push({positions: partPositions, index: partIndex, matrix: P});
       if (data.mate.part !== false) roles.mate.push({positions: partPositions, index: partIndex, matrix: mate.clone().multiply(P)});
+      // A hand's further fingers are opaque bodies, and their still stacks (stack3, ...) cover as the second's do; the
+      // exploded stack is held apart from each of them as from the second (2026-11-17).  Since the review that day each
+      // further stack is measured too: its top FPC (its face toward the camera) in both modes (extra_seen) and its field's
+      // clearance to every body and finger but its own fingertip (stack3_body, ...).
+      const extraParts = state.info.extras.map(extra => ({positions: partPositions, index: partIndex, matrix: extra.clone().multiply(P)}));
+      roles.body.push(...extraParts);
+      const copies = [["stack2", mate], ...state.info.extras.map((extra, k) => [`stack${k + 3}`, extra])];
+      const further = new Set(copies.slice(1).map(([label]) => label));
       const identity = new THREE.Matrix4();
       const out = {};
       const sight = {};
@@ -866,8 +908,8 @@ export function libraryStage() {
         // Each stack's layers whole (inside the outline: what covers) and its field (inside and on the face: what is measured);
         // a stack that does not explode is assembled in both modes (its film's face not drawn).
         const whole = {}; const fields = {};
-        const exploding = label => mode === "exploded" && (label === "stack1" || state.info.explodeMate);
-        for (const [label, matrix] of [["stack1", identity], ["stack2", mate]]) {
+        const exploding = label => mode === "exploded" && (label === "stack1" || (label === "stack2" && state.info.explodeMate));
+        for (const [label, matrix] of [["stack1", identity], ...copies]) {
           for (const name of LAYERS) {
             const sheet = stack.sheets[name];
             if (!exploding(label) && name === "film") continue;  // (its face is not drawn there: onpart.js filmFace)
@@ -882,8 +924,10 @@ export function libraryStage() {
         const layers = {};
         for (const [key, f] of Object.entries(fields)) {
           const [label] = key.split(".");
-          // Assembled: stack 1's top FPC, and the still stack's bottom FPC (its face toward the camera: near_seen).
-          if (mode === "assembled" && key !== "stack1.top" && !(key === "stack2.bottom" && !state.info.explodeMate)) continue;
+          // Assembled: stack 1's top FPC, the still stack's bottom FPC (its face toward the camera: near_seen) and each
+          // further stack's top FPC (extra_seen).
+          if (mode === "assembled" && key !== "stack1.top" && !(key === "stack2.bottom" && !state.info.explodeMate)
+              && !(further.has(label) && key === `${label}.top`)) continue;
           const own = Object.keys(whole).filter(other => other !== key && other.startsWith(label));
           const other = Object.keys(whole).filter(name => !name.startsWith(label));
           let total = 0; let visible = 0; const hidden = {body: 0, sensor: 0, mate: 0, own: 0, other: 0, opaque: 0};
@@ -917,7 +961,8 @@ export function libraryStage() {
             for (const [key, buffer] of Object.entries(whole)) if (key.startsWith(`${label}.`)) for (let i = 0; i < W * H; i += 1) if (buffer[i] !== Infinity) m[i] = 1;
             return m;
           };
-          screenApart = silhouetteGap(maskOf("stack2"), maskOf("stack1"), W, H);
+          const apart = copies.map(([label]) => silhouetteGap(maskOf(label), maskOf("stack1"), W, H)).filter(value => value !== null);
+          screenApart = apart.length ? Math.min(...apart) : null;
         }
         // Which finger is nearer the camera at this home (the roles' check): the camera's distance to each finger's field
         // (its bottom FPC's, assembled) and to each stack's drawn fields.
@@ -939,14 +984,20 @@ export function libraryStage() {
       const tri = {body: [], sensor: [], mate: []};
       for (const [role, list] of Object.entries(roles)) for (const item of list) worldTriangles(item.positions, item.index, item.matrix, tri[role]);
       const grids = Object.fromEntries(Object.entries(tri).map(([role, list]) => [role, triangleGrid(list, CELL_MM)]));
+      // Each further stack's: every body and finger but its own fingertip (and its own finger's bodies, "extra<k>").
+      const furtherGrids = extraParts.map((own, k) => {
+        const list = [];
+        for (const item of [...roles.body, ...roles.sensor, ...roles.mate]) if (item !== own && item.extra !== k + 1) worldTriangles(item.positions, item.index, item.matrix, list);
+        return triangleGrid(list, CELL_MM);
+      });
       const clearance = {};
       for (const mode of MODES) {
         const stackPoints = {};
-        for (const [label, matrix] of [["stack1", null], ["stack2", mate]]) {
+        for (const [label, matrix] of [["stack1", null], ...copies]) {
           const points = [];
           for (const name of LAYERS) {
             const sheet = stack.sheets[name];
-            const exploding = mode === "exploded" && (label === "stack1" || state.info.explodeMate);
+            const exploding = mode === "exploded" && (label === "stack1" || (label === "stack2" && state.info.explodeMate));
             sheetPoints(sheet, exploding ? sheet.positions : sheet.assembled, matrix, points, 500, true);
           }
           stackPoints[label] = points;
@@ -955,11 +1006,16 @@ export function libraryStage() {
         clearance[mode] = {
           stack1_body: mm(nearestTo(stackPoints.stack1, grids.body, CELL_MM, REACH_MM)), stack1_mate: mm(nearestTo(stackPoints.stack1, grids.mate, CELL_MM, REACH_MM)),
           stack2_body: mm(nearestTo(stackPoints.stack2, grids.body, CELL_MM, REACH_MM)), stack2_sensor: mm(nearestTo(stackPoints.stack2, grids.sensor, CELL_MM, REACH_MM))};
-        // The stacks to each other (field points; the sheets are dense grids, a point-to-point bound).
-        let best = Infinity; const a = stackPoints.stack1; const b = stackPoints.stack2;
-        for (let i = 0; i < a.length; i += 3) for (let j = 0; j < b.length; j += 3) {
-          const dd = (a[i] - b[j]) ** 2 + (a[i + 1] - b[j + 1]) ** 2 + (a[i + 2] - b[j + 2]) ** 2;
-          if (dd < best) best = dd;
+        furtherGrids.forEach((grid, k) => { clearance[mode][`stack${k + 3}_body`] = mm(nearestTo(stackPoints[`stack${k + 3}`], grid, CELL_MM, REACH_MM)); });
+        // The stacks to each other (field points; the sheets are dense grids, a point-to-point bound): stack 1 to the
+        // nearest of the others.
+        let best = Infinity; const a = stackPoints.stack1;
+        for (const [label] of copies) {
+          const b = stackPoints[label];
+          for (let i = 0; i < a.length; i += 3) for (let j = 0; j < b.length; j += 3) {
+            const dd = (a[i] - b[j]) ** 2 + (a[i + 1] - b[j + 1]) ** 2 + (a[i + 2] - b[j + 2]) ** 2;
+            if (dd < best) best = dd;
+          }
         }
         clearance[mode].stacks = Math.round(Math.sqrt(best) * 10) / 10;
       }
@@ -1043,13 +1099,15 @@ export function libraryStage() {
       }
       const extras = state.extras;
       if (!extras || !view.stack) return;
-      const local = camera.position.clone().applyMatrix4(extras.mateInverse); const target = controls.target.clone().applyMatrix4(extras.mateInverse);
-      const outside = local.z >= target.z;
       const order = {bottom: 1, film: 2, top: 3};
-      extras.second.children.forEach(group => {
-        group.renderOrder = outside ? order[group.userData.sheet] : 4 - order[group.userData.sheet];
-        group.children.forEach(mesh => { mesh.visible = !mesh.userData.hidden && mesh.userData.source.visible; });
-      });
+      for (const {group: copies, inverse} of [{group: extras.second, inverse: extras.mateInverse}, ...extras.others]) {
+        const local = camera.position.clone().applyMatrix4(inverse); const target = controls.target.clone().applyMatrix4(inverse);
+        const outside = local.z >= target.z;
+        copies.children.forEach(group => {
+          group.renderOrder = outside ? order[group.userData.sheet] : 4 - order[group.userData.sheet];
+          group.children.forEach(mesh => { mesh.visible = !mesh.userData.hidden && mesh.userData.source.visible; });
+        });
+      }
       const seeing = state.info.seeModes.has(view.mode);
       for (const mesh of extras.fingers) {
         const ghosted = seeing && extras.see.has(mesh.userData.finger);
@@ -1118,6 +1176,8 @@ export function libraryStage() {
       return i && {gap_mm: r3(i.gap_mm), step_mm: r3(i.step_mm), drape_step_mm: r3(i.drape_step_mm), kind: i.kind, explode: i.explode,
         face_tilt_deg: r3(i.face_tilt_deg), see_through: i.see_through, camera: state.rules.camera, home: view.homes, up: i.up.toArray().map(r6), numbers: i.numbers,
         explode_stacks: state.rules.explode_stacks, see_through_modes: state.rules.see_through_modes,
+        // A hand's further fingers drawn, each with its still stack (only where the scene has them, 2026-11-17).
+        ...(i.extras.length ? {extra_fingers: i.extras.length} : {}),
         measures: i.measures,
         // What of the scene's looks is drawn (the checks' read): the bodies' looks by name, the part's, the crease angle
         // and how many points the part's corners share at it.

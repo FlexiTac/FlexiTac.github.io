@@ -275,14 +275,16 @@
               <div class="cad-view-wrap">
               <!-- The tools in the 3D view's window, on its left (the user's request of 2026-10-30): what a click on the
                    part does, the border editor (docs/CAD_BORDER.md; handles on the part while it is pressed) and Clear.
-                   A click on a surface selects it, a click on a selected one deselects it (no Add / Subtract). -->
+                   A click on a surface selects it, a click on a selected one deselects it (no Add / Subtract).  The two click
+                   tools numbered 1 and 2 and Edit border marked Optional (the user's request of 2026-11-17: the order of work
+                   in the menu); the numbers and the word are for the eye (aria-hidden), the controls' names as before. -->
               <div class="cad-view-tools" id="cadViewTools">
                 <fieldset class="cad-tools" id="cadTools">
                   <legend>Click on the part</legend>
-                  <label title="Click a surface to select it (it grows over the face's facets); click a selected surface to deselect it"><input type="radio" name="cadTool" value="grow" checked /><span>Select a surface</span></label>
-                  <label title="Click a side of the selection's outline: the tails leave the sensor there"><input type="radio" name="cadTool" value="edge" /><span>Base edge</span></label>
+                  <label title="Click a surface to select it (it grows over the face's facets); click a selected surface to deselect it"><input type="radio" name="cadTool" value="grow" checked /><span><span class="cad-tool-no" aria-hidden="true">1</span>Select a surface</span></label>
+                  <label title="Click a side of the selection's outline: the tails leave the sensor there"><input type="radio" name="cadTool" value="edge" /><span><span class="cad-tool-no" aria-hidden="true">2</span>Base edge</span></label>
                 </fieldset>
-                <button type="button" class="cad-edit-border" id="cadEditBorder" aria-pressed="false" aria-controls="cadBorderBar" disabled>Edit border</button>
+                <button type="button" class="cad-edit-border" id="cadEditBorder" aria-pressed="false" aria-controls="cadBorderBar" disabled><span class="cad-edit-border-name">Edit border</span><span class="cad-tool-optional" aria-hidden="true">Optional</span></button>
                 <button type="button" class="cad-undo" id="cadUndo" disabled>Undo</button>
                 <button type="button" class="cad-clear" id="cadClear" disabled>Clear</button>
                 <button type="button" class="cad-remove" id="cadRemove" title="Take the model off the view (its selection, border and proposals too)" disabled>Remove model</button>
@@ -317,6 +319,11 @@
                    has no face selected, a face clicked only chooses (main.js autoSelect).  The Gerber ZIPs are the downloads'. -->
               <div class="cad-quick" id="cadQuick">
                 <button type="button" class="primary cad-quick-generate" id="cadQuickGenerate" disabled>Generate sensor</button>
+                <!-- A curved selection that stretches beyond the strain limit flat (the user's decisions of 2026-11-17): the fit
+                     refuses it whole, and Shrink to fit selects what flattens within the limit round its click (main.js
+                     shrinkToFit, the stretch preset); the line says how far it stretches. -->
+                <button type="button" class="cad-shrink" id="cadShrink" hidden>Shrink to fit</button>
+                <span class="cad-shrink-note" id="cadShrinkNote" hidden></span>
               </div>
             </div>
           </div>
@@ -374,7 +381,14 @@
                       <select id="cadReader" data-option="reader" title="The tails are sized to the reader's connectors (either electrode set on either connector); Auto takes the smallest reader that holds the readout."><option value="none">None (1 per line)</option><option value="auto">Auto (smallest that fits)</option><option value="16x16">16 × 16</option><option value="32x16">32 × 16 (FlexiTac)</option><option value="32x32">32 × 32</option><option value="48x48">48 × 48</option></select></div>
                     <div class="cad-field"><label for="cadPlacement">Placement</label>
                       <select id="cadPlacement" data-option="placement"><option value="far">Far from base edge</option><option value="near">Near base edge</option><option value="center">Centred</option></select></div>
-                    <div class="cad-field"><label for="cadStrainLimit">Strain limit (curved surfaces; 0.003 = 0.3 %)</label><input type="number" id="cadStrainLimit" data-option="strain_limit" value="0.003" min="0" max="0.2" step="0.0005" inputmode="decimal" /></div>
+                    <!-- The strain limit (the user's decisions of 2026-11-17 and their choice of that day, "1% default on curves"):
+                         its value on a doubly curved selection, 1 % (the sheet bonded once: JLC's FPC copper is rolled-annealed,
+                         laminated by the user, soft tape to the part), or Strict 0.3 %; data-flat, 0.3 %, on every other face.
+                         Sent as the number in effect (main.js strainLimit, readOptions); a click on a curved face selects what
+                         flattens within the curved one (main.js growOp). -->
+                    <div class="cad-field"><label for="cadStrainLimit">Strain limit</label>
+                      <select id="cadStrainLimit" data-option="strain_limit" data-number data-flat="0.003"><option value="0.01" selected>1 % on curved faces</option><option value="0.003">Strict 0.3 %</option></select>
+                      <p class="hint cad-tier-note" id="cadTierNote" hidden>Test first: rim may wrinkle or lift on tape.</p></div>
                     <div class="cad-field"><label for="cadProposalCount">Proposals</label><input type="number" id="cadProposalCount" data-option="proposals" value="5" min="1" max="20" step="1" inputmode="numeric" /></div>
                   </div>
                   <p class="hint" id="cadConfigHint">Only the taxel field stays on the surface: the Row traces beside it, the Column fan-out and both tails may leave it, beyond its sides and the base edge.</p>
@@ -588,9 +602,17 @@
               <button type="button" data-download="manifest" disabled>Build manifest</button>
             </div>
           </details>
+          <!-- Ordering and fabrication (the user's request of 2026-11-17, "gen也加入reading board"): the FlexiTac
+               fabrication guide (the Ordering notes' link of 2026-11-06, moved here: one link, the review of 2026-11-17) and
+               the reading board the shown sensor's tails plug into, its bundle (Gerber, BOM, pick and place) beside it
+               (web/boards.js tailsBoard; app.js showBoard: the form's rows, columns and connector pins, so it follows every
+               change of the design). -->
+          <dl class="order-board" id="orderBoard">
+            <div><dt>Ordering and fabrication</dt><dd><a href="https://docs.google.com/document/d/1bvz6AL7BUkhj4Dj7n9DFXTjnGIX4-ziN8-smiCKpVZU/edit?tab=t.0#heading=h.kk7d14qme9db" target="_blank" rel="noopener noreferrer">FlexiTac fabrication guide</a></dd></div>
+            <div><dt>Reading board</dt><dd id="readingBoard"></dd></div>
+          </dl>
           <details class="manufacturing-note" id="manufacturingNote">
             <summary>Ordering notes</summary>
-            <p class="order-guide">Step by step: the <a href="https://docs.google.com/document/d/1bvz6AL7BUkhj4Dj7n9DFXTjnGIX4-ziN8-smiCKpVZU/edit?tab=t.0#heading=h.kk7d14qme9db" target="_blank" rel="noopener noreferrer">FlexiTac fabrication guide</a>.</p>
             <p>Gerber ZIPs are deterministic Direct Gerber / JLC review candidates: upload top and bottom separately, then verify the outline, the coverlay openings and the PI stiffener listed under Standardized manufacturing. They are not EasyEDA-native exports and are not production approval. The EasyEDA Pro projects ZIP holds one native .epro2 project per board: import it into EasyEDA Pro (pro.easyeda.com, File &gt; Import &gt; EasyEDA/JLCEDA (Professional)), check FPC mode, the stiffener and DRC there, and let EasyEDA write the Gerbers and the order (README_EASYEDA.txt). Every file name starts with the build id. The design and layout JSON downloads are readable copies of the shown build; the project review ZIP carries their canonical, byte-stable versions.</p>
             <!-- Rendered from /api/default profile.order_requirements, the entries of ORDER_NOTES.txt in every ZIP. -->
             <section class="order-note" aria-labelledby="orderOptionsTitle">
@@ -692,6 +714,7 @@
     </svg>
     <script src="static/counts.js" defer></script>
     <script src="static/backend.js" defer></script>
+    <script src="static/boards.js" defer></script>
     <script src="static/app.js" defer></script>
     <script type="module" src="static/cad/main.js"></script>
   </body>

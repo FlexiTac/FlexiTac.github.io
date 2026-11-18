@@ -1,16 +1,22 @@
 {
   "generator_version": "deterministic-sensor-core/0.4.0",
-  "engine_zip_sha256": "8de3e71a8954355a3fe4921be2ceb0917f70c06a0f7b09a7685e8c295c2baf69",
+  "engine_zip_sha256": "aff18dd119e29a78b5b23cc2013d7e1cd0799cd612a1e117d3ecad6bd2d04f3a",
   "github": {
     "stars": 188,
     "forks": 19
   },
   "library": {
-    "variants": 58,
-    "files_json_sha256": "00ded33fcd186ff8b7871ab2cf2ae4f766b4358d7778bf5e0223b69dbfd7d3ba",
-    "pictured": 58,
-    "viewed": 58,
+    "variants": 102,
+    "files_json_sha256": "6e3ba754b1903d93d185f7a3b0ec6a56490e9bc7ebe90ce74c4a92d8ca52fb22",
+    "pictured": 102,
+    "viewed": 102,
     "showcase": "flexitac-g1"
+  },
+  "hardware": {
+    "static/vendor/flexitac-v2/Gerber_Top_FPC_2026-03-02.zip": "496c348c6fc236b03d23ba3f84d6a2c70ae3e66efba570a7889a990db171b621",
+    "static/vendor/flexitac-v2/Gerber_Bottom_FPC_2026-03-02.zip": "a2e0da2e0e36dc194c09db6e6f207d0508f7f3e9634666cdfa4ab48846397f6a",
+    "static/vendor/flexitac-reader/FlexiTac_reading_board_32x16.zip": "af488c7f85845d8b03daf58327a6cd0209268a47a97c748dbf09e05867e889a5",
+    "static/vendor/flexitac-reader/FlexiTac_reading_board_32x32.zip": "5e8fa8ed642346b943077272a72509bb622e4dc8de60f7bfef88cbbf98194aba"
   },
   "pyodide": {
     "version": "0.27.8",

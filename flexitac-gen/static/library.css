@@ -205,6 +205,26 @@ main.lib { --lib-gutter:clamp(24px,5vw,76px); --lib-gap:20px; display:block; max
 .lib-facts dt { color:var(--text-2); }
 .lib-facts dd { color:var(--text); font-variant-numeric:tabular-nums; }
 .lib-facts code { font-family:var(--font-mono); font-size:13px; overflow-wrap:anywhere; }
+/* Ordering and fabrication, Reading board (the user's request of 2026-11-17): the facts' look under their hairline, the
+   labels' column their own (as wide as "Ordering and fabrication", at most 40 %: two lines in a narrow window), so the
+   facts keep their 72 px labels and one line each at 900 px; one line each from 1280 px, the board's pieces (its size,
+   its ZIP, its licence) never split.  From 1200 px (the review of 2026-11-17) the facts and the two rows are one table:
+   one labels' column (subgrid), no hairline between them, a row's gap after Build, so the values line up and a sensor's
+   window keeps its 1440 x 900 fit (the two rows for the Reader row: one row taller).  The showcase's window has the
+   Reading board row alone, between hairlines. */
+.lib-order { display:grid; grid-template-columns:fit-content(40%) minmax(0,1fr); gap:8px 12px; padding:14px 0; border-bottom:1px solid var(--separator);
+  font-size:15px; line-height:1.4; }
+.lib-order div { display:contents; }
+.lib-order dt { color:var(--text-2); }
+.lib-order dd { color:var(--text); font-variant-numeric:tabular-nums; }
+.lib-board > * { white-space:nowrap; }
+.lib-detail-showcase .lib-order { border-top:1px solid var(--separator); }
+@media (min-width:1200px) {
+  .lib-specs { display:grid; grid-template-columns:fit-content(40%) minmax(0,1fr); column-gap:12px; }
+  .lib-specs > dl { grid-column:1 / -1; grid-template-columns:subgrid; column-gap:12px; }
+  .lib-specs .lib-facts div { grid-column:1 / -1; grid-template-columns:subgrid; }
+  .lib-specs .lib-facts { padding-bottom:0; border-bottom:0; }
+  .lib-specs .lib-order { padding-top:8px; } }
 /* Open in Gen by Surface: the page's blue fill (and the showcase's Design your own since 2026-11-16, below). */
 .lib .lib-open { display:inline-flex; align-items:center; justify-content:center; align-self:flex-start; min-height:44px; padding:0 22px; border-radius:var(--r-pill);
   background:var(--accent); color:#fff; font-size:17px; font-weight:600; letter-spacing:-.01em; text-decoration:none; }

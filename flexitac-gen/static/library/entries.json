@@ -276,15 +276,56 @@
  "generator_version": "deterministic-sensor-core/0.4.0",
  "order": [
   "umi-finray",
+  "leflexitac",
+  "robotiq-2f-85",
   "franka-hand",
   "widowx-250",
   "trossen-widowx-ai",
   "arx-x5",
   "i2rt-yam",
+  "makermods-metal",
+  "agilex-piper",
+  "galaxea-r1-lite",
+  "seeed-rebot",
+  "ufactory-xarm",
+  "rainbow-rby1",
+  "enactic-openarm",
+  "yubi-gripper",
   "unitree-dex1",
-  "makermods-metal"
+  "unitree-dex3",
+  "leap-hand"
  ],
  "parts": {
+  "agilex-piper": {
+   "card": null,
+   "default": "agilex-piper-2mm",
+   "family": null,
+   "finger": "gripper finger",
+   "license": {
+    "change": "unchanged",
+    "holder": "RosenYin",
+    "source": "https://github.com/google-deepmind/mujoco_menagerie/blob/fb36886b3023db08c198264e1e9956ab202c3e3b/agilex_piper/assets/link7.stl",
+    "spdx": "MIT",
+    "text": "licenses/mujoco_menagerie-agilex_piper.txt"
+   },
+   "maker": "AgileX Robotics",
+   "mesh": {
+    "bytes": 91984,
+    "facets": 1838,
+    "file": "meshes/agilex-piper.stl",
+    "name": "agilex-piper.stl",
+    "sha256": "907dcdd10498a9d2e9317e42f550570a4ca522d1c4ff7b7c8721fd5cb951e481",
+    "unit": "m"
+   },
+   "shelf": "Four pitches, 1 to 4 mm.",
+   "title": "AgileX Piper",
+   "variants": [
+    "agilex-piper-1mm",
+    "agilex-piper-2mm",
+    "agilex-piper-3mm",
+    "agilex-piper-4mm"
+   ]
+  },
   "arx-x5": {
    "card": null,
    "default": "arx-x5-2mm",
@@ -313,6 +354,36 @@
     "arx-x5-2mm",
     "arx-x5-3mm",
     "arx-x5-4mm"
+   ]
+  },
+  "enactic-openarm": {
+   "card": null,
+   "default": "enactic-openarm-2mm",
+   "family": null,
+   "finger": "gripper finger, HandUMI",
+   "license": {
+    "change": "unchanged",
+    "holder": "BrikHMP18 (HandUMI hardware), after Enactic, Inc.'s OpenArm 1.0 finger",
+    "source": "https://github.com/murobotics-ai/handumi-hw/blob/144827862d4e2d5cd2d331ce7eed1374d3c769df/hardware/STL/gripper_tips/OpenArmv1/OpenArm-left.stl",
+    "spdx": "Apache-2.0",
+    "text": "licenses/handumi-hw.txt"
+   },
+   "maker": "Enactic",
+   "mesh": {
+    "bytes": 653384,
+    "facets": 13066,
+    "file": "meshes/enactic-openarm.stl",
+    "name": "enactic-openarm.stl",
+    "sha256": "b86528931e3abae5cebee5b62e306afb16a5acf36740df52a595cd98ae92ddf7",
+    "unit": "m"
+   },
+   "shelf": "Four pitches, 1 to 2.5 mm.",
+   "title": "OpenArm 1.0",
+   "variants": [
+    "enactic-openarm-1mm",
+    "enactic-openarm-1.5mm",
+    "enactic-openarm-2mm",
+    "enactic-openarm-2.5mm"
    ]
   },
   "franka-hand": {
@@ -345,6 +416,36 @@
     "franka-hand-2.5mm"
    ]
   },
+  "galaxea-r1-lite": {
+   "card": null,
+   "default": "galaxea-r1-lite-2mm",
+   "family": null,
+   "finger": "gripper finger",
+   "license": {
+    "change": "unchanged",
+    "holder": "Galaxea",
+    "source": "https://github.com/OpenGalaxea/GalaxeaManipSim/blob/abe7f5161eeaa150e6eaffdf443af5df7f23f356/galaxea_sim/assets/r1_lite/meshes/left_gripper_finger_link1.STL",
+    "spdx": "Apache-2.0",
+    "text": "licenses/galaxeamanipsim.txt"
+   },
+   "maker": "Galaxea Dynamics",
+   "mesh": {
+    "bytes": 256484,
+    "facets": 5128,
+    "file": "meshes/galaxea-r1-lite.stl",
+    "name": "galaxea-r1-lite.stl",
+    "sha256": "9e486d5bfa8bd512e272bed6e5df92e8f9d12de796ee03139f5b9618b55fa79b",
+    "unit": "m"
+   },
+   "shelf": "Four pitches, 1 to 3 mm.",
+   "title": "Galaxea R1 Lite",
+   "variants": [
+    "galaxea-r1-lite-1mm",
+    "galaxea-r1-lite-1.5mm",
+    "galaxea-r1-lite-2mm",
+    "galaxea-r1-lite-3mm"
+   ]
+  },
   "i2rt-yam": {
    "card": null,
    "default": "i2rt-yam-2mm",
@@ -373,6 +474,67 @@
     "i2rt-yam-2mm",
     "i2rt-yam-3mm",
     "i2rt-yam-4mm"
+   ]
+  },
+  "leap-hand": {
+   "card": null,
+   "default": "leap-hand-2mm",
+   "family": null,
+   "finger": "fingertip",
+   "license": {
+    "change": "distal.obj's object fingertip_W (the white fingertip) alone, m to mm, binary STL",
+    "holder": "Ananye Agarwal",
+    "source": "https://github.com/google-deepmind/mujoco_menagerie/blob/f3b6013629c7b94f8ee93fd977b161fa8350f9bc/leap_hand/assets/distal.obj",
+    "spdx": "MIT",
+    "text": "licenses/mujoco_menagerie-leap_hand.txt"
+   },
+   "maker": "Carnegie Mellon University",
+   "mesh": {
+    "bytes": 72584,
+    "facets": 1450,
+    "file": "meshes/leap-hand.stl",
+    "name": "leap-hand.stl",
+    "sha256": "166bb1de0c0af51f7dde4df90940d2294991f6eff1ceb4909e7c064b6f89b312",
+    "unit": "mm"
+   },
+   "shelf": "Four pitches, 1 to 3 mm.",
+   "title": "LEAP Hand",
+   "variants": [
+    "leap-hand-1mm",
+    "leap-hand-1.5mm",
+    "leap-hand-2mm",
+    "leap-hand-3mm"
+   ]
+  },
+  "leflexitac": {
+   "card": null,
+   "default": "leflexitac-2mm",
+   "family": null,
+   "finger": "moving jaw, LeFlexiTac",
+   "license": {
+    "change": "unchanged",
+    "holder": "the LeFlexiTac authors (Columbia University RoboPIL); no licence stated; remodelled from SO-ARM100 `a758567`, `STL/SO101/Individual/Moving_Jaw_SO101.stl` (Apache-2.0, TheRobotStudio, `licenses/so-arm100.txt`)",
+    "permission": "shared with the authors' permission (given by a co-author of LeFlexiTac, 2026-11-17)",
+    "source": "https://github.com/TNA001-AI/LeFlexiTac/blob/b61259fdea21bf8b0b5193fb3d373e71e5e5be81/assets/models/Moving_Jaw_08d.stl",
+    "spdx": "NOASSERTION",
+    "text": "licenses/leflexitac.txt"
+   },
+   "maker": "LeRobot SO-101 (TheRobotStudio)",
+   "mesh": {
+    "bytes": 935384,
+    "facets": 18706,
+    "file": "meshes/leflexitac.stl",
+    "name": "leflexitac.stl",
+    "sha256": "c0f71e0134a7cd3a425488ba5cab87e16ee677f4768cd57036d21b9b81c6ea60",
+    "unit": "mm"
+   },
+   "shelf": "Four pitches, 1 to 3 mm.",
+   "title": "LeFlexiTac",
+   "variants": [
+    "leflexitac-1mm",
+    "leflexitac-1.5mm",
+    "leflexitac-2mm",
+    "leflexitac-3mm"
    ]
   },
   "makermods-metal": {
@@ -405,6 +567,96 @@
     "makermods-metal-3mm"
    ]
   },
+  "rainbow-rby1": {
+   "card": null,
+   "default": "rainbow-rby1-2mm",
+   "family": null,
+   "finger": "gripper finger pad",
+   "license": {
+    "change": "OBJ in metres to binary STL in millimetres",
+    "holder": "Rainbow Robotics",
+    "source": "https://github.com/google-deepmind/mujoco_menagerie/blob/f3b6013629c7b94f8ee93fd977b161fa8350f9bc/rainbow_robotics_rby1/assets/EE_FINGER_0.obj",
+    "spdx": "Apache-2.0",
+    "text": "licenses/mujoco_menagerie-rainbow_robotics_rby1.txt"
+   },
+   "maker": "Rainbow Robotics",
+   "mesh": {
+    "bytes": 3884,
+    "facets": 76,
+    "file": "meshes/rainbow-rby1.stl",
+    "name": "rainbow-rby1.stl",
+    "sha256": "b25966e831ec215924f7f2ae1fa169ffdc66c52d368ef2d35d1c86638ae8f6ab",
+    "unit": "mm"
+   },
+   "shelf": "Four pitches, 1 to 3 mm.",
+   "title": "Rainbow RB-Y1",
+   "variants": [
+    "rainbow-rby1-1mm",
+    "rainbow-rby1-1.5mm",
+    "rainbow-rby1-2mm",
+    "rainbow-rby1-3mm"
+   ]
+  },
+  "robotiq-2f-85": {
+   "card": null,
+   "default": "robotiq-2f-85-2mm",
+   "family": null,
+   "finger": "silicone finger pad",
+   "license": {
+    "change": "unchanged",
+    "holder": "ROS-Industrial (MuJoCo Menagerie's robotiq_2f85)",
+    "source": "https://github.com/google-deepmind/mujoco_menagerie/blob/f3b6013629c7b94f8ee93fd977b161fa8350f9bc/robotiq_2f85/assets/silicone_pad.stl",
+    "spdx": "BSD-2-Clause",
+    "text": "licenses/mujoco_menagerie-robotiq_2f85.txt"
+   },
+   "maker": "Robotiq",
+   "mesh": {
+    "bytes": 15084,
+    "facets": 300,
+    "file": "meshes/robotiq-2f-85.stl",
+    "name": "robotiq-2f-85.stl",
+    "sha256": "ca20c0fa61e6d3ce7b04bed25360e048e31dfd88ace04187aa6d9e8f4ca3fd0f",
+    "unit": "mm"
+   },
+   "shelf": "Four pitches, 1 to 3 mm.",
+   "title": "Robotiq 2F-85",
+   "variants": [
+    "robotiq-2f-85-1mm",
+    "robotiq-2f-85-1.5mm",
+    "robotiq-2f-85-2mm",
+    "robotiq-2f-85-3mm"
+   ]
+  },
+  "seeed-rebot": {
+   "card": null,
+   "default": "seeed-rebot-2mm",
+   "family": null,
+   "finger": "gripper finger",
+   "license": {
+    "change": "contact face's two pockets capped, m to mm, binary STL",
+    "holder": "Seeed Studio",
+    "source": "https://github.com/google-deepmind/mujoco_menagerie/blob/f3b6013629c7b94f8ee93fd977b161fa8350f9bc/seeed_rebot_devarm/assets/pla_left.STL",
+    "spdx": "MIT",
+    "text": "licenses/mujoco_menagerie-seeed_rebot_devarm.txt"
+   },
+   "maker": "Seeed Studio",
+   "mesh": {
+    "bytes": 253484,
+    "facets": 5068,
+    "file": "meshes/seeed-rebot.stl",
+    "name": "seeed-rebot.stl",
+    "sha256": "56f349cadcf7bab472ed454f02d2013b603cfafe95bd7a25298aeb3e025fa81b",
+    "unit": "mm"
+   },
+   "shelf": "Four pitches, 1 to 3 mm.",
+   "title": "Seeed reBot DevArm",
+   "variants": [
+    "seeed-rebot-1mm",
+    "seeed-rebot-1.5mm",
+    "seeed-rebot-2mm",
+    "seeed-rebot-3mm"
+   ]
+  },
   "trossen-widowx-ai": {
    "card": null,
    "default": "trossen-widowx-ai-2mm",
@@ -433,6 +685,36 @@
     "trossen-widowx-ai-1.5mm",
     "trossen-widowx-ai-2mm",
     "trossen-widowx-ai-3mm"
+   ]
+  },
+  "ufactory-xarm": {
+   "card": null,
+   "default": "ufactory-xarm-2mm",
+   "family": null,
+   "finger": "gripper finger",
+   "license": {
+    "change": "unchanged",
+    "holder": "UFACTORY Inc.",
+    "source": "https://github.com/google-deepmind/mujoco_menagerie/blob/f3b6013629c7b94f8ee93fd977b161fa8350f9bc/ufactory_xarm7/assets/left_finger.stl",
+    "spdx": "BSD-3-Clause",
+    "text": "licenses/mujoco_menagerie-ufactory_xarm7.txt"
+   },
+   "maker": "UFACTORY",
+   "mesh": {
+    "bytes": 242684,
+    "facets": 4852,
+    "file": "meshes/ufactory-xarm.stl",
+    "name": "ufactory-xarm.stl",
+    "sha256": "a44756eb72f9c214cb37e61dc209cd7073fdff3e4271a7423476ef6fd090d2d4",
+    "unit": "m"
+   },
+   "shelf": "Four pitches, 1 to 3 mm.",
+   "title": "xArm Gripper",
+   "variants": [
+    "ufactory-xarm-1mm",
+    "ufactory-xarm-1.5mm",
+    "ufactory-xarm-2mm",
+    "ufactory-xarm-3mm"
    ]
   },
   "umi-concave-tip13.8": {
@@ -1197,6 +1479,36 @@
     "unitree-dex1-3mm"
    ]
   },
+  "unitree-dex3": {
+   "card": null,
+   "default": "unitree-dex3-2mm",
+   "family": null,
+   "finger": "fingertip",
+   "license": {
+    "change": "the fingertip cap's mirror-symmetric convex hull, m to mm, binary STL",
+    "holder": "HangZhou YuShu Technology Co., Ltd. (Unitree Robotics)",
+    "source": "https://github.com/unitreerobotics/unitree_ros/blob/b579bbe1671bf330e42f6fc1b9cd75a73b0879a7/robots/dexterous_hand_description/dex3_1/meshes/left_hand_index_1_link.STL",
+    "spdx": "BSD-3-Clause",
+    "text": "licenses/unitree_ros.txt"
+   },
+   "maker": "Unitree Robotics",
+   "mesh": {
+    "bytes": 776284,
+    "facets": 15524,
+    "file": "meshes/unitree-dex3.stl",
+    "name": "unitree-dex3.stl",
+    "sha256": "9fb4d06c219e39c2578297a0638a76dd0b868823b659ebaa9e69143fa4e522d3",
+    "unit": "mm"
+   },
+   "shelf": "Four pitches, 1 to 2.5 mm.",
+   "title": "Unitree Dex3-1",
+   "variants": [
+    "unitree-dex3-1mm",
+    "unitree-dex3-1.5mm",
+    "unitree-dex3-2mm",
+    "unitree-dex3-2.5mm"
+   ]
+  },
   "widowx-250": {
    "card": null,
    "default": "widowx-250-2mm",
@@ -1226,19 +1538,224 @@
     "widowx-250-2mm",
     "widowx-250-3mm"
    ]
+  },
+  "yubi-gripper": {
+   "card": null,
+   "default": "yubi-gripper-2mm",
+   "family": null,
+   "finger": "gripper finger pad",
+   "license": {
+    "change": "unchanged",
+    "holder": "Toyota Motor Corporation",
+    "source": "https://github.com/Toyota/yubi-hw/blob/dd8bd13d2fd8e5003057243576f88be333d95fc5/STL/gripper/FINGER_PAD_t30_L.stl",
+    "spdx": "CERN-OHL-W-2.0",
+    "text": "licenses/yubi-hw.txt"
+   },
+   "maker": "Toyota Motor Corporation",
+   "mesh": {
+    "bytes": 208884,
+    "facets": 4176,
+    "file": "meshes/yubi-gripper.stl",
+    "name": "yubi-gripper.stl",
+    "sha256": "36e029e3fe2590711014823c6b75b0c403b0c0a59315d565b4625318f2a46466",
+    "unit": "mm"
+   },
+   "shelf": "Four pitches, 1 to 2.5 mm.",
+   "title": "YUBI Gripper",
+   "variants": [
+    "yubi-gripper-1mm",
+    "yubi-gripper-1.5mm",
+    "yubi-gripper-2mm",
+    "yubi-gripper-2.5mm"
+   ]
   }
  },
  "start": [
   "umi-finray-2mm",
+  "leflexitac-2mm",
+  "robotiq-2f-85-2mm",
   "franka-hand-2mm",
   "widowx-250-2mm",
   "trossen-widowx-ai-2mm",
   "arx-x5-2mm",
   "i2rt-yam-2mm",
+  "makermods-metal-2mm",
+  "agilex-piper-2mm",
+  "galaxea-r1-lite-2mm",
+  "seeed-rebot-2mm",
+  "ufactory-xarm-2mm",
+  "rainbow-rby1-2mm",
+  "enactic-openarm-2mm",
+  "yubi-gripper-2mm",
   "unitree-dex1-2mm",
-  "makermods-metal-2mm"
+  "unitree-dex3-2mm",
+  "leap-hand-2mm"
  ],
  "variants": {
+  "agilex-piper-1mm": {
+   "badge": "Fine",
+   "build_id": "surface-32x30-4870109e5f29",
+   "centred": true,
+   "column_tail_mm": 52.27,
+   "columns": 30,
+   "field_mm": [
+    29.5,
+    31.5
+   ],
+   "fill": 0.5,
+   "fit": "fits/agilex-piper-1mm.json",
+   "fit_sha256": "01a0b625f74fa17461b40a21ff56d85319571987b177492c035013ef3b51338f",
+   "fits_reader": null,
+   "image": {
+    "alt": "AgileX Piper, 1 mm on both fingers of the open gripper",
+    "assembled": {
+     "height": 800,
+     "src": "shots/agilex-piper-1mm.assembled.webp",
+     "width": 1280
+    },
+    "exploded": {
+     "card": "shots/agilex-piper-1mm.exploded.card.webp",
+     "height": 800,
+     "src": "shots/agilex-piper-1mm.exploded.webp",
+     "width": 1280
+    }
+   },
+   "label": "AgileX Piper, 1 mm",
+   "part": "agilex-piper",
+   "pitch_mm": 1,
+   "reader": "none",
+   "row_tail_mm": 52.27,
+   "rows": 32,
+   "symmetric_face": true,
+   "taxels": 818,
+   "view": {
+    "art": "art/agilex-piper-1mm.json.gz",
+    "scene": "scenes/agilex-piper.json"
+   }
+  },
+  "agilex-piper-2mm": {
+   "badge": null,
+   "build_id": "surface-32x24-cdd0d9c72f7f",
+   "centred": true,
+   "column_tail_mm": 19.98,
+   "columns": 24,
+   "field_mm": [
+    47.0,
+    63.0
+   ],
+   "fill": 0.5,
+   "fit": "fits/agilex-piper-2mm.json",
+   "fit_sha256": "207ede8b61a2e1cc7c9e412cb4a1cf37d3411c17614f286d115fb13044933f2e",
+   "fits_reader": null,
+   "image": {
+    "alt": "AgileX Piper, 2 mm on both fingers of the open gripper",
+    "assembled": {
+     "height": 800,
+     "src": "shots/agilex-piper-2mm.assembled.webp",
+     "width": 1280
+    },
+    "exploded": {
+     "card": "shots/agilex-piper-2mm.exploded.card.webp",
+     "height": 800,
+     "src": "shots/agilex-piper-2mm.exploded.webp",
+     "width": 1280
+    }
+   },
+   "label": "AgileX Piper, 2 mm",
+   "part": "agilex-piper",
+   "pitch_mm": 2,
+   "reader": "none",
+   "row_tail_mm": 19.98,
+   "rows": 32,
+   "symmetric_face": true,
+   "taxels": 508,
+   "view": {
+    "art": "art/agilex-piper-2mm.json.gz",
+    "scene": "scenes/agilex-piper.json"
+   }
+  },
+  "agilex-piper-3mm": {
+   "badge": null,
+   "build_id": "surface-23x17-26cd111d1462",
+   "centred": true,
+   "column_tail_mm": 15.951,
+   "columns": 17,
+   "field_mm": [
+    49.5,
+    67.5
+   ],
+   "fill": 0.5,
+   "fit": "fits/agilex-piper-3mm.json",
+   "fit_sha256": "1012ac706327d2b014b317b533b457fb4d7e8881b198225fc42b40e467491d56",
+   "fits_reader": null,
+   "image": {
+    "alt": "AgileX Piper, 3 mm on both fingers of the open gripper",
+    "assembled": {
+     "height": 800,
+     "src": "shots/agilex-piper-3mm.assembled.webp",
+     "width": 1280
+    },
+    "exploded": {
+     "card": "shots/agilex-piper-3mm.exploded.card.webp",
+     "height": 800,
+     "src": "shots/agilex-piper-3mm.exploded.webp",
+     "width": 1280
+    }
+   },
+   "label": "AgileX Piper, 3 mm",
+   "part": "agilex-piper",
+   "pitch_mm": 3,
+   "reader": "none",
+   "row_tail_mm": 15.951,
+   "rows": 23,
+   "symmetric_face": true,
+   "taxels": 253,
+   "view": {
+    "art": "art/agilex-piper-3mm.json.gz",
+    "scene": "scenes/agilex-piper.json"
+   }
+  },
+  "agilex-piper-4mm": {
+   "badge": null,
+   "build_id": "surface-17x14-df15367723e4",
+   "centred": true,
+   "column_tail_mm": 16.662,
+   "columns": 14,
+   "field_mm": [
+    54.0,
+    66.0
+   ],
+   "fill": 0.5,
+   "fit": "fits/agilex-piper-4mm.json",
+   "fit_sha256": "e1fafa26e460a2309b245d2a31e7fe344371332fa8e66783b311b801293c3fca",
+   "fits_reader": null,
+   "image": {
+    "alt": "AgileX Piper, 4 mm on both fingers of the open gripper",
+    "assembled": {
+     "height": 800,
+     "src": "shots/agilex-piper-4mm.assembled.webp",
+     "width": 1280
+    },
+    "exploded": {
+     "card": "shots/agilex-piper-4mm.exploded.card.webp",
+     "height": 800,
+     "src": "shots/agilex-piper-4mm.exploded.webp",
+     "width": 1280
+    }
+   },
+   "label": "AgileX Piper, 4 mm",
+   "part": "agilex-piper",
+   "pitch_mm": 4,
+   "reader": "none",
+   "row_tail_mm": 16.662,
+   "rows": 17,
+   "symmetric_face": true,
+   "taxels": 138,
+   "view": {
+    "art": "art/agilex-piper-4mm.json.gz",
+    "scene": "scenes/agilex-piper.json"
+   }
+  },
   "arx-x5-1mm": {
    "badge": "Fine",
    "build_id": "surface-32x26-e32a3d71cbce",
@@ -1401,6 +1918,170 @@
    "view": {
     "art": "art/arx-x5-4mm.json.gz",
     "scene": "scenes/arx-x5.json"
+   }
+  },
+  "enactic-openarm-1.5mm": {
+   "badge": null,
+   "build_id": "surface-7x13-41c268c40e82",
+   "centred": true,
+   "column_tail_mm": 17.883,
+   "columns": 13,
+   "field_mm": [
+    18.75,
+    9.75
+   ],
+   "fill": 0.5,
+   "fit": "fits/enactic-openarm-1.5mm.json",
+   "fit_sha256": "36cf3b3d62d64cfda7a4cd96e196e188def9def41729e1d05cf8cb4fdd26f1ae",
+   "fits_reader": null,
+   "image": {
+    "alt": "OpenArm 1.0, 1.5 mm on both fingers of the open gripper",
+    "assembled": {
+     "height": 800,
+     "src": "shots/enactic-openarm-1.5mm.assembled.webp",
+     "width": 1280
+    },
+    "exploded": {
+     "card": "shots/enactic-openarm-1.5mm.exploded.card.webp",
+     "height": 800,
+     "src": "shots/enactic-openarm-1.5mm.exploded.webp",
+     "width": 1280
+    }
+   },
+   "label": "OpenArm 1.0, 1.5 mm",
+   "part": "enactic-openarm",
+   "pitch_mm": 1.5,
+   "reader": "none",
+   "row_tail_mm": 17.883,
+   "rows": 7,
+   "symmetric_face": true,
+   "taxels": 57,
+   "view": {
+    "art": "art/enactic-openarm-1.5mm.json.gz",
+    "scene": "scenes/enactic-openarm.json"
+   }
+  },
+  "enactic-openarm-1mm": {
+   "badge": "Fine",
+   "build_id": "surface-10x20-f91bdea60002",
+   "centred": true,
+   "column_tail_mm": 17.772,
+   "columns": 20,
+   "field_mm": [
+    19.5,
+    9.5
+   ],
+   "fill": 0.5,
+   "fit": "fits/enactic-openarm-1mm.json",
+   "fit_sha256": "e91950bef03de373cae9fb851e2e502ca3e97f52abe157c2a814ef904e668c98",
+   "fits_reader": null,
+   "image": {
+    "alt": "OpenArm 1.0, 1 mm on both fingers of the open gripper",
+    "assembled": {
+     "height": 800,
+     "src": "shots/enactic-openarm-1mm.assembled.webp",
+     "width": 1280
+    },
+    "exploded": {
+     "card": "shots/enactic-openarm-1mm.exploded.card.webp",
+     "height": 800,
+     "src": "shots/enactic-openarm-1mm.exploded.webp",
+     "width": 1280
+    }
+   },
+   "label": "OpenArm 1.0, 1 mm",
+   "part": "enactic-openarm",
+   "pitch_mm": 1,
+   "reader": "none",
+   "row_tail_mm": 17.772,
+   "rows": 10,
+   "symmetric_face": true,
+   "taxels": 134,
+   "view": {
+    "art": "art/enactic-openarm-1mm.json.gz",
+    "scene": "scenes/enactic-openarm.json"
+   }
+  },
+  "enactic-openarm-2.5mm": {
+   "badge": null,
+   "build_id": "surface-4x7-26531b41a24f",
+   "centred": true,
+   "column_tail_mm": 18.389,
+   "columns": 7,
+   "field_mm": [
+    16.25,
+    8.75
+   ],
+   "fill": 0.5,
+   "fit": "fits/enactic-openarm-2.5mm.json",
+   "fit_sha256": "af88a38286f3daba5cc82c276af9435c14899b9344c1a554ad93e35ed1ff65e9",
+   "fits_reader": null,
+   "image": {
+    "alt": "OpenArm 1.0, 2.5 mm on both fingers of the open gripper",
+    "assembled": {
+     "height": 800,
+     "src": "shots/enactic-openarm-2.5mm.assembled.webp",
+     "width": 1280
+    },
+    "exploded": {
+     "card": "shots/enactic-openarm-2.5mm.exploded.card.webp",
+     "height": 800,
+     "src": "shots/enactic-openarm-2.5mm.exploded.webp",
+     "width": 1280
+    }
+   },
+   "label": "OpenArm 1.0, 2.5 mm",
+   "part": "enactic-openarm",
+   "pitch_mm": 2.5,
+   "reader": "none",
+   "row_tail_mm": 18.389,
+   "rows": 4,
+   "symmetric_face": true,
+   "taxels": 22,
+   "view": {
+    "art": "art/enactic-openarm-2.5mm.json.gz",
+    "scene": "scenes/enactic-openarm.json"
+   }
+  },
+  "enactic-openarm-2mm": {
+   "badge": null,
+   "build_id": "surface-5x9-e06f96efd96e",
+   "centred": true,
+   "column_tail_mm": 18.416,
+   "columns": 9,
+   "field_mm": [
+    17.0,
+    9.0
+   ],
+   "fill": 0.5,
+   "fit": "fits/enactic-openarm-2mm.json",
+   "fit_sha256": "67d67591545351a3435d1f81045fce705e7deb147ce5c223ec14be96488bc363",
+   "fits_reader": null,
+   "image": {
+    "alt": "OpenArm 1.0, 2 mm on both fingers of the open gripper",
+    "assembled": {
+     "height": 800,
+     "src": "shots/enactic-openarm-2mm.assembled.webp",
+     "width": 1280
+    },
+    "exploded": {
+     "card": "shots/enactic-openarm-2mm.exploded.card.webp",
+     "height": 800,
+     "src": "shots/enactic-openarm-2mm.exploded.webp",
+     "width": 1280
+    }
+   },
+   "label": "OpenArm 1.0, 2 mm",
+   "part": "enactic-openarm",
+   "pitch_mm": 2,
+   "reader": "none",
+   "row_tail_mm": 18.416,
+   "rows": 5,
+   "symmetric_face": true,
+   "taxels": 33,
+   "view": {
+    "art": "art/enactic-openarm-2mm.json.gz",
+    "scene": "scenes/enactic-openarm.json"
    }
   },
   "franka-hand-1.5mm": {
@@ -1567,6 +2248,170 @@
     "scene": "scenes/franka-hand.json"
    }
   },
+  "galaxea-r1-lite-1.5mm": {
+   "badge": null,
+   "build_id": "surface-32x12-dd03906dd638",
+   "centred": true,
+   "column_tail_mm": 36.724,
+   "columns": 12,
+   "field_mm": [
+    17.25,
+    47.25
+   ],
+   "fill": 0.5,
+   "fit": "fits/galaxea-r1-lite-1.5mm.json",
+   "fit_sha256": "410d9cc03330c8172edc3494de53e65deeaf9b2dddc1050b4e411594f7e5cd65",
+   "fits_reader": null,
+   "image": {
+    "alt": "Galaxea R1 Lite, 1.5 mm on both fingers of the open gripper",
+    "assembled": {
+     "height": 800,
+     "src": "shots/galaxea-r1-lite-1.5mm.assembled.webp",
+     "width": 1280
+    },
+    "exploded": {
+     "card": "shots/galaxea-r1-lite-1.5mm.exploded.card.webp",
+     "height": 800,
+     "src": "shots/galaxea-r1-lite-1.5mm.exploded.webp",
+     "width": 1280
+    }
+   },
+   "label": "Galaxea R1 Lite, 1.5 mm",
+   "part": "galaxea-r1-lite",
+   "pitch_mm": 1.5,
+   "reader": "none",
+   "row_tail_mm": 36.724,
+   "rows": 32,
+   "symmetric_face": true,
+   "taxels": 280,
+   "view": {
+    "art": "art/galaxea-r1-lite-1.5mm.json.gz",
+    "scene": "scenes/galaxea-r1-lite.json"
+   }
+  },
+  "galaxea-r1-lite-1mm": {
+   "badge": "Fine",
+   "build_id": "surface-32x16-3ed91ae4aa10",
+   "centred": true,
+   "column_tail_mm": 52.738,
+   "columns": 16,
+   "field_mm": [
+    15.5,
+    31.5
+   ],
+   "fill": 0.5,
+   "fit": "fits/galaxea-r1-lite-1mm.json",
+   "fit_sha256": "d82a133775e8ef47f7f74a32c302aa5a19e62a865ae58131ad94b54f0e4816e1",
+   "fits_reader": "32x16",
+   "image": {
+    "alt": "Galaxea R1 Lite, 1 mm on both fingers of the open gripper",
+    "assembled": {
+     "height": 800,
+     "src": "shots/galaxea-r1-lite-1mm.assembled.webp",
+     "width": 1280
+    },
+    "exploded": {
+     "card": "shots/galaxea-r1-lite-1mm.exploded.card.webp",
+     "height": 800,
+     "src": "shots/galaxea-r1-lite-1mm.exploded.webp",
+     "width": 1280
+    }
+   },
+   "label": "Galaxea R1 Lite, 1 mm",
+   "part": "galaxea-r1-lite",
+   "pitch_mm": 1,
+   "reader": "none",
+   "row_tail_mm": 52.738,
+   "rows": 32,
+   "symmetric_face": true,
+   "taxels": 362,
+   "view": {
+    "art": "art/galaxea-r1-lite-1mm.json.gz",
+    "scene": "scenes/galaxea-r1-lite.json"
+   }
+  },
+  "galaxea-r1-lite-2mm": {
+   "badge": null,
+   "build_id": "surface-27x11-6683927e8a29",
+   "centred": true,
+   "column_tail_mm": 31.408,
+   "columns": 11,
+   "field_mm": [
+    21.0,
+    53.0
+   ],
+   "fill": 0.5,
+   "fit": "fits/galaxea-r1-lite-2mm.json",
+   "fit_sha256": "d3cec78a48cca2f59ccaf618e0556a5f3a77e885cca6f4051d3ff8713f6f0cfe",
+   "fits_reader": null,
+   "image": {
+    "alt": "Galaxea R1 Lite, 2 mm on both fingers of the open gripper",
+    "assembled": {
+     "height": 800,
+     "src": "shots/galaxea-r1-lite-2mm.assembled.webp",
+     "width": 1280
+    },
+    "exploded": {
+     "card": "shots/galaxea-r1-lite-2mm.exploded.card.webp",
+     "height": 800,
+     "src": "shots/galaxea-r1-lite-2mm.exploded.webp",
+     "width": 1280
+    }
+   },
+   "label": "Galaxea R1 Lite, 2 mm",
+   "part": "galaxea-r1-lite",
+   "pitch_mm": 2,
+   "reader": "none",
+   "row_tail_mm": 31.408,
+   "rows": 27,
+   "symmetric_face": true,
+   "taxels": 183,
+   "view": {
+    "art": "art/galaxea-r1-lite-2mm.json.gz",
+    "scene": "scenes/galaxea-r1-lite.json"
+   }
+  },
+  "galaxea-r1-lite-3mm": {
+   "badge": null,
+   "build_id": "surface-18x7-e15f5655008d",
+   "centred": true,
+   "column_tail_mm": 17.879,
+   "columns": 7,
+   "field_mm": [
+    19.5,
+    52.5
+   ],
+   "fill": 0.5,
+   "fit": "fits/galaxea-r1-lite-3mm.json",
+   "fit_sha256": "644601ab949a75fe7ca90be294845e9de4708ae743600ffc7e8d68872899e226",
+   "fits_reader": null,
+   "image": {
+    "alt": "Galaxea R1 Lite, 3 mm on both fingers of the open gripper",
+    "assembled": {
+     "height": 800,
+     "src": "shots/galaxea-r1-lite-3mm.assembled.webp",
+     "width": 1280
+    },
+    "exploded": {
+     "card": "shots/galaxea-r1-lite-3mm.exploded.card.webp",
+     "height": 800,
+     "src": "shots/galaxea-r1-lite-3mm.exploded.webp",
+     "width": 1280
+    }
+   },
+   "label": "Galaxea R1 Lite, 3 mm",
+   "part": "galaxea-r1-lite",
+   "pitch_mm": 3,
+   "reader": "none",
+   "row_tail_mm": 17.879,
+   "rows": 18,
+   "symmetric_face": true,
+   "taxels": 82,
+   "view": {
+    "art": "art/galaxea-r1-lite-3mm.json.gz",
+    "scene": "scenes/galaxea-r1-lite.json"
+   }
+  },
   "i2rt-yam-1mm": {
    "badge": "Fine",
    "build_id": "surface-32x32-9f9f07663e9f",
@@ -1729,6 +2574,334 @@
    "view": {
     "art": "art/i2rt-yam-4mm.json.gz",
     "scene": "scenes/i2rt-yam.json"
+   }
+  },
+  "leap-hand-1.5mm": {
+   "badge": null,
+   "build_id": "surface-17x9-91ad61bbbda6",
+   "centred": true,
+   "column_tail_mm": 17.062,
+   "columns": 9,
+   "field_mm": [
+    12.75,
+    24.75
+   ],
+   "fill": 0.5,
+   "fit": "fits/leap-hand-1.5mm.json",
+   "fit_sha256": "d4211f0cf321fb9b3d070ebd5ff8bc55914916d6e7d3d4670f3c4228685088d7",
+   "fits_reader": null,
+   "image": {
+    "alt": "LEAP Hand, 1.5 mm on every finger of the open hand",
+    "assembled": {
+     "height": 800,
+     "src": "shots/leap-hand-1.5mm.assembled.webp",
+     "width": 1280
+    },
+    "exploded": {
+     "card": "shots/leap-hand-1.5mm.exploded.card.webp",
+     "height": 800,
+     "src": "shots/leap-hand-1.5mm.exploded.webp",
+     "width": 1280
+    }
+   },
+   "label": "LEAP Hand, 1.5 mm",
+   "part": "leap-hand",
+   "pitch_mm": 1.5,
+   "reader": "none",
+   "row_tail_mm": 17.062,
+   "rows": 17,
+   "symmetric_face": true,
+   "taxels": 149,
+   "view": {
+    "art": "art/leap-hand-1.5mm.json.gz",
+    "scene": "scenes/leap-hand.json"
+   }
+  },
+  "leap-hand-1mm": {
+   "badge": "Fine",
+   "build_id": "surface-25x13-ecaed6b15fc8",
+   "centred": true,
+   "column_tail_mm": 16.585,
+   "columns": 13,
+   "field_mm": [
+    12.5,
+    24.5
+   ],
+   "fill": 0.5,
+   "fit": "fits/leap-hand-1mm.json",
+   "fit_sha256": "cfe619e5903b2b49d361fed1828784905f72639c2e23644b9eb7da5546d619ac",
+   "fits_reader": null,
+   "image": {
+    "alt": "LEAP Hand, 1 mm on every finger of the open hand",
+    "assembled": {
+     "height": 800,
+     "src": "shots/leap-hand-1mm.assembled.webp",
+     "width": 1280
+    },
+    "exploded": {
+     "card": "shots/leap-hand-1mm.exploded.card.webp",
+     "height": 800,
+     "src": "shots/leap-hand-1mm.exploded.webp",
+     "width": 1280
+    }
+   },
+   "label": "LEAP Hand, 1 mm",
+   "part": "leap-hand",
+   "pitch_mm": 1,
+   "reader": "none",
+   "row_tail_mm": 16.585,
+   "rows": 25,
+   "symmetric_face": true,
+   "taxels": 315,
+   "view": {
+    "art": "art/leap-hand-1mm.json.gz",
+    "scene": "scenes/leap-hand.json"
+   }
+  },
+  "leap-hand-2mm": {
+   "badge": null,
+   "build_id": "surface-13x6-caf1305f5b6b",
+   "centred": true,
+   "column_tail_mm": 17.434,
+   "columns": 6,
+   "field_mm": [
+    11.0,
+    25.0
+   ],
+   "fill": 0.5,
+   "fit": "fits/leap-hand-2mm.json",
+   "fit_sha256": "6646c6edd0970985f5e57e57ad1e14ceb9a1282252193fbb61d2f80b9cac8ced",
+   "fits_reader": null,
+   "image": {
+    "alt": "LEAP Hand, 2 mm on every finger of the open hand",
+    "assembled": {
+     "height": 800,
+     "src": "shots/leap-hand-2mm.assembled.webp",
+     "width": 1280
+    },
+    "exploded": {
+     "card": "shots/leap-hand-2mm.exploded.card.webp",
+     "height": 800,
+     "src": "shots/leap-hand-2mm.exploded.webp",
+     "width": 1280
+    }
+   },
+   "label": "LEAP Hand, 2 mm",
+   "part": "leap-hand",
+   "pitch_mm": 2,
+   "reader": "none",
+   "row_tail_mm": 17.434,
+   "rows": 13,
+   "symmetric_face": true,
+   "taxels": 74,
+   "view": {
+    "art": "art/leap-hand-2mm.json.gz",
+    "scene": "scenes/leap-hand.json"
+   }
+  },
+  "leap-hand-3mm": {
+   "badge": null,
+   "build_id": "surface-8x4-54c99c82e57f",
+   "centred": true,
+   "column_tail_mm": 19.955,
+   "columns": 4,
+   "field_mm": [
+    10.5,
+    22.5
+   ],
+   "fill": 0.5,
+   "fit": "fits/leap-hand-3mm.json",
+   "fit_sha256": "2b95bbbad1ca06dc0e5d9cd6acf97f0753e1f487129b8c865b5bd4aac15e1314",
+   "fits_reader": null,
+   "image": {
+    "alt": "LEAP Hand, 3 mm on every finger of the open hand",
+    "assembled": {
+     "height": 800,
+     "src": "shots/leap-hand-3mm.assembled.webp",
+     "width": 1280
+    },
+    "exploded": {
+     "card": "shots/leap-hand-3mm.exploded.card.webp",
+     "height": 800,
+     "src": "shots/leap-hand-3mm.exploded.webp",
+     "width": 1280
+    }
+   },
+   "label": "LEAP Hand, 3 mm",
+   "part": "leap-hand",
+   "pitch_mm": 3,
+   "reader": "none",
+   "row_tail_mm": 19.955,
+   "rows": 8,
+   "symmetric_face": true,
+   "taxels": 32,
+   "view": {
+    "art": "art/leap-hand-3mm.json.gz",
+    "scene": "scenes/leap-hand.json"
+   }
+  },
+  "leflexitac-1.5mm": {
+   "badge": null,
+   "build_id": "surface-32x18-096cb05ed1ce",
+   "centred": true,
+   "column_tail_mm": 33.726,
+   "columns": 18,
+   "field_mm": [
+    26.25,
+    47.25
+   ],
+   "fill": 0.5,
+   "fit": "fits/leflexitac-1.5mm.json",
+   "fit_sha256": "fa4137c8e491bd01fd04039416ca8d19d7ee1f147273978a3aba9b10df8a7e86",
+   "fits_reader": null,
+   "image": {
+    "alt": "LeFlexiTac, 1.5 mm on both fingers of the open gripper",
+    "assembled": {
+     "height": 800,
+     "src": "shots/leflexitac-1.5mm.assembled.webp",
+     "width": 1280
+    },
+    "exploded": {
+     "card": "shots/leflexitac-1.5mm.exploded.card.webp",
+     "height": 800,
+     "src": "shots/leflexitac-1.5mm.exploded.webp",
+     "width": 1280
+    }
+   },
+   "label": "LeFlexiTac, 1.5 mm",
+   "part": "leflexitac",
+   "pitch_mm": 1.5,
+   "reader": "none",
+   "row_tail_mm": 33.726,
+   "rows": 32,
+   "symmetric_face": true,
+   "taxels": 540,
+   "view": {
+    "art": "art/leflexitac-1.5mm.json.gz",
+    "scene": "scenes/leflexitac.json"
+   }
+  },
+  "leflexitac-1mm": {
+   "badge": "Fine",
+   "build_id": "surface-32x27-c4fdd1e36c93",
+   "centred": true,
+   "column_tail_mm": 49.527,
+   "columns": 27,
+   "field_mm": [
+    26.5,
+    31.5
+   ],
+   "fill": 0.5,
+   "fit": "fits/leflexitac-1mm.json",
+   "fit_sha256": "77f130ea5ed79b8fe04e4e72245ec6e71b95a5199b1ec27c9568df2f032b0350",
+   "fits_reader": null,
+   "image": {
+    "alt": "LeFlexiTac, 1 mm on both fingers of the open gripper",
+    "assembled": {
+     "height": 800,
+     "src": "shots/leflexitac-1mm.assembled.webp",
+     "width": 1280
+    },
+    "exploded": {
+     "card": "shots/leflexitac-1mm.exploded.card.webp",
+     "height": 800,
+     "src": "shots/leflexitac-1mm.exploded.webp",
+     "width": 1280
+    }
+   },
+   "label": "LeFlexiTac, 1 mm",
+   "part": "leflexitac",
+   "pitch_mm": 1,
+   "reader": "none",
+   "row_tail_mm": 49.527,
+   "rows": 32,
+   "symmetric_face": true,
+   "taxels": 792,
+   "view": {
+    "art": "art/leflexitac-1mm.json.gz",
+    "scene": "scenes/leflexitac.json"
+   }
+  },
+  "leflexitac-2mm": {
+   "badge": null,
+   "build_id": "surface-32x14-c25c9c5857fa",
+   "centred": true,
+   "column_tail_mm": 18.005,
+   "columns": 14,
+   "field_mm": [
+    27.0,
+    63.0
+   ],
+   "fill": 0.5,
+   "fit": "fits/leflexitac-2mm.json",
+   "fit_sha256": "9d720179e0b3295a6cfc91fe639289cfab3187d84cbd0764ac539e9cabbcdbd0",
+   "fits_reader": null,
+   "image": {
+    "alt": "LeFlexiTac, 2 mm on both fingers of the open gripper",
+    "assembled": {
+     "height": 800,
+     "src": "shots/leflexitac-2mm.assembled.webp",
+     "width": 1280
+    },
+    "exploded": {
+     "card": "shots/leflexitac-2mm.exploded.card.webp",
+     "height": 800,
+     "src": "shots/leflexitac-2mm.exploded.webp",
+     "width": 1280
+    }
+   },
+   "label": "LeFlexiTac, 2 mm",
+   "part": "leflexitac",
+   "pitch_mm": 2,
+   "reader": "none",
+   "row_tail_mm": 18.005,
+   "rows": 32,
+   "symmetric_face": true,
+   "taxels": 422,
+   "view": {
+    "art": "art/leflexitac-2mm.json.gz",
+    "scene": "scenes/leflexitac.json"
+   }
+  },
+  "leflexitac-3mm": {
+   "badge": null,
+   "build_id": "surface-22x9-46f14897dbe8",
+   "centred": true,
+   "column_tail_mm": 17.377,
+   "columns": 9,
+   "field_mm": [
+    25.5,
+    64.5
+   ],
+   "fill": 0.5,
+   "fit": "fits/leflexitac-3mm.json",
+   "fit_sha256": "2feeb9173427a070e43c5888c9ad616ec95ff19d6375b0d63b2ee458f439e6c6",
+   "fits_reader": null,
+   "image": {
+    "alt": "LeFlexiTac, 3 mm on both fingers of the open gripper",
+    "assembled": {
+     "height": 800,
+     "src": "shots/leflexitac-3mm.assembled.webp",
+     "width": 1280
+    },
+    "exploded": {
+     "card": "shots/leflexitac-3mm.exploded.card.webp",
+     "height": 800,
+     "src": "shots/leflexitac-3mm.exploded.webp",
+     "width": 1280
+    }
+   },
+   "label": "LeFlexiTac, 3 mm",
+   "part": "leflexitac",
+   "pitch_mm": 3,
+   "reader": "none",
+   "row_tail_mm": 17.377,
+   "rows": 22,
+   "symmetric_face": true,
+   "taxels": 188,
+   "view": {
+    "art": "art/leflexitac-3mm.json.gz",
+    "scene": "scenes/leflexitac.json"
    }
   },
   "makermods-metal-1.5mm": {
@@ -1895,6 +3068,498 @@
     "scene": "scenes/makermods-metal.json"
    }
   },
+  "rainbow-rby1-1.5mm": {
+   "badge": null,
+   "build_id": "surface-32x20-a66db1934e22",
+   "centred": true,
+   "column_tail_mm": 16.787,
+   "columns": 20,
+   "field_mm": [
+    29.25,
+    47.25
+   ],
+   "fill": 0.5,
+   "fit": "fits/rainbow-rby1-1.5mm.json",
+   "fit_sha256": "5f50bc768f678f30cf54b11ed1873e7adf91a2472dc3850e43d1f1e6c43b7d6c",
+   "fits_reader": null,
+   "image": {
+    "alt": "Rainbow RB-Y1, 1.5 mm on both fingers of the open gripper",
+    "assembled": {
+     "height": 800,
+     "src": "shots/rainbow-rby1-1.5mm.assembled.webp",
+     "width": 1280
+    },
+    "exploded": {
+     "card": "shots/rainbow-rby1-1.5mm.exploded.card.webp",
+     "height": 800,
+     "src": "shots/rainbow-rby1-1.5mm.exploded.webp",
+     "width": 1280
+    }
+   },
+   "label": "Rainbow RB-Y1, 1.5 mm",
+   "part": "rainbow-rby1",
+   "pitch_mm": 1.5,
+   "reader": "none",
+   "row_tail_mm": 16.787,
+   "rows": 32,
+   "symmetric_face": true,
+   "taxels": 514,
+   "view": {
+    "art": "art/rainbow-rby1-1.5mm.json.gz",
+    "scene": "scenes/rainbow-rby1.json"
+   }
+  },
+  "rainbow-rby1-1mm": {
+   "badge": "Fine",
+   "build_id": "surface-32x26-f484d938aaf3",
+   "centred": true,
+   "column_tail_mm": 32.639,
+   "columns": 26,
+   "field_mm": [
+    25.5,
+    31.5
+   ],
+   "fill": 0.5,
+   "fit": "fits/rainbow-rby1-1mm.json",
+   "fit_sha256": "a5188212c7d78c011038abb50659ba8f18ab8ffea5816c3b47c432c256e080e3",
+   "fits_reader": null,
+   "image": {
+    "alt": "Rainbow RB-Y1, 1 mm on both fingers of the open gripper",
+    "assembled": {
+     "height": 800,
+     "src": "shots/rainbow-rby1-1mm.assembled.webp",
+     "width": 1280
+    },
+    "exploded": {
+     "card": "shots/rainbow-rby1-1mm.exploded.card.webp",
+     "height": 800,
+     "src": "shots/rainbow-rby1-1mm.exploded.webp",
+     "width": 1280
+    }
+   },
+   "label": "Rainbow RB-Y1, 1 mm",
+   "part": "rainbow-rby1",
+   "pitch_mm": 1,
+   "reader": "none",
+   "row_tail_mm": 32.639,
+   "rows": 32,
+   "symmetric_face": true,
+   "taxels": 718,
+   "view": {
+    "art": "art/rainbow-rby1-1mm.json.gz",
+    "scene": "scenes/rainbow-rby1.json"
+   }
+  },
+  "rainbow-rby1-2mm": {
+   "badge": null,
+   "build_id": "surface-25x15-09f7dc7dd5eb",
+   "centred": true,
+   "column_tail_mm": 15.537,
+   "columns": 15,
+   "field_mm": [
+    29.0,
+    49.0
+   ],
+   "fill": 0.5,
+   "fit": "fits/rainbow-rby1-2mm.json",
+   "fit_sha256": "76659c7d4811a79affdca825c4074090c75e60ce8da6cd2acc58e5b5c0470d8c",
+   "fits_reader": null,
+   "image": {
+    "alt": "Rainbow RB-Y1, 2 mm on both fingers of the open gripper",
+    "assembled": {
+     "height": 800,
+     "src": "shots/rainbow-rby1-2mm.assembled.webp",
+     "width": 1280
+    },
+    "exploded": {
+     "card": "shots/rainbow-rby1-2mm.exploded.card.webp",
+     "height": 800,
+     "src": "shots/rainbow-rby1-2mm.exploded.webp",
+     "width": 1280
+    }
+   },
+   "label": "Rainbow RB-Y1, 2 mm",
+   "part": "rainbow-rby1",
+   "pitch_mm": 2,
+   "reader": "none",
+   "row_tail_mm": 15.537,
+   "rows": 25,
+   "symmetric_face": true,
+   "taxels": 301,
+   "view": {
+    "art": "art/rainbow-rby1-2mm.json.gz",
+    "scene": "scenes/rainbow-rby1.json"
+   }
+  },
+  "rainbow-rby1-3mm": {
+   "badge": null,
+   "build_id": "surface-16x9-8fbcce3bd65c",
+   "centred": true,
+   "column_tail_mm": 18.078,
+   "columns": 9,
+   "field_mm": [
+    25.5,
+    46.5
+   ],
+   "fill": 0.5,
+   "fit": "fits/rainbow-rby1-3mm.json",
+   "fit_sha256": "58480f6b9597ea6275c2f5e4a3a28b93f008b8e3cf8eaccaa7b37b14c74095c3",
+   "fits_reader": null,
+   "image": {
+    "alt": "Rainbow RB-Y1, 3 mm on both fingers of the open gripper",
+    "assembled": {
+     "height": 800,
+     "src": "shots/rainbow-rby1-3mm.assembled.webp",
+     "width": 1280
+    },
+    "exploded": {
+     "card": "shots/rainbow-rby1-3mm.exploded.card.webp",
+     "height": 800,
+     "src": "shots/rainbow-rby1-3mm.exploded.webp",
+     "width": 1280
+    }
+   },
+   "label": "Rainbow RB-Y1, 3 mm",
+   "part": "rainbow-rby1",
+   "pitch_mm": 3,
+   "reader": "none",
+   "row_tail_mm": 18.078,
+   "rows": 16,
+   "symmetric_face": true,
+   "taxels": 126,
+   "view": {
+    "art": "art/rainbow-rby1-3mm.json.gz",
+    "scene": "scenes/rainbow-rby1.json"
+   }
+  },
+  "robotiq-2f-85-1.5mm": {
+   "badge": null,
+   "build_id": "surface-24x14-09aacacc6af6",
+   "centred": true,
+   "column_tail_mm": 17.088,
+   "columns": 14,
+   "field_mm": [
+    20.25,
+    35.25
+   ],
+   "fill": 0.5,
+   "fit": "fits/robotiq-2f-85-1.5mm.json",
+   "fit_sha256": "47ba42aa9817c3d3d986cfd58acfcbb2724764a0c4b019c0ff5c1156c0007c3f",
+   "fits_reader": null,
+   "image": {
+    "alt": "Robotiq 2F-85, 1.5 mm on both fingers of the open gripper",
+    "assembled": {
+     "height": 800,
+     "src": "shots/robotiq-2f-85-1.5mm.assembled.webp",
+     "width": 1280
+    },
+    "exploded": {
+     "card": "shots/robotiq-2f-85-1.5mm.exploded.card.webp",
+     "height": 800,
+     "src": "shots/robotiq-2f-85-1.5mm.exploded.webp",
+     "width": 1280
+    }
+   },
+   "label": "Robotiq 2F-85, 1.5 mm",
+   "part": "robotiq-2f-85",
+   "pitch_mm": 1.5,
+   "reader": "none",
+   "row_tail_mm": 17.088,
+   "rows": 24,
+   "symmetric_face": true,
+   "taxels": 330,
+   "view": {
+    "art": "art/robotiq-2f-85-1.5mm.json.gz",
+    "scene": "scenes/robotiq-2f-85.json"
+   }
+  },
+  "robotiq-2f-85-1mm": {
+   "badge": "Fine",
+   "build_id": "surface-32x21-33db45dfe7b5",
+   "centred": true,
+   "column_tail_mm": 19.983,
+   "columns": 21,
+   "field_mm": [
+    20.5,
+    31.5
+   ],
+   "fill": 0.5,
+   "fit": "fits/robotiq-2f-85-1mm.json",
+   "fit_sha256": "4db0d123b1c912553df37f2f564e8baef233c7d4e5d4fb4987cfc08dd26c4b56",
+   "fits_reader": null,
+   "image": {
+    "alt": "Robotiq 2F-85, 1 mm on both fingers of the open gripper",
+    "assembled": {
+     "height": 800,
+     "src": "shots/robotiq-2f-85-1mm.assembled.webp",
+     "width": 1280
+    },
+    "exploded": {
+     "card": "shots/robotiq-2f-85-1mm.exploded.card.webp",
+     "height": 800,
+     "src": "shots/robotiq-2f-85-1mm.exploded.webp",
+     "width": 1280
+    }
+   },
+   "label": "Robotiq 2F-85, 1 mm",
+   "part": "robotiq-2f-85",
+   "pitch_mm": 1,
+   "reader": "none",
+   "row_tail_mm": 19.983,
+   "rows": 32,
+   "symmetric_face": true,
+   "taxels": 662,
+   "view": {
+    "art": "art/robotiq-2f-85-1mm.json.gz",
+    "scene": "scenes/robotiq-2f-85.json"
+   }
+  },
+  "robotiq-2f-85-2mm": {
+   "badge": null,
+   "build_id": "surface-18x10-afdfaad369ad",
+   "centred": true,
+   "column_tail_mm": 17.902,
+   "columns": 10,
+   "field_mm": [
+    19.0,
+    35.0
+   ],
+   "fill": 0.5,
+   "fit": "fits/robotiq-2f-85-2mm.json",
+   "fit_sha256": "b4bff599c85d68941672aaf2474319a28addfdcc9967882bcb2dc5be369ab550",
+   "fits_reader": null,
+   "image": {
+    "alt": "Robotiq 2F-85, 2 mm on both fingers of the open gripper",
+    "assembled": {
+     "height": 800,
+     "src": "shots/robotiq-2f-85-2mm.assembled.webp",
+     "width": 1280
+    },
+    "exploded": {
+     "card": "shots/robotiq-2f-85-2mm.exploded.card.webp",
+     "height": 800,
+     "src": "shots/robotiq-2f-85-2mm.exploded.webp",
+     "width": 1280
+    }
+   },
+   "label": "Robotiq 2F-85, 2 mm",
+   "part": "robotiq-2f-85",
+   "pitch_mm": 2,
+   "reader": "none",
+   "row_tail_mm": 17.902,
+   "rows": 18,
+   "symmetric_face": true,
+   "taxels": 178,
+   "view": {
+    "art": "art/robotiq-2f-85-2mm.json.gz",
+    "scene": "scenes/robotiq-2f-85.json"
+   }
+  },
+  "robotiq-2f-85-3mm": {
+   "badge": null,
+   "build_id": "surface-12x7-bdd4196e6d44",
+   "centred": true,
+   "column_tail_mm": 19.138,
+   "columns": 7,
+   "field_mm": [
+    19.5,
+    34.5
+   ],
+   "fill": 0.5,
+   "fit": "fits/robotiq-2f-85-3mm.json",
+   "fit_sha256": "f2fb2213ae405090e38bb991b50b70954ad7f3a9b38efe5768246f2bdba7a29c",
+   "fits_reader": null,
+   "image": {
+    "alt": "Robotiq 2F-85, 3 mm on both fingers of the open gripper",
+    "assembled": {
+     "height": 800,
+     "src": "shots/robotiq-2f-85-3mm.assembled.webp",
+     "width": 1280
+    },
+    "exploded": {
+     "card": "shots/robotiq-2f-85-3mm.exploded.card.webp",
+     "height": 800,
+     "src": "shots/robotiq-2f-85-3mm.exploded.webp",
+     "width": 1280
+    }
+   },
+   "label": "Robotiq 2F-85, 3 mm",
+   "part": "robotiq-2f-85",
+   "pitch_mm": 3,
+   "reader": "none",
+   "row_tail_mm": 19.138,
+   "rows": 12,
+   "symmetric_face": true,
+   "taxels": 82,
+   "view": {
+    "art": "art/robotiq-2f-85-3mm.json.gz",
+    "scene": "scenes/robotiq-2f-85.json"
+   }
+  },
+  "seeed-rebot-1.5mm": {
+   "badge": null,
+   "build_id": "surface-32x20-4453d7d4a0af",
+   "centred": true,
+   "column_tail_mm": 29.537,
+   "columns": 20,
+   "field_mm": [
+    29.25,
+    47.25
+   ],
+   "fill": 0.5,
+   "fit": "fits/seeed-rebot-1.5mm.json",
+   "fit_sha256": "519f1c2b7c0a618041fb98b5cc1f595cd95d57ec8f8e9d134f72e5dc58a93050",
+   "fits_reader": null,
+   "image": {
+    "alt": "Seeed reBot DevArm, 1.5 mm on both fingers of the open gripper",
+    "assembled": {
+     "height": 800,
+     "src": "shots/seeed-rebot-1.5mm.assembled.webp",
+     "width": 1280
+    },
+    "exploded": {
+     "card": "shots/seeed-rebot-1.5mm.exploded.card.webp",
+     "height": 800,
+     "src": "shots/seeed-rebot-1.5mm.exploded.webp",
+     "width": 1280
+    }
+   },
+   "label": "Seeed reBot DevArm, 1.5 mm",
+   "part": "seeed-rebot",
+   "pitch_mm": 1.5,
+   "reader": "none",
+   "row_tail_mm": 29.537,
+   "rows": 32,
+   "symmetric_face": true,
+   "taxels": 354,
+   "view": {
+    "art": "art/seeed-rebot-1.5mm.json.gz",
+    "scene": "scenes/seeed-rebot.json"
+   }
+  },
+  "seeed-rebot-1mm": {
+   "badge": "Fine",
+   "build_id": "surface-32x22-32a24cea3b5a",
+   "centred": true,
+   "column_tail_mm": 46.564,
+   "columns": 22,
+   "field_mm": [
+    21.5,
+    31.5
+   ],
+   "fill": 0.5,
+   "fit": "fits/seeed-rebot-1mm.json",
+   "fit_sha256": "fde1ac07bb87221ba79c2a2de84e24837c5f12f2d2aedc191f440bc29c82435d",
+   "fits_reader": null,
+   "image": {
+    "alt": "Seeed reBot DevArm, 1 mm on both fingers of the open gripper",
+    "assembled": {
+     "height": 800,
+     "src": "shots/seeed-rebot-1mm.assembled.webp",
+     "width": 1280
+    },
+    "exploded": {
+     "card": "shots/seeed-rebot-1mm.exploded.card.webp",
+     "height": 800,
+     "src": "shots/seeed-rebot-1mm.exploded.webp",
+     "width": 1280
+    }
+   },
+   "label": "Seeed reBot DevArm, 1 mm",
+   "part": "seeed-rebot",
+   "pitch_mm": 1,
+   "reader": "none",
+   "row_tail_mm": 46.564,
+   "rows": 32,
+   "symmetric_face": true,
+   "taxels": 362,
+   "view": {
+    "art": "art/seeed-rebot-1mm.json.gz",
+    "scene": "scenes/seeed-rebot.json"
+   }
+  },
+  "seeed-rebot-2mm": {
+   "badge": null,
+   "build_id": "surface-32x19-2e1186195330",
+   "centred": true,
+   "column_tail_mm": 15.135,
+   "columns": 19,
+   "field_mm": [
+    37.0,
+    63.0
+   ],
+   "fill": 0.5,
+   "fit": "fits/seeed-rebot-2mm.json",
+   "fit_sha256": "0845bf8143c9ad2c097bfa006eedd4a441a8a1b5a2ec78c3658aff2207ae8b5b",
+   "fits_reader": null,
+   "image": {
+    "alt": "Seeed reBot DevArm, 2 mm on both fingers of the open gripper",
+    "assembled": {
+     "height": 800,
+     "src": "shots/seeed-rebot-2mm.assembled.webp",
+     "width": 1280
+    },
+    "exploded": {
+     "card": "shots/seeed-rebot-2mm.exploded.card.webp",
+     "height": 800,
+     "src": "shots/seeed-rebot-2mm.exploded.webp",
+     "width": 1280
+    }
+   },
+   "label": "Seeed reBot DevArm, 2 mm",
+   "part": "seeed-rebot",
+   "pitch_mm": 2,
+   "reader": "none",
+   "row_tail_mm": 15.135,
+   "rows": 32,
+   "symmetric_face": true,
+   "taxels": 322,
+   "view": {
+    "art": "art/seeed-rebot-2mm.json.gz",
+    "scene": "scenes/seeed-rebot.json"
+   }
+  },
+  "seeed-rebot-3mm": {
+   "badge": null,
+   "build_id": "surface-21x11-4621a35145a1",
+   "centred": true,
+   "column_tail_mm": 16.043,
+   "columns": 11,
+   "field_mm": [
+    31.5,
+    61.5
+   ],
+   "fill": 0.5,
+   "fit": "fits/seeed-rebot-3mm.json",
+   "fit_sha256": "3d8cd7ce26c59987852d8dab6c7b58b7d279305f889be3528e892b453f981836",
+   "fits_reader": null,
+   "image": {
+    "alt": "Seeed reBot DevArm, 3 mm on both fingers of the open gripper",
+    "assembled": {
+     "height": 800,
+     "src": "shots/seeed-rebot-3mm.assembled.webp",
+     "width": 1280
+    },
+    "exploded": {
+     "card": "shots/seeed-rebot-3mm.exploded.card.webp",
+     "height": 800,
+     "src": "shots/seeed-rebot-3mm.exploded.webp",
+     "width": 1280
+    }
+   },
+   "label": "Seeed reBot DevArm, 3 mm",
+   "part": "seeed-rebot",
+   "pitch_mm": 3,
+   "reader": "none",
+   "row_tail_mm": 16.043,
+   "rows": 21,
+   "symmetric_face": true,
+   "taxels": 139,
+   "view": {
+    "art": "art/seeed-rebot-3mm.json.gz",
+    "scene": "scenes/seeed-rebot.json"
+   }
+  },
   "trossen-widowx-ai-1.5mm": {
    "badge": null,
    "build_id": "surface-32x22-78af12034925",
@@ -2059,6 +3724,170 @@
     "scene": "scenes/trossen-widowx-ai.json"
    }
   },
+  "ufactory-xarm-1.5mm": {
+   "badge": null,
+   "build_id": "surface-24x19-7ab4370c0659",
+   "centred": true,
+   "column_tail_mm": 16.76,
+   "columns": 19,
+   "field_mm": [
+    27.75,
+    35.25
+   ],
+   "fill": 0.5,
+   "fit": "fits/ufactory-xarm-1.5mm.json",
+   "fit_sha256": "b1d792d5a658b4933cb6722df9e8cfeac4c92275d6c69838820ba7cf75246d62",
+   "fits_reader": null,
+   "image": {
+    "alt": "xArm Gripper, 1.5 mm on both fingers of the open gripper",
+    "assembled": {
+     "height": 800,
+     "src": "shots/ufactory-xarm-1.5mm.assembled.webp",
+     "width": 1280
+    },
+    "exploded": {
+     "card": "shots/ufactory-xarm-1.5mm.exploded.card.webp",
+     "height": 800,
+     "src": "shots/ufactory-xarm-1.5mm.exploded.webp",
+     "width": 1280
+    }
+   },
+   "label": "xArm Gripper, 1.5 mm",
+   "part": "ufactory-xarm",
+   "pitch_mm": 1.5,
+   "reader": "none",
+   "row_tail_mm": 16.76,
+   "rows": 24,
+   "symmetric_face": true,
+   "taxels": 454,
+   "view": {
+    "art": "art/ufactory-xarm-1.5mm.json.gz",
+    "scene": "scenes/ufactory-xarm.json"
+   }
+  },
+  "ufactory-xarm-1mm": {
+   "badge": "Fine",
+   "build_id": "surface-32x28-81014a8d19e2",
+   "centred": true,
+   "column_tail_mm": 19.051,
+   "columns": 28,
+   "field_mm": [
+    27.5,
+    31.5
+   ],
+   "fill": 0.5,
+   "fit": "fits/ufactory-xarm-1mm.json",
+   "fit_sha256": "c148bbe404ada3b551bdf6e6d784d78b90041fc28f095cf540985a54b2f22e2e",
+   "fits_reader": null,
+   "image": {
+    "alt": "xArm Gripper, 1 mm on both fingers of the open gripper",
+    "assembled": {
+     "height": 800,
+     "src": "shots/ufactory-xarm-1mm.assembled.webp",
+     "width": 1280
+    },
+    "exploded": {
+     "card": "shots/ufactory-xarm-1mm.exploded.card.webp",
+     "height": 800,
+     "src": "shots/ufactory-xarm-1mm.exploded.webp",
+     "width": 1280
+    }
+   },
+   "label": "xArm Gripper, 1 mm",
+   "part": "ufactory-xarm",
+   "pitch_mm": 1,
+   "reader": "none",
+   "row_tail_mm": 19.051,
+   "rows": 32,
+   "symmetric_face": true,
+   "taxels": 896,
+   "view": {
+    "art": "art/ufactory-xarm-1mm.json.gz",
+    "scene": "scenes/ufactory-xarm.json"
+   }
+  },
+  "ufactory-xarm-2mm": {
+   "badge": null,
+   "build_id": "surface-18x14-1517ea0947c8",
+   "centred": true,
+   "column_tail_mm": 17.301,
+   "columns": 14,
+   "field_mm": [
+    27.0,
+    35.0
+   ],
+   "fill": 0.5,
+   "fit": "fits/ufactory-xarm-2mm.json",
+   "fit_sha256": "fdb1b4a97c1c68fa31d0f58156594c88e3b9ffb6e3d355e18463cb09dfa50c1e",
+   "fits_reader": null,
+   "image": {
+    "alt": "xArm Gripper, 2 mm on both fingers of the open gripper",
+    "assembled": {
+     "height": 800,
+     "src": "shots/ufactory-xarm-2mm.assembled.webp",
+     "width": 1280
+    },
+    "exploded": {
+     "card": "shots/ufactory-xarm-2mm.exploded.card.webp",
+     "height": 800,
+     "src": "shots/ufactory-xarm-2mm.exploded.webp",
+     "width": 1280
+    }
+   },
+   "label": "xArm Gripper, 2 mm",
+   "part": "ufactory-xarm",
+   "pitch_mm": 2,
+   "reader": "none",
+   "row_tail_mm": 17.301,
+   "rows": 18,
+   "symmetric_face": true,
+   "taxels": 252,
+   "view": {
+    "art": "art/ufactory-xarm-2mm.json.gz",
+    "scene": "scenes/ufactory-xarm.json"
+   }
+  },
+  "ufactory-xarm-3mm": {
+   "badge": null,
+   "build_id": "surface-12x9-784fff602005",
+   "centred": true,
+   "column_tail_mm": 18.876,
+   "columns": 9,
+   "field_mm": [
+    25.5,
+    34.5
+   ],
+   "fill": 0.5,
+   "fit": "fits/ufactory-xarm-3mm.json",
+   "fit_sha256": "cf619a4c5df6176b6aa5c3af4b7719184fbc496fa80b930b7f6095c95f4ecad2",
+   "fits_reader": null,
+   "image": {
+    "alt": "xArm Gripper, 3 mm on both fingers of the open gripper",
+    "assembled": {
+     "height": 800,
+     "src": "shots/ufactory-xarm-3mm.assembled.webp",
+     "width": 1280
+    },
+    "exploded": {
+     "card": "shots/ufactory-xarm-3mm.exploded.card.webp",
+     "height": 800,
+     "src": "shots/ufactory-xarm-3mm.exploded.webp",
+     "width": 1280
+    }
+   },
+   "label": "xArm Gripper, 3 mm",
+   "part": "ufactory-xarm",
+   "pitch_mm": 3,
+   "reader": "none",
+   "row_tail_mm": 18.876,
+   "rows": 12,
+   "symmetric_face": true,
+   "taxels": 108,
+   "view": {
+    "art": "art/ufactory-xarm-3mm.json.gz",
+    "scene": "scenes/ufactory-xarm.json"
+   }
+  },
   "umi-concave-tip13.8-2mm": {
    "badge": null,
    "build_id": "surface-32x11-bfb94d585709",
@@ -2071,7 +3900,7 @@
    ],
    "fill": 0.5,
    "fit": "fits/umi-concave-tip13.8-2mm.json",
-   "fit_sha256": "b72e37a0f4183f6848472af88e9b1a2ee575ca54160c9dd1b78c6d87be53fb3e",
+   "fit_sha256": "697a7c706a305155f1475f5ca469a14d66cafcdb5f66b793c113a456c319c66d",
    "fits_reader": null,
    "image": {
     "alt": "UMI concave arc tip, 13.8 mm on the part",
@@ -2112,7 +3941,7 @@
    ],
    "fill": 0.5,
    "fit": "fits/umi-concave-tip17.8-2mm.json",
-   "fit_sha256": "9862f6607827bbcb14264f1e87fa1a57d31dbd5e1e9b02012b4fce52237196b7",
+   "fit_sha256": "00f62148f01854e44fb2ff13f558e588499fe8521bcd0f15a14b4571ff4801c4",
    "fits_reader": null,
    "image": {
     "alt": "UMI concave arc tip, 17.8 mm on the part",
@@ -2153,7 +3982,7 @@
    ],
    "fill": 0.5,
    "fit": "fits/umi-concave-tip21.8-2mm.json",
-   "fit_sha256": "45942a6ab6b3918761599a69be7fc05153bef444960870e573a8db92d3a2bf72",
+   "fit_sha256": "12309dd06465e9ec332349eac69b64c30c3151d6751d298751ef021f0f56549a",
    "fits_reader": null,
    "image": {
     "alt": "UMI concave arc tip, 21.8 mm on the part",
@@ -2194,7 +4023,7 @@
    ],
    "fill": 0.5,
    "fit": "fits/umi-concave-tip5.8-2mm.json",
-   "fit_sha256": "4f89ba1f0414cc076582a6c7ee9d5890a90366ea80349649f2d5d5457cea81cf",
+   "fit_sha256": "b4c9ee4e2bbdda28b0164585a91f04c9b2c6fb561d31db391e64343bd54be288",
    "fits_reader": null,
    "image": {
     "alt": "UMI concave arc tip, 5.8 mm on the part",
@@ -2235,7 +4064,7 @@
    ],
    "fill": 0.5,
    "fit": "fits/umi-concave-tip9.8-2mm.json",
-   "fit_sha256": "46be41265f76fc0a5b794903f630e083c64d175d9cd7d980f75a8306d6864b3c",
+   "fit_sha256": "fae25b3e421d1be86c149be8dd12c812ae93e6aaf7caef864daca673da7ceaf9",
    "fits_reader": null,
    "image": {
     "alt": "UMI concave arc tip, 9.8 mm on the part",
@@ -2276,7 +4105,7 @@
    ],
    "fill": 0.5,
    "fit": "fits/umi-convex-tip13.8-2mm.json",
-   "fit_sha256": "52952cf3dd982d204cf01e585ad1b30c037ec0a1589fa81d6d46c382d79ddb9c",
+   "fit_sha256": "501883c3b1c702250073113dd24b4101a6c199a2b390e9db10d6fe0459b73882",
    "fits_reader": null,
    "image": {
     "alt": "UMI convex arc tip, 13.8 mm on the part",
@@ -2317,7 +4146,7 @@
    ],
    "fill": 0.5,
    "fit": "fits/umi-convex-tip17.8-2mm.json",
-   "fit_sha256": "94e0715552e2ceb9bc1cb6629fec69c7211f14ce07ec0081a90a8c9a1d029114",
+   "fit_sha256": "84e1a9a55c8a2dcffc154f577aef9ebca8bd39aa1a702de1886f58c321aacdea",
    "fits_reader": null,
    "image": {
     "alt": "UMI convex arc tip, 17.8 mm on the part",
@@ -2358,7 +4187,7 @@
    ],
    "fill": 0.5,
    "fit": "fits/umi-convex-tip21.8-2mm.json",
-   "fit_sha256": "9cf5f42251da93381e5d1660d4e69c19eb4a81e6a9afcf286869f7b31b30ad0e",
+   "fit_sha256": "7ebb307c184e62a95bb03dafea75a098696eab7549dc189fc428882778de4990",
    "fits_reader": null,
    "image": {
     "alt": "UMI convex arc tip, 21.8 mm on the part",
@@ -2399,7 +4228,7 @@
    ],
    "fill": 0.5,
    "fit": "fits/umi-convex-tip5.8-2mm.json",
-   "fit_sha256": "9d8f9241a6370f8319e61c87b7b50a5b02f533b6ee94ca900e255e8fee9722fc",
+   "fit_sha256": "82f34d52e6478f96eba47b46c2f1a86c243b5431c5ac03ebbec8f4b3ea6397f0",
    "fits_reader": null,
    "image": {
     "alt": "UMI convex arc tip, 5.8 mm on the part",
@@ -2440,7 +4269,7 @@
    ],
    "fill": 0.5,
    "fit": "fits/umi-convex-tip9.8-2mm.json",
-   "fit_sha256": "2f4c6c11113541ec088375118efd97deb7943caa71af7f84db45e4fe7affaa92",
+   "fit_sha256": "05a2d954ff60a774483869f40d78433727586057bc276f074276d01e4409b58b",
    "fits_reader": null,
    "image": {
     "alt": "UMI convex arc tip, 9.8 mm on the part",
@@ -2481,7 +4310,7 @@
    ],
    "fill": 0.5,
    "fit": "fits/umi-finray-1.5mm.json",
-   "fit_sha256": "90a02212f4be1365c681fc36503c29db20e010edf72be3591a77780d45060ae4",
+   "fit_sha256": "3aceb44f47f00bdc2ae3ebd0ee533e436c7e95141f647d4ea9d05daff4527023",
    "fits_reader": null,
    "image": {
     "alt": "UMI Fin-Ray Gripper, 1.5 mm on the part",
@@ -2522,7 +4351,7 @@
    ],
    "fill": 0.5,
    "fit": "fits/umi-finray-1mm.json",
-   "fit_sha256": "7dd0290ea23d914f18158852b637e41a3e814d5d74cc564b43daafd2ebcf444b",
+   "fit_sha256": "2c722f206082dc81c1783214a59b6d4f12fb5ec3fbadccd7ebc33763909b7a08",
    "fits_reader": null,
    "image": {
     "alt": "UMI Fin-Ray Gripper, 1 mm on the part",
@@ -2563,7 +4392,7 @@
    ],
    "fill": 0.5,
    "fit": "../vendor/umi/default-fit.json",
-   "fit_sha256": "488dc0a3ab81bd398bee635cad5ee3c782f7559826944643a41349c40e546e1a",
+   "fit_sha256": "76cf220c09eece5330a7eac4b87a02065929711511791995ba00465b92b465e7",
    "fits_reader": null,
    "image": {
     "alt": "UMI Fin-Ray Gripper, 2 mm on the part",
@@ -2604,7 +4433,7 @@
    ],
    "fill": 0.5,
    "fit": "fits/umi-finray-3mm.json",
-   "fit_sha256": "910d5174be2cbe52052c6d450a6511c4b309e4a8d293ea971b947ec441e5a414",
+   "fit_sha256": "c113842b29b8294e552c776f95dc2d2e0aa6dada0224f3b0152d14000f2ce24c",
    "fits_reader": null,
    "image": {
     "alt": "UMI Fin-Ray Gripper, 3 mm on the part",
@@ -2645,7 +4474,7 @@
    ],
    "fill": 0.5,
    "fit": "fits/umi-pointed-tip2-2mm.json",
-   "fit_sha256": "45d6d9bae3bdfbac3e2dc58194e4c0537c1200c9450a4f5e535fb6dc358491d1",
+   "fit_sha256": "1c829179e5c7a3c91459262d12da49433e75725674c1df60674239db1d4753f1",
    "fits_reader": null,
    "image": {
     "alt": "UMI pointed tip, 2 mm on the part",
@@ -2686,7 +4515,7 @@
    ],
    "fill": 0.5,
    "fit": "fits/umi-short-convex-tip13.8-2mm.json",
-   "fit_sha256": "b154d1327e32935faa0833f46378f31e0434de34ec838512d473f47b6d85a9a9",
+   "fit_sha256": "82c357a51edd2921872047af90572d22f5d5f64c493129f3e2ce95fb25d86528",
    "fits_reader": null,
    "image": {
     "alt": "UMI short convex, 13.8 mm on the part",
@@ -2727,7 +4556,7 @@
    ],
    "fill": 0.5,
    "fit": "fits/umi-short-convex-tip17.8-2mm.json",
-   "fit_sha256": "edb64c3d2781184773c9f4a6f92db7e43b8485603d51a28a80490cbbf8eac233",
+   "fit_sha256": "bc099df7cdd514f18e0055505dbc663f5245b1ba9b95c077410689b8afd57799",
    "fits_reader": null,
    "image": {
     "alt": "UMI short convex, 17.8 mm on the part",
@@ -2768,7 +4597,7 @@
    ],
    "fill": 0.5,
    "fit": "fits/umi-short-convex-tip21.8-2mm.json",
-   "fit_sha256": "cf2573ec7f8656174a02e84abcbc6417fdc989d6ecfdb509c2906a506d6f80d1",
+   "fit_sha256": "c1e40d88726722408c75d98de79c4259f6b70d325a5f00aba28fbb32f7feac08",
    "fits_reader": null,
    "image": {
     "alt": "UMI short convex, 21.8 mm on the part",
@@ -2809,7 +4638,7 @@
    ],
    "fill": 0.5,
    "fit": "fits/umi-short-convex-tip5.8-2mm.json",
-   "fit_sha256": "a79a7ef72db981ac69ef957dfd6d5ac3afea6065aa182a594587ec5c40e612f0",
+   "fit_sha256": "4277429cf7900fd6cd7f24118ae79e8f648c79fa643893342e665a8cb5710a5c",
    "fits_reader": null,
    "image": {
     "alt": "UMI short convex, 5.8 mm on the part",
@@ -2850,7 +4679,7 @@
    ],
    "fill": 0.5,
    "fit": "fits/umi-short-convex-tip9.8-2mm.json",
-   "fit_sha256": "7e9fc74833ebe3f6ccc18c142cbb086d6e2c9f44bd81c388a1f3f53d58a4cd6d",
+   "fit_sha256": "60e25d8b36e4fe842bb254d7b566b9c22f1c2ec2be92191ecabd526bfd741a79",
    "fits_reader": null,
    "image": {
     "alt": "UMI short convex, 9.8 mm on the part",
@@ -2891,7 +4720,7 @@
    ],
    "fill": 0.5,
    "fit": "fits/umi-short-trap-tip13.8-2mm.json",
-   "fit_sha256": "62d53cba2acae5f8f502c726096ee49421f0bfa54b9adc732b88573598989eaf",
+   "fit_sha256": "04af8be0199ae869cfaac4b053aaa1d9775bacd2455e9717ee0e58ecb86ab59c",
    "fits_reader": null,
    "image": {
     "alt": "UMI short trapezoid, 13.8 mm on the part",
@@ -2932,7 +4761,7 @@
    ],
    "fill": 0.5,
    "fit": "fits/umi-short-trap-tip17.8-2mm.json",
-   "fit_sha256": "7e66f885e910cf4378513c3eb4059939f23d40859dd8daae85e0f0e75c033fa8",
+   "fit_sha256": "a6bd8b57071aebfc9022c257fe918c809bc5ca52f6aeaeab09a6fd4dc7037d2f",
    "fits_reader": null,
    "image": {
     "alt": "UMI short trapezoid, 17.8 mm on the part",
@@ -2973,7 +4802,7 @@
    ],
    "fill": 0.5,
    "fit": "fits/umi-short-trap-tip21.8-2mm.json",
-   "fit_sha256": "b5ac00c094f532b2082847b75bab1bcfcf8352f15bc7b5a5b3f1f5aa2a875a82",
+   "fit_sha256": "c30ffff492797bde4c0e4c3e1f9f5a42b18fa96f6ebcbe4f316bc9745161860e",
    "fits_reader": null,
    "image": {
     "alt": "UMI short trapezoid, 21.8 mm on the part",
@@ -3014,7 +4843,7 @@
    ],
    "fill": 0.5,
    "fit": "fits/umi-short-trap-tip5.8-2mm.json",
-   "fit_sha256": "9744bf8d6ecc9a731b94c40865597533c4f2031acdfafd56f0e787686f089b01",
+   "fit_sha256": "0f62f4f8ef9ae561aad243169ec43f34204c73d1cf3dd07e07d58c00f871879b",
    "fits_reader": null,
    "image": {
     "alt": "UMI short trapezoid, 5.8 mm on the part",
@@ -3055,7 +4884,7 @@
    ],
    "fill": 0.5,
    "fit": "fits/umi-short-trap-tip9.8-2mm.json",
-   "fit_sha256": "ace88a1b25b97c7074fb6bf28aa6e09053839131f63a255a38e869e4b4ec55d1",
+   "fit_sha256": "b768ffe44d3403f70ab1ab45dbef1b314f5894f814737f87769806b6cf8fb302",
    "fits_reader": null,
    "image": {
     "alt": "UMI short trapezoid, 9.8 mm on the part",
@@ -3096,7 +4925,7 @@
    ],
    "fill": 0.5,
    "fit": "fits/umi-trap-tip13.8-2mm.json",
-   "fit_sha256": "1746c1eb70d6d51feccae1b932dc349d9d0ab64af87b964add7830c17372781d",
+   "fit_sha256": "dda165dfdbce91faab3aa22c59f29d722e328340fbe03bea4f426b34bb323f2e",
    "fits_reader": null,
    "image": {
     "alt": "UMI trapezoid tip, 13.8 mm on the part",
@@ -3137,7 +4966,7 @@
    ],
    "fill": 0.5,
    "fit": "fits/umi-trap-tip17.8-2mm.json",
-   "fit_sha256": "3fb0ad9481deef8f266eefd35adf72a6710dc3a9bb4e5a5d096a2973ac19de0e",
+   "fit_sha256": "706984d207f8f57ba14286b115fac1b6e0fe2c4f1064c5b9674246e77d7bdb35",
    "fits_reader": null,
    "image": {
     "alt": "UMI trapezoid tip, 17.8 mm on the part",
@@ -3178,7 +5007,7 @@
    ],
    "fill": 0.5,
    "fit": "fits/umi-trap-tip21.8-2mm.json",
-   "fit_sha256": "c3efa569930da76406473f94292e15d71f33cf63b4e21d77fbaa5dc2112f0928",
+   "fit_sha256": "ac776223d3e2164d8edf66e5a67fa9bdf2fde54ea8e51a0f9afa24ac22721650",
    "fits_reader": null,
    "image": {
     "alt": "UMI trapezoid tip, 21.8 mm on the part",
@@ -3219,7 +5048,7 @@
    ],
    "fill": 0.5,
    "fit": "fits/umi-trap-tip5.8-2mm.json",
-   "fit_sha256": "15b39e0564c34532b4ec80c1f761ccba5358e4da204974bd93ffad77dce90cac",
+   "fit_sha256": "1b243db005edbc15eca61778c24c6aa55664be067e8a526068f53b851d98b452",
    "fits_reader": null,
    "image": {
     "alt": "UMI trapezoid tip, 5.8 mm on the part",
@@ -3260,7 +5089,7 @@
    ],
    "fill": 0.5,
    "fit": "fits/umi-trap-tip9.8-2mm.json",
-   "fit_sha256": "73d4391e56d5a3af6bef03c08c9cfacb95ed6d263846c09c21077d6862f62920",
+   "fit_sha256": "a75d96b4051ef391bda16fe926e34fd0075a4ca20622940e5d7f0f9bd54b7605",
    "fits_reader": null,
    "image": {
     "alt": "UMI trapezoid tip, 9.8 mm on the part",
@@ -3453,6 +5282,170 @@
     "scene": "scenes/unitree-dex1.json"
    }
   },
+  "unitree-dex3-1.5mm": {
+   "badge": null,
+   "build_id": "surface-18x10-86669d501aca",
+   "centred": true,
+   "column_tail_mm": 18.06,
+   "columns": 10,
+   "field_mm": [
+    14.25,
+    26.25
+   ],
+   "fill": 0.5,
+   "fit": "fits/unitree-dex3-1.5mm.json",
+   "fit_sha256": "70e3b694d5c9789731d0fbafd8c771ce5cddab94c4e4699a0daed2dc87922b00",
+   "fits_reader": null,
+   "image": {
+    "alt": "Unitree Dex3-1, 1.5 mm on the three fingertips of the open hand",
+    "assembled": {
+     "height": 800,
+     "src": "shots/unitree-dex3-1.5mm.assembled.webp",
+     "width": 1280
+    },
+    "exploded": {
+     "card": "shots/unitree-dex3-1.5mm.exploded.card.webp",
+     "height": 800,
+     "src": "shots/unitree-dex3-1.5mm.exploded.webp",
+     "width": 1280
+    }
+   },
+   "label": "Unitree Dex3-1, 1.5 mm",
+   "part": "unitree-dex3",
+   "pitch_mm": 1.5,
+   "reader": "none",
+   "row_tail_mm": 18.06,
+   "rows": 18,
+   "symmetric_face": true,
+   "taxels": 146,
+   "view": {
+    "art": "art/unitree-dex3-1.5mm.json.gz",
+    "scene": "scenes/unitree-dex3.json"
+   }
+  },
+  "unitree-dex3-1mm": {
+   "badge": "Fine",
+   "build_id": "surface-26x15-404fbaf634dc",
+   "centred": true,
+   "column_tail_mm": 17.629,
+   "columns": 15,
+   "field_mm": [
+    14.5,
+    25.5
+   ],
+   "fill": 0.5,
+   "fit": "fits/unitree-dex3-1mm.json",
+   "fit_sha256": "3c9b3239ede0a413ba4ab17d9cb6fec3b6aba81f7e8b2b815d6c7db4a9f01207",
+   "fits_reader": null,
+   "image": {
+    "alt": "Unitree Dex3-1, 1 mm on the three fingertips of the open hand",
+    "assembled": {
+     "height": 800,
+     "src": "shots/unitree-dex3-1mm.assembled.webp",
+     "width": 1280
+    },
+    "exploded": {
+     "card": "shots/unitree-dex3-1mm.exploded.card.webp",
+     "height": 800,
+     "src": "shots/unitree-dex3-1mm.exploded.webp",
+     "width": 1280
+    }
+   },
+   "label": "Unitree Dex3-1, 1 mm",
+   "part": "unitree-dex3",
+   "pitch_mm": 1,
+   "reader": "none",
+   "row_tail_mm": 17.629,
+   "rows": 26,
+   "symmetric_face": true,
+   "taxels": 332,
+   "view": {
+    "art": "art/unitree-dex3-1mm.json.gz",
+    "scene": "scenes/unitree-dex3.json"
+   }
+  },
+  "unitree-dex3-2.5mm": {
+   "badge": null,
+   "build_id": "surface-11x6-c875c35c634c",
+   "centred": true,
+   "column_tail_mm": 18.659,
+   "columns": 6,
+   "field_mm": [
+    13.75,
+    26.25
+   ],
+   "fill": 0.5,
+   "fit": "fits/unitree-dex3-2.5mm.json",
+   "fit_sha256": "33904fa2ee2ac3edf482f7fe124904cfa78888a996c142ac5080f3a01990b1ce",
+   "fits_reader": null,
+   "image": {
+    "alt": "Unitree Dex3-1, 2.5 mm on the three fingertips of the open hand",
+    "assembled": {
+     "height": 800,
+     "src": "shots/unitree-dex3-2.5mm.assembled.webp",
+     "width": 1280
+    },
+    "exploded": {
+     "card": "shots/unitree-dex3-2.5mm.exploded.card.webp",
+     "height": 800,
+     "src": "shots/unitree-dex3-2.5mm.exploded.webp",
+     "width": 1280
+    }
+   },
+   "label": "Unitree Dex3-1, 2.5 mm",
+   "part": "unitree-dex3",
+   "pitch_mm": 2.5,
+   "reader": "none",
+   "row_tail_mm": 18.659,
+   "rows": 11,
+   "symmetric_face": true,
+   "taxels": 52,
+   "view": {
+    "art": "art/unitree-dex3-2.5mm.json.gz",
+    "scene": "scenes/unitree-dex3.json"
+   }
+  },
+  "unitree-dex3-2mm": {
+   "badge": null,
+   "build_id": "surface-13x8-53583cbedf62",
+   "centred": true,
+   "column_tail_mm": 18.988,
+   "columns": 8,
+   "field_mm": [
+    15.0,
+    25.0
+   ],
+   "fill": 0.5,
+   "fit": "fits/unitree-dex3-2mm.json",
+   "fit_sha256": "0198dbcb8c3aebd572cb889cf3b07d197bb4f2880641ee196b58ca253b277bd4",
+   "fits_reader": null,
+   "image": {
+    "alt": "Unitree Dex3-1, 2 mm on the three fingertips of the open hand",
+    "assembled": {
+     "height": 800,
+     "src": "shots/unitree-dex3-2mm.assembled.webp",
+     "width": 1280
+    },
+    "exploded": {
+     "card": "shots/unitree-dex3-2mm.exploded.card.webp",
+     "height": 800,
+     "src": "shots/unitree-dex3-2mm.exploded.webp",
+     "width": 1280
+    }
+   },
+   "label": "Unitree Dex3-1, 2 mm",
+   "part": "unitree-dex3",
+   "pitch_mm": 2,
+   "reader": "none",
+   "row_tail_mm": 18.988,
+   "rows": 13,
+   "symmetric_face": true,
+   "taxels": 82,
+   "view": {
+    "art": "art/unitree-dex3-2mm.json.gz",
+    "scene": "scenes/unitree-dex3.json"
+   }
+  },
   "widowx-250-1.5mm": {
    "badge": null,
    "build_id": "surface-17x17-fd7b59548583",
@@ -3615,6 +5608,170 @@
    "view": {
     "art": "art/widowx-250-3mm.json.gz",
     "scene": "scenes/widowx-250.json"
+   }
+  },
+  "yubi-gripper-1.5mm": {
+   "badge": null,
+   "build_id": "surface-11x10-0e67a5a7d785",
+   "centred": true,
+   "column_tail_mm": 17.503,
+   "columns": 10,
+   "field_mm": [
+    14.25,
+    15.75
+   ],
+   "fill": 0.5,
+   "fit": "fits/yubi-gripper-1.5mm.json",
+   "fit_sha256": "c13881b491cf59b783b7211ab55b1c12fdeda30e0fd223e005026a927f26bc8f",
+   "fits_reader": null,
+   "image": {
+    "alt": "YUBI Gripper, 1.5 mm on both fingertips of the open gripper",
+    "assembled": {
+     "height": 800,
+     "src": "shots/yubi-gripper-1.5mm.assembled.webp",
+     "width": 1280
+    },
+    "exploded": {
+     "card": "shots/yubi-gripper-1.5mm.exploded.card.webp",
+     "height": 800,
+     "src": "shots/yubi-gripper-1.5mm.exploded.webp",
+     "width": 1280
+    }
+   },
+   "label": "YUBI Gripper, 1.5 mm",
+   "part": "yubi-gripper",
+   "pitch_mm": 1.5,
+   "reader": "none",
+   "row_tail_mm": 17.503,
+   "rows": 11,
+   "symmetric_face": true,
+   "taxels": 74,
+   "view": {
+    "art": "art/yubi-gripper-1.5mm.json.gz",
+    "scene": "scenes/yubi-gripper.json"
+   }
+  },
+  "yubi-gripper-1mm": {
+   "badge": "Fine",
+   "build_id": "surface-16x14-a01103be8b44",
+   "centred": true,
+   "column_tail_mm": 17.354,
+   "columns": 14,
+   "field_mm": [
+    13.5,
+    15.5
+   ],
+   "fill": 0.5,
+   "fit": "fits/yubi-gripper-1mm.json",
+   "fit_sha256": "013a6233109811bdc69ccffbfc5a0dea090ea5aba48c6f2b5d3997bc7f1205c9",
+   "fits_reader": null,
+   "image": {
+    "alt": "YUBI Gripper, 1 mm on both fingertips of the open gripper",
+    "assembled": {
+     "height": 800,
+     "src": "shots/yubi-gripper-1mm.assembled.webp",
+     "width": 1280
+    },
+    "exploded": {
+     "card": "shots/yubi-gripper-1mm.exploded.card.webp",
+     "height": 800,
+     "src": "shots/yubi-gripper-1mm.exploded.webp",
+     "width": 1280
+    }
+   },
+   "label": "YUBI Gripper, 1 mm",
+   "part": "yubi-gripper",
+   "pitch_mm": 1,
+   "reader": "none",
+   "row_tail_mm": 17.354,
+   "rows": 16,
+   "symmetric_face": true,
+   "taxels": 166,
+   "view": {
+    "art": "art/yubi-gripper-1mm.json.gz",
+    "scene": "scenes/yubi-gripper.json"
+   }
+  },
+  "yubi-gripper-2.5mm": {
+   "badge": null,
+   "build_id": "surface-6x5-116880492453",
+   "centred": true,
+   "column_tail_mm": 19.618,
+   "columns": 5,
+   "field_mm": [
+    11.25,
+    13.75
+   ],
+   "fill": 0.5,
+   "fit": "fits/yubi-gripper-2.5mm.json",
+   "fit_sha256": "f4a5675600b1fb2a266d7b2d66047e4ba8d95f42535bf64efd72ee3b23b51d6a",
+   "fits_reader": null,
+   "image": {
+    "alt": "YUBI Gripper, 2.5 mm on both fingertips of the open gripper",
+    "assembled": {
+     "height": 800,
+     "src": "shots/yubi-gripper-2.5mm.assembled.webp",
+     "width": 1280
+    },
+    "exploded": {
+     "card": "shots/yubi-gripper-2.5mm.exploded.card.webp",
+     "height": 800,
+     "src": "shots/yubi-gripper-2.5mm.exploded.webp",
+     "width": 1280
+    }
+   },
+   "label": "YUBI Gripper, 2.5 mm",
+   "part": "yubi-gripper",
+   "pitch_mm": 2.5,
+   "reader": "none",
+   "row_tail_mm": 19.618,
+   "rows": 6,
+   "symmetric_face": true,
+   "taxels": 24,
+   "view": {
+    "art": "art/yubi-gripper-2.5mm.json.gz",
+    "scene": "scenes/yubi-gripper.json"
+   }
+  },
+  "yubi-gripper-2mm": {
+   "badge": null,
+   "build_id": "surface-8x7-b41763f570bd",
+   "centred": true,
+   "column_tail_mm": 18.449,
+   "columns": 7,
+   "field_mm": [
+    13.0,
+    15.0
+   ],
+   "fill": 0.5,
+   "fit": "fits/yubi-gripper-2mm.json",
+   "fit_sha256": "5bfd443c0a037cad9b48828cb707bc354cc485ea9917907fe7b1b9635e7d975c",
+   "fits_reader": null,
+   "image": {
+    "alt": "YUBI Gripper, 2 mm on both fingertips of the open gripper",
+    "assembled": {
+     "height": 800,
+     "src": "shots/yubi-gripper-2mm.assembled.webp",
+     "width": 1280
+    },
+    "exploded": {
+     "card": "shots/yubi-gripper-2mm.exploded.card.webp",
+     "height": 800,
+     "src": "shots/yubi-gripper-2mm.exploded.webp",
+     "width": 1280
+    }
+   },
+   "label": "YUBI Gripper, 2 mm",
+   "part": "yubi-gripper",
+   "pitch_mm": 2,
+   "reader": "none",
+   "row_tail_mm": 18.449,
+   "rows": 8,
+   "symmetric_face": true,
+   "taxels": 40,
+   "view": {
+    "art": "art/yubi-gripper-2mm.json.gz",
+    "scene": "scenes/yubi-gripper.json"
    }
   }
  }

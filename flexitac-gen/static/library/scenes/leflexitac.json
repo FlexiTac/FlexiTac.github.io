@@ -1,0 +1,175 @@
+{
+ "format": "flexitac-library-scene/v1",
+ "part": "leflexitac",
+ "part_mesh_sha256": "c0f71e0134a7cd3a425488ba5cab87e16ee677f4768cd57036d21b9b81c6ea60",
+ "about": "LeFlexiTac, the LeRobot SO-101's gripper with LeFlexiTac's jaws: SO-ARM100 a758567, Simulation/SO101/so101_new_calib.urdf (Apache-2.0): the gripper joint revolute -0.174533..1.74533 rad about the servo's axis, drawn at q 0.6807 rad (39 degrees, the jaw as far open as the grippers' homes let its sensors read: at more the static face turns toward the camera; the pad face's far end 59.483 mm from where it is at q 0).  The bodies are SO-ARM100's sts3215_03a_v1.stl (the servo, its horn on) and LeFlexiTac b61259f's Wrist_Roll_08c.stl (no licence stated), the wrist roll with the static jaw, where the URDF places the stock wrist_roll_follower_so101_v1.stl; the Library mesh is LeFlexiTac's Moving_Jaw_08d.stl, the moving jaw, where it places moving_jaw_so101_v1.stl (LeFlexiTac's files are the stock parts remodelled in their frames: the jaw's hub and the servo's cradle lie on them, 64 and 19 % of their surfaces within 0.05 mm).  The wrist roll is two files: its static jaw (its triangles above z 38 mm of its file) is the other finger, the servo's cradle a body.  Each jaw has a flat pad face 28.4 mm wide; at q 0 the two are parallel: the other finger is the moving jaw there turned 180 degrees about the gripper's axis, onto the static jaw's face, so its sensor is the same board.  The approach runs from the servo's axis to the middle of the two faces' far ends, where the jaws grasp (6.6 degrees off gripper_link's axis toward the moving jaw).  The explode's gap_share is 0.45 for this reason: a rotary jaw's faces are 33 mm apart at most at its hub, where the stack's field begins, and at the rules' 0.42 the explode's film is seen less than the rules' 0.25 of it at every opening where the see-through static jaw still veils its own sensor.  The looks: drawn after LeFlexiTac's own pictures (its project page's cover photo of the gripper on the SO-101, assets/media/hero/leflexitac-cover.jpg, and its videos of the gripper at work, 2026-11-16): a gripper black all over, its jaws and wrist roll printed in black PLA (layer lines on every face, an even matte with no highlight) round the STS3215 servo's black moulded case; the arm beyond the wrist (dark purple PLA in the photo) is not drawn.  The real gripper's grip tape, Kapton tape and ribbon cable are not drawn: the sensors are this project's generated ones.  The servo's aluminium horn lies under the moving jaw's hub, out of sight at the homes, and wears the case's black.",
+ "frame": "the part's file axes, mm",
+ "approach": [
+  -0.5351363052911458,
+  -0.8447657277371884,
+  1.1264349140175515e-16
+ ],
+ "opening": {
+  "q_mm": 59.483,
+  "limit_mm": 136.505,
+  "joint": "gripper (revolute, the moving jaw)",
+  "source": "SO-ARM100 a758567, Simulation/SO101/so101_new_calib.urdf: gripper limit -0.174533 1.74533 rad; the pad face's far end's travel from q 0"
+ },
+ "mate": {
+  "kind": "turned",
+  "matrix": [
+   [
+    -0.777146,
+    0.62932,
+    -5e-06,
+    -29.842401
+   ],
+   [
+    0.62932,
+    0.777146,
+    -6e-06,
+    24.165903
+   ],
+   [
+    0.0,
+    -7e-06,
+    -1.0,
+    0.117805
+   ],
+   [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  ],
+  "part": false
+ },
+ "bodies": [
+  {
+   "mesh": "bodies/leflexitac/sts3215.stl",
+   "sha256": "475eddde4c84b2a207819d3d002c6cd0ced6874c83b8721b58b8f38abef6e0c4",
+   "bytes": 119884,
+   "triangles": 2396,
+   "matrix": [
+    [
+     0.777146,
+     -0.62932,
+     -5e-06,
+     -9.714281
+    ],
+    [
+     -0.62932,
+     -0.777146,
+     -6e-06,
+     7.866559
+    ],
+    [
+     0.0,
+     7e-06,
+     -1.0,
+     -0.2
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": null,
+   "look": "servo-black"
+  },
+  {
+   "mesh": "bodies/leflexitac/wrist-roll.stl",
+   "sha256": "de8487dbafaa5defdb3f382c0ccfcc75a7a1a6d940bdf4fa7b115dc126cfc4f7",
+   "bytes": 97684,
+   "triangles": 1952,
+   "matrix": [
+    [
+     0.777146,
+     1e-06,
+     -0.62932,
+     -0.374536
+    ],
+    [
+     -0.62932,
+     1e-06,
+     -0.777146,
+     31.635602
+    ],
+    [
+     0.0,
+     1.0,
+     1e-06,
+     0.118125
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": null,
+   "look": "pla-black"
+  },
+  {
+   "mesh": "bodies/leflexitac/static-jaw.stl",
+   "sha256": "a1991511f2b08448306cce9275db464dab20228471f9a6694c5b207e1da738fc",
+   "bytes": 50184,
+   "triangles": 1002,
+   "matrix": [
+    [
+     0.777146,
+     1e-06,
+     -0.62932,
+     -0.374536
+    ],
+    [
+     -0.62932,
+     1e-06,
+     -0.777146,
+     31.635602
+    ],
+    [
+     0.0,
+     1.0,
+     1e-06,
+     0.118125
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": "mate",
+   "look": "pla-black"
+  }
+ ],
+ "looks": {
+  "pla-black": {
+   "color": "#2a2a2c",
+   "metalness": 0,
+   "roughness": 0.8,
+   "env_intensity": 2.6
+  },
+  "servo-black": {
+   "color": "#2e2e30",
+   "metalness": 0,
+   "roughness": 0.7,
+   "env_intensity": 1.8
+  }
+ },
+ "part_look": "pla-black",
+ "smooth_deg": 35,
+ "see_through": [
+  "mate"
+ ],
+ "picture": "on both fingers of the open gripper",
+ "explode": {
+  "gap_share": 0.45
+ }
+}

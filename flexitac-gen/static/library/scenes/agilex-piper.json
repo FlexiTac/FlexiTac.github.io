@@ -1,0 +1,184 @@
+{
+ "format": "flexitac-library-scene/v1",
+ "part": "agilex-piper",
+ "part_mesh_sha256": "907dcdd10498a9d2e9317e42f550570a4ca522d1c4ff7b7c8721fd5cb951e481",
+ "about": "AgileX Piper at full opening: mujoco_menagerie fb36886, agilex_piper/piper.xml (MIT; the newest commit to touch the model, which moved its lights to scene.xml): joint7 slide 0..0.035 m, joint8 its mirror (the equality joint8 = -joint7), q 35 mm, the jaws 70 mm apart.  The body is link6.stl, the whole gripper but its fingers (the flange and motor can, the cross plate with its guide rail and end blocks), where piper.xml places it (its geom quat).  The Library mesh is link7.stl, the left finger, as piper.xml places it; the other finger is link8.stl, which is link7.stl turned 180 degrees about its file's z (within 0.07 mm): the mate is that turn, so its sensor is the same board.  piper.xml's quats are a URDF's quarter turns to six digits (4e-6 off): each rotation is squared to the axes.  The looks: drawn after AgileX's own photo of the PiPER at its zero pose (agilexrobotics/Piper_ros, asserts/pictures/piper_zero.png, 2026-11-17: the gripper side on, in white light) and AgileX's product pictures of the PiPER gripper (the three-quarter view from above with the jaws closed, as its resellers show it): a gripper black all over but for its guide rail.  The fingers are a matte black that is not metal (their material non-slip rubber in the gripper's listings, e.g. Generation Robots' and MyBotShop's, 2026-11-17; one flat black with no highlight in the photo), the cross plate with its end blocks as dark but bead-blasted black anodising, a metal with a soft sheen along its edges, the motor can below them a glossier, darker black that mirrors the room, and the ground steel guide rail on the plate the one bright part (its end shows at the end block in the photo, its length on the plate in the product pictures).  No screw, belt, pulley, cable or lettering is modelled.",
+ "frame": "the part's file axes, mm",
+ "approach": [
+  0.0,
+  1.0,
+  0.0
+ ],
+ "opening": {
+  "q_mm": 35.0,
+  "limit_mm": 35.0,
+  "joint": "joint7/joint8 (slide z of link7 and link8, mirrored)",
+  "source": "mujoco_menagerie fb36886, agilex_piper/piper.xml: joint7 range 0 0.035 m"
+ },
+ "mate": {
+  "kind": "turned",
+  "matrix": [
+   [
+    -1.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   [
+    0.0,
+    1.0,
+    0.0,
+    0.0
+   ],
+   [
+    0.0,
+    0.0,
+    -1.0,
+    70.0
+   ],
+   [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  ],
+  "part": true
+ },
+ "bodies": [
+  {
+   "mesh": "bodies/agilex-piper/link6-rail.stl",
+   "sha256": "b3f6044f2a06482fd2c5b4d46c293baa123b11d35da0519c4ec7c46356a442ca",
+   "bytes": 51784,
+   "triangles": 1034,
+   "matrix": [
+    [
+     0.0,
+     1.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     -135.03
+    ],
+    [
+     1.0,
+     0.0,
+     0.0,
+     35.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": null,
+   "look": "rail-ground"
+  },
+  {
+   "mesh": "bodies/agilex-piper/link6-plate.stl",
+   "sha256": "47173f8242fc24b8db5e42890668b16d54bd03cab36f8f48bc48d75550984e33",
+   "bytes": 171084,
+   "triangles": 3420,
+   "matrix": [
+    [
+     0.0,
+     1.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     -135.03
+    ],
+    [
+     1.0,
+     0.0,
+     0.0,
+     35.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": null,
+   "look": "frame-blasted"
+  },
+  {
+   "mesh": "bodies/agilex-piper/link6-can.stl",
+   "sha256": "2ff9d4f61ffaf09861980708b53fa17f0ef121150f02adf37b35531ca2730085",
+   "bytes": 132684,
+   "triangles": 2652,
+   "matrix": [
+    [
+     0.0,
+     1.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     -135.03
+    ],
+    [
+     1.0,
+     0.0,
+     0.0,
+     35.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": null,
+   "look": "anodized-black"
+  }
+ ],
+ "looks": {
+  "anodized-black": {
+   "color": "#232428",
+   "metalness": 0.6,
+   "roughness": 0.45,
+   "env_intensity": 2.4
+  },
+  "finger-black": {
+   "color": "#2a2a2c",
+   "metalness": 0,
+   "roughness": 0.7,
+   "env_intensity": 1.4
+  },
+  "frame-blasted": {
+   "color": "#232428",
+   "metalness": 0.6,
+   "roughness": 0.7,
+   "env_intensity": 3.0
+  },
+  "rail-ground": {
+   "color": "#c9cbcd",
+   "metalness": 1,
+   "roughness": 0.45,
+   "env_intensity": 1.12
+  }
+ },
+ "part_look": "finger-black",
+ "smooth_deg": 35,
+ "see_through": [
+  "mate"
+ ],
+ "picture": "on both fingers of the open gripper"
+}

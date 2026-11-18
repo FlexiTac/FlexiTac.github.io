@@ -1,0 +1,29 @@
+No licence is stated for LeFlexiTac's gripper files.
+
+This file is not a licence.  It is the FlexiTac-Gen project's note on two
+files of LeFlexiTac (https://github.com/TNA001-AI/LeFlexiTac at
+b61259fdea21bf8b0b5193fb3d373e71e5e5be81, the STL downloads of its project
+page, https://tna001-ai.github.io/LeFlexiTac/docs.html):
+
+  assets/models/Moving_Jaw_08d.stl  (the Library's meshes/leflexitac.stl)
+  assets/models/Wrist_Roll_08c.stl  (the Library's bodies/leflexitac/
+                                     wrist-roll.stl and static-jaw.stl)
+
+That repository has no LICENSE file, and neither its pages nor its README
+state a licence for them.  LeFlexiTac's code, TNA001-AI/lerobot_tactile, is
+Apache-2.0, but it holds neither file.
+
+Both are remodelled from SO-ARM100's Apache-2.0 parts, in their frames
+(https://github.com/TheRobotStudio/SO-ARM100 at
+a758567c3978dfeefe282ede0500085a48fe8f78, Copyright TheRobotStudio; the
+licence's text is licenses/so-arm100.txt), 64 % and 19 % of their surfaces
+within 0.05 mm of them:
+
+  STL/SO101/Individual/Moving_Jaw_SO101.stl          (Moving_Jaw_08d.stl)
+  STL/SO101/Individual/Wrist_Roll_Follower_SO101.stl (Wrist_Roll_08c.stl)
+
+They are shared in the Library with the permission of their authors (the
+LeFlexiTac authors, Columbia University RoboPIL), given by a co-author of
+LeFlexiTac on 2026-11-17: tools/library_write.py PERMITTED_LICENCES (an
+entry of 2026-11-16, pending until then).  The permission lets this
+project publish them; it is not a licence, and none is stated for them.

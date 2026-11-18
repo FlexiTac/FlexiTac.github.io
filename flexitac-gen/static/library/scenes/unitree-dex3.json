@@ -1,0 +1,428 @@
+{
+ "format": "flexitac-library-scene/v1",
+ "part": "unitree-dex3",
+ "part_mesh_sha256": "9fb4d06c219e39c2578297a0638a76dd0b868823b659ebaa9e69143fa4e522d3",
+ "about": "Unitree Dex3-1, the G1's left hand, open to grasp: unitree_ros b579bbe, robots/dexterous_hand_description/dex3_1/dex3_1_l.urdf (BSD-3-Clause), its revolute joints at index_0 -35, index_1 -35, middle_0 -35, middle_1 -35, thumb_0 0, thumb_1 10, thumb_2 15 degrees (each within its limits), the fingertips' pads facing across a gap of 76.0 mm.  A three-finger hand has no stroke: the opening is that gap.  The bodies are left_hand_palm_link.STL, left_hand_thumb_0_link.STL and left_hand_index_0_link.STL three times (the index's and the middle finger's first links, and the thumb's second, left_hand_thumb_1_link.STL, which is that file turned 180 degrees about (1, -1, 0): every vertex the same).  The Library mesh is left_hand_index_1_link.STL with its textured fingertip cap replaced by the cap's mirror-symmetric convex hull (NOTICE.md); it is the index fingertip, whose stack explodes toward the thumb.  The other finger (the mate) is the thumb's tip, left_hand_thumb_2_link.STL, which is the same file turned the same way, so its sensor is the same board; the middle fingertip, left_hand_middle_1_link.STL, the same file byte for byte, is the scene's extra finger with a third, still sensor.  The checks override's reason: card_min_px 19 for this hand open to grasp, the rules' 20 only in a hand no longer open.  The fingertip's face is a dome (24 mm wide, 8.8 mm deep), whose sensor is fitted on the patch a click selects at the curved faces' 1 % (405.1 mm2; its fields 13.75 to 15 mm across the finger), and the hand is framed whole (85.9 mm from the centre of its box to its farthest point), so the card's top FPC is 19 px wide at the grippers' homes; the most compact pose a scan of the joints found (the fingers 70 and 15 degrees, the thumb 0, -25 and 40) frames it 6 % closer (80.9 mm, about 20 px), but a hand no longer open.  The looks: drawn after Unitree's product pictures of the Dex3-1 (unitree.com/Dex3-1: the hand upright beside an adult's hand, its sizes marked, and the hand on the G1), 2026-11-17: a hand black all over but for the grey metal blocks of the two fingers' knuckles at the palm's top; the palm a satin black shell; the fingers' and the thumb's first links black anodised aluminium frames, each holding a knurled black pad; the fingertips black rubber with a fingerprint's ridges (the Library's part, its cap drawn as the cap's hull: one mesh, one look).  Not modelled: the palm's knurled pad as a look of its own (the decimated palm keeps no clean edge round it), the screws (the meshes keep their holes), the cables.",
+ "frame": "the part's file axes, mm",
+ "approach": [
+  0.9828639231652659,
+  0.18433260303099502,
+  0.0
+ ],
+ "opening": {
+  "q_mm": 76.0,
+  "limit_mm": 76.0,
+  "joint": "the fingers' and the thumb's revolute joints (the pose above)",
+  "source": "unitree_ros b579bbe, robots/dexterous_hand_description/dex3_1/dex3_1_l.urdf: thumb_0 -60..60, thumb_1 -35..60, thumb_2 0..100, index_0 -90..0, index_1 -100..0, middle_0 -90..0, middle_1 -100..0 degrees"
+ },
+ "mate": {
+  "kind": "turned",
+  "matrix": [
+   [
+    0.996195,
+    0.087156,
+    0.0,
+    8.518105
+   ],
+   [
+    0.087156,
+    -0.996195,
+    0.0,
+    -92.772295
+   ],
+   [
+    0.0,
+    0.0,
+    -1.0,
+    -28.5
+   ],
+   [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  ],
+  "part": true
+ },
+ "extra_fingers": [
+  {
+   "kind": "turned",
+   "matrix": [
+    [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     1.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     -57.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ]
+  }
+ ],
+ "checks": {
+  "card_min_px": 19
+ },
+ "bodies": [
+  {
+   "mesh": "bodies/unitree-dex3/palm-knuckles.stl",
+   "sha256": "07305e114a514a8b6640cd1eeee9ee4ba36ad788ab4e2755ffc071a9724f8b38",
+   "bytes": 15484,
+   "triangles": 308,
+   "matrix": [
+    [
+     0.34202,
+     -0.939693,
+     0.0,
+     -62.588621
+    ],
+    [
+     0.939693,
+     0.34202,
+     0.0,
+     -99.83115
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     -28.5
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": null,
+   "look": "knuckle-grey"
+  },
+  {
+   "mesh": "bodies/unitree-dex3/palm-shell.stl",
+   "sha256": "39efa9d01230decad86576d898327362792d9ce5bd0f265b1f37a8b37d401dba",
+   "bytes": 163184,
+   "triangles": 3262,
+   "matrix": [
+    [
+     0.34202,
+     -0.939693,
+     0.0,
+     -62.588621
+    ],
+    [
+     0.939693,
+     0.34202,
+     0.0,
+     -99.83115
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     -28.5
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": null,
+   "look": "palm-satin"
+  },
+  {
+   "mesh": "bodies/unitree-dex3/thumb_0.stl",
+   "sha256": "a3c875844c6ab5cf024c0bb95a36b511269d42e2514eea3f59243904027f4e6b",
+   "bytes": 2584,
+   "triangles": 50,
+   "matrix": [
+    [
+     0.34202,
+     -0.939693,
+     0.0,
+     -53.867107
+    ],
+    [
+     0.939693,
+     0.34202,
+     0.0,
+     -75.868988
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     -28.5
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": null,
+   "look": "link-anodized"
+  },
+  {
+   "mesh": "bodies/unitree-dex3/proximal-pad.stl",
+   "sha256": "4fd2db0c3d031a04c5465a78df25189261e1149c424195a77553c65af6f95ee4",
+   "bytes": 88734,
+   "triangles": 1773,
+   "matrix": [
+    [
+     0.819152,
+     -0.573576,
+     0.0,
+     -37.517164
+    ],
+    [
+     0.573576,
+     0.819152,
+     0.0,
+     -26.269801
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": null,
+   "look": "pad-knurled"
+  },
+  {
+   "mesh": "bodies/unitree-dex3/proximal-frame.stl",
+   "sha256": "91d94b516659f97b53a94040f4b2f39c32a8bcb7c0fc42648e5912885641b9ba",
+   "bytes": 21934,
+   "triangles": 437,
+   "matrix": [
+    [
+     0.819152,
+     -0.573576,
+     0.0,
+     -37.517164
+    ],
+    [
+     0.573576,
+     0.819152,
+     0.0,
+     -26.269801
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": null,
+   "look": "link-anodized"
+  },
+  {
+   "mesh": "bodies/unitree-dex3/proximal-pad.stl",
+   "sha256": "4fd2db0c3d031a04c5465a78df25189261e1149c424195a77553c65af6f95ee4",
+   "bytes": 88734,
+   "triangles": 1773,
+   "matrix": [
+    [
+     0.819152,
+     -0.573576,
+     0.0,
+     -37.517164
+    ],
+    [
+     0.573576,
+     0.819152,
+     0.0,
+     -26.269801
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     -57.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": null,
+   "look": "pad-knurled"
+  },
+  {
+   "mesh": "bodies/unitree-dex3/proximal-frame.stl",
+   "sha256": "91d94b516659f97b53a94040f4b2f39c32a8bcb7c0fc42648e5912885641b9ba",
+   "bytes": 21934,
+   "triangles": 437,
+   "matrix": [
+    [
+     0.819152,
+     -0.573576,
+     0.0,
+     -37.517164
+    ],
+    [
+     0.573576,
+     0.819152,
+     0.0,
+     -26.269801
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     -57.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": null,
+   "look": "link-anodized"
+  },
+  {
+   "mesh": "bodies/unitree-dex3/proximal-pad.stl",
+   "sha256": "4fd2db0c3d031a04c5465a78df25189261e1149c424195a77553c65af6f95ee4",
+   "bytes": 88734,
+   "triangles": 1773,
+   "matrix": [
+    [
+     0.984808,
+     -0.173648,
+     0.0,
+     -36.58609
+    ],
+    [
+     -0.173648,
+     -0.984808,
+     0.0,
+     -84.819208
+    ],
+    [
+     0.0,
+     0.0,
+     -1.0,
+     -28.5
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": null,
+   "look": "pad-knurled"
+  },
+  {
+   "mesh": "bodies/unitree-dex3/proximal-frame.stl",
+   "sha256": "91d94b516659f97b53a94040f4b2f39c32a8bcb7c0fc42648e5912885641b9ba",
+   "bytes": 21934,
+   "triangles": 437,
+   "matrix": [
+    [
+     0.984808,
+     -0.173648,
+     0.0,
+     -36.58609
+    ],
+    [
+     -0.173648,
+     -0.984808,
+     0.0,
+     -84.819208
+    ],
+    [
+     0.0,
+     0.0,
+     -1.0,
+     -28.5
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": null,
+   "look": "link-anodized"
+  }
+ ],
+ "looks": {
+  "knuckle-grey": {
+   "color": "#8a9198",
+   "metalness": 0.5,
+   "roughness": 0.5,
+   "env_intensity": 1.6
+  },
+  "link-anodized": {
+   "color": "#25262a",
+   "metalness": 0.4,
+   "roughness": 0.55,
+   "env_intensity": 3.0
+  },
+  "pad-knurled": {
+   "color": "#2c2d31",
+   "metalness": 0,
+   "roughness": 0.92,
+   "env_intensity": 2.4
+  },
+  "palm-satin": {
+   "color": "#242528",
+   "metalness": 0,
+   "roughness": 0.4,
+   "env_intensity": 2.6
+  },
+  "tip-rubber": {
+   "color": "#26272a",
+   "metalness": 0,
+   "roughness": 0.8,
+   "env_intensity": 2.6
+  }
+ },
+ "part_look": "tip-rubber",
+ "smooth_deg": 35,
+ "see_through": [
+  "mate"
+ ],
+ "picture": "on the three fingertips of the open hand"
+}

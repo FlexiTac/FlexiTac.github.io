@@ -718,6 +718,10 @@ body[data-look="photo"] .look-scope :is(.oblique-board,.stacked-canvas:not(.is-p
   color:#fff; font-size:1rem; font-weight:800; cursor:pointer; }
 .cad-workspace .cad-quick button.cad-quick-generate:hover:not(:disabled) { background:#094c80; }
 .cad-workspace .cad-quick button.cad-quick-generate:disabled { background:#e3eceb; color:#8a9a9e; cursor:default; opacity:1; }
+.cad-quick { flex-wrap:wrap; row-gap:8px; }
+.cad-workspace .cad-quick button.cad-shrink { width:auto; margin-left:12px; }
+.cad-quick .cad-shrink-note { margin-left:12px; font-size:.82rem; }
+.cad-tier-note { margin:4px 0 0; }
 .cad-customize { border-top:1px solid var(--line); }
 .cad-customize > summary { display:flex; flex-wrap:wrap; align-items:center; gap:4px 12px; padding:16px 16px; background:#e4f2f3; border-left:5px solid var(--accent);
   font-size:1.12rem; font-weight:800; color:#065560; cursor:pointer; }

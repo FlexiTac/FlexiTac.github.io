@@ -1,5 +1,5 @@
 {
- "about": "The Library's gripper parts (index.html): each part's mesh, licence and the face the page selects (the request's selection, base and border, with seed facets), and its variants (pitch and fill; the page's other options are its defaults).  Written once by the private tools/library_import.py from the multi-gripper video's recipes, then edited by hand; the UMI finger's tapered tips (the family umi-tapers) and their meshes come from the private tools/library_tips.py, which cuts them from the HandUMI finger; tools/library_write.py fits every variant and writes entries.json and fits/.",
+ "about": "The Library's gripper parts (index.html): each part's mesh, licence and the face the page selects (the request's selection, base and border, with seed facets), and its variants (pitch and fill; the page's other options are its defaults).  Written once by the private tools/library_import.py from the multi-gripper video's recipes, then edited by hand; the Robotiq 2F-85 added by hand on 2026-11-16 (MuJoCo Menagerie's robotiq_2f85, the user's decision of that day); the UMI finger's tapered tips (the family umi-tapers) and their meshes come from the private tools/library_tips.py, which cuts them from the HandUMI finger; tools/library_write.py fits every variant and writes entries.json and fits/.",
  "families": {
   "umi-tapers": {
    "cards": [
@@ -281,15 +281,97 @@
   "umi-concave-tip9.8",
   "umi-concave-tip5.8",
   "umi-pointed-tip2",
+  "leflexitac",
+  "robotiq-2f-85",
   "franka-hand",
   "widowx-250",
   "trossen-widowx-ai",
   "arx-x5",
   "i2rt-yam",
+  "makermods-metal",
+  "agilex-piper",
+  "galaxea-r1-lite",
+  "seeed-rebot",
+  "ufactory-xarm",
+  "rainbow-rby1",
+  "enactic-openarm",
+  "yubi-gripper",
   "unitree-dex1",
-  "makermods-metal"
+  "unitree-dex3",
+  "leap-hand"
  ],
  "parts": {
+  "agilex-piper": {
+   "finger": "gripper finger",
+   "license": {
+    "change": "unchanged",
+    "holder": "RosenYin",
+    "source": "https://github.com/google-deepmind/mujoco_menagerie/blob/fb36886b3023db08c198264e1e9956ab202c3e3b/agilex_piper/assets/link7.stl",
+    "spdx": "MIT",
+    "text": "licenses/mujoco_menagerie-agilex_piper.txt"
+   },
+   "maker": "AgileX Robotics",
+   "mesh": {
+    "bytes": 91984,
+    "file": "meshes/agilex-piper.stl",
+    "name": "agilex-piper.stl",
+    "sha256": "907dcdd10498a9d2e9317e42f550570a4ca522d1c4ff7b7c8721fd5cb951e481"
+   },
+   "setup": {
+    "base": "auto",
+    "border": {
+     "uv": [
+      [
+       -27.8112,
+       28.361064
+      ],
+      [
+       -27.8112,
+       -28.638936
+      ],
+      [
+       41.74,
+       -28.638936
+      ],
+      [
+       41.74,
+       28.361064
+      ]
+     ]
+    },
+    "options": {},
+    "selection": {
+     "ops": [
+      {
+       "mode": "add",
+       "op": "grow",
+       "preset": "surface",
+       "seed_facet": 2
+      }
+     ]
+    }
+   },
+   "title": "AgileX Piper",
+   "variants": [
+    {
+     "badge": "Fine",
+     "fill": 0.5,
+     "pitch_mm": 1
+    },
+    {
+     "fill": 0.5,
+     "pitch_mm": 2
+    },
+    {
+     "fill": 0.5,
+     "pitch_mm": 3
+    },
+    {
+     "fill": 0.5,
+     "pitch_mm": 4
+    }
+   ]
+  },
   "arx-x5": {
    "finger": "gripper tip, HandUMI",
    "license": {
@@ -356,6 +438,64 @@
     }
    ]
   },
+  "enactic-openarm": {
+   "finger": "gripper finger, HandUMI",
+   "license": {
+    "change": "unchanged",
+    "holder": "BrikHMP18 (HandUMI hardware), after Enactic, Inc.'s OpenArm 1.0 finger",
+    "source": "https://github.com/murobotics-ai/handumi-hw/blob/144827862d4e2d5cd2d331ce7eed1374d3c769df/hardware/STL/gripper_tips/OpenArmv1/OpenArm-left.stl",
+    "spdx": "Apache-2.0",
+    "text": "licenses/handumi-hw.txt"
+   },
+   "maker": "Enactic",
+   "mesh": {
+    "bytes": 653384,
+    "file": "meshes/enactic-openarm.stl",
+    "name": "enactic-openarm.stl",
+    "sha256": "b86528931e3abae5cebee5b62e306afb16a5acf36740df52a595cd98ae92ddf7"
+   },
+   "setup": {
+    "base": {
+     "point_xyz": [
+      58.82,
+      -13.1,
+      -43.35
+     ]
+    },
+    "border": null,
+    "options": {},
+    "selection": {
+     "ops": [
+      {
+       "mode": "add",
+       "op": "grow",
+       "preset": "surface",
+       "seed_facet": 347
+      }
+     ]
+    }
+   },
+   "title": "OpenArm 1.0",
+   "variants": [
+    {
+     "badge": "Fine",
+     "fill": 0.5,
+     "pitch_mm": 1
+    },
+    {
+     "fill": 0.5,
+     "pitch_mm": 1.5
+    },
+    {
+     "fill": 0.5,
+     "pitch_mm": 2
+    },
+    {
+     "fill": 0.5,
+     "pitch_mm": 2.5
+    }
+   ]
+  },
   "franka-hand": {
    "finger": "gripper finger pad",
    "license": {
@@ -411,6 +551,79 @@
     {
      "fill": 0.5,
      "pitch_mm": 2.5
+    }
+   ]
+  },
+  "galaxea-r1-lite": {
+   "finger": "gripper finger",
+   "license": {
+    "change": "unchanged",
+    "holder": "Galaxea",
+    "source": "https://github.com/OpenGalaxea/GalaxeaManipSim/blob/abe7f5161eeaa150e6eaffdf443af5df7f23f356/galaxea_sim/assets/r1_lite/meshes/left_gripper_finger_link1.STL",
+    "spdx": "Apache-2.0",
+    "text": "licenses/galaxeamanipsim.txt"
+   },
+   "maker": "Galaxea Dynamics",
+   "mesh": {
+    "bytes": 256484,
+    "file": "meshes/galaxea-r1-lite.stl",
+    "name": "galaxea-r1-lite.stl",
+    "sha256": "9e486d5bfa8bd512e272bed6e5df92e8f9d12de796ee03139f5b9618b55fa79b"
+   },
+   "setup": {
+    "base": "auto",
+    "border": {
+     "uv": [
+      [
+       15,
+       17.5
+      ],
+      [
+       -15,
+       17.5
+      ],
+      [
+       -15,
+       -40
+      ],
+      [
+       15,
+       -40
+      ]
+     ]
+    },
+    "options": {
+     "rotation": "none"
+    },
+    "selection": {
+     "ops": [
+      {
+       "mode": "add",
+       "op": "grow",
+       "preset": "flat",
+       "seed_facet": 3062
+      }
+     ]
+    }
+   },
+   "title": "Galaxea R1 Lite",
+   "variants": [
+    {
+     "badge": "Fine",
+     "fill": 0.5,
+     "pitch_mm": 1
+    },
+    {
+     "fill": 0.5,
+     "pitch_mm": 1.5
+    },
+    {
+     "fill": 0.5,
+     "pitch_mm": 2
+    },
+    {
+     "fill": 0.5,
+     "pitch_mm": 3
     }
    ]
   },
@@ -471,6 +684,118 @@
     {
      "fill": 0.5,
      "pitch_mm": 4
+    }
+   ]
+  },
+  "leap-hand": {
+   "finger": "fingertip",
+   "license": {
+    "change": "distal.obj's object fingertip_W (the white fingertip) alone, m to mm, binary STL",
+    "holder": "Ananye Agarwal",
+    "source": "https://github.com/google-deepmind/mujoco_menagerie/blob/f3b6013629c7b94f8ee93fd977b161fa8350f9bc/leap_hand/assets/distal.obj",
+    "spdx": "MIT",
+    "text": "licenses/mujoco_menagerie-leap_hand.txt"
+   },
+   "maker": "Carnegie Mellon University",
+   "mesh": {
+    "bytes": 72584,
+    "file": "meshes/leap-hand.stl",
+    "name": "leap-hand.stl",
+    "sha256": "166bb1de0c0af51f7dde4df90940d2294991f6eff1ceb4909e7c064b6f89b312"
+   },
+   "setup": {
+    "base": "auto",
+    "border": null,
+    "options": {},
+    "selection": {
+     "ops": [
+      {
+       "mode": "add",
+       "op": "grow",
+       "preset": "flat",
+       "seed_facet": 1124,
+       "theta_c_deg": 1
+      }
+     ]
+    }
+   },
+   "title": "LEAP Hand",
+   "variants": [
+    {
+     "badge": "Fine",
+     "fill": 0.5,
+     "pitch_mm": 1
+    },
+    {
+     "fill": 0.5,
+     "pitch_mm": 1.5
+    },
+    {
+     "fill": 0.5,
+     "pitch_mm": 2
+    },
+    {
+     "fill": 0.5,
+     "pitch_mm": 3
+    }
+   ]
+  },
+  "leflexitac": {
+   "finger": "moving jaw, LeFlexiTac",
+   "license": {
+    "change": "unchanged",
+    "holder": "the LeFlexiTac authors (Columbia University RoboPIL); no licence stated; remodelled from SO-ARM100 `a758567`, `STL/SO101/Individual/Moving_Jaw_SO101.stl` (Apache-2.0, TheRobotStudio, `licenses/so-arm100.txt`)",
+    "permission": "shared with the authors' permission (given by a co-author of LeFlexiTac, 2026-11-17)",
+    "source": "https://github.com/TNA001-AI/LeFlexiTac/blob/b61259fdea21bf8b0b5193fb3d373e71e5e5be81/assets/models/Moving_Jaw_08d.stl",
+    "spdx": "NOASSERTION",
+    "text": "licenses/leflexitac.txt"
+   },
+   "maker": "LeRobot SO-101 (TheRobotStudio)",
+   "mesh": {
+    "bytes": 935384,
+    "file": "meshes/leflexitac.stl",
+    "name": "leflexitac.stl",
+    "sha256": "c0f71e0134a7cd3a425488ba5cab87e16ee677f4768cd57036d21b9b81c6ea60"
+   },
+   "setup": {
+    "base": {
+     "point_xyz": [
+      -10.3,
+      -21.3,
+      0
+     ]
+    },
+    "border": null,
+    "options": {},
+    "selection": {
+     "ops": [
+      {
+       "mode": "add",
+       "op": "grow",
+       "preset": "flat",
+       "seed_facet": 17094
+      }
+     ]
+    }
+   },
+   "title": "LeFlexiTac",
+   "variants": [
+    {
+     "badge": "Fine",
+     "fill": 0.5,
+     "pitch_mm": 1
+    },
+    {
+     "fill": 0.5,
+     "pitch_mm": 1.5
+    },
+    {
+     "fill": 0.5,
+     "pitch_mm": 2
+    },
+    {
+     "fill": 0.5,
+     "pitch_mm": 3
     }
    ]
   },
@@ -538,6 +863,188 @@
     }
    ]
   },
+  "rainbow-rby1": {
+   "finger": "gripper finger pad",
+   "license": {
+    "change": "OBJ in metres to binary STL in millimetres",
+    "holder": "Rainbow Robotics",
+    "source": "https://github.com/google-deepmind/mujoco_menagerie/blob/f3b6013629c7b94f8ee93fd977b161fa8350f9bc/rainbow_robotics_rby1/assets/EE_FINGER_0.obj",
+    "spdx": "Apache-2.0",
+    "text": "licenses/mujoco_menagerie-rainbow_robotics_rby1.txt"
+   },
+   "maker": "Rainbow Robotics",
+   "mesh": {
+    "bytes": 3884,
+    "file": "meshes/rainbow-rby1.stl",
+    "name": "rainbow-rby1.stl",
+    "sha256": "b25966e831ec215924f7f2ae1fa169ffdc66c52d368ef2d35d1c86638ae8f6ab"
+   },
+   "setup": {
+    "base": {
+     "point_xyz": [
+      -3,
+      0,
+      -10.14
+     ]
+    },
+    "border": null,
+    "options": {},
+    "selection": {
+     "ops": [
+      {
+       "mode": "add",
+       "op": "grow",
+       "preset": "flat",
+       "seed_facet": 38
+      },
+      {
+       "facets": [
+        34,
+        35
+       ],
+       "mode": "subtract",
+       "op": "facets"
+      }
+     ]
+    }
+   },
+   "title": "Rainbow RB-Y1",
+   "variants": [
+    {
+     "badge": "Fine",
+     "fill": 0.5,
+     "pitch_mm": 1
+    },
+    {
+     "fill": 0.5,
+     "pitch_mm": 1.5
+    },
+    {
+     "fill": 0.5,
+     "pitch_mm": 2
+    },
+    {
+     "fill": 0.5,
+     "pitch_mm": 3
+    }
+   ]
+  },
+  "robotiq-2f-85": {
+   "finger": "silicone finger pad",
+   "license": {
+    "change": "unchanged",
+    "holder": "ROS-Industrial (MuJoCo Menagerie's robotiq_2f85)",
+    "source": "https://github.com/google-deepmind/mujoco_menagerie/blob/f3b6013629c7b94f8ee93fd977b161fa8350f9bc/robotiq_2f85/assets/silicone_pad.stl",
+    "spdx": "BSD-2-Clause",
+    "text": "licenses/mujoco_menagerie-robotiq_2f85.txt"
+   },
+   "maker": "Robotiq",
+   "mesh": {
+    "bytes": 15084,
+    "file": "meshes/robotiq-2f-85.stl",
+    "name": "robotiq-2f-85.stl",
+    "sha256": "ca20c0fa61e6d3ce7b04bed25360e048e31dfd88ace04187aa6d9e8f4ca3fd0f"
+   },
+   "setup": {
+    "base": {
+     "point_xyz": [
+      0,
+      -6.6,
+      0
+     ]
+    },
+    "border": null,
+    "options": {},
+    "selection": {
+     "ops": [
+      {
+       "mode": "add",
+       "op": "grow",
+       "preset": "flat",
+       "seed_facet": 232
+      }
+     ]
+    }
+   },
+   "title": "Robotiq 2F-85",
+   "variants": [
+    {
+     "badge": "Fine",
+     "fill": 0.5,
+     "pitch_mm": 1
+    },
+    {
+     "fill": 0.5,
+     "pitch_mm": 1.5
+    },
+    {
+     "fill": 0.5,
+     "pitch_mm": 2
+    },
+    {
+     "fill": 0.5,
+     "pitch_mm": 3
+    }
+   ]
+  },
+  "seeed-rebot": {
+   "finger": "gripper finger",
+   "license": {
+    "change": "contact face's two pockets capped, m to mm, binary STL",
+    "holder": "Seeed Studio",
+    "source": "https://github.com/google-deepmind/mujoco_menagerie/blob/f3b6013629c7b94f8ee93fd977b161fa8350f9bc/seeed_rebot_devarm/assets/pla_left.STL",
+    "spdx": "MIT",
+    "text": "licenses/mujoco_menagerie-seeed_rebot_devarm.txt"
+   },
+   "maker": "Seeed Studio",
+   "mesh": {
+    "bytes": 253484,
+    "file": "meshes/seeed-rebot.stl",
+    "name": "seeed-rebot.stl",
+    "sha256": "56f349cadcf7bab472ed454f02d2013b603cfafe95bd7a25298aeb3e025fa81b"
+   },
+   "setup": {
+    "base": {
+     "point_xyz": [
+      0,
+      22.87,
+      0
+     ]
+    },
+    "border": null,
+    "options": {},
+    "selection": {
+     "ops": [
+      {
+       "mode": "add",
+       "op": "grow",
+       "preset": "flat",
+       "seed_facet": 152
+      }
+     ]
+    }
+   },
+   "title": "Seeed reBot DevArm",
+   "variants": [
+    {
+     "badge": "Fine",
+     "fill": 0.5,
+     "pitch_mm": 1
+    },
+    {
+     "fill": 0.5,
+     "pitch_mm": 1.5
+    },
+    {
+     "fill": 0.5,
+     "pitch_mm": 2
+    },
+    {
+     "fill": 0.5,
+     "pitch_mm": 3
+    }
+   ]
+  },
   "trossen-widowx-ai": {
    "finger": "gripper tip sock, HandUMI",
    "license": {
@@ -578,6 +1085,64 @@
     }
    },
    "title": "Trossen WidowX AI",
+   "variants": [
+    {
+     "badge": "Fine",
+     "fill": 0.5,
+     "pitch_mm": 1
+    },
+    {
+     "fill": 0.5,
+     "pitch_mm": 1.5
+    },
+    {
+     "fill": 0.5,
+     "pitch_mm": 2
+    },
+    {
+     "fill": 0.5,
+     "pitch_mm": 3
+    }
+   ]
+  },
+  "ufactory-xarm": {
+   "finger": "gripper finger",
+   "license": {
+    "change": "unchanged",
+    "holder": "UFACTORY Inc.",
+    "source": "https://github.com/google-deepmind/mujoco_menagerie/blob/f3b6013629c7b94f8ee93fd977b161fa8350f9bc/ufactory_xarm7/assets/left_finger.stl",
+    "spdx": "BSD-3-Clause",
+    "text": "licenses/mujoco_menagerie-ufactory_xarm7.txt"
+   },
+   "maker": "UFACTORY",
+   "mesh": {
+    "bytes": 242684,
+    "file": "meshes/ufactory-xarm.stl",
+    "name": "ufactory-xarm.stl",
+    "sha256": "a44756eb72f9c214cb37e61dc209cd7073fdff3e4271a7423476ef6fd090d2d4"
+   },
+   "setup": {
+    "base": {
+     "point_xyz": [
+      0,
+      -26,
+      22.25
+     ]
+    },
+    "border": null,
+    "options": {},
+    "selection": {
+     "ops": [
+      {
+       "mode": "add",
+       "op": "grow",
+       "preset": "flat",
+       "seed_facet": 2926
+      }
+     ]
+    }
+   },
+   "title": "xArm Gripper",
    "variants": [
     {
      "badge": "Fine",
@@ -1951,6 +2516,59 @@
     }
    ]
   },
+  "unitree-dex3": {
+   "finger": "fingertip",
+   "license": {
+    "change": "the fingertip cap's mirror-symmetric convex hull, m to mm, binary STL",
+    "holder": "HangZhou YuShu Technology Co., Ltd. (Unitree Robotics)",
+    "source": "https://github.com/unitreerobotics/unitree_ros/blob/b579bbe1671bf330e42f6fc1b9cd75a73b0879a7/robots/dexterous_hand_description/dex3_1/meshes/left_hand_index_1_link.STL",
+    "spdx": "BSD-3-Clause",
+    "text": "licenses/unitree_ros.txt"
+   },
+   "maker": "Unitree Robotics",
+   "mesh": {
+    "bytes": 776284,
+    "file": "meshes/unitree-dex3.stl",
+    "name": "unitree-dex3.stl",
+    "sha256": "9fb4d06c219e39c2578297a0638a76dd0b868823b659ebaa9e69143fa4e522d3"
+   },
+   "setup": {
+    "base": "auto",
+    "border": null,
+    "options": {},
+    "selection": {
+     "ops": [
+      {
+       "mode": "add",
+       "op": "grow",
+       "preset": "surface",
+       "seed_facet": 9267,
+       "stretch_budget": 0.01
+      }
+     ]
+    }
+   },
+   "title": "Unitree Dex3-1",
+   "variants": [
+    {
+     "badge": "Fine",
+     "fill": 0.5,
+     "pitch_mm": 1
+    },
+    {
+     "fill": 0.5,
+     "pitch_mm": 1.5
+    },
+    {
+     "fill": 0.5,
+     "pitch_mm": 2
+    },
+    {
+     "fill": 0.5,
+     "pitch_mm": 2.5
+    }
+   ]
+  },
   "widowx-250": {
    "finger": "gripper finger",
    "license": {
@@ -2050,6 +2668,64 @@
     {
      "fill": 0.5,
      "pitch_mm": 3
+    }
+   ]
+  },
+  "yubi-gripper": {
+   "finger": "gripper finger pad",
+   "license": {
+    "change": "unchanged",
+    "holder": "Toyota Motor Corporation",
+    "source": "https://github.com/Toyota/yubi-hw/blob/dd8bd13d2fd8e5003057243576f88be333d95fc5/STL/gripper/FINGER_PAD_t30_L.stl",
+    "spdx": "CERN-OHL-W-2.0",
+    "text": "licenses/yubi-hw.txt"
+   },
+   "maker": "Toyota Motor Corporation",
+   "mesh": {
+    "bytes": 208884,
+    "file": "meshes/yubi-gripper.stl",
+    "name": "yubi-gripper.stl",
+    "sha256": "36e029e3fe2590711014823c6b75b0c403b0c0a59315d565b4625318f2a46466"
+   },
+   "setup": {
+    "base": {
+     "point_xyz": [
+      16.709156,
+      20.081618,
+      4.533682
+     ]
+    },
+    "border": null,
+    "options": {},
+    "selection": {
+     "ops": [
+      {
+       "mode": "add",
+       "op": "grow",
+       "preset": "surface",
+       "seed_facet": 101
+      }
+     ]
+    }
+   },
+   "title": "YUBI Gripper",
+   "variants": [
+    {
+     "badge": "Fine",
+     "fill": 0.5,
+     "pitch_mm": 1
+    },
+    {
+     "fill": 0.5,
+     "pitch_mm": 1.5
+    },
+    {
+     "fill": 0.5,
+     "pitch_mm": 2
+    },
+    {
+     "fill": 0.5,
+     "pitch_mm": 2.5
     }
    ]
   }

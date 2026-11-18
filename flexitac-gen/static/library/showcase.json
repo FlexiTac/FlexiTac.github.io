@@ -69,8 +69,8 @@
    "src": "showcase/flexitac-g1.card.webp",
    "width": 800,
    "height": 1000,
-   "bytes": 67698,
-   "sha256": "6261417c19a0b229be70337bd491c6fd0d0302d16960c715d18138605d97afa5"
+   "bytes": 74974,
+   "sha256": "bb6b3db402dd77d333caf33d0955c7244ff6546e618a2b842e9a5e29412f2912"
   },
   "alt": "The hand-designed FlexiTac sensor on both soft fingers of the xArm gripper"
  },
@@ -80,7 +80,7 @@
   "art_sha256": "d25710d94993f05c4740978cf5d8293a8f35eac71521544804978bec471d3b7f",
   "placed_sha256": "9b486c99c7eeb268fec5bc517f11f2b675158edd3836d94a278ae2016cec3773",
   "figure_sha256": "e38217818ff99c16f8d898f74079f4297bb51b7613218839c04ae9f2a59ab1c1",
-  "view_sha256": "38120a78b39dab48c9eeaefa95ff660e9e13e58035b54edd1c5f54db892089b3",
+  "view_sha256": "d8f62f02c31bbc3399cff1c62208165df0188518a995a5f862ef3284312bf685",
   "look": "photo",
   "margins_px": {
    "exploded": [
@@ -129,8 +129,8 @@
   }
  },
  "tutorial": {
-  "label": "FlexiTac hardware tutorial (Gerbers)",
-  "href": "https://docs.google.com/document/d/1bvz6AL7BUkhj4Dj7n9DFXTjnGIX4-ziN8-smiCKpVZU/"
+  "label": "FlexiTac fabrication guide",
+  "href": "https://docs.google.com/document/d/1bvz6AL7BUkhj4Dj7n9DFXTjnGIX4-ziN8-smiCKpVZU/edit?tab=t.0#heading=h.kk7d14qme9db"
  },
  "sources": [
   {

@@ -76,12 +76,23 @@
   }
  },
  "scenes": {
+  "leflexitac": "scenes/leflexitac.json",
+  "robotiq-2f-85": "scenes/robotiq-2f-85.json",
   "franka-hand": "scenes/franka-hand.json",
   "widowx-250": "scenes/widowx-250.json",
   "trossen-widowx-ai": "scenes/trossen-widowx-ai.json",
   "arx-x5": "scenes/arx-x5.json",
   "i2rt-yam": "scenes/i2rt-yam.json",
+  "makermods-metal": "scenes/makermods-metal.json",
+  "agilex-piper": "scenes/agilex-piper.json",
+  "galaxea-r1-lite": "scenes/galaxea-r1-lite.json",
+  "seeed-rebot": "scenes/seeed-rebot.json",
+  "ufactory-xarm": "scenes/ufactory-xarm.json",
+  "rainbow-rby1": "scenes/rainbow-rby1.json",
+  "enactic-openarm": "scenes/enactic-openarm.json",
+  "yubi-gripper": "scenes/yubi-gripper.json",
   "unitree-dex1": "scenes/unitree-dex1.json",
-  "makermods-metal": "scenes/makermods-metal.json"
+  "unitree-dex3": "scenes/unitree-dex3.json",
+  "leap-hand": "scenes/leap-hand.json"
  }
 }

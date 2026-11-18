@@ -2,6 +2,66 @@
  "format": "flexitac-library-files/v1",
  "generator_version": "deterministic-sensor-core/0.4.0",
  "variants": {
+  "agilex-piper-1mm": {
+   "bottom-gerber": {
+    "bytes": 39997,
+    "name": "surface-32x30-4870109e5f29-bottom-columns-direct-gerber.zip",
+    "path": "files/agilex-piper-1mm/surface-32x30-4870109e5f29-bottom-columns-direct-gerber.zip",
+    "sha256": "95dd7274053dc43c3ac414e954691f1f3e8538d073f40899f9dd8556113bd1b9"
+   },
+   "build_id": "surface-32x30-4870109e5f29",
+   "top-gerber": {
+    "bytes": 44147,
+    "name": "surface-32x30-4870109e5f29-top-rows-direct-gerber.zip",
+    "path": "files/agilex-piper-1mm/surface-32x30-4870109e5f29-top-rows-direct-gerber.zip",
+    "sha256": "450368ac2e9d5b735e360b5209112cb525792f3aa44910b7f6a506f9553963cd"
+   }
+  },
+  "agilex-piper-2mm": {
+   "bottom-gerber": {
+    "bytes": 39029,
+    "name": "surface-32x24-cdd0d9c72f7f-bottom-columns-direct-gerber.zip",
+    "path": "files/agilex-piper-2mm/surface-32x24-cdd0d9c72f7f-bottom-columns-direct-gerber.zip",
+    "sha256": "880e80b1dc881f5aea0801dfdee267454b00c7e5fc02a04af8911b3f4fa67b8c"
+   },
+   "build_id": "surface-32x24-cdd0d9c72f7f",
+   "top-gerber": {
+    "bytes": 46670,
+    "name": "surface-32x24-cdd0d9c72f7f-top-rows-direct-gerber.zip",
+    "path": "files/agilex-piper-2mm/surface-32x24-cdd0d9c72f7f-top-rows-direct-gerber.zip",
+    "sha256": "f9e79b79b465fb4a928d555c4714cea0dcbdb189e7d682dd2cbc3d0c956006ba"
+   }
+  },
+  "agilex-piper-3mm": {
+   "bottom-gerber": {
+    "bytes": 34309,
+    "name": "surface-23x17-26cd111d1462-bottom-columns-direct-gerber.zip",
+    "path": "files/agilex-piper-3mm/surface-23x17-26cd111d1462-bottom-columns-direct-gerber.zip",
+    "sha256": "0a6c0dc82b40b0b2097d0e56092da5d1093714529cbe36892ea4940694b82815"
+   },
+   "build_id": "surface-23x17-26cd111d1462",
+   "top-gerber": {
+    "bytes": 39681,
+    "name": "surface-23x17-26cd111d1462-top-rows-direct-gerber.zip",
+    "path": "files/agilex-piper-3mm/surface-23x17-26cd111d1462-top-rows-direct-gerber.zip",
+    "sha256": "75423422430e13fa3de1e8a35e5951855cd2eb695407cff1bf55bbc7cfafd0de"
+   }
+  },
+  "agilex-piper-4mm": {
+   "bottom-gerber": {
+    "bytes": 32490,
+    "name": "surface-17x14-df15367723e4-bottom-columns-direct-gerber.zip",
+    "path": "files/agilex-piper-4mm/surface-17x14-df15367723e4-bottom-columns-direct-gerber.zip",
+    "sha256": "fd4157ffb7ed0b5ab375d5ab9ba0c84c544ee9c5df1a35ff480e9d52508b6f26"
+   },
+   "build_id": "surface-17x14-df15367723e4",
+   "top-gerber": {
+    "bytes": 35196,
+    "name": "surface-17x14-df15367723e4-top-rows-direct-gerber.zip",
+    "path": "files/agilex-piper-4mm/surface-17x14-df15367723e4-top-rows-direct-gerber.zip",
+    "sha256": "4417cc26fdef2a60283ab3fa912d69bbe1c04b9e138f3639622b8e7d7e1c8658"
+   }
+  },
   "arx-x5-1mm": {
    "bottom-gerber": {
     "bytes": 38003,
@@ -60,6 +120,66 @@
     "name": "surface-17x13-a03eb604d85b-top-rows-direct-gerber.zip",
     "path": "files/arx-x5-4mm/surface-17x13-a03eb604d85b-top-rows-direct-gerber.zip",
     "sha256": "e49505a1609ebb0b6bb4989b425618eb476cfd92fae3a0ca07de6c99243c85f4"
+   }
+  },
+  "enactic-openarm-1.5mm": {
+   "bottom-gerber": {
+    "bytes": 31345,
+    "name": "surface-7x13-41c268c40e82-bottom-columns-direct-gerber.zip",
+    "path": "files/enactic-openarm-1.5mm/surface-7x13-41c268c40e82-bottom-columns-direct-gerber.zip",
+    "sha256": "fd6c2651252e5b26d539bcd1d01a5f71bddd6c1333e4c4f654efd95ed5663110"
+   },
+   "build_id": "surface-7x13-41c268c40e82",
+   "top-gerber": {
+    "bytes": 28555,
+    "name": "surface-7x13-41c268c40e82-top-rows-direct-gerber.zip",
+    "path": "files/enactic-openarm-1.5mm/surface-7x13-41c268c40e82-top-rows-direct-gerber.zip",
+    "sha256": "ca09c7ca7958f84f4e751bd9981f49e52873d373ea73c33db17388731b0b19d0"
+   }
+  },
+  "enactic-openarm-1mm": {
+   "bottom-gerber": {
+    "bytes": 34341,
+    "name": "surface-10x20-f91bdea60002-bottom-columns-direct-gerber.zip",
+    "path": "files/enactic-openarm-1mm/surface-10x20-f91bdea60002-bottom-columns-direct-gerber.zip",
+    "sha256": "43a1b29036c33d142a734e20d91b425d2bce1d89023a1337b82150474c986b70"
+   },
+   "build_id": "surface-10x20-f91bdea60002",
+   "top-gerber": {
+    "bytes": 30413,
+    "name": "surface-10x20-f91bdea60002-top-rows-direct-gerber.zip",
+    "path": "files/enactic-openarm-1mm/surface-10x20-f91bdea60002-top-rows-direct-gerber.zip",
+    "sha256": "357e4925652a40733d45f7f3da34c7b8f1d5b5e0bf3b8a101cfedae5f3755cf1"
+   }
+  },
+  "enactic-openarm-2.5mm": {
+   "bottom-gerber": {
+    "bytes": 27446,
+    "name": "surface-4x7-26531b41a24f-bottom-columns-direct-gerber.zip",
+    "path": "files/enactic-openarm-2.5mm/surface-4x7-26531b41a24f-bottom-columns-direct-gerber.zip",
+    "sha256": "ecae10d1ccfb7ec704d628d8e02be67eb3819091946186940dfc5eb37ac47806"
+   },
+   "build_id": "surface-4x7-26531b41a24f",
+   "top-gerber": {
+    "bytes": 26275,
+    "name": "surface-4x7-26531b41a24f-top-rows-direct-gerber.zip",
+    "path": "files/enactic-openarm-2.5mm/surface-4x7-26531b41a24f-top-rows-direct-gerber.zip",
+    "sha256": "bcf3f48a841c93bfcd668acdb348047ed2f304832a3c8d5f84d55c4ba6ba707c"
+   }
+  },
+  "enactic-openarm-2mm": {
+   "bottom-gerber": {
+    "bytes": 28619,
+    "name": "surface-5x9-e06f96efd96e-bottom-columns-direct-gerber.zip",
+    "path": "files/enactic-openarm-2mm/surface-5x9-e06f96efd96e-bottom-columns-direct-gerber.zip",
+    "sha256": "39e66a806bcef569212b78a90c3d8126d0da87e0197402d2cfc308ac6b7b617c"
+   },
+   "build_id": "surface-5x9-e06f96efd96e",
+   "top-gerber": {
+    "bytes": 26968,
+    "name": "surface-5x9-e06f96efd96e-top-rows-direct-gerber.zip",
+    "path": "files/enactic-openarm-2mm/surface-5x9-e06f96efd96e-top-rows-direct-gerber.zip",
+    "sha256": "3c4f65b68f5406da9556c278f3059ca9b6905def103750a32a74d18e37e300aa"
    }
   },
   "franka-hand-1.5mm": {
@@ -122,6 +242,66 @@
     "sha256": "15d2e2efed740538a23faafdec70eee48f11c3fada4e96e477d27d0789d2cccb"
    }
   },
+  "galaxea-r1-lite-1.5mm": {
+   "bottom-gerber": {
+    "bytes": 31102,
+    "name": "surface-32x12-dd03906dd638-bottom-columns-direct-gerber.zip",
+    "path": "files/galaxea-r1-lite-1.5mm/surface-32x12-dd03906dd638-bottom-columns-direct-gerber.zip",
+    "sha256": "27df9eefccd387cd0712ee2a2115b2310129ad437633d7f028ba3002cc310f02"
+   },
+   "build_id": "surface-32x12-dd03906dd638",
+   "top-gerber": {
+    "bytes": 46904,
+    "name": "surface-32x12-dd03906dd638-top-rows-direct-gerber.zip",
+    "path": "files/galaxea-r1-lite-1.5mm/surface-32x12-dd03906dd638-top-rows-direct-gerber.zip",
+    "sha256": "b75ef6b7e8ae10e8ee5723364d88607d5514aff3f62808eaa17014da023a90c1"
+   }
+  },
+  "galaxea-r1-lite-1mm": {
+   "bottom-gerber": {
+    "bytes": 32369,
+    "name": "surface-32x16-3ed91ae4aa10-bottom-columns-direct-gerber.zip",
+    "path": "files/galaxea-r1-lite-1mm/surface-32x16-3ed91ae4aa10-bottom-columns-direct-gerber.zip",
+    "sha256": "76513953fd19d560b03edece419ae3ca8a944abfb86642dac0ffd096b3880ac3"
+   },
+   "build_id": "surface-32x16-3ed91ae4aa10",
+   "top-gerber": {
+    "bytes": 43315,
+    "name": "surface-32x16-3ed91ae4aa10-top-rows-direct-gerber.zip",
+    "path": "files/galaxea-r1-lite-1mm/surface-32x16-3ed91ae4aa10-top-rows-direct-gerber.zip",
+    "sha256": "64c413bc9ca4508af10512e880d8510d851b15404bc82c0c8ca874a6f5cc358f"
+   }
+  },
+  "galaxea-r1-lite-2mm": {
+   "bottom-gerber": {
+    "bytes": 30460,
+    "name": "surface-27x11-6683927e8a29-bottom-columns-direct-gerber.zip",
+    "path": "files/galaxea-r1-lite-2mm/surface-27x11-6683927e8a29-bottom-columns-direct-gerber.zip",
+    "sha256": "9834f0c193431e5c85a4d4b72204e0c859aa25831cbe48dbeec27b73860ec62a"
+   },
+   "build_id": "surface-27x11-6683927e8a29",
+   "top-gerber": {
+    "bytes": 42684,
+    "name": "surface-27x11-6683927e8a29-top-rows-direct-gerber.zip",
+    "path": "files/galaxea-r1-lite-2mm/surface-27x11-6683927e8a29-top-rows-direct-gerber.zip",
+    "sha256": "6242c5536c56ceb6513c844f56fb5855bb124fd2d1838821866ecc86fb55026c"
+   }
+  },
+  "galaxea-r1-lite-3mm": {
+   "bottom-gerber": {
+    "bytes": 27588,
+    "name": "surface-18x7-e15f5655008d-bottom-columns-direct-gerber.zip",
+    "path": "files/galaxea-r1-lite-3mm/surface-18x7-e15f5655008d-bottom-columns-direct-gerber.zip",
+    "sha256": "4f976a448e7be7ab0321efcb09e53a4f3a896954501b26f50f17f607ab31f3dc"
+   },
+   "build_id": "surface-18x7-e15f5655008d",
+   "top-gerber": {
+    "bytes": 35932,
+    "name": "surface-18x7-e15f5655008d-top-rows-direct-gerber.zip",
+    "path": "files/galaxea-r1-lite-3mm/surface-18x7-e15f5655008d-top-rows-direct-gerber.zip",
+    "sha256": "a532aa0c144ba2458f60489ebda640d2e437f86d66cec4adb2a33be678b8dec0"
+   }
+  },
   "i2rt-yam-1mm": {
    "bottom-gerber": {
     "bytes": 41144,
@@ -180,6 +360,126 @@
     "name": "surface-17x17-2af8d7fde405-top-rows-direct-gerber.zip",
     "path": "files/i2rt-yam-4mm/surface-17x17-2af8d7fde405-top-rows-direct-gerber.zip",
     "sha256": "e1e9471b82ae5dd3f69333cc3677516be7099711998270fca2172f896fade1c6"
+   }
+  },
+  "leap-hand-1.5mm": {
+   "bottom-gerber": {
+    "bytes": 28973,
+    "name": "surface-17x9-91ad61bbbda6-bottom-columns-direct-gerber.zip",
+    "path": "files/leap-hand-1.5mm/surface-17x9-91ad61bbbda6-bottom-columns-direct-gerber.zip",
+    "sha256": "5dc696a77518be7c21819eacade607e4e66906736004af4a1995dde469d2a1eb"
+   },
+   "build_id": "surface-17x9-91ad61bbbda6",
+   "top-gerber": {
+    "bytes": 34795,
+    "name": "surface-17x9-91ad61bbbda6-top-rows-direct-gerber.zip",
+    "path": "files/leap-hand-1.5mm/surface-17x9-91ad61bbbda6-top-rows-direct-gerber.zip",
+    "sha256": "c600dc1b453dfbf6612ca80ad9d938fd616a282f6e92129833fac3341eade681"
+   }
+  },
+  "leap-hand-1mm": {
+   "bottom-gerber": {
+    "bytes": 30482,
+    "name": "surface-25x13-ecaed6b15fc8-bottom-columns-direct-gerber.zip",
+    "path": "files/leap-hand-1mm/surface-25x13-ecaed6b15fc8-bottom-columns-direct-gerber.zip",
+    "sha256": "548f243e499b072fbb1c293dd48ecd9b5e6583040c938f2c920d8cc74aaf19cb"
+   },
+   "build_id": "surface-25x13-ecaed6b15fc8",
+   "top-gerber": {
+    "bytes": 38001,
+    "name": "surface-25x13-ecaed6b15fc8-top-rows-direct-gerber.zip",
+    "path": "files/leap-hand-1mm/surface-25x13-ecaed6b15fc8-top-rows-direct-gerber.zip",
+    "sha256": "8421e8c1686b7cd24aee99c6fd30052d873b38197592f354e887bb2ab1d11fc0"
+   }
+  },
+  "leap-hand-2mm": {
+   "bottom-gerber": {
+    "bytes": 27024,
+    "name": "surface-13x6-caf1305f5b6b-bottom-columns-direct-gerber.zip",
+    "path": "files/leap-hand-2mm/surface-13x6-caf1305f5b6b-bottom-columns-direct-gerber.zip",
+    "sha256": "d3a94ede348803344eed25e3d6f216cf911f66b6316b99ee395c8ca9e22118ec"
+   },
+   "build_id": "surface-13x6-caf1305f5b6b",
+   "top-gerber": {
+    "bytes": 31932,
+    "name": "surface-13x6-caf1305f5b6b-top-rows-direct-gerber.zip",
+    "path": "files/leap-hand-2mm/surface-13x6-caf1305f5b6b-top-rows-direct-gerber.zip",
+    "sha256": "83b9bb39277e5c950308b958f797bfa44b06ff6ae6b79eef011f09d8b1c21a5d"
+   }
+  },
+  "leap-hand-3mm": {
+   "bottom-gerber": {
+    "bytes": 25282,
+    "name": "surface-8x4-54c99c82e57f-bottom-columns-direct-gerber.zip",
+    "path": "files/leap-hand-3mm/surface-8x4-54c99c82e57f-bottom-columns-direct-gerber.zip",
+    "sha256": "d01778d4ead28000c93dd62cc1ae49b3325683ef7f86ef2cfd2946c8619f19d8"
+   },
+   "build_id": "surface-8x4-54c99c82e57f",
+   "top-gerber": {
+    "bytes": 27874,
+    "name": "surface-8x4-54c99c82e57f-top-rows-direct-gerber.zip",
+    "path": "files/leap-hand-3mm/surface-8x4-54c99c82e57f-top-rows-direct-gerber.zip",
+    "sha256": "fe641de044631267268b88f620654a504e46ed5c83d23ca175156da50bc33c49"
+   }
+  },
+  "leflexitac-1.5mm": {
+   "bottom-gerber": {
+    "bytes": 35248,
+    "name": "surface-32x18-096cb05ed1ce-bottom-columns-direct-gerber.zip",
+    "path": "files/leflexitac-1.5mm/surface-32x18-096cb05ed1ce-bottom-columns-direct-gerber.zip",
+    "sha256": "1cc40c8cd05ef46c5f2ed3d3a98451dbae6f96b1fd7b128d339e57342c56e835"
+   },
+   "build_id": "surface-32x18-096cb05ed1ce",
+   "top-gerber": {
+    "bytes": 46225,
+    "name": "surface-32x18-096cb05ed1ce-top-rows-direct-gerber.zip",
+    "path": "files/leflexitac-1.5mm/surface-32x18-096cb05ed1ce-top-rows-direct-gerber.zip",
+    "sha256": "d9cdce87939d1df2bf73d7498a4a86140954cdaee1ab319a853ffec2085390eb"
+   }
+  },
+  "leflexitac-1mm": {
+   "bottom-gerber": {
+    "bytes": 38672,
+    "name": "surface-32x27-c4fdd1e36c93-bottom-columns-direct-gerber.zip",
+    "path": "files/leflexitac-1mm/surface-32x27-c4fdd1e36c93-bottom-columns-direct-gerber.zip",
+    "sha256": "79de6e2013f2aaa9f35b36ae2b4daf2a974628bacc2e27e1949839c435bcf1b5"
+   },
+   "build_id": "surface-32x27-c4fdd1e36c93",
+   "top-gerber": {
+    "bytes": 43299,
+    "name": "surface-32x27-c4fdd1e36c93-top-rows-direct-gerber.zip",
+    "path": "files/leflexitac-1mm/surface-32x27-c4fdd1e36c93-top-rows-direct-gerber.zip",
+    "sha256": "58c51590a396f9e4aa2a43fc0e8386793c0ba29bca4be069ebfddf5b3358c1d6"
+   }
+  },
+  "leflexitac-2mm": {
+   "bottom-gerber": {
+    "bytes": 32621,
+    "name": "surface-32x14-c25c9c5857fa-bottom-columns-direct-gerber.zip",
+    "path": "files/leflexitac-2mm/surface-32x14-c25c9c5857fa-bottom-columns-direct-gerber.zip",
+    "sha256": "f2ac20f597507ddd1b3d9aba3ba9f574c6d668161c1573ce06b8f06e380454cf"
+   },
+   "build_id": "surface-32x14-c25c9c5857fa",
+   "top-gerber": {
+    "bytes": 46169,
+    "name": "surface-32x14-c25c9c5857fa-top-rows-direct-gerber.zip",
+    "path": "files/leflexitac-2mm/surface-32x14-c25c9c5857fa-top-rows-direct-gerber.zip",
+    "sha256": "c390188e019d2f9d1543bf8e4d4a797ba9d65e8b95e3b77ef005107d3fab7ef8"
+   }
+  },
+  "leflexitac-3mm": {
+   "bottom-gerber": {
+    "bytes": 29117,
+    "name": "surface-22x9-46f14897dbe8-bottom-columns-direct-gerber.zip",
+    "path": "files/leflexitac-3mm/surface-22x9-46f14897dbe8-bottom-columns-direct-gerber.zip",
+    "sha256": "05b42601b715c380d985b4bd95ba1163b1d5a3ce1c0922137f5b8af37db5607b"
+   },
+   "build_id": "surface-22x9-46f14897dbe8",
+   "top-gerber": {
+    "bytes": 38670,
+    "name": "surface-22x9-46f14897dbe8-top-rows-direct-gerber.zip",
+    "path": "files/leflexitac-3mm/surface-22x9-46f14897dbe8-top-rows-direct-gerber.zip",
+    "sha256": "b27df55b894c1577550a5a6dc557ca5b088965693e0c7c1abda689c94b6c677a"
    }
   },
   "makermods-metal-1.5mm": {
@@ -242,6 +542,186 @@
     "sha256": "9f03a31e4df31a6e2a5e4ea2303918268a3bba049c8420939af2325dc893a750"
    }
   },
+  "rainbow-rby1-1.5mm": {
+   "bottom-gerber": {
+    "bytes": 36345,
+    "name": "surface-32x20-a66db1934e22-bottom-columns-direct-gerber.zip",
+    "path": "files/rainbow-rby1-1.5mm/surface-32x20-a66db1934e22-bottom-columns-direct-gerber.zip",
+    "sha256": "ba582dd6c9997414142a38b3165bf09af9eee516340c59b7d0f0bb88fe4e5525"
+   },
+   "build_id": "surface-32x20-a66db1934e22",
+   "top-gerber": {
+    "bytes": 47134,
+    "name": "surface-32x20-a66db1934e22-top-rows-direct-gerber.zip",
+    "path": "files/rainbow-rby1-1.5mm/surface-32x20-a66db1934e22-top-rows-direct-gerber.zip",
+    "sha256": "90bec66f139fcfc3ca88bc53b832735eb269bf6903420046357ca2663d93265c"
+   }
+  },
+  "rainbow-rby1-1mm": {
+   "bottom-gerber": {
+    "bytes": 37612,
+    "name": "surface-32x26-f484d938aaf3-bottom-columns-direct-gerber.zip",
+    "path": "files/rainbow-rby1-1mm/surface-32x26-f484d938aaf3-bottom-columns-direct-gerber.zip",
+    "sha256": "4b267751b2606e3bed8e30d40c9ca9b84e11558e35c1f844faca6594b512cec7"
+   },
+   "build_id": "surface-32x26-f484d938aaf3",
+   "top-gerber": {
+    "bytes": 43256,
+    "name": "surface-32x26-f484d938aaf3-top-rows-direct-gerber.zip",
+    "path": "files/rainbow-rby1-1mm/surface-32x26-f484d938aaf3-top-rows-direct-gerber.zip",
+    "sha256": "f353f6667d41792a4e5e266c895f08b63de9c379bcdb14e85ccc9daa70e61fca"
+   }
+  },
+  "rainbow-rby1-2mm": {
+   "bottom-gerber": {
+    "bytes": 32956,
+    "name": "surface-25x15-09f7dc7dd5eb-bottom-columns-direct-gerber.zip",
+    "path": "files/rainbow-rby1-2mm/surface-25x15-09f7dc7dd5eb-bottom-columns-direct-gerber.zip",
+    "sha256": "cf682240ccaad64365125997ce2e77869eeae872f7df268c4d4de40ceb22a7b6"
+   },
+   "build_id": "surface-25x15-09f7dc7dd5eb",
+   "top-gerber": {
+    "bytes": 41721,
+    "name": "surface-25x15-09f7dc7dd5eb-top-rows-direct-gerber.zip",
+    "path": "files/rainbow-rby1-2mm/surface-25x15-09f7dc7dd5eb-top-rows-direct-gerber.zip",
+    "sha256": "861300b15e6ed5e1229d16dc19a9ddf63b9e1c0ff3db22354faad234025c854d"
+   }
+  },
+  "rainbow-rby1-3mm": {
+   "bottom-gerber": {
+    "bytes": 28932,
+    "name": "surface-16x9-8fbcce3bd65c-bottom-columns-direct-gerber.zip",
+    "path": "files/rainbow-rby1-3mm/surface-16x9-8fbcce3bd65c-bottom-columns-direct-gerber.zip",
+    "sha256": "5b8ca00b82be971fa2b2d3c3e9211a56d7adcfb49fe3bf0ddfd3091bfba4f242"
+   },
+   "build_id": "surface-16x9-8fbcce3bd65c",
+   "top-gerber": {
+    "bytes": 34368,
+    "name": "surface-16x9-8fbcce3bd65c-top-rows-direct-gerber.zip",
+    "path": "files/rainbow-rby1-3mm/surface-16x9-8fbcce3bd65c-top-rows-direct-gerber.zip",
+    "sha256": "0f8264dbbd5c998719895ad0600bc2fc1dbb0a757958872ebbaba93617d83f1d"
+   }
+  },
+  "robotiq-2f-85-1.5mm": {
+   "bottom-gerber": {
+    "bytes": 32462,
+    "name": "surface-24x14-09aacacc6af6-bottom-columns-direct-gerber.zip",
+    "path": "files/robotiq-2f-85-1.5mm/surface-24x14-09aacacc6af6-bottom-columns-direct-gerber.zip",
+    "sha256": "1a474d6247d731ad03a75115075f4a7f70fc54d72926bf1bd3458cd6430d703b"
+   },
+   "build_id": "surface-24x14-09aacacc6af6",
+   "top-gerber": {
+    "bytes": 39998,
+    "name": "surface-24x14-09aacacc6af6-top-rows-direct-gerber.zip",
+    "path": "files/robotiq-2f-85-1.5mm/surface-24x14-09aacacc6af6-top-rows-direct-gerber.zip",
+    "sha256": "5dd8aaaa5eb3a2f5b91ffad721fb46a64325a137e9a1d20f6cb7d83144a06f3e"
+   }
+  },
+  "robotiq-2f-85-1mm": {
+   "bottom-gerber": {
+    "bytes": 34786,
+    "name": "surface-32x21-33db45dfe7b5-bottom-columns-direct-gerber.zip",
+    "path": "files/robotiq-2f-85-1mm/surface-32x21-33db45dfe7b5-bottom-columns-direct-gerber.zip",
+    "sha256": "ef4307faff9dc876f70698ff2cdf658d7c67c9ef22ab9f4f229faddffcacbe2e"
+   },
+   "build_id": "surface-32x21-33db45dfe7b5",
+   "top-gerber": {
+    "bytes": 42184,
+    "name": "surface-32x21-33db45dfe7b5-top-rows-direct-gerber.zip",
+    "path": "files/robotiq-2f-85-1mm/surface-32x21-33db45dfe7b5-top-rows-direct-gerber.zip",
+    "sha256": "933e9612ac6a0f4dec0b8cc051068b84274f827a4ca448db9b0093a2f18418e7"
+   }
+  },
+  "robotiq-2f-85-2mm": {
+   "bottom-gerber": {
+    "bytes": 29749,
+    "name": "surface-18x10-afdfaad369ad-bottom-columns-direct-gerber.zip",
+    "path": "files/robotiq-2f-85-2mm/surface-18x10-afdfaad369ad-bottom-columns-direct-gerber.zip",
+    "sha256": "2a15309765332c5c87998aa419e8419a4628aa4e0d7e5ec2c0c8c6e834e79b4d"
+   },
+   "build_id": "surface-18x10-afdfaad369ad",
+   "top-gerber": {
+    "bytes": 35557,
+    "name": "surface-18x10-afdfaad369ad-top-rows-direct-gerber.zip",
+    "path": "files/robotiq-2f-85-2mm/surface-18x10-afdfaad369ad-top-rows-direct-gerber.zip",
+    "sha256": "f7d857df57834e7be599c4b5c28f7e3f74a3d6d045ef4b0f3095619b20786c71"
+   }
+  },
+  "robotiq-2f-85-3mm": {
+   "bottom-gerber": {
+    "bytes": 27682,
+    "name": "surface-12x7-bdd4196e6d44-bottom-columns-direct-gerber.zip",
+    "path": "files/robotiq-2f-85-3mm/surface-12x7-bdd4196e6d44-bottom-columns-direct-gerber.zip",
+    "sha256": "3032b24a515fa0570d737ce39d222711ee0268b525b4983bc6e76a435904f75e"
+   },
+   "build_id": "surface-12x7-bdd4196e6d44",
+   "top-gerber": {
+    "bytes": 31274,
+    "name": "surface-12x7-bdd4196e6d44-top-rows-direct-gerber.zip",
+    "path": "files/robotiq-2f-85-3mm/surface-12x7-bdd4196e6d44-top-rows-direct-gerber.zip",
+    "sha256": "813e02712abbf16f7882c8ed5233aa5c2a9e140a01cbac425af9b987ac728651"
+   }
+  },
+  "seeed-rebot-1.5mm": {
+   "bottom-gerber": {
+    "bytes": 36347,
+    "name": "surface-32x20-4453d7d4a0af-bottom-columns-direct-gerber.zip",
+    "path": "files/seeed-rebot-1.5mm/surface-32x20-4453d7d4a0af-bottom-columns-direct-gerber.zip",
+    "sha256": "0131ea5f821443f34769e243cfa479b3d2dbb19c78523f3ee98d721c73e5540f"
+   },
+   "build_id": "surface-32x20-4453d7d4a0af",
+   "top-gerber": {
+    "bytes": 47641,
+    "name": "surface-32x20-4453d7d4a0af-top-rows-direct-gerber.zip",
+    "path": "files/seeed-rebot-1.5mm/surface-32x20-4453d7d4a0af-top-rows-direct-gerber.zip",
+    "sha256": "1733d0654f5cb969599fd9d438cc1fc1ebae51f79d44d17d781d1673f30629a1"
+   }
+  },
+  "seeed-rebot-1mm": {
+   "bottom-gerber": {
+    "bytes": 35926,
+    "name": "surface-32x22-32a24cea3b5a-bottom-columns-direct-gerber.zip",
+    "path": "files/seeed-rebot-1mm/surface-32x22-32a24cea3b5a-bottom-columns-direct-gerber.zip",
+    "sha256": "b5c50af699510449aed55babe9d3d46a3d6167d8dcf056798b8e90c0c4cdbbc2"
+   },
+   "build_id": "surface-32x22-32a24cea3b5a",
+   "top-gerber": {
+    "bytes": 43792,
+    "name": "surface-32x22-32a24cea3b5a-top-rows-direct-gerber.zip",
+    "path": "files/seeed-rebot-1mm/surface-32x22-32a24cea3b5a-top-rows-direct-gerber.zip",
+    "sha256": "cf1d410e9befbf55be72b5c3f833db4c593265a0506f2f6347716a0949eb08d0"
+   }
+  },
+  "seeed-rebot-2mm": {
+   "bottom-gerber": {
+    "bytes": 35638,
+    "name": "surface-32x19-2e1186195330-bottom-columns-direct-gerber.zip",
+    "path": "files/seeed-rebot-2mm/surface-32x19-2e1186195330-bottom-columns-direct-gerber.zip",
+    "sha256": "64d50fa99fe79a24871943a6df0dc373135ca78b5bd8bb341c30cea0a8edf4a3"
+   },
+   "build_id": "surface-32x19-2e1186195330",
+   "top-gerber": {
+    "bytes": 47615,
+    "name": "surface-32x19-2e1186195330-top-rows-direct-gerber.zip",
+    "path": "files/seeed-rebot-2mm/surface-32x19-2e1186195330-top-rows-direct-gerber.zip",
+    "sha256": "8619e3b8b4be1e29397c051f416d0dd45506d1cb43962c59f7b055819e6aa36a"
+   }
+  },
+  "seeed-rebot-3mm": {
+   "bottom-gerber": {
+    "bytes": 30298,
+    "name": "surface-21x11-4621a35145a1-bottom-columns-direct-gerber.zip",
+    "path": "files/seeed-rebot-3mm/surface-21x11-4621a35145a1-bottom-columns-direct-gerber.zip",
+    "sha256": "242629e8009b01686ceeb8cfe0eb340682395fe8c2398da7fa5b2feb3d1473b1"
+   },
+   "build_id": "surface-21x11-4621a35145a1",
+   "top-gerber": {
+    "bytes": 38753,
+    "name": "surface-21x11-4621a35145a1-top-rows-direct-gerber.zip",
+    "path": "files/seeed-rebot-3mm/surface-21x11-4621a35145a1-top-rows-direct-gerber.zip",
+    "sha256": "6754f704e486a58d73a985dfd55b65233018e6946acc9b776001aa4d29518268"
+   }
+  },
   "trossen-widowx-ai-1.5mm": {
    "bottom-gerber": {
     "bytes": 37735,
@@ -300,6 +780,66 @@
     "name": "surface-16x11-dafab6b1695b-top-rows-direct-gerber.zip",
     "path": "files/trossen-widowx-ai-3mm/surface-16x11-dafab6b1695b-top-rows-direct-gerber.zip",
     "sha256": "8b986efb54a1b31ec5380a890858c5aee8b616830b11af50c99158064ec80119"
+   }
+  },
+  "ufactory-xarm-1.5mm": {
+   "bottom-gerber": {
+    "bytes": 35681,
+    "name": "surface-24x19-7ab4370c0659-bottom-columns-direct-gerber.zip",
+    "path": "files/ufactory-xarm-1.5mm/surface-24x19-7ab4370c0659-bottom-columns-direct-gerber.zip",
+    "sha256": "7b161486d97f95566fd4f072199da1a9979ad8ecc92da0b9bde18f54632a5023"
+   },
+   "build_id": "surface-24x19-7ab4370c0659",
+   "top-gerber": {
+    "bytes": 39954,
+    "name": "surface-24x19-7ab4370c0659-top-rows-direct-gerber.zip",
+    "path": "files/ufactory-xarm-1.5mm/surface-24x19-7ab4370c0659-top-rows-direct-gerber.zip",
+    "sha256": "729d7baff8cc8def4f8b621d0be7c3901c11f1c48b5aa20e58a4d2c66a05dc49"
+   }
+  },
+  "ufactory-xarm-1mm": {
+   "bottom-gerber": {
+    "bytes": 38021,
+    "name": "surface-32x28-81014a8d19e2-bottom-columns-direct-gerber.zip",
+    "path": "files/ufactory-xarm-1mm/surface-32x28-81014a8d19e2-bottom-columns-direct-gerber.zip",
+    "sha256": "269eb7ef9f8ba2d384a23fb61f1603ffaf52ab0b778e841c6e93c60b68c55c80"
+   },
+   "build_id": "surface-32x28-81014a8d19e2",
+   "top-gerber": {
+    "bytes": 41547,
+    "name": "surface-32x28-81014a8d19e2-top-rows-direct-gerber.zip",
+    "path": "files/ufactory-xarm-1mm/surface-32x28-81014a8d19e2-top-rows-direct-gerber.zip",
+    "sha256": "697f15f594ca13bf6337291c9f14be2808771b9cd7d3877fb88955efa5b5c043"
+   }
+  },
+  "ufactory-xarm-2mm": {
+   "bottom-gerber": {
+    "bytes": 32066,
+    "name": "surface-18x14-1517ea0947c8-bottom-columns-direct-gerber.zip",
+    "path": "files/ufactory-xarm-2mm/surface-18x14-1517ea0947c8-bottom-columns-direct-gerber.zip",
+    "sha256": "819eaf7f11605f54ac356ea219c97e9a2fb5a7f212e937efc05722735948202f"
+   },
+   "build_id": "surface-18x14-1517ea0947c8",
+   "top-gerber": {
+    "bytes": 35250,
+    "name": "surface-18x14-1517ea0947c8-top-rows-direct-gerber.zip",
+    "path": "files/ufactory-xarm-2mm/surface-18x14-1517ea0947c8-top-rows-direct-gerber.zip",
+    "sha256": "ae95b7912a85c950e884c3f9f741931889d87bef255048993cf1567eefe76227"
+   }
+  },
+  "ufactory-xarm-3mm": {
+   "bottom-gerber": {
+    "bytes": 28688,
+    "name": "surface-12x9-784fff602005-bottom-columns-direct-gerber.zip",
+    "path": "files/ufactory-xarm-3mm/surface-12x9-784fff602005-bottom-columns-direct-gerber.zip",
+    "sha256": "81275741268891f31369647cfd208a5da994e9da4a6f4f418a433a6f4a17a1d6"
+   },
+   "build_id": "surface-12x9-784fff602005",
+   "top-gerber": {
+    "bytes": 30934,
+    "name": "surface-12x9-784fff602005-top-rows-direct-gerber.zip",
+    "path": "files/ufactory-xarm-3mm/surface-12x9-784fff602005-top-rows-direct-gerber.zip",
+    "sha256": "da328378d895332fd6815a3c3a082a4957d9d71a3c3d369cf9f381856a0793a8"
    }
   },
   "umi-concave-tip13.8-2mm": {
@@ -812,6 +1352,66 @@
     "sha256": "69115b7062045d3da5a016da9a59cb538dd35c78885e47bd561e582c219e6b38"
    }
   },
+  "unitree-dex3-1.5mm": {
+   "bottom-gerber": {
+    "bytes": 30178,
+    "name": "surface-18x10-86669d501aca-bottom-columns-direct-gerber.zip",
+    "path": "files/unitree-dex3-1.5mm/surface-18x10-86669d501aca-bottom-columns-direct-gerber.zip",
+    "sha256": "214d8f2ec5b1da02a6e8b418747c0cb13546caea7a7f81ac49aee43f5df27319"
+   },
+   "build_id": "surface-18x10-86669d501aca",
+   "top-gerber": {
+    "bytes": 37387,
+    "name": "surface-18x10-86669d501aca-top-rows-direct-gerber.zip",
+    "path": "files/unitree-dex3-1.5mm/surface-18x10-86669d501aca-top-rows-direct-gerber.zip",
+    "sha256": "3856b5e18459847779476917d9bc6e02ed400251aff41f2e3df45e8f6243b8a8"
+   }
+  },
+  "unitree-dex3-1mm": {
+   "bottom-gerber": {
+    "bytes": 31662,
+    "name": "surface-26x15-404fbaf634dc-bottom-columns-direct-gerber.zip",
+    "path": "files/unitree-dex3-1mm/surface-26x15-404fbaf634dc-bottom-columns-direct-gerber.zip",
+    "sha256": "3f5e31def286c9dbddeee2e9f6298274c260cac3e1a94f42cc7250a8ba78c24e"
+   },
+   "build_id": "surface-26x15-404fbaf634dc",
+   "top-gerber": {
+    "bytes": 39287,
+    "name": "surface-26x15-404fbaf634dc-top-rows-direct-gerber.zip",
+    "path": "files/unitree-dex3-1mm/surface-26x15-404fbaf634dc-top-rows-direct-gerber.zip",
+    "sha256": "d9378618c0fd67da2982c6e48488392d157c187d5509eddf15f76d77ea711a60"
+   }
+  },
+  "unitree-dex3-2.5mm": {
+   "bottom-gerber": {
+    "bytes": 27946,
+    "name": "surface-11x6-c875c35c634c-bottom-columns-direct-gerber.zip",
+    "path": "files/unitree-dex3-2.5mm/surface-11x6-c875c35c634c-bottom-columns-direct-gerber.zip",
+    "sha256": "1ec4d3a57d32daf5b14853b2ea12216025677cf34a505efcb54cc77aaa4f8cbb"
+   },
+   "build_id": "surface-11x6-c875c35c634c",
+   "top-gerber": {
+    "bytes": 32172,
+    "name": "surface-11x6-c875c35c634c-top-rows-direct-gerber.zip",
+    "path": "files/unitree-dex3-2.5mm/surface-11x6-c875c35c634c-top-rows-direct-gerber.zip",
+    "sha256": "581a6e0c5f6123d084013104c92a89de7b809d1b074eb8a81a1d2e264eadf64c"
+   }
+  },
+  "unitree-dex3-2mm": {
+   "bottom-gerber": {
+    "bytes": 28306,
+    "name": "surface-13x8-53583cbedf62-bottom-columns-direct-gerber.zip",
+    "path": "files/unitree-dex3-2mm/surface-13x8-53583cbedf62-bottom-columns-direct-gerber.zip",
+    "sha256": "e523740264b1d8ebf20d6675182c3bfb39feea37f5e06d155da7d5c26f2fa285"
+   },
+   "build_id": "surface-13x8-53583cbedf62",
+   "top-gerber": {
+    "bytes": 32217,
+    "name": "surface-13x8-53583cbedf62-top-rows-direct-gerber.zip",
+    "path": "files/unitree-dex3-2mm/surface-13x8-53583cbedf62-top-rows-direct-gerber.zip",
+    "sha256": "d1bf6cd237efaf79f0dd28597060affdd36e55c588954ed6bae1c4bd8065b3b9"
+   }
+  },
   "widowx-250-1.5mm": {
    "bottom-gerber": {
     "bytes": 33842,
@@ -870,6 +1470,66 @@
     "name": "surface-9x9-bad0f3f1d596-top-rows-direct-gerber.zip",
     "path": "files/widowx-250-3mm/surface-9x9-bad0f3f1d596-top-rows-direct-gerber.zip",
     "sha256": "48ea663c1b0f338074d5ebb2d32d5e42a3c1e81153441aa459132a0331434c04"
+   }
+  },
+  "yubi-gripper-1.5mm": {
+   "bottom-gerber": {
+    "bytes": 29399,
+    "name": "surface-11x10-0e67a5a7d785-bottom-columns-direct-gerber.zip",
+    "path": "files/yubi-gripper-1.5mm/surface-11x10-0e67a5a7d785-bottom-columns-direct-gerber.zip",
+    "sha256": "0ee11518f70c3ac73cdc90059a9d6e1bb85b238368788ac65cc0a40d67f39fa8"
+   },
+   "build_id": "surface-11x10-0e67a5a7d785",
+   "top-gerber": {
+    "bytes": 30645,
+    "name": "surface-11x10-0e67a5a7d785-top-rows-direct-gerber.zip",
+    "path": "files/yubi-gripper-1.5mm/surface-11x10-0e67a5a7d785-top-rows-direct-gerber.zip",
+    "sha256": "e765ab8301de2e9f02a12226732657ca5d89b319d6cd4288156d2f4021792616"
+   }
+  },
+  "yubi-gripper-1mm": {
+   "bottom-gerber": {
+    "bytes": 30936,
+    "name": "surface-16x14-a01103be8b44-bottom-columns-direct-gerber.zip",
+    "path": "files/yubi-gripper-1mm/surface-16x14-a01103be8b44-bottom-columns-direct-gerber.zip",
+    "sha256": "cbf11caf7e921f1eae77e760938192700eba536cec0b775dc0d9a7e5acba9463"
+   },
+   "build_id": "surface-16x14-a01103be8b44",
+   "top-gerber": {
+    "bytes": 33026,
+    "name": "surface-16x14-a01103be8b44-top-rows-direct-gerber.zip",
+    "path": "files/yubi-gripper-1mm/surface-16x14-a01103be8b44-top-rows-direct-gerber.zip",
+    "sha256": "3fc01aa193d55dcb44c8473b8979a0b9f2322a60f67fb0369c7787c28048a1a0"
+   }
+  },
+  "yubi-gripper-2.5mm": {
+   "bottom-gerber": {
+    "bytes": 25978,
+    "name": "surface-6x5-116880492453-bottom-columns-direct-gerber.zip",
+    "path": "files/yubi-gripper-2.5mm/surface-6x5-116880492453-bottom-columns-direct-gerber.zip",
+    "sha256": "46f063c259ee76241bd3d6e01d28bd6a38278edd343da5758d29e2d9e9408232"
+   },
+   "build_id": "surface-6x5-116880492453",
+   "top-gerber": {
+    "bytes": 26804,
+    "name": "surface-6x5-116880492453-top-rows-direct-gerber.zip",
+    "path": "files/yubi-gripper-2.5mm/surface-6x5-116880492453-top-rows-direct-gerber.zip",
+    "sha256": "b3fcba0f69124354ab99d2cb7618f0b154017c26832b433803001e63e63f6376"
+   }
+  },
+  "yubi-gripper-2mm": {
+   "bottom-gerber": {
+    "bytes": 27354,
+    "name": "surface-8x7-b41763f570bd-bottom-columns-direct-gerber.zip",
+    "path": "files/yubi-gripper-2mm/surface-8x7-b41763f570bd-bottom-columns-direct-gerber.zip",
+    "sha256": "70093c9496b230c4e683c32e3474b9a5be7c1578d213c494aa51ae6deb50b509"
+   },
+   "build_id": "surface-8x7-b41763f570bd",
+   "top-gerber": {
+    "bytes": 28356,
+    "name": "surface-8x7-b41763f570bd-top-rows-direct-gerber.zip",
+    "path": "files/yubi-gripper-2mm/surface-8x7-b41763f570bd-top-rows-direct-gerber.zip",
+    "sha256": "7293897baa70692877b626460ee79c6097472e853d093801ce668947d2e3dd60"
    }
   }
  }

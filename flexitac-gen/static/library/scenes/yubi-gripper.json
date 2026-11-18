@@ -1,0 +1,467 @@
+{
+ "format": "flexitac-library-scene/v1",
+ "part": "yubi-gripper",
+ "part_mesh_sha256": "36e029e3fe2590711014823c6b75b0c403b0c0a59315d565b4625318f2a46466",
+ "about": "YUBI Gripper (Toyota Motor Corporation, Frontier Research Center) open: yubi-hw dd8bd13 (CERN-OHL-W-2.0), STEP/gripper/YUBI Gripper Assy_Dynamixel_ver2.STEP places its parts (read from its NEXT_ASSEMBLY_USAGE_OCCURRENCEs' transformations); the bodies are the STL files of STL/gripper/ (CASE, BRACKET_DYNAMIXEL, UPPER PLATE_CAMERA BKT, and on each finger FINGER ATTACHMENT_L and FLAP_L), each registered in its part's frame (on the part's B-rep vertices, the rotation an exchange of axes; 41 to 93 % of the vertices within 0.01 mm).  The Library mesh is FINGER_PAD_t30_L.stl, the left finger's pad as the assembly guide gives it (FINGER PAD_t30_L or _t20 on FINGER ATTACHMENT_L; the assembly carries PAD_t20 there): the assembly's PAD_t30_R mirrored across the plane half way between the fingers' hinges, across which the left finger's parts are the right finger's mirrored (0.000 mm). The fingers turn about their shafts, geared together (two spur gears z30, 30 mm apart), each as much as the other the other way: from the assembly's pose they close 6.75 degrees until the pads meet and open 38.5 until FINGER ATTACHMENT meets the UPPER PLATE (measured on the parts); drawn at 11 degrees open from it, the tip faces 17.75 degrees from closed, the least opening at which every pitch keeps the rules, so that the near finger's sensor reads as a face at the grippers' homes (the reason measured in docs/LIBRARY_VIEW.md).  The other finger is the right finger: this one mirrored across that plane (its pad FINGER_PAD_t30_R.stl, the part mirrored within 0.03 mm), so its sensor is the mirror-image board.  The approach is the gripper's axis, across the hinges in their plane.  Not drawn from the model: the DYNAMIXEL XM430-W350-R and the fisheye camera, the project's plain shapes (below); not drawn: the gears, shafts, bearings, screws, the rubber sheets and the arm's bracket.  The looks: drawn after the YUBI project's photos of the real gripper (yubi.airoa.io, 2026-11-17: the gripper on the UR5e, the Franka and the ALOHA arms, and the README's teaser) and its bill of materials (docs/BOM, YUBI Gripper Assy_DYNAMIXEL_ver.2: the case, the upper plate, the servo's bracket and the flaps printed in black PLA, the finger pads in red PLA, the finger attachments machined in A2024 or printed in black PLA, black in every photo): a matte black print all over, the two red pads.  The servo and the fisheye camera are the project's own drawing, not the model's: a plain box to the DYNAMIXEL XM430-W350-R's published size (28.5 x 46.5 x 34 mm) where the assembly STEP places it (bodies/yubi-gripper/drawn-servo.stl), and the camera's 32 mm board, its lens holder and lens to the sizes of the assembly's USB CAMERA_ELP-USBFHD01M-L180 where it places it, 10 degrees down (drawn-camera-board.stl, drawn-camera-lens.stl).  Not drawn: the black ribbed rubber sheets glued on the pads' gripping faces (cut to suit, the guide says; the sensor takes the fingertip's place), the screws, the cables.",
+ "frame": "the part's file axes, mm",
+ "approach": [
+  -0.9816271834499208,
+  0.0,
+  -0.1908089953649345
+ ],
+ "opening": {
+  "q_mm": 32.409,
+  "limit_mm": 80.812,
+  "joint": "the two finger shafts (revolute, geared together)",
+  "source": "yubi-hw dd8bd13, STEP/gripper/YUBI Gripper Assy_Dynamixel_ver2.STEP: the pad's tip's travel from closed (6.75 degrees from the assembly's pose) to 11 degrees open from it, of the 45.25 its parts allow"
+ },
+ "mate": {
+  "kind": "mirror",
+  "matrix": [
+   [
+    0.927184,
+    0.0,
+    0.374607,
+    9.998069
+   ],
+   [
+    0.0,
+    1.0,
+    0.0,
+    0.0
+   ],
+   [
+    0.374607,
+    0.0,
+    -0.927184,
+    -51.435605
+   ],
+   [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  ],
+  "part": true
+ },
+ "bodies": [
+  {
+   "mesh": "bodies/yubi-gripper/case.stl",
+   "sha256": "248206349accc277043777812d79c1edab5972aae5ac48fa7f8996b438626318",
+   "bytes": 67784,
+   "triangles": 1354,
+   "matrix": [
+    [
+     0.190809,
+     -0.981627,
+     0.0,
+     107.856135
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     7.082
+    ],
+    [
+     -0.981627,
+     -0.190809,
+     0.0,
+     -5.724408
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": null,
+   "look": "print-black"
+  },
+  {
+   "mesh": "bodies/yubi-gripper/bracket.stl",
+   "sha256": "12ac435beef07d5823ec4df44baea88ef459b146a577103758fc85eda958b2ed",
+   "bytes": 25884,
+   "triangles": 516,
+   "matrix": [
+    [
+     0.190809,
+     -0.981627,
+     0.0,
+     95.993862
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     3.082
+    ],
+    [
+     -0.981627,
+     -0.190809,
+     0.0,
+     -23.31095
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": null,
+   "look": "print-black"
+  },
+  {
+   "mesh": "bodies/yubi-gripper/drawn-servo.stl",
+   "sha256": "b9c4690d9f518e412313e2c0859f9b06bfc4d92c7a4ef4897088f7beada32e1e",
+   "bytes": 684,
+   "triangles": 12,
+   "matrix": [
+    [
+     0.190809,
+     -0.981627,
+     0.0,
+     95.993862
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     3.082
+    ],
+    [
+     -0.981627,
+     -0.190809,
+     0.0,
+     -23.31095
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": null,
+   "look": "plastic-black-matte"
+  },
+  {
+   "mesh": "bodies/yubi-gripper/plate.stl",
+   "sha256": "1db4fb76c8b8b81961fb0cd73fc043fd1edf0009d7b34e559c3fe2f53de3aed9",
+   "bytes": 72084,
+   "triangles": 1440,
+   "matrix": [
+    [
+     -0.190809,
+     0.0,
+     -0.981627,
+     138.788916
+    ],
+    [
+     0.0,
+     1.0,
+     0.0,
+     22.082
+    ],
+    [
+     0.981627,
+     0.0,
+     -0.190809,
+     -33.838694
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": null,
+   "look": "print-black"
+  },
+  {
+   "mesh": "bodies/yubi-gripper/drawn-camera-board.stl",
+   "sha256": "0c2e7997cf4ed48665a09d8e55c114ada1d0e6e6d74fb95347448f50174ab0c4",
+   "bytes": 684,
+   "triangles": 12,
+   "matrix": [
+    [
+     -0.190809,
+     0.0,
+     -0.981627,
+     138.788916
+    ],
+    [
+     0.0,
+     1.0,
+     0.0,
+     22.082
+    ],
+    [
+     0.981627,
+     0.0,
+     -0.190809,
+     -33.838694
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": null,
+   "look": "pcb-black"
+  },
+  {
+   "mesh": "bodies/yubi-gripper/drawn-camera-lens.stl",
+   "sha256": "8faf6189411b6d176873a46e7d6390153d38b275b5f93a5f45d2b97feed3a515",
+   "bytes": 7084,
+   "triangles": 140,
+   "matrix": [
+    [
+     -0.190809,
+     0.0,
+     -0.981627,
+     138.788916
+    ],
+    [
+     0.0,
+     1.0,
+     0.0,
+     22.082
+    ],
+    [
+     0.981627,
+     0.0,
+     -0.190809,
+     -33.838694
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": null,
+   "look": "plastic-black-satin"
+  },
+  {
+   "mesh": "bodies/yubi-gripper/drawn-camera-glass.stl",
+   "sha256": "8d1240e83f63130841f417814ee391d672677c76dfde43efe3538bd4295de71a",
+   "bytes": 6484,
+   "triangles": 128,
+   "matrix": [
+    [
+     -0.190809,
+     0.0,
+     -0.981627,
+     138.788916
+    ],
+    [
+     0.0,
+     1.0,
+     0.0,
+     22.082
+    ],
+    [
+     0.981627,
+     0.0,
+     -0.190809,
+     -33.838694
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": null,
+   "look": "lens-glass"
+  },
+  {
+   "mesh": "bodies/yubi-gripper/finger-attachment.stl",
+   "sha256": "3979daffc4957f2070429dc8bbcf65f4a59a22028f9ac96ebd206f082caa1a71",
+   "bytes": 23084,
+   "triangles": 460,
+   "matrix": [
+    [
+     0.0,
+     1.0,
+     0.0,
+     104.994
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     26.082
+    ],
+    [
+     1.0,
+     0.0,
+     0.0,
+     9.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": "sensor",
+   "look": "print-black"
+  },
+  {
+   "mesh": "bodies/yubi-gripper/finger-attachment.stl",
+   "sha256": "3979daffc4957f2070429dc8bbcf65f4a59a22028f9ac96ebd206f082caa1a71",
+   "bytes": 23084,
+   "triangles": 460,
+   "matrix": [
+    [
+     0.374607,
+     0.927184,
+     0.0,
+     110.71827
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     26.082
+    ],
+    [
+     -0.927184,
+     0.374607,
+     0.0,
+     -20.448816
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": "mate",
+   "look": "print-black"
+  },
+  {
+   "mesh": "bodies/yubi-gripper/flap.stl",
+   "sha256": "bec1f7fe16faae6fdb3ce98ba7a85ef0f6b6f18ad6eb5e056cf13f42ea996254",
+   "bytes": 12934,
+   "triangles": 257,
+   "matrix": [
+    [
+     0.0,
+     1.0,
+     0.0,
+     94.994
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     10.082
+    ],
+    [
+     1.0,
+     0.0,
+     0.0,
+     -6.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": "sensor",
+   "look": "print-black"
+  },
+  {
+   "mesh": "bodies/yubi-gripper/flap.stl",
+   "sha256": "bec1f7fe16faae6fdb3ce98ba7a85ef0f6b6f18ad6eb5e056cf13f42ea996254",
+   "bytes": 12934,
+   "triangles": 257,
+   "matrix": [
+    [
+     0.374607,
+     0.927184,
+     0.0,
+     95.827332
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     10.082
+    ],
+    [
+     -0.927184,
+     0.374607,
+     0.0,
+     -10.287124
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": "mate",
+   "look": "print-black"
+  }
+ ],
+ "looks": {
+  "lens-glass": {
+   "color": "#222224",
+   "metalness": 0,
+   "roughness": 0.15,
+   "env_intensity": 2.6
+  },
+  "pcb-black": {
+   "color": "#232425",
+   "metalness": 0,
+   "roughness": 0.55
+  },
+  "pla-red": {
+   "color": "#c42a27",
+   "metalness": 0,
+   "roughness": 0.8,
+   "env_intensity": 0.35
+  },
+  "plastic-black-matte": {
+   "color": "#262628",
+   "metalness": 0,
+   "roughness": 0.75,
+   "env_intensity": 1.8
+  },
+  "plastic-black-satin": {
+   "color": "#222224",
+   "metalness": 0,
+   "roughness": 0.4,
+   "env_intensity": 1.8
+  },
+  "print-black": {
+   "color": "#2a2a2c",
+   "metalness": 0,
+   "roughness": 0.65,
+   "env_intensity": 1.5
+  }
+ },
+ "part_look": "pla-red",
+ "smooth_deg": 35,
+ "see_through": [
+  "mate"
+ ],
+ "picture": "on both fingertips of the open gripper"
+}

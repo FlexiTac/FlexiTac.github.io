@@ -1,0 +1,364 @@
+{
+ "format": "flexitac-library-scene/v1",
+ "part": "enactic-openarm",
+ "part_mesh_sha256": "b86528931e3abae5cebee5b62e306afb16a5acf36740df52a595cd98ae92ddf7",
+ "about": "OpenArm 1.0's parallel gripper (openarm_description's parallel_link end effector, the v1.0 arm's; OpenArm 2.0's gripper is another, its pinch_gripper, not drawn here) at full opening: openarm_description 81fe647, assets/robot/openarm_v1.0/urdf/example/v1.urdf (Apache-2.0, Enactic): finger_joint1/2 prismatic 0..0.044 m, finger_joint2 mimicking finger_joint1, q 44 mm.  The bodies are the hand (hand.dae: the guide rail, its sheet-metal ends and the plate on the motor), the gripper's motor (link7.dae's components above its wrist bracket: the can, its end caps and screws; the bracket is not drawn) and, under each finger, the guide's carriage block (finger.dae's material mat_0.009), where the URDF places them.  The Library mesh is the HandUMI replica of the OpenArm 1.0 finger (handumi-hw 1448278, OpenArmv1/OpenArm-left.stl, Apache-2.0), registered on finger.dae's finger (the rotation from the faces' normals, the translation by nearest points; median 0.001 mm: Enactic's finger surface (Apache-2.0, Enactic, Inc.) but for the mount at its base).  The other finger is the URDF's right finger: the same finger turned 180 degrees about the hand's axis (its visual's yaw pi), so its sensor is the same board.  The looks: drawn after Enactic's own pictures of the OpenArm 1.0 gripper (2026-11-17: openarm.dev's social-preview photo (its og:image, ogp.webp) of the bimanual OpenArm 1.0, both grippers in it, and the 1.0 documentation's gripper renders, docs.openarm.dev/1.0, its gripper pages and bill of materials): matte black printed fingers (the Library's part, the HandUMI replica of the OpenArm finger), a black motor can between bright machined aluminium end caps, the bent stainless sheet-metal brackets and the plate on the motor, the guide's stainless carriage blocks under the fingers, and the dark guide rail with its bright counterbored holes; the CAD files' own colours (finger.dae's black finger and pale carriage, hand.dae's dark rail and pale plate, link7.dae's dark can and pale caps) agree.  Not modelled: the swivel rotor and its two links (not in openarm_description's v1.0 meshes), the wrist bracket under the motor (link7.dae's, left out), the cables.",
+ "frame": "the part's file axes, mm",
+ "approach": [
+  1.0,
+  0.0,
+  0.0
+ ],
+ "opening": {
+  "q_mm": 44.0,
+  "limit_mm": 44.0,
+  "joint": "finger_joint1/2 (prismatic y, mimic)",
+  "source": "openarm_description 81fe647, assets/robot/openarm_v1.0/urdf/example/v1.urdf: openarm_right_finger_joint1 limit 0 0.044 m"
+ },
+ "mate": {
+  "kind": "turned",
+  "matrix": [
+   [
+    1.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   [
+    0.0,
+    -1.0,
+    0.0,
+    -26.2
+   ],
+   [
+    0.0,
+    0.0,
+    -1.0,
+    -0.222
+   ],
+   [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  ],
+  "part": true
+ },
+ "bodies": [
+  {
+   "mesh": "bodies/enactic-openarm/hand-rail.stl",
+   "sha256": "1d7ea3228c15fea8cf59ccad0bb58e8b04bd2d143cca38e9110984250fa00d2b",
+   "bytes": 47284,
+   "triangles": 944,
+   "matrix": [
+    [
+     0.0,
+     0.0,
+     1.0,
+     -683.099
+    ],
+    [
+     -1.0,
+     0.0,
+     0.0,
+     -13.1
+    ],
+    [
+     0.0,
+     -1.0,
+     0.0,
+     -0.111
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": null,
+   "look": "rail-black"
+  },
+  {
+   "mesh": "bodies/enactic-openarm/hand-brackets.stl",
+   "sha256": "698375c86eb13c5138c189d44a173749feea741b0f7e14579b92a5a8715d198c",
+   "bytes": 109684,
+   "triangles": 2192,
+   "matrix": [
+    [
+     0.0,
+     0.0,
+     1.0,
+     -683.099
+    ],
+    [
+     -1.0,
+     0.0,
+     0.0,
+     -13.1
+    ],
+    [
+     0.0,
+     -1.0,
+     0.0,
+     -0.111
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": null,
+   "look": "steel-ground"
+  },
+  {
+   "mesh": "bodies/enactic-openarm/motor-flange.stl",
+   "sha256": "b0f75b4966849d6554f75e49326ac8930cc1aabc10beceb1b1020e0cda25b686",
+   "bytes": 161034,
+   "triangles": 3219,
+   "matrix": [
+    [
+     0.0,
+     0.0,
+     1.0,
+     -683.099
+    ],
+    [
+     -1.0,
+     0.0,
+     0.0,
+     -13.1
+    ],
+    [
+     0.0,
+     -1.0,
+     0.0,
+     -0.111
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": null,
+   "look": "anodized-natural"
+  },
+  {
+   "mesh": "bodies/enactic-openarm/motor-cap.stl",
+   "sha256": "cd620e7df6a95dc8698116be1c1e654a7bcb0398f46326d20f6bb35f75c51e65",
+   "bytes": 42384,
+   "triangles": 846,
+   "matrix": [
+    [
+     0.0,
+     0.0,
+     1.0,
+     -683.099
+    ],
+    [
+     -1.0,
+     0.0,
+     0.0,
+     -13.1
+    ],
+    [
+     0.0,
+     -1.0,
+     0.0,
+     -0.111
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": null,
+   "look": "cap-satin"
+  },
+  {
+   "mesh": "bodies/enactic-openarm/motor-screws.stl",
+   "sha256": "7b5f5ee22807c3bd1b8c9f642db1587ec1008c1f327c42aadfe93630e5ed8c51",
+   "bytes": 38534,
+   "triangles": 769,
+   "matrix": [
+    [
+     0.0,
+     0.0,
+     1.0,
+     -683.099
+    ],
+    [
+     -1.0,
+     0.0,
+     0.0,
+     -13.1
+    ],
+    [
+     0.0,
+     -1.0,
+     0.0,
+     -0.111
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": null,
+   "look": "steel-ground"
+  },
+  {
+   "mesh": "bodies/enactic-openarm/motor-can.stl",
+   "sha256": "f1e4c23f7ff0284d781c4d9bd6793618b13d4d46166246fa916de386f389327b",
+   "bytes": 111034,
+   "triangles": 2219,
+   "matrix": [
+    [
+     0.0,
+     0.0,
+     1.0,
+     -683.099
+    ],
+    [
+     -1.0,
+     0.0,
+     0.0,
+     -13.1
+    ],
+    [
+     0.0,
+     -1.0,
+     0.0,
+     -0.111
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": null,
+   "look": "can-black"
+  },
+  {
+   "mesh": "bodies/enactic-openarm/finger-carriage.stl",
+   "sha256": "3e50ee99348ef41531ddfb8e19a8a89ce541d71a652ed5113289ae93dabc0f44",
+   "bytes": 69884,
+   "triangles": 1396,
+   "matrix": [
+    [
+     0.0,
+     0.0,
+     1.0,
+     -682.5
+    ],
+    [
+     -1.0,
+     0.0,
+     0.0,
+     -13.1
+    ],
+    [
+     0.0,
+     -1.0,
+     0.0,
+     0.889
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": "sensor",
+   "look": "steel-ground"
+  },
+  {
+   "mesh": "bodies/enactic-openarm/finger-carriage.stl",
+   "sha256": "3e50ee99348ef41531ddfb8e19a8a89ce541d71a652ed5113289ae93dabc0f44",
+   "bytes": 69884,
+   "triangles": 1396,
+   "matrix": [
+    [
+     0.0,
+     0.0,
+     1.0,
+     -682.5
+    ],
+    [
+     1.0,
+     0.0,
+     0.0,
+     -13.1
+    ],
+    [
+     0.0,
+     1.0,
+     0.0,
+     -1.111
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": "mate",
+   "look": "steel-ground"
+  }
+ ],
+ "looks": {
+  "anodized-natural": {
+   "color": "#c9ccd0",
+   "metalness": 1,
+   "roughness": 0.45
+  },
+  "can-black": {
+   "color": "#232428",
+   "metalness": 0.6,
+   "roughness": 0.6,
+   "env_intensity": 2.8
+  },
+  "cap-satin": {
+   "color": "#c2c5c9",
+   "metalness": 1,
+   "roughness": 0.55,
+   "env_intensity": 0.8
+  },
+  "print-black": {
+   "color": "#2a2a2c",
+   "metalness": 0,
+   "roughness": 0.65,
+   "env_intensity": 1.5
+  },
+  "rail-black": {
+   "color": "#2c2c30",
+   "metalness": 0.85,
+   "roughness": 0.4,
+   "env_intensity": 2.4
+  },
+  "steel-ground": {
+   "color": "#b4b7ba",
+   "metalness": 1,
+   "roughness": 0.35
+  }
+ },
+ "part_look": "print-black",
+ "smooth_deg": 35,
+ "see_through": [
+  "mate"
+ ],
+ "picture": "on both fingers of the open gripper"
+}

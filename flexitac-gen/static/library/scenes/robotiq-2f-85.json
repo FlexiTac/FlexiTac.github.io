@@ -1,0 +1,907 @@
+{
+ "format": "flexitac-library-scene/v1",
+ "part": "robotiq-2f-85",
+ "part_mesh_sha256": "ca20c0fa61e6d3ce7b04bed25360e048e31dfd88ace04187aa6d9e8f4ca3fd0f",
+ "about": "Robotiq 2F-85 at full opening: mujoco_menagerie f3b6013, robotiq_2f85/2f85.xml (BSD-2-Clause, ROS-Industrial; derived from ros-industrial/robotiq's robotiq_2f_85_gripper_visualization): every joint at 0, each driver at the open end of its range 0..0.8 rad, the silicone pads' faces 85.400 mm apart.  The bodies are base_mount.stl and base.stl and, on each finger's four-bar linkage, driver.stl, coupler.stl, spring_link.stl, follower.stl and pad.stl (the fingertip's plate under the silicone pad), where 2f85.xml places them; the Library mesh is the right finger's silicone_pad.stl, the pad the gripper grips with.  The other finger is 2f85.xml's left one: the same links turned 180 degrees about the gripper's axis (its quat 0 0 0 1), so its sensor is the same board.  The looks: drawn after Robotiq's studio photos of the 2F-85 (robotiq.com, the 2F-85 and 2F-140 product page: 2F_Adaptive_Grippers_White.png, the open grippers side by side; 2F-84 2F-140 montage.png, seen from below), 2026-11-16: the satin black anodised housing and coupling, the bead-blasted aluminium palm block between the fingers with its screws, the black anodised links of each finger's four-bar linkage (the inner link, spring_link.stl, and the outer one, coupler.stl), the aluminium driver inside them, the bright machined aluminium fingertip (follower.stl and the pad's plate, pad.stl) and the black silicone pad (the Library's part).  The pins' heads in the outer links' pivots and the cap and pin of the inner link's bore are the project's own drawing, plain cylinders (bodies/robotiq-2f-85/drawn-coupler-pins.stl, drawn-spring-link-pins.stl and drawn-spring-link-caps.stl), where the model leaves the holes open; the inner link's far pins are the model's own.  Not modelled: the ROBOTIQ lettering, the coupling's status light, the screws of the links' faces.",
+ "frame": "the part's file axes, mm",
+ "approach": [
+  0.0,
+  0.0,
+  1.0
+ ],
+ "opening": {
+  "q_mm": 42.7,
+  "limit_mm": 42.7,
+  "joint": "left_driver_joint/right_driver_joint (hinge, the four-bar linkages)",
+  "source": "mujoco_menagerie f3b6013, robotiq_2f85/2f85.xml: class driver, range 0 0.8 rad, 0 the open end; each face 42.7 mm from the mid-plane there"
+ },
+ "mate": {
+  "kind": "turned",
+  "matrix": [
+   [
+    -1.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   [
+    0.0,
+    -1.0,
+    0.0,
+    -98.6
+   ],
+   [
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  ],
+  "part": true
+ },
+ "bodies": [
+  {
+   "mesh": "bodies/robotiq-2f-85/base_mount.stl",
+   "sha256": "8fd8796a29801361d2b418d71e60207b545c1c945e0a24e87227f97fd520a522",
+   "bytes": 89584,
+   "triangles": 1790,
+   "matrix": [
+    [
+     0.0,
+     -1.0,
+     0.0,
+     0.0
+    ],
+    [
+     1.0,
+     0.0,
+     0.0,
+     -49.3
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     -115.72
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": null,
+   "look": "housing-black"
+  },
+  {
+   "mesh": "bodies/robotiq-2f-85/base-palm.stl",
+   "sha256": "34402c00f6ddcab95365effe67956ed395a646a0902a54049580ee926b1d2836",
+   "bytes": 21984,
+   "triangles": 438,
+   "matrix": [
+    [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     1.0,
+     0.0,
+     -49.3
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     -111.92
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": null,
+   "look": "anodized-natural"
+  },
+  {
+   "mesh": "bodies/robotiq-2f-85/base-screws.stl",
+   "sha256": "2f8372e89470951284b07dc2dc3b98308542537950051711f7eb371cc2c31158",
+   "bytes": 71684,
+   "triangles": 1432,
+   "matrix": [
+    [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     1.0,
+     0.0,
+     -49.3
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     -111.92
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": null,
+   "look": "steel-polished"
+  },
+  {
+   "mesh": "bodies/robotiq-2f-85/base-housing.stl",
+   "sha256": "10d076752f8342ddfbcb5e457a39ffe463c9d75af4d1635eb7afab06156f6a37",
+   "bytes": 265884,
+   "triangles": 5316,
+   "matrix": [
+    [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     1.0,
+     0.0,
+     -49.3
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     -111.92
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": null,
+   "look": "housing-black"
+  },
+  {
+   "mesh": "bodies/robotiq-2f-85/driver.stl",
+   "sha256": "612d798e7d0425e4ba9e0b97aeb4f9cf586a30da277778aebf8b319617dcfba8",
+   "bytes": 20084,
+   "triangles": 400,
+   "matrix": [
+    [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     1.0,
+     0.0,
+     -18.6989
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     -57.016
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": "sensor",
+   "look": "anodized-natural"
+  },
+  {
+   "mesh": "bodies/robotiq-2f-85/coupler-link.stl",
+   "sha256": "3b1c077e6613a0047c4d71086d1b6a76230bd84f563625242395c8fd7c456421",
+   "bytes": 32284,
+   "triangles": 644,
+   "matrix": [
+    [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     1.0,
+     0.0,
+     12.8011
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     -61.116
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": "sensor",
+   "look": "anodized-black"
+  },
+  {
+   "mesh": "bodies/robotiq-2f-85/drawn-coupler-pins.stl",
+   "sha256": "92759fbca8d0af7c5f3727350ba09b2096b83a5d18b6090fa0087d1c43b24fe2",
+   "bytes": 12884,
+   "triangles": 256,
+   "matrix": [
+    [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     1.0,
+     0.0,
+     12.8011
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     -61.116
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": "sensor",
+   "look": "steel-polished"
+  },
+  {
+   "mesh": "bodies/robotiq-2f-85/spring-link-far-pins.stl",
+   "sha256": "d110d548ce8f5973d3a86a4983f3149636d896c1e30ad7ad30372e99cfc13413",
+   "bytes": 5184,
+   "triangles": 102,
+   "matrix": [
+    [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     1.0,
+     0.0,
+     -36.1
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     -51.02
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": "sensor",
+   "look": "steel-polished"
+  },
+  {
+   "mesh": "bodies/robotiq-2f-85/spring-link.stl",
+   "sha256": "20dbf70b890999ba9e62e8ddf990fc073a1e553818cc8fc636fee44dd6197a4b",
+   "bytes": 27584,
+   "triangles": 550,
+   "matrix": [
+    [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     1.0,
+     0.0,
+     -36.1
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     -51.02
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": "sensor",
+   "look": "anodized-black"
+  },
+  {
+   "mesh": "bodies/robotiq-2f-85/drawn-spring-link-caps.stl",
+   "sha256": "acb4a2ce6f2d20a40ab78f1a6ac5a1fa3f75b99c5c8f8c9a46f97929949167b7",
+   "bytes": 9684,
+   "triangles": 192,
+   "matrix": [
+    [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     1.0,
+     0.0,
+     -36.1
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     -51.02
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": "sensor",
+   "look": "anodized-black"
+  },
+  {
+   "mesh": "bodies/robotiq-2f-85/drawn-spring-link-pins.stl",
+   "sha256": "a7c42e47721e925c64157a12ba4d69c7e327c94b1b6e1cc67c48e5120d2e3b7b",
+   "bytes": 6484,
+   "triangles": 128,
+   "matrix": [
+    [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     1.0,
+     0.0,
+     -36.1
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     -51.02
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": "sensor",
+   "look": "steel-polished"
+  },
+  {
+   "mesh": "bodies/robotiq-2f-85/follower-pins.stl",
+   "sha256": "45440bef98962e1bf7a36b96790e9468f30b248e507ac32a2d77c89e22e41a03",
+   "bytes": 9684,
+   "triangles": 192,
+   "matrix": [
+    [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     1.0,
+     0.0,
+     18.9
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     -13.52
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": "sensor",
+   "look": "steel-polished"
+  },
+  {
+   "mesh": "bodies/robotiq-2f-85/follower-tip.stl",
+   "sha256": "19a9b43ee9c2d772b0269fab0b05a48d27c5bda3d66f548279ccac50a1d8a0ce",
+   "bytes": 33884,
+   "triangles": 676,
+   "matrix": [
+    [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     1.0,
+     0.0,
+     18.9
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     -13.52
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": "sensor",
+   "look": "tip-aluminium"
+  },
+  {
+   "mesh": "bodies/robotiq-2f-85/pad.stl",
+   "sha256": "0a16b432f97e7fbfc160e6e18c356567c31d556ab428c31bf102964559398ce4",
+   "bytes": 1784,
+   "triangles": 34,
+   "matrix": [
+    [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     1.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": "sensor",
+   "look": "tip-aluminium"
+  },
+  {
+   "mesh": "bodies/robotiq-2f-85/driver.stl",
+   "sha256": "612d798e7d0425e4ba9e0b97aeb4f9cf586a30da277778aebf8b319617dcfba8",
+   "bytes": 20084,
+   "triangles": 400,
+   "matrix": [
+    [
+     -1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     -1.0,
+     0.0,
+     -79.9011
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     -57.016
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": "mate",
+   "look": "anodized-natural"
+  },
+  {
+   "mesh": "bodies/robotiq-2f-85/coupler-link.stl",
+   "sha256": "3b1c077e6613a0047c4d71086d1b6a76230bd84f563625242395c8fd7c456421",
+   "bytes": 32284,
+   "triangles": 644,
+   "matrix": [
+    [
+     -1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     -1.0,
+     0.0,
+     -111.4011
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     -61.116
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": "mate",
+   "look": "anodized-black"
+  },
+  {
+   "mesh": "bodies/robotiq-2f-85/drawn-coupler-pins.stl",
+   "sha256": "92759fbca8d0af7c5f3727350ba09b2096b83a5d18b6090fa0087d1c43b24fe2",
+   "bytes": 12884,
+   "triangles": 256,
+   "matrix": [
+    [
+     -1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     -1.0,
+     0.0,
+     -111.4011
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     -61.116
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": "mate",
+   "look": "steel-polished"
+  },
+  {
+   "mesh": "bodies/robotiq-2f-85/spring-link-far-pins.stl",
+   "sha256": "d110d548ce8f5973d3a86a4983f3149636d896c1e30ad7ad30372e99cfc13413",
+   "bytes": 5184,
+   "triangles": 102,
+   "matrix": [
+    [
+     -1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     -1.0,
+     0.0,
+     -62.5
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     -51.02
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": "mate",
+   "look": "steel-polished"
+  },
+  {
+   "mesh": "bodies/robotiq-2f-85/spring-link.stl",
+   "sha256": "20dbf70b890999ba9e62e8ddf990fc073a1e553818cc8fc636fee44dd6197a4b",
+   "bytes": 27584,
+   "triangles": 550,
+   "matrix": [
+    [
+     -1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     -1.0,
+     0.0,
+     -62.5
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     -51.02
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": "mate",
+   "look": "anodized-black"
+  },
+  {
+   "mesh": "bodies/robotiq-2f-85/drawn-spring-link-caps.stl",
+   "sha256": "acb4a2ce6f2d20a40ab78f1a6ac5a1fa3f75b99c5c8f8c9a46f97929949167b7",
+   "bytes": 9684,
+   "triangles": 192,
+   "matrix": [
+    [
+     -1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     -1.0,
+     0.0,
+     -62.5
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     -51.02
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": "mate",
+   "look": "anodized-black"
+  },
+  {
+   "mesh": "bodies/robotiq-2f-85/drawn-spring-link-pins.stl",
+   "sha256": "a7c42e47721e925c64157a12ba4d69c7e327c94b1b6e1cc67c48e5120d2e3b7b",
+   "bytes": 6484,
+   "triangles": 128,
+   "matrix": [
+    [
+     -1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     -1.0,
+     0.0,
+     -62.5
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     -51.02
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": "mate",
+   "look": "steel-polished"
+  },
+  {
+   "mesh": "bodies/robotiq-2f-85/follower-pins.stl",
+   "sha256": "45440bef98962e1bf7a36b96790e9468f30b248e507ac32a2d77c89e22e41a03",
+   "bytes": 9684,
+   "triangles": 192,
+   "matrix": [
+    [
+     -1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     -1.0,
+     0.0,
+     -117.5
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     -13.52
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": "mate",
+   "look": "steel-polished"
+  },
+  {
+   "mesh": "bodies/robotiq-2f-85/follower-tip.stl",
+   "sha256": "19a9b43ee9c2d772b0269fab0b05a48d27c5bda3d66f548279ccac50a1d8a0ce",
+   "bytes": 33884,
+   "triangles": 676,
+   "matrix": [
+    [
+     -1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     -1.0,
+     0.0,
+     -117.5
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     -13.52
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": "mate",
+   "look": "tip-aluminium"
+  },
+  {
+   "mesh": "bodies/robotiq-2f-85/pad.stl",
+   "sha256": "0a16b432f97e7fbfc160e6e18c356567c31d556ab428c31bf102964559398ce4",
+   "bytes": 1784,
+   "triangles": 34,
+   "matrix": [
+    [
+     -1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     -1.0,
+     0.0,
+     -98.6
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": "mate",
+   "look": "tip-aluminium"
+  }
+ ],
+ "looks": {
+  "anodized-black": {
+   "color": "#232428",
+   "metalness": 0.6,
+   "roughness": 0.45,
+   "env_intensity": 2.4
+  },
+  "anodized-natural": {
+   "color": "#c9ccd0",
+   "metalness": 1,
+   "roughness": 0.45
+  },
+  "housing-black": {
+   "color": "#232428",
+   "metalness": 0.5,
+   "roughness": 0.5,
+   "env_intensity": 2.8
+  },
+  "rubber-black": {
+   "color": "#232325",
+   "metalness": 0,
+   "roughness": 0.92,
+   "env_intensity": 2.2
+  },
+  "steel-polished": {
+   "color": "#c8cacc",
+   "metalness": 1,
+   "roughness": 0.18
+  },
+  "tip-aluminium": {
+   "color": "#cfd1d4",
+   "metalness": 1,
+   "roughness": 0.3
+  }
+ },
+ "part_look": "rubber-black",
+ "smooth_deg": 35,
+ "see_through": [
+  "mate"
+ ],
+ "picture": "on both fingers of the open gripper"
+}

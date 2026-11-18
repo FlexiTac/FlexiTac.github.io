@@ -30,8 +30,14 @@ and keeps its Content Security Policy (`default-src 'self'`).
   `496c348c6fc236b03d23ba3f84d6a2c70ae3e66efba570a7889a990db171b621`) and
   `Gerber_Bottom_FPC_2026-03-02.zip` (SHA-256
   `a2e0da2e0e36dc194c09db6e6f207d0508f7f3e9634666cdfa4ab48846397f6a`),
-  EasyEDA Pro v3.2.91 exports of 2026-03-02.  The ZIPs themselves are not in
-  this repository; order the boards from the tutorial's own files.
+  EasyEDA Pro v3.2.91 exports of 2026-03-02.  Its ordering section,
+  `https://docs.google.com/document/d/1bvz6AL7BUkhj4Dj7n9DFXTjnGIX4-ziN8-smiCKpVZU/edit?tab=t.0#heading=h.kk7d14qme9db`,
+  is the address of the Library showcase's "FlexiTac fabrication guide"
+  (the user's word of 2026-11-17) and of Gen by Surface's step 3.  Since the user's request of
+  2026-11-17 the two ZIPs are served here too, unchanged (downloaded from
+  the Google Drive links of the tutorial's table on 2026-11-17, their
+  SHA-256s the ones above; `tools/flexitac_downloads.py` checks them), so
+  the showcase's window offers them for download.
 
 ## Files
 
@@ -39,6 +45,8 @@ and keeps its Content Security Policy (`default-src 'self'`).
 | --- | --- | --- | --- | --- |
 | `geometry.json` | the two Gerber ZIPs above (their outline, top copper, top solder mask and stiffener layers) | CC BY-NC 4.0, Columbia University (FlexiTac, Binghao Huang and Yunzhu Li) | modified: the two FPCs' outlines, slots, window, electrodes, traces, gold fingers, coverlay openings and stiffeners read into one JSON document by `tools/flexitac_v2.py` (the FlexiTac-Gen project, 2026); the silkscreen, the drill and document layers and the order files are left out | `f472ddc1ad3a5ca2002a556feac38af4bf642a0f954eadbcca329c64ac226b81` |
 | `art.json.gz` | `geometry.json` above | CC BY-NC 4.0, Columbia University (FlexiTac, Binghao Huang and Yunzhu Li) | modified: the two FPCs drawn from `geometry.json` by FlexiTac-Gen's own SVG writer and its page's Photo look (`tools/browser/flexitac_v2_art.py`, the FlexiTac-Gen project, 2026): each board's copper and polyimide side as SVG documents with its outline (of the stiffeners only the 0.2 mm ones under the gold ends are drawn), a `flexitac-library-art/v1` document (`docs/LIBRARY_VIEW.md`), gzip | `d25710d94993f05c4740978cf5d8293a8f35eac71521544804978bec471d3b7f` |
+| `Gerber_Top_FPC_2026-03-02.zip` | the tutorial's Top FPC Gerber ZIP above | CC BY-NC 4.0, Columbia University (FlexiTac, Binghao Huang and Yunzhu Li) | unchanged (52,816 bytes) | `496c348c6fc236b03d23ba3f84d6a2c70ae3e66efba570a7889a990db171b621` |
+| `Gerber_Bottom_FPC_2026-03-02.zip` | the tutorial's Bottom FPC Gerber ZIP above | CC BY-NC 4.0, Columbia University (FlexiTac, Binghao Huang and Yunzhu Li) | unchanged (66,670 bytes) | `a2e0da2e0e36dc194c09db6e6f207d0508f7f3e9634666cdfa4ab48846397f6a` |
 
 `umi-finray.placed.json` is this project's own (Apache-2.0, as the
 repository): where the pad lies on the UMI fin-ray finger of

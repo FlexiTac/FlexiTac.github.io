@@ -24,8 +24,9 @@ import * as B from "./border.js";
 import * as D from "./drape.js";
 
 const SVG_NS = "http://www.w3.org/2000/svg";
-// select.PRESETS of surface/select.py: [theta_d_deg, theta_c_deg, min_radius_mm].
-const PRESETS = {flat: [10, 4, 0], surface: [30, 180, 4], smooth: [30, 180, 0]};
+// select.PRESETS of surface/select.py: [theta_d_deg, theta_c_deg, min_radius_mm].  The stretch preset is no choice of
+// cadPreset: Shrink to fit sends it (shrinkToFit), and Surface turns to it on a doubly curved face (growOp).
+const PRESETS = {flat: [10, 4, 0], surface: [30, 180, 4], smooth: [30, 180, 0], stretch: [30, 90, 4]};
 // CAD mode builds on the surface template (surface/fit.py's CAD_ONLY: the field follows the selected area; the generic
 // template and rectangular fields are the Rectangular mode's, P5-diagonal-bus.md section 26.16).
 const SURFACE_TEMPLATE_ID = "surface_matrix_v1";
@@ -111,6 +112,9 @@ const cad = {
   // pointer with the Base edge tool (or a hovered list row).
   border: null, editing: false, hover: null,
   fit: null, chosen: null, preview: null, fitRequest: null,
+  // The fit's refusal of a curved selection beyond the strain limit (E_SURFACE_NOT_DEVELOPABLE: its stretch and the
+  // patch that fits round its click, shrinkState), until the next selection or fit.
+  fitRefusal: null,
   map: null, mapError: null, lastResult: null, pendingBuild: null,
   formLimits: null, limitsSync: null,
   stale: false, busy: new Map(), controllers: new Map(), error: null, retries: 0,
@@ -270,6 +274,11 @@ function renderState() {
     fit_options: cad.fitOptions ?? null,
     fit_source: cad.fitSource,
     fit_stale: fitStale(),
+    strain_limit: strainLimit(),
+    curved_limit: curvedLimit(),
+    shrink: shrinkState(),
+    selection_stretch: cad.selection?.stretch ?? null,
+    select_ops: cad.ops,
     proposal: proposal ? {rank: proposal.rank, build_id: proposal.build_id, rows: proposal.metrics.rows, columns: proposal.metrics.columns, base_side: proposal.placement.base_side,
       base_kind: proposal.placement.base_kind ?? null, border_area_mm2: proposal.metrics.border_area_mm2 ?? null,
       border_on_surface: proposal.metrics.border_on_surface_share ?? null,
@@ -335,6 +344,8 @@ function renderQuick() {
   const button = $("cadQuickGenerate");
   button.disabled = kind === "busy" || !cad.selection || Boolean(cad.selectionError) || cad.editing || sensorCurrent();
   button.title = text;
+  renderShrink();
+  renderTierNote();
   renderFlatEmpty();
   return {kind, text, generate: !button.disabled};
 }
@@ -364,6 +375,8 @@ function quickText() {
     return ["ok", `${size} · ${fmt(proposal.design.matrix.pitch_x_mm, 1)} mm pitch · all ${passed} checks pass on the part.`];
   }
   if (!cad.selection) return ["idle", "Click the face the sensor goes on, then Generate sensor."];
+  const over = shrinkState();
+  if (over) return ["problem", `The face stretches ${percent(over.stretch)} on the part, over the ${percent(over.limit)} limit: Shrink to fit${over.limit < TOP_TIER ? ", or the 1 % limit" : ""}.`];
   if (cad.map && !cad.map.ok) return ["problem", "The sensor fails a check on the part: see Advanced Customization, On the part."];
   if (cad.error || (cad.fit && !fitStale() && !cad.fit.proposals?.length)) return ["problem", "No sensor fits here: choose another face, or open Advanced Customization."];
   if (cad.fit && fitStale()) return ["todo", "Settings changed: Generate sensor to update it."];
@@ -690,11 +703,15 @@ function applyLibraryOptions(options) {
   // its control's own default recorded ({id: the value set}) for leaveLibrary, whether this wrote it or the control held
   // it already (a browser's restored form: Firefox puts a reloaded page's values back before main.js runs, and leaving
   // the Library then kept 1 mm, 0.65 and rotation none; the review of 2026-11-05); numbers compared as numbers (2 is the
-  // default 2.0).
+  // default 2.0).  The strain limit's data-flat value (0.3 %, every Library request's but the Unitree Dex3-1's, whose
+  // doubly curved dome sends the select's own 1 % since 2026-11-18) is what the select sends off a curved face whatever
+  // it shows, so it leaves the select as it is: writing it chose Strict 0.3 % for the user's own curved clicks on the
+  // part (the review of 2026-11-17, finding 5).
   const changed = {};
   for (const control of $("cadConfig").querySelectorAll("[data-option]")) {
     const key = control.dataset.option;
     if (!Object.hasOwn(options, key)) continue;
+    if (control.hasAttribute("data-flat") && Number(options[key]) === Number(control.dataset.flat)) continue;
     const value = String(options[key]);
     const same = other => (control.tagName === "SELECT" ? other === value : Number(other) === Number(value));
     if (!same(control.value)) control.value = value;
@@ -983,7 +1000,89 @@ function growOp(seed, mode, preset = $("cadPreset").value) {
     const [thetaD, thetaC, minRadius] = presetValues();
     return {op: "grow", mode, seed_facet: seed, theta_d_deg: thetaD, theta_c_deg: thetaC, min_radius_mm: minRadius};
   }
+  // Surface at the curved faces' strain limit (the user's decisions of 2026-11-17): on a doubly curved face the server
+  // selects what flattens within it round the dome, symmetric on a symmetric face (select.py stretch_region), on any
+  // other face the face as before.
+  if (preset === "surface") return {op: "grow", mode, seed_facet: seed, preset, stretch_budget: curvedLimit()};
   return {op: "grow", mode, seed_facet: seed, preset};
+}
+// The strain limit (the user's choice of 2026-11-17, "1% default on curves"): on a doubly curved selection (its stretch
+// on the part, the select reply's, beyond CURVED_FROM: surface.fit.AXIS_MIN_STRETCH, the curved chart's 0.05 % gate)
+// #cadStrainLimit's value, 1 % unless Strict 0.3 % is chosen; on any other face (planar, developable, the Franka Hand's
+// nearly flat pad) its data-flat 0.3 %, so their requests stay as they were.  A click's stretch budget is the curved one
+// (the server applies it on a doubly curved face only).
+const CURVED_FROM = 5e-4;
+const curvedLimit = () => Number($("cadStrainLimit").value);
+const flatLimit = () => Number($("cadStrainLimit").dataset.flat);
+const doublyCurved = () => Boolean(cad.selection && !cad.selectionError && cad.selection.stretch?.smooth_max > CURVED_FROM);
+const strainLimit = () => doublyCurved() ? curvedLimit() : flatLimit();
+const TOP_TIER = 0.01;
+const percent = ratio => `${Number((ratio * 100).toFixed(2))} %`;
+
+function shrinkState() {
+  // A curved selection that stretches beyond the strain limit on the part: {stretch, limit, fits (the patch round its click
+  // that stays within it, as the fit's refusal names it; undefined until a fit, null when none does)}, else null.
+  const limit = strainLimit();
+  if (!cad.selection || cad.selectionError) return null;
+  const refused = cad.fitRefusal;
+  if (refused && refused.strain_limit === limit) return {stretch: refused.stretch, limit, fits: refused.shrink ?? null};
+  const stretch = cad.selection.stretch?.smooth_max;
+  return Number.isFinite(stretch) && stretch > limit ? {stretch, limit, fits: undefined} : null;
+}
+function renderShrink() {
+  // Shrink to fit beside Generate sensor while the selection stretches beyond the limit, and its line: how far, and how
+  // much of it fits once the fit has said so.
+  const state = shrinkState();
+  $("cadShrink").hidden = !state;
+  $("cadShrink").disabled = !state || cad.busy.has("select");
+  $("cadShrinkNote").hidden = !state;
+  $("cadShrinkNote").textContent = state
+    ? `Stretches ${percent(state.stretch)} on the part, over the ${percent(state.limit)} limit${state.fits ? `: ${fmt(state.fits.area_mm2, 0)} mm² of it fits` : state.fits === null ? ": none of it round the click fits" : ""}.`
+    : "";
+  return state;
+}
+function shrinkSeed() {
+  // The click of the selection: the facet the fit's refusal names, else its first seed (the server's choice too).
+  const named = cad.fitRefusal?.shrink?.seed_facet;
+  if (Number.isInteger(named)) return named;
+  const op = cad.ops.find(entry => (entry.op === "grow" || entry.op === "disk") && (entry.mode ?? "add") === "add" && isSelected(entry.seed_facet));
+  return op ? op.seed_facet : cad.selection?.facets?.[0];
+}
+function shrinkToFit() {
+  // Select, round the selection's click, what flattens within the strain limit (preset stretch).
+  const seed = shrinkSeed();
+  if (!Number.isInteger(seed)) return;
+  setOps([{op: "grow", mode: "add", seed_facet: seed, preset: "stretch", stretch_budget: curvedLimit()}]);
+  return runSelect({look: true});
+}
+function renderTierNote() {
+  // The 1 % limit's note, while it is in effect (a doubly curved selection, Strict 0.3 % not chosen).
+  $("cadTierNote").hidden = !(doublyCurved() && curvedLimit() > flatLimit());
+}
+function onTierChange() {
+  // 1 % on curved faces or Strict 0.3 %: the selection's operations at the curved limit.  A doubly curved selection is
+  // made again at once, as the region drawn is the one fitted, a click alone from the selection's middle (the select
+  // reply's centre_facet: the dome's patch at the other limit, symmetric, whichever click on the dome made it); any
+  // other face is the same region and the same limit either way, so its operations take the curved limit as they are
+  // and its sensor stays.
+  const limit = curvedLimit();
+  if (cad.ops.some(op => "stretch_budget" in op && op.stretch_budget !== limit)) {
+    const middle = cad.ops.length === 1 && doublyCurved() ? cad.selection.stretch.centre_facet : null;
+    const next = cad.ops.map(op => {
+      if (!("stretch_budget" in op)) return op;
+      const changed = {...op, stretch_budget: limit, ...(Number.isInteger(middle) ? {seed_facet: middle} : {})};
+      if (added.has(op)) added.set(changed, added.get(op));
+      return changed;
+    });
+    if (doublyCurved()) {
+      setOps(next);
+      runSelect();
+      return;
+    }
+    cad.ops = next;
+  }
+  renderShrink();
+  renderState();
 }
 // A click selects (the user's request of 2026-10-30, in place of an Add / Subtract switch): on a facet outside the
 // selection it adds that surface; on one inside it removes the surface that added the facet (``added``: an add
@@ -1016,7 +1115,7 @@ function pickSurface(text) {
   if (!cad.inspect || !Number.isInteger(seed)) return;
   // As a click: in one step that surface alone (and its sensor), else the selection's toggle.
   if (quickMode()) { autoSelect(seed, preset); return; }
-  toggleSurface(seed, {op: "grow", seed_facet: seed, preset});
+  toggleSurface(seed, growOp(seed, "add", preset));
 }
 
 function applyOp(op, options = {}) {
@@ -1658,7 +1757,8 @@ function renderBorderBar() {
   const button = $("cadEditBorder");
   button.disabled = !ready;
   button.setAttribute("aria-pressed", String(cad.editing));
-  button.textContent = cad.editing ? "Done editing" : "Edit border";
+  // Its name in its first span, "Optional" after it (gen.html; the user's request of 2026-11-17; hidden while pressed).
+  button.querySelector(".cad-edit-border-name").textContent = cad.editing ? "Done editing" : "Edit border";
   button.title = ready ? "Drag the border's corners and edges on the part; the taxels lie inside it"
     : cad.facetMismatch ? "Off for this file: the browser's facets do not match the server's" : "Select a surface first";
   $("cadBorderBar").hidden = !cad.editing;
@@ -1870,7 +1970,11 @@ function readOptions() {
   const invalid = [];
   for (const control of $("cadConfig").querySelectorAll("[data-option]")) {
     if (control.disabled) continue;
-    if (control.tagName === "SELECT") { options[control.dataset.option] = control.value; continue; }
+    if (control.tagName === "SELECT") {
+      // The strain limit sends the number in effect for the selection (data-flat off a doubly curved face: strainLimit).
+      options[control.dataset.option] = control.hasAttribute("data-flat") ? strainLimit() : control.hasAttribute("data-number") ? Number(control.value) : control.value;
+      continue;
+    }
     const value = Number(control.value);
     if (control.value.trim() === "" || !control.validity.valid || !Number.isFinite(value)) invalid.push(control);
     else options[control.dataset.option] = control.step === "1" ? Math.round(value) : value;
@@ -1963,7 +2067,7 @@ function syncContainment() {
 function resetFit() {
   abortRequests("fit", "preview", "map");
   cad.seq.fit += 1; cad.seq.preview += 1; cad.seq.map += 1;
-  cad.fit = null; cad.chosen = null; cad.preview = null; cad.map = null; cad.mapError = null;
+  cad.fit = null; cad.chosen = null; cad.preview = null; cad.map = null; cad.mapError = null; cad.fitRefusal = null;
   renderProposals();
   renderVerification();
   cad.viewer?.setOverlay(null);
@@ -2027,6 +2131,14 @@ async function runFit() {
     renderSides();
   } catch (error) {
     if (sequence !== cad.seq.fit || aborted(error)) return;
+    if (error.code === "E_SURFACE_NOT_DEVELOPABLE" && Number.isFinite(error.details?.stretch)) {
+      // Beyond the strain limit (2026-11-17): the line beside Shrink to fit says how far and how much fits.
+      cad.fitRefusal = error.details;
+      cad.error = error.code;
+      renderShrink();
+      setStatus("warning", `Not fitted: over the ${percent(error.details.strain_limit)} strain limit.`);
+      return;
+    }
     // E_SURFACE_NO_FIT details: {rejected: [{reason, count}], bases}.
     const reasons = error.details?.rejected || error.details?.reasons;
     fail(error, "No fit");
@@ -2127,7 +2239,8 @@ function fitNote() {
   const short = Number.isInteger(asked) && count < asked
     ? `${count} of the ${asked} proposals asked for: ${field ? "the field-only search keeps the best readout and the others within 3 % of it, and " : ""}a field that repeats a readout, or has no more taxels than an earlier proposal on as large a readout, is not proposed.` : "";
   const rejected = (cad.fit.rejected || []).map(item => `${item.count} ${item.reason}`).join(", ");
-  const obstacles = Object.entries(cad.fit.obstacles || {}).filter(([, number]) => number).map(([key, number]) => `${number} ${key}`).join(", ");
+  // The reply's keys as words (Whole board's field_bends: "field bends", the bends only the taxel field keeps off).
+  const obstacles = Object.entries(cad.fit.obstacles || {}).filter(([, number]) => number).map(([key, number]) => `${number} ${key.replace(/_/g, " ")}`).join(", ");
   const border = cad.fit.request?.border ? `Inside your border (${plural(cad.fit.request.border.uv.length, "corner")}): every taxel lies in it.` : "";
   return [border, tried && `Base edges tried: ${tried}.`, short, rejected && `Rejected candidates: ${rejected}.`, `Obstacles: ${obstacles || "none"}.`].filter(Boolean).join(" ");
 }
@@ -3084,6 +3197,8 @@ function wire() {
   $("cadHelp").textContent = defaultHelp;
   $("cadCustomize").addEventListener("toggle", onCustomizeToggle);
   $("cadQuickGenerate").addEventListener("click", oneStep);
+  $("cadShrink").addEventListener("click", shrinkToFit);
+  $("cadStrainLimit").addEventListener("change", onTierChange);
   $("guideCustomize").addEventListener("click", () => {
     // Opens (or folds) Advanced Customization on the right; the toggle event brings the guide in step (syncGuideCustomize).
     const fold = $("cadCustomize");

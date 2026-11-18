@@ -2,6 +2,350 @@
  "about": "The Library's pictures (library.html's cards and sensor pages): each sensor of entries.json drawn by the Library's own 3D view (web/cad/library_view.js: Gen by Surface's sensor on the part, web/cad/onpart.js, and for a gripper its whole scene, web/cad/library_stage.js) at its Exploded and Assembled homes, with each file's bytes and SHA-256, the fit and build id it was shot from, the hashes of the figure's and the view's sources, the sensor's art (art/<id>.json.gz) and, for a gripper, its stage (its scene's hash and numbers).  A gripper is drawn whole (scenes/), the sensor finger's stack exploded and the near finger see-through in both views, its stack assembled.  Written by tools/browser/library_shots.py; tools/library_write.py writes entries.json's image and view from it.",
  "format": "flexitac-library-shots/v1",
  "shots": {
+  "agilex-piper-1mm": {
+   "art": {
+    "build_id": "surface-32x30-4870109e5f29",
+    "bytes": 13522,
+    "json_sha256": "461043d4c4c9e854d71e5f6a184d98e6c8be3ada46c030d128d7bcb2e0f032bd",
+    "path": "art/agilex-piper-1mm.json.gz",
+    "sha256": "a2c25234fe7f7d59220a7ba3f2eee3a2a22d2fc947a0ac80a394d671433762eb"
+   },
+   "build_id": "surface-32x30-4870109e5f29",
+   "figure_sha256": "e38217818ff99c16f8d898f74079f4297bb51b7613218839c04ae9f2a59ab1c1",
+   "files": {
+    "assembled": {
+     "bytes": 27424,
+     "height": 800,
+     "path": "shots/agilex-piper-1mm.assembled.webp",
+     "sha256": "14d81ec96bd8dab68aadf1c88d5c1c4c1b5e7fc6e2050e29a5030c6b59a08a21",
+     "width": 1280
+    },
+    "card": {
+     "bytes": 20342,
+     "height": 400,
+     "path": "shots/agilex-piper-1mm.exploded.card.webp",
+     "sha256": "8f72a6fe061140ff2a606b21c2b5c0191647821e9a71f22f81d31386aeddffd5",
+     "width": 640
+    },
+    "exploded": {
+     "bytes": 32010,
+     "height": 800,
+     "path": "shots/agilex-piper-1mm.exploded.webp",
+     "sha256": "dad09ab469ff98f45e89ff456f2397a6d29af0f889322bfd106636a08ef4c15a",
+     "width": 1280
+    }
+   },
+   "fit_sha256": "01a0b625f74fa17461b40a21ff56d85319571987b177492c035013ef3b51338f",
+   "look": "photo",
+   "margins_px": {
+    "assembled": [
+     357,
+     52,
+     357,
+     52
+    ],
+    "exploded": [
+     334,
+     52,
+     334,
+     52
+    ]
+   },
+   "stage": {
+    "numbers": {
+     "assembled_opaque": 0,
+     "band_css": {
+      "contain": [
+       13,
+       49
+      ],
+      "cover": [
+       25,
+       91
+      ]
+     },
+     "card_px": [
+      45,
+      167
+     ],
+     "clearance_mm": {
+      "bodies": 3.8,
+      "other_finger": 12,
+      "stacks": 40.1
+     },
+     "drape_step_mm": 21.38,
+     "face_tilt_deg": 3.468,
+     "ghost_cover": 0.995,
+     "jaw_gap_mm": 69.5,
+     "near_seen": 1,
+     "opaque_max": 0,
+     "stacks_apart_px": 98.3,
+     "step_mm": 9.48,
+     "visible_min": 0.593
+    },
+    "scene": "scenes/agilex-piper.json",
+    "scene_sha256": "a3c09fd2dcf967732f37c689cb193de9322b95b725450849c04c6179299ab3cd"
+   },
+   "view_sha256": "d8f62f02c31bbc3399cff1c62208165df0188518a995a5f862ef3284312bf685"
+  },
+  "agilex-piper-2mm": {
+   "art": {
+    "build_id": "surface-32x24-cdd0d9c72f7f",
+    "bytes": 12996,
+    "json_sha256": "f77e5e27108590c1aa301e0da6dad211433a21eef773f7135aff80218987e0ba",
+    "path": "art/agilex-piper-2mm.json.gz",
+    "sha256": "2e7b12650a9db057b2356c104fb2a0e287ad934e5165ea46254f701315d26842"
+   },
+   "build_id": "surface-32x24-cdd0d9c72f7f",
+   "figure_sha256": "e38217818ff99c16f8d898f74079f4297bb51b7613218839c04ae9f2a59ab1c1",
+   "files": {
+    "assembled": {
+     "bytes": 29480,
+     "height": 800,
+     "path": "shots/agilex-piper-2mm.assembled.webp",
+     "sha256": "0f44d89f74972b2bbf1945c566a7a062a1a8dc40152dd33a0d2b791d130514c3",
+     "width": 1280
+    },
+    "card": {
+     "bytes": 21548,
+     "height": 400,
+     "path": "shots/agilex-piper-2mm.exploded.card.webp",
+     "sha256": "7f51e3143511a69c38fc197453e2488e0bd79cfd70e1fa39bc7cbf90b98377da",
+     "width": 640
+    },
+    "exploded": {
+     "bytes": 34568,
+     "height": 800,
+     "path": "shots/agilex-piper-2mm.exploded.webp",
+     "sha256": "bbb1f9581083328483479e324eab2154576297746816739929aea42095d0528b",
+     "width": 1280
+    }
+   },
+   "fit_sha256": "207ede8b61a2e1cc7c9e412cb4a1cf37d3411c17614f286d115fb13044933f2e",
+   "look": "photo",
+   "margins_px": {
+    "assembled": [
+     353,
+     52,
+     353,
+     52
+    ],
+    "exploded": [
+     331,
+     52,
+     331,
+     52
+    ]
+   },
+   "stage": {
+    "numbers": {
+     "assembled_opaque": 0,
+     "band_css": {
+      "contain": [
+       20,
+       54
+      ],
+      "cover": [
+       37,
+       100
+      ]
+     },
+     "card_px": [
+      69,
+      184
+     ],
+     "clearance_mm": {
+      "bodies": 3.2,
+      "other_finger": 12,
+      "stacks": 40
+     },
+     "drape_step_mm": 31.112,
+     "face_tilt_deg": 1.662,
+     "ghost_cover": 0.992,
+     "jaw_gap_mm": 69.434,
+     "near_seen": 1,
+     "opaque_max": 0,
+     "stacks_apart_px": 74.7,
+     "step_mm": 9.438,
+     "visible_min": 0.447
+    },
+    "scene": "scenes/agilex-piper.json",
+    "scene_sha256": "a3c09fd2dcf967732f37c689cb193de9322b95b725450849c04c6179299ab3cd"
+   },
+   "view_sha256": "d8f62f02c31bbc3399cff1c62208165df0188518a995a5f862ef3284312bf685"
+  },
+  "agilex-piper-3mm": {
+   "art": {
+    "build_id": "surface-23x17-26cd111d1462",
+    "bytes": 10228,
+    "json_sha256": "83aad6e3edf4a8320c031a61b5e9b52076be3ba72b69cc553e5fd3f9504d9961",
+    "path": "art/agilex-piper-3mm.json.gz",
+    "sha256": "872e5951f4915927e36ce67b4061ba865bb884366f1f339dcf71555e9e3e5fbd"
+   },
+   "build_id": "surface-23x17-26cd111d1462",
+   "figure_sha256": "e38217818ff99c16f8d898f74079f4297bb51b7613218839c04ae9f2a59ab1c1",
+   "files": {
+    "assembled": {
+     "bytes": 28836,
+     "height": 800,
+     "path": "shots/agilex-piper-3mm.assembled.webp",
+     "sha256": "657b35c09d7448cac64c7abbea2cc68a52929059f114face5e4b70518e50849a",
+     "width": 1280
+    },
+    "card": {
+     "bytes": 21198,
+     "height": 400,
+     "path": "shots/agilex-piper-3mm.exploded.card.webp",
+     "sha256": "6859d50aa52077760733bdaeaccdd0c58c5028c220c1b1a2bf004d984f6a7bbd",
+     "width": 640
+    },
+    "exploded": {
+     "bytes": 33500,
+     "height": 800,
+     "path": "shots/agilex-piper-3mm.exploded.webp",
+     "sha256": "3e50e3da8510477d3d06136becf95f8724e04d2da50bcfd03a257475d87b2149",
+     "width": 1280
+    }
+   },
+   "fit_sha256": "1012ac706327d2b014b317b533b457fb4d7e8881b198225fc42b40e467491d56",
+   "look": "photo",
+   "margins_px": {
+    "assembled": [
+     353,
+     52,
+     353,
+     52
+    ],
+    "exploded": [
+     331,
+     52,
+     331,
+     52
+    ]
+   },
+   "stage": {
+    "numbers": {
+     "assembled_opaque": 0,
+     "band_css": {
+      "contain": [
+       20,
+       56
+      ],
+      "cover": [
+       38,
+       104
+      ]
+     },
+     "card_px": [
+      69,
+      191
+     ],
+     "clearance_mm": {
+      "bodies": 3.8,
+      "other_finger": 12,
+      "stacks": 40
+     },
+     "drape_step_mm": 31.184,
+     "face_tilt_deg": 1.482,
+     "ghost_cover": 0.991,
+     "jaw_gap_mm": 69.433,
+     "near_seen": 1,
+     "opaque_max": 0,
+     "stacks_apart_px": 74.4,
+     "step_mm": 9.437,
+     "visible_min": 0.444
+    },
+    "scene": "scenes/agilex-piper.json",
+    "scene_sha256": "a3c09fd2dcf967732f37c689cb193de9322b95b725450849c04c6179299ab3cd"
+   },
+   "view_sha256": "d8f62f02c31bbc3399cff1c62208165df0188518a995a5f862ef3284312bf685"
+  },
+  "agilex-piper-4mm": {
+   "art": {
+    "build_id": "surface-17x14-df15367723e4",
+    "bytes": 9023,
+    "json_sha256": "11bdc7f61529f344de3e5a3c6550a640c98d6aa33b696d1ba9750b459beff8e4",
+    "path": "art/agilex-piper-4mm.json.gz",
+    "sha256": "4c6b7ed8f94d73a790357fc0ad965d51ed89a4928775ae7f8277834e473edbaa"
+   },
+   "build_id": "surface-17x14-df15367723e4",
+   "figure_sha256": "e38217818ff99c16f8d898f74079f4297bb51b7613218839c04ae9f2a59ab1c1",
+   "files": {
+    "assembled": {
+     "bytes": 28742,
+     "height": 800,
+     "path": "shots/agilex-piper-4mm.assembled.webp",
+     "sha256": "28d4d2932f40dc3b8c477c04e5605c15205f744142ac39897c401a8214a7b682",
+     "width": 1280
+    },
+    "card": {
+     "bytes": 20686,
+     "height": 400,
+     "path": "shots/agilex-piper-4mm.exploded.card.webp",
+     "sha256": "cdd9d2c80aad448451f6399d24a601a0cc6e8fa7464d13e045accf455dc4979f",
+     "width": 640
+    },
+    "exploded": {
+     "bytes": 32826,
+     "height": 800,
+     "path": "shots/agilex-piper-4mm.exploded.webp",
+     "sha256": "e3d2d26ed5c5b72d39df5f0417c3adc4c9eca1db6b840ab2a64cff04694ca8c3",
+     "width": 1280
+    }
+   },
+   "fit_sha256": "e1fafa26e460a2309b245d2a31e7fe344371332fa8e66783b311b801293c3fca",
+   "look": "photo",
+   "margins_px": {
+    "assembled": [
+     353,
+     52,
+     353,
+     52
+    ],
+    "exploded": [
+     330,
+     52,
+     331,
+     52
+    ]
+   },
+   "stage": {
+    "numbers": {
+     "assembled_opaque": 0,
+     "band_css": {
+      "contain": [
+       20,
+       54
+      ],
+      "cover": [
+       37,
+       102
+      ]
+     },
+     "card_px": [
+      69,
+      186
+     ],
+     "clearance_mm": {
+      "bodies": 3.6,
+      "other_finger": 12,
+      "stacks": 40
+     },
+     "drape_step_mm": 32.751,
+     "face_tilt_deg": 1.465,
+     "ghost_cover": 0.991,
+     "jaw_gap_mm": 69.405,
+     "near_seen": 1,
+     "opaque_max": 0,
+     "stacks_apart_px": 71.4,
+     "step_mm": 9.419,
+     "visible_min": 0.42
+    },
+    "scene": "scenes/agilex-piper.json",
+    "scene_sha256": "a3c09fd2dcf967732f37c689cb193de9322b95b725450849c04c6179299ab3cd"
+   },
+   "view_sha256": "d8f62f02c31bbc3399cff1c62208165df0188518a995a5f862ef3284312bf685"
+  },
   "arx-x5-1mm": {
    "art": {
     "build_id": "surface-32x26-e32a3d71cbce",
@@ -86,7 +430,7 @@
     "scene": "scenes/arx-x5.json",
     "scene_sha256": "de7b8190769354b4aad220d03218a10ca273f5d062e96cc1f60ae7ee67b0364c"
    },
-   "view_sha256": "38120a78b39dab48c9eeaefa95ff660e9e13e58035b54edd1c5f54db892089b3"
+   "view_sha256": "d8f62f02c31bbc3399cff1c62208165df0188518a995a5f862ef3284312bf685"
   },
   "arx-x5-2mm": {
    "art": {
@@ -172,7 +516,7 @@
     "scene": "scenes/arx-x5.json",
     "scene_sha256": "de7b8190769354b4aad220d03218a10ca273f5d062e96cc1f60ae7ee67b0364c"
    },
-   "view_sha256": "38120a78b39dab48c9eeaefa95ff660e9e13e58035b54edd1c5f54db892089b3"
+   "view_sha256": "d8f62f02c31bbc3399cff1c62208165df0188518a995a5f862ef3284312bf685"
   },
   "arx-x5-3mm": {
    "art": {
@@ -258,7 +602,7 @@
     "scene": "scenes/arx-x5.json",
     "scene_sha256": "de7b8190769354b4aad220d03218a10ca273f5d062e96cc1f60ae7ee67b0364c"
    },
-   "view_sha256": "38120a78b39dab48c9eeaefa95ff660e9e13e58035b54edd1c5f54db892089b3"
+   "view_sha256": "d8f62f02c31bbc3399cff1c62208165df0188518a995a5f862ef3284312bf685"
   },
   "arx-x5-4mm": {
    "art": {
@@ -344,7 +688,351 @@
     "scene": "scenes/arx-x5.json",
     "scene_sha256": "de7b8190769354b4aad220d03218a10ca273f5d062e96cc1f60ae7ee67b0364c"
    },
-   "view_sha256": "38120a78b39dab48c9eeaefa95ff660e9e13e58035b54edd1c5f54db892089b3"
+   "view_sha256": "d8f62f02c31bbc3399cff1c62208165df0188518a995a5f862ef3284312bf685"
+  },
+  "enactic-openarm-1.5mm": {
+   "art": {
+    "build_id": "surface-7x13-41c268c40e82",
+    "bytes": 7801,
+    "json_sha256": "7071d9814ac0d27691789a226a088f7e52810e8256bf6c3eb39803c0fed929a8",
+    "path": "art/enactic-openarm-1.5mm.json.gz",
+    "sha256": "d352892b2c58dfc2a3d22d37a1685d71d604c99e7bf302ad5ccf88beba4725cf"
+   },
+   "build_id": "surface-7x13-41c268c40e82",
+   "figure_sha256": "e38217818ff99c16f8d898f74079f4297bb51b7613218839c04ae9f2a59ab1c1",
+   "files": {
+    "assembled": {
+     "bytes": 25604,
+     "height": 800,
+     "path": "shots/enactic-openarm-1.5mm.assembled.webp",
+     "sha256": "695f7dc57fb66aa0c08407d26cc53bbe32c6621d6a36bb48c73cd8459112926c",
+     "width": 1280
+    },
+    "card": {
+     "bytes": 21426,
+     "height": 400,
+     "path": "shots/enactic-openarm-1.5mm.exploded.card.webp",
+     "sha256": "68fca76af9da69231fa82ebda704b0a225d15d056a9719252f9c14290b363da3",
+     "width": 640
+    },
+    "exploded": {
+     "bytes": 31064,
+     "height": 800,
+     "path": "shots/enactic-openarm-1.5mm.exploded.webp",
+     "sha256": "40365ae0486ce3c8ee3097b7ad4353de7fec42178754774a732c535be79bb373",
+     "width": 1280
+    }
+   },
+   "fit_sha256": "36cf3b3d62d64cfda7a4cd96e196e188def9def41729e1d05cf8cb4fdd26f1ae",
+   "look": "photo",
+   "margins_px": {
+    "assembled": [
+     308,
+     52,
+     309,
+     52
+    ],
+    "exploded": [
+     289,
+     52,
+     290,
+     52
+    ]
+   },
+   "stage": {
+    "numbers": {
+     "assembled_opaque": 0,
+     "band_css": {
+      "contain": [
+       7,
+       10
+      ],
+      "cover": [
+       14,
+       18
+      ]
+     },
+     "card_px": [
+      26,
+      33
+     ],
+     "clearance_mm": {
+      "bodies": 12,
+      "other_finger": 12,
+      "stacks": 49.6
+     },
+     "drape_step_mm": 11.955,
+     "face_tilt_deg": 0,
+     "ghost_cover": 0.997,
+     "jaw_gap_mm": 85.978,
+     "near_seen": 1,
+     "opaque_max": 0,
+     "stacks_apart_px": 179.3,
+     "step_mm": 11.787,
+     "visible_min": 1
+    },
+    "scene": "scenes/enactic-openarm.json",
+    "scene_sha256": "8eb74c9b5f37739debb9951b0ad8174f9a18b6227021b26b3860b1e91016626d"
+   },
+   "view_sha256": "d8f62f02c31bbc3399cff1c62208165df0188518a995a5f862ef3284312bf685"
+  },
+  "enactic-openarm-1mm": {
+   "art": {
+    "build_id": "surface-10x20-f91bdea60002",
+    "bytes": 9172,
+    "json_sha256": "43660d798e622cd36c56f35a413a0bde6f457e92d3d2258eb2dfc7cfa791b32f",
+    "path": "art/enactic-openarm-1mm.json.gz",
+    "sha256": "a8db61ce554fde29d4bdd1a7fc47b169af74c5e4befa3c5792c34f8ad1c018a4"
+   },
+   "build_id": "surface-10x20-f91bdea60002",
+   "figure_sha256": "e38217818ff99c16f8d898f74079f4297bb51b7613218839c04ae9f2a59ab1c1",
+   "files": {
+    "assembled": {
+     "bytes": 25920,
+     "height": 800,
+     "path": "shots/enactic-openarm-1mm.assembled.webp",
+     "sha256": "e50c1947238202aa133dd92e05374bf80072f2ae36dc8d50984ab9446a456aa7",
+     "width": 1280
+    },
+    "card": {
+     "bytes": 21518,
+     "height": 400,
+     "path": "shots/enactic-openarm-1mm.exploded.card.webp",
+     "sha256": "1a8c3d88aaffe5b6b8ce7c4a83b3a47dece95334739a585b881dc24a32cd090d",
+     "width": 640
+    },
+    "exploded": {
+     "bytes": 31598,
+     "height": 800,
+     "path": "shots/enactic-openarm-1mm.exploded.webp",
+     "sha256": "d5613c2bb98d9dbba6935310055b92a9aa03ec20eeaddc68fcb278ad47717c8e",
+     "width": 1280
+    }
+   },
+   "fit_sha256": "e91950bef03de373cae9fb851e2e502ca3e97f52abe157c2a814ef904e668c98",
+   "look": "photo",
+   "margins_px": {
+    "assembled": [
+     308,
+     52,
+     309,
+     52
+    ],
+    "exploded": [
+     289,
+     52,
+     290,
+     52
+    ]
+   },
+   "stage": {
+    "numbers": {
+     "assembled_opaque": 0,
+     "band_css": {
+      "contain": [
+       8,
+       10
+      ],
+      "cover": [
+       14,
+       18
+      ]
+     },
+     "card_px": [
+      26,
+      34
+     ],
+     "clearance_mm": {
+      "bodies": 12,
+      "other_finger": 12,
+      "stacks": 49.6
+     },
+     "drape_step_mm": 12.788,
+     "face_tilt_deg": 0,
+     "ghost_cover": 0.995,
+     "jaw_gap_mm": 85.978,
+     "near_seen": 1,
+     "opaque_max": 0,
+     "stacks_apart_px": 176.6,
+     "step_mm": 11.787,
+     "visible_min": 1
+    },
+    "scene": "scenes/enactic-openarm.json",
+    "scene_sha256": "8eb74c9b5f37739debb9951b0ad8174f9a18b6227021b26b3860b1e91016626d"
+   },
+   "view_sha256": "d8f62f02c31bbc3399cff1c62208165df0188518a995a5f862ef3284312bf685"
+  },
+  "enactic-openarm-2.5mm": {
+   "art": {
+    "build_id": "surface-4x7-26531b41a24f",
+    "bytes": 5704,
+    "json_sha256": "6ca89fbc06fde5e7fc8ba91ff9ef8100c0ea9173b3cd062bb96ee1a9becac6b5",
+    "path": "art/enactic-openarm-2.5mm.json.gz",
+    "sha256": "1c1f40bc81eab3381a0f90804105ea0d1d76873281d238c9e99632de465f8abc"
+   },
+   "build_id": "surface-4x7-26531b41a24f",
+   "figure_sha256": "e38217818ff99c16f8d898f74079f4297bb51b7613218839c04ae9f2a59ab1c1",
+   "files": {
+    "assembled": {
+     "bytes": 25174,
+     "height": 800,
+     "path": "shots/enactic-openarm-2.5mm.assembled.webp",
+     "sha256": "2469ce9341302888d92dbf48347091391e08f9911be93dc8f60f138387470769",
+     "width": 1280
+    },
+    "card": {
+     "bytes": 20876,
+     "height": 400,
+     "path": "shots/enactic-openarm-2.5mm.exploded.card.webp",
+     "sha256": "55a0d334c93114048620c545aed8c109395cd45b88427bfcff64aa9a537f5eec",
+     "width": 640
+    },
+    "exploded": {
+     "bytes": 30356,
+     "height": 800,
+     "path": "shots/enactic-openarm-2.5mm.exploded.webp",
+     "sha256": "24358654bed5ee46233d5d592727c89fa6cab5e29acbd7754d0a61e5254e78bb",
+     "width": 1280
+    }
+   },
+   "fit_sha256": "af88a38286f3daba5cc82c276af9435c14899b9344c1a554ad93e35ed1ff65e9",
+   "look": "photo",
+   "margins_px": {
+    "assembled": [
+     308,
+     52,
+     309,
+     52
+    ],
+    "exploded": [
+     289,
+     52,
+     290,
+     52
+    ]
+   },
+   "stage": {
+    "numbers": {
+     "assembled_opaque": 0,
+     "band_css": {
+      "contain": [
+       7,
+       9
+      ],
+      "cover": [
+       12,
+       17
+      ]
+     },
+     "card_px": [
+      23,
+      31
+     ],
+     "clearance_mm": {
+      "bodies": 12,
+      "other_finger": 12,
+      "stacks": 54.4
+     },
+     "drape_step_mm": 10.193,
+     "face_tilt_deg": 0,
+     "ghost_cover": 0.996,
+     "jaw_gap_mm": 85.978,
+     "near_seen": 1,
+     "opaque_max": 0,
+     "stacks_apart_px": 201.8,
+     "step_mm": 10.193,
+     "visible_min": 1
+    },
+    "scene": "scenes/enactic-openarm.json",
+    "scene_sha256": "8eb74c9b5f37739debb9951b0ad8174f9a18b6227021b26b3860b1e91016626d"
+   },
+   "view_sha256": "d8f62f02c31bbc3399cff1c62208165df0188518a995a5f862ef3284312bf685"
+  },
+  "enactic-openarm-2mm": {
+   "art": {
+    "build_id": "surface-5x9-e06f96efd96e",
+    "bytes": 5947,
+    "json_sha256": "672bf7865a9d45c90e908881e96ef75f5027849079ad4535908f21891580ef64",
+    "path": "art/enactic-openarm-2mm.json.gz",
+    "sha256": "6492ea9c8bead2016344ee0132e516295b4e4e10ca68eebee4958873305a8700"
+   },
+   "build_id": "surface-5x9-e06f96efd96e",
+   "figure_sha256": "e38217818ff99c16f8d898f74079f4297bb51b7613218839c04ae9f2a59ab1c1",
+   "files": {
+    "assembled": {
+     "bytes": 25198,
+     "height": 800,
+     "path": "shots/enactic-openarm-2mm.assembled.webp",
+     "sha256": "2181ed24bac82c9085bff106624bd44b5606e676c38346d208c1ceea1dcd6443",
+     "width": 1280
+    },
+    "card": {
+     "bytes": 21328,
+     "height": 400,
+     "path": "shots/enactic-openarm-2mm.exploded.card.webp",
+     "sha256": "5d6e19a00515114d090a2f37ba232c101237f26a6cf2ba17f8e0e898b996c4cf",
+     "width": 640
+    },
+    "exploded": {
+     "bytes": 29982,
+     "height": 800,
+     "path": "shots/enactic-openarm-2mm.exploded.webp",
+     "sha256": "bf380e5ac0c30022134644f9e8aecc161ead53a16bbdad435e4770a7001b5c72",
+     "width": 1280
+    }
+   },
+   "fit_sha256": "67d67591545351a3435d1f81045fce705e7deb147ce5c223ec14be96488bc363",
+   "look": "photo",
+   "margins_px": {
+    "assembled": [
+     308,
+     52,
+     309,
+     52
+    ],
+    "exploded": [
+     289,
+     52,
+     290,
+     52
+    ]
+   },
+   "stage": {
+    "numbers": {
+     "assembled_opaque": 0,
+     "band_css": {
+      "contain": [
+       7,
+       9
+      ],
+      "cover": [
+       13,
+       18
+      ]
+     },
+     "card_px": [
+      24,
+      33
+     ],
+     "clearance_mm": {
+      "bodies": 12,
+      "other_finger": 12,
+      "stacks": 52.7
+     },
+     "drape_step_mm": 10.753,
+     "face_tilt_deg": 0,
+     "ghost_cover": 0.998,
+     "jaw_gap_mm": 85.978,
+     "near_seen": 1,
+     "opaque_max": 0,
+     "stacks_apart_px": 194.8,
+     "step_mm": 10.753,
+     "visible_min": 1
+    },
+    "scene": "scenes/enactic-openarm.json",
+    "scene_sha256": "8eb74c9b5f37739debb9951b0ad8174f9a18b6227021b26b3860b1e91016626d"
+   },
+   "view_sha256": "d8f62f02c31bbc3399cff1c62208165df0188518a995a5f862ef3284312bf685"
   },
   "franka-hand-1.5mm": {
    "art": {
@@ -430,7 +1118,7 @@
     "scene": "scenes/franka-hand.json",
     "scene_sha256": "d4724a41d53deb9ed3b3af407e5c1339dfba741c52bbcd1870394dbaeb60094e"
    },
-   "view_sha256": "38120a78b39dab48c9eeaefa95ff660e9e13e58035b54edd1c5f54db892089b3"
+   "view_sha256": "d8f62f02c31bbc3399cff1c62208165df0188518a995a5f862ef3284312bf685"
   },
   "franka-hand-1mm": {
    "art": {
@@ -516,7 +1204,7 @@
     "scene": "scenes/franka-hand.json",
     "scene_sha256": "d4724a41d53deb9ed3b3af407e5c1339dfba741c52bbcd1870394dbaeb60094e"
    },
-   "view_sha256": "38120a78b39dab48c9eeaefa95ff660e9e13e58035b54edd1c5f54db892089b3"
+   "view_sha256": "d8f62f02c31bbc3399cff1c62208165df0188518a995a5f862ef3284312bf685"
   },
   "franka-hand-2.5mm": {
    "art": {
@@ -602,7 +1290,7 @@
     "scene": "scenes/franka-hand.json",
     "scene_sha256": "d4724a41d53deb9ed3b3af407e5c1339dfba741c52bbcd1870394dbaeb60094e"
    },
-   "view_sha256": "38120a78b39dab48c9eeaefa95ff660e9e13e58035b54edd1c5f54db892089b3"
+   "view_sha256": "d8f62f02c31bbc3399cff1c62208165df0188518a995a5f862ef3284312bf685"
   },
   "franka-hand-2mm": {
    "art": {
@@ -688,7 +1376,351 @@
     "scene": "scenes/franka-hand.json",
     "scene_sha256": "d4724a41d53deb9ed3b3af407e5c1339dfba741c52bbcd1870394dbaeb60094e"
    },
-   "view_sha256": "38120a78b39dab48c9eeaefa95ff660e9e13e58035b54edd1c5f54db892089b3"
+   "view_sha256": "d8f62f02c31bbc3399cff1c62208165df0188518a995a5f862ef3284312bf685"
+  },
+  "galaxea-r1-lite-1.5mm": {
+   "art": {
+    "build_id": "surface-32x12-dd03906dd638",
+    "bytes": 10505,
+    "json_sha256": "4437b9d206f4b48b2c2c8c47d348c362dfb268063be7bc31413735b8191bf201",
+    "path": "art/galaxea-r1-lite-1.5mm.json.gz",
+    "sha256": "2dd4a0e138c2bc51bab59ffd8b3dbdfa9a710e851c45fc9378b965251910c1fb"
+   },
+   "build_id": "surface-32x12-dd03906dd638",
+   "figure_sha256": "e38217818ff99c16f8d898f74079f4297bb51b7613218839c04ae9f2a59ab1c1",
+   "files": {
+    "assembled": {
+     "bytes": 20358,
+     "height": 800,
+     "path": "shots/galaxea-r1-lite-1.5mm.assembled.webp",
+     "sha256": "bd5217c63a1247189cfd3083d87ee07cc2bd5bf9f92e2577d4654b0c22e77ab4",
+     "width": 1280
+    },
+    "card": {
+     "bytes": 19854,
+     "height": 400,
+     "path": "shots/galaxea-r1-lite-1.5mm.exploded.card.webp",
+     "sha256": "877a084e33c392126585f4d9ab19b22ac99e50f6620e8ea979aacdd18eb88d09",
+     "width": 640
+    },
+    "exploded": {
+     "bytes": 28028,
+     "height": 800,
+     "path": "shots/galaxea-r1-lite-1.5mm.exploded.webp",
+     "sha256": "aceaa58e3c49ac1b112d632a08c5e092d6c834daba5bacf09cfd8119960630f9",
+     "width": 1280
+    }
+   },
+   "fit_sha256": "410d9cc03330c8172edc3494de53e65deeaf9b2dddc1050b4e411594f7e5cd65",
+   "look": "photo",
+   "margins_px": {
+    "assembled": [
+     380,
+     52,
+     381,
+     52
+    ],
+    "exploded": [
+     357,
+     52,
+     358,
+     52
+    ]
+   },
+   "stage": {
+    "numbers": {
+     "assembled_opaque": 0,
+     "band_css": {
+      "contain": [
+       7,
+       44
+      ],
+      "cover": [
+       13,
+       83
+      ]
+     },
+     "card_px": [
+      25,
+      153
+     ],
+     "clearance_mm": {
+      "bodies": 8.3,
+      "other_finger": 12,
+      "stacks": 57.5
+     },
+     "drape_step_mm": 14.934,
+     "face_tilt_deg": 0,
+     "ghost_cover": 0.99,
+     "jaw_gap_mm": 99.497,
+     "near_seen": 1,
+     "opaque_max": 0,
+     "stacks_apart_px": 190.6,
+     "step_mm": 13.68,
+     "visible_min": 1
+    },
+    "scene": "scenes/galaxea-r1-lite.json",
+    "scene_sha256": "1bbf7fd48edd751b53ed7d798b07e224eea141b22ced5c9c01a89ff3988acb0d"
+   },
+   "view_sha256": "d8f62f02c31bbc3399cff1c62208165df0188518a995a5f862ef3284312bf685"
+  },
+  "galaxea-r1-lite-1mm": {
+   "art": {
+    "build_id": "surface-32x16-3ed91ae4aa10",
+    "bytes": 11461,
+    "json_sha256": "754cfc898651a71a7014acf4d15b568002d2dc49779ca16b1373f00a889def61",
+    "path": "art/galaxea-r1-lite-1mm.json.gz",
+    "sha256": "de2bc8fe27c9791165ac2277d78f64b8aba32bfd588abd1737d72cd37476d3af"
+   },
+   "build_id": "surface-32x16-3ed91ae4aa10",
+   "figure_sha256": "e38217818ff99c16f8d898f74079f4297bb51b7613218839c04ae9f2a59ab1c1",
+   "files": {
+    "assembled": {
+     "bytes": 20110,
+     "height": 800,
+     "path": "shots/galaxea-r1-lite-1mm.assembled.webp",
+     "sha256": "5876b37696b726fa98455f91507bd31023f397191cff5042022f2b7513e3c5ff",
+     "width": 1280
+    },
+    "card": {
+     "bytes": 19386,
+     "height": 400,
+     "path": "shots/galaxea-r1-lite-1mm.exploded.card.webp",
+     "sha256": "838ead7684e7043248222776380c15e2399f65fa0d3ca2478f125f9c7abf3e05",
+     "width": 640
+    },
+    "exploded": {
+     "bytes": 26720,
+     "height": 800,
+     "path": "shots/galaxea-r1-lite-1mm.exploded.webp",
+     "sha256": "ad882c1edaff9a2a880b7d961e0b88161819ec0c9ce919dcd13ff748ca0ea428",
+     "width": 1280
+    }
+   },
+   "fit_sha256": "d82a133775e8ef47f7f74a32c302aa5a19e62a865ae58131ad94b54f0e4816e1",
+   "look": "photo",
+   "margins_px": {
+    "assembled": [
+     380,
+     52,
+     381,
+     52
+    ],
+    "exploded": [
+     357,
+     52,
+     358,
+     52
+    ]
+   },
+   "stage": {
+    "numbers": {
+     "assembled_opaque": 0,
+     "band_css": {
+      "contain": [
+       6,
+       44
+      ],
+      "cover": [
+       11,
+       83
+      ]
+     },
+     "card_px": [
+      20,
+      153
+     ],
+     "clearance_mm": {
+      "bodies": 7.7,
+      "other_finger": 12,
+      "stacks": 57.5
+     },
+     "drape_step_mm": 13.68,
+     "face_tilt_deg": 0,
+     "ghost_cover": 0.991,
+     "jaw_gap_mm": 99.497,
+     "near_seen": 1,
+     "opaque_max": 0,
+     "stacks_apart_px": 196.3,
+     "step_mm": 13.68,
+     "visible_min": 1
+    },
+    "scene": "scenes/galaxea-r1-lite.json",
+    "scene_sha256": "1bbf7fd48edd751b53ed7d798b07e224eea141b22ced5c9c01a89ff3988acb0d"
+   },
+   "view_sha256": "d8f62f02c31bbc3399cff1c62208165df0188518a995a5f862ef3284312bf685"
+  },
+  "galaxea-r1-lite-2mm": {
+   "art": {
+    "build_id": "surface-27x11-6683927e8a29",
+    "bytes": 9427,
+    "json_sha256": "c9061dd56cd8aa531d14e985ce3c1bb694017647c691cf95d27fc5b0e48b355b",
+    "path": "art/galaxea-r1-lite-2mm.json.gz",
+    "sha256": "7317b76236352fdf96ebcc18d9eb6f276443c07d590db8c2ac4b3ea42095c18f"
+   },
+   "build_id": "surface-27x11-6683927e8a29",
+   "figure_sha256": "e38217818ff99c16f8d898f74079f4297bb51b7613218839c04ae9f2a59ab1c1",
+   "files": {
+    "assembled": {
+     "bytes": 20454,
+     "height": 800,
+     "path": "shots/galaxea-r1-lite-2mm.assembled.webp",
+     "sha256": "173cedb9853acb874a1c555657c5c0e431997add2262df701ea0e71b357bda44",
+     "width": 1280
+    },
+    "card": {
+     "bytes": 19974,
+     "height": 400,
+     "path": "shots/galaxea-r1-lite-2mm.exploded.card.webp",
+     "sha256": "27a40db1b93af83c53beb674b0ac0f9670e595693fcdf7de36bcd27033c16f32",
+     "width": 640
+    },
+    "exploded": {
+     "bytes": 27704,
+     "height": 800,
+     "path": "shots/galaxea-r1-lite-2mm.exploded.webp",
+     "sha256": "435250ad761b614467c223d5c4c395c08f40436a4173ff13464191631fa864eb",
+     "width": 1280
+    }
+   },
+   "fit_sha256": "d3cec78a48cca2f59ccaf618e0556a5f3a77e885cca6f4051d3ff8713f6f0cfe",
+   "look": "photo",
+   "margins_px": {
+    "assembled": [
+     380,
+     52,
+     381,
+     52
+    ],
+    "exploded": [
+     357,
+     52,
+     358,
+     52
+    ]
+   },
+   "stage": {
+    "numbers": {
+     "assembled_opaque": 0,
+     "band_css": {
+      "contain": [
+       7,
+       44
+      ],
+      "cover": [
+       14,
+       83
+      ]
+     },
+     "card_px": [
+      26,
+      151
+     ],
+     "clearance_mm": {
+      "bodies": 7.8,
+      "other_finger": 12,
+      "stacks": 57.5
+     },
+     "drape_step_mm": 16.006,
+     "face_tilt_deg": 0,
+     "ghost_cover": 0.99,
+     "jaw_gap_mm": 99.497,
+     "near_seen": 1,
+     "opaque_max": 0,
+     "stacks_apart_px": 186.6,
+     "step_mm": 13.68,
+     "visible_min": 0.999
+    },
+    "scene": "scenes/galaxea-r1-lite.json",
+    "scene_sha256": "1bbf7fd48edd751b53ed7d798b07e224eea141b22ced5c9c01a89ff3988acb0d"
+   },
+   "view_sha256": "d8f62f02c31bbc3399cff1c62208165df0188518a995a5f862ef3284312bf685"
+  },
+  "galaxea-r1-lite-3mm": {
+   "art": {
+    "build_id": "surface-18x7-e15f5655008d",
+    "bytes": 7452,
+    "json_sha256": "4877c88b0faf49d158013d5bf33f64740c0eb74d35a54e0237ddc8c97a7ed6ed",
+    "path": "art/galaxea-r1-lite-3mm.json.gz",
+    "sha256": "9effecbd3667e4ca806b3e586b8ccbf105e5e18fcd45d0e44cd391705c8eae40"
+   },
+   "build_id": "surface-18x7-e15f5655008d",
+   "figure_sha256": "e38217818ff99c16f8d898f74079f4297bb51b7613218839c04ae9f2a59ab1c1",
+   "files": {
+    "assembled": {
+     "bytes": 19864,
+     "height": 800,
+     "path": "shots/galaxea-r1-lite-3mm.assembled.webp",
+     "sha256": "2b45fdc9e4c9408df191b4559c9733e906aebc3473b356754d38a8441909baa4",
+     "width": 1280
+    },
+    "card": {
+     "bytes": 20168,
+     "height": 400,
+     "path": "shots/galaxea-r1-lite-3mm.exploded.card.webp",
+     "sha256": "9f4f5adddae5543c11aef247d3045a5ca41f35f9208f6fb52b1ce96db70eb85d",
+     "width": 640
+    },
+    "exploded": {
+     "bytes": 28152,
+     "height": 800,
+     "path": "shots/galaxea-r1-lite-3mm.exploded.webp",
+     "sha256": "f481f00712e6d4e6d5f32ae4253773e60befe08de37ba3204b71fbf89d36c5d5",
+     "width": 1280
+    }
+   },
+   "fit_sha256": "644601ab949a75fe7ca90be294845e9de4708ae743600ffc7e8d68872899e226",
+   "look": "photo",
+   "margins_px": {
+    "assembled": [
+     380,
+     52,
+     381,
+     52
+    ],
+    "exploded": [
+     357,
+     52,
+     358,
+     52
+    ]
+   },
+   "stage": {
+    "numbers": {
+     "assembled_opaque": 0,
+     "band_css": {
+      "contain": [
+       7,
+       38
+      ],
+      "cover": [
+       14,
+       72
+      ]
+     },
+     "card_px": [
+      26,
+      131
+     ],
+     "clearance_mm": {
+      "bodies": 12,
+      "other_finger": 12,
+      "stacks": 57.5
+     },
+     "drape_step_mm": 14.075,
+     "face_tilt_deg": 0,
+     "ghost_cover": 0.986,
+     "jaw_gap_mm": 99.497,
+     "near_seen": 1,
+     "opaque_max": 0,
+     "stacks_apart_px": 191.5,
+     "step_mm": 13.68,
+     "visible_min": 1
+    },
+    "scene": "scenes/galaxea-r1-lite.json",
+    "scene_sha256": "1bbf7fd48edd751b53ed7d798b07e224eea141b22ced5c9c01a89ff3988acb0d"
+   },
+   "view_sha256": "d8f62f02c31bbc3399cff1c62208165df0188518a995a5f862ef3284312bf685"
   },
   "i2rt-yam-1mm": {
    "art": {
@@ -774,7 +1806,7 @@
     "scene": "scenes/i2rt-yam.json",
     "scene_sha256": "7d187392e63cb33adabbfaaf97ecf336aaaf88af756de64b91eff465017e7cf4"
    },
-   "view_sha256": "38120a78b39dab48c9eeaefa95ff660e9e13e58035b54edd1c5f54db892089b3"
+   "view_sha256": "d8f62f02c31bbc3399cff1c62208165df0188518a995a5f862ef3284312bf685"
   },
   "i2rt-yam-2mm": {
    "art": {
@@ -860,7 +1892,7 @@
     "scene": "scenes/i2rt-yam.json",
     "scene_sha256": "7d187392e63cb33adabbfaaf97ecf336aaaf88af756de64b91eff465017e7cf4"
    },
-   "view_sha256": "38120a78b39dab48c9eeaefa95ff660e9e13e58035b54edd1c5f54db892089b3"
+   "view_sha256": "d8f62f02c31bbc3399cff1c62208165df0188518a995a5f862ef3284312bf685"
   },
   "i2rt-yam-3mm": {
    "art": {
@@ -946,7 +1978,7 @@
     "scene": "scenes/i2rt-yam.json",
     "scene_sha256": "7d187392e63cb33adabbfaaf97ecf336aaaf88af756de64b91eff465017e7cf4"
    },
-   "view_sha256": "38120a78b39dab48c9eeaefa95ff660e9e13e58035b54edd1c5f54db892089b3"
+   "view_sha256": "d8f62f02c31bbc3399cff1c62208165df0188518a995a5f862ef3284312bf685"
   },
   "i2rt-yam-4mm": {
    "art": {
@@ -1032,7 +2064,699 @@
     "scene": "scenes/i2rt-yam.json",
     "scene_sha256": "7d187392e63cb33adabbfaaf97ecf336aaaf88af756de64b91eff465017e7cf4"
    },
-   "view_sha256": "38120a78b39dab48c9eeaefa95ff660e9e13e58035b54edd1c5f54db892089b3"
+   "view_sha256": "d8f62f02c31bbc3399cff1c62208165df0188518a995a5f862ef3284312bf685"
+  },
+  "leap-hand-1.5mm": {
+   "art": {
+    "build_id": "surface-17x9-91ad61bbbda6",
+    "bytes": 6912,
+    "json_sha256": "cfd71f908ab1b28442d3b34324253b9282fcb3676fedb1ab0a93a8f6af160b50",
+    "path": "art/leap-hand-1.5mm.json.gz",
+    "sha256": "a5eed77b6d94b773210a1d46bb991f78fe26b30bc3333ad14af268c9bd5c8189"
+   },
+   "build_id": "surface-17x9-91ad61bbbda6",
+   "figure_sha256": "e38217818ff99c16f8d898f74079f4297bb51b7613218839c04ae9f2a59ab1c1",
+   "files": {
+    "assembled": {
+     "bytes": 30938,
+     "height": 800,
+     "path": "shots/leap-hand-1.5mm.assembled.webp",
+     "sha256": "f3340aff3d6e20b8b1a3ee9c509585d3ef9d3c00f8519cb157fe2d2817c1d06b",
+     "width": 1280
+    },
+    "card": {
+     "bytes": 20028,
+     "height": 400,
+     "path": "shots/leap-hand-1.5mm.exploded.card.webp",
+     "sha256": "03456417853c9769f2ff15c665bec340ab575c5fffca705db21a388cade85035",
+     "width": 640
+    },
+    "exploded": {
+     "bytes": 32730,
+     "height": 800,
+     "path": "shots/leap-hand-1.5mm.exploded.webp",
+     "sha256": "2ea1a5b614df64c53dca43ed56d133163d0c0b0f61beaf8aeea46206034df52f",
+     "width": 1280
+    }
+   },
+   "fit_sha256": "d4211f0cf321fb9b3d070ebd5ff8bc55914916d6e7d3d4670f3c4228685088d7",
+   "look": "photo",
+   "margins_px": {
+    "assembled": [
+     365,
+     52,
+     366,
+     52
+    ],
+    "exploded": [
+     359,
+     52,
+     360,
+     52
+    ]
+   },
+   "stage": {
+    "numbers": {
+     "assembled_opaque": 0,
+     "band_css": {
+      "contain": [
+       4,
+       15
+      ],
+      "cover": [
+       8,
+       29
+      ]
+     },
+     "card_px": [
+      15,
+      53
+     ],
+     "clearance_mm": {
+      "bodies": 12,
+      "other_finger": 12,
+      "stacks": 38.3
+     },
+     "drape_step_mm": 10.248,
+     "extra_seen": 0.894,
+     "face_tilt_deg": 0,
+     "ghost_cover": 1,
+     "jaw_gap_mm": 66.467,
+     "near_seen": 1,
+     "opaque_max": 0,
+     "stacks_apart_px": 38.5,
+     "step_mm": 9.055,
+     "visible_min": 1
+    },
+    "scene": "scenes/leap-hand.json",
+    "scene_sha256": "f2b931eeee8c9e3173a201d684f3da71fe7d6ea7c04e485f5df5ad0d95f2c8f5"
+   },
+   "view_sha256": "d8f62f02c31bbc3399cff1c62208165df0188518a995a5f862ef3284312bf685"
+  },
+  "leap-hand-1mm": {
+   "art": {
+    "build_id": "surface-25x13-ecaed6b15fc8",
+    "bytes": 8515,
+    "json_sha256": "07eb18e7be8e790e147129afd3d5a7c04a8b3d7f8e3f858ff17733fe178ba891",
+    "path": "art/leap-hand-1mm.json.gz",
+    "sha256": "524bf89091c0b7d8881d98912779f04c4ce8c0ed97eee201fd312646ca210897"
+   },
+   "build_id": "surface-25x13-ecaed6b15fc8",
+   "figure_sha256": "e38217818ff99c16f8d898f74079f4297bb51b7613218839c04ae9f2a59ab1c1",
+   "files": {
+    "assembled": {
+     "bytes": 31330,
+     "height": 800,
+     "path": "shots/leap-hand-1mm.assembled.webp",
+     "sha256": "20629e36c07e89b984c5932f918eea825df31b8190f652ad699ceaf5be1a37f8",
+     "width": 1280
+    },
+    "card": {
+     "bytes": 19568,
+     "height": 400,
+     "path": "shots/leap-hand-1mm.exploded.card.webp",
+     "sha256": "acdfe8f2e509cd8c9cc2b69276941057c98791dbb0b5485a1dc0dd903e3500db",
+     "width": 640
+    },
+    "exploded": {
+     "bytes": 32416,
+     "height": 800,
+     "path": "shots/leap-hand-1mm.exploded.webp",
+     "sha256": "d2ed1b34d75258355d3c5188fb9790c53ff93465d79a019ff4234d442ac7afb6",
+     "width": 1280
+    }
+   },
+   "fit_sha256": "cfe619e5903b2b49d361fed1828784905f72639c2e23644b9eb7da5546d619ac",
+   "look": "photo",
+   "margins_px": {
+    "assembled": [
+     365,
+     52,
+     366,
+     52
+    ],
+    "exploded": [
+     359,
+     52,
+     360,
+     52
+    ]
+   },
+   "stage": {
+    "numbers": {
+     "assembled_opaque": 0,
+     "band_css": {
+      "contain": [
+       4,
+       15
+      ],
+      "cover": [
+       8,
+       29
+      ]
+     },
+     "card_px": [
+      15,
+      53
+     ],
+     "clearance_mm": {
+      "bodies": 12,
+      "other_finger": 12,
+      "stacks": 38.3
+     },
+     "drape_step_mm": 11.049,
+     "extra_seen": 0.894,
+     "face_tilt_deg": 0,
+     "ghost_cover": 1,
+     "jaw_gap_mm": 66.466,
+     "near_seen": 1,
+     "opaque_max": 0,
+     "stacks_apart_px": 33.1,
+     "step_mm": 9.055,
+     "visible_min": 0.998
+    },
+    "scene": "scenes/leap-hand.json",
+    "scene_sha256": "f2b931eeee8c9e3173a201d684f3da71fe7d6ea7c04e485f5df5ad0d95f2c8f5"
+   },
+   "view_sha256": "d8f62f02c31bbc3399cff1c62208165df0188518a995a5f862ef3284312bf685"
+  },
+  "leap-hand-2mm": {
+   "art": {
+    "build_id": "surface-13x6-caf1305f5b6b",
+    "bytes": 6219,
+    "json_sha256": "67c8c2603c68e1ebeebf3944bd3c01a5f1b89081809bf1e562fcf4063e2fe4c2",
+    "path": "art/leap-hand-2mm.json.gz",
+    "sha256": "b90b64b59c0b718cd95cdd6c38a90f96b40d0de95e5b8bb5b7e3ea4fced06692"
+   },
+   "build_id": "surface-13x6-caf1305f5b6b",
+   "figure_sha256": "e38217818ff99c16f8d898f74079f4297bb51b7613218839c04ae9f2a59ab1c1",
+   "files": {
+    "assembled": {
+     "bytes": 30466,
+     "height": 800,
+     "path": "shots/leap-hand-2mm.assembled.webp",
+     "sha256": "a870f9b8208469e23cff064cf8f59f0ef1c63a43971f73e9bc68c634d4a3235e",
+     "width": 1280
+    },
+    "card": {
+     "bytes": 19952,
+     "height": 400,
+     "path": "shots/leap-hand-2mm.exploded.card.webp",
+     "sha256": "cf99f8586813b1f24ec1db7a882a4a83e19320b89727ad37de449692e1d5f4db",
+     "width": 640
+    },
+    "exploded": {
+     "bytes": 32898,
+     "height": 800,
+     "path": "shots/leap-hand-2mm.exploded.webp",
+     "sha256": "9c6a3e90509cd1a0bacc136bf5772bd104afa2d8009a79d7dfec50abb32545da",
+     "width": 1280
+    }
+   },
+   "fit_sha256": "6646c6edd0970985f5e57e57ad1e14ceb9a1282252193fbb61d2f80b9cac8ced",
+   "look": "photo",
+   "margins_px": {
+    "assembled": [
+     365,
+     52,
+     366,
+     52
+    ],
+    "exploded": [
+     359,
+     52,
+     360,
+     52
+    ]
+   },
+   "stage": {
+    "numbers": {
+     "assembled_opaque": 0,
+     "band_css": {
+      "contain": [
+       4,
+       15
+      ],
+      "cover": [
+       8,
+       29
+      ]
+     },
+     "card_px": [
+      14,
+      53
+     ],
+     "clearance_mm": {
+      "bodies": 12,
+      "other_finger": 12,
+      "stacks": 39.4
+     },
+     "drape_step_mm": 8.682,
+     "extra_seen": 0.924,
+     "face_tilt_deg": 0,
+     "ghost_cover": 1,
+     "jaw_gap_mm": 66.469,
+     "near_seen": 1,
+     "opaque_max": 0,
+     "stacks_apart_px": 46.5,
+     "step_mm": 8.682,
+     "visible_min": 1
+    },
+    "scene": "scenes/leap-hand.json",
+    "scene_sha256": "f2b931eeee8c9e3173a201d684f3da71fe7d6ea7c04e485f5df5ad0d95f2c8f5"
+   },
+   "view_sha256": "d8f62f02c31bbc3399cff1c62208165df0188518a995a5f862ef3284312bf685"
+  },
+  "leap-hand-3mm": {
+   "art": {
+    "build_id": "surface-8x4-54c99c82e57f",
+    "bytes": 5109,
+    "json_sha256": "2c9a84c2ce09c60050b97a50a64271e13add4acf138639b82012bba3d7642e28",
+    "path": "art/leap-hand-3mm.json.gz",
+    "sha256": "d3a491d0426650297ad8a969f7873baa3ab30539b9359894ec1ebaf4970fdac2"
+   },
+   "build_id": "surface-8x4-54c99c82e57f",
+   "figure_sha256": "e38217818ff99c16f8d898f74079f4297bb51b7613218839c04ae9f2a59ab1c1",
+   "files": {
+    "assembled": {
+     "bytes": 30752,
+     "height": 800,
+     "path": "shots/leap-hand-3mm.assembled.webp",
+     "sha256": "a72932fc82806ddc971983830110b28c730b6ca8b2f820bb960ecd895f81a45b",
+     "width": 1280
+    },
+    "card": {
+     "bytes": 20040,
+     "height": 400,
+     "path": "shots/leap-hand-3mm.exploded.card.webp",
+     "sha256": "36764253625ad7f37c654eece2ae3cda5346aaf4ce98500fe88cf91a9a2db9c5",
+     "width": 640
+    },
+    "exploded": {
+     "bytes": 32924,
+     "height": 800,
+     "path": "shots/leap-hand-3mm.exploded.webp",
+     "sha256": "74ccfa04ef6b371fa57ed2d50e43e2fc597f932cbeb23b59d16d763475480913",
+     "width": 1280
+    }
+   },
+   "fit_sha256": "2b95bbbad1ca06dc0e5d9cd6acf97f0753e1f487129b8c865b5bd4aac15e1314",
+   "look": "photo",
+   "margins_px": {
+    "assembled": [
+     365,
+     52,
+     366,
+     52
+    ],
+    "exploded": [
+     359,
+     52,
+     360,
+     52
+    ]
+   },
+   "stage": {
+    "numbers": {
+     "assembled_opaque": 0,
+     "band_css": {
+      "contain": [
+       4,
+       15
+      ],
+      "cover": [
+       7,
+       28
+      ]
+     },
+     "card_px": [
+      14,
+      52
+     ],
+     "clearance_mm": {
+      "bodies": 12,
+      "other_finger": 12,
+      "stacks": 42.5
+     },
+     "drape_step_mm": 7.67,
+     "extra_seen": 0.923,
+     "face_tilt_deg": 0,
+     "ghost_cover": 1,
+     "jaw_gap_mm": 66.473,
+     "near_seen": 1,
+     "opaque_max": 0,
+     "stacks_apart_px": 62.6,
+     "step_mm": 7.67,
+     "visible_min": 1
+    },
+    "scene": "scenes/leap-hand.json",
+    "scene_sha256": "f2b931eeee8c9e3173a201d684f3da71fe7d6ea7c04e485f5df5ad0d95f2c8f5"
+   },
+   "view_sha256": "d8f62f02c31bbc3399cff1c62208165df0188518a995a5f862ef3284312bf685"
+  },
+  "leflexitac-1.5mm": {
+   "art": {
+    "build_id": "surface-32x18-096cb05ed1ce",
+    "bytes": 12154,
+    "json_sha256": "96c64e544581046535cdbadb1e987eb189a593875a088861333285a9859e874d",
+    "path": "art/leflexitac-1.5mm.json.gz",
+    "sha256": "048053b3fc9d0016a190c4928e07cffef76149cc6c45936e2f011d29089a5a13"
+   },
+   "build_id": "surface-32x18-096cb05ed1ce",
+   "figure_sha256": "e38217818ff99c16f8d898f74079f4297bb51b7613218839c04ae9f2a59ab1c1",
+   "files": {
+    "assembled": {
+     "bytes": 30566,
+     "height": 800,
+     "path": "shots/leflexitac-1.5mm.assembled.webp",
+     "sha256": "1d9353b95c1df4ad3defd85179d6210292f7498d43df8856c6f810ce8ec6ee50",
+     "width": 1280
+    },
+    "card": {
+     "bytes": 20794,
+     "height": 400,
+     "path": "shots/leflexitac-1.5mm.exploded.card.webp",
+     "sha256": "a0fd8d0897a504f79517ac5df226a4e2da0d46e76b99cb1518341ae01092cc84",
+     "width": 640
+    },
+    "exploded": {
+     "bytes": 37230,
+     "height": 800,
+     "path": "shots/leflexitac-1.5mm.exploded.webp",
+     "sha256": "a3fd0b1e9d4e5aa179e20d7e5bee606ddb0d1ada222c8c1672d1da5cfe4837e9",
+     "width": 1280
+    }
+   },
+   "fit_sha256": "fa4137c8e491bd01fd04039416ca8d19d7ee1f147273978a3aba9b10df8a7e86",
+   "look": "photo",
+   "margins_px": {
+    "assembled": [
+     351,
+     52,
+     351,
+     52
+    ],
+    "exploded": [
+     344,
+     52,
+     344,
+     52
+    ]
+   },
+   "stage": {
+    "numbers": {
+     "assembled_opaque": 0,
+     "band_css": {
+      "contain": [
+       34,
+       53
+      ],
+      "cover": [
+       64,
+       99
+      ]
+     },
+     "card_px": [
+      118,
+      181
+     ],
+     "clearance_mm": {
+      "bodies": 8.1,
+      "other_finger": 12,
+      "stacks": 18.5
+     },
+     "drape_step_mm": 19.883,
+     "face_tilt_deg": 32.407,
+     "ghost_cover": 0.617,
+     "jaw_gap_mm": 32.92,
+     "near_seen": 1,
+     "opaque_max": 0,
+     "stacks_apart_px": 29.2,
+     "step_mm": 4.688,
+     "visible_min": 0.279
+    },
+    "scene": "scenes/leflexitac.json",
+    "scene_sha256": "f570771546df8ddf3889b4b9c53f1b8f760287afadf1a2698183063ae52f2694"
+   },
+   "view_sha256": "d8f62f02c31bbc3399cff1c62208165df0188518a995a5f862ef3284312bf685"
+  },
+  "leflexitac-1mm": {
+   "art": {
+    "build_id": "surface-32x27-c4fdd1e36c93",
+    "bytes": 13190,
+    "json_sha256": "daa6849dba1c338f927302232b54c0f72d3213390e06dc2915d3b0a1fba0bcad",
+    "path": "art/leflexitac-1mm.json.gz",
+    "sha256": "4a2058a5c2b3eda5862a9003095b9d3f156866f43329908b9a76af3b154d4e9b"
+   },
+   "build_id": "surface-32x27-c4fdd1e36c93",
+   "figure_sha256": "e38217818ff99c16f8d898f74079f4297bb51b7613218839c04ae9f2a59ab1c1",
+   "files": {
+    "assembled": {
+     "bytes": 29464,
+     "height": 800,
+     "path": "shots/leflexitac-1mm.assembled.webp",
+     "sha256": "f18ee28b1379241ccb19b799593e4833b345964309d122ad523ca5898504a46a",
+     "width": 1280
+    },
+    "card": {
+     "bytes": 20250,
+     "height": 400,
+     "path": "shots/leflexitac-1mm.exploded.card.webp",
+     "sha256": "fd950abab63bd4b044103fa5dc4479a39d0829774a52853c2bfd1128da1c3355",
+     "width": 640
+    },
+    "exploded": {
+     "bytes": 35282,
+     "height": 800,
+     "path": "shots/leflexitac-1mm.exploded.webp",
+     "sha256": "84505c0d4a6676e08d9af16857f5a1106caab47bee1b50d6a11a29dc5b91db1a",
+     "width": 1280
+    }
+   },
+   "fit_sha256": "77f130ea5ed79b8fe04e4e72245ec6e71b95a5199b1ec27c9568df2f032b0350",
+   "look": "photo",
+   "margins_px": {
+    "assembled": [
+     351,
+     52,
+     351,
+     52
+    ],
+    "exploded": [
+     344,
+     52,
+     344,
+     52
+    ]
+   },
+   "stage": {
+    "numbers": {
+     "assembled_opaque": 0,
+     "band_css": {
+      "contain": [
+       34,
+       53
+      ],
+      "cover": [
+       64,
+       99
+      ]
+     },
+     "card_px": [
+      118,
+      181
+     ],
+     "clearance_mm": {
+      "bodies": 8.1,
+      "other_finger": 12,
+      "stacks": 18.5
+     },
+     "drape_step_mm": 19.73,
+     "face_tilt_deg": 32.462,
+     "ghost_cover": 0.617,
+     "jaw_gap_mm": 32.925,
+     "near_seen": 1,
+     "opaque_max": 0,
+     "stacks_apart_px": 29.1,
+     "step_mm": 4.689,
+     "visible_min": 0.301
+    },
+    "scene": "scenes/leflexitac.json",
+    "scene_sha256": "f570771546df8ddf3889b4b9c53f1b8f760287afadf1a2698183063ae52f2694"
+   },
+   "view_sha256": "d8f62f02c31bbc3399cff1c62208165df0188518a995a5f862ef3284312bf685"
+  },
+  "leflexitac-2mm": {
+   "art": {
+    "build_id": "surface-32x14-c25c9c5857fa",
+    "bytes": 11311,
+    "json_sha256": "334cc7b55af5eba56abf44db66330a18474cd027429917f5b6e1a73a30f90449",
+    "path": "art/leflexitac-2mm.json.gz",
+    "sha256": "81ff04f6b161edeef372cefc6de075351642c040ec6eb4442c077b0547d3a524"
+   },
+   "build_id": "surface-32x14-c25c9c5857fa",
+   "figure_sha256": "e38217818ff99c16f8d898f74079f4297bb51b7613218839c04ae9f2a59ab1c1",
+   "files": {
+    "assembled": {
+     "bytes": 30076,
+     "height": 800,
+     "path": "shots/leflexitac-2mm.assembled.webp",
+     "sha256": "97b5c8a3f69ebd387e205f84b80fd5138d3ed821b938c2ca6012f449066260d7",
+     "width": 1280
+    },
+    "card": {
+     "bytes": 21106,
+     "height": 400,
+     "path": "shots/leflexitac-2mm.exploded.card.webp",
+     "sha256": "b1265709c77d6356b5d975a70d10f580e0d00cba76d7a6f1bcf6b198b37ec288",
+     "width": 640
+    },
+    "exploded": {
+     "bytes": 38252,
+     "height": 800,
+     "path": "shots/leflexitac-2mm.exploded.webp",
+     "sha256": "8600e3421a079b126b3556449bff1fda238eb2cd67a284aefe24b1153798ef67",
+     "width": 1280
+    }
+   },
+   "fit_sha256": "9d720179e0b3295a6cfc91fe639289cfab3187d84cbd0764ac539e9cabbcdbd0",
+   "look": "photo",
+   "margins_px": {
+    "assembled": [
+     351,
+     52,
+     351,
+     52
+    ],
+    "exploded": [
+     344,
+     52,
+     344,
+     52
+    ]
+   },
+   "stage": {
+    "numbers": {
+     "assembled_opaque": 0,
+     "band_css": {
+      "contain": [
+       35,
+       55
+      ],
+      "cover": [
+       66,
+       103
+      ]
+     },
+     "card_px": [
+      121,
+      189
+     ],
+     "clearance_mm": {
+      "bodies": 8.1,
+      "other_finger": 12,
+      "stacks": 18.5
+     },
+     "drape_step_mm": 20.253,
+     "face_tilt_deg": 32.39,
+     "ghost_cover": 0.594,
+     "jaw_gap_mm": 32.936,
+     "near_seen": 1,
+     "opaque_max": 0,
+     "stacks_apart_px": 28.2,
+     "step_mm": 4.69,
+     "visible_min": 0.254
+    },
+    "scene": "scenes/leflexitac.json",
+    "scene_sha256": "f570771546df8ddf3889b4b9c53f1b8f760287afadf1a2698183063ae52f2694"
+   },
+   "view_sha256": "d8f62f02c31bbc3399cff1c62208165df0188518a995a5f862ef3284312bf685"
+  },
+  "leflexitac-3mm": {
+   "art": {
+    "build_id": "surface-22x9-46f14897dbe8",
+    "bytes": 8046,
+    "json_sha256": "27601b61e294cff154037eba0e79bde498468149559fa81e4d9675878341bb12",
+    "path": "art/leflexitac-3mm.json.gz",
+    "sha256": "353da3f1ea36315dba4bcc85eb1b885a8c6d5dfad1ba49e4252e68dce56667f0"
+   },
+   "build_id": "surface-22x9-46f14897dbe8",
+   "figure_sha256": "e38217818ff99c16f8d898f74079f4297bb51b7613218839c04ae9f2a59ab1c1",
+   "files": {
+    "assembled": {
+     "bytes": 29516,
+     "height": 800,
+     "path": "shots/leflexitac-3mm.assembled.webp",
+     "sha256": "04e5cd66b775c81b41d73b9a96a40c458116c7e6f2ce117bd25d336c7e449da9",
+     "width": 1280
+    },
+    "card": {
+     "bytes": 20588,
+     "height": 400,
+     "path": "shots/leflexitac-3mm.exploded.card.webp",
+     "sha256": "1d7f183270823c480979a9d9972200b40a0d65d6462d4f867206d41112c18e98",
+     "width": 640
+    },
+    "exploded": {
+     "bytes": 36536,
+     "height": 800,
+     "path": "shots/leflexitac-3mm.exploded.webp",
+     "sha256": "1c052c563d051028002432f527713e2c91f7af0efdb050f6da59a8e8d3c75046",
+     "width": 1280
+    }
+   },
+   "fit_sha256": "2feeb9173427a070e43c5888c9ad616ec95ff19d6375b0d63b2ee458f439e6c6",
+   "look": "photo",
+   "margins_px": {
+    "assembled": [
+     351,
+     52,
+     351,
+     52
+    ],
+    "exploded": [
+     344,
+     52,
+     344,
+     52
+    ]
+   },
+   "stage": {
+    "numbers": {
+     "assembled_opaque": 0,
+     "band_css": {
+      "contain": [
+       35,
+       55
+      ],
+      "cover": [
+       66,
+       103
+      ]
+     },
+     "card_px": [
+      121,
+      189
+     ],
+     "clearance_mm": {
+      "bodies": 8,
+      "other_finger": 12,
+      "stacks": 18.5
+     },
+     "drape_step_mm": 17.938,
+     "face_tilt_deg": 32.386,
+     "ghost_cover": 0.593,
+     "jaw_gap_mm": 32.847,
+     "near_seen": 1,
+     "opaque_max": 0,
+     "stacks_apart_px": 28.9,
+     "step_mm": 4.677,
+     "visible_min": 0.299
+    },
+    "scene": "scenes/leflexitac.json",
+    "scene_sha256": "f570771546df8ddf3889b4b9c53f1b8f760287afadf1a2698183063ae52f2694"
+   },
+   "view_sha256": "d8f62f02c31bbc3399cff1c62208165df0188518a995a5f862ef3284312bf685"
   },
   "makermods-metal-1.5mm": {
    "art": {
@@ -1118,7 +2842,7 @@
     "scene": "scenes/makermods-metal.json",
     "scene_sha256": "7ecddbe3eb527af57527447a0515bec8ed536855aa4c91656f454ce617d8bd30"
    },
-   "view_sha256": "38120a78b39dab48c9eeaefa95ff660e9e13e58035b54edd1c5f54db892089b3"
+   "view_sha256": "d8f62f02c31bbc3399cff1c62208165df0188518a995a5f862ef3284312bf685"
   },
   "makermods-metal-1mm": {
    "art": {
@@ -1204,7 +2928,7 @@
     "scene": "scenes/makermods-metal.json",
     "scene_sha256": "7ecddbe3eb527af57527447a0515bec8ed536855aa4c91656f454ce617d8bd30"
    },
-   "view_sha256": "38120a78b39dab48c9eeaefa95ff660e9e13e58035b54edd1c5f54db892089b3"
+   "view_sha256": "d8f62f02c31bbc3399cff1c62208165df0188518a995a5f862ef3284312bf685"
   },
   "makermods-metal-2mm": {
    "art": {
@@ -1290,7 +3014,7 @@
     "scene": "scenes/makermods-metal.json",
     "scene_sha256": "7ecddbe3eb527af57527447a0515bec8ed536855aa4c91656f454ce617d8bd30"
    },
-   "view_sha256": "38120a78b39dab48c9eeaefa95ff660e9e13e58035b54edd1c5f54db892089b3"
+   "view_sha256": "d8f62f02c31bbc3399cff1c62208165df0188518a995a5f862ef3284312bf685"
   },
   "makermods-metal-3mm": {
    "art": {
@@ -1376,7 +3100,1039 @@
     "scene": "scenes/makermods-metal.json",
     "scene_sha256": "7ecddbe3eb527af57527447a0515bec8ed536855aa4c91656f454ce617d8bd30"
    },
-   "view_sha256": "38120a78b39dab48c9eeaefa95ff660e9e13e58035b54edd1c5f54db892089b3"
+   "view_sha256": "d8f62f02c31bbc3399cff1c62208165df0188518a995a5f862ef3284312bf685"
+  },
+  "rainbow-rby1-1.5mm": {
+   "art": {
+    "build_id": "surface-32x20-a66db1934e22",
+    "bytes": 12505,
+    "json_sha256": "8bec9aaf7ce1816ba2e2f6d7b355e24376dfe85a2e19d4247255453cccc78d4d",
+    "path": "art/rainbow-rby1-1.5mm.json.gz",
+    "sha256": "102d7034ce7459314c8073ccdd9178b84331ecd8abf621ca2a1ca9f63a12f88f"
+   },
+   "build_id": "surface-32x20-a66db1934e22",
+   "figure_sha256": "e38217818ff99c16f8d898f74079f4297bb51b7613218839c04ae9f2a59ab1c1",
+   "files": {
+    "assembled": {
+     "bytes": 22034,
+     "height": 800,
+     "path": "shots/rainbow-rby1-1.5mm.assembled.webp",
+     "sha256": "ff73e5d4bc1761c560a3444d96338193770aee3b6ca0a855fa62709a7d76bd0a",
+     "width": 1280
+    },
+    "card": {
+     "bytes": 18144,
+     "height": 400,
+     "path": "shots/rainbow-rby1-1.5mm.exploded.card.webp",
+     "sha256": "cadeacbc1ee1a23f615fd819af7650ac153f83d53dfe0e854b5295a5c4f4ad3e",
+     "width": 640
+    },
+    "exploded": {
+     "bytes": 30844,
+     "height": 800,
+     "path": "shots/rainbow-rby1-1.5mm.exploded.webp",
+     "sha256": "59979ec3114b4c258fd98355e0b1642483ab5448b7fbdc60588db56579aaed3c",
+     "width": 1280
+    }
+   },
+   "fit_sha256": "5f50bc768f678f30cf54b11ed1873e7adf91a2472dc3850e43d1f1e6c43b7d6c",
+   "look": "photo",
+   "margins_px": {
+    "assembled": [
+     376,
+     52,
+     377,
+     52
+    ],
+    "exploded": [
+     343,
+     52,
+     344,
+     52
+    ]
+   },
+   "stage": {
+    "numbers": {
+     "assembled_opaque": 0,
+     "band_css": {
+      "contain": [
+       12,
+       40
+      ],
+      "cover": [
+       22,
+       76
+      ]
+     },
+     "card_px": [
+      40,
+      139
+     ],
+     "clearance_mm": {
+      "bodies": 11.2,
+      "other_finger": 12,
+      "stacks": 57.5
+     },
+     "drape_step_mm": 21.239,
+     "face_tilt_deg": 0,
+     "ghost_cover": 0.982,
+     "jaw_gap_mm": 99.5,
+     "near_seen": 1,
+     "opaque_max": 0,
+     "stacks_apart_px": 185.7,
+     "step_mm": 13.68,
+     "visible_min": 0.853
+    },
+    "scene": "scenes/rainbow-rby1.json",
+    "scene_sha256": "425d320fcb9de021b3217f9ab3d2e872dccf36ec3fa24820f611e2f0315513e6"
+   },
+   "view_sha256": "d8f62f02c31bbc3399cff1c62208165df0188518a995a5f862ef3284312bf685"
+  },
+  "rainbow-rby1-1mm": {
+   "art": {
+    "build_id": "surface-32x26-f484d938aaf3",
+    "bytes": 12567,
+    "json_sha256": "652a4621de1bde6691d8e88f3b1a4c9a0e64cc87a36cb79bf90c34effe8c368b",
+    "path": "art/rainbow-rby1-1mm.json.gz",
+    "sha256": "b5db9de559675f5f0df09e3488dd2b4b25e75cd39579c8b9d416c2b3993d2fa7"
+   },
+   "build_id": "surface-32x26-f484d938aaf3",
+   "figure_sha256": "e38217818ff99c16f8d898f74079f4297bb51b7613218839c04ae9f2a59ab1c1",
+   "files": {
+    "assembled": {
+     "bytes": 21690,
+     "height": 800,
+     "path": "shots/rainbow-rby1-1mm.assembled.webp",
+     "sha256": "1b7978bced8dd0960bb920330a8e4da7aae98099b7a654eef1592672ab4fe9f6",
+     "width": 1280
+    },
+    "card": {
+     "bytes": 18152,
+     "height": 400,
+     "path": "shots/rainbow-rby1-1mm.exploded.card.webp",
+     "sha256": "cb15bae748ec20f58e850a7200b02f6a62b13b2a4d3c83f53769d66f5cb44c63",
+     "width": 640
+    },
+    "exploded": {
+     "bytes": 29694,
+     "height": 800,
+     "path": "shots/rainbow-rby1-1mm.exploded.webp",
+     "sha256": "b4a0c8b5787a7aee19bbc6fb3bcf1a39d693f39b44385caccb56ddc77121dfd4",
+     "width": 1280
+    }
+   },
+   "fit_sha256": "a5188212c7d78c011038abb50659ba8f18ab8ffea5816c3b47c432c256e080e3",
+   "look": "photo",
+   "margins_px": {
+    "assembled": [
+     376,
+     52,
+     377,
+     52
+    ],
+    "exploded": [
+     343,
+     52,
+     344,
+     52
+    ]
+   },
+   "stage": {
+    "numbers": {
+     "assembled_opaque": 0,
+     "band_css": {
+      "contain": [
+       11,
+       38
+      ],
+      "cover": [
+       20,
+       71
+      ]
+     },
+     "card_px": [
+      37,
+      130
+     ],
+     "clearance_mm": {
+      "bodies": 11.3,
+      "other_finger": 12,
+      "stacks": 57.5
+     },
+     "drape_step_mm": 19.181,
+     "face_tilt_deg": 0,
+     "ghost_cover": 0.985,
+     "jaw_gap_mm": 99.5,
+     "near_seen": 1,
+     "opaque_max": 0,
+     "stacks_apart_px": 198,
+     "step_mm": 13.68,
+     "visible_min": 0.907
+    },
+    "scene": "scenes/rainbow-rby1.json",
+    "scene_sha256": "425d320fcb9de021b3217f9ab3d2e872dccf36ec3fa24820f611e2f0315513e6"
+   },
+   "view_sha256": "d8f62f02c31bbc3399cff1c62208165df0188518a995a5f862ef3284312bf685"
+  },
+  "rainbow-rby1-2mm": {
+   "art": {
+    "build_id": "surface-25x15-09f7dc7dd5eb",
+    "bytes": 10522,
+    "json_sha256": "00e4dd662791057cef3381314ea235acd3a196bbbdebb688fd7a2d6926ba9a52",
+    "path": "art/rainbow-rby1-2mm.json.gz",
+    "sha256": "b18bc8222358c64802b04b7f92cc68cfcf20f8326e81d7cd5b8c0bc64647cf30"
+   },
+   "build_id": "surface-25x15-09f7dc7dd5eb",
+   "figure_sha256": "e38217818ff99c16f8d898f74079f4297bb51b7613218839c04ae9f2a59ab1c1",
+   "files": {
+    "assembled": {
+     "bytes": 21754,
+     "height": 800,
+     "path": "shots/rainbow-rby1-2mm.assembled.webp",
+     "sha256": "3d193c205d75c12938ec468a32bdf65be5f624bc79dae01d56ae285c91ac0586",
+     "width": 1280
+    },
+    "card": {
+     "bytes": 18136,
+     "height": 400,
+     "path": "shots/rainbow-rby1-2mm.exploded.card.webp",
+     "sha256": "cc7fc328a76d3af8889f0501517ba5ef4d07305c2676813d8d2a17244d204ac1",
+     "width": 640
+    },
+    "exploded": {
+     "bytes": 30134,
+     "height": 800,
+     "path": "shots/rainbow-rby1-2mm.exploded.webp",
+     "sha256": "4c116ca26862eaad702e2113d90e1a4e771b414c326b1c2becec840505732d0f",
+     "width": 1280
+    }
+   },
+   "fit_sha256": "76659c7d4811a79affdca825c4074090c75e60ce8da6cd2acc58e5b5c0470d8c",
+   "look": "photo",
+   "margins_px": {
+    "assembled": [
+     376,
+     52,
+     377,
+     52
+    ],
+    "exploded": [
+     343,
+     52,
+     344,
+     52
+    ]
+   },
+   "stage": {
+    "numbers": {
+     "assembled_opaque": 0,
+     "band_css": {
+      "contain": [
+       12,
+       40
+      ],
+      "cover": [
+       22,
+       75
+      ]
+     },
+     "card_px": [
+      40,
+      138
+     ],
+     "clearance_mm": {
+      "bodies": 11.6,
+      "other_finger": 12,
+      "stacks": 57.5
+     },
+     "drape_step_mm": 20.208,
+     "face_tilt_deg": 0,
+     "ghost_cover": 0.984,
+     "jaw_gap_mm": 99.5,
+     "near_seen": 1,
+     "opaque_max": 0,
+     "stacks_apart_px": 189.2,
+     "step_mm": 13.68,
+     "visible_min": 0.863
+    },
+    "scene": "scenes/rainbow-rby1.json",
+    "scene_sha256": "425d320fcb9de021b3217f9ab3d2e872dccf36ec3fa24820f611e2f0315513e6"
+   },
+   "view_sha256": "d8f62f02c31bbc3399cff1c62208165df0188518a995a5f862ef3284312bf685"
+  },
+  "rainbow-rby1-3mm": {
+   "art": {
+    "build_id": "surface-16x9-8fbcce3bd65c",
+    "bytes": 6729,
+    "json_sha256": "a281aa364ad067612ea94617a51d2c98d22612bb20264a5fa713348a4eb852be",
+    "path": "art/rainbow-rby1-3mm.json.gz",
+    "sha256": "06b15e167ed0764a735350f3b3ce7b90cc0c304a6e6e597a2a245764efefe1b9"
+   },
+   "build_id": "surface-16x9-8fbcce3bd65c",
+   "figure_sha256": "e38217818ff99c16f8d898f74079f4297bb51b7613218839c04ae9f2a59ab1c1",
+   "files": {
+    "assembled": {
+     "bytes": 20594,
+     "height": 800,
+     "path": "shots/rainbow-rby1-3mm.assembled.webp",
+     "sha256": "873382ac3a01e0394a0329f90b3ba56f7c3109a7ce3c2b6c2390736d71a9513a",
+     "width": 1280
+    },
+    "card": {
+     "bytes": 18262,
+     "height": 400,
+     "path": "shots/rainbow-rby1-3mm.exploded.card.webp",
+     "sha256": "906c2d210194c4e8525084f818435ceaafc21984e978f1a01196fa2cbaf24202",
+     "width": 640
+    },
+    "exploded": {
+     "bytes": 28308,
+     "height": 800,
+     "path": "shots/rainbow-rby1-3mm.exploded.webp",
+     "sha256": "9eba616eccb8c9c51ecda5c08ade6950e0e6d0825841d488c3b16a26c0292569",
+     "width": 1280
+    }
+   },
+   "fit_sha256": "58480f6b9597ea6275c2f5e4a3a28b93f008b8e3cf8eaccaa7b37b14c74095c3",
+   "look": "photo",
+   "margins_px": {
+    "assembled": [
+     376,
+     52,
+     377,
+     52
+    ],
+    "exploded": [
+     343,
+     52,
+     344,
+     52
+    ]
+   },
+   "stage": {
+    "numbers": {
+     "assembled_opaque": 0,
+     "band_css": {
+      "contain": [
+       11,
+       39
+      ],
+      "cover": [
+       21,
+       74
+      ]
+     },
+     "card_px": [
+      39,
+      135
+     ],
+     "clearance_mm": {
+      "bodies": 11.2,
+      "other_finger": 12,
+      "stacks": 57.5
+     },
+     "drape_step_mm": 17.073,
+     "face_tilt_deg": 0,
+     "ghost_cover": 0.983,
+     "jaw_gap_mm": 99.5,
+     "near_seen": 1,
+     "opaque_max": 0,
+     "stacks_apart_px": 197.3,
+     "step_mm": 13.68,
+     "visible_min": 0.885
+    },
+    "scene": "scenes/rainbow-rby1.json",
+    "scene_sha256": "425d320fcb9de021b3217f9ab3d2e872dccf36ec3fa24820f611e2f0315513e6"
+   },
+   "view_sha256": "d8f62f02c31bbc3399cff1c62208165df0188518a995a5f862ef3284312bf685"
+  },
+  "robotiq-2f-85-1.5mm": {
+   "art": {
+    "build_id": "surface-24x14-09aacacc6af6",
+    "bytes": 9847,
+    "json_sha256": "195a2b1a9c0226c3028519d75729cd80477ef4ad301547a0820e39e3e9557bde",
+    "path": "art/robotiq-2f-85-1.5mm.json.gz",
+    "sha256": "1ce51d7200a33a18069d00ba2894dafd7e86aa516a2e5508a267c883bfeec0cb"
+   },
+   "build_id": "surface-24x14-09aacacc6af6",
+   "figure_sha256": "e38217818ff99c16f8d898f74079f4297bb51b7613218839c04ae9f2a59ab1c1",
+   "files": {
+    "assembled": {
+     "bytes": 26706,
+     "height": 800,
+     "path": "shots/robotiq-2f-85-1.5mm.assembled.webp",
+     "sha256": "f404fef5cd846b00c35d4f128204419837fbde24338dff0604ae452ef5e1e0a6",
+     "width": 1280
+    },
+    "card": {
+     "bytes": 21820,
+     "height": 400,
+     "path": "shots/robotiq-2f-85-1.5mm.exploded.card.webp",
+     "sha256": "dad49affe45bf578685a54ad510c4dd7782bda75f6317553005454f6794538fd",
+     "width": 640
+    },
+    "exploded": {
+     "bytes": 32106,
+     "height": 800,
+     "path": "shots/robotiq-2f-85-1.5mm.exploded.webp",
+     "sha256": "e7fb632db682beb6263aaf45433ced012d18ec34522ca8b9a3e9436114da4afb",
+     "width": 1280
+    }
+   },
+   "fit_sha256": "47ba42aa9817c3d3d986cfd58acfcbb2724764a0c4b019c0ff5c1156c0007c3f",
+   "look": "photo",
+   "margins_px": {
+    "assembled": [
+     371,
+     49,
+     371,
+     50
+    ],
+    "exploded": [
+     343,
+     49,
+     344,
+     49
+    ]
+   },
+   "stage": {
+    "numbers": {
+     "assembled_opaque": 0,
+     "band_css": {
+      "contain": [
+       8,
+       26
+      ],
+      "cover": [
+       14,
+       49
+      ]
+     },
+     "card_px": [
+      27,
+      89
+     ],
+     "clearance_mm": {
+      "bodies": 12,
+      "other_finger": 12,
+      "stacks": 49
+     },
+     "drape_step_mm": 15.404,
+     "face_tilt_deg": 0,
+     "ghost_cover": 0.978,
+     "jaw_gap_mm": 84.9,
+     "near_seen": 1,
+     "opaque_max": 0,
+     "stacks_apart_px": 139.2,
+     "step_mm": 11.636,
+     "visible_min": 0.88
+    },
+    "scene": "scenes/robotiq-2f-85.json",
+    "scene_sha256": "0fc6a52149ad4f53dcecbacf659afe8c1b5aaad416e0f118959e2add2f53588b"
+   },
+   "view_sha256": "d8f62f02c31bbc3399cff1c62208165df0188518a995a5f862ef3284312bf685"
+  },
+  "robotiq-2f-85-1mm": {
+   "art": {
+    "build_id": "surface-32x21-33db45dfe7b5",
+    "bytes": 11342,
+    "json_sha256": "2b53b58d6f44b049bb3284e53d43677994e37be71678f15b70f3018c1bd771c9",
+    "path": "art/robotiq-2f-85-1mm.json.gz",
+    "sha256": "fbcf3cb552342b805b8d80e1a30fa34ea19eb869cb2d03296d3dd28c1ef30abb"
+   },
+   "build_id": "surface-32x21-33db45dfe7b5",
+   "figure_sha256": "e38217818ff99c16f8d898f74079f4297bb51b7613218839c04ae9f2a59ab1c1",
+   "files": {
+    "assembled": {
+     "bytes": 27130,
+     "height": 800,
+     "path": "shots/robotiq-2f-85-1mm.assembled.webp",
+     "sha256": "cf205f48446ba3c70f93fb6e1327368e01b7ee277f17241b1cc86d40fcfd4373",
+     "width": 1280
+    },
+    "card": {
+     "bytes": 21186,
+     "height": 400,
+     "path": "shots/robotiq-2f-85-1mm.exploded.card.webp",
+     "sha256": "b85ce316893c46d3f6a9c28b551eaf6f0123874e50c6734b54048beb22055630",
+     "width": 640
+    },
+    "exploded": {
+     "bytes": 33010,
+     "height": 800,
+     "path": "shots/robotiq-2f-85-1mm.exploded.webp",
+     "sha256": "4de1dcea8b458f58d1cf41c4626cef4d7feda0ac1601fc8aa660863056d0fb38",
+     "width": 1280
+    }
+   },
+   "fit_sha256": "4db0d123b1c912553df37f2f564e8baef233c7d4e5d4fb4987cfc08dd26c4b56",
+   "look": "photo",
+   "margins_px": {
+    "assembled": [
+     371,
+     49,
+     371,
+     50
+    ],
+    "exploded": [
+     343,
+     49,
+     344,
+     49
+    ]
+   },
+   "stage": {
+    "numbers": {
+     "assembled_opaque": 0,
+     "band_css": {
+      "contain": [
+       8,
+       26
+      ],
+      "cover": [
+       14,
+       48
+      ]
+     },
+     "card_px": [
+      26,
+      88
+     ],
+     "clearance_mm": {
+      "bodies": 12,
+      "other_finger": 12,
+      "stacks": 49
+     },
+     "drape_step_mm": 16.43,
+     "face_tilt_deg": 0,
+     "ghost_cover": 0.987,
+     "jaw_gap_mm": 84.9,
+     "near_seen": 1,
+     "opaque_max": 0,
+     "stacks_apart_px": 136.2,
+     "step_mm": 11.636,
+     "visible_min": 0.862
+    },
+    "scene": "scenes/robotiq-2f-85.json",
+    "scene_sha256": "0fc6a52149ad4f53dcecbacf659afe8c1b5aaad416e0f118959e2add2f53588b"
+   },
+   "view_sha256": "d8f62f02c31bbc3399cff1c62208165df0188518a995a5f862ef3284312bf685"
+  },
+  "robotiq-2f-85-2mm": {
+   "art": {
+    "build_id": "surface-18x10-afdfaad369ad",
+    "bytes": 7215,
+    "json_sha256": "692c2e1520733931ebc219bc9896e09795406a6353efd28bbd2268f7c36e65ad",
+    "path": "art/robotiq-2f-85-2mm.json.gz",
+    "sha256": "94f9263070527b011e2db036b63951a7685a7d0f12cdc2762e585832fd26430c"
+   },
+   "build_id": "surface-18x10-afdfaad369ad",
+   "figure_sha256": "e38217818ff99c16f8d898f74079f4297bb51b7613218839c04ae9f2a59ab1c1",
+   "files": {
+    "assembled": {
+     "bytes": 26550,
+     "height": 800,
+     "path": "shots/robotiq-2f-85-2mm.assembled.webp",
+     "sha256": "67679a2d6e1751ab2947ac7e1e8300f50d195b867641da1b44c2b62069dfce41",
+     "width": 1280
+    },
+    "card": {
+     "bytes": 21818,
+     "height": 400,
+     "path": "shots/robotiq-2f-85-2mm.exploded.card.webp",
+     "sha256": "361c8cfb74b62eab93e94059d7aa891ed57cd17d3a7c3e49d46d940e80e50f51",
+     "width": 640
+    },
+    "exploded": {
+     "bytes": 31512,
+     "height": 800,
+     "path": "shots/robotiq-2f-85-2mm.exploded.webp",
+     "sha256": "898b389fbb963b052aedf6dba545fec8592c4b60f0b4e615f96863e7245029c0",
+     "width": 1280
+    }
+   },
+   "fit_sha256": "b4bff599c85d68941672aaf2474319a28addfdcc9967882bcb2dc5be369ab550",
+   "look": "photo",
+   "margins_px": {
+    "assembled": [
+     371,
+     49,
+     371,
+     50
+    ],
+    "exploded": [
+     343,
+     49,
+     344,
+     49
+    ]
+   },
+   "stage": {
+    "numbers": {
+     "assembled_opaque": 0,
+     "band_css": {
+      "contain": [
+       8,
+       26
+      ],
+      "cover": [
+       14,
+       49
+      ]
+     },
+     "card_px": [
+      26,
+      89
+     ],
+     "clearance_mm": {
+      "bodies": 12,
+      "other_finger": 12,
+      "stacks": 49
+     },
+     "drape_step_mm": 13.811,
+     "face_tilt_deg": 0,
+     "ghost_cover": 0.989,
+     "jaw_gap_mm": 84.9,
+     "near_seen": 1,
+     "opaque_max": 0,
+     "stacks_apart_px": 144,
+     "step_mm": 11.636,
+     "visible_min": 0.916
+    },
+    "scene": "scenes/robotiq-2f-85.json",
+    "scene_sha256": "0fc6a52149ad4f53dcecbacf659afe8c1b5aaad416e0f118959e2add2f53588b"
+   },
+   "view_sha256": "d8f62f02c31bbc3399cff1c62208165df0188518a995a5f862ef3284312bf685"
+  },
+  "robotiq-2f-85-3mm": {
+   "art": {
+    "build_id": "surface-12x7-bdd4196e6d44",
+    "bytes": 6165,
+    "json_sha256": "df8a5f3d36ec9c453b8389f3e4b1241b786f07b09216a3de80719dbe08624a06",
+    "path": "art/robotiq-2f-85-3mm.json.gz",
+    "sha256": "6f7f18d45ef540ed0d3467634bd83fd21b99533066ee22b460d98386bf48cfa6"
+   },
+   "build_id": "surface-12x7-bdd4196e6d44",
+   "figure_sha256": "e38217818ff99c16f8d898f74079f4297bb51b7613218839c04ae9f2a59ab1c1",
+   "files": {
+    "assembled": {
+     "bytes": 26302,
+     "height": 800,
+     "path": "shots/robotiq-2f-85-3mm.assembled.webp",
+     "sha256": "c80a03cb776f95fbce198ab7955b383ad9fa3da82de7c543dc6b503717e9b396",
+     "width": 1280
+    },
+    "card": {
+     "bytes": 21828,
+     "height": 400,
+     "path": "shots/robotiq-2f-85-3mm.exploded.card.webp",
+     "sha256": "b467f3eeb97edd10541ab5a74493d6cfd7bffefbbb9fb458f3d4687a2cfe97e1",
+     "width": 640
+    },
+    "exploded": {
+     "bytes": 30886,
+     "height": 800,
+     "path": "shots/robotiq-2f-85-3mm.exploded.webp",
+     "sha256": "5234f50fb42fe1ed414708cb88b635ecd3378264cc4514113b37387d7e9b67a8",
+     "width": 1280
+    }
+   },
+   "fit_sha256": "f2fb2213ae405090e38bb991b50b70954ad7f3a9b38efe5768246f2bdba7a29c",
+   "look": "photo",
+   "margins_px": {
+    "assembled": [
+     371,
+     49,
+     371,
+     50
+    ],
+    "exploded": [
+     343,
+     49,
+     344,
+     49
+    ]
+   },
+   "stage": {
+    "numbers": {
+     "assembled_opaque": 0,
+     "band_css": {
+      "contain": [
+       8,
+       26
+      ],
+      "cover": [
+       14,
+       48
+      ]
+     },
+     "card_px": [
+      26,
+      89
+     ],
+     "clearance_mm": {
+      "bodies": 12,
+      "other_finger": 12,
+      "stacks": 49
+     },
+     "drape_step_mm": 13.197,
+     "face_tilt_deg": 0,
+     "ghost_cover": 0.982,
+     "jaw_gap_mm": 84.9,
+     "near_seen": 1,
+     "opaque_max": 0,
+     "stacks_apart_px": 146,
+     "step_mm": 11.636,
+     "visible_min": 0.904
+    },
+    "scene": "scenes/robotiq-2f-85.json",
+    "scene_sha256": "0fc6a52149ad4f53dcecbacf659afe8c1b5aaad416e0f118959e2add2f53588b"
+   },
+   "view_sha256": "d8f62f02c31bbc3399cff1c62208165df0188518a995a5f862ef3284312bf685"
+  },
+  "seeed-rebot-1.5mm": {
+   "art": {
+    "build_id": "surface-32x20-4453d7d4a0af",
+    "bytes": 13292,
+    "json_sha256": "c54ea3e71f0925acbff1058c7e6a668ee8decb39658fa4f56cef0849adc2beeb",
+    "path": "art/seeed-rebot-1.5mm.json.gz",
+    "sha256": "a340df4b39b842f2a33c962f8b12f45812883f0149c52dceb0e7114f567d6b58"
+   },
+   "build_id": "surface-32x20-4453d7d4a0af",
+   "figure_sha256": "e38217818ff99c16f8d898f74079f4297bb51b7613218839c04ae9f2a59ab1c1",
+   "files": {
+    "assembled": {
+     "bytes": 29988,
+     "height": 800,
+     "path": "shots/seeed-rebot-1.5mm.assembled.webp",
+     "sha256": "51a4feac5164c1aea1f65428a7325e981d1f9ff4c04ed0f720a5d555ade59f36",
+     "width": 1280
+    },
+    "card": {
+     "bytes": 24792,
+     "height": 400,
+     "path": "shots/seeed-rebot-1.5mm.exploded.card.webp",
+     "sha256": "12acb68a6fe3a3fa8b513f0df8a1768685517b6030a6856448a3d74d1a26cc56",
+     "width": 640
+    },
+    "exploded": {
+     "bytes": 37768,
+     "height": 800,
+     "path": "shots/seeed-rebot-1.5mm.exploded.webp",
+     "sha256": "550087e9cf18469e7e4395ff2b4660c2610baff7fcdf95d162c3baabd94e2d79",
+     "width": 1280
+    }
+   },
+   "fit_sha256": "519f1c2b7c0a618041fb98b5cc1f595cd95d57ec8f8e9d134f72e5dc58a93050",
+   "look": "photo",
+   "margins_px": {
+    "assembled": [
+     320,
+     52,
+     321,
+     52
+    ],
+    "exploded": [
+     289,
+     52,
+     290,
+     52
+    ]
+   },
+   "stage": {
+    "numbers": {
+     "assembled_opaque": 0,
+     "band_css": {
+      "contain": [
+       11,
+       39
+      ],
+      "cover": [
+       21,
+       72
+      ]
+     },
+     "card_px": [
+      39,
+      132
+     ],
+     "clearance_mm": {
+      "bodies": 9.5,
+      "other_finger": 12,
+      "stacks": 57.5
+     },
+     "drape_step_mm": 21.239,
+     "face_tilt_deg": 0,
+     "ghost_cover": 0.986,
+     "jaw_gap_mm": 99.647,
+     "near_seen": 1,
+     "opaque_max": 0,
+     "stacks_apart_px": 158.9,
+     "step_mm": 13.701,
+     "visible_min": 0.901
+    },
+    "scene": "scenes/seeed-rebot.json",
+    "scene_sha256": "32d586dec0c7ef59939f4154486ceb99eb4b422353913185687ea47f067861eb"
+   },
+   "view_sha256": "d8f62f02c31bbc3399cff1c62208165df0188518a995a5f862ef3284312bf685"
+  },
+  "seeed-rebot-1mm": {
+   "art": {
+    "build_id": "surface-32x22-32a24cea3b5a",
+    "bytes": 12499,
+    "json_sha256": "acd4a84f8d7decc614af925769bf28b1d14e76765ccf60450cf09e76d5db8d21",
+    "path": "art/seeed-rebot-1mm.json.gz",
+    "sha256": "18556ceae354bc391745414fddd95060a78799487e67da7d13eae420c3e5be72"
+   },
+   "build_id": "surface-32x22-32a24cea3b5a",
+   "figure_sha256": "e38217818ff99c16f8d898f74079f4297bb51b7613218839c04ae9f2a59ab1c1",
+   "files": {
+    "assembled": {
+     "bytes": 29302,
+     "height": 800,
+     "path": "shots/seeed-rebot-1mm.assembled.webp",
+     "sha256": "88bf18ee343d17068b01aa7756e1c6b3d53e81954b90ec53980d0c91dd213eea",
+     "width": 1280
+    },
+    "card": {
+     "bytes": 24216,
+     "height": 400,
+     "path": "shots/seeed-rebot-1mm.exploded.card.webp",
+     "sha256": "60aaaea673642add9635f252c62de147f6f7f373b6c53d1a2481de58f1613e64",
+     "width": 640
+    },
+    "exploded": {
+     "bytes": 35886,
+     "height": 800,
+     "path": "shots/seeed-rebot-1mm.exploded.webp",
+     "sha256": "b08dbb30499e8439ce114f7cbffc01ee9e4e007be3b3515f6d0a76e87ed99065",
+     "width": 1280
+    }
+   },
+   "fit_sha256": "fde1ac07bb87221ba79c2a2de84e24837c5f12f2d2aedc191f440bc29c82435d",
+   "look": "photo",
+   "margins_px": {
+    "assembled": [
+     320,
+     52,
+     321,
+     52
+    ],
+    "exploded": [
+     289,
+     52,
+     290,
+     52
+    ]
+   },
+   "stage": {
+    "numbers": {
+     "assembled_opaque": 0,
+     "band_css": {
+      "contain": [
+       8,
+       39
+      ],
+      "cover": [
+       15,
+       73
+      ]
+     },
+     "card_px": [
+      28,
+      134
+     ],
+     "clearance_mm": {
+      "bodies": 9.6,
+      "other_finger": 12,
+      "stacks": 57.5
+     },
+     "drape_step_mm": 16.982,
+     "face_tilt_deg": 0,
+     "ghost_cover": 0.985,
+     "jaw_gap_mm": 99.647,
+     "near_seen": 1,
+     "opaque_max": 0,
+     "stacks_apart_px": 176,
+     "step_mm": 13.701,
+     "visible_min": 0.999
+    },
+    "scene": "scenes/seeed-rebot.json",
+    "scene_sha256": "32d586dec0c7ef59939f4154486ceb99eb4b422353913185687ea47f067861eb"
+   },
+   "view_sha256": "d8f62f02c31bbc3399cff1c62208165df0188518a995a5f862ef3284312bf685"
+  },
+  "seeed-rebot-2mm": {
+   "art": {
+    "build_id": "surface-32x19-2e1186195330",
+    "bytes": 12819,
+    "json_sha256": "4ffa256dafda6a3719064d041bc9f45069c01b97927720a0f1a236c08dae7761",
+    "path": "art/seeed-rebot-2mm.json.gz",
+    "sha256": "2db48c0ad1b58633a3375519df669d939a27030ec2dc36392721a3842854d5ca"
+   },
+   "build_id": "surface-32x19-2e1186195330",
+   "figure_sha256": "e38217818ff99c16f8d898f74079f4297bb51b7613218839c04ae9f2a59ab1c1",
+   "files": {
+    "assembled": {
+     "bytes": 30242,
+     "height": 800,
+     "path": "shots/seeed-rebot-2mm.assembled.webp",
+     "sha256": "2b49939ebdcd7c22c0714f2ecd88c8dc0e33a1c197c432f359a1a03254d7d7da",
+     "width": 1280
+    },
+    "card": {
+     "bytes": 24680,
+     "height": 400,
+     "path": "shots/seeed-rebot-2mm.exploded.card.webp",
+     "sha256": "1ef89fb4cbf8cab34c6210e17168b6704c84fcf3a267e23b6c55cff8139553f0",
+     "width": 640
+    },
+    "exploded": {
+     "bytes": 38448,
+     "height": 800,
+     "path": "shots/seeed-rebot-2mm.exploded.webp",
+     "sha256": "bb1a6ff9d2cb72d963e91830e00c91347a77fd636b20d3a58a90f9d2721af146",
+     "width": 1280
+    }
+   },
+   "fit_sha256": "0845bf8143c9ad2c097bfa006eedd4a441a8a1b5a2ec78c3658aff2207ae8b5b",
+   "look": "photo",
+   "margins_px": {
+    "assembled": [
+     320,
+     51,
+     321,
+     52
+    ],
+    "exploded": [
+     289,
+     52,
+     290,
+     52
+    ]
+   },
+   "stage": {
+    "numbers": {
+     "assembled_opaque": 0,
+     "band_css": {
+      "contain": [
+       12,
+       42
+      ],
+      "cover": [
+       23,
+       80
+      ]
+     },
+     "card_px": [
+      42,
+      146
+     ],
+     "clearance_mm": {
+      "bodies": 9.3,
+      "other_finger": 12,
+      "stacks": 57.5
+     },
+     "drape_step_mm": 25.604,
+     "face_tilt_deg": 0,
+     "ghost_cover": 0.986,
+     "jaw_gap_mm": 99.647,
+     "near_seen": 1,
+     "opaque_max": 0,
+     "stacks_apart_px": 142.8,
+     "step_mm": 13.701,
+     "visible_min": 0.79
+    },
+    "scene": "scenes/seeed-rebot.json",
+    "scene_sha256": "32d586dec0c7ef59939f4154486ceb99eb4b422353913185687ea47f067861eb"
+   },
+   "view_sha256": "d8f62f02c31bbc3399cff1c62208165df0188518a995a5f862ef3284312bf685"
+  },
+  "seeed-rebot-3mm": {
+   "art": {
+    "build_id": "surface-21x11-4621a35145a1",
+    "bytes": 8699,
+    "json_sha256": "074096ce64b0620bca23f5606ff9e1b591a218ed2192e7bd10285e1f366e4386",
+    "path": "art/seeed-rebot-3mm.json.gz",
+    "sha256": "2028995cf854a2d0b6d042bc8690bff2891ceef8762172deb52ca8f8e3c7d6ee"
+   },
+   "build_id": "surface-21x11-4621a35145a1",
+   "figure_sha256": "e38217818ff99c16f8d898f74079f4297bb51b7613218839c04ae9f2a59ab1c1",
+   "files": {
+    "assembled": {
+     "bytes": 29212,
+     "height": 800,
+     "path": "shots/seeed-rebot-3mm.assembled.webp",
+     "sha256": "d99a80bcedc3fcf33677d0666f6ffe35bb51cf1f6d6e564e4e730962c4991e69",
+     "width": 1280
+    },
+    "card": {
+     "bytes": 24372,
+     "height": 400,
+     "path": "shots/seeed-rebot-3mm.exploded.card.webp",
+     "sha256": "13e968e5206b26a8ab5ca451f5275013bd002879d66b7b048d3261b03c6e9d92",
+     "width": 640
+    },
+    "exploded": {
+     "bytes": 36512,
+     "height": 800,
+     "path": "shots/seeed-rebot-3mm.exploded.webp",
+     "sha256": "c6f7e696a203da67e07db92114566ad42dae1f9f7b0d86f79cad930c846e0f01",
+     "width": 1280
+    }
+   },
+   "fit_sha256": "3d8cd7ce26c59987852d8dab6c7b58b7d279305f889be3528e892b453f981836",
+   "look": "photo",
+   "margins_px": {
+    "assembled": [
+     320,
+     52,
+     321,
+     52
+    ],
+    "exploded": [
+     289,
+     52,
+     290,
+     52
+    ]
+   },
+   "stage": {
+    "numbers": {
+     "assembled_opaque": 0,
+     "band_css": {
+      "contain": [
+       12,
+       41
+      ],
+      "cover": [
+       23,
+       77
+      ]
+     },
+     "card_px": [
+      42,
+      142
+     ],
+     "clearance_mm": {
+      "bodies": 9.4,
+      "other_finger": 12,
+      "stacks": 57.5
+     },
+     "drape_step_mm": 21.094,
+     "face_tilt_deg": 0,
+     "ghost_cover": 0.987,
+     "jaw_gap_mm": 99.647,
+     "near_seen": 1,
+     "opaque_max": 0,
+     "stacks_apart_px": 152.2,
+     "step_mm": 13.701,
+     "visible_min": 0.819
+    },
+    "scene": "scenes/seeed-rebot.json",
+    "scene_sha256": "32d586dec0c7ef59939f4154486ceb99eb4b422353913185687ea47f067861eb"
+   },
+   "view_sha256": "d8f62f02c31bbc3399cff1c62208165df0188518a995a5f862ef3284312bf685"
   },
   "trossen-widowx-ai-1.5mm": {
    "art": {
@@ -1462,7 +4218,7 @@
     "scene": "scenes/trossen-widowx-ai.json",
     "scene_sha256": "6b569eddfec285c77771a4faa4bc7ec15f21d63d275093b1d9144b2378460b03"
    },
-   "view_sha256": "38120a78b39dab48c9eeaefa95ff660e9e13e58035b54edd1c5f54db892089b3"
+   "view_sha256": "d8f62f02c31bbc3399cff1c62208165df0188518a995a5f862ef3284312bf685"
   },
   "trossen-widowx-ai-1mm": {
    "art": {
@@ -1548,7 +4304,7 @@
     "scene": "scenes/trossen-widowx-ai.json",
     "scene_sha256": "6b569eddfec285c77771a4faa4bc7ec15f21d63d275093b1d9144b2378460b03"
    },
-   "view_sha256": "38120a78b39dab48c9eeaefa95ff660e9e13e58035b54edd1c5f54db892089b3"
+   "view_sha256": "d8f62f02c31bbc3399cff1c62208165df0188518a995a5f862ef3284312bf685"
   },
   "trossen-widowx-ai-2mm": {
    "art": {
@@ -1634,7 +4390,7 @@
     "scene": "scenes/trossen-widowx-ai.json",
     "scene_sha256": "6b569eddfec285c77771a4faa4bc7ec15f21d63d275093b1d9144b2378460b03"
    },
-   "view_sha256": "38120a78b39dab48c9eeaefa95ff660e9e13e58035b54edd1c5f54db892089b3"
+   "view_sha256": "d8f62f02c31bbc3399cff1c62208165df0188518a995a5f862ef3284312bf685"
   },
   "trossen-widowx-ai-3mm": {
    "art": {
@@ -1720,7 +4476,351 @@
     "scene": "scenes/trossen-widowx-ai.json",
     "scene_sha256": "6b569eddfec285c77771a4faa4bc7ec15f21d63d275093b1d9144b2378460b03"
    },
-   "view_sha256": "38120a78b39dab48c9eeaefa95ff660e9e13e58035b54edd1c5f54db892089b3"
+   "view_sha256": "d8f62f02c31bbc3399cff1c62208165df0188518a995a5f862ef3284312bf685"
+  },
+  "ufactory-xarm-1.5mm": {
+   "art": {
+    "build_id": "surface-24x19-7ab4370c0659",
+    "bytes": 10315,
+    "json_sha256": "fbc3a2d2824f8b0352cf0c6469a97912f8f81009625b7cfc221c995c44915275",
+    "path": "art/ufactory-xarm-1.5mm.json.gz",
+    "sha256": "2114badffe452c5473e726bddc6d55441cd7312b8dd20a3a25e6d35065822e9a"
+   },
+   "build_id": "surface-24x19-7ab4370c0659",
+   "figure_sha256": "e38217818ff99c16f8d898f74079f4297bb51b7613218839c04ae9f2a59ab1c1",
+   "files": {
+    "assembled": {
+     "bytes": 25204,
+     "height": 800,
+     "path": "shots/ufactory-xarm-1.5mm.assembled.webp",
+     "sha256": "f85626585800927aa9887e043e219835c9c62d9f743ef34ff7a34393a7466b03",
+     "width": 1280
+    },
+    "card": {
+     "bytes": 20938,
+     "height": 400,
+     "path": "shots/ufactory-xarm-1.5mm.exploded.card.webp",
+     "sha256": "1795f9f2566c64c8bffde767c1668433f1a1a5ad0d7bc6ddd0fab2ec75581b1e",
+     "width": 640
+    },
+    "exploded": {
+     "bytes": 31454,
+     "height": 800,
+     "path": "shots/ufactory-xarm-1.5mm.exploded.webp",
+     "sha256": "3b17833c95d204cb31ae578797f74456bdf205a0ea9cc00ec09605253b7fdce2",
+     "width": 1280
+    }
+   },
+   "fit_sha256": "b1d792d5a658b4933cb6722df9e8cfeac4c92275d6c69838820ba7cf75246d62",
+   "look": "photo",
+   "margins_px": {
+    "assembled": [
+     365,
+     49,
+     365,
+     49
+    ],
+    "exploded": [
+     333,
+     51,
+     333,
+     52
+    ]
+   },
+   "stage": {
+    "numbers": {
+     "assembled_opaque": 0,
+     "band_css": {
+      "contain": [
+       10,
+       26
+      ],
+      "cover": [
+       19,
+       49
+      ]
+     },
+     "card_px": [
+      35,
+      91
+     ],
+     "clearance_mm": {
+      "bodies": 7.5,
+      "other_finger": 12,
+      "stacks": 51
+     },
+     "drape_step_mm": 19.529,
+     "face_tilt_deg": 0,
+     "ghost_cover": 0.986,
+     "jaw_gap_mm": 88.424,
+     "near_seen": 1,
+     "opaque_max": 0,
+     "stacks_apart_px": 126.1,
+     "step_mm": 12.129,
+     "visible_min": 0.711
+    },
+    "scene": "scenes/ufactory-xarm.json",
+    "scene_sha256": "b6eb809980e26786e1df9a90c2205a9dc05758f53d4a9ab5c53e99399fbd4af2"
+   },
+   "view_sha256": "d8f62f02c31bbc3399cff1c62208165df0188518a995a5f862ef3284312bf685"
+  },
+  "ufactory-xarm-1mm": {
+   "art": {
+    "build_id": "surface-32x28-81014a8d19e2",
+    "bytes": 11589,
+    "json_sha256": "ff6f69b14a04656df825b381b2252ee9f9c68f1b8536efc991a8b9d26b78724d",
+    "path": "art/ufactory-xarm-1mm.json.gz",
+    "sha256": "ddffff1a4bef9646bcd572f3500183c7cd19a80815c5ad5fa16778de631ddc2f"
+   },
+   "build_id": "surface-32x28-81014a8d19e2",
+   "figure_sha256": "e38217818ff99c16f8d898f74079f4297bb51b7613218839c04ae9f2a59ab1c1",
+   "files": {
+    "assembled": {
+     "bytes": 25524,
+     "height": 800,
+     "path": "shots/ufactory-xarm-1mm.assembled.webp",
+     "sha256": "0a618922b400602c2aca5397355ef3557288288122868414ee71560b27f2f83e",
+     "width": 1280
+    },
+    "card": {
+     "bytes": 20234,
+     "height": 400,
+     "path": "shots/ufactory-xarm-1mm.exploded.card.webp",
+     "sha256": "8cc0c998807a5f4b5562aa05903f299abdc79d01726582e62fbc26a4acfd2153",
+     "width": 640
+    },
+    "exploded": {
+     "bytes": 31054,
+     "height": 800,
+     "path": "shots/ufactory-xarm-1mm.exploded.webp",
+     "sha256": "af4dad0a7cb9069b021e66e533600f69d87f2191c3f1999f88d4990d0a663049",
+     "width": 1280
+    }
+   },
+   "fit_sha256": "c148bbe404ada3b551bdf6e6d784d78b90041fc28f095cf540985a54b2f22e2e",
+   "look": "photo",
+   "margins_px": {
+    "assembled": [
+     365,
+     49,
+     365,
+     49
+    ],
+    "exploded": [
+     333,
+     51,
+     333,
+     52
+    ]
+   },
+   "stage": {
+    "numbers": {
+     "assembled_opaque": 0,
+     "band_css": {
+      "contain": [
+       10,
+       26
+      ],
+      "cover": [
+       19,
+       49
+      ]
+     },
+     "card_px": [
+      35,
+      90
+     ],
+     "clearance_mm": {
+      "bodies": 7.4,
+      "other_finger": 12,
+      "stacks": 51
+     },
+     "drape_step_mm": 20.28,
+     "face_tilt_deg": 0,
+     "ghost_cover": 0.987,
+     "jaw_gap_mm": 88.424,
+     "near_seen": 1,
+     "opaque_max": 0,
+     "stacks_apart_px": 124.2,
+     "step_mm": 12.129,
+     "visible_min": 0.717
+    },
+    "scene": "scenes/ufactory-xarm.json",
+    "scene_sha256": "b6eb809980e26786e1df9a90c2205a9dc05758f53d4a9ab5c53e99399fbd4af2"
+   },
+   "view_sha256": "d8f62f02c31bbc3399cff1c62208165df0188518a995a5f862ef3284312bf685"
+  },
+  "ufactory-xarm-2mm": {
+   "art": {
+    "build_id": "surface-18x14-1517ea0947c8",
+    "bytes": 8318,
+    "json_sha256": "bd7fb4bad0e4d18f86520b239537b073e26eb4acb1744ba2600f87828f6b99c5",
+    "path": "art/ufactory-xarm-2mm.json.gz",
+    "sha256": "a96043a6311344592c0ebcbd71856e7b7d81cfd6b4de2406f674748b90b6513c"
+   },
+   "build_id": "surface-18x14-1517ea0947c8",
+   "figure_sha256": "e38217818ff99c16f8d898f74079f4297bb51b7613218839c04ae9f2a59ab1c1",
+   "files": {
+    "assembled": {
+     "bytes": 24978,
+     "height": 800,
+     "path": "shots/ufactory-xarm-2mm.assembled.webp",
+     "sha256": "cc04cba3f9b4446423618f7ee40496079a14fb902429bca7bea931aa77efd4c9",
+     "width": 1280
+    },
+    "card": {
+     "bytes": 20742,
+     "height": 400,
+     "path": "shots/ufactory-xarm-2mm.exploded.card.webp",
+     "sha256": "425132bc038b9c50b1f1fef6c69f978454b90d8e5e3a3aedae4b7cebe92c5b76",
+     "width": 640
+    },
+    "exploded": {
+     "bytes": 30936,
+     "height": 800,
+     "path": "shots/ufactory-xarm-2mm.exploded.webp",
+     "sha256": "44919fda587bc3584749cfb1076deefdc8b3e4d0201ee7a6ccd76068e4684bd4",
+     "width": 1280
+    }
+   },
+   "fit_sha256": "fdb1b4a97c1c68fa31d0f58156594c88e3b9ffb6e3d355e18463cb09dfa50c1e",
+   "look": "photo",
+   "margins_px": {
+    "assembled": [
+     365,
+     49,
+     365,
+     49
+    ],
+    "exploded": [
+     333,
+     51,
+     333,
+     52
+    ]
+   },
+   "stage": {
+    "numbers": {
+     "assembled_opaque": 0,
+     "band_css": {
+      "contain": [
+       10,
+       26
+      ],
+      "cover": [
+       19,
+       49
+      ]
+     },
+     "card_px": [
+      35,
+      91
+     ],
+     "clearance_mm": {
+      "bodies": 7.4,
+      "other_finger": 12,
+      "stacks": 51
+     },
+     "drape_step_mm": 18.211,
+     "face_tilt_deg": 0,
+     "ghost_cover": 0.987,
+     "jaw_gap_mm": 88.424,
+     "near_seen": 1,
+     "opaque_max": 0,
+     "stacks_apart_px": 130,
+     "step_mm": 12.129,
+     "visible_min": 0.733
+    },
+    "scene": "scenes/ufactory-xarm.json",
+    "scene_sha256": "b6eb809980e26786e1df9a90c2205a9dc05758f53d4a9ab5c53e99399fbd4af2"
+   },
+   "view_sha256": "d8f62f02c31bbc3399cff1c62208165df0188518a995a5f862ef3284312bf685"
+  },
+  "ufactory-xarm-3mm": {
+   "art": {
+    "build_id": "surface-12x9-784fff602005",
+    "bytes": 6056,
+    "json_sha256": "c72f224e0914d6b0983591587e6d8ebf3741859642daa15d8ac043f8fe7a0f1d",
+    "path": "art/ufactory-xarm-3mm.json.gz",
+    "sha256": "241427f774476235e12d5608ac8a55cf041350d43021813bf04a6fbb59de7c56"
+   },
+   "build_id": "surface-12x9-784fff602005",
+   "figure_sha256": "e38217818ff99c16f8d898f74079f4297bb51b7613218839c04ae9f2a59ab1c1",
+   "files": {
+    "assembled": {
+     "bytes": 24650,
+     "height": 800,
+     "path": "shots/ufactory-xarm-3mm.assembled.webp",
+     "sha256": "58400fc72a2fa4baf191e72363c8a26fd451d827c01c1afb9a934dcc616e31cc",
+     "width": 1280
+    },
+    "card": {
+     "bytes": 20904,
+     "height": 400,
+     "path": "shots/ufactory-xarm-3mm.exploded.card.webp",
+     "sha256": "8386c144869b08fb9abe99a15aab8d3c0b7655c562507a6aa580b25b04f52a84",
+     "width": 640
+    },
+    "exploded": {
+     "bytes": 30592,
+     "height": 800,
+     "path": "shots/ufactory-xarm-3mm.exploded.webp",
+     "sha256": "01f3c78b3e7d3cf0fb5c293277a069b0eda18d31104ebaf78f5132422abc2868",
+     "width": 1280
+    }
+   },
+   "fit_sha256": "cf619a4c5df6176b6aa5c3af4b7719184fbc496fa80b930b7f6095c95f4ecad2",
+   "look": "photo",
+   "margins_px": {
+    "assembled": [
+     365,
+     49,
+     365,
+     49
+    ],
+    "exploded": [
+     333,
+     51,
+     333,
+     52
+    ]
+   },
+   "stage": {
+    "numbers": {
+     "assembled_opaque": 0,
+     "band_css": {
+      "contain": [
+       10,
+       26
+      ],
+      "cover": [
+       18,
+       49
+      ]
+     },
+     "card_px": [
+      34,
+      90
+     ],
+     "clearance_mm": {
+      "bodies": 7.5,
+      "other_finger": 12,
+      "stacks": 51
+     },
+     "drape_step_mm": 16.497,
+     "face_tilt_deg": 0,
+     "ghost_cover": 0.997,
+     "jaw_gap_mm": 88.424,
+     "near_seen": 1,
+     "opaque_max": 0,
+     "stacks_apart_px": 136,
+     "step_mm": 12.129,
+     "visible_min": 0.761
+    },
+    "scene": "scenes/ufactory-xarm.json",
+    "scene_sha256": "b6eb809980e26786e1df9a90c2205a9dc05758f53d4a9ab5c53e99399fbd4af2"
+   },
+   "view_sha256": "d8f62f02c31bbc3399cff1c62208165df0188518a995a5f862ef3284312bf685"
   },
   "umi-concave-tip13.8-2mm": {
    "art": {
@@ -1731,6 +4831,21 @@
     "sha256": "3446a0c9a3ec3f881fcc5c76a86a9fb592093e018bf02f449cb4a95dbda9ec9e"
    },
    "build_id": "surface-32x11-bfb94d585709",
+   "card_frame": {
+    "base_px": 69,
+    "margins_px": [
+     313,
+     48,
+     313,
+     0
+    ],
+    "top": 0.06,
+    "window_px": [
+     211,
+     17
+    ],
+    "zoom": 1.25
+   },
    "figure_sha256": "e38217818ff99c16f8d898f74079f4297bb51b7613218839c04ae9f2a59ab1c1",
    "files": {
     "assembled": {
@@ -1741,10 +4856,10 @@
      "width": 1280
     },
     "card": {
-     "bytes": 22884,
+     "bytes": 27078,
      "height": 400,
      "path": "shots/umi-concave-tip13.8-2mm.exploded.card.webp",
-     "sha256": "91e737cb2c8a84d9f52f02dd3711596a02cae73fb41084bb845de0f5e1441b26",
+     "sha256": "fe1b6acc204649bc79ebf2238c1d653e5f3a33007ae5cfc8b04cf273954d9a5c",
      "width": 640
     },
     "exploded": {
@@ -1755,7 +4870,7 @@
      "width": 1280
     }
    },
-   "fit_sha256": "b72e37a0f4183f6848472af88e9b1a2ee575ca54160c9dd1b78c6d87be53fb3e",
+   "fit_sha256": "697a7c706a305155f1475f5ca469a14d66cafcdb5f66b793c113a456c319c66d",
    "look": "photo",
    "margins_px": {
     "assembled": [
@@ -1772,7 +4887,7 @@
     ]
    },
    "part_look_sha256": "2893d8f0501573ff39faedcd6294f686e04fda69c37142a7f13c73443ac86440",
-   "view_sha256": "38120a78b39dab48c9eeaefa95ff660e9e13e58035b54edd1c5f54db892089b3"
+   "view_sha256": "d8f62f02c31bbc3399cff1c62208165df0188518a995a5f862ef3284312bf685"
   },
   "umi-concave-tip17.8-2mm": {
    "art": {
@@ -1783,6 +4898,21 @@
     "sha256": "8f055d0b850e4feee9e077d5c645591db2a58025a6b80c16d890003e5cd1d8d9"
    },
    "build_id": "surface-32x11-f20b3f659cff",
+   "card_frame": {
+    "base_px": 69,
+    "margins_px": [
+     312,
+     48,
+     312,
+     0
+    ],
+    "top": 0.06,
+    "window_px": [
+     209,
+     17
+    ],
+    "zoom": 1.25
+   },
    "figure_sha256": "e38217818ff99c16f8d898f74079f4297bb51b7613218839c04ae9f2a59ab1c1",
    "files": {
     "assembled": {
@@ -1793,10 +4923,10 @@
      "width": 1280
     },
     "card": {
-     "bytes": 22546,
+     "bytes": 27022,
      "height": 400,
      "path": "shots/umi-concave-tip17.8-2mm.exploded.card.webp",
-     "sha256": "765767a48e1bb0f9cdac6be0e2605321de5e430cb44f3bc832f5254887417b69",
+     "sha256": "ddfd103b0e44a60944e26b172f3d3499d65398cb92af849f79eef2c88e549fe4",
      "width": 640
     },
     "exploded": {
@@ -1807,7 +4937,7 @@
      "width": 1280
     }
    },
-   "fit_sha256": "9862f6607827bbcb14264f1e87fa1a57d31dbd5e1e9b02012b4fce52237196b7",
+   "fit_sha256": "00f62148f01854e44fb2ff13f558e588499fe8521bcd0f15a14b4571ff4801c4",
    "look": "photo",
    "margins_px": {
     "assembled": [
@@ -1824,7 +4954,7 @@
     ]
    },
    "part_look_sha256": "2893d8f0501573ff39faedcd6294f686e04fda69c37142a7f13c73443ac86440",
-   "view_sha256": "38120a78b39dab48c9eeaefa95ff660e9e13e58035b54edd1c5f54db892089b3"
+   "view_sha256": "d8f62f02c31bbc3399cff1c62208165df0188518a995a5f862ef3284312bf685"
   },
   "umi-concave-tip21.8-2mm": {
    "art": {
@@ -1835,6 +4965,21 @@
     "sha256": "0c144f7dab004b79ebacdc821853b4a3b7b2f78f4a4e856a4e07d31f832b2528"
    },
    "build_id": "surface-32x11-62d7fb2ed676",
+   "card_frame": {
+    "base_px": 66,
+    "margins_px": [
+     307,
+     48,
+     307,
+     0
+    ],
+    "top": 0.06,
+    "window_px": [
+     209,
+     17
+    ],
+    "zoom": 1.25
+   },
    "figure_sha256": "e38217818ff99c16f8d898f74079f4297bb51b7613218839c04ae9f2a59ab1c1",
    "files": {
     "assembled": {
@@ -1845,10 +4990,10 @@
      "width": 1280
     },
     "card": {
-     "bytes": 22534,
+     "bytes": 26774,
      "height": 400,
      "path": "shots/umi-concave-tip21.8-2mm.exploded.card.webp",
-     "sha256": "42c053238f2ae6f89c1492a0e2b9f5311a6721cc646e9b59b14720fb56b7f08b",
+     "sha256": "4c3af3d8c42b4168ec51dedd33f660a446457ac4b7845b03bc79eb99c2024456",
      "width": 640
     },
     "exploded": {
@@ -1859,7 +5004,7 @@
      "width": 1280
     }
    },
-   "fit_sha256": "45942a6ab6b3918761599a69be7fc05153bef444960870e573a8db92d3a2bf72",
+   "fit_sha256": "12309dd06465e9ec332349eac69b64c30c3151d6751d298751ef021f0f56549a",
    "look": "photo",
    "margins_px": {
     "assembled": [
@@ -1876,7 +5021,7 @@
     ]
    },
    "part_look_sha256": "2893d8f0501573ff39faedcd6294f686e04fda69c37142a7f13c73443ac86440",
-   "view_sha256": "38120a78b39dab48c9eeaefa95ff660e9e13e58035b54edd1c5f54db892089b3"
+   "view_sha256": "d8f62f02c31bbc3399cff1c62208165df0188518a995a5f862ef3284312bf685"
   },
   "umi-concave-tip5.8-2mm": {
    "art": {
@@ -1887,6 +5032,21 @@
     "sha256": "f441d2bbc07e71e27097316f7ac72e496f08775a02263a7ba5b577cb079d0b5e"
    },
    "build_id": "surface-32x9-30f809793c76",
+   "card_frame": {
+    "base_px": 57,
+    "margins_px": [
+     334,
+     48,
+     334,
+     0
+    ],
+    "top": 0.06,
+    "window_px": [
+     214,
+     17
+    ],
+    "zoom": 1.25
+   },
    "figure_sha256": "e38217818ff99c16f8d898f74079f4297bb51b7613218839c04ae9f2a59ab1c1",
    "files": {
     "assembled": {
@@ -1897,10 +5057,10 @@
      "width": 1280
     },
     "card": {
-     "bytes": 22144,
+     "bytes": 26284,
      "height": 400,
      "path": "shots/umi-concave-tip5.8-2mm.exploded.card.webp",
-     "sha256": "d3bee46b908b9fa817bfbce491d0fcfca76024529e17ecbbf440dc36783ec417",
+     "sha256": "b0ee483ebf967fd3774f6ff491eb7d9a80a92bed992b3e2f7278ee4a32710ad3",
      "width": 640
     },
     "exploded": {
@@ -1911,7 +5071,7 @@
      "width": 1280
     }
    },
-   "fit_sha256": "4f89ba1f0414cc076582a6c7ee9d5890a90366ea80349649f2d5d5457cea81cf",
+   "fit_sha256": "b4c9ee4e2bbdda28b0164585a91f04c9b2c6fb561d31db391e64343bd54be288",
    "look": "photo",
    "margins_px": {
     "assembled": [
@@ -1928,7 +5088,7 @@
     ]
    },
    "part_look_sha256": "2893d8f0501573ff39faedcd6294f686e04fda69c37142a7f13c73443ac86440",
-   "view_sha256": "38120a78b39dab48c9eeaefa95ff660e9e13e58035b54edd1c5f54db892089b3"
+   "view_sha256": "d8f62f02c31bbc3399cff1c62208165df0188518a995a5f862ef3284312bf685"
   },
   "umi-concave-tip9.8-2mm": {
    "art": {
@@ -1939,6 +5099,21 @@
     "sha256": "b926899b1998241f99c797354e95a6b993e07fe7880adb1b0624b18447da3ae6"
    },
    "build_id": "surface-32x9-ea37529f0b44",
+   "card_frame": {
+    "base_px": 56,
+    "margins_px": [
+     331,
+     48,
+     331,
+     0
+    ],
+    "top": 0.06,
+    "window_px": [
+     212,
+     17
+    ],
+    "zoom": 1.25
+   },
    "figure_sha256": "e38217818ff99c16f8d898f74079f4297bb51b7613218839c04ae9f2a59ab1c1",
    "files": {
     "assembled": {
@@ -1949,10 +5124,10 @@
      "width": 1280
     },
     "card": {
-     "bytes": 22480,
+     "bytes": 26690,
      "height": 400,
      "path": "shots/umi-concave-tip9.8-2mm.exploded.card.webp",
-     "sha256": "fa3722073e073cedeecd4cb040c01755386585f0770d335fe31d76321dfb4691",
+     "sha256": "520574358041a1e2d329bc41063f801855275579719efe64e46d160ce11ff1db",
      "width": 640
     },
     "exploded": {
@@ -1963,7 +5138,7 @@
      "width": 1280
     }
    },
-   "fit_sha256": "46be41265f76fc0a5b794903f630e083c64d175d9cd7d980f75a8306d6864b3c",
+   "fit_sha256": "fae25b3e421d1be86c149be8dd12c812ae93e6aaf7caef864daca673da7ceaf9",
    "look": "photo",
    "margins_px": {
     "assembled": [
@@ -1980,7 +5155,7 @@
     ]
    },
    "part_look_sha256": "2893d8f0501573ff39faedcd6294f686e04fda69c37142a7f13c73443ac86440",
-   "view_sha256": "38120a78b39dab48c9eeaefa95ff660e9e13e58035b54edd1c5f54db892089b3"
+   "view_sha256": "d8f62f02c31bbc3399cff1c62208165df0188518a995a5f862ef3284312bf685"
   },
   "umi-convex-tip13.8-2mm": {
    "art": {
@@ -1991,6 +5166,21 @@
     "sha256": "1990d1c7335ee78e78a3365ff8c8ffda5cc4206f94b845336e3cf207abe520a6"
    },
    "build_id": "surface-32x12-568f1bcff1cc",
+   "card_frame": {
+    "base_px": 82,
+    "margins_px": [
+     295,
+     48,
+     294,
+     0
+    ],
+    "top": 0.06,
+    "window_px": [
+     208,
+     17
+    ],
+    "zoom": 1.25
+   },
    "figure_sha256": "e38217818ff99c16f8d898f74079f4297bb51b7613218839c04ae9f2a59ab1c1",
    "files": {
     "assembled": {
@@ -2001,10 +5191,10 @@
      "width": 1280
     },
     "card": {
-     "bytes": 23020,
+     "bytes": 27902,
      "height": 400,
      "path": "shots/umi-convex-tip13.8-2mm.exploded.card.webp",
-     "sha256": "f237f30de8b0a410c26c9100cdc2ae66be0881fe0c0ca2c1f59e744b31eaf269",
+     "sha256": "8a7fe9395e30b339eb3294d853e8832937d7ae29d9bae97c077ff8dc273a718f",
      "width": 640
     },
     "exploded": {
@@ -2015,7 +5205,7 @@
      "width": 1280
     }
    },
-   "fit_sha256": "52952cf3dd982d204cf01e585ad1b30c037ec0a1589fa81d6d46c382d79ddb9c",
+   "fit_sha256": "501883c3b1c702250073113dd24b4101a6c199a2b390e9db10d6fe0459b73882",
    "look": "photo",
    "margins_px": {
     "assembled": [
@@ -2032,7 +5222,7 @@
     ]
    },
    "part_look_sha256": "2893d8f0501573ff39faedcd6294f686e04fda69c37142a7f13c73443ac86440",
-   "view_sha256": "38120a78b39dab48c9eeaefa95ff660e9e13e58035b54edd1c5f54db892089b3"
+   "view_sha256": "d8f62f02c31bbc3399cff1c62208165df0188518a995a5f862ef3284312bf685"
   },
   "umi-convex-tip17.8-2mm": {
    "art": {
@@ -2043,6 +5233,21 @@
     "sha256": "0c299434c2ef714cd365a11a3e0dad4e0249727d4baf9e4b5e2e1060cc733314"
    },
    "build_id": "surface-32x12-a4e852337e7a",
+   "card_frame": {
+    "base_px": 80,
+    "margins_px": [
+     293,
+     48,
+     292,
+     0
+    ],
+    "top": 0.06,
+    "window_px": [
+     208,
+     17
+    ],
+    "zoom": 1.25
+   },
    "figure_sha256": "e38217818ff99c16f8d898f74079f4297bb51b7613218839c04ae9f2a59ab1c1",
    "files": {
     "assembled": {
@@ -2053,10 +5258,10 @@
      "width": 1280
     },
     "card": {
-     "bytes": 22822,
+     "bytes": 27478,
      "height": 400,
      "path": "shots/umi-convex-tip17.8-2mm.exploded.card.webp",
-     "sha256": "eb401271e2fb1da5255a4ba63a33003fce78bad20e64933b1c3f6b11c54d910f",
+     "sha256": "9ff4e35bf5b84cff86b30df4a1b9aaf2485b67843bdfa76fe953bba706f9f490",
      "width": 640
     },
     "exploded": {
@@ -2067,7 +5272,7 @@
      "width": 1280
     }
    },
-   "fit_sha256": "94e0715552e2ceb9bc1cb6629fec69c7211f14ce07ec0081a90a8c9a1d029114",
+   "fit_sha256": "84e1a9a55c8a2dcffc154f577aef9ebca8bd39aa1a702de1886f58c321aacdea",
    "look": "photo",
    "margins_px": {
     "assembled": [
@@ -2084,7 +5289,7 @@
     ]
    },
    "part_look_sha256": "2893d8f0501573ff39faedcd6294f686e04fda69c37142a7f13c73443ac86440",
-   "view_sha256": "38120a78b39dab48c9eeaefa95ff660e9e13e58035b54edd1c5f54db892089b3"
+   "view_sha256": "d8f62f02c31bbc3399cff1c62208165df0188518a995a5f862ef3284312bf685"
   },
   "umi-convex-tip21.8-2mm": {
    "art": {
@@ -2095,6 +5300,21 @@
     "sha256": "c2604052e658071cc70dd434486b33ac0989d73fca145858380c3339c9a83314"
    },
    "build_id": "surface-32x12-a2448259d9c3",
+   "card_frame": {
+    "base_px": 75,
+    "margins_px": [
+     298,
+     48,
+     297,
+     0
+    ],
+    "top": 0.06,
+    "window_px": [
+     208,
+     17
+    ],
+    "zoom": 1.25
+   },
    "figure_sha256": "e38217818ff99c16f8d898f74079f4297bb51b7613218839c04ae9f2a59ab1c1",
    "files": {
     "assembled": {
@@ -2105,10 +5325,10 @@
      "width": 1280
     },
     "card": {
-     "bytes": 22662,
+     "bytes": 26992,
      "height": 400,
      "path": "shots/umi-convex-tip21.8-2mm.exploded.card.webp",
-     "sha256": "fec5828427fb3b8a152c01b24a02c53d5ebcbdbd762923b0a2fde0d71a4d9d33",
+     "sha256": "9433cec73ba5f27874639a3ca20e23aa8be421803ea723e483f2a8464cfd9bf8",
      "width": 640
     },
     "exploded": {
@@ -2119,7 +5339,7 @@
      "width": 1280
     }
    },
-   "fit_sha256": "9cf5f42251da93381e5d1660d4e69c19eb4a81e6a9afcf286869f7b31b30ad0e",
+   "fit_sha256": "7ebb307c184e62a95bb03dafea75a098696eab7549dc189fc428882778de4990",
    "look": "photo",
    "margins_px": {
     "assembled": [
@@ -2136,7 +5356,7 @@
     ]
    },
    "part_look_sha256": "2893d8f0501573ff39faedcd6294f686e04fda69c37142a7f13c73443ac86440",
-   "view_sha256": "38120a78b39dab48c9eeaefa95ff660e9e13e58035b54edd1c5f54db892089b3"
+   "view_sha256": "d8f62f02c31bbc3399cff1c62208165df0188518a995a5f862ef3284312bf685"
   },
   "umi-convex-tip5.8-2mm": {
    "art": {
@@ -2147,6 +5367,21 @@
     "sha256": "229cec2c688473ff181b2f23ac24424bff01bd862e8ec37b2e64e216eab792cb"
    },
    "build_id": "surface-32x11-e1778282dbcd",
+   "card_frame": {
+    "base_px": 71,
+    "margins_px": [
+     308,
+     48,
+     307,
+     0
+    ],
+    "top": 0.06,
+    "window_px": [
+     209,
+     17
+    ],
+    "zoom": 1.25
+   },
    "figure_sha256": "e38217818ff99c16f8d898f74079f4297bb51b7613218839c04ae9f2a59ab1c1",
    "files": {
     "assembled": {
@@ -2157,10 +5392,10 @@
      "width": 1280
     },
     "card": {
-     "bytes": 23048,
+     "bytes": 27366,
      "height": 400,
      "path": "shots/umi-convex-tip5.8-2mm.exploded.card.webp",
-     "sha256": "1fc6c3d2295465e47f807bf99b8dde859c11c65198c3607d74d56dcb5e82546f",
+     "sha256": "6a880b8989dc58cc81c4fdd9d1ec1060a9f3c7dd8fd09eaf9647230a3ee6e778",
      "width": 640
     },
     "exploded": {
@@ -2171,7 +5406,7 @@
      "width": 1280
     }
    },
-   "fit_sha256": "9d8f9241a6370f8319e61c87b7b50a5b02f533b6ee94ca900e255e8fee9722fc",
+   "fit_sha256": "82f34d52e6478f96eba47b46c2f1a86c243b5431c5ac03ebbec8f4b3ea6397f0",
    "look": "photo",
    "margins_px": {
     "assembled": [
@@ -2188,7 +5423,7 @@
     ]
    },
    "part_look_sha256": "2893d8f0501573ff39faedcd6294f686e04fda69c37142a7f13c73443ac86440",
-   "view_sha256": "38120a78b39dab48c9eeaefa95ff660e9e13e58035b54edd1c5f54db892089b3"
+   "view_sha256": "d8f62f02c31bbc3399cff1c62208165df0188518a995a5f862ef3284312bf685"
   },
   "umi-convex-tip9.8-2mm": {
    "art": {
@@ -2199,6 +5434,21 @@
     "sha256": "b71beae82ccb567e20bb04fa3d558dc24b6fb8a05dd8c2b069bc07d1c171b9fb"
    },
    "build_id": "surface-32x12-7aea1fdee23c",
+   "card_frame": {
+    "base_px": 79,
+    "margins_px": [
+     299,
+     48,
+     299,
+     0
+    ],
+    "top": 0.06,
+    "window_px": [
+     209,
+     17
+    ],
+    "zoom": 1.25
+   },
    "figure_sha256": "e38217818ff99c16f8d898f74079f4297bb51b7613218839c04ae9f2a59ab1c1",
    "files": {
     "assembled": {
@@ -2209,10 +5459,10 @@
      "width": 1280
     },
     "card": {
-     "bytes": 23058,
+     "bytes": 27436,
      "height": 400,
      "path": "shots/umi-convex-tip9.8-2mm.exploded.card.webp",
-     "sha256": "d64fd1f525216986690a0ce14b63355d309e1848eef68559e5a9c38aa6ec667c",
+     "sha256": "4f6342729c87214c38986cc4b6b900dcc145ed979d81273ee0e3c332365e969d",
      "width": 640
     },
     "exploded": {
@@ -2223,7 +5473,7 @@
      "width": 1280
     }
    },
-   "fit_sha256": "2f4c6c11113541ec088375118efd97deb7943caa71af7f84db45e4fe7affaa92",
+   "fit_sha256": "05a2d954ff60a774483869f40d78433727586057bc276f074276d01e4409b58b",
    "look": "photo",
    "margins_px": {
     "assembled": [
@@ -2240,7 +5490,7 @@
     ]
    },
    "part_look_sha256": "2893d8f0501573ff39faedcd6294f686e04fda69c37142a7f13c73443ac86440",
-   "view_sha256": "38120a78b39dab48c9eeaefa95ff660e9e13e58035b54edd1c5f54db892089b3"
+   "view_sha256": "d8f62f02c31bbc3399cff1c62208165df0188518a995a5f862ef3284312bf685"
   },
   "umi-finray-1.5mm": {
    "art": {
@@ -2251,6 +5501,21 @@
     "sha256": "4f3071a564001c127cb393d6a8eba0914bbb8695728a9ecd0078c0803151eb20"
    },
    "build_id": "surface-32x17-23d2f6c5a920",
+   "card_frame": {
+    "base_px": 81,
+    "margins_px": [
+     286,
+     48,
+     285,
+     0
+    ],
+    "top": 0.06,
+    "window_px": [
+     199,
+     17
+    ],
+    "zoom": 1.25
+   },
    "figure_sha256": "e38217818ff99c16f8d898f74079f4297bb51b7613218839c04ae9f2a59ab1c1",
    "files": {
     "assembled": {
@@ -2261,10 +5526,10 @@
      "width": 1280
     },
     "card": {
-     "bytes": 22284,
+     "bytes": 27118,
      "height": 400,
      "path": "shots/umi-finray-1.5mm.exploded.card.webp",
-     "sha256": "468d54cd26c1480974abadb5c5a86f53dee2a28145df9dd51254a4fa0e85f9a5",
+     "sha256": "9701e64345f78095bb94c68dfff50f5e88c2c3117a63bd2d4f20976a9fdd7c55",
      "width": 640
     },
     "exploded": {
@@ -2275,7 +5540,7 @@
      "width": 1280
     }
    },
-   "fit_sha256": "90a02212f4be1365c681fc36503c29db20e010edf72be3591a77780d45060ae4",
+   "fit_sha256": "3aceb44f47f00bdc2ae3ebd0ee533e436c7e95141f647d4ea9d05daff4527023",
    "look": "photo",
    "margins_px": {
     "assembled": [
@@ -2292,7 +5557,7 @@
     ]
    },
    "part_look_sha256": "2893d8f0501573ff39faedcd6294f686e04fda69c37142a7f13c73443ac86440",
-   "view_sha256": "38120a78b39dab48c9eeaefa95ff660e9e13e58035b54edd1c5f54db892089b3"
+   "view_sha256": "d8f62f02c31bbc3399cff1c62208165df0188518a995a5f862ef3284312bf685"
   },
   "umi-finray-1mm": {
    "art": {
@@ -2303,6 +5568,21 @@
     "sha256": "0cd7ca52cf57e8cef2dcddc031b9d971a19e062c163655be8cc220f1b66a79b5"
    },
    "build_id": "surface-32x25-3b48a66c2948",
+   "card_frame": {
+    "base_px": 79,
+    "margins_px": [
+     290,
+     48,
+     289,
+     0
+    ],
+    "top": 0.06,
+    "window_px": [
+     198,
+     17
+    ],
+    "zoom": 1.25
+   },
    "figure_sha256": "e38217818ff99c16f8d898f74079f4297bb51b7613218839c04ae9f2a59ab1c1",
    "files": {
     "assembled": {
@@ -2313,10 +5593,10 @@
      "width": 1280
     },
     "card": {
-     "bytes": 21332,
+     "bytes": 25836,
      "height": 400,
      "path": "shots/umi-finray-1mm.exploded.card.webp",
-     "sha256": "03e9fa4ed69ad57b91897fb559b41b127988c892a749095e2ed8d0b6636d3103",
+     "sha256": "a8e3e8f4c6a47e58c1035e1a9014835dc142322bd92fafc09cf64192c6826021",
      "width": 640
     },
     "exploded": {
@@ -2327,7 +5607,7 @@
      "width": 1280
     }
    },
-   "fit_sha256": "7dd0290ea23d914f18158852b637e41a3e814d5d74cc564b43daafd2ebcf444b",
+   "fit_sha256": "2c722f206082dc81c1783214a59b6d4f12fb5ec3fbadccd7ebc33763909b7a08",
    "look": "photo",
    "margins_px": {
     "assembled": [
@@ -2344,7 +5624,7 @@
     ]
    },
    "part_look_sha256": "2893d8f0501573ff39faedcd6294f686e04fda69c37142a7f13c73443ac86440",
-   "view_sha256": "38120a78b39dab48c9eeaefa95ff660e9e13e58035b54edd1c5f54db892089b3"
+   "view_sha256": "d8f62f02c31bbc3399cff1c62208165df0188518a995a5f862ef3284312bf685"
   },
   "umi-finray-2mm": {
    "art": {
@@ -2355,6 +5635,21 @@
     "sha256": "4a5e97466d8bdbfa16b28194bf7c71eb458d55caf1cab32b7d57a9a7c2ccfbbb"
    },
    "build_id": "surface-32x12-3713abf9ee10",
+   "card_frame": {
+    "base_px": 72,
+    "margins_px": [
+     294,
+     48,
+     294,
+     0
+    ],
+    "top": 0.06,
+    "window_px": [
+     200,
+     17
+    ],
+    "zoom": 1.25
+   },
    "figure_sha256": "e38217818ff99c16f8d898f74079f4297bb51b7613218839c04ae9f2a59ab1c1",
    "files": {
     "assembled": {
@@ -2365,10 +5660,10 @@
      "width": 1280
     },
     "card": {
-     "bytes": 22598,
+     "bytes": 26970,
      "height": 400,
      "path": "shots/umi-finray-2mm.exploded.card.webp",
-     "sha256": "a0e1de6f595a22b29217c3628aac7d198905e5a0228d31c60a40931033611805",
+     "sha256": "f251a5e96a3cba1e57814fff6a5aa10656d5810a744b81c3e89acd33c09abab1",
      "width": 640
     },
     "exploded": {
@@ -2379,7 +5674,7 @@
      "width": 1280
     }
    },
-   "fit_sha256": "488dc0a3ab81bd398bee635cad5ee3c782f7559826944643a41349c40e546e1a",
+   "fit_sha256": "76cf220c09eece5330a7eac4b87a02065929711511791995ba00465b92b465e7",
    "look": "photo",
    "margins_px": {
     "assembled": [
@@ -2396,7 +5691,7 @@
     ]
    },
    "part_look_sha256": "2893d8f0501573ff39faedcd6294f686e04fda69c37142a7f13c73443ac86440",
-   "view_sha256": "38120a78b39dab48c9eeaefa95ff660e9e13e58035b54edd1c5f54db892089b3"
+   "view_sha256": "d8f62f02c31bbc3399cff1c62208165df0188518a995a5f862ef3284312bf685"
   },
   "umi-finray-3mm": {
    "art": {
@@ -2407,6 +5702,21 @@
     "sha256": "edc07e9e12f0da0c6621119ad14b36be08c880663778660f2f240ec967bcd80f"
    },
    "build_id": "surface-21x8-4548f2e02ef6",
+   "card_frame": {
+    "base_px": 55,
+    "margins_px": [
+     309,
+     48,
+     308,
+     0
+    ],
+    "top": 0.06,
+    "window_px": [
+     200,
+     17
+    ],
+    "zoom": 1.25
+   },
    "figure_sha256": "e38217818ff99c16f8d898f74079f4297bb51b7613218839c04ae9f2a59ab1c1",
    "files": {
     "assembled": {
@@ -2417,10 +5727,10 @@
      "width": 1280
     },
     "card": {
-     "bytes": 21746,
+     "bytes": 25416,
      "height": 400,
      "path": "shots/umi-finray-3mm.exploded.card.webp",
-     "sha256": "fcd79fcdbdf18ae006583d2e98db700d4384ba40c43be294ae25e3d48adf5bb6",
+     "sha256": "ebcf4e6f51673d478afcb99ee09ae4698fd300af2f2a55f7fbb70f23218a359e",
      "width": 640
     },
     "exploded": {
@@ -2431,7 +5741,7 @@
      "width": 1280
     }
    },
-   "fit_sha256": "910d5174be2cbe52052c6d450a6511c4b309e4a8d293ea971b947ec441e5a414",
+   "fit_sha256": "c113842b29b8294e552c776f95dc2d2e0aa6dada0224f3b0152d14000f2ce24c",
    "look": "photo",
    "margins_px": {
     "assembled": [
@@ -2448,7 +5758,7 @@
     ]
    },
    "part_look_sha256": "2893d8f0501573ff39faedcd6294f686e04fda69c37142a7f13c73443ac86440",
-   "view_sha256": "38120a78b39dab48c9eeaefa95ff660e9e13e58035b54edd1c5f54db892089b3"
+   "view_sha256": "d8f62f02c31bbc3399cff1c62208165df0188518a995a5f862ef3284312bf685"
   },
   "umi-pointed-tip2-2mm": {
    "art": {
@@ -2459,6 +5769,21 @@
     "sha256": "28faa43038cfe855325006f2b2a4cb861f354420e1842eb90b176e5bc65a457c"
    },
    "build_id": "surface-32x12-225658b2334b",
+   "card_frame": {
+    "base_px": 76,
+    "margins_px": [
+     294,
+     48,
+     293,
+     0
+    ],
+    "top": 0.06,
+    "window_px": [
+     207,
+     17
+    ],
+    "zoom": 1.25
+   },
    "figure_sha256": "e38217818ff99c16f8d898f74079f4297bb51b7613218839c04ae9f2a59ab1c1",
    "files": {
     "assembled": {
@@ -2469,10 +5794,10 @@
      "width": 1280
     },
     "card": {
-     "bytes": 23626,
+     "bytes": 27886,
      "height": 400,
      "path": "shots/umi-pointed-tip2-2mm.exploded.card.webp",
-     "sha256": "c89e87b6693d7328c7efb90736ddef26f01e50229c08b5ae51f3b9047e5171cd",
+     "sha256": "c2972af3afe28208ab014b1065f6fedc88222cef850b84caf3e2a1eb4ceed3f5",
      "width": 640
     },
     "exploded": {
@@ -2483,7 +5808,7 @@
      "width": 1280
     }
    },
-   "fit_sha256": "45d6d9bae3bdfbac3e2dc58194e4c0537c1200c9450a4f5e535fb6dc358491d1",
+   "fit_sha256": "1c829179e5c7a3c91459262d12da49433e75725674c1df60674239db1d4753f1",
    "look": "photo",
    "margins_px": {
     "assembled": [
@@ -2500,7 +5825,7 @@
     ]
    },
    "part_look_sha256": "2893d8f0501573ff39faedcd6294f686e04fda69c37142a7f13c73443ac86440",
-   "view_sha256": "38120a78b39dab48c9eeaefa95ff660e9e13e58035b54edd1c5f54db892089b3"
+   "view_sha256": "d8f62f02c31bbc3399cff1c62208165df0188518a995a5f862ef3284312bf685"
   },
   "umi-short-convex-tip13.8-2mm": {
    "art": {
@@ -2511,6 +5836,21 @@
     "sha256": "075409a4712d5b2d35ceabd653c86a23044d177bd5eb813e237e8cb39075c70a"
    },
    "build_id": "surface-32x12-2d739fe25b69",
+   "card_frame": {
+    "base_px": 76,
+    "margins_px": [
+     296,
+     48,
+     296,
+     0
+    ],
+    "top": 0.06,
+    "window_px": [
+     202,
+     17
+    ],
+    "zoom": 1.25
+   },
    "figure_sha256": "e38217818ff99c16f8d898f74079f4297bb51b7613218839c04ae9f2a59ab1c1",
    "files": {
     "assembled": {
@@ -2521,10 +5861,10 @@
      "width": 1280
     },
     "card": {
-     "bytes": 22902,
+     "bytes": 27208,
      "height": 400,
      "path": "shots/umi-short-convex-tip13.8-2mm.exploded.card.webp",
-     "sha256": "6d7a7e3b78301cdd89cad244181ffc9b8fd08078c2e799dda9f38e139d5cb62d",
+     "sha256": "26ec06baaa77a62b8f93cbc2fa69805487ce73c78ef2fdfe79f2b20e414b7d9c",
      "width": 640
     },
     "exploded": {
@@ -2535,7 +5875,7 @@
      "width": 1280
     }
    },
-   "fit_sha256": "b154d1327e32935faa0833f46378f31e0434de34ec838512d473f47b6d85a9a9",
+   "fit_sha256": "82c357a51edd2921872047af90572d22f5d5f64c493129f3e2ce95fb25d86528",
    "look": "photo",
    "margins_px": {
     "assembled": [
@@ -2552,7 +5892,7 @@
     ]
    },
    "part_look_sha256": "2893d8f0501573ff39faedcd6294f686e04fda69c37142a7f13c73443ac86440",
-   "view_sha256": "38120a78b39dab48c9eeaefa95ff660e9e13e58035b54edd1c5f54db892089b3"
+   "view_sha256": "d8f62f02c31bbc3399cff1c62208165df0188518a995a5f862ef3284312bf685"
   },
   "umi-short-convex-tip17.8-2mm": {
    "art": {
@@ -2563,6 +5903,21 @@
     "sha256": "42ce56f3885ba515cb90de33d79e8185a6b7c859b179cdadbd489f174cab8b17"
    },
    "build_id": "surface-32x12-94ed1318b98d",
+   "card_frame": {
+    "base_px": 76,
+    "margins_px": [
+     296,
+     48,
+     296,
+     0
+    ],
+    "top": 0.06,
+    "window_px": [
+     200,
+     17
+    ],
+    "zoom": 1.25
+   },
    "figure_sha256": "e38217818ff99c16f8d898f74079f4297bb51b7613218839c04ae9f2a59ab1c1",
    "files": {
     "assembled": {
@@ -2573,10 +5928,10 @@
      "width": 1280
     },
     "card": {
-     "bytes": 22992,
+     "bytes": 27180,
      "height": 400,
      "path": "shots/umi-short-convex-tip17.8-2mm.exploded.card.webp",
-     "sha256": "efbb5d3558f0230f10086921e1cb337d43453d6322e5450d3e27e0b4782babd2",
+     "sha256": "06d70d6d77b723a29b899c0f5b1fb018de177c3c912e5b9b780d2d66c8a1cece",
      "width": 640
     },
     "exploded": {
@@ -2587,7 +5942,7 @@
      "width": 1280
     }
    },
-   "fit_sha256": "edb64c3d2781184773c9f4a6f92db7e43b8485603d51a28a80490cbbf8eac233",
+   "fit_sha256": "bc099df7cdd514f18e0055505dbc663f5245b1ba9b95c077410689b8afd57799",
    "look": "photo",
    "margins_px": {
     "assembled": [
@@ -2604,7 +5959,7 @@
     ]
    },
    "part_look_sha256": "2893d8f0501573ff39faedcd6294f686e04fda69c37142a7f13c73443ac86440",
-   "view_sha256": "38120a78b39dab48c9eeaefa95ff660e9e13e58035b54edd1c5f54db892089b3"
+   "view_sha256": "d8f62f02c31bbc3399cff1c62208165df0188518a995a5f862ef3284312bf685"
   },
   "umi-short-convex-tip21.8-2mm": {
    "art": {
@@ -2615,6 +5970,21 @@
     "sha256": "f33d018b276babc4b96e5c868d0dcc124bc1a5511e4006b47a52b660becb669c"
    },
    "build_id": "surface-32x12-342fbab32928",
+   "card_frame": {
+    "base_px": 73,
+    "margins_px": [
+     295,
+     48,
+     295,
+     0
+    ],
+    "top": 0.06,
+    "window_px": [
+     202,
+     17
+    ],
+    "zoom": 1.25
+   },
    "figure_sha256": "e38217818ff99c16f8d898f74079f4297bb51b7613218839c04ae9f2a59ab1c1",
    "files": {
     "assembled": {
@@ -2625,10 +5995,10 @@
      "width": 1280
     },
     "card": {
-     "bytes": 22836,
+     "bytes": 27084,
      "height": 400,
      "path": "shots/umi-short-convex-tip21.8-2mm.exploded.card.webp",
-     "sha256": "50962a0d69ea675d63b78c6c710cb4e96b60c4d896a5b42952b1b304eccfc5f3",
+     "sha256": "011cafefba2bcbcdec335fa8f79366856598a3b131071645149c067b48d87549",
      "width": 640
     },
     "exploded": {
@@ -2639,7 +6009,7 @@
      "width": 1280
     }
    },
-   "fit_sha256": "cf2573ec7f8656174a02e84abcbc6417fdc989d6ecfdb509c2906a506d6f80d1",
+   "fit_sha256": "c1e40d88726722408c75d98de79c4259f6b70d325a5f00aba28fbb32f7feac08",
    "look": "photo",
    "margins_px": {
     "assembled": [
@@ -2656,7 +6026,7 @@
     ]
    },
    "part_look_sha256": "2893d8f0501573ff39faedcd6294f686e04fda69c37142a7f13c73443ac86440",
-   "view_sha256": "38120a78b39dab48c9eeaefa95ff660e9e13e58035b54edd1c5f54db892089b3"
+   "view_sha256": "d8f62f02c31bbc3399cff1c62208165df0188518a995a5f862ef3284312bf685"
   },
   "umi-short-convex-tip5.8-2mm": {
    "art": {
@@ -2667,6 +6037,21 @@
     "sha256": "a96500866540a80b144cd7a6cce1d958bbb873a14337789394998ae22c6e2eb0"
    },
    "build_id": "surface-32x12-c9006c20cab8",
+   "card_frame": {
+    "base_px": 75,
+    "margins_px": [
+     293,
+     48,
+     292,
+     0
+    ],
+    "top": 0.06,
+    "window_px": [
+     199,
+     17
+    ],
+    "zoom": 1.25
+   },
    "figure_sha256": "e38217818ff99c16f8d898f74079f4297bb51b7613218839c04ae9f2a59ab1c1",
    "files": {
     "assembled": {
@@ -2677,10 +6062,10 @@
      "width": 1280
     },
     "card": {
-     "bytes": 23204,
+     "bytes": 27740,
      "height": 400,
      "path": "shots/umi-short-convex-tip5.8-2mm.exploded.card.webp",
-     "sha256": "e8a1212b255d1c138005160f57269d1ff13c147d5b069166105ff13156a9a37f",
+     "sha256": "a697432f6f674bba6f0f034f5c0c07fc8bc04a9e3523dc2652b7575cf1371a9f",
      "width": 640
     },
     "exploded": {
@@ -2691,7 +6076,7 @@
      "width": 1280
     }
    },
-   "fit_sha256": "a79a7ef72db981ac69ef957dfd6d5ac3afea6065aa182a594587ec5c40e612f0",
+   "fit_sha256": "4277429cf7900fd6cd7f24118ae79e8f648c79fa643893342e665a8cb5710a5c",
    "look": "photo",
    "margins_px": {
     "assembled": [
@@ -2708,7 +6093,7 @@
     ]
    },
    "part_look_sha256": "2893d8f0501573ff39faedcd6294f686e04fda69c37142a7f13c73443ac86440",
-   "view_sha256": "38120a78b39dab48c9eeaefa95ff660e9e13e58035b54edd1c5f54db892089b3"
+   "view_sha256": "d8f62f02c31bbc3399cff1c62208165df0188518a995a5f862ef3284312bf685"
   },
   "umi-short-convex-tip9.8-2mm": {
    "art": {
@@ -2719,6 +6104,21 @@
     "sha256": "d0a51b1f3b87cb89d13c08f52e75b66c500b8acfc18feba8ff7c6df4173542a5"
    },
    "build_id": "surface-32x12-104ecbf19cc9",
+   "card_frame": {
+    "base_px": 77,
+    "margins_px": [
+     296,
+     48,
+     295,
+     0
+    ],
+    "top": 0.06,
+    "window_px": [
+     200,
+     17
+    ],
+    "zoom": 1.25
+   },
    "figure_sha256": "e38217818ff99c16f8d898f74079f4297bb51b7613218839c04ae9f2a59ab1c1",
    "files": {
     "assembled": {
@@ -2729,10 +6129,10 @@
      "width": 1280
     },
     "card": {
-     "bytes": 22938,
+     "bytes": 27528,
      "height": 400,
      "path": "shots/umi-short-convex-tip9.8-2mm.exploded.card.webp",
-     "sha256": "fa4aba22296971f3debd6ccd5e56ab27799b8b58aa53813530f9c79963d18d4c",
+     "sha256": "608a0a61c684d0e8f8da5ce07748331a520c562fe74acb878ed832ae31f7d5a7",
      "width": 640
     },
     "exploded": {
@@ -2743,7 +6143,7 @@
      "width": 1280
     }
    },
-   "fit_sha256": "7e9fc74833ebe3f6ccc18c142cbb086d6e2c9f44bd81c388a1f3f53d58a4cd6d",
+   "fit_sha256": "60e25d8b36e4fe842bb254d7b566b9c22f1c2ec2be92191ecabd526bfd741a79",
    "look": "photo",
    "margins_px": {
     "assembled": [
@@ -2760,7 +6160,7 @@
     ]
    },
    "part_look_sha256": "2893d8f0501573ff39faedcd6294f686e04fda69c37142a7f13c73443ac86440",
-   "view_sha256": "38120a78b39dab48c9eeaefa95ff660e9e13e58035b54edd1c5f54db892089b3"
+   "view_sha256": "d8f62f02c31bbc3399cff1c62208165df0188518a995a5f862ef3284312bf685"
   },
   "umi-short-trap-tip13.8-2mm": {
    "art": {
@@ -2771,6 +6171,21 @@
     "sha256": "58b91eb8f5c38c8d432f41e2fbde279fd86bb0c303f05164613892094ff1dd59"
    },
    "build_id": "surface-32x12-9293aa782072",
+   "card_frame": {
+    "base_px": 74,
+    "margins_px": [
+     296,
+     48,
+     296,
+     0
+    ],
+    "top": 0.06,
+    "window_px": [
+     202,
+     17
+    ],
+    "zoom": 1.25
+   },
    "figure_sha256": "e38217818ff99c16f8d898f74079f4297bb51b7613218839c04ae9f2a59ab1c1",
    "files": {
     "assembled": {
@@ -2781,10 +6196,10 @@
      "width": 1280
     },
     "card": {
-     "bytes": 22838,
+     "bytes": 27258,
      "height": 400,
      "path": "shots/umi-short-trap-tip13.8-2mm.exploded.card.webp",
-     "sha256": "8509c7b3e4b4d3bdccb3cb08b8dfdcd2e2d1c6fda406cebcbfb0e5739d2ac391",
+     "sha256": "9722cea524edf1ac09ebf65a000dbb363fd3985799bec3790fa891fbc72e833a",
      "width": 640
     },
     "exploded": {
@@ -2795,7 +6210,7 @@
      "width": 1280
     }
    },
-   "fit_sha256": "62d53cba2acae5f8f502c726096ee49421f0bfa54b9adc732b88573598989eaf",
+   "fit_sha256": "04af8be0199ae869cfaac4b053aaa1d9775bacd2455e9717ee0e58ecb86ab59c",
    "look": "photo",
    "margins_px": {
     "assembled": [
@@ -2812,7 +6227,7 @@
     ]
    },
    "part_look_sha256": "2893d8f0501573ff39faedcd6294f686e04fda69c37142a7f13c73443ac86440",
-   "view_sha256": "38120a78b39dab48c9eeaefa95ff660e9e13e58035b54edd1c5f54db892089b3"
+   "view_sha256": "d8f62f02c31bbc3399cff1c62208165df0188518a995a5f862ef3284312bf685"
   },
   "umi-short-trap-tip17.8-2mm": {
    "art": {
@@ -2823,6 +6238,21 @@
     "sha256": "f46607f520f0c34ec1c74087dbb514d687cba618330a3ecdd7f6cc92c5945fa5"
    },
    "build_id": "surface-32x12-cdebb8ebe8e3",
+   "card_frame": {
+    "base_px": 76,
+    "margins_px": [
+     297,
+     48,
+     297,
+     0
+    ],
+    "top": 0.06,
+    "window_px": [
+     202,
+     17
+    ],
+    "zoom": 1.25
+   },
    "figure_sha256": "e38217818ff99c16f8d898f74079f4297bb51b7613218839c04ae9f2a59ab1c1",
    "files": {
     "assembled": {
@@ -2833,10 +6263,10 @@
      "width": 1280
     },
     "card": {
-     "bytes": 22540,
+     "bytes": 27300,
      "height": 400,
      "path": "shots/umi-short-trap-tip17.8-2mm.exploded.card.webp",
-     "sha256": "ab8ecfad7988968ec9c319f2a7277cb1fdf5b5c6cb7d7b3365107eb80f534961",
+     "sha256": "d69d2c5499c595c2d067a38fd63a152494a58e09b4b3a560feabed34edef9a47",
      "width": 640
     },
     "exploded": {
@@ -2847,7 +6277,7 @@
      "width": 1280
     }
    },
-   "fit_sha256": "7e66f885e910cf4378513c3eb4059939f23d40859dd8daae85e0f0e75c033fa8",
+   "fit_sha256": "a6bd8b57071aebfc9022c257fe918c809bc5ca52f6aeaeab09a6fd4dc7037d2f",
    "look": "photo",
    "margins_px": {
     "assembled": [
@@ -2864,7 +6294,7 @@
     ]
    },
    "part_look_sha256": "2893d8f0501573ff39faedcd6294f686e04fda69c37142a7f13c73443ac86440",
-   "view_sha256": "38120a78b39dab48c9eeaefa95ff660e9e13e58035b54edd1c5f54db892089b3"
+   "view_sha256": "d8f62f02c31bbc3399cff1c62208165df0188518a995a5f862ef3284312bf685"
   },
   "umi-short-trap-tip21.8-2mm": {
    "art": {
@@ -2875,6 +6305,21 @@
     "sha256": "d693accaa76b6760fbd3e8996822f27e2723ba4e45a900a54761544a108d3d32"
    },
    "build_id": "surface-32x12-a813c264bd0f",
+   "card_frame": {
+    "base_px": 78,
+    "margins_px": [
+     298,
+     48,
+     298,
+     0
+    ],
+    "top": 0.06,
+    "window_px": [
+     202,
+     17
+    ],
+    "zoom": 1.25
+   },
    "figure_sha256": "e38217818ff99c16f8d898f74079f4297bb51b7613218839c04ae9f2a59ab1c1",
    "files": {
     "assembled": {
@@ -2885,10 +6330,10 @@
      "width": 1280
     },
     "card": {
-     "bytes": 22192,
+     "bytes": 26932,
      "height": 400,
      "path": "shots/umi-short-trap-tip21.8-2mm.exploded.card.webp",
-     "sha256": "c2c639bd56fba9bfc39f416245c39009fadf4ec9e4426de69d4f411c5dd513dc",
+     "sha256": "b731d23df2161309742cc8a1b0284d730a39fe8498e9934502e8ae3362939757",
      "width": 640
     },
     "exploded": {
@@ -2899,7 +6344,7 @@
      "width": 1280
     }
    },
-   "fit_sha256": "b5ac00c094f532b2082847b75bab1bcfcf8352f15bc7b5a5b3f1f5aa2a875a82",
+   "fit_sha256": "c30ffff492797bde4c0e4c3e1f9f5a42b18fa96f6ebcbe4f316bc9745161860e",
    "look": "photo",
    "margins_px": {
     "assembled": [
@@ -2916,7 +6361,7 @@
     ]
    },
    "part_look_sha256": "2893d8f0501573ff39faedcd6294f686e04fda69c37142a7f13c73443ac86440",
-   "view_sha256": "38120a78b39dab48c9eeaefa95ff660e9e13e58035b54edd1c5f54db892089b3"
+   "view_sha256": "d8f62f02c31bbc3399cff1c62208165df0188518a995a5f862ef3284312bf685"
   },
   "umi-short-trap-tip5.8-2mm": {
    "art": {
@@ -2927,6 +6372,21 @@
     "sha256": "047b5c1d5b34ae98648b85ff3c69aff7ce4af9e84151782bb09b2ba00db04f6c"
    },
    "build_id": "surface-32x12-b6c8e235bf0a",
+   "card_frame": {
+    "base_px": 78,
+    "margins_px": [
+     296,
+     48,
+     295,
+     0
+    ],
+    "top": 0.06,
+    "window_px": [
+     200,
+     17
+    ],
+    "zoom": 1.25
+   },
    "figure_sha256": "e38217818ff99c16f8d898f74079f4297bb51b7613218839c04ae9f2a59ab1c1",
    "files": {
     "assembled": {
@@ -2937,10 +6397,10 @@
      "width": 1280
     },
     "card": {
-     "bytes": 23550,
+     "bytes": 27608,
      "height": 400,
      "path": "shots/umi-short-trap-tip5.8-2mm.exploded.card.webp",
-     "sha256": "ee7c81900bca952edef1152264a2439a0fdf0e9f69f769f516502f09eeb50026",
+     "sha256": "990e0bbb09ddfe0bfcd3a67f365bb527e693a839dfc1b4e00e263f2a1deff681",
      "width": 640
     },
     "exploded": {
@@ -2951,7 +6411,7 @@
      "width": 1280
     }
    },
-   "fit_sha256": "9744bf8d6ecc9a731b94c40865597533c4f2031acdfafd56f0e787686f089b01",
+   "fit_sha256": "0f62f4f8ef9ae561aad243169ec43f34204c73d1cf3dd07e07d58c00f871879b",
    "look": "photo",
    "margins_px": {
     "assembled": [
@@ -2968,7 +6428,7 @@
     ]
    },
    "part_look_sha256": "2893d8f0501573ff39faedcd6294f686e04fda69c37142a7f13c73443ac86440",
-   "view_sha256": "38120a78b39dab48c9eeaefa95ff660e9e13e58035b54edd1c5f54db892089b3"
+   "view_sha256": "d8f62f02c31bbc3399cff1c62208165df0188518a995a5f862ef3284312bf685"
   },
   "umi-short-trap-tip9.8-2mm": {
    "art": {
@@ -2979,6 +6439,21 @@
     "sha256": "f5d34355984a3b921c30774c4ccae4746056d4cb6ec4b70d3b1144b2e271c94d"
    },
    "build_id": "surface-32x12-c31187be42da",
+   "card_frame": {
+    "base_px": 77,
+    "margins_px": [
+     297,
+     48,
+     296,
+     0
+    ],
+    "top": 0.06,
+    "window_px": [
+     201,
+     17
+    ],
+    "zoom": 1.25
+   },
    "figure_sha256": "e38217818ff99c16f8d898f74079f4297bb51b7613218839c04ae9f2a59ab1c1",
    "files": {
     "assembled": {
@@ -2989,10 +6464,10 @@
      "width": 1280
     },
     "card": {
-     "bytes": 23322,
+     "bytes": 27564,
      "height": 400,
      "path": "shots/umi-short-trap-tip9.8-2mm.exploded.card.webp",
-     "sha256": "c8e9fd29ab059553ada366979c0015f7c742e44531abdc169a97810270cf56d1",
+     "sha256": "079c070caac30fc04575d312be598152f113dceefe8645fc98f281271a2589f2",
      "width": 640
     },
     "exploded": {
@@ -3003,7 +6478,7 @@
      "width": 1280
     }
    },
-   "fit_sha256": "ace88a1b25b97c7074fb6bf28aa6e09053839131f63a255a38e869e4b4ec55d1",
+   "fit_sha256": "b768ffe44d3403f70ab1ab45dbef1b314f5894f814737f87769806b6cf8fb302",
    "look": "photo",
    "margins_px": {
     "assembled": [
@@ -3020,7 +6495,7 @@
     ]
    },
    "part_look_sha256": "2893d8f0501573ff39faedcd6294f686e04fda69c37142a7f13c73443ac86440",
-   "view_sha256": "38120a78b39dab48c9eeaefa95ff660e9e13e58035b54edd1c5f54db892089b3"
+   "view_sha256": "d8f62f02c31bbc3399cff1c62208165df0188518a995a5f862ef3284312bf685"
   },
   "umi-trap-tip13.8-2mm": {
    "art": {
@@ -3031,6 +6506,21 @@
     "sha256": "4950fe4adfa5b57cbda5ccc72126a12bf8f72a9ee8dd24f767780ef0eed2db6b"
    },
    "build_id": "surface-32x11-3b33935dba27",
+   "card_frame": {
+    "base_px": 71,
+    "margins_px": [
+     299,
+     48,
+     298,
+     0
+    ],
+    "top": 0.06,
+    "window_px": [
+     202,
+     17
+    ],
+    "zoom": 1.25
+   },
    "figure_sha256": "e38217818ff99c16f8d898f74079f4297bb51b7613218839c04ae9f2a59ab1c1",
    "files": {
     "assembled": {
@@ -3041,10 +6531,10 @@
      "width": 1280
     },
     "card": {
-     "bytes": 23260,
+     "bytes": 27296,
      "height": 400,
      "path": "shots/umi-trap-tip13.8-2mm.exploded.card.webp",
-     "sha256": "6040d75a39ef010f874247114387d4845688ae5d61030923315f5edd8ff0df04",
+     "sha256": "94981db69827f98e08206fca0ffa3c0b51496bacc9dfbd0f646917d1383f33a0",
      "width": 640
     },
     "exploded": {
@@ -3055,7 +6545,7 @@
      "width": 1280
     }
    },
-   "fit_sha256": "1746c1eb70d6d51feccae1b932dc349d9d0ab64af87b964add7830c17372781d",
+   "fit_sha256": "dda165dfdbce91faab3aa22c59f29d722e328340fbe03bea4f426b34bb323f2e",
    "look": "photo",
    "margins_px": {
     "assembled": [
@@ -3072,7 +6562,7 @@
     ]
    },
    "part_look_sha256": "2893d8f0501573ff39faedcd6294f686e04fda69c37142a7f13c73443ac86440",
-   "view_sha256": "38120a78b39dab48c9eeaefa95ff660e9e13e58035b54edd1c5f54db892089b3"
+   "view_sha256": "d8f62f02c31bbc3399cff1c62208165df0188518a995a5f862ef3284312bf685"
   },
   "umi-trap-tip17.8-2mm": {
    "art": {
@@ -3083,6 +6573,21 @@
     "sha256": "68b8449b71715797d7d335a4cd021beb563e60ce7a4d2f65cb2657fba1387962"
    },
    "build_id": "surface-32x11-0081149cd3fc",
+   "card_frame": {
+    "base_px": 66,
+    "margins_px": [
+     308,
+     48,
+     308,
+     0
+    ],
+    "top": 0.06,
+    "window_px": [
+     203,
+     17
+    ],
+    "zoom": 1.25
+   },
    "figure_sha256": "e38217818ff99c16f8d898f74079f4297bb51b7613218839c04ae9f2a59ab1c1",
    "files": {
     "assembled": {
@@ -3093,10 +6598,10 @@
      "width": 1280
     },
     "card": {
-     "bytes": 22972,
+     "bytes": 27164,
      "height": 400,
      "path": "shots/umi-trap-tip17.8-2mm.exploded.card.webp",
-     "sha256": "8921ed5376f66db106b6d0c7494fa94c853a90c8d851104e41db8a2687fec4d6",
+     "sha256": "587419711af4cd1d1b7e7415c8034e6a6a807b1af645626438351326f97fb66c",
      "width": 640
     },
     "exploded": {
@@ -3107,7 +6612,7 @@
      "width": 1280
     }
    },
-   "fit_sha256": "3fb0ad9481deef8f266eefd35adf72a6710dc3a9bb4e5a5d096a2973ac19de0e",
+   "fit_sha256": "706984d207f8f57ba14286b115fac1b6e0fe2c4f1064c5b9674246e77d7bdb35",
    "look": "photo",
    "margins_px": {
     "assembled": [
@@ -3124,7 +6629,7 @@
     ]
    },
    "part_look_sha256": "2893d8f0501573ff39faedcd6294f686e04fda69c37142a7f13c73443ac86440",
-   "view_sha256": "38120a78b39dab48c9eeaefa95ff660e9e13e58035b54edd1c5f54db892089b3"
+   "view_sha256": "d8f62f02c31bbc3399cff1c62208165df0188518a995a5f862ef3284312bf685"
   },
   "umi-trap-tip21.8-2mm": {
    "art": {
@@ -3135,6 +6640,21 @@
     "sha256": "8d3e6fd17644e98c29c71e9c481517839c65af44fe9215538faf167bd7cbcd9b"
    },
    "build_id": "surface-32x11-b71429b37fb2",
+   "card_frame": {
+    "base_px": 66,
+    "margins_px": [
+     304,
+     48,
+     304,
+     0
+    ],
+    "top": 0.06,
+    "window_px": [
+     200,
+     17
+    ],
+    "zoom": 1.25
+   },
    "figure_sha256": "e38217818ff99c16f8d898f74079f4297bb51b7613218839c04ae9f2a59ab1c1",
    "files": {
     "assembled": {
@@ -3145,10 +6665,10 @@
      "width": 1280
     },
     "card": {
-     "bytes": 22600,
+     "bytes": 26384,
      "height": 400,
      "path": "shots/umi-trap-tip21.8-2mm.exploded.card.webp",
-     "sha256": "87766d16fc24bbb90c263773e38b2b9686014998b3375ced885f07f8d809f5d9",
+     "sha256": "58946c49bf98bdb321653f061ca5cddfbdefad6babefc716d6f2d057705cedbc",
      "width": 640
     },
     "exploded": {
@@ -3159,7 +6679,7 @@
      "width": 1280
     }
    },
-   "fit_sha256": "c3efa569930da76406473f94292e15d71f33cf63b4e21d77fbaa5dc2112f0928",
+   "fit_sha256": "ac776223d3e2164d8edf66e5a67fa9bdf2fde54ea8e51a0f9afa24ac22721650",
    "look": "photo",
    "margins_px": {
     "assembled": [
@@ -3176,7 +6696,7 @@
     ]
    },
    "part_look_sha256": "2893d8f0501573ff39faedcd6294f686e04fda69c37142a7f13c73443ac86440",
-   "view_sha256": "38120a78b39dab48c9eeaefa95ff660e9e13e58035b54edd1c5f54db892089b3"
+   "view_sha256": "d8f62f02c31bbc3399cff1c62208165df0188518a995a5f862ef3284312bf685"
   },
   "umi-trap-tip5.8-2mm": {
    "art": {
@@ -3187,6 +6707,21 @@
     "sha256": "1095110b864f789f1179968c173659a9e1bb8dc1808b21d142b0ba228dcaf430"
    },
    "build_id": "surface-32x11-c3cf744e7a3c",
+   "card_frame": {
+    "base_px": 68,
+    "margins_px": [
+     312,
+     48,
+     312,
+     0
+    ],
+    "top": 0.06,
+    "window_px": [
+     207,
+     17
+    ],
+    "zoom": 1.25
+   },
    "figure_sha256": "e38217818ff99c16f8d898f74079f4297bb51b7613218839c04ae9f2a59ab1c1",
    "files": {
     "assembled": {
@@ -3197,10 +6732,10 @@
      "width": 1280
     },
     "card": {
-     "bytes": 22888,
+     "bytes": 26536,
      "height": 400,
      "path": "shots/umi-trap-tip5.8-2mm.exploded.card.webp",
-     "sha256": "72f7fc3277b21d101cc9ea9005909fd8198fd54cf2942f277c1f8d064bf79a41",
+     "sha256": "51a56fc900acec8cc364c80c18614cbc4cfd187894e4f95b9e2e220411dbaebd",
      "width": 640
     },
     "exploded": {
@@ -3211,7 +6746,7 @@
      "width": 1280
     }
    },
-   "fit_sha256": "15b39e0564c34532b4ec80c1f761ccba5358e4da204974bd93ffad77dce90cac",
+   "fit_sha256": "1b243db005edbc15eca61778c24c6aa55664be067e8a526068f53b851d98b452",
    "look": "photo",
    "margins_px": {
     "assembled": [
@@ -3228,7 +6763,7 @@
     ]
    },
    "part_look_sha256": "2893d8f0501573ff39faedcd6294f686e04fda69c37142a7f13c73443ac86440",
-   "view_sha256": "38120a78b39dab48c9eeaefa95ff660e9e13e58035b54edd1c5f54db892089b3"
+   "view_sha256": "d8f62f02c31bbc3399cff1c62208165df0188518a995a5f862ef3284312bf685"
   },
   "umi-trap-tip9.8-2mm": {
    "art": {
@@ -3239,6 +6774,21 @@
     "sha256": "2a198755a2699cee19a05e838e767d75c5dc58e2e3dab790151ddb40391faa0f"
    },
    "build_id": "surface-32x11-11e36f96e75a",
+   "card_frame": {
+    "base_px": 70,
+    "margins_px": [
+     311,
+     48,
+     310,
+     0
+    ],
+    "top": 0.06,
+    "window_px": [
+     205,
+     17
+    ],
+    "zoom": 1.25
+   },
    "figure_sha256": "e38217818ff99c16f8d898f74079f4297bb51b7613218839c04ae9f2a59ab1c1",
    "files": {
     "assembled": {
@@ -3249,10 +6799,10 @@
      "width": 1280
     },
     "card": {
-     "bytes": 22658,
+     "bytes": 27068,
      "height": 400,
      "path": "shots/umi-trap-tip9.8-2mm.exploded.card.webp",
-     "sha256": "fec4838950a2b22b12773439fc30f1edf49a4822ca37c453a168fc8917b86572",
+     "sha256": "69b64f292b5c951806aed81f8192f70f17d72a3c4c4e453c382f99977d77911d",
      "width": 640
     },
     "exploded": {
@@ -3263,7 +6813,7 @@
      "width": 1280
     }
    },
-   "fit_sha256": "73d4391e56d5a3af6bef03c08c9cfacb95ed6d263846c09c21077d6862f62920",
+   "fit_sha256": "a75d96b4051ef391bda16fe926e34fd0075a4ca20622940e5d7f0f9bd54b7605",
    "look": "photo",
    "margins_px": {
     "assembled": [
@@ -3280,7 +6830,7 @@
     ]
    },
    "part_look_sha256": "2893d8f0501573ff39faedcd6294f686e04fda69c37142a7f13c73443ac86440",
-   "view_sha256": "38120a78b39dab48c9eeaefa95ff660e9e13e58035b54edd1c5f54db892089b3"
+   "view_sha256": "d8f62f02c31bbc3399cff1c62208165df0188518a995a5f862ef3284312bf685"
   },
   "unitree-dex1-1.5mm": {
    "art": {
@@ -3366,7 +6916,7 @@
     "scene": "scenes/unitree-dex1.json",
     "scene_sha256": "bd95a3d028d6a5159d2a514b515a18bb646d348b32de138b1e6d4d402f4c9c82"
    },
-   "view_sha256": "38120a78b39dab48c9eeaefa95ff660e9e13e58035b54edd1c5f54db892089b3"
+   "view_sha256": "d8f62f02c31bbc3399cff1c62208165df0188518a995a5f862ef3284312bf685"
   },
   "unitree-dex1-1mm": {
    "art": {
@@ -3452,7 +7002,7 @@
     "scene": "scenes/unitree-dex1.json",
     "scene_sha256": "bd95a3d028d6a5159d2a514b515a18bb646d348b32de138b1e6d4d402f4c9c82"
    },
-   "view_sha256": "38120a78b39dab48c9eeaefa95ff660e9e13e58035b54edd1c5f54db892089b3"
+   "view_sha256": "d8f62f02c31bbc3399cff1c62208165df0188518a995a5f862ef3284312bf685"
   },
   "unitree-dex1-2mm": {
    "art": {
@@ -3538,7 +7088,7 @@
     "scene": "scenes/unitree-dex1.json",
     "scene_sha256": "bd95a3d028d6a5159d2a514b515a18bb646d348b32de138b1e6d4d402f4c9c82"
    },
-   "view_sha256": "38120a78b39dab48c9eeaefa95ff660e9e13e58035b54edd1c5f54db892089b3"
+   "view_sha256": "d8f62f02c31bbc3399cff1c62208165df0188518a995a5f862ef3284312bf685"
   },
   "unitree-dex1-3mm": {
    "art": {
@@ -3624,7 +7174,355 @@
     "scene": "scenes/unitree-dex1.json",
     "scene_sha256": "bd95a3d028d6a5159d2a514b515a18bb646d348b32de138b1e6d4d402f4c9c82"
    },
-   "view_sha256": "38120a78b39dab48c9eeaefa95ff660e9e13e58035b54edd1c5f54db892089b3"
+   "view_sha256": "d8f62f02c31bbc3399cff1c62208165df0188518a995a5f862ef3284312bf685"
+  },
+  "unitree-dex3-1.5mm": {
+   "art": {
+    "build_id": "surface-18x10-86669d501aca",
+    "bytes": 9177,
+    "json_sha256": "0504af7302f1d83f1aa9f4367286198d1a672f44e16811f7a9789443eb5b6c72",
+    "path": "art/unitree-dex3-1.5mm.json.gz",
+    "sha256": "3d74f8fae6385f4116f52d59b3ca3f92e9bb850ac21e4281b2a75d1b32e61822"
+   },
+   "build_id": "surface-18x10-86669d501aca",
+   "figure_sha256": "e38217818ff99c16f8d898f74079f4297bb51b7613218839c04ae9f2a59ab1c1",
+   "files": {
+    "assembled": {
+     "bytes": 25464,
+     "height": 800,
+     "path": "shots/unitree-dex3-1.5mm.assembled.webp",
+     "sha256": "bf3a47f37c3e92eb600d7cc72cb6d095a9582e7f132df63b7a237507f08eb0dc",
+     "width": 1280
+    },
+    "card": {
+     "bytes": 22990,
+     "height": 400,
+     "path": "shots/unitree-dex3-1.5mm.exploded.card.webp",
+     "sha256": "1fa7e67b76214842fc7fafa4c703daefa6781bf0a8449012b0239c3a11231c4e",
+     "width": 640
+    },
+    "exploded": {
+     "bytes": 32002,
+     "height": 800,
+     "path": "shots/unitree-dex3-1.5mm.exploded.webp",
+     "sha256": "d837c61329dfd9fc59c4a090d4c019ee16c5a3e433a2251f10a32366f86baee6",
+     "width": 1280
+    }
+   },
+   "fit_sha256": "70e3b694d5c9789731d0fbafd8c771ce5cddab94c4e4699a0daed2dc87922b00",
+   "look": "photo",
+   "margins_px": {
+    "assembled": [
+     351,
+     50,
+     352,
+     50
+    ],
+    "exploded": [
+     337,
+     51,
+     337,
+     51
+    ]
+   },
+   "stage": {
+    "numbers": {
+     "assembled_opaque": 0,
+     "band_css": {
+      "contain": [
+       5,
+       19
+      ],
+      "cover": [
+       10,
+       36
+      ]
+     },
+     "card_px": [
+      19,
+      65
+     ],
+     "clearance_mm": {
+      "bodies": 12,
+      "other_finger": 12,
+      "stacks": 41.5
+     },
+     "drape_step_mm": 11.003,
+     "extra_seen": 1,
+     "face_tilt_deg": 1.263,
+     "ghost_cover": 0.866,
+     "jaw_gap_mm": 73.013,
+     "near_seen": 0.998,
+     "opaque_max": 0,
+     "stacks_apart_px": 122.5,
+     "step_mm": 9.972,
+     "visible_min": 1
+    },
+    "scene": "scenes/unitree-dex3.json",
+    "scene_sha256": "d03336538e1a5edf3abbf3de73fc21dba90db17c4f07fc8cbff898a59427dc84"
+   },
+   "view_sha256": "d8f62f02c31bbc3399cff1c62208165df0188518a995a5f862ef3284312bf685"
+  },
+  "unitree-dex3-1mm": {
+   "art": {
+    "build_id": "surface-26x15-404fbaf634dc",
+    "bytes": 10223,
+    "json_sha256": "b7a0561685d818d9372708afcae433cca06c17c2e63e59b720a701363a885055",
+    "path": "art/unitree-dex3-1mm.json.gz",
+    "sha256": "d43f00734ca4e51952fd1fd40f2c2a79ff7c1719b97874c5a93a2175ed8523f3"
+   },
+   "build_id": "surface-26x15-404fbaf634dc",
+   "figure_sha256": "e38217818ff99c16f8d898f74079f4297bb51b7613218839c04ae9f2a59ab1c1",
+   "files": {
+    "assembled": {
+     "bytes": 26316,
+     "height": 800,
+     "path": "shots/unitree-dex3-1mm.assembled.webp",
+     "sha256": "14f656f52e68e35d7bded01cbacfec922c950762b09c78ff0909e7bea74aaf6b",
+     "width": 1280
+    },
+    "card": {
+     "bytes": 22666,
+     "height": 400,
+     "path": "shots/unitree-dex3-1mm.exploded.card.webp",
+     "sha256": "b17e9dc395b51096e54d1e8eb6a909b325cae7c30a9daec34274b4828b9fb7bd",
+     "width": 640
+    },
+    "exploded": {
+     "bytes": 31972,
+     "height": 800,
+     "path": "shots/unitree-dex3-1mm.exploded.webp",
+     "sha256": "ff28fa8ccf1d9879267341d0e6e52b8182aab6daf4d85fa4a2971f2f3cdcd75b",
+     "width": 1280
+    }
+   },
+   "fit_sha256": "3c9b3239ede0a413ba4ab17d9cb6fec3b6aba81f7e8b2b815d6c7db4a9f01207",
+   "look": "photo",
+   "margins_px": {
+    "assembled": [
+     351,
+     50,
+     352,
+     50
+    ],
+    "exploded": [
+     337,
+     51,
+     337,
+     51
+    ]
+   },
+   "stage": {
+    "numbers": {
+     "assembled_opaque": 0,
+     "band_css": {
+      "contain": [
+       5,
+       19
+      ],
+      "cover": [
+       10,
+       35
+      ]
+     },
+     "card_px": [
+      19,
+      64
+     ],
+     "clearance_mm": {
+      "bodies": 12,
+      "other_finger": 12,
+      "stacks": 43.1
+     },
+     "drape_step_mm": 12.289,
+     "extra_seen": 1,
+     "face_tilt_deg": 1.583,
+     "ghost_cover": 0.866,
+     "jaw_gap_mm": 72.916,
+     "near_seen": 0.986,
+     "opaque_max": 0,
+     "stacks_apart_px": 118.2,
+     "step_mm": 9.958,
+     "visible_min": 1
+    },
+    "scene": "scenes/unitree-dex3.json",
+    "scene_sha256": "d03336538e1a5edf3abbf3de73fc21dba90db17c4f07fc8cbff898a59427dc84"
+   },
+   "view_sha256": "d8f62f02c31bbc3399cff1c62208165df0188518a995a5f862ef3284312bf685"
+  },
+  "unitree-dex3-2.5mm": {
+   "art": {
+    "build_id": "surface-11x6-c875c35c634c",
+    "bytes": 7693,
+    "json_sha256": "932f9a6f9e754826e58c6271dea2204c37de78d533b31a030dd447efd9ffafdd",
+    "path": "art/unitree-dex3-2.5mm.json.gz",
+    "sha256": "660ee29337fd2a4b0f07fd0b97584c29d0e750fc2a2a29274fbf5942217b3261"
+   },
+   "build_id": "surface-11x6-c875c35c634c",
+   "figure_sha256": "e38217818ff99c16f8d898f74079f4297bb51b7613218839c04ae9f2a59ab1c1",
+   "files": {
+    "assembled": {
+     "bytes": 25166,
+     "height": 800,
+     "path": "shots/unitree-dex3-2.5mm.assembled.webp",
+     "sha256": "6b8835644d9d71897fa582b1dbcf3812950b549ee9e81ee932c22b4ddf3e755f",
+     "width": 1280
+    },
+    "card": {
+     "bytes": 23010,
+     "height": 400,
+     "path": "shots/unitree-dex3-2.5mm.exploded.card.webp",
+     "sha256": "dbc0a239469407f7af22378cca0524b3f3dfc025220466eafcd7bb2ea7b64440",
+     "width": 640
+    },
+    "exploded": {
+     "bytes": 31280,
+     "height": 800,
+     "path": "shots/unitree-dex3-2.5mm.exploded.webp",
+     "sha256": "c5e5a3b7c49eb7a02f8283bcfbdc89f8dc9d25f8b320a5a02632c0cb8e7cbed4",
+     "width": 1280
+    }
+   },
+   "fit_sha256": "33904fa2ee2ac3edf482f7fe124904cfa78888a996c142ac5080f3a01990b1ce",
+   "look": "photo",
+   "margins_px": {
+    "assembled": [
+     351,
+     50,
+     351,
+     50
+    ],
+    "exploded": [
+     337,
+     51,
+     337,
+     51
+    ]
+   },
+   "stage": {
+    "numbers": {
+     "assembled_opaque": 0,
+     "band_css": {
+      "contain": [
+       5,
+       19
+      ],
+      "cover": [
+       10,
+       35
+      ]
+     },
+     "card_px": [
+      19,
+      65
+     ],
+     "clearance_mm": {
+      "bodies": 12,
+      "other_finger": 12,
+      "stacks": 41.4
+     },
+     "drape_step_mm": 9.721,
+     "extra_seen": 1,
+     "face_tilt_deg": 1.209,
+     "ghost_cover": 0.869,
+     "jaw_gap_mm": 73.116,
+     "near_seen": 1,
+     "opaque_max": 0,
+     "stacks_apart_px": 123.8,
+     "step_mm": 9.721,
+     "visible_min": 1
+    },
+    "scene": "scenes/unitree-dex3.json",
+    "scene_sha256": "d03336538e1a5edf3abbf3de73fc21dba90db17c4f07fc8cbff898a59427dc84"
+   },
+   "view_sha256": "d8f62f02c31bbc3399cff1c62208165df0188518a995a5f862ef3284312bf685"
+  },
+  "unitree-dex3-2mm": {
+   "art": {
+    "build_id": "surface-13x8-53583cbedf62",
+    "bytes": 6564,
+    "json_sha256": "9039395f9f83415681d1d2fbd6448ff99c492987a07ffa4995e1ad130827f4c9",
+    "path": "art/unitree-dex3-2mm.json.gz",
+    "sha256": "264e97091b0df4a703241c7f20acad4940be00b5183066502d8e1baadf7ae3f4"
+   },
+   "build_id": "surface-13x8-53583cbedf62",
+   "figure_sha256": "e38217818ff99c16f8d898f74079f4297bb51b7613218839c04ae9f2a59ab1c1",
+   "files": {
+    "assembled": {
+     "bytes": 25402,
+     "height": 800,
+     "path": "shots/unitree-dex3-2mm.assembled.webp",
+     "sha256": "70529e76b1524915666c2816298d302589197eb55e84e5299bf1ce26648cceff",
+     "width": 1280
+    },
+    "card": {
+     "bytes": 23190,
+     "height": 400,
+     "path": "shots/unitree-dex3-2mm.exploded.card.webp",
+     "sha256": "65bbc8ca537b26f98374a704bdcbdd933a90aa47a0c57659c15d0f88df1c9b3f",
+     "width": 640
+    },
+    "exploded": {
+     "bytes": 31654,
+     "height": 800,
+     "path": "shots/unitree-dex3-2mm.exploded.webp",
+     "sha256": "a86e7bac2391164ca6af4e10c6659ac0155fb2e0a4636d0720a9e00b0133cb39",
+     "width": 1280
+    }
+   },
+   "fit_sha256": "0198dbcb8c3aebd572cb889cf3b07d197bb4f2880641ee196b58ca253b277bd4",
+   "look": "photo",
+   "margins_px": {
+    "assembled": [
+     351,
+     50,
+     352,
+     50
+    ],
+    "exploded": [
+     337,
+     50,
+     337,
+     51
+    ]
+   },
+   "stage": {
+    "numbers": {
+     "assembled_opaque": 0,
+     "band_css": {
+      "contain": [
+       5,
+       19
+      ],
+      "cover": [
+       10,
+       35
+      ]
+     },
+     "card_px": [
+      19,
+      65
+     ],
+     "clearance_mm": {
+      "bodies": 12,
+      "other_finger": 12,
+      "stacks": 42.1
+     },
+     "drape_step_mm": 10.883,
+     "extra_seen": 1,
+     "face_tilt_deg": 1.243,
+     "ghost_cover": 0.869,
+     "jaw_gap_mm": 73.01,
+     "near_seen": 1,
+     "opaque_max": 0,
+     "stacks_apart_px": 123.4,
+     "step_mm": 9.971,
+     "visible_min": 1
+    },
+    "scene": "scenes/unitree-dex3.json",
+    "scene_sha256": "d03336538e1a5edf3abbf3de73fc21dba90db17c4f07fc8cbff898a59427dc84"
+   },
+   "view_sha256": "d8f62f02c31bbc3399cff1c62208165df0188518a995a5f862ef3284312bf685"
   },
   "widowx-250-1.5mm": {
    "art": {
@@ -3710,7 +7608,7 @@
     "scene": "scenes/widowx-250.json",
     "scene_sha256": "cce848893b77f0db5b329d0a2e052bf9bde93b735d4e47523c78ebd0f620da98"
    },
-   "view_sha256": "38120a78b39dab48c9eeaefa95ff660e9e13e58035b54edd1c5f54db892089b3"
+   "view_sha256": "d8f62f02c31bbc3399cff1c62208165df0188518a995a5f862ef3284312bf685"
   },
   "widowx-250-1mm": {
    "art": {
@@ -3796,7 +7694,7 @@
     "scene": "scenes/widowx-250.json",
     "scene_sha256": "cce848893b77f0db5b329d0a2e052bf9bde93b735d4e47523c78ebd0f620da98"
    },
-   "view_sha256": "38120a78b39dab48c9eeaefa95ff660e9e13e58035b54edd1c5f54db892089b3"
+   "view_sha256": "d8f62f02c31bbc3399cff1c62208165df0188518a995a5f862ef3284312bf685"
   },
   "widowx-250-2mm": {
    "art": {
@@ -3882,7 +7780,7 @@
     "scene": "scenes/widowx-250.json",
     "scene_sha256": "cce848893b77f0db5b329d0a2e052bf9bde93b735d4e47523c78ebd0f620da98"
    },
-   "view_sha256": "38120a78b39dab48c9eeaefa95ff660e9e13e58035b54edd1c5f54db892089b3"
+   "view_sha256": "d8f62f02c31bbc3399cff1c62208165df0188518a995a5f862ef3284312bf685"
   },
   "widowx-250-3mm": {
    "art": {
@@ -3968,7 +7866,351 @@
     "scene": "scenes/widowx-250.json",
     "scene_sha256": "cce848893b77f0db5b329d0a2e052bf9bde93b735d4e47523c78ebd0f620da98"
    },
-   "view_sha256": "38120a78b39dab48c9eeaefa95ff660e9e13e58035b54edd1c5f54db892089b3"
+   "view_sha256": "d8f62f02c31bbc3399cff1c62208165df0188518a995a5f862ef3284312bf685"
+  },
+  "yubi-gripper-1.5mm": {
+   "art": {
+    "build_id": "surface-11x10-0e67a5a7d785",
+    "bytes": 6574,
+    "json_sha256": "a8f395d93df2b5d5823cbaacd595002c9dd284a37f17a41ca7d508da82a5472f",
+    "path": "art/yubi-gripper-1.5mm.json.gz",
+    "sha256": "3ff86716733c3e39079b43e435c34f7914256854edfb1c9960b23a9a5e5bfa16"
+   },
+   "build_id": "surface-11x10-0e67a5a7d785",
+   "figure_sha256": "e38217818ff99c16f8d898f74079f4297bb51b7613218839c04ae9f2a59ab1c1",
+   "files": {
+    "assembled": {
+     "bytes": 19242,
+     "height": 800,
+     "path": "shots/yubi-gripper-1.5mm.assembled.webp",
+     "sha256": "c00ba48c6506ded3e2d20d9b0c7452fa8cff17fb02cf22499af82b52efd9d8b7",
+     "width": 1280
+    },
+    "card": {
+     "bytes": 18760,
+     "height": 400,
+     "path": "shots/yubi-gripper-1.5mm.exploded.card.webp",
+     "sha256": "0decd0abb690e9932513aa9e2585955941ced7e08e283348a1b07c9c5361ce71",
+     "width": 640
+    },
+    "exploded": {
+     "bytes": 25000,
+     "height": 800,
+     "path": "shots/yubi-gripper-1.5mm.exploded.webp",
+     "sha256": "725183acab3c455c33f9e8d825de20ddd000b483886d65c2e1fa9b57da76c3fc",
+     "width": 1280
+    }
+   },
+   "fit_sha256": "c13881b491cf59b783b7211ab55b1c12fdeda30e0fd223e005026a927f26bc8f",
+   "look": "photo",
+   "margins_px": {
+    "assembled": [
+     407,
+     51,
+     408,
+     52
+    ],
+    "exploded": [
+     395,
+     52,
+     396,
+     52
+    ]
+   },
+   "stage": {
+    "numbers": {
+     "assembled_opaque": 0,
+     "band_css": {
+      "contain": [
+       6,
+       14
+      ],
+      "cover": [
+       12,
+       26
+      ]
+     },
+     "card_px": [
+      22,
+      48
+     ],
+     "clearance_mm": {
+      "bodies": 12,
+      "other_finger": 12,
+      "stacks": 31.4
+     },
+     "drape_step_mm": 10.05,
+     "face_tilt_deg": 16.56,
+     "ghost_cover": 0.811,
+     "jaw_gap_mm": 54.534,
+     "near_seen": 1,
+     "opaque_max": 0,
+     "stacks_apart_px": 87.3,
+     "step_mm": 7.385,
+     "visible_min": 1
+    },
+    "scene": "scenes/yubi-gripper.json",
+    "scene_sha256": "230bb98640e25f90b91de26204051a8a97fae15a306d9776b31ea80c6db92cd6"
+   },
+   "view_sha256": "d8f62f02c31bbc3399cff1c62208165df0188518a995a5f862ef3284312bf685"
+  },
+  "yubi-gripper-1mm": {
+   "art": {
+    "build_id": "surface-16x14-a01103be8b44",
+    "bytes": 7294,
+    "json_sha256": "6e752fb3bbaa41a13be5e33ac4daaae6a9d3a3db5d614c7f4e724728b40575d6",
+    "path": "art/yubi-gripper-1mm.json.gz",
+    "sha256": "0672361e2efe4105ccad74e98a6d52d472db0f40b0623739955885b6c2decf84"
+   },
+   "build_id": "surface-16x14-a01103be8b44",
+   "figure_sha256": "e38217818ff99c16f8d898f74079f4297bb51b7613218839c04ae9f2a59ab1c1",
+   "files": {
+    "assembled": {
+     "bytes": 19364,
+     "height": 800,
+     "path": "shots/yubi-gripper-1mm.assembled.webp",
+     "sha256": "4144b7ca178b154db024af00f8844dbe4398825f87642989525f5bd6e5f6761b",
+     "width": 1280
+    },
+    "card": {
+     "bytes": 18618,
+     "height": 400,
+     "path": "shots/yubi-gripper-1mm.exploded.card.webp",
+     "sha256": "6dcbbdc615b01191c58a069891938740422021c8db195a5d4f5c216efc2b654c",
+     "width": 640
+    },
+    "exploded": {
+     "bytes": 24966,
+     "height": 800,
+     "path": "shots/yubi-gripper-1mm.exploded.webp",
+     "sha256": "18d48ca2d5021d8d1abdfe540f76a0a433870092d495480b177408c08656f0cd",
+     "width": 1280
+    }
+   },
+   "fit_sha256": "013a6233109811bdc69ccffbfc5a0dea090ea5aba48c6f2b5d3997bc7f1205c9",
+   "look": "photo",
+   "margins_px": {
+    "assembled": [
+     407,
+     51,
+     408,
+     52
+    ],
+    "exploded": [
+     395,
+     52,
+     396,
+     52
+    ]
+   },
+   "stage": {
+    "numbers": {
+     "assembled_opaque": 0,
+     "band_css": {
+      "contain": [
+       6,
+       14
+      ],
+      "cover": [
+       12,
+       26
+      ]
+     },
+     "card_px": [
+      22,
+      48
+     ],
+     "clearance_mm": {
+      "bodies": 12,
+      "other_finger": 12,
+      "stacks": 31.4
+     },
+     "drape_step_mm": 10.336,
+     "face_tilt_deg": 16.56,
+     "ghost_cover": 0.804,
+     "jaw_gap_mm": 54.541,
+     "near_seen": 1,
+     "opaque_max": 0,
+     "stacks_apart_px": 84.8,
+     "step_mm": 7.386,
+     "visible_min": 1
+    },
+    "scene": "scenes/yubi-gripper.json",
+    "scene_sha256": "230bb98640e25f90b91de26204051a8a97fae15a306d9776b31ea80c6db92cd6"
+   },
+   "view_sha256": "d8f62f02c31bbc3399cff1c62208165df0188518a995a5f862ef3284312bf685"
+  },
+  "yubi-gripper-2.5mm": {
+   "art": {
+    "build_id": "surface-6x5-116880492453",
+    "bytes": 5116,
+    "json_sha256": "45ad4eb2bd162e73981b309c2302c270fb40b73a79c36febea184d0c6e8f7187",
+    "path": "art/yubi-gripper-2.5mm.json.gz",
+    "sha256": "9d8fe5a6b5947a53cc8882f13f6c5b5e2ddf0e5ee7ee377cac9c13b433bf4668"
+   },
+   "build_id": "surface-6x5-116880492453",
+   "figure_sha256": "e38217818ff99c16f8d898f74079f4297bb51b7613218839c04ae9f2a59ab1c1",
+   "files": {
+    "assembled": {
+     "bytes": 18642,
+     "height": 800,
+     "path": "shots/yubi-gripper-2.5mm.assembled.webp",
+     "sha256": "db6c0b5ebfd8f2a80f81dacd4ee169eaf0c7a55eaa5d1cf98f06307094ff9d46",
+     "width": 1280
+    },
+    "card": {
+     "bytes": 18692,
+     "height": 400,
+     "path": "shots/yubi-gripper-2.5mm.exploded.card.webp",
+     "sha256": "3254c41e1c3d39ba89f8ca96931c1f8a5630b3ea9692a61309e7ec1dd27702f6",
+     "width": 640
+    },
+    "exploded": {
+     "bytes": 24324,
+     "height": 800,
+     "path": "shots/yubi-gripper-2.5mm.exploded.webp",
+     "sha256": "fb2f1667ae5f8d31c8164ec1d70e9011e6c5d3cf632b7cf01d75c64a0b6cd18b",
+     "width": 1280
+    }
+   },
+   "fit_sha256": "f4a5675600b1fb2a266d7b2d66047e4ba8d95f42535bf64efd72ee3b23b51d6a",
+   "look": "photo",
+   "margins_px": {
+    "assembled": [
+     407,
+     51,
+     408,
+     52
+    ],
+    "exploded": [
+     395,
+     52,
+     396,
+     52
+    ]
+   },
+   "stage": {
+    "numbers": {
+     "assembled_opaque": 0,
+     "band_css": {
+      "contain": [
+       6,
+       13
+      ],
+      "cover": [
+       11,
+       24
+      ]
+     },
+     "card_px": [
+      20,
+      44
+     ],
+     "clearance_mm": {
+      "bodies": 12,
+      "other_finger": 12,
+      "stacks": 31.4
+     },
+     "drape_step_mm": 7.804,
+     "face_tilt_deg": 16.56,
+     "ghost_cover": 0.831,
+     "jaw_gap_mm": 54.538,
+     "near_seen": 1,
+     "opaque_max": 0,
+     "stacks_apart_px": 89.1,
+     "step_mm": 7.385,
+     "visible_min": 1
+    },
+    "scene": "scenes/yubi-gripper.json",
+    "scene_sha256": "230bb98640e25f90b91de26204051a8a97fae15a306d9776b31ea80c6db92cd6"
+   },
+   "view_sha256": "d8f62f02c31bbc3399cff1c62208165df0188518a995a5f862ef3284312bf685"
+  },
+  "yubi-gripper-2mm": {
+   "art": {
+    "build_id": "surface-8x7-b41763f570bd",
+    "bytes": 5659,
+    "json_sha256": "e0e9743447696f34e048ae4a2b954ca63a0529552619b2d94bfb6ee2845ff02f",
+    "path": "art/yubi-gripper-2mm.json.gz",
+    "sha256": "45d2ec62ab2bfc60f97f4787be87831f9a20c68c269b547ba240a4540a41011c"
+   },
+   "build_id": "surface-8x7-b41763f570bd",
+   "figure_sha256": "e38217818ff99c16f8d898f74079f4297bb51b7613218839c04ae9f2a59ab1c1",
+   "files": {
+    "assembled": {
+     "bytes": 18916,
+     "height": 800,
+     "path": "shots/yubi-gripper-2mm.assembled.webp",
+     "sha256": "2ba49fd9276ace9fd921be29e3838af3874366b20d31f460252f148065637e07",
+     "width": 1280
+    },
+    "card": {
+     "bytes": 18828,
+     "height": 400,
+     "path": "shots/yubi-gripper-2mm.exploded.card.webp",
+     "sha256": "716afa29ca6c69d062f9c1054aa568bbc4cd838952ce67ab85336494713d32be",
+     "width": 640
+    },
+    "exploded": {
+     "bytes": 24708,
+     "height": 800,
+     "path": "shots/yubi-gripper-2mm.exploded.webp",
+     "sha256": "599bfdd3bef1cd1c96bf3e0e91e1a93b1e1fa82e6c935c741015b0abbe1889d1",
+     "width": 1280
+    }
+   },
+   "fit_sha256": "5bfd443c0a037cad9b48828cb707bc354cc485ea9917907fe7b1b9635e7d975c",
+   "look": "photo",
+   "margins_px": {
+    "assembled": [
+     407,
+     51,
+     408,
+     52
+    ],
+    "exploded": [
+     395,
+     52,
+     396,
+     52
+    ]
+   },
+   "stage": {
+    "numbers": {
+     "assembled_opaque": 0,
+     "band_css": {
+      "contain": [
+       6,
+       13
+      ],
+      "cover": [
+       11,
+       25
+      ]
+     },
+     "card_px": [
+      21,
+      46
+     ],
+     "clearance_mm": {
+      "bodies": 12,
+      "other_finger": 12,
+      "stacks": 31.4
+     },
+     "drape_step_mm": 8.978,
+     "face_tilt_deg": 16.56,
+     "ghost_cover": 0.822,
+     "jaw_gap_mm": 54.526,
+     "near_seen": 1,
+     "opaque_max": 0,
+     "stacks_apart_px": 88.8,
+     "step_mm": 7.384,
+     "visible_min": 1
+    },
+    "scene": "scenes/yubi-gripper.json",
+    "scene_sha256": "230bb98640e25f90b91de26204051a8a97fae15a306d9776b31ea80c6db92cd6"
+   },
+   "view_sha256": "d8f62f02c31bbc3399cff1c62208165df0188518a995a5f862ef3284312bf685"
   }
  }
 }

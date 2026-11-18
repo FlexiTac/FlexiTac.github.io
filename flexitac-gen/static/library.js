@@ -70,14 +70,16 @@
   const CARD = [640, 400];
   const VIEWS = [["exploded", "Exploded"], ["assembled", "Assembled"]];
   // The showcase's document (docs/LIBRARY_VIEW.md "The showcase's page") and the view its card shows and its page opens
-  // with: the gripper as built.
+  // with: Exploded, as every gripper's card and page (the user's decision of 2026-11-16, "Switch to exploded"; the
+  // gripper as built, Assembled, before).
   const SHOWCASE_FORMAT = "flexitac-library-showcase/v1";
-  const SHOWCASE_VIEW = "assembled";
+  const SHOWCASE_VIEW = "exploded";
   // The parts shown with a shelf of their own (the user's request of 2026-11-06: the UMI finger alone), after the
   // grippers' section: the part's own card and its families' cards (its shapes, 2026-11-16); every other part of
   // entries.json's order is one card in the grippers' section, its pitches chosen on its sensor's page.
   const SHELVED = ["umi-finray"];
-  const COUNTS = ["None", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Eleven", "Twelve"];
+  const COUNTS = ["None", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Eleven", "Twelve",
+    "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen", "Twenty"];
   // index: entries.json; files: files.json (the static site); view: "grid" or "detail" (the window open); picture: the
   // view a sensor's page shows (VIEWS; kept as its pitch, shape or tip changes, the first again on each sensor's page
   // opened); gridY and opener: where the grid was and the card that opened a sensor's page (closing the window puts both
@@ -137,7 +139,29 @@
   // A name's hyphens unbreakable (U+2011): its balanced lines never split "Fin-Ray" (the second review of 2026-11-05).
   const whole = text => String(text).replace(/-/g, "\u2011");
   const bytesText = bytes => (bytes >= 1e6 ? `${(bytes / 1e6).toFixed(1)} MB` : `${Math.max(1, Math.round(bytes / 1e3))} kB`);
-  const readerText = name => (name === "32x16" ? "32 × 16 FlexiTac" : String(name).replace("x", " × "));
+  // The FlexiTac hardware's own files (web/boards.js, the user's request of 2026-11-17): the fabrication guide, the
+  // original pad's FPC Gerbers and the reading boards; null should boards.js not have loaded (their rows left out).
+  const HARDWARE = window.FlexiTacBoards || null;
+  const LICENCE = "CC BY-NC 4.0";
+  function boardRow(board) {
+    // "Reading board": the board's size, its bundle's download (its name in full for a screen reader) and its licence, the
+    // dot never starting a line (a no-break space before it, as the detail line's: the review of 2026-11-17); or none
+    // past 32 lines on a side.  A sensor's window and the showcase's (its own row there, the review of 2026-11-17).
+    const size = board && `ZIP, ${bytesText(board.bytes)}`;
+    return el("div", {}, el("dt", {}, "Reading board"), el("dd", {className: "lib-board"}, board ? [el("span", {}, board.label), "\u00a0· ",
+      el("a", {href: HARDWARE.href(board), download: board.file, "data-board": board.id, "aria-label": `Reading board ${board.label}, ${size}`}, size), "\u00a0· ",
+      el("a", {href: HARDWARE.NOTICE, target: "_blank", rel: "noopener"}, LICENCE)] : "none (more than 32 lines)"));
+  }
+  function orderFacts(rows, columns) {
+    // A sensor's "Ordering and fabrication" and "Reading board" (the user's request of 2026-11-17, in place of the Reader
+    // row of before): the guide in a new tab; the board its lines take (boards.js readingBoard) with its bundle's
+    // download and licence, or none past 32 lines on a side.  The tails stay one pin per line ("tail C").
+    if (!HARDWARE) return null;
+    return el("dl", {className: "lib-order"},
+      el("div", {}, el("dt", {}, "Ordering and fabrication"),
+        el("dd", {}, el("a", {href: HARDWARE.GUIDE, target: "_blank", rel: "noopener noreferrer"}, "FlexiTac fabrication guide"))),
+      boardRow(HARDWARE.readingBoard(rows, columns)));
+  }
   async function json(url) {
     const answer = await fetch(url);
     if (!answer.ok) throw new Error(`HTTP ${answer.status}`);
@@ -158,7 +182,9 @@
     const box = el("div", {className: `lib-shot lib-shot-${kind}`});
     const image = variant.image;
     // (Every card its Exploded card file, the UMI shelf's too since the user's request of 2026-11-16: "图一中umicard图太大
-    // ... 这样所有card都是对齐的，大小对齐，空间朝向对齐"; its Assembled picture framed on the tip before.)
+    // ... 这样所有card都是对齐的，大小对齐，空间朝向对齐"; its Assembled picture framed on the tip before.  The UMI shelf's
+    // card files are its Exploded home zoomed on the tip since the user's decision of the same day, rendered so by the
+    // shots tool: its 3D view and its pictures stay the whole drawing.)
     const src = kind === "detail" ? image?.[view]?.src : kind === "showcase" ? image?.card?.src : image?.exploded?.card;
     if (!src) {
       box.append(field(variant));
@@ -318,9 +344,9 @@
   function grippers(parts) {
     // The grippers but the shelved (the user's request of 2026-11-06, "其他夹爪的话,不需要每个夹爪一row,你就每个row放4个夹爪就
     // 好了"): one section, the grid's first (the UMI shelf after it), its heading in the shelves' wording ('Grippers.
-    // Seven, each fitted at four pitches.'), then a grid of one card each, four to a row from 735 px and two below
-    // (library.css), never three (3 + 3 + 1); nothing scrolls sideways.  A count past COUNTS is its digits ('13'), one
-    // pitch 'one pitch'.
+    // <count>, each fitted at four pitches.', the count the cards': 'Seven' on 2026-11-05), then a grid of one card each,
+    // four to a row from 735 px and two below (library.css), never three (3 + 3 + 1); nothing scrolls sideways.  A count
+    // past COUNTS is its digits ('21'; words to twenty since 2026-11-17, the grid's nineteen cards), one pitch 'one pitch'.
     const word = count => COUNTS[count] || String(count);
     const counts = new Set(parts.map(part => state.index.parts[part].variants.length));
     const [count] = counts;
@@ -343,8 +369,9 @@
   const shown = id => (id && state.showcase?.id === id ? state.showcase.entry : state.index.variants[id]);
 
   function showcaseCard() {
-    // The grid's first section (2026-11-12): one large card, its picture (the gripper as built, Assembled; on the left
-    // since 2026-11-15) beside its label, its title, one line and Details.  Since the user's request of 2026-11-15 ("make only the image that can
+    // The grid's first section (2026-11-12): one large card, its picture (Exploded since 2026-11-16, as every gripper's
+    // card, the gripper as built, Assembled, before; on the left since 2026-11-15) beside its label, its title, one line
+    // and Details.  Since the user's request of 2026-11-15 ("make only the image that can
     // click to the details ... a button called details") the card itself is no link: its picture and its Details pill
     // open the showcase's own page.  The picture's link repeats Details', so it is out of the Tab order and hidden from
     // assistive technology (Details is the card's one stop).  Its id is the grid's address of it (#showcase: its page's
@@ -435,7 +462,6 @@
     const title = shape ? `${index.parts[home].title}, ${shape.title.toLowerCase()}` : part.title;
     const controls = shape ? familyControls(shape, id)
       : [segments("Pitch", "libPitch", part.variants.map(other => [other, `${index.variants[other].pitch_mm} mm`, other]), id)];
-    const reader = variant.fits_reader ? `none (one tail pin per line; the tails also fit the ${readerText(variant.fits_reader)} reader)` : "none (one tail pin per line)";
     // The tapered tips' own fact: the shape and the width at the tip, over the card's taper height.
     const chosen = shape ? chosenOf(shape, id) : [];
     const picked = shape ? Object.fromEntries(shape.axes.map((axis, k) => [axis.key, axis.choices.find(item => item.value === chosen[k])])) : {};
@@ -448,7 +474,6 @@
       ["Pitch", `${variant.pitch_mm} mm · fill ${variant.fill.toFixed(2)}`],
       ["Field", `${fieldText(variant)}${variant.centred ? ", centred" : ""}`],
       ["Tails", `${fmt1(variant.row_tail_mm)} mm, centred, ending together`],
-      ["Reader", reader],
       ["Build", el("code", {}, variant.build_id)],
     ];
     const downloads = el("div", {className: "lib-downloads"});
@@ -465,12 +490,18 @@
           // it ("convex arc tip / · UMI", the review of 2026-11-05).
           el("p", {className: "lib-detail-line"}, `${capital(part.finger)}\u00a0· ${part.maker}`),
           controls,
-          el("dl", {className: "lib-facts"}, facts.map(([name, value]) => el("div", {}, el("dt", {}, name), el("dd", {}, value)))),
+          // The facts, then (2026-11-17) the ordering's two rows under a hairline, in a column of their own.
+          el("div", {className: "lib-specs"},
+            el("dl", {className: "lib-facts"}, facts.map(([name, value]) => el("div", {}, el("dt", {}, name), el("dd", {}, value)))),
+            orderFacts(variant.rows, variant.columns)),
           el("a", {className: "lib-open", href: `gen.html?part=${encodeURIComponent(id)}`}, "Open in Gen by Surface"),
           downloads,
           el("p", {className: "lib-links"},
             el("a", {href: BASE + mesh.file, download: mesh.name}, `Part STL (${bytesText(mesh.bytes)})`), " · ",
-            el("a", {href: BASE + license.text, target: "_blank", rel: "noopener"}, `Licence (${license.spdx})`)),
+            // (NOASSERTION: a source that states no licence, its text the project's note; 2026-11-16, the LeFlexiTac.  With
+            // its authors' permission recorded, tools/library_write.py PERMITTED_LICENCES: 2026-11-17.)
+            el("a", {href: BASE + license.text, target: "_blank", rel: "noopener"},
+              license.spdx === "NOASSERTION" ? (license.permission ? "Shared with the authors' permission" : "Licence not stated") : `Licence (${license.spdx})`)),
           el("p", {className: "lib-provenance"}, `${mesh.name} · ${mesh.facets} facets · ${mesh.unit} · ${license.change} · source: `,
             el("a", {href: license.source, target: "_blank", rel: "noopener noreferrer"}, source(license))),
           el("p", {className: "lib-detail-note"}, "For EasyEDA Pro projects, the project review and the taxel map, open it in Gen by Surface."))));
@@ -485,8 +516,14 @@
     // drawn over it from the placed record), its label, its title, its one line and its line of detail (the sensor's size
     // and fingers, 2026-11-15: the card's line no longer says them), the FlexiTac hardware tutorial for
     // its Gerbers (the showcase's own link, in showcase.json; a grey pill: the blue is Open in Gen by Surface's, which
-    // this page has not) and its sources with their notices.  No pitch, no generator downloads.
+    // this page has not) and its sources with their notices.  No pitch, no generator downloads.  Since the user's request
+    // of 2026-11-17 ("把instruction里面的fpc gerber也都放到这边可以直接download") under the tutorial the guide's own files,
+    // served as they are (boards.js): the pad's Top and Bottom FPC Gerber ZIPs in the sensors' download pills, on one
+    // line, and its reading board (12 x 32: the 32 x 16 board) in the sensors' own row, its licence in it (the review of
+    // 2026-11-17: three pills wrapped two and one under the tutorial).
     const {id, data, entry} = state.showcase;
+    const board = HARDWARE?.readingBoard(data.sensor?.rows, data.sensor?.columns);
+    const files = HARDWARE ? HARDWARE.FPC.map(item => [item.href, item.file, item.label, item.kind]) : [];
     state.place = "showcase";
     $("libDetail").replaceChildren(
       el("div", {className: "lib-detail-body lib-detail-showcase"},
@@ -498,6 +535,9 @@
           el("p", {className: "lib-showcase-detail"}, keep(data.detail)),
           el("div", {className: "lib-pills"},
             el("a", {className: "lib-pill", href: data.tutorial.href, target: "_blank", rel: "noopener noreferrer"}, data.tutorial.label)),
+          files.length ? el("div", {className: "lib-downloads"}, el("div", {className: "lib-pills"}, files.map(([href, file, label, kind]) =>
+            el("a", {className: "lib-pill", href, download: file, "data-hardware": kind}, label)))) : null,
+          board ? el("dl", {className: "lib-order"}, boardRow(board)) : null,
           el("p", {className: "lib-provenance"}, data.sources.flatMap((source, k) => [k ? " · " : null, `${source.text} (`,
             el("a", {href: BASE + source.notice, target: "_blank", rel: "noopener"}, "notice"), ")"])))));
     document.title = `${data.title} · ${PAGE_TITLE}`;

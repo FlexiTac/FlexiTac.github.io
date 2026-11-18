@@ -1,0 +1,509 @@
+{
+ "format": "flexitac-library-scene/v1",
+ "part": "ufactory-xarm",
+ "part_mesh_sha256": "a44756eb72f9c214cb37e61dc209cd7073fdff3e4271a7423476ef6fd090d2d4",
+ "about": "UFACTORY xArm Gripper at full opening: mujoco_menagerie f3b6013, ufactory_xarm7/hand.xml (BSD-3-Clause, UFACTORY Inc.): left_driver_joint/right_driver_joint hinge x 0..0.85 rad, a parallel four-bar linkage (each outer and inner knuckle turning, the finger kept parallel), at 0, fully open: each finger 43.6418 mm from closed.  The bodies are base_link.stl, the housing, and each side's outer and inner knuckle where hand.xml places them at 0 (pure translations); the Library mesh is left_finger.stl, the finger with its pad.  The other finger is hand.xml's right_finger: the same mesh turned 180 degrees about the approach axis (median 0.00 mm, about 1.0 mm at most, away from the pad), so its sensor is the same board.  The looks: drawn after UFACTORY's photos and renders of the xArm Gripper (2026-11-17): the glossy white moulded shell, the black anodised aluminium links and fingers with machined edges, the turned steel pins of the links, the black anodised flange, the dark Phillips screws of the shell and the black inner chassis seen between the shell's halves.  The finger and its pad are one file, the Library's part, in the finger's black; since the user's word of 2026-11-17 (\"xarm grey pad\") the pad is drawn over it in the stock pad's light grey rubber, matte, after the same photos: on each finger a prism of the project's own (bodies/ufactory-xarm/drawn-pad-sensor.stl and drawn-pad-mate.stl, not UFACTORY's geometry) with the outline and thickness of the model's pad (left_finger.stl's facets 2900 to 2991, one connected component: a 29.5 x 37.5 mm rectangle with 3 mm round corners, 3 mm thick, 2 mm of it proud of the finger's plate), 0.02 mm larger on every side, so it covers that pad; the part's file and the sensor's fit on its face are unchanged.  The showcase draws the same housing (UFACTORY's G1 file, scenes/flexitac-g1.json) with numbers of its own, tuned on 2026-11-12/13 for the hand-designed FlexiTac beside it; this card's are the stock gripper's, after the maker's photos (the review of 2026-11-17).",
+ "frame": "the part's file axes, mm",
+ "approach": [
+  0.0,
+  0.0,
+  1.0
+ ],
+ "opening": {
+  "q_mm": 43.641775,
+  "limit_mm": 43.641775,
+  "joint": "left_driver_joint/right_driver_joint (hinge x, a four-bar linkage, at 0)",
+  "source": "mujoco_menagerie f3b6013, ufactory_xarm7/hand.xml: class xarm7_hand joint range 0 0.85 rad, 0 open"
+ },
+ "mate": {
+  "kind": "turned",
+  "matrix": [
+   [
+    -1.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   [
+    0.0,
+    -1.0,
+    0.0,
+    -140.93
+   ],
+   [
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  ],
+  "part": true
+ },
+ "bodies": [
+  {
+   "mesh": "bodies/ufactory-xarm/base-shell.stl",
+   "sha256": "b9300559117c8503f5b0f411fcc3d8257a3653c6c4b3585617812195c359b647",
+   "bytes": 87334,
+   "triangles": 1745,
+   "matrix": [
+    [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     1.0,
+     0.0,
+     -70.465
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     -101.137
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": null,
+   "look": "shell-gloss"
+  },
+  {
+   "mesh": "bodies/ufactory-xarm/base-screws.stl",
+   "sha256": "c7cd97b6478a6172c3c945ca04e8c438a2a8bc67c2dd7c59bab2332152b78e86",
+   "bytes": 68834,
+   "triangles": 1375,
+   "matrix": [
+    [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     1.0,
+     0.0,
+     -70.465
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     -101.137
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": null,
+   "look": "screw-dark"
+  },
+  {
+   "mesh": "bodies/ufactory-xarm/base-flange.stl",
+   "sha256": "b7c28b031c2c15d726aa921af8a5f2fb3fb8c005c656b2084c8ef20fdb311a5a",
+   "bytes": 48284,
+   "triangles": 964,
+   "matrix": [
+    [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     1.0,
+     0.0,
+     -70.465
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     -101.137
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": null,
+   "look": "anodized-black"
+  },
+  {
+   "mesh": "bodies/ufactory-xarm/base-chassis.stl",
+   "sha256": "88274b3f2c6c0071f161a3afeadc08c019502ec1fac68923af5ecfe9b146b07b",
+   "bytes": 74884,
+   "triangles": 1496,
+   "matrix": [
+    [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     1.0,
+     0.0,
+     -70.465
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     -101.137
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": null,
+   "look": "chassis-black"
+  },
+  {
+   "mesh": "bodies/ufactory-xarm/left_outer_knuckle.stl",
+   "sha256": "c9393b6c78a59b50d6cff3dabb2c25401f084f5039d9b59f0b2493ef6098596c",
+   "bytes": 18784,
+   "triangles": 374,
+   "matrix": [
+    [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     1.0,
+     0.0,
+     -35.465
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     -42.039
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": null,
+   "look": "anodized-satin"
+  },
+  {
+   "mesh": "bodies/ufactory-xarm/left-inner-pins.stl",
+   "sha256": "07c144b8d1d40ac83d2012eab7864b92ea3086c151b63d0b38461b15f61106ce",
+   "bytes": 49384,
+   "triangles": 986,
+   "matrix": [
+    [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     1.0,
+     0.0,
+     -50.465
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     -27.039
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": null,
+   "look": "pin-steel"
+  },
+  {
+   "mesh": "bodies/ufactory-xarm/left-inner-links.stl",
+   "sha256": "298f61b19d83dcb0a05596d341a1d344e32a836a6cb63f21d58cbfb291f8ec4a",
+   "bytes": 97784,
+   "triangles": 1954,
+   "matrix": [
+    [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     1.0,
+     0.0,
+     -50.465
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     -27.039
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": null,
+   "look": "anodized-satin"
+  },
+  {
+   "mesh": "bodies/ufactory-xarm/right_outer_knuckle.stl",
+   "sha256": "e0a5402c805ed12978ab5dd6b95aef4e901fedb46f2122c139e308933f7a12e1",
+   "bytes": 18784,
+   "triangles": 374,
+   "matrix": [
+    [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     1.0,
+     0.0,
+     -105.465
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     -42.039
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": null,
+   "look": "anodized-satin"
+  },
+  {
+   "mesh": "bodies/ufactory-xarm/right-inner-pins.stl",
+   "sha256": "0347e182eedcd410e97eea8e2c8440e916d614e196a9167a1cf04e7e0d84027e",
+   "bytes": 49284,
+   "triangles": 984,
+   "matrix": [
+    [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     1.0,
+     0.0,
+     -90.465
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     -27.039
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": null,
+   "look": "pin-steel"
+  },
+  {
+   "mesh": "bodies/ufactory-xarm/right-inner-links.stl",
+   "sha256": "311cb50b06f7352dda5e8ef214483b5d8b44fbf59de2ca7badcdd50d3050175b",
+   "bytes": 96184,
+   "triangles": 1922,
+   "matrix": [
+    [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     1.0,
+     0.0,
+     -90.465
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     -27.039
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": null,
+   "look": "anodized-satin"
+  },
+  {
+   "mesh": "bodies/ufactory-xarm/drawn-pad-sensor.stl",
+   "sha256": "11ce63373834b087be87d92bfd2d6190729af96fe4bf61a420a2e0e5226d391e",
+   "bytes": 4684,
+   "triangles": 92,
+   "matrix": [
+    [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     1.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": "sensor",
+   "look": "pad-grey"
+  },
+  {
+   "mesh": "bodies/ufactory-xarm/drawn-pad-mate.stl",
+   "sha256": "b97f50ceff9d5de5b97640c2eb91723b96f046df1da113606c6c991578c6098e",
+   "bytes": 4684,
+   "triangles": 92,
+   "matrix": [
+    [
+     -1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     -1.0,
+     0.0,
+     -140.93
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": "mate",
+   "look": "pad-grey"
+  }
+ ],
+ "looks": {
+  "anodized-black": {
+   "color": "#232428",
+   "metalness": 0.6,
+   "roughness": 0.45,
+   "env_intensity": 2.4
+  },
+  "anodized-satin": {
+   "color": "#2e2e31",
+   "metalness": 0.6,
+   "roughness": 0.42,
+   "env_intensity": 2.4
+  },
+  "chassis-black": {
+   "color": "#262628",
+   "metalness": 0,
+   "roughness": 0.75,
+   "env_intensity": 1.8
+  },
+  "pad-grey": {
+   "color": "#a2a3a6",
+   "metalness": 0,
+   "roughness": 0.92,
+   "env_intensity": 1.2
+  },
+  "pin-steel": {
+   "color": "#c8cacc",
+   "metalness": 1,
+   "roughness": 0.25
+  },
+  "screw-dark": {
+   "color": "#3a3a3d",
+   "metalness": 0.25,
+   "roughness": 0.5,
+   "env_intensity": 1.6
+  },
+  "shell-gloss": {
+   "color": "#eceef0",
+   "metalness": 0,
+   "roughness": 0.3,
+   "clearcoat": 0.6,
+   "clearcoat_roughness": 0.15,
+   "env_intensity": 1.6
+  }
+ },
+ "part_look": "anodized-satin",
+ "smooth_deg": 35,
+ "see_through": [
+  "mate"
+ ],
+ "picture": "on both fingers of the open gripper"
+}

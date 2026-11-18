@@ -136,7 +136,7 @@
    "unit": "mm"
   },
   "obstacles": {
-   "bends": 3,
+   "bends": 4,
    "covered": 0,
    "holes": 0,
    "strained": 0

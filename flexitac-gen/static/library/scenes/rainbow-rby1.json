@@ -1,0 +1,172 @@
+{
+ "format": "flexitac-library-scene/v1",
+ "part": "rainbow-rby1",
+ "part_mesh_sha256": "b25966e831ec215924f7f2ae1fa169ffdc66c52d368ef2d35d1c86638ae8f6ab",
+ "about": "Rainbow RB-Y1 gripper at full opening: mujoco_menagerie f3b6013, rainbow_robotics_rby1/rby1m_1.2.xml (Apache-2.0, the 1.2 model, whose gripper is nearer Rainbow Robotics' drawing of it than the v1.3 model's): gripper_finger_r1/r2 slide -0.05..0 m, coupled one to one by an equality, open at -0.05, 50 mm each.  The bodies are the gripper EE_BODY.obj, where the right arm's EE_BODY_R places it on link_right_arm_6 (the wrist's last link itself not drawn), and on each finger EE_FINGER_1.obj, the finger; the sensor finger's pad, EE_FINGER_0.obj, is the Library mesh.  The other finger stands where ee_finger_r2 opens to: the same pad and finger turned 180 degrees about the wrist's axis, so its sensor is the same board (the model leaves ee_finger_r2 unturned, its pad facing away).  The looks: drawn after Rainbow Robotics' photos of the RB-Y1 (its product page and media kit, 2026-11-17: the robot cut out from the front and from three-quarters, and the photo of its teleoperation with the gripper in white light; they do not say which version of the gripper they show, and this 1.2 model's gripper stands nearer them than the v1.3 model's, docs/LIBRARY_VIEW.md): the gripper's housing, its rail block and both fingers black, a satin black with soft highlights (#191a1c to #2d2e30 in that photo), drawn as black anodised aluminium; the pad on each finger's inner face, the Library's part, black as every photo shows the fingers (the three-quarter photo's far finger reads #2b2a2a on its inner face, as its near one on its outer), drawn as black rubber, matte as the model's own material of the pad.  The model's gripper closes its own top (a recessed boss 56 mm across, where the wrist's last link, not drawn, stands on it), so the project draws nothing there.  No lettering is drawn.",
+ "frame": "the part's file axes, mm",
+ "approach": [
+  0.0,
+  0.0,
+  -1.0
+ ],
+ "opening": {
+  "q_mm": 50.0,
+  "limit_mm": 50.0,
+  "joint": "gripper_finger_r1/r2 (slide -x of r1, +x of r2, coupled)",
+  "source": "mujoco_menagerie f3b6013, rainbow_robotics_rby1/rby1m_1.2.xml: gripper_finger_r1 range -0.05 0 m, open at -0.05"
+ },
+ "mate": {
+  "kind": "turned",
+  "matrix": [
+   [
+    -1.0,
+    0.0,
+    0.0,
+    -106.0
+   ],
+   [
+    0.0,
+    -1.0,
+    0.0,
+    0.0
+   ],
+   [
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  ],
+  "part": true
+ },
+ "bodies": [
+  {
+   "mesh": "bodies/rainbow-rby1/ee_body.stl",
+   "sha256": "870be7d956d2fab630dee864aefa9174ea59b85dcf0342289163256cec1c7241",
+   "bytes": 92484,
+   "triangles": 1848,
+   "matrix": [
+    [
+     1.0,
+     0.0,
+     0.0,
+     -53.0
+    ],
+    [
+     0.0,
+     1.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     74.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": null,
+   "look": "anodized-black"
+  },
+  {
+   "mesh": "bodies/rainbow-rby1/ee_finger_1.stl",
+   "sha256": "ff90e1efe93736fadba19dbe358a53dc7ceb8eee693c6ffb330d4c878e7da12a",
+   "bytes": 11884,
+   "triangles": 236,
+   "matrix": [
+    [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     1.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": "sensor",
+   "look": "anodized-black"
+  },
+  {
+   "mesh": "bodies/rainbow-rby1/ee_finger_1.stl",
+   "sha256": "ff90e1efe93736fadba19dbe358a53dc7ceb8eee693c6ffb330d4c878e7da12a",
+   "bytes": 11884,
+   "triangles": 236,
+   "matrix": [
+    [
+     -1.0,
+     0.0,
+     0.0,
+     -106.0
+    ],
+    [
+     0.0,
+     -1.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": "mate",
+   "look": "anodized-black"
+  }
+ ],
+ "looks": {
+  "anodized-black": {
+   "color": "#232428",
+   "metalness": 0.6,
+   "roughness": 0.45,
+   "env_intensity": 2.4
+  },
+  "rubber-black": {
+   "color": "#232325",
+   "metalness": 0,
+   "roughness": 0.92,
+   "env_intensity": 2.2
+  }
+ },
+ "part_look": "rubber-black",
+ "smooth_deg": 35,
+ "see_through": [
+  "mate"
+ ],
+ "picture": "on both fingers of the open gripper"
+}

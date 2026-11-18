@@ -1,0 +1,716 @@
+{
+ "format": "flexitac-library-scene/v1",
+ "part": "leap-hand",
+ "part_mesh_sha256": "166bb1de0c0af51f7dde4df90940d2294991f6eff1ceb4909e7c064b6f89b312",
+ "about": "LEAP Hand (right), open and ready to grasp: mujoco_menagerie f3b6013, leap_hand/right_hand.xml (MIT, Ananye Agarwal; derived from dex-urdf's model of the hand and LEAP_Hand_Sim's, MIT): the joints at mcp 1.2, rot 0, pip 0.3, dip 0, th_cmc 1.5, th_axl 0, th_mcp 0.1, th_ipl 0 rad (each finger's mcp, rot, pip and dip alike, but the middle and ring spread and a little more bent: mf_rot 0.55, mf_pip 0.5, rf_rot 1, rf_pip 0.5 rad), the index fingertip's pad facing the thumb's 67.4 mm away.  The bodies are the hand's visual meshes where right_hand.xml places them: the palm (palm_right.obj), each finger's base, proximal, medial and distal links (base.obj, proximal.obj, medial.obj, distal.obj) and the thumb's (proximal.obj, thumb_base.obj, thumb_proximal.obj, thumb_distal.obj).  The Library mesh is the white fingertip, distal.obj's object fingertip_W alone, as the index finger draws it; each distal body is its file's black object (the link and the posts that hold the fingertip).  A sensor on every finger: the middle and ring fingertips are the same part again (extra_fingers, the same board, assembled), their links their own (extra1, extra2); the thumb's fingertip is the same part turned 180 degrees about x of its file (within 0.07 mm of thumb_distal.obj's own), so the mate is the thumb, its sensor the same board.  The thumb's two outer links are the mate's finger, see-through: from the grippers' homes its pad faces away, toward the index.  The checks override's reason: card_min_px 14 for this hand, at the grippers' homes (65 and 57 degrees off the index pad); the whole hand is framed and its fingertip's flat pad is 13.87 mm across, seen at cos 65 on the card, so the sensor's top board is 14 px wide there, under the rules' 20.  The looks: drawn after the LEAP Hand paper's own photo of the hand (Shaw, Agarwal and Pathak, RSS 2023, figure 1: the hand palm-on in white light, 2026-11-17): a hand black all over but for its four white fingertips (the paper's figure 8, the hand on an xArm, shows a build whose fingertips are printed black: the Library draws the hero photo's white).  The palm is a matte black print with a fine texture; the finger and thumb links, the Dynamixel servos in their black brackets, are one satin black (the photo shows the cases and the brackets alike, #2b2b2e to #333336); the fingertips are white soft prints, a cool matte white (#d7d7dd to #dcdce2 under the flash), no gloss.  Not modelled: the servos' cables and horns, the screws, the print's layer lines.",
+ "frame": "the part's file axes, mm",
+ "approach": [
+  0.0,
+  1.0,
+  0.0
+ ],
+ "opening": {
+  "q_mm": 67.359,
+  "limit_mm": 67.359,
+  "joint": "if/mf/rf and thumb joints (mcp 1.2, rot 0, pip 0.3, dip 0, th_cmc 1.5, th_axl 0, th_mcp 0.1, th_ipl 0 rad; mf_rot 0.55, mf_pip 0.5, rf_rot 1, rf_pip 0.5)",
+  "source": "mujoco_menagerie f3b6013, leap_hand/right_hand.xml: the joints' classes' ranges; the gap between the index and thumb pads at the pose"
+ },
+ "mate": {
+  "kind": "turned",
+  "matrix": [
+   [
+    -0.999555,
+    0.029391,
+    -0.005008,
+    -116.951473
+   ],
+   [
+    0.028964,
+    0.997087,
+    0.070563,
+    1.090788
+   ],
+   [
+    0.007067,
+    0.070386,
+    -0.997495,
+    -2.185286
+   ],
+   [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  ],
+  "part": true
+ },
+ "extra_fingers": [
+  {
+   "kind": "turned",
+   "matrix": [
+    [
+     0.959172,
+     -0.236917,
+     0.154467,
+     -11.352013
+    ],
+    [
+     0.131123,
+     0.856424,
+     0.499344,
+     -6.647924
+    ],
+    [
+     -0.250592,
+     -0.458702,
+     0.852523,
+     -75.946233
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ]
+  },
+  {
+   "kind": "turned",
+   "matrix": [
+    [
+     0.914935,
+     -0.317891,
+     0.248676,
+     -16.761538
+    ],
+    [
+     -0.01188,
+     0.594662,
+     0.803888,
+     -24.182895
+    ],
+    [
+     -0.403427,
+     -0.738459,
+     0.5403,
+     -139.818931
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ]
+  }
+ ],
+ "checks": {
+  "card_min_px": 14
+ },
+ "bodies": [
+  {
+   "mesh": "bodies/leap-hand/palm.stl",
+   "sha256": "870a2186c2aabb263cd8a1c7053a553606ae254e5de6e82ab0c82282fe6b2fb5",
+   "bytes": 799684,
+   "triangles": 15992,
+   "matrix": [
+    [
+     0.997495,
+     -2e-06,
+     0.070731,
+     -42.227584
+    ],
+    [
+     0.070731,
+     -4e-06,
+     -0.997495,
+     -78.124122
+    ],
+    [
+     2e-06,
+     1.0,
+     -3e-06,
+     17.549636
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": null,
+   "look": "palm-black"
+  },
+  {
+   "mesh": "bodies/leap-hand/base.stl",
+   "sha256": "24fb1fc0da681f5c8fe6a7dbcb1797a48fb2f17d217ca2c910da90caf7780f3e",
+   "bytes": 285884,
+   "triangles": 5716,
+   "matrix": [
+    [
+     -0.955333,
+     0.295532,
+     8e-06,
+     -33.877533
+    ],
+    [
+     0.295532,
+     0.955333,
+     4e-06,
+     -83.325944
+    ],
+    [
+     -6e-06,
+     6e-06,
+     -1.0,
+     0.1496
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": "sensor",
+   "look": "servo-black"
+  },
+  {
+   "mesh": "bodies/leap-hand/proximal.stl",
+   "sha256": "b31d59d974f7284f98f2857ac9287df9c700584f9fc7a644fa6262134ba4e7c3",
+   "bytes": 195884,
+   "triangles": 3916,
+   "matrix": [
+    [
+     0.955337,
+     0.29552,
+     -4e-06,
+     -1.707729
+    ],
+    [
+     -0.29552,
+     0.955337,
+     -1.2e-05,
+     -51.407432
+    ],
+    [
+     0.0,
+     1.2e-05,
+     1.0,
+     0.499965
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": "sensor",
+   "look": "servo-black"
+  },
+  {
+   "mesh": "bodies/leap-hand/medial.stl",
+   "sha256": "b006d7ac979560d25b4d9712515b034de3a86d9d4292b9ccce24ac8b2bcf7144",
+   "bytes": 284584,
+   "triangles": 5690,
+   "matrix": [
+    [
+     1.0,
+     0.0,
+     0.0,
+     7.9
+    ],
+    [
+     0.0,
+     1.0,
+     0.0,
+     -33.8
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     4.899998
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": "sensor",
+   "look": "servo-black"
+  },
+  {
+   "mesh": "bodies/leap-hand/distal.stl",
+   "sha256": "41f2ebf82ad884f0e10611c5aaf1d1746cd23371b8f1bee35db9035c0556bbaf",
+   "bytes": 85634,
+   "triangles": 1711,
+   "matrix": [
+    [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     1.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": "sensor",
+   "look": "servo-black"
+  },
+  {
+   "mesh": "bodies/leap-hand/base.stl",
+   "sha256": "24fb1fc0da681f5c8fe6a7dbcb1797a48fb2f17d217ca2c910da90caf7780f3e",
+   "bytes": 285884,
+   "triangles": 5716,
+   "matrix": [
+    [
+     -0.955333,
+     0.295532,
+     8e-06,
+     -33.977213
+    ],
+    [
+     0.295532,
+     0.955333,
+     4e-06,
+     -83.332855
+    ],
+    [
+     -6e-06,
+     6e-06,
+     -1.0,
+     -45.250401
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": "extra1",
+   "look": "servo-black"
+  },
+  {
+   "mesh": "bodies/leap-hand/proximal.stl",
+   "sha256": "b31d59d974f7284f98f2857ac9287df9c700584f9fc7a644fa6262134ba4e7c3",
+   "bytes": 195884,
+   "triangles": 3916,
+   "matrix": [
+    [
+     0.955336,
+     0.251939,
+     0.154465,
+     -2.179456
+    ],
+    [
+     -0.295521,
+     0.814454,
+     0.499331,
+     -52.61704
+    ],
+    [
+     -3e-06,
+     -0.522677,
+     0.852531,
+     -49.862083
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": "extra1",
+   "look": "servo-black"
+  },
+  {
+   "mesh": "bodies/leap-hand/medial.stl",
+   "sha256": "b006d7ac979560d25b4d9712515b034de3a86d9d4292b9ccce24ac8b2bcf7144",
+   "bytes": 284584,
+   "triangles": 5690,
+   "matrix": [
+    [
+     0.959172,
+     -0.236916,
+     0.154468,
+     5.005567
+    ],
+    [
+     0.131123,
+     0.856427,
+     0.499339,
+     -32.062536
+    ],
+    [
+     -0.250592,
+     -0.458697,
+     0.852526,
+     -58.159242
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": "extra1",
+   "look": "servo-black"
+  },
+  {
+   "mesh": "bodies/leap-hand/distal.stl",
+   "sha256": "41f2ebf82ad884f0e10611c5aaf1d1746cd23371b8f1bee35db9035c0556bbaf",
+   "bytes": 85634,
+   "triangles": 1711,
+   "matrix": [
+    [
+     0.959172,
+     -0.236917,
+     0.154467,
+     -11.352013
+    ],
+    [
+     0.131123,
+     0.856424,
+     0.499344,
+     -6.647924
+    ],
+    [
+     -0.250592,
+     -0.458702,
+     0.852523,
+     -75.946233
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": "extra1",
+   "look": "servo-black"
+  },
+  {
+   "mesh": "bodies/leap-hand/base.stl",
+   "sha256": "24fb1fc0da681f5c8fe6a7dbcb1797a48fb2f17d217ca2c910da90caf7780f3e",
+   "bytes": 285884,
+   "triangles": 5716,
+   "matrix": [
+    [
+     -0.955333,
+     0.295532,
+     8e-06,
+     -33.967169
+    ],
+    [
+     0.295532,
+     0.955333,
+     4e-06,
+     -83.331984
+    ],
+    [
+     -6e-06,
+     6e-06,
+     -1.0,
+     -90.650401
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": "extra2",
+   "look": "servo-black"
+  },
+  {
+   "mesh": "bodies/leap-hand/proximal.stl",
+   "sha256": "b31d59d974f7284f98f2857ac9287df9c700584f9fc7a644fa6262134ba4e7c3",
+   "bytes": 195884,
+   "triangles": 3916,
+   "matrix": [
+    [
+     0.955336,
+     0.15967,
+     0.248675,
+     -3.026934
+    ],
+    [
+     -0.295523,
+     0.516181,
+     0.80388,
+     -55.388245
+    ],
+    [
+     -5e-06,
+     -0.841465,
+     0.540312,
+     -98.416091
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": "extra2",
+   "look": "servo-black"
+  },
+  {
+   "mesh": "bodies/leap-hand/medial.stl",
+   "sha256": "b006d7ac979560d25b4d9712515b034de3a86d9d4292b9ccce24ac8b2bcf7144",
+   "bytes": 284584,
+   "triangles": 5690,
+   "matrix": [
+    [
+     0.914935,
+     -0.31789,
+     0.248677,
+     2.451359
+    ],
+    [
+     -0.01188,
+     0.594666,
+     0.803885,
+     -40.351017
+    ],
+    [
+     -0.403427,
+     -0.738457,
+     0.540304,
+     -115.352004
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": "extra2",
+   "look": "servo-black"
+  },
+  {
+   "mesh": "bodies/leap-hand/distal.stl",
+   "sha256": "41f2ebf82ad884f0e10611c5aaf1d1746cd23371b8f1bee35db9035c0556bbaf",
+   "bytes": 85634,
+   "triangles": 1711,
+   "matrix": [
+    [
+     0.914935,
+     -0.317891,
+     0.248676,
+     -16.761538
+    ],
+    [
+     -0.01188,
+     0.594662,
+     0.803888,
+     -24.182895
+    ],
+    [
+     -0.403427,
+     -0.738459,
+     0.5403,
+     -139.818931
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": "extra2",
+   "look": "servo-black"
+  },
+  {
+   "mesh": "bodies/leap-hand/proximal.stl",
+   "sha256": "b31d59d974f7284f98f2857ac9287df9c700584f9fc7a644fa6262134ba4e7c3",
+   "bytes": 195884,
+   "triangles": 3916,
+   "matrix": [
+    [
+     0.997496,
+     -0.005008,
+     -0.070548,
+     -89.694098
+    ],
+    [
+     0.070726,
+     0.070569,
+     0.994996,
+     -94.698586
+    ],
+    [
+     -4e-06,
+     -0.997494,
+     0.070747,
+     -4.092551
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": null,
+   "look": "servo-black"
+  },
+  {
+   "mesh": "bodies/leap-hand/thumb_base.stl",
+   "sha256": "64cf1e810c798a0ce6408335d8c2f376ce2c52afa37d3a32ff397d7e127bd4b4",
+   "bytes": 87184,
+   "triangles": 1742,
+   "matrix": [
+    [
+     0.997496,
+     0.070549,
+     -0.005007,
+     -93.638394
+    ],
+    [
+     0.070726,
+     -0.994998,
+     0.070552,
+     -64.802403
+    ],
+    [
+     -4e-06,
+     -0.070729,
+     -0.997496,
+     -7.271371
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": null,
+   "look": "servo-black"
+  },
+  {
+   "mesh": "bodies/leap-hand/thumb_proximal.stl",
+   "sha256": "16dc4d76a36d882e42e3d2e360e69c7e4dab817922d20b039d02e7f6d482fb80",
+   "bytes": 254084,
+   "triangles": 5080,
+   "matrix": [
+    [
+     0.999556,
+     0.029387,
+     0.005007,
+     -60.041548
+    ],
+    [
+     -0.028961,
+     0.997087,
+     -0.070563,
+     -8.410601
+    ],
+    [
+     -0.007066,
+     0.070386,
+     0.997495,
+     2.463947
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": "mate",
+   "look": "servo-black"
+  },
+  {
+   "mesh": "bodies/leap-hand/thumb_distal.stl",
+   "sha256": "c71979eaa5cb78fd79f41e8a58a3861324101d2603536ed8b81932898b2723a2",
+   "bytes": 182934,
+   "triangles": 3657,
+   "matrix": [
+    [
+     -0.999555,
+     -0.029391,
+     0.005008,
+     -168.741582
+    ],
+    [
+     0.028964,
+     -0.997087,
+     -0.070563,
+     -98.839116
+    ],
+    [
+     0.007067,
+     -0.070386,
+     0.997495,
+     54.457609
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "finger": "mate",
+   "look": "servo-black"
+  }
+ ],
+ "looks": {
+  "palm-black": {
+   "color": "#2a2a2c",
+   "metalness": 0,
+   "roughness": 0.75,
+   "env_intensity": 1.5
+  },
+  "servo-black": {
+   "color": "#262629",
+   "metalness": 0,
+   "roughness": 0.55,
+   "env_intensity": 1.6
+  },
+  "tip-white": {
+   "color": "#e3e4e8",
+   "metalness": 0,
+   "roughness": 0.7
+  }
+ },
+ "part_look": "tip-white",
+ "smooth_deg": 35,
+ "see_through": [
+  "mate"
+ ],
+ "picture": "on every finger of the open hand"
+}
