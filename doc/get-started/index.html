@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quickstart | FlexiTac Docs</title>
+<meta name="description" content="The whole path from ordering parts to a live tactile heatmap, with time, cost and the commands you&#x27;ll run.">
+<link rel="canonical" href="https://flexitac.github.io/doc/get-started/">
+<meta property="og:title" content="Quickstart | FlexiTac Docs">
+<meta property="og:description" content="The whole path from ordering parts to a live tactile heatmap, with time, cost and the commands you&#x27;ll run.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://flexitac.github.io/doc/get-started/">
+<meta property="og:image" content="https://flexitac.github.io/static/images/flexitac.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/svg+xml" href="/static/images/favicon.svg">
+<link rel="apple-touch-icon" href="/static/images/apple-touch-icon.png">
+<script>try{var t=localStorage.getItem("ft-docs-theme");if(t==="light"||t==="dark")document.documentElement.dataset.theme=t}catch(e){}</script>
+<link rel="stylesheet" href="/doc/assets/docs.css?v=20261123">
+<script src="/doc/assets/docs.js?v=20261123" defer></script>
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<header class="header">
+  <button class="menu" type="button" aria-label="Menu" aria-expanded="false" aria-controls="sidebar" data-menu><span></span></button>
+  <a class="brand" href="/doc/"><svg class="logo" viewBox="0 0 40 40" aria-hidden="true"><rect x="2.5" y="2.5" width="35" height="35" rx="7" class="logo-plate"/><path d="M13 9v22M20 9v22M27 9v22" class="logo-sense"/><path d="M9 15.5h22M9 24.5h22" class="logo-drive"/><circle cx="20" cy="24.5" r="3.4" class="logo-dot"/></svg><span>FlexiTac</span><span class="brand-sub">Docs</span></a>
+  <button class="search-btn" type="button" data-search-open aria-label="Search">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+    <span>Search</span><kbd data-kbd>Ctrl K</kbd>
+  </button>
+  <nav class="hlinks" aria-label="Site">
+    <a class="txt" href="/">Home</a>
+    <a class="ico" href="https://github.com/FlexiTac/FlexiTac" target="_blank" rel="noopener" aria-label="GitHub"><svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0a8 8 0 0 0-2.53 15.59c.4.07.55-.17.55-.38v-1.33c-2.23.48-2.7-1.07-2.7-1.07-.36-.93-.89-1.17-.89-1.17-.73-.5.05-.49.05-.49.8.06 1.23.83 1.23.83.72 1.22 1.88.87 2.33.66.07-.52.28-.87.5-1.07-1.78-.2-3.65-.89-3.65-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.6 7.6 0 0 1 4 0c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.28.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48v2.2c0 .21.15.46.55.38A8 8 0 0 0 8 0Z"/></svg></a>
+    <a class="ico" href="https://discord.gg/6gw887Vxms" target="_blank" rel="noopener" aria-label="Discord"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M20.3 4.4A19.8 19.8 0 0 0 15.4 3l-.6 1.3a18.3 18.3 0 0 0-5.5 0L8.6 3a19.7 19.7 0 0 0-4.9 1.5C.6 9.1-.3 13.7.1 18.2a19.9 19.9 0 0 0 6 3l1.3-2a13 13 0 0 1-2-1l.5-.4a14.2 14.2 0 0 0 12.2 0l.5.4c-.6.4-1.3.7-2 1l1.3 2a19.8 19.8 0 0 0 6-3c.5-5.2-.9-9.8-3.6-13.8ZM8 15.4c-1.2 0-2.2-1.1-2.2-2.4s1-2.4 2.2-2.4 2.2 1.1 2.2 2.4-1 2.4-2.2 2.4Zm8 0c-1.2 0-2.2-1.1-2.2-2.4s1-2.4 2.2-2.4 2.2 1.1 2.2 2.4-1 2.4-2.2 2.4Z"/></svg></a>
+    <button class="ico theme" type="button" data-theme-toggle aria-label="Theme: auto" title="Theme: auto">
+      <svg class="t-auto" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 4a8 8 0 0 1 0 16Z" fill="currentColor"/></svg>
+      <svg class="t-light" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M2 12h2m16 0h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+      <svg class="t-dark" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z"/></svg>
+    </button>
+  </nav>
+</header>
+<div class="layout">
+  <nav class="sidebar" id="sidebar" aria-label="Documentation">
+    <div class="sidebar-inner"><details class="group" open><summary>Get Started</summary><ul><li><a href="/doc/">Introduction</a></li><li><a href="/doc/get-started/" aria-current="page">Quickstart</a></li><li><a href="/doc/get-started/order-parts/">Order parts</a></li><li><a href="/doc/get-started/fabricate/">Fabricate a sensor</a></li><li><a href="/doc/get-started/stream/">Stream sensor</a></li><li><a href="/doc/get-started/troubleshooting/">Troubleshooting</a></li><li><a href="/doc/get-started/next-steps/">Next steps</a></li></ul></details><details class="group" open><summary>Learning with FlexiTac</summary><ul><li><a href="/doc/robot-learning/">On a real robot</a></li></ul></details><details class="group" open><summary>FlexiTac in Simulation</summary><ul><li><a href="/doc/simulation/">Isaac Sim &amp; VT-Refine</a></li></ul></details><details class="group" open><summary>Ecosystem</summary><ul><li><a href="/">FlexiTac homepage<span class="ext" aria-hidden="true">↗</span></a></li><li><a href="/flexitac-gen/">FlexiTac-Gen<span class="ext" aria-hidden="true">↗</span></a></li><li><a href="https://tna001-ai.github.io/LeFlexiTac/docs.html" target="_blank" rel="noopener">LeFlexiTac<span class="ext" aria-hidden="true">↗</span></a></li><li><a href="https://binghao-huang.github.io/Awesome-FlexiTac/" target="_blank" rel="noopener">Awesome FlexiTac<span class="ext" aria-hidden="true">↗</span></a></li><li><a href="/learn/">Interactive course<span class="ext" aria-hidden="true">↗</span></a></li></ul></details>
+      <div class="sidebar-foot"><a href="/">← FlexiTac home</a></div>
+    </div>
+  </nav>
+  <div class="main">
+    <details class="mtoc"><summary><span>On this page</span><span class="mtoc-cur">Overview</span></summary><ul><li class="l2"><a href="#_top">Overview</a></li><li class="l2"><a href="#at-a-glance">At a glance</a></li><li class="l3"><a href="#what-you-need">What you need</a></li><li class="l2"><a href="#steps">Steps</a></li><li class="l2"><a href="#already-have-an-assembled-sensor">Already have an assembled sensor?</a></li><li class="l2"><a href="#youre-done-when">You&#x27;re done when…</a></li></ul></details>
+    <div class="content-row">
+      <main id="content" class="content" tabindex="-1">
+        <div class="hero" id="_top">
+          <h1>Quickstart</h1>
+          <p class="lead">The whole path from ordering parts to a live tactile heatmap, with time, cost and the commands you'll run.</p>
+        </div>
+        <div class="md">
+<p>This guide walks you through building one <strong>FlexiTac-V2</strong> sensor (32 × 12 taxels), connecting it to a <strong>32 × 16 reading board</strong>, and streaming it live to a heatmap on your computer. This is the standard setup: the fabrication guide, the firmware and PyFlexiTac all default to it. Each step links to a detailed page.</p>
+<aside class="aside tip" aria-label="Need a different shape or size?"><p class="aside-title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.5 1 2.5h6c0-1 .3-1.8 1-2.5A6 6 0 0 0 12 3Z"/></svg>Need a different shape or size?</p><div class="aside-body"><p>Generate the two FPCs for your own gripper or fingertip with <a href="/flexitac-gen/">FlexiTac-Gen</a>. It also tells you which reading board fits your design. Ordering and fabrication work the same way. Flash and read it with your sensor's rows and columns, as described in <a href="/doc/get-started/pyflexitac/#rows">Match the reader to the firmware</a>. Designs that need the 32 × 32 board aren't covered by these docs yet.</p></div></aside>
+<figure class="figure"><a href="/doc/assets/img/v2-assembly-overview.webp" class="zoom"><img src="/doc/assets/img/v2-assembly-overview.webp" alt="Assembled FlexiTac sensor with reading board and Arduino Nano (left) and the 32 × 12 sensor pad (right)" loading="lazy" decoding="async"></a><figcaption>What you'll build: (a) an assembled sensor on a soft gripper, wired to the 32 × 16 reading board; (b) the 32 × 12 sensor pad.</figcaption></figure>
+<h2 id="at-a-glance"><a class="anchor" href="#at-a-glance" aria-hidden="true" tabindex="-1">#</a>At a glance</h2>
+<div class="stats">
+<div class="stat"><b>&lt; 3 min</b><span>to fabricate one sensor</span></div>
+<div class="stat"><b>~$4</b><span>materials per sensor</span></div>
+<div class="stat"><b>~$30</b><span>reading board + Arduino Nano</span></div>
+<div class="stat"><b>1–2 weeks</b><span>FPC / PCB lead time</span></div>
+</div>
+<p>Costs are the estimates from the <a href="https://docs.google.com/document/d/1bvz6AL7BUkhj4Dj7n9DFXTjnGIX4-ziN8-smiCKpVZU/edit?usp=sharing" target="_blank" rel="noopener">Hardware Fabrication Guide<span class="ext" aria-hidden="true">↗</span></a> (March 2026). Cables, connectors and consumables add roughly $10.</p>
+<h3 id="what-you-need"><a class="anchor" href="#what-you-need" aria-hidden="true" tabindex="-1">#</a>What you need</h3>
+<ul><li><strong>A computer</strong> running Linux or macOS (the platforms the existing guides document), with <strong>Python 3.11 or newer</strong>.</li><li><strong>An Arduino Nano</strong> and a USB cable that carries data, not just power.</li><li><strong>Two FPCs and one reading board</strong>, ordered from a PCB manufacturer using the open design files (step 1).</li><li><strong>Consumables:</strong> pressure-sensitive conductive film (Velostat or Linqstat), adhesive laminating sheets and polyimide tape.</li><li><strong>Flat flexible cables and FFC extenders</strong> (16-pin and 32-pin) to connect the sensor to the board.</li></ul>
+<p>No soldering is needed to fabricate the sensor itself. You can have the reading board assembled by the manufacturer (PCBA) when you order it.</p>
+<h2 id="steps"><a class="anchor" href="#steps" aria-hidden="true" tabindex="-1">#</a>Steps</h2>
+<ol class="steps"><li id="order-the-parts"><p class="step-title">Order the parts</p><p>Upload the Gerber files for the top FPC, the bottom FPC and the reading board to a PCB manufacturer, and order the consumables from the bill of materials. Order a few spare sensors: they're cheap, and spares make debugging easier.</p>
+<p><a href="/doc/get-started/order-parts/">Bill of materials and ordering settings →</a></p></li><li id="fabricate-the-sensor"><p class="step-title">Fabricate the sensor</p><p>Laminate each FPC onto an adhesive sheet, put Velostat between them, seal the edges with polyimide tape and plug the gold fingers into the connectors. This takes under three minutes.</p>
+<p><a href="/doc/get-started/fabricate/">Step-by-step fabrication with photos →</a></p></li><li id="stream-the-sensor"><p class="step-title">Stream the sensor</p><p>Open PyFlexiTac's firmware sketch in the Arduino IDE and upload it to the reading board's Arduino Nano. Then install PyFlexiTac, find the serial port and open a live heatmap:</p>
+<figure class="code terminal"><pre data-lang="bash"><code><span class="tk-k">pip</span> install <span class="tk-s">"flexitac[examples]"</span>
+<span class="tk-k">flexitac-find-port</span>
+<span class="tk-k">flexitac-heatmap</span> <span class="tk-f">--port</span> /dev/ttyUSB0</code></pre><button class="copy" type="button" aria-label="Copy code" data-copy><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg></button></figure>
+<p><a href="/doc/get-started/stream/">Stream the sensor →</a></p></li></ol>
+<h2 id="already-have-an-assembled-sensor"><a class="anchor" href="#already-have-an-assembled-sensor" aria-hidden="true" tabindex="-1">#</a>Already have an assembled sensor?</h2>
+<p>If someone handed you a working sensor and reading board, these four commands are the entire setup:</p>
+<figure class="code terminal has-title"><figcaption><span class="dots" aria-hidden="true"></span><span class="title">Terminal</span></figcaption><pre data-lang="bash"><code><span class="tk-k">pip</span> install <span class="tk-s">"flexitac[examples]"</span>      <span class="tk-c"># Python 3.11+</span>
+<span class="tk-k">flexitac-flash</span>                        <span class="tk-c"># needs arduino-cli; or use the Arduino IDE</span>
+<span class="tk-k">flexitac-find-port</span>                    <span class="tk-c"># which /dev/tty* is the sensor</span>
+<span class="tk-k">flexitac-heatmap</span> <span class="tk-f">--port</span> /dev/ttyUSB0  <span class="tk-c"># press the pad</span></code></pre><button class="copy" type="button" aria-label="Copy code" data-copy><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg></button></figure>
+<h2 id="youre-done-when"><a class="anchor" href="#youre-done-when" aria-hidden="true" tabindex="-1">#</a>You're done when…</h2>
+<ul><li class="task"><span class="box" aria-hidden="true"></span><code>flexitac-stream</code> (<a href="/doc/get-started/pyflexitac/#stream">Check the signal</a>) reports a steady frame rate (about <strong>100+ fps</strong> for a 32 × 12 sensor).</li><li class="task"><span class="box" aria-hidden="true"></span><code>raw_max</code> changes when you press the sensor, and isn't stuck at 0 or 255.</li><li class="task"><span class="box" aria-hidden="true"></span>A bright spot in <code>flexitac-heatmap</code> follows your fingertip across <strong>every</strong> row and column.</li></ul>
+<aside class="aside tip" aria-label="Stuck?"><p class="aside-title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.5 1 2.5h6c0-1 .3-1.8 1-2.5A6 6 0 0 0 12 3Z"/></svg>Stuck?</p><div class="aside-body"><p>Most first-time problems are a serial permission, a cable that only charges, or firmware and reader disagreeing on the number of rows. <a href="/doc/get-started/troubleshooting/">Troubleshooting</a> covers each of these by symptom. You can also ask on the <a href="https://discord.gg/6gw887Vxms" target="_blank" rel="noopener">Discord<span class="ext" aria-hidden="true">↗</span></a>.</p></div></aside>
+        </div>
+        <footer class="page-foot">
+          <div class="meta">
+            <a href="https://github.com/FlexiTac/FlexiTac.github.io/edit/main/doc/_src/pages/get-started/index.md" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16v4Zm9-13 4 4"/></svg>Edit page</a>
+            <a href="https://github.com/FlexiTac/FlexiTac.github.io/issues/new?title=Docs:+Quickstart&amp;labels=documentation" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg>Report a problem</a>
+            <span class="updated">Last updated: <time datetime="2026-11-25">Nov 25, 2026</time></span>
+          </div>
+          <nav class="pager" aria-label="Pagination"><a class="prev" href="/doc/" rel="prev"><span>Previous</span><strong>Introduction</strong></a><a class="next" href="/doc/get-started/order-parts/" rel="next"><span>Next</span><strong>Order parts</strong></a></nav>
+        </footer>
+      </main>
+      <aside class="toc" aria-label="On this page"><div class="toc-inner"><h2>On this page</h2><ul><li class="l2"><a href="#_top">Overview</a></li><li class="l2"><a href="#at-a-glance">At a glance</a></li><li class="l3"><a href="#what-you-need">What you need</a></li><li class="l2"><a href="#steps">Steps</a></li><li class="l2"><a href="#already-have-an-assembled-sensor">Already have an assembled sensor?</a></li><li class="l2"><a href="#youre-done-when">You&#x27;re done when…</a></li></ul></div></aside>
+    </div>
+    <footer class="site-foot">
+      <p>FlexiTac © 2026 Columbia University · Hardware licensed <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a> · <a href="https://github.com/FlexiTac/FlexiTac.github.io/tree/main/doc/_src" target="_blank" rel="noopener">Docs source on GitHub</a></p>
+    </footer>
+  </div>
+</div>
+<div class="scrim" data-scrim hidden></div>
+<dialog class="search" aria-label="Search the docs" data-search>
+  <div class="search-box">
+    <div class="search-field">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <input type="search" placeholder="Search the docs" aria-label="Search the docs" autocomplete="off" spellcheck="false" data-search-input>
+      <button type="button" class="search-close" data-search-close>Cancel</button>
+    </div>
+    <ul class="search-results" role="listbox" data-search-results></ul>
+    <p class="search-hint"><kbd>↑</kbd><kbd>↓</kbd> to navigate · <kbd>Enter</kbd> to open · <kbd>Esc</kbd> to close</p>
+  </div>
+</dialog>
+</body>
+</html>

@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Troubleshooting &amp; FAQ | FlexiTac Docs</title>
+<meta name="description" content="Find your symptom, then work through the checks from most to least likely.">
+<link rel="canonical" href="https://flexitac.github.io/doc/get-started/troubleshooting/">
+<meta property="og:title" content="Troubleshooting &amp; FAQ | FlexiTac Docs">
+<meta property="og:description" content="Find your symptom, then work through the checks from most to least likely.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://flexitac.github.io/doc/get-started/troubleshooting/">
+<meta property="og:image" content="https://flexitac.github.io/static/images/flexitac.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/svg+xml" href="/static/images/favicon.svg">
+<link rel="apple-touch-icon" href="/static/images/apple-touch-icon.png">
+<script>try{var t=localStorage.getItem("ft-docs-theme");if(t==="light"||t==="dark")document.documentElement.dataset.theme=t}catch(e){}</script>
+<link rel="stylesheet" href="/doc/assets/docs.css?v=20261123">
+<script src="/doc/assets/docs.js?v=20261123" defer></script>
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<header class="header">
+  <button class="menu" type="button" aria-label="Menu" aria-expanded="false" aria-controls="sidebar" data-menu><span></span></button>
+  <a class="brand" href="/doc/"><svg class="logo" viewBox="0 0 40 40" aria-hidden="true"><rect x="2.5" y="2.5" width="35" height="35" rx="7" class="logo-plate"/><path d="M13 9v22M20 9v22M27 9v22" class="logo-sense"/><path d="M9 15.5h22M9 24.5h22" class="logo-drive"/><circle cx="20" cy="24.5" r="3.4" class="logo-dot"/></svg><span>FlexiTac</span><span class="brand-sub">Docs</span></a>
+  <button class="search-btn" type="button" data-search-open aria-label="Search">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+    <span>Search</span><kbd data-kbd>Ctrl K</kbd>
+  </button>
+  <nav class="hlinks" aria-label="Site">
+    <a class="txt" href="/">Home</a>
+    <a class="ico" href="https://github.com/FlexiTac/FlexiTac" target="_blank" rel="noopener" aria-label="GitHub"><svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0a8 8 0 0 0-2.53 15.59c.4.07.55-.17.55-.38v-1.33c-2.23.48-2.7-1.07-2.7-1.07-.36-.93-.89-1.17-.89-1.17-.73-.5.05-.49.05-.49.8.06 1.23.83 1.23.83.72 1.22 1.88.87 2.33.66.07-.52.28-.87.5-1.07-1.78-.2-3.65-.89-3.65-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.6 7.6 0 0 1 4 0c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.28.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48v2.2c0 .21.15.46.55.38A8 8 0 0 0 8 0Z"/></svg></a>
+    <a class="ico" href="https://discord.gg/6gw887Vxms" target="_blank" rel="noopener" aria-label="Discord"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M20.3 4.4A19.8 19.8 0 0 0 15.4 3l-.6 1.3a18.3 18.3 0 0 0-5.5 0L8.6 3a19.7 19.7 0 0 0-4.9 1.5C.6 9.1-.3 13.7.1 18.2a19.9 19.9 0 0 0 6 3l1.3-2a13 13 0 0 1-2-1l.5-.4a14.2 14.2 0 0 0 12.2 0l.5.4c-.6.4-1.3.7-2 1l1.3 2a19.8 19.8 0 0 0 6-3c.5-5.2-.9-9.8-3.6-13.8ZM8 15.4c-1.2 0-2.2-1.1-2.2-2.4s1-2.4 2.2-2.4 2.2 1.1 2.2 2.4-1 2.4-2.2 2.4Zm8 0c-1.2 0-2.2-1.1-2.2-2.4s1-2.4 2.2-2.4 2.2 1.1 2.2 2.4-1 2.4-2.2 2.4Z"/></svg></a>
+    <button class="ico theme" type="button" data-theme-toggle aria-label="Theme: auto" title="Theme: auto">
+      <svg class="t-auto" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 4a8 8 0 0 1 0 16Z" fill="currentColor"/></svg>
+      <svg class="t-light" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M2 12h2m16 0h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+      <svg class="t-dark" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z"/></svg>
+    </button>
+  </nav>
+</header>
+<div class="layout">
+  <nav class="sidebar" id="sidebar" aria-label="Documentation">
+    <div class="sidebar-inner"><details class="group" open><summary>Get Started</summary><ul><li><a href="/doc/">Introduction</a></li><li><a href="/doc/get-started/">Quickstart</a></li><li><a href="/doc/get-started/order-parts/">Order parts</a></li><li><a href="/doc/get-started/fabricate/">Fabricate a sensor</a></li><li><a href="/doc/get-started/stream/">Stream sensor</a></li><li><a href="/doc/get-started/troubleshooting/" aria-current="page">Troubleshooting</a></li><li><a href="/doc/get-started/next-steps/">Next steps</a></li></ul></details><details class="group" open><summary>Learning with FlexiTac</summary><ul><li><a href="/doc/robot-learning/">On a real robot</a></li></ul></details><details class="group" open><summary>FlexiTac in Simulation</summary><ul><li><a href="/doc/simulation/">Isaac Sim &amp; VT-Refine</a></li></ul></details><details class="group" open><summary>Ecosystem</summary><ul><li><a href="/">FlexiTac homepage<span class="ext" aria-hidden="true">↗</span></a></li><li><a href="/flexitac-gen/">FlexiTac-Gen<span class="ext" aria-hidden="true">↗</span></a></li><li><a href="https://tna001-ai.github.io/LeFlexiTac/docs.html" target="_blank" rel="noopener">LeFlexiTac<span class="ext" aria-hidden="true">↗</span></a></li><li><a href="https://binghao-huang.github.io/Awesome-FlexiTac/" target="_blank" rel="noopener">Awesome FlexiTac<span class="ext" aria-hidden="true">↗</span></a></li><li><a href="/learn/">Interactive course<span class="ext" aria-hidden="true">↗</span></a></li></ul></details>
+      <div class="sidebar-foot"><a href="/">← FlexiTac home</a></div>
+    </div>
+  </nav>
+  <div class="main">
+    <details class="mtoc"><summary><span>On this page</span><span class="mtoc-cur">Overview</span></summary><ul><li class="l2"><a href="#_top">Overview</a></li><li class="l2"><a href="#no-port">No serial port appears</a></li><li class="l2"><a href="#permission-denied">Permission denied</a></li><li class="l2"><a href="#flash-fails">Flashing fails</a></li><li class="l2"><a href="#no-frames">No frames, fps=0 or TimeoutError</a></li><li class="l2"><a href="#scrambled">The heatmap looks scrambled or shifted</a></li><li class="l2"><a href="#dead-rows">Some rows or columns never respond</a></li><li class="l2"><a href="#stuck">raw_max is stuck at 0 or 255</a></li><li class="l2"><a href="#noisy">Noisy or drifting at rest</a></li><li class="l2"><a href="#range">The signal saturates or barely changes</a></li><li class="l2"><a href="#low-fps">Low frame rate</a></li><li class="l2"><a href="#faq">FAQ</a></li><li class="l3"><a href="#how-long-do-fpc-and-pcb-orders-take">How long do FPC and PCB orders take?</a></li><li class="l3"><a href="#how-durable-is-the-sensor">How durable is the sensor?</a></li><li class="l3"><a href="#what-if-a-sensor-is-damaged-or-malfunctioning">What if a sensor is damaged or malfunctioning?</a></li><li class="l3"><a href="#can-i-use-flexitac-commercially">Can I use FlexiTac commercially?</a></li><li class="l2"><a href="#help">Still stuck?</a></li></ul></details>
+    <div class="content-row">
+      <main id="content" class="content" tabindex="-1">
+        <div class="hero" id="_top">
+          <h1>Troubleshooting &amp; FAQ</h1>
+          <p class="lead">Find your symptom, then work through the checks from most to least likely.</p>
+        </div>
+        <div class="md">
+<p>Start with <code>flexitac-stream --port &lt;port&gt;</code>. Its output (fps, <code>raw_max</code>, <code>norm_max</code>) tells you which layer is failing: USB and serial, firmware, or the sensor itself.</p>
+<h2 id="no-port"><a class="anchor" href="#no-port" aria-hidden="true" tabindex="-1">#</a>No serial port appears</h2>
+<ul><li><strong>Try another USB cable.</strong> Many mini-USB cables only carry power. If the Nano's LED lights up but no port appears, the cable is the most likely cause.</li><li><strong>Check the USB driver.</strong> Many Nano clones use a CH340 USB-serial chip. Recent Linux and macOS versions include a driver. On older systems, install the CH340 driver from the chip vendor.</li><li><strong>Look at the kernel log</strong> (Linux) while you plug the board in:<figure class="code terminal"><pre data-lang="bash"><code><span class="tk-c"># expect e.g. "ch341-uart converter now attached to ttyUSB0"</span>
+<span class="tk-k">sudo</span> dmesg <span class="tk-f">-w</span></code></pre><button class="copy" type="button" aria-label="Copy code" data-copy><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg></button></figure></li><li>On Linux, <strong><code>brltty</code> can grab CH340 devices.</strong> If the port appears and immediately disappears, removing that package (<code>sudo apt remove brltty</code>) is a common fix.</li></ul>
+<h2 id="permission-denied"><a class="anchor" href="#permission-denied" aria-hidden="true" tabindex="-1">#</a>Permission denied</h2>
+<p>Your user can't open the serial device. On Linux, add yourself to <code>dialout</code> and log in again:</p>
+<figure class="code terminal"><pre data-lang="bash"><code><span class="tk-k">sudo</span> usermod <span class="tk-f">-aG</span> dialout <span class="tk-s">"$USER"</span></code></pre><button class="copy" type="button" aria-label="Copy code" data-copy><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg></button></figure>
+<p>See <a href="/doc/get-started/pyflexitac/#permissions">Serial port permissions</a> for macOS and temporary workarounds.</p>
+<h2 id="flash-fails"><a class="anchor" href="#flash-fails" aria-hidden="true" tabindex="-1">#</a>Flashing fails</h2>
+<div class="table-wrap"><table><thead><tr><th>Message</th><th>Fix</th></tr></thead><tbody><tr><td><code>arduino-cli not found on PATH</code></td><td>Install <code>arduino-cli</code> and run <code>arduino-cli core install arduino:avr</code>. See <a href="/doc/get-started/pyflexitac/#flexitac-flash">Flash from the command line</a>.</td></tr><tr><td><code>no Arduino board detected</code></td><td>Clones often don't report a board type. Pass <code>--port</code> and <code>--fqbn arduino:avr:nano</code>.</td></tr><tr><td><code>multiple boards detected</code></td><td>Unplug the other boards, or pass <code>--port</code> and <code>--fqbn</code> explicitly.</td></tr><tr><td>Upload hangs or says <code>not in sync</code></td><td>Old-bootloader Nano: use <code>--fqbn arduino:avr:nano:cpu=atmega328old</code> (in the IDE: <strong>Processor → ATmega328P (Old Bootloader)</strong>).</td></tr><tr><td><code>Permission denied</code></td><td>See <a href="#permission-denied">Permission denied</a>. Close the Arduino IDE serial monitor and any other program holding the port.</td></tr></tbody></table></div>
+<h2 id="no-frames"><a class="anchor" href="#no-frames" aria-hidden="true" tabindex="-1">#</a>No frames, <code>fps=0</code> or <code>TimeoutError</code></h2>
+<p>The port opens, but the reader never finds a start marker (<code>0xAA 0x55</code>) followed by a full frame.</p>
+<ol><li><strong>Re-flash.</strong> A board fresh from the factory, or one running another sketch, isn't sending FlexiTac frames.</li><li><strong>Check the baud rate.</strong> Both sides must use 2,000,000 unless you changed it on purpose. At the wrong rate, the bytes arrive garbled and no marker is ever found.</li><li><strong>Check the port.</strong> Make sure you're reading the reading board and not another serial device. <code>flexitac-find-port</code> tells you which one it is.</li><li><strong>Close other programs</strong> that might be reading the same port (serial monitor, a second script).</li></ol>
+<h2 id="scrambled"><a class="anchor" href="#scrambled" aria-hidden="true" tabindex="-1">#</a>The heatmap looks scrambled or shifted</h2>
+<p>Frames arrive, but the picture is wrong. This usually means a <strong>row-count mismatch</strong> between the firmware you flashed and the reader:</p>
+<div class="table-wrap"><table><thead><tr><th>What you see</th><th>Cause</th><th>Fix</th></tr></thead><tbody><tr><td>Normal fps, but the top 4 rows never respond and touches near one end of the sensor don't show</td><td>Firmware sends 16 rows (<code>32_16_fast.ino</code>), reader expects 12</td><td>Read with <code>--rows 16</code>, or flash PyFlexiTac's sketch instead</td></tr><tr><td>Frame rate drops to about half, and the bottom 4 rows echo touches on the top rows</td><td>Firmware sends 12 rows, reader expects 16</td><td>Read with the defaults (12 rows)</td></tr><tr><td>A round touch shows up as a slanted streak (each row shifted a little further sideways)</td><td><code>--cols</code> doesn't match the firmware</td><td>Use the same <code>--cols</code> the firmware was built with (32 for V2)</td></tr></tbody></table></div>
+<p>See <a href="/doc/get-started/pyflexitac/#rows">Match the reader to the firmware</a> for which reader settings go with which firmware.</p>
+<h2 id="dead-rows"><a class="anchor" href="#dead-rows" aria-hidden="true" tabindex="-1">#</a>Some rows or columns never respond</h2>
+<p>Run <code>flexitac-stream --port &lt;port&gt; --per-row</code> and press along a column. Then check:</p>
+<ul><li><strong>Gold fingers fully and squarely seated</strong> in each FFC connector. Re-seat both ends and both cables.</li><li><strong>Cable orientation.</strong> A cable inserted with its contacts facing the wrong way gives a whole dead side.</li><li><strong>Velostat coverage.</strong> A dead band along one edge often means the film doesn't reach that edge.</li><li><strong>Lamination alignment.</strong> If the top and bottom FPCs were offset when you stacked them, edge crossings may not overlap.</li><li><strong>Expected dead rows:</strong> with <code>32_16_fast.ino</code> on a V2 sensor, rows 0–3 are unconnected by design.</li><li><strong>Swap parts to isolate the fault.</strong> Try a spare sensor on the same board, then the same sensor on another board.</li></ul>
+<h2 id="stuck"><a class="anchor" href="#stuck" aria-hidden="true" tabindex="-1">#</a><code>raw_max</code> is stuck at 0 or 255</h2>
+<p>A value that stays flat at either end of the range points to a <strong>wiring problem</strong>, such as a disconnected or shorted line, not a flashing problem. Re-seat the connectors and inspect the gold fingers and cables for damage.</p>
+<h2 id="noisy"><a class="anchor" href="#noisy" aria-hidden="true" tabindex="-1">#</a>Noisy or drifting at rest</h2>
+<ul><li><strong>Re-calibrate with nothing touching the sensor.</strong> If the sensor was pressed during the first ~30 frames, the baseline is wrong. Call <code>sensor.calibrate()</code> or restart the stream.</li><li><strong>Mounting changes the baseline.</strong> Bending or pre-loading the sensor onto a curved finger raises its resting values. Calibrate after mounting, not before.</li><li><strong>Expect small fluctuations.</strong> <code>normalized</code> hides readings below the threshold (default 25 counts above baseline). If you work with <code>raw</code>, apply your own threshold or temporal filter. The hardware repo's <code>fast_32_16.py</code> uses an exponential filter with α = 0.2.</li></ul>
+<h2 id="range"><a class="anchor" href="#range" aria-hidden="true" tabindex="-1">#</a>The signal saturates or barely changes</h2>
+<ul><li><strong>Saturates under light touch:</strong> the sensor may be pre-loaded by its mount, or the baseline was captured under load. Re-calibrate at rest.</li><li><strong>Barely changes under firm pressure:</strong> check that the Velostat is present and centered, and that the polyimide seal isn't holding the layers apart. Make sure you're reading the right port, and not another device.</li></ul>
+<h2 id="low-fps"><a class="anchor" href="#low-fps" aria-hidden="true" tabindex="-1">#</a>Low frame rate</h2>
+<p>About 100+ fps is expected for 12 × 32 at 2 Mbaud. Lower rates usually come from a slow USB hub, a very busy host, or a visualizer that renders every frame. For live use, call <code>read_latest()</code> so rendering never falls behind.</p>
+<h2 id="faq"><a class="anchor" href="#faq" aria-hidden="true" tabindex="-1">#</a>FAQ</h2>
+<h3 id="how-long-do-fpc-and-pcb-orders-take"><a class="anchor" href="#how-long-do-fpc-and-pcb-orders-take" aria-hidden="true" tabindex="-1">#</a>How long do FPC and PCB orders take?</h3>
+<p>Usually 1–2 weeks from order to delivery for the FPCs and PCBs, depending on your location and shipping method. An assembled reading board takes about one week.</p>
+<h3 id="how-durable-is-the-sensor"><a class="anchor" href="#how-durable-is-the-sensor" aria-hidden="true" tabindex="-1">#</a>How durable is the sensor?</h3>
+<p>In the authors' experience, sensors stay consistent and can often be used for about a year without significant degradation. Some teams have collected thousands of demonstrations without breaking one.</p>
+<h3 id="what-if-a-sensor-is-damaged-or-malfunctioning"><a class="anchor" href="#what-if-a-sensor-is-damaged-or-malfunctioning" aria-hidden="true" tabindex="-1">#</a>What if a sensor is damaged or malfunctioning?</h3>
+<p>Order a few spare sensors up front. Replacing a damaged sensor with a new one typically doesn't noticeably affect performance, so sensors are consistent across instances.</p>
+<h3 id="can-i-use-flexitac-commercially"><a class="anchor" href="#can-i-use-flexitac-commercially" aria-hidden="true" tabindex="-1">#</a>Can I use FlexiTac commercially?</h3>
+<p>The hardware is licensed <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0<span class="ext" aria-hidden="true">↗</span></a>, which doesn't cover commercial use. Software projects in the ecosystem have their own licenses; PyFlexiTac, for example, is MIT-licensed.</p>
+<h2 id="help"><a class="anchor" href="#help" aria-hidden="true" tabindex="-1">#</a>Still stuck?</h2>
+<p>Ask on the <a href="https://discord.gg/6gw887Vxms" target="_blank" rel="noopener">FlexiTac Discord<span class="ext" aria-hidden="true">↗</span></a>, or open an issue in the repository that owns the problem:</p>
+<div class="table-wrap"><table><thead><tr><th>Problem with</th><th>Open an issue in</th></tr></thead><tbody><tr><td>Sensor design, reading board, <code>32_16_fast.ino</code></td><td><a href="https://github.com/FlexiTac/FlexiTac/issues" target="_blank" rel="noopener">FlexiTac/FlexiTac<span class="ext" aria-hidden="true">↗</span></a></td></tr><tr><td><code>flexitac-*</code> commands, the Python API, <code>flexitac-flash</code> firmware</td><td><a href="https://github.com/WT-MM/PyFlexiTac/issues" target="_blank" rel="noopener">WT-MM/PyFlexiTac<span class="ext" aria-hidden="true">↗</span></a></td></tr><tr><td>These docs</td><td><a href="https://github.com/FlexiTac/FlexiTac.github.io/issues" target="_blank" rel="noopener">FlexiTac/FlexiTac.github.io<span class="ext" aria-hidden="true">↗</span></a></td></tr></tbody></table></div>
+<p>A report anyone can act on includes: sensor version or geometry, reading board (32 × 16 or 32 × 32), which firmware you flashed and its settings, OS and Python version, the exact command you ran, the full output, and a photo of the connections.</p>
+        </div>
+        <footer class="page-foot">
+          <div class="meta">
+            <a href="https://github.com/FlexiTac/FlexiTac.github.io/edit/main/doc/_src/pages/get-started/troubleshooting.md" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16v4Zm9-13 4 4"/></svg>Edit page</a>
+            <a href="https://github.com/FlexiTac/FlexiTac.github.io/issues/new?title=Docs:+Troubleshooting+&amp;+FAQ&amp;labels=documentation" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg>Report a problem</a>
+            <span class="updated">Last updated: <time datetime="2026-11-25">Nov 25, 2026</time></span>
+          </div>
+          <nav class="pager" aria-label="Pagination"><a class="prev" href="/doc/get-started/stream/" rel="prev"><span>Previous</span><strong>Stream sensor</strong></a><a class="next" href="/doc/get-started/next-steps/" rel="next"><span>Next</span><strong>Next steps</strong></a></nav>
+        </footer>
+      </main>
+      <aside class="toc" aria-label="On this page"><div class="toc-inner"><h2>On this page</h2><ul><li class="l2"><a href="#_top">Overview</a></li><li class="l2"><a href="#no-port">No serial port appears</a></li><li class="l2"><a href="#permission-denied">Permission denied</a></li><li class="l2"><a href="#flash-fails">Flashing fails</a></li><li class="l2"><a href="#no-frames">No frames, fps=0 or TimeoutError</a></li><li class="l2"><a href="#scrambled">The heatmap looks scrambled or shifted</a></li><li class="l2"><a href="#dead-rows">Some rows or columns never respond</a></li><li class="l2"><a href="#stuck">raw_max is stuck at 0 or 255</a></li><li class="l2"><a href="#noisy">Noisy or drifting at rest</a></li><li class="l2"><a href="#range">The signal saturates or barely changes</a></li><li class="l2"><a href="#low-fps">Low frame rate</a></li><li class="l2"><a href="#faq">FAQ</a></li><li class="l3"><a href="#how-long-do-fpc-and-pcb-orders-take">How long do FPC and PCB orders take?</a></li><li class="l3"><a href="#how-durable-is-the-sensor">How durable is the sensor?</a></li><li class="l3"><a href="#what-if-a-sensor-is-damaged-or-malfunctioning">What if a sensor is damaged or malfunctioning?</a></li><li class="l3"><a href="#can-i-use-flexitac-commercially">Can I use FlexiTac commercially?</a></li><li class="l2"><a href="#help">Still stuck?</a></li></ul></div></aside>
+    </div>
+    <footer class="site-foot">
+      <p>FlexiTac © 2026 Columbia University · Hardware licensed <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a> · <a href="https://github.com/FlexiTac/FlexiTac.github.io/tree/main/doc/_src" target="_blank" rel="noopener">Docs source on GitHub</a></p>
+    </footer>
+  </div>
+</div>
+<div class="scrim" data-scrim hidden></div>
+<dialog class="search" aria-label="Search the docs" data-search>
+  <div class="search-box">
+    <div class="search-field">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <input type="search" placeholder="Search the docs" aria-label="Search the docs" autocomplete="off" spellcheck="false" data-search-input>
+      <button type="button" class="search-close" data-search-close>Cancel</button>
+    </div>
+    <ul class="search-results" role="listbox" data-search-results></ul>
+    <p class="search-hint"><kbd>↑</kbd><kbd>↓</kbd> to navigate · <kbd>Enter</kbd> to open · <kbd>Esc</kbd> to close</p>
+  </div>
+</dialog>
+</body>
+</html>

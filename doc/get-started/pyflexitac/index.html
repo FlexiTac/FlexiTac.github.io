@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PyFlexiTac | FlexiTac Docs</title>
+<meta name="description" content="Use the sensor from Python with PyFlexiTac. Check the signal, read and record frames, run several sensors, flash from the command line, and read the wire protocol.">
+<link rel="canonical" href="https://flexitac.github.io/doc/get-started/pyflexitac/">
+<meta property="og:title" content="PyFlexiTac | FlexiTac Docs">
+<meta property="og:description" content="Use the sensor from Python with PyFlexiTac. Check the signal, read and record frames, run several sensors, flash from the command line, and read the wire protocol.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://flexitac.github.io/doc/get-started/pyflexitac/">
+<meta property="og:image" content="https://flexitac.github.io/static/images/flexitac.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/svg+xml" href="/static/images/favicon.svg">
+<link rel="apple-touch-icon" href="/static/images/apple-touch-icon.png">
+<script>try{var t=localStorage.getItem("ft-docs-theme");if(t==="light"||t==="dark")document.documentElement.dataset.theme=t}catch(e){}</script>
+<link rel="stylesheet" href="/doc/assets/docs.css?v=20261123">
+<script src="/doc/assets/docs.js?v=20261123" defer></script>
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<header class="header">
+  <button class="menu" type="button" aria-label="Menu" aria-expanded="false" aria-controls="sidebar" data-menu><span></span></button>
+  <a class="brand" href="/doc/"><svg class="logo" viewBox="0 0 40 40" aria-hidden="true"><rect x="2.5" y="2.5" width="35" height="35" rx="7" class="logo-plate"/><path d="M13 9v22M20 9v22M27 9v22" class="logo-sense"/><path d="M9 15.5h22M9 24.5h22" class="logo-drive"/><circle cx="20" cy="24.5" r="3.4" class="logo-dot"/></svg><span>FlexiTac</span><span class="brand-sub">Docs</span></a>
+  <button class="search-btn" type="button" data-search-open aria-label="Search">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+    <span>Search</span><kbd data-kbd>Ctrl K</kbd>
+  </button>
+  <nav class="hlinks" aria-label="Site">
+    <a class="txt" href="/">Home</a>
+    <a class="ico" href="https://github.com/FlexiTac/FlexiTac" target="_blank" rel="noopener" aria-label="GitHub"><svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0a8 8 0 0 0-2.53 15.59c.4.07.55-.17.55-.38v-1.33c-2.23.48-2.7-1.07-2.7-1.07-.36-.93-.89-1.17-.89-1.17-.73-.5.05-.49.05-.49.8.06 1.23.83 1.23.83.72 1.22 1.88.87 2.33.66.07-.52.28-.87.5-1.07-1.78-.2-3.65-.89-3.65-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.6 7.6 0 0 1 4 0c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.28.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48v2.2c0 .21.15.46.55.38A8 8 0 0 0 8 0Z"/></svg></a>
+    <a class="ico" href="https://discord.gg/6gw887Vxms" target="_blank" rel="noopener" aria-label="Discord"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M20.3 4.4A19.8 19.8 0 0 0 15.4 3l-.6 1.3a18.3 18.3 0 0 0-5.5 0L8.6 3a19.7 19.7 0 0 0-4.9 1.5C.6 9.1-.3 13.7.1 18.2a19.9 19.9 0 0 0 6 3l1.3-2a13 13 0 0 1-2-1l.5-.4a14.2 14.2 0 0 0 12.2 0l.5.4c-.6.4-1.3.7-2 1l1.3 2a19.8 19.8 0 0 0 6-3c.5-5.2-.9-9.8-3.6-13.8ZM8 15.4c-1.2 0-2.2-1.1-2.2-2.4s1-2.4 2.2-2.4 2.2 1.1 2.2 2.4-1 2.4-2.2 2.4Zm8 0c-1.2 0-2.2-1.1-2.2-2.4s1-2.4 2.2-2.4 2.2 1.1 2.2 2.4-1 2.4-2.2 2.4Z"/></svg></a>
+    <button class="ico theme" type="button" data-theme-toggle aria-label="Theme: auto" title="Theme: auto">
+      <svg class="t-auto" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 4a8 8 0 0 1 0 16Z" fill="currentColor"/></svg>
+      <svg class="t-light" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M2 12h2m16 0h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+      <svg class="t-dark" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z"/></svg>
+    </button>
+  </nav>
+</header>
+<div class="layout">
+  <nav class="sidebar" id="sidebar" aria-label="Documentation">
+    <div class="sidebar-inner"><details class="group" open><summary>Get Started</summary><ul><li><a href="/doc/">Introduction</a></li><li><a href="/doc/get-started/">Quickstart</a></li><li><a href="/doc/get-started/order-parts/">Order parts</a></li><li><a href="/doc/get-started/fabricate/">Fabricate a sensor</a></li><li><a href="/doc/get-started/stream/">Stream sensor</a></li><li><a href="/doc/get-started/troubleshooting/">Troubleshooting</a></li><li><a href="/doc/get-started/next-steps/">Next steps</a></li></ul></details><details class="group" open><summary>Learning with FlexiTac</summary><ul><li><a href="/doc/robot-learning/">On a real robot</a></li></ul></details><details class="group" open><summary>FlexiTac in Simulation</summary><ul><li><a href="/doc/simulation/">Isaac Sim &amp; VT-Refine</a></li></ul></details><details class="group" open><summary>Ecosystem</summary><ul><li><a href="/">FlexiTac homepage<span class="ext" aria-hidden="true">↗</span></a></li><li><a href="/flexitac-gen/">FlexiTac-Gen<span class="ext" aria-hidden="true">↗</span></a></li><li><a href="https://tna001-ai.github.io/LeFlexiTac/docs.html" target="_blank" rel="noopener">LeFlexiTac<span class="ext" aria-hidden="true">↗</span></a></li><li><a href="https://binghao-huang.github.io/Awesome-FlexiTac/" target="_blank" rel="noopener">Awesome FlexiTac<span class="ext" aria-hidden="true">↗</span></a></li><li><a href="/learn/">Interactive course<span class="ext" aria-hidden="true">↗</span></a></li></ul></details>
+      <div class="sidebar-foot"><a href="/">← FlexiTac home</a></div>
+    </div>
+  </nav>
+  <div class="main">
+    <details class="mtoc"><summary><span>On this page</span><span class="mtoc-cur">Overview</span></summary><ul><li class="l2"><a href="#_top">Overview</a></li><li class="l2"><a href="#install">Install</a></li><li class="l2"><a href="#stream">Check the signal</a></li><li class="l2"><a href="#permissions">Serial port permissions</a></li><li class="l2"><a href="#python">Read frames in Python</a></li><li class="l3"><a href="#record">Record a short dataset</a></li><li class="l3"><a href="#multiple">More than one sensor</a></li><li class="l2"><a href="#flexitac-flash">Flash from the command line</a></li><li class="l2"><a href="#rows">Match the reader to the firmware</a></li><li class="l2"><a href="#wire-protocol">Wire protocol</a></li></ul></details>
+    <div class="content-row">
+      <main id="content" class="content" tabindex="-1">
+        <div class="hero" id="_top">
+          <h1>PyFlexiTac</h1>
+          <p class="lead">Use the sensor from Python with PyFlexiTac. Check the signal, read and record frames, run several sensors, flash from the command line, and read the wire protocol.</p>
+        </div>
+        <div class="md">
+<p><a href="https://github.com/WT-MM/PyFlexiTac" target="_blank" rel="noopener">PyFlexiTac<span class="ext" aria-hidden="true">↗</span></a> is the <code>flexitac</code> Python package (MIT-licensed, maintained by Wesley Maa). <a href="/doc/get-started/stream/">Stream the sensor</a> already used it for the live heatmap. This page covers the rest. Its README is the source of truth for every option.</p>
+<h2 id="install"><a class="anchor" href="#install" aria-hidden="true" tabindex="-1">#</a>Install</h2>
+<p>PyFlexiTac needs <strong>Python 3.11 or newer</strong>.</p>
+<div class="tabs" data-sync="pkg"><div role="tablist"><button role="tab" id="tab-1-0" aria-controls="panel-1-0" aria-selected="true" tabindex="0" data-label="pip">pip</button><button role="tab" id="tab-1-1" aria-controls="panel-1-1" aria-selected="false" tabindex="-1" data-label="uv">uv</button><button role="tab" id="tab-1-2" aria-controls="panel-1-2" aria-selected="false" tabindex="-1" data-label="From source">From source</button></div><div role="tabpanel" id="panel-1-0" aria-labelledby="tab-1-0"><figure class="code terminal"><pre data-lang="bash"><code><span class="tk-k">python3</span> <span class="tk-f">-m</span> venv .venv &amp;&amp; source .venv/bin/activate
+<span class="tk-c"># [examples] adds matplotlib for the heatmap</span>
+<span class="tk-k">pip</span> install <span class="tk-s">"flexitac[examples]"</span></code></pre><button class="copy" type="button" aria-label="Copy code" data-copy><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg></button></figure></div><div role="tabpanel" id="panel-1-1" aria-labelledby="tab-1-1" hidden><figure class="code terminal"><pre data-lang="bash"><code><span class="tk-k">uv</span> venv &amp;&amp; source .venv/bin/activate
+<span class="tk-k">uv</span> pip install <span class="tk-s">"flexitac[examples]"</span></code></pre><button class="copy" type="button" aria-label="Copy code" data-copy><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg></button></figure></div><div role="tabpanel" id="panel-1-2" aria-labelledby="tab-1-2" hidden><figure class="code terminal"><pre data-lang="bash"><code><span class="tk-k">git</span> clone https://github.com/WT-MM/PyFlexiTac.git
+<span class="tk-k">cd</span> PyFlexiTac
+<span class="tk-k">uv</span> sync <span class="tk-f">--extra</span> examples     <span class="tk-c"># or: pip install -e ".[examples]"</span></code></pre><button class="copy" type="button" aria-label="Copy code" data-copy><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg></button></figure></div></div>
+<p>This installs four commands: <code>flexitac-find-port</code>, <code>flexitac-heatmap</code>, <code>flexitac-stream</code> and <code>flexitac-flash</code>.</p>
+<h2 id="stream"><a class="anchor" href="#stream" aria-hidden="true" tabindex="-1">#</a>Check the signal</h2>
+<p><code>flexitac-stream</code> prints the frame rate and signal statistics. It tells you whether the board, the firmware and the reader agree.</p>
+<figure class="code terminal"><pre data-lang="bash"><code><span class="tk-k">flexitac-stream</span> <span class="tk-f">--port</span> /dev/ttyUSB0 <span class="tk-f">--frames</span> 3000</code></pre><button class="copy" type="button" aria-label="Copy code" data-copy><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg></button></figure>
+<figure class="code editor has-title"><figcaption><span class="dots" aria-hidden="true"></span><span class="title">Expected output</span></figcaption><pre data-lang="text"><code>frame=    10 fps=  85.3 raw_max=104 norm_max=0.000
+frame=    20 fps=  87.1 raw_max=109 norm_max=0.123</code></pre><button class="copy" type="button" aria-label="Copy code" data-copy><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg></button></figure>
+<aside class="aside caution" aria-label="Don&#x27;t touch the sensor for the first second"><p class="aside-title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 2 20h20L12 3Z"/><path d="M12 10v4M12 17h.01"/></svg>Don't touch the sensor for the first second</p><div class="aside-body"><p>On its first read, PyFlexiTac <strong>calibrates</strong>: it collects 30 frames and stores each taxel's median as the baseline. If you press the sensor during calibration, that pressure becomes part of the "zero."</p></div></aside>
+<div class="table-wrap"><table><thead><tr><th>Field</th><th>Healthy</th><th>If not</th></tr></thead><tbody><tr><td><code>fps</code></td><td>Settles near <strong>100+</strong> for a 12 × 32 sensor</td><td><code>0</code> or <code>TimeoutError</code>: the board isn't sending FlexiTac frames at this baud rate. See <a href="/doc/get-started/troubleshooting/#no-frames">No frames</a>. About half the expected rate: the reader expects more rows than the firmware sends. See <a href="/doc/get-started/troubleshooting/#scrambled">Scrambled heatmap</a>.</td></tr><tr><td><code>raw_max</code></td><td>Between 0 and 255, and <strong>changes when you press</strong></td><td>Stuck at 0 or 255: a wiring or connector problem, not a flashing problem.</td></tr><tr><td><code>norm_max</code></td><td>Near 0 at rest, rises toward <strong>1.0</strong> on contact</td><td>Never rises: check the Velostat and the connectors.</td></tr></tbody></table></div>
+<p>If some rows seem dead, add <code>--per-row</code>. It prints each row's mean baseline once, then each row's <code>raw_max</code> every 20 frames. Press along a column and check that every row responds.</p>
+<h2 id="permissions"><a class="anchor" href="#permissions" aria-hidden="true" tabindex="-1">#</a>Serial port permissions</h2>
+<div class="tabs" data-sync="os"><div role="tablist"><button role="tab" id="tab-2-0" aria-controls="panel-2-0" aria-selected="true" tabindex="0" data-label="Linux">Linux</button><button role="tab" id="tab-2-1" aria-controls="panel-2-1" aria-selected="false" tabindex="-1" data-label="macOS">macOS</button></div><div role="tabpanel" id="panel-2-0" aria-labelledby="tab-2-0"><p>Add yourself to the <code>dialout</code> group once, then <strong>log out and back in</strong>:</p>
+<figure class="code terminal"><pre data-lang="bash"><code><span class="tk-k">sudo</span> usermod <span class="tk-f">-aG</span> dialout <span class="tk-s">"$USER"</span></code></pre><button class="copy" type="button" aria-label="Copy code" data-copy><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg></button></figure>
+<p>As a quick, temporary workaround (until the next replug), you can loosen permissions on the device instead:</p>
+<figure class="code terminal"><pre data-lang="bash"><code><span class="tk-k">sudo</span> chmod a+rw /dev/ttyUSB0</code></pre><button class="copy" type="button" aria-label="Copy code" data-copy><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg></button></figure></div><div role="tabpanel" id="panel-2-1" aria-labelledby="tab-2-1" hidden><p>Serial permissions are usually handled automatically. If you still get <code>Permission denied</code>:</p>
+<figure class="code terminal"><pre data-lang="bash"><code><span class="tk-k">sudo</span> chmod a+rw /dev/tty.usbserial-*</code></pre><button class="copy" type="button" aria-label="Copy code" data-copy><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg></button></figure></div></div>
+<h2 id="python"><a class="anchor" href="#python" aria-hidden="true" tabindex="-1">#</a>Read frames in Python</h2>
+<figure class="code editor has-title"><figcaption><span class="dots" aria-hidden="true"></span><span class="title">hello_flexitac.py</span></figcaption><pre data-lang="python"><code><span class="tk-k">from</span> flexitac <span class="tk-k">import</span> FlexiTacSensor
+
+<span class="tk-c"># rows=12, cols=32 by default; the first read calibrates</span>
+<span class="tk-k">with</span> FlexiTacSensor(<span class="tk-s">"/dev/ttyUSB0"</span>) <span class="tk-k">as</span> sensor:
+    <span class="tk-k">for</span> frame <span class="tk-k">in</span> sensor:
+        <span class="tk-k">print</span>(frame.seq, frame.raw.max(), frame.normalized.max())</code></pre><button class="copy" type="button" aria-label="Copy code" data-copy><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg></button></figure>
+<p>Each <code>frame</code> is a <code>FlexiTacFrame</code>:</p>
+<div class="table-wrap"><table><thead><tr><th>Field</th><th>Type</th><th>Meaning</th></tr></thead><tbody><tr><td><code>seq</code></td><td><code>int</code></td><td>Frame counter since the sensor was opened</td></tr><tr><td><code>timestamp_s</code></td><td><code>float</code></td><td>Host time when the frame was read (<code>time.time()</code>)</td></tr><tr><td><code>raw</code></td><td><code>uint8[rows, cols]</code></td><td>Values exactly as sent by the firmware</td></tr><tr><td><code>normalized</code></td><td><code>float32[rows, cols]</code></td><td>Baseline-subtracted, thresholded and scaled to 0–1</td></tr></tbody></table></div>
+<p>Useful methods and options:</p>
+<ul><li><code>sensor.read()</code> returns the next frame in order. Use it when you're <strong>recording</strong> data and don't want to skip any.</li><li><code>sensor.read_latest()</code> discards queued frames and returns the newest one. Use it for <strong>live control or visualization</strong>, so you never lag behind the sensor.</li><li><code>sensor.calibrate()</code> re-captures the baseline, for example after mounting the sensor or changing the load at rest.</li><li><code>FlexiTacSensor(port, rows=…, cols=…, baud=…, init_frames=30, threshold=25.0, noise_scale=30.0, baseline=None)</code>. Pass <code>baseline=</code> with a saved array, or a scalar such as <code>20.0</code>, to skip startup calibration.</li></ul>
+<aside class="aside caution" aria-label="`normalized` is scaled per frame"><p class="aside-title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 2 20h20L12 3Z"/><path d="M12 10v4M12 17h.01"/></svg><code>normalized</code> is scaled per frame</p><div class="aside-body"><p>When contact is detected, <code>normalized</code> divides by that frame's own peak, so the strongest taxel is always 1.0. That's ideal for visualization, but it hides absolute force. For learning or force estimation, record <code>raw</code> together with the baseline (<code>sensor.baseline</code>) and normalize consistently yourself.</p></div></aside>
+<h3 id="record"><a class="anchor" href="#record" aria-hidden="true" tabindex="-1">#</a>Record a short dataset</h3>
+<figure class="code editor has-title"><figcaption><span class="dots" aria-hidden="true"></span><span class="title">record.py</span></figcaption><pre data-lang="python"><code><span class="tk-k">import</span> numpy <span class="tk-k">as</span> np
+<span class="tk-k">from</span> flexitac <span class="tk-k">import</span> FlexiTacSensor
+
+<span class="tk-k">with</span> FlexiTacSensor(<span class="tk-s">"/dev/ttyUSB0"</span>) <span class="tk-k">as</span> sensor:
+    sensor.calibrate()          <span class="tk-c"># don't touch the sensor here</span>
+    frames, stamps = [], []
+    <span class="tk-k">for</span> _ <span class="tk-k">in</span> range(<span class="tk-n">1000</span>):       <span class="tk-c"># about 10 s at ~100 fps</span>
+        f = sensor.read()       <span class="tk-c"># in order, no dropped frames</span>
+        frames.append(f.raw)
+        stamps.append(f.timestamp_s)
+
+np.savez_compressed(<span class="tk-s">"tactile.npz"</span>, raw=np.stack(frames),
+                    t=np.array(stamps), baseline=sensor.baseline)</code></pre><button class="copy" type="button" aria-label="Copy code" data-copy><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg></button></figure>
+<h3 id="multiple"><a class="anchor" href="#multiple" aria-hidden="true" tabindex="-1">#</a>More than one sensor</h3>
+<p>Each reading board is its own USB serial device. For a two-finger gripper, open one <code>FlexiTacSensor</code> per port (find each with <code>flexitac-find-port</code>) and read them in parallel threads, or call <code>read_latest()</code> on each in your control loop.</p>
+<h2 id="flexitac-flash"><a class="anchor" href="#flexitac-flash" aria-hidden="true" tabindex="-1">#</a>Flash from the command line</h2>
+<p><code>flexitac-flash</code> puts the same sketch on the board as the Arduino IDE path, without opening the IDE, and can generate it for a custom sensor size.</p>
+<ol class="steps"><li id="install-arduino-cli-and-the-avr-core"><p class="step-title">Install arduino-cli and the AVR core</p><p><code>flexitac-flash</code> compiles and uploads with <a href="https://arduino.github.io/arduino-cli/latest/installation/" target="_blank" rel="noopener"><code>arduino-cli</code><span class="ext" aria-hidden="true">↗</span></a>.</p>
+<div class="tabs" data-sync="os"><div role="tablist"><button role="tab" id="tab-3-0" aria-controls="panel-3-0" aria-selected="true" tabindex="0" data-label="macOS">macOS</button><button role="tab" id="tab-3-1" aria-controls="panel-3-1" aria-selected="false" tabindex="-1" data-label="Linux">Linux</button></div><div role="tabpanel" id="panel-3-0" aria-labelledby="tab-3-0"><figure class="code terminal"><pre data-lang="bash"><code><span class="tk-k">brew</span> install arduino-cli
+<span class="tk-k">arduino-cli</span> core update-index
+<span class="tk-k">arduino-cli</span> core install arduino:avr</code></pre><button class="copy" type="button" aria-label="Copy code" data-copy><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg></button></figure></div><div role="tabpanel" id="panel-3-1" aria-labelledby="tab-3-1" hidden><figure class="code terminal"><pre data-lang="bash"><code><span class="tk-k">curl</span> <span class="tk-f">-fsSL</span> https://raw.githubusercontent.com/arduino/arduino-cli/master/install.sh | sh
+<span class="tk-c"># the script installs into ./bin — move it onto your PATH, e.g.:</span>
+<span class="tk-k">sudo</span> mv bin/arduino-cli /usr/local/bin/
+<span class="tk-k">arduino-cli</span> core update-index
+<span class="tk-k">arduino-cli</span> core install arduino:avr</code></pre><button class="copy" type="button" aria-label="Copy code" data-copy><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg></button></figure></div></div></li><li id="plug-in-the-board-and-flash"><p class="step-title">Plug in the board and flash</p><p>With exactly one Arduino connected, <code>flexitac-flash</code> finds the port and the board type on its own:</p>
+<figure class="code terminal"><pre data-lang="bash"><code><span class="tk-k">flexitac-flash</span></code></pre><button class="copy" type="button" aria-label="Copy code" data-copy><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg></button></figure>
+<p>The defaults are for the standard V2 sensor: <code>--rows 12 --cols 32 --baud 2000000 --mux-offset 4</code>, meaning 12 rows wired to multiplexer channels 4–15. For a custom sensor, pass its geometry:</p>
+<figure class="code terminal"><pre data-lang="bash"><code><span class="tk-k">flexitac-flash</span> <span class="tk-f">--rows</span> 16 <span class="tk-f">--cols</span> 32 <span class="tk-f">--mux-offset</span> 0</code></pre><button class="copy" type="button" aria-label="Copy code" data-copy><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg></button></figure></li></ol>
+<aside class="aside caution" aria-label="Board not detected?"><p class="aside-title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 2 20h20L12 3Z"/><path d="M12 10v4M12 17h.01"/></svg>Board not detected?</p><div class="aside-body"><p>Many Arduino Nano clones (CH340 USB chip) don't report a board type, so auto-detection fails with <code>no Arduino board detected</code>. Pass the port and board explicitly:</p>
+<figure class="code terminal"><pre data-lang="bash"><code><span class="tk-k">flexitac-flash</span> <span class="tk-f">--port</span> /dev/ttyUSB0 <span class="tk-f">--fqbn</span> arduino:avr:nano
+
+<span class="tk-c"># older Nanos and many clones use the old bootloader:</span>
+<span class="tk-k">flexitac-flash</span> <span class="tk-f">--port</span> /dev/ttyUSB0 \
+    <span class="tk-f">--fqbn</span> arduino:avr:nano:cpu=atmega328old</code></pre><button class="copy" type="button" aria-label="Copy code" data-copy><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg></button></figure></div></aside>
+<h2 id="rows"><a class="anchor" href="#rows" aria-hidden="true" tabindex="-1">#</a>Match the reader to the firmware</h2>
+<p><strong>The reader must use the same rows and columns as the firmware.</strong> If they don't match, the reader splits the byte stream in the wrong places and the heatmap comes out cut off or scrambled (<a href="/doc/get-started/troubleshooting/#scrambled">what each mismatch looks like</a>).</p>
+<div class="table-wrap"><table><thead><tr><th>Firmware</th><th>Frame</th><th>Read with</th></tr></thead><tbody><tr><td>PyFlexiTac's sketch, from the Arduino IDE or <code>flexitac-flash</code> (the default)</td><td>12 × 32</td><td>The defaults</td></tr><tr><td>A custom size: <code>flexitac-flash --rows R --cols C --mux-offset M</code></td><td>R × C</td><td><code>--rows R --cols C</code></td></tr><tr><td><code>32_16_fast.ino</code> from the <a href="https://github.com/FlexiTac/FlexiTac" target="_blank" rel="noopener">hardware repo<span class="ext" aria-hidden="true">↗</span></a></td><td>16 × 32; rows 0–3 stay near zero on a V2 sensor</td><td><code>--rows 16 --cols 32</code></td></tr></tbody></table></div>
+<p>To build a custom size from the Arduino IDE instead, change <code>ROW_COUNT</code>, <code>COLUMN_COUNT</code> and <code>MUX_CHANNEL_OFFSET</code> at the top of the sketch before uploading. Custom sensors must fit the 32 × 16 board (up to 16 rows and 32 columns); the 32 × 32 board's firmware isn't covered by these docs yet. The hardware repo also includes <code>fast_32_16.py</code>, a standalone OpenCV viewer for <code>32_16_fast.ino</code>.</p>
+<h2 id="wire-protocol"><a class="anchor" href="#wire-protocol" aria-hidden="true" tabindex="-1">#</a>Wire protocol</h2>
+<p>If you're writing your own reader, for a robot middleware, a microcontroller or another language, here is the whole protocol. For every frame, the firmware sends a two-byte start marker, then selects each <strong>row</strong> through a 16-channel analog multiplexer, steps through each <strong>column</strong> with shift registers, and reads each crossing with the Nano's 10-bit ADC, scaled to one byte.</p>
+<div class="table-wrap"><table><thead><tr><th>Field</th><th>Value</th></tr></thead><tbody><tr><td>Transport</td><td>USB serial, <strong>2,000,000 baud</strong>, 8N1</td></tr><tr><td>Start marker</td><td>2 bytes: <code>0xAA 0x55</code></td></tr><tr><td>Payload</td><td><code>rows × cols</code> bytes, unsigned 8-bit, row-major (row 0 first, columns 0…cols−1)</td></tr><tr><td>Value</td><td>ADC reading ÷ 4 (10-bit → 8-bit). Higher values mean more pressure.</td></tr><tr><td>Frame rate</td><td>Continuous, with no text formatting; about 100+ fps for 12 × 32</td></tr></tbody></table></div>
+<p>A minimal reader with <code>pyserial</code> and NumPy:</p>
+<figure class="code editor has-title"><figcaption><span class="dots" aria-hidden="true"></span><span class="title">read_raw.py</span></figcaption><pre data-lang="python"><code><span class="tk-k">import</span> numpy <span class="tk-k">as</span> np
+<span class="tk-k">import</span> serial
+
+ROWS, COLS = <span class="tk-n">12</span>, <span class="tk-n">32</span>                 <span class="tk-c"># must match the firmware you flashed</span>
+MARKER, N = b<span class="tk-s">"\xaa\x55"</span>, ROWS * COLS
+
+<span class="tk-k">with</span> serial.Serial(<span class="tk-s">"/dev/ttyUSB0"</span>, <span class="tk-n">2_000_000</span>, timeout=<span class="tk-n">0.05</span>) <span class="tk-k">as</span> ser:
+    buf = bytearray()
+    <span class="tk-k">while</span> <span class="tk-k">True</span>:
+        buf += ser.read(<span class="tk-n">4096</span>)
+        i = buf.find(MARKER)
+        <span class="tk-k">if</span> i &lt; <span class="tk-n">0</span>:
+            del buf[:-<span class="tk-n">1</span>]            <span class="tk-c"># keep a possible half marker</span>
+            continue
+        <span class="tk-k">if</span> len(buf) &lt; i + <span class="tk-n">2</span> + N:
+            continue                <span class="tk-c"># wait for the rest of the frame</span>
+        start = i + <span class="tk-n">2</span>
+        frame = np.frombuffer(buf[start : start + N], dtype=np.uint8)
+        frame = frame.reshape(ROWS, COLS)
+        del buf[: start + N]
+        <span class="tk-k">print</span>(frame.max())</code></pre><button class="copy" type="button" aria-label="Copy code" data-copy><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg></button></figure>
+<aside class="aside note" aria-label="Note"><p class="aside-title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg>Note</p><div class="aside-body"><p>Readings are raw. Each taxel has its own resting level, so subtract a <strong>baseline</strong>, such as the per-taxel median of the first ~30 frames taken while nothing touches the sensor, before you threshold or normalize. <code>FlexiTacSensor</code> does this for you.</p></div></aside>
+        </div>
+        <footer class="page-foot">
+          <div class="meta">
+            <a href="https://github.com/FlexiTac/FlexiTac.github.io/edit/main/doc/_src/pages/get-started/pyflexitac.md" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16v4Zm9-13 4 4"/></svg>Edit page</a>
+            <a href="https://github.com/FlexiTac/FlexiTac.github.io/issues/new?title=Docs:+PyFlexiTac&amp;labels=documentation" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg>Report a problem</a>
+            <span class="updated">Last updated: <time datetime="2026-11-25">Nov 25, 2026</time></span>
+          </div>
+          <nav class="pager" aria-label="Pagination"><span></span></nav>
+        </footer>
+      </main>
+      <aside class="toc" aria-label="On this page"><div class="toc-inner"><h2>On this page</h2><ul><li class="l2"><a href="#_top">Overview</a></li><li class="l2"><a href="#install">Install</a></li><li class="l2"><a href="#stream">Check the signal</a></li><li class="l2"><a href="#permissions">Serial port permissions</a></li><li class="l2"><a href="#python">Read frames in Python</a></li><li class="l3"><a href="#record">Record a short dataset</a></li><li class="l3"><a href="#multiple">More than one sensor</a></li><li class="l2"><a href="#flexitac-flash">Flash from the command line</a></li><li class="l2"><a href="#rows">Match the reader to the firmware</a></li><li class="l2"><a href="#wire-protocol">Wire protocol</a></li></ul></div></aside>
+    </div>
+    <footer class="site-foot">
+      <p>FlexiTac © 2026 Columbia University · Hardware licensed <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a> · <a href="https://github.com/FlexiTac/FlexiTac.github.io/tree/main/doc/_src" target="_blank" rel="noopener">Docs source on GitHub</a></p>
+    </footer>
+  </div>
+</div>
+<div class="scrim" data-scrim hidden></div>
+<dialog class="search" aria-label="Search the docs" data-search>
+  <div class="search-box">
+    <div class="search-field">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <input type="search" placeholder="Search the docs" aria-label="Search the docs" autocomplete="off" spellcheck="false" data-search-input>
+      <button type="button" class="search-close" data-search-close>Cancel</button>
+    </div>
+    <ul class="search-results" role="listbox" data-search-results></ul>
+    <p class="search-hint"><kbd>↑</kbd><kbd>↓</kbd> to navigate · <kbd>Enter</kbd> to open · <kbd>Esc</kbd> to close</p>
+  </div>
+</dialog>
+</body>
+</html>

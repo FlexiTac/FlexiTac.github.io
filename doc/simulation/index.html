@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tactile simulation | FlexiTac Docs</title>
+<meta name="description" content="Simulate FlexiTac pads in NVIDIA Isaac Sim, then replay tactile trajectories and record visuo-tactile demonstrations in the browser. Plus VT-Refine, the sim fine-tuning research behind it.">
+<link rel="canonical" href="https://flexitac.github.io/doc/simulation/">
+<meta property="og:title" content="Tactile simulation | FlexiTac Docs">
+<meta property="og:description" content="Simulate FlexiTac pads in NVIDIA Isaac Sim, then replay tactile trajectories and record visuo-tactile demonstrations in the browser. Plus VT-Refine, the sim fine-tuning research behind it.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://flexitac.github.io/doc/simulation/">
+<meta property="og:image" content="https://flexitac.github.io/static/images/flexitac.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/svg+xml" href="/static/images/favicon.svg">
+<link rel="apple-touch-icon" href="/static/images/apple-touch-icon.png">
+<script>try{var t=localStorage.getItem("ft-docs-theme");if(t==="light"||t==="dark")document.documentElement.dataset.theme=t}catch(e){}</script>
+<link rel="stylesheet" href="/doc/assets/docs.css?v=20261123">
+<script src="/doc/assets/docs.js?v=20261123" defer></script>
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<header class="header">
+  <button class="menu" type="button" aria-label="Menu" aria-expanded="false" aria-controls="sidebar" data-menu><span></span></button>
+  <a class="brand" href="/doc/"><svg class="logo" viewBox="0 0 40 40" aria-hidden="true"><rect x="2.5" y="2.5" width="35" height="35" rx="7" class="logo-plate"/><path d="M13 9v22M20 9v22M27 9v22" class="logo-sense"/><path d="M9 15.5h22M9 24.5h22" class="logo-drive"/><circle cx="20" cy="24.5" r="3.4" class="logo-dot"/></svg><span>FlexiTac</span><span class="brand-sub">Docs</span></a>
+  <button class="search-btn" type="button" data-search-open aria-label="Search">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+    <span>Search</span><kbd data-kbd>Ctrl K</kbd>
+  </button>
+  <nav class="hlinks" aria-label="Site">
+    <a class="txt" href="/">Home</a>
+    <a class="ico" href="https://github.com/FlexiTac/FlexiTac" target="_blank" rel="noopener" aria-label="GitHub"><svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0a8 8 0 0 0-2.53 15.59c.4.07.55-.17.55-.38v-1.33c-2.23.48-2.7-1.07-2.7-1.07-.36-.93-.89-1.17-.89-1.17-.73-.5.05-.49.05-.49.8.06 1.23.83 1.23.83.72 1.22 1.88.87 2.33.66.07-.52.28-.87.5-1.07-1.78-.2-3.65-.89-3.65-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.6 7.6 0 0 1 4 0c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.28.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48v2.2c0 .21.15.46.55.38A8 8 0 0 0 8 0Z"/></svg></a>
+    <a class="ico" href="https://discord.gg/6gw887Vxms" target="_blank" rel="noopener" aria-label="Discord"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M20.3 4.4A19.8 19.8 0 0 0 15.4 3l-.6 1.3a18.3 18.3 0 0 0-5.5 0L8.6 3a19.7 19.7 0 0 0-4.9 1.5C.6 9.1-.3 13.7.1 18.2a19.9 19.9 0 0 0 6 3l1.3-2a13 13 0 0 1-2-1l.5-.4a14.2 14.2 0 0 0 12.2 0l.5.4c-.6.4-1.3.7-2 1l1.3 2a19.8 19.8 0 0 0 6-3c.5-5.2-.9-9.8-3.6-13.8ZM8 15.4c-1.2 0-2.2-1.1-2.2-2.4s1-2.4 2.2-2.4 2.2 1.1 2.2 2.4-1 2.4-2.2 2.4Zm8 0c-1.2 0-2.2-1.1-2.2-2.4s1-2.4 2.2-2.4 2.2 1.1 2.2 2.4-1 2.4-2.2 2.4Z"/></svg></a>
+    <button class="ico theme" type="button" data-theme-toggle aria-label="Theme: auto" title="Theme: auto">
+      <svg class="t-auto" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 4a8 8 0 0 1 0 16Z" fill="currentColor"/></svg>
+      <svg class="t-light" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M2 12h2m16 0h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+      <svg class="t-dark" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z"/></svg>
+    </button>
+  </nav>
+</header>
+<div class="layout">
+  <nav class="sidebar" id="sidebar" aria-label="Documentation">
+    <div class="sidebar-inner"><details class="group" open><summary>Get Started</summary><ul><li><a href="/doc/">Introduction</a></li><li><a href="/doc/get-started/">Quickstart</a></li><li><a href="/doc/get-started/order-parts/">Order parts</a></li><li><a href="/doc/get-started/fabricate/">Fabricate a sensor</a></li><li><a href="/doc/get-started/stream/">Stream sensor</a></li><li><a href="/doc/get-started/troubleshooting/">Troubleshooting</a></li><li><a href="/doc/get-started/next-steps/">Next steps</a></li></ul></details><details class="group" open><summary>Learning with FlexiTac</summary><ul><li><a href="/doc/robot-learning/">On a real robot</a></li></ul></details><details class="group" open><summary>FlexiTac in Simulation</summary><ul><li><a href="/doc/simulation/" aria-current="page">Isaac Sim &amp; VT-Refine</a></li></ul></details><details class="group" open><summary>Ecosystem</summary><ul><li><a href="/">FlexiTac homepage<span class="ext" aria-hidden="true">↗</span></a></li><li><a href="/flexitac-gen/">FlexiTac-Gen<span class="ext" aria-hidden="true">↗</span></a></li><li><a href="https://tna001-ai.github.io/LeFlexiTac/docs.html" target="_blank" rel="noopener">LeFlexiTac<span class="ext" aria-hidden="true">↗</span></a></li><li><a href="https://binghao-huang.github.io/Awesome-FlexiTac/" target="_blank" rel="noopener">Awesome FlexiTac<span class="ext" aria-hidden="true">↗</span></a></li><li><a href="/learn/">Interactive course<span class="ext" aria-hidden="true">↗</span></a></li></ul></details>
+      <div class="sidebar-foot"><a href="/">← FlexiTac home</a></div>
+    </div>
+  </nav>
+  <div class="main">
+    <details class="mtoc"><summary><span>On this page</span><span class="mtoc-cur">Overview</span></summary><ul><li class="l2"><a href="#_top">Overview</a></li><li class="l2"><a href="#isaac-sim">Build the Isaac Sim simulation</a></li><li class="l2"><a href="#replay">Replay a trajectory with touch</a></li><li class="l2"><a href="#web">Teleoperate and record in the browser</a></li><li class="l2"><a href="#sensor-model">How the simulated pad works</a></li><li class="l2"><a href="#vt-refine">VT-Refine</a></li></ul></details>
+    <div class="content-row">
+      <main id="content" class="content" tabindex="-1">
+        <div class="hero" id="_top">
+          <h1>Tactile simulation</h1>
+          <p class="lead">Simulate FlexiTac pads in NVIDIA Isaac Sim, then replay tactile trajectories and record visuo-tactile demonstrations in the browser. Plus VT-Refine, the sim fine-tuning research behind it.</p>
+        </div>
+        <div class="md">
+<p>The simulation lets you work with touch without any hardware. Simulated pads give the same 12 × 32 taxel grid as a FlexiTac-V2 sensor, on the fingers of a robot in NVIDIA Isaac Sim. The current release is the <strong>FlexiTac tactile simulation in Isaac Sim</strong>, which this page shows you how to build and run. It uses the same bimanual plug–socket setup and the same pad layout as <strong>VT-Refine</strong>, the research on fine-tuning visuo-tactile policies in simulation, whose own code runs on the older Isaac Gym.</p>
+<div class="table-wrap"><table><thead><tr><th></th><th>Isaac Sim simulation (current release)</th><th>VT-Refine (research code)</th></tr></thead><tbody><tr><td><strong>Simulator</strong></td><td>Isaac Sim 5.1.0 with Isaac Lab</td><td>Isaac Gym Preview (TacSL build), in Docker</td></tr><tr><td><strong>Robot and task</strong></td><td>Bimanual ALOHA robot, plug–socket insertion</td><td>ALOHA-style tabletop arms and a two-arm Kinova robot, plug–socket insertion</td></tr><tr><td><strong>Simulated pads</strong></td><td>12 × 32 taxels at 2 mm on all four fingers</td><td>12 × 32 at 2 mm on the ALOHA setup</td></tr><tr><td><strong>What you do with it</strong></td><td>Replay trajectories with live tactile heatmaps; teleoperate in the browser and record demonstrations</td><td>Pre-train a visuo-tactile policy, then fine-tune it with reinforcement learning</td></tr><tr><td><strong>Code</strong></td><td><a href="https://github.com/binghao-huang/FlexiTac-IsaacSim-Simulation" target="_blank" rel="noopener">FlexiTac-IsaacSim-Simulation<span class="ext" aria-hidden="true">↗</span></a></td><td><a href="https://github.com/NVlabs/vt-refine" target="_blank" rel="noopener">NVlabs/vt-refine<span class="ext" aria-hidden="true">↗</span></a></td></tr></tbody></table></div>
+<h2 id="isaac-sim"><a class="anchor" href="#isaac-sim" aria-hidden="true" tabindex="-1">#</a>Build the Isaac Sim simulation</h2>
+<p>The repository is an Isaac Lab tree with two additions: a tactile sensor for FlexiTac pads, and an ALOHA environment whose four fingers each carry a simulated pad.</p>
+<p><strong>You need:</strong> a Linux x86_64 computer with an NVIDIA GPU that meets <a href="https://docs.isaacsim.omniverse.nvidia.com/5.1.0/installation/requirements.html" target="_blank" rel="noopener">Isaac Sim 5.1.0's requirements<span class="ext" aria-hidden="true">↗</span></a>, plus conda and git. The repository is pinned to Isaac Sim 5.1.0. The trajectory viewer opens a desktop window; the browser interface can run headless. No FlexiTac hardware is needed.</p>
+<ol class="steps"><li id="install-isaac-sim-510"><p class="step-title">Install Isaac Sim 5.1.0</p><p>Skip this if Isaac Sim 5.1.0 is already installed. Download the <a href="https://downloads.isaacsim.nvidia.com/isaac-sim-standalone-5.1.0-linux-x86_64.zip" target="_blank" rel="noopener">Isaac Sim 5.1.0 standalone package for Linux<span class="ext" aria-hidden="true">↗</span></a>, extract it into an <code>isaac-sim</code> folder, and run from there:</p>
+<figure class="code terminal has-title"><figcaption><span class="dots" aria-hidden="true"></span><span class="title">isaac-sim/</span></figcaption><pre data-lang="bash"><code>./post_install.sh
+./isaac-sim.selector.sh</code></pre><button class="copy" type="button" aria-label="Copy code" data-copy><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg></button></figure></li><li id="clone-the-repository"><p class="step-title">Clone the repository</p><figure class="code terminal"><pre data-lang="bash"><code><span class="tk-k">git</span> clone https://github.com/binghao-huang/FlexiTac-IsaacSim-Simulation.git
+<span class="tk-k">cd</span> FlexiTac-IsaacSim-Simulation</code></pre><button class="copy" type="button" aria-label="Copy code" data-copy><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg></button></figure></li><li id="create-the-environment-and-install-isaac-lab"><p class="step-title">Create the environment and install Isaac Lab</p><p>Python 3.11, the Isaac Sim pip packages and a CUDA 12.8 build of PyTorch, then the Isaac Lab extensions in this repository:</p>
+<figure class="code terminal has-title"><figcaption><span class="dots" aria-hidden="true"></span><span class="title">FlexiTac-IsaacSim-Simulation/</span></figcaption><pre data-lang="bash"><code><span class="tk-k">conda</span> create <span class="tk-f">-n</span> tactile_isaaclab python=3.11
+<span class="tk-k">conda</span> activate tactile_isaaclab
+<span class="tk-k">pip</span> install <span class="tk-s">"isaacsim[all,extscache]==5.1.0"</span> <span class="tk-f">--extra-index-url</span> https://pypi.nvidia.com
+<span class="tk-k">pip</span> install <span class="tk-f">-U</span> torch==2.7.0 torchvision==0.22.0 <span class="tk-f">--index-url</span> https://download.pytorch.org/whl/cu128
+isaacsim                  <span class="tk-c"># check that Isaac Sim starts, then close it</span>
+./isaaclab.sh <span class="tk-f">--install</span>   <span class="tk-c"># from the repository root</span></code></pre><button class="copy" type="button" aria-label="Copy code" data-copy><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg></button></figure></li><li id="install-the-viewer-dependencies"><p class="step-title">Install the viewer dependencies</p><figure class="code terminal"><pre data-lang="bash"><code><span class="tk-k">pip</span> uninstall <span class="tk-f">-y</span> opencv-python-headless
+<span class="tk-k">pip</span> install opencv-python==4.11.0.86
+<span class="tk-k">pip</span> install viser</code></pre><button class="copy" type="button" aria-label="Copy code" data-copy><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg></button></figure></li></ol>
+<p>These steps follow the repository's <a href="https://github.com/binghao-huang/FlexiTac-IsaacSim-Simulation#%EF%B8%8F-installation" target="_blank" rel="noopener">installation guide<span class="ext" aria-hidden="true">↗</span></a> as of April 2026. If the two differ, the README is the source of truth.</p>
+<h2 id="replay"><a class="anchor" href="#replay" aria-hidden="true" tabindex="-1">#</a>Replay a trajectory with touch</h2>
+<p>Replay an episode from the bundled sample dataset. The ALOHA robot repeats the recorded motion, and a separate window shows the four finger pads as live tactile heatmaps.</p>
+<figure class="code terminal has-title"><figcaption><span class="dots" aria-hidden="true"></span><span class="title">FlexiTac-IsaacSim-Simulation/</span></figcaption><pre data-lang="bash"><code>./isaaclab.sh <span class="tk-f">-p</span> Isaacsim_tactile_env/reply_with_tactile.py \
+    <span class="tk-f">--dataset_npz</span> Isaacsim_tactile_env/data/dataset_train.npz \
+    <span class="tk-f">--normalization_pth</span> Isaacsim_tactile_env/data/dataset_normalizer.npz \
+    <span class="tk-f">--episode_idx</span> 3 \
+    <span class="tk-f">--replay_key</span> joint_states \
+    <span class="tk-f">--steps_per_frame</span> 3</code></pre><button class="copy" type="button" aria-label="Copy code" data-copy><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg></button></figure>
+<p>The script really is named <code>reply_with_tactile.py</code>. Change <code>--episode_idx</code> to replay another episode.</p>
+<h2 id="web"><a class="anchor" href="#web" aria-hidden="true" tabindex="-1">#</a>Teleoperate and record in the browser</h2>
+<p>Start the web interface, then open <strong>http://localhost:8080</strong>:</p>
+<figure class="code terminal has-title"><figcaption><span class="dots" aria-hidden="true"></span><span class="title">FlexiTac-IsaacSim-Simulation/</span></figcaption><pre data-lang="bash"><code>./isaaclab.sh <span class="tk-f">-p</span> Isaacsim_tactile_env/viser_interface.py \
+    <span class="tk-f">--headless</span> \
+    <span class="tk-f">--enable_cameras</span></code></pre><button class="copy" type="button" aria-label="Copy code" data-copy><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg></button></figure>
+<p>Drag the handle on each end effector to move the two arms, and open or close each gripper with its buttons. The page shows the four tactile heatmaps, the simulated camera and the robot state as you work. <strong>Reset</strong> puts the plug and socket back at the start with a slightly randomized wrist orientation.</p>
+<p><strong>Start Recording</strong> and <strong>Stop Recording</strong> save each demonstration as one <code>.npz</code> file in <code>Isaacsim_tactile_env/output/trajectories/</code>. Each file holds:</p>
+<div class="table-wrap"><table><thead><tr><th>Key</th><th>Shape</th><th>What it is</th></tr></thead><tbody><tr><td><code>tactile</code></td><td>(T, 4, 12, 32)</td><td>The four pads, in the order left arm left finger, left arm right finger, right arm left finger, right arm right finger</td></tr><tr><td><code>joint_pos</code>, <code>joint_vel</code></td><td>(T, 16)</td><td>Joint positions and velocities of both arms</td></tr><tr><td><code>actions</code></td><td>(T, 16)</td><td>Per arm: target position (3), quaternion (4), gripper (1)</td></tr><tr><td><code>plug_pose</code>, <code>socket_pose</code></td><td>(T, 7)</td><td>Object position and wxyz quaternion</td></tr><tr><td><code>rgb</code></td><td>(T, 480, 640, 3)</td><td>Camera images</td></tr></tbody></table></div>
+<h2 id="sensor-model"><a class="anchor" href="#sensor-model" aria-hidden="true" tabindex="-1">#</a>How the simulated pad works</h2>
+<p>Each finger has a pad with a 12 × 32 grid of taxels at 2 mm pitch, the same layout as a FlexiTac-V2 sensor. On every step, <a href="https://github.com/NVIDIA/warp" target="_blank" rel="noopener">NVIDIA Warp<span class="ext" aria-hidden="true">↗</span></a> measures how far each taxel has pushed into the object's mesh. That depth becomes a spring force, <code>clamp(stiffness × depth, 0, max_force)</code>, which is then divided by <code>max_force</code> so each reading lies between 0 and 1. The grid size, spacing, <code>stiffness</code> (5000) and <code>max_force</code> (10) are settings in <a href="https://github.com/binghao-huang/FlexiTac-IsaacSim-Simulation/blob/dc2e1c6607a1b1a0e4b196bb4e2d4ccdc1afdcb0/Isaacsim_tactile_env/aloha_tactile_cfg.py#L52-L68" target="_blank" rel="noopener"><code>AlohaTactileEnvCfg</code><span class="ext" aria-hidden="true">↗</span></a>.</p>
+<aside class="aside caution" aria-label="What it does not model yet"><p class="aside-title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 2 20h20L12 3Z"/><path d="M12 10v4M12 17h.01"/></svg>What it does not model yet</p><div class="aside-body"><ul><li>The pads on the left arm sense only the socket, and the pads on the right arm only the plug. Touching anything else, such as the table, gives no signal.</li><li>Readings are normalized from 0 to 1, not calibrated to a real sensor's output.</li><li>The environment is built around the ALOHA robot. Using another gripper or pad layout means changing the code; there is no guide for that yet.</li></ul></div></aside>
+<h2 id="vt-refine"><a class="anchor" href="#vt-refine" aria-hidden="true" tabindex="-1">#</a>VT-Refine</h2>
+<p><a href="https://binghao-huang.github.io/vt_refine/" target="_blank" rel="noopener">VT-Refine<span class="ext" aria-hidden="true">↗</span></a> (CoRL 2025) trains bimanual assembly policies in three stages, from real to sim and back to real. It first trains a diffusion policy on about 30 real demonstrations per task. Each demonstration records FlexiTac pads on all four fingers together with a camera point cloud, the representation from <a href="/doc/robot-learning/#research">3D-ViTac</a>. Next it fine-tunes that policy in a simulated copy of the setup with large-scale, GPU-parallel reinforcement learning. Finally it moves the policy back to the real robot. The tasks are plug–socket insertions done in mid-air.</p>
+<p>The repository has the simulation and training side: a Docker environment, the simulated environments with their tactile model, training configs, and a script that downloads about 909 MB of pre-training data. It does not include trained checkpoints or code for collecting data or running on a real robot.</p>
+<ol class="steps"><li id="install-with-docker"><p class="step-title">Install with Docker</p><p>Clone with submodules and build the image, which installs the TacSL build of Isaac Gym. <a href="https://github.com/NVlabs/vt-refine#installation" target="_blank" rel="noopener">README: Installation<span class="ext" aria-hidden="true">↗</span></a></p></li><li id="pre-train-the-visuo-tactile-policy"><p class="step-title">Pre-train the visuo-tactile policy</p><p>Download the data and train the diffusion policy. <a href="https://github.com/NVlabs/vt-refine#pre-training" target="_blank" rel="noopener">README: Pre-training<span class="ext" aria-hidden="true">↗</span></a></p></li><li id="fine-tune-in-simulation"><p class="step-title">Fine-tune in simulation</p><p>Evaluate the pre-trained policy in simulation, then fine-tune it with reinforcement learning. <a href="https://github.com/NVlabs/vt-refine#evaluation---pre-training" target="_blank" rel="noopener">README: Evaluation<span class="ext" aria-hidden="true">↗</span></a> · <a href="https://github.com/NVlabs/vt-refine#fine-tuning" target="_blank" rel="noopener">Fine-tuning<span class="ext" aria-hidden="true">↗</span></a></p></li></ol>
+<aside class="aside note" aria-label="License and simulator"><p class="aside-title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg>License and simulator</p><div class="aside-body"><p>The VT-Refine repository is under the NVIDIA License (non-commercial research and evaluation only), and its pre-training data under CC BY-NC 4.0. The submodules it pulls in, with the simulated environments, the tactile model and the training code, are MIT-licensed. It runs on Isaac Gym, which NVIDIA no longer develops. For new work, start from the <a href="#isaac-sim">Isaac Sim simulation</a> above.</p></div></aside>
+        </div>
+        <footer class="page-foot">
+          <div class="meta">
+            <a href="https://github.com/FlexiTac/FlexiTac.github.io/edit/main/doc/_src/pages/simulation/index.md" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16v4Zm9-13 4 4"/></svg>Edit page</a>
+            <a href="https://github.com/FlexiTac/FlexiTac.github.io/issues/new?title=Docs:+Tactile+simulation&amp;labels=documentation" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg>Report a problem</a>
+            <span class="updated">Last updated: <time datetime="2026-11-25">Nov 25, 2026</time></span>
+          </div>
+          <nav class="pager" aria-label="Pagination"><a class="prev" href="/doc/robot-learning/" rel="prev"><span>Previous</span><strong>On a real robot</strong></a></nav>
+        </footer>
+      </main>
+      <aside class="toc" aria-label="On this page"><div class="toc-inner"><h2>On this page</h2><ul><li class="l2"><a href="#_top">Overview</a></li><li class="l2"><a href="#isaac-sim">Build the Isaac Sim simulation</a></li><li class="l2"><a href="#replay">Replay a trajectory with touch</a></li><li class="l2"><a href="#web">Teleoperate and record in the browser</a></li><li class="l2"><a href="#sensor-model">How the simulated pad works</a></li><li class="l2"><a href="#vt-refine">VT-Refine</a></li></ul></div></aside>
+    </div>
+    <footer class="site-foot">
+      <p>FlexiTac © 2026 Columbia University · Hardware licensed <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a> · <a href="https://github.com/FlexiTac/FlexiTac.github.io/tree/main/doc/_src" target="_blank" rel="noopener">Docs source on GitHub</a></p>
+    </footer>
+  </div>
+</div>
+<div class="scrim" data-scrim hidden></div>
+<dialog class="search" aria-label="Search the docs" data-search>
+  <div class="search-box">
+    <div class="search-field">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <input type="search" placeholder="Search the docs" aria-label="Search the docs" autocomplete="off" spellcheck="false" data-search-input>
+      <button type="button" class="search-close" data-search-close>Cancel</button>
+    </div>
+    <ul class="search-results" role="listbox" data-search-results></ul>
+    <p class="search-hint"><kbd>↑</kbd><kbd>↓</kbd> to navigate · <kbd>Enter</kbd> to open · <kbd>Esc</kbd> to close</p>
+  </div>
+</dialog>
+</body>
+</html>
