@@ -136,6 +136,9 @@ To decline, close the issue with a short, kind note. Papers and projects that do
   (no frame, a soft shadow, works in both themes). The FPC layouts on *Order parts* come from
   `tools/fpc_svg.py`, which draws them from Learn FlexiTac's Gerber-traced geometry:
   `python3 doc/_src/tools/fpc_svg.py [path/to/learn_flexitac/flexitac-anatomy/shared/data]`.
+- *Quickstart*'s "What you'll build" figure (the whole setup and the pad, with numbered markers) is rendered in
+  Blender like the exploded view: `~/website/blender/flexitac-umi` (`system.py`, `pad.py`, then `build_web.py`,
+  which rewrites the `<div class="build" id="build-figure">` block in `get-started/index.md`).
 - *Tactile representation* has a point cloud viewer, `doc/assets/pcv.js`. The page loads the script itself, and
   the viewer reads `doc/assets/data/isaac-aloha.{json,bin}` and its picture atlas `isaac-aloha-rgb.webp` (the JSON
   describes the layout; each pad's points are stored column by column). They are recorded by

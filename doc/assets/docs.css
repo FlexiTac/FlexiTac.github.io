@@ -385,10 +385,28 @@ html[data-theme="dark"] .theme .t-dark { display: block; }
   font-size: .8rem; font-weight: 700; line-height: 1; font-variant-numeric: tabular-nums;
   color: var(--accent); background: var(--accent-soft); border: 1px solid var(--accent-line);
 }
-.xmark { position: absolute; transform: translate(-50%, -50%); }
+.xmark { position: absolute; transform: translate(-50%, -50%);
+  background: linear-gradient(var(--accent-soft), var(--accent-soft)), var(--bg); }   /* opaque: leader lines end under it */
 .md ol.layers { list-style: none; counter-reset: layer; padding: 0; margin: .5rem 0 1.25rem; display: grid; gap: .45rem; }
 .md ol.layers > li { counter-increment: layer; position: relative; margin: 0; padding-left: 2.3rem; min-height: 1.55rem; }
 .md ol.layers > li::before { content: counter(layer); position: absolute; left: 0; top: .05rem; }
+/* "What you'll build" (Quickstart): the same markers on two renders, (a) the setup and (b) the pad with its dimensions */
+.build { display: grid; grid-template-columns: 7fr 6fr; gap: 0 1.5rem; align-items: start; margin: 1.25rem 0 1.5rem; }
+.build .figure.exploded { margin: 0 0 .4rem; }
+.build .xmark { width: 1.35rem; height: 1.35rem; font-size: .72rem; }
+.md .build ol.layers { margin: .35rem 0 0; gap: .3rem; font-size: .9rem; }
+.md .build ol.layers > li { padding-left: 2rem; min-height: 1.35rem; line-height: 1.45; }
+.md .build ol.layers > li::before { width: 1.35rem; height: 1.35rem; font-size: .72rem; }
+@media (max-width: 760px) {
+  .build { grid-template-columns: 1fr; gap: 1.5rem; }
+  .build .build-b .xstage { max-width: 30rem; margin: 0 auto; }
+}
+.exploded .xlines .xdim line { stroke: var(--text-2); stroke-width: 1; }
+.xdimt {
+  position: absolute; transform: translate(-50%, -50%); white-space: nowrap; pointer-events: none;
+  font-size: .78rem; font-weight: 650; font-variant-numeric: tabular-nums; color: var(--text-2);
+}
+.xdimt.v { transform: translate(-50%, -50%) rotate(-90deg); }
 :root[data-theme="dark"] .exploded .xstage { background: radial-gradient(ellipse 60% 55% at 42% 48%, rgba(255, 255, 255, .07), transparent 70%); }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) .exploded .xstage { background: radial-gradient(ellipse 60% 55% at 42% 48%, rgba(255, 255, 255, .07), transparent 70%); }

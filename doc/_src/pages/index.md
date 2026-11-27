@@ -31,9 +31,9 @@ description: An open-source platform for tactile robotics, from flexible sensor 
 <p class="flow-card-act"><a class="btn primary" href="/doc/robot-learning/imitation-learning/">Start learning<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></a></p>
 :::
 
-<figure class="figure viewer3d" data-viewer3d data-src="/doc/assets/3d/flexitac-umi.glb" data-env="/doc/assets/3d/studio.hdr" data-shadow="0" data-orbit="334deg 70deg 0.40m" data-target="-0.008m 0.048m 0.013m" data-fov="13.6deg">
+<figure class="figure viewer3d" data-viewer3d data-src="/doc/assets/3d/flexitac-umi.glb?v=20261127" data-env="/doc/assets/3d/studio.hdr" data-shadow="0" data-orbit="334deg 70deg 0.40m" data-target="-0.008m 0.048m 0.013m" data-fov="13.6deg">
 <div class="v3d-stage">
-<img class="v3d-poster" src="/doc/assets/img/flexitac-umi-sandwich.webp" alt="Render of a FlexiTac sensor on the orange UMI soft fin-ray finger. The outer FPC and the black Velostat film peel back from the inner FPC; both FPC tails run out flat to the side, and the clear laminating sheets peel away with the stack." width="1600" height="900">
+<img class="v3d-poster" src="/doc/assets/img/flexitac-umi-sandwich.webp?v=20261127" alt="Render of a FlexiTac sensor on the orange UMI soft fin-ray finger. The outer FPC and the black Velostat film peel back from the inner FPC; both FPC tails run out flat to the side, and the clear laminating sheets peel away with the stack." width="1600" height="900">
 <button class="v3d-start" type="button" data-v3d-start><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 3v6h-6"/></svg>Rotate in 3D</button>
 </div>
 <div class="v3d-bar" hidden>

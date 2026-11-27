@@ -13,16 +13,20 @@ Start with `flexitac-stream --port <port>`. Its output (fps, `raw_max`, `norm_ma
 
 These stay with the sensor, a connector or a cable. If you have a spare, swapping it in moves the fault with it.
 
-### One press shows up in two places {#short}
+### Rows with gaps, dead rows or identical readings {#short}
 
 <figure class="sample trouble-clip">
 <video src="/doc/assets/video/trouble-ffc-short.mp4" poster="/doc/assets/img/trouble-ffc-short.webp" width="420" height="240" muted loop playsinline preload="none" data-inview aria-label="Live heatmap of a sensor with two shorted lines: each press lights up two patches, one above the other in the same column"></video>
 <figcaption><span class="sample-tag">Example</span>Gold fingers that went into their extender at an angle. Each press lights up two patches in the same column instead of one.</figcaption>
 </figure>
 
-Two of the sensor's lines are shorted together. The usual cause is an FFC extender whose gold fingers or flat cable went in at an angle. The extender joins the two one to one: each gold finger rests on its own contact, and each contact runs straight across the board to its own wire in the cable. A finger that goes in crooked can land across two contacts and join its line to another one. The two lines then act as one, so a press on either shows up on both.
+Typical signs:
 
-The Adafruit extenders are wider than what plugs into them. The [20-pin one](https://www.adafruit.com/product/5203) takes the sensor's 12 gold fingers on one side and the 16-pin cable on the other, which leaves room for both to go in crooked. Push the gold fingers against one side of the opening as you slide them in: the side keeps them square, so each finger lands on its own contact.
+- **A press lights up rows with gaps between them**, as in the video.
+- **Some rows never light up.**
+- **Neighboring taxels show exactly the same reading.**
+
+The usual cause is gold fingers or a flat cable that went into an FFC extender at an angle. The extender joins each gold finger to its own wire in the cable. A crooked finger can touch two contacts, which shorts two lines into one, or miss its contact. The [20-pin extender](https://www.adafruit.com/product/5203) is wider than the sensor's 12 gold fingers and the 16-pin cable, so both can go in crooked. Push the gold fingers against one side of the opening as you slide them in; the side keeps them square.
 
 <figure class="sample">
 <div class="ffc"><p>The animation needs JavaScript. In short: push the gold fingers in straight, against one side of the connector, so each finger touches exactly one contact.</p></div>

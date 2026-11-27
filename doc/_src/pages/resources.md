@@ -68,13 +68,14 @@ How to use them: [Tactile simulation](/doc/simulation/).
 | [LeRobot](https://github.com/huggingface/lerobot) · [SO-101 walkthrough](https://huggingface.co/docs/lerobot/il_robots) | The robot-learning stack LeFlexiTac builds on |
 | [SO-ARM100](https://github.com/TheRobotStudio/SO-ARM100) | Build guide for the SO-100/101 arms |
 | [UMI](https://github.com/real-stanford/universal_manipulation_interface) | The handheld gripper and data pipeline Touch in the Wild builds on |
-| [Isaac Sim 5.1.0](https://docs.isaacsim.omniverse.nvidia.com/5.1.0/installation/requirements.html) · [Isaac Lab](https://isaac-sim.github.io/IsaacLab/main/source/setup/installation/pip_installation.html) | The simulator and robot-learning framework the simulation runs on |
+| [Isaac Sim 6.2](https://docs.isaacsim.omniverse.nvidia.com/6.2.0/installation/requirements.html) · [Isaac Lab 3.0](https://isaac-sim.github.io/IsaacLab/main/source/setup/installation/pip_installation.html) | The simulator and robot-learning framework the simulation runs on (its `isaacsim-5.1` branch: Isaac Sim 5.1, Isaac Lab 2.3) |
 | [NVIDIA Warp](https://github.com/NVIDIA/warp) | The simulated pad's contact computation |
 
 ## On these pages {#credits}
 
 - The 3D sensor on the [Introduction](/doc/) is rendered from the V2 Gerbers on the UMI soft finger from [HandUMI](https://github.com/murobotics-ai/handumi-hw) (Apache-2.0), and shown with [model-viewer](https://modelviewer.dev/) (Apache-2.0).
 - The FPC drawings, the exploded view and the colours of the boards follow [Learn FlexiTac](/learn/).
+- The "What you'll build" renders on [Quickstart](/doc/get-started/) are made the same way: the sensor from the V2 Gerbers on the HandUMI finger, the reading board from its Gerbers and parts list, the Arduino Nano laid out as in Learn FlexiTac, and the FFC extenders modeled on Adafruit's product photos.
 - The sample clips on [Data collection](/doc/robot-learning/data-collection/) come from the [LeFlexiTac](https://tna001-ai.github.io/LeFlexiTac/) and [Touch in the Wild](https://binghao-huang.github.io/touch_in_the_wild/) project pages.
 - The point cloud viewer and the tactile map on [Tactile representation](/doc/robot-learning/tactile-representation/) show one plug–socket demonstration replayed in [FlexiTac-IsaacSim-Simulation](https://github.com/binghao-huang/FlexiTac-IsaacSim-Simulation) (Isaac Sim 6.2 and Isaac Lab 3.0): the ALOHA robot with UMI-style fingers, the WarpSdf tactile sensors, and an RTX camera for the pictures and the depth behind the camera points.
 - The xArm render in the Introduction's Design card comes from the [FlexiTac-Gen](/flexitac-gen/) library: the gripper is UFACTORY's 3D model, and the sensor is the FlexiTac V2 design.
