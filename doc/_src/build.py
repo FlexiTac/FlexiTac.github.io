@@ -610,6 +610,7 @@ def page_html(slug: str, p: dict, pages: dict, order: list[str]) -> str:
 <title>{html.escape(full_title)}</title>
 <meta name="description" content="{html.escape(desc, quote=True)}">
 <link rel="canonical" href="{canon}">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
 <meta property="og:title" content="{html.escape(full_title, quote=True)}">
 <meta property="og:description" content="{html.escape(desc, quote=True)}">
 <meta property="og:type" content="article">
@@ -723,6 +724,11 @@ def build(check: bool = False) -> int:
             index.append({"p": p["title"], "h": s["h"], "u": url_for(slug) + ("" if s["a"] == "_top" else "#" + s["a"]),
                           "x": text[:600]})
     outputs[DOC / "assets" / "search-index.json"] = json.dumps(index, ensure_ascii=False, separators=(",", ":"))
+
+    # Sitemap for search engines; the site's /robots.txt points here. Unlisted pages are public too, so they're in it.
+    urls = "".join(f"  <url><loc>{SITE}{url_for(s)}</loc><lastmod>{pages[s]['updated']}</lastmod></url>\n" for s in built)
+    outputs[DOC / "sitemap.xml"] = ('<?xml version="1.0" encoding="UTF-8"?>\n'
+                                    '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + urls + "</urlset>\n")
 
     # Internal link check: every /doc/... link and #anchor must resolve.
     anchors = {url_for(s): {h[1] for h in pages[s]["toc"]} | set(re.findall(r'id="([^"]+)"', pages[s]["body"])) | {"_top"} for s in built}

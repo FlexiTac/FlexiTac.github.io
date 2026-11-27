@@ -1,0 +1,5 @@
+# Everything on flexitac.github.io may be crawled and indexed, by search engines and AI crawlers alike.
+User-agent: *
+Allow: /
+
+Sitemap: https://flexitac.github.io/doc/sitemap.xml

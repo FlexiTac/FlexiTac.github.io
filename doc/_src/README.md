@@ -36,7 +36,11 @@ internal link, anchor or image is broken. Run it before opening a pull request.
    ```
 
 2. Add its slug (for example `get-started/my-page`) to `NAV` at the top of `build.py`. `NAV`
-   decides the sidebar order and the previous/next links.
+   decides the sidebar order and the previous/next links. A page that should be reachable only
+   through links goes in `UNLISTED` instead.
+
+`build.py` also writes `doc/sitemap.xml` with every page. The site's `/robots.txt` allows all
+crawlers and points them to it, so search engines find the docs even without a homepage link.
 
 ## Markdown you can use
 
