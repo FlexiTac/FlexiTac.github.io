@@ -261,7 +261,8 @@ html[data-theme="dark"] .theme .t-dark { display: block; }
   border-radius: 6px;
 }
 .group li a:hover { color: var(--text); background: var(--bg-soft); }
-.group li.sub a { margin-left: .85rem; font-size: .9em; }      /* a subpage, indented under its parent */
+.group ul ul { margin: 1px 0 .15rem .65rem; padding-left: .5rem; }   /* subpages, nested under their parent */
+.group ul ul a { font-size: .88rem; }
 .group li a[aria-current="page"] {
   color: var(--accent); background: var(--accent-soft); font-weight: 600;
   box-shadow: -.65rem 0 0 -.5rem var(--accent);

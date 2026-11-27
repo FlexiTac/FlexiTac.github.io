@@ -14,7 +14,7 @@ as-is.  Folders starting with "_" are not published by GitHub Pages (Jekyll),
 so the sources here are only visible on GitHub.
 
 Markdown subset (see doc/_src/README.md for examples):
-  front matter    --- title / description / sidebar_label / sidebar_sub: true (indented under the page above) ---
+  front matter    --- title / description / sidebar_label / status: pending ---
   headings        ## and ### (become the "On this page" entries), #### inside components
   blocks          paragraphs, - / 1. lists (nest with 2+ spaces), > quotes, | tables |,
                   ```lang title="file.py" fenced code, raw HTML lines, ![alt](src "caption")
@@ -49,19 +49,21 @@ BASE = "/doc/"
 SITE = "https://flexitac.github.io"
 EDIT_BASE = "https://github.com/FlexiTac/FlexiTac.github.io/edit/main/doc/_src/pages/"
 ISSUE_URL = "https://github.com/FlexiTac/FlexiTac.github.io/issues/new"
-ASSET_VERSION = "20261126b"
+ASSET_VERSION = "20261127a"
 
 # --------------------------------------------------------------------------------------------
 # Navigation: the one place that decides page order (sidebar, prev/next).
 # Internal entries are page slugs ("" is the docs home); external entries are (label, url).
+# (slug, [child slugs]) lists a page with subpages, which the sidebar nests under it.
 # --------------------------------------------------------------------------------------------
 NAV = [
     ("Get Started", [
         "",
-        "get-started",
-        "get-started/order-parts",
-        "get-started/fabricate",
-        "get-started/stream",
+        ("get-started", [
+            "get-started/order-parts",
+            "get-started/fabricate",
+            "get-started/stream",
+        ]),
         "get-started/troubleshooting",
         "get-started/next-steps",
     ]),
@@ -688,23 +690,34 @@ def timeline_html() -> str:
     return f'<div class="tl">{"".join(out)}</div>'
 
 
+def nav_slugs(entries: list) -> list[str]:
+    """The page slugs in a NAV entry list, subpages right after their parent (the reading order)."""
+    out = []
+    for e in entries:
+        if isinstance(e, str):
+            out.append(e)
+        elif isinstance(e[1], list):
+            out += [e[0]] + nav_slugs(e[1])
+    return out
+
+
 def sidebar(cur: str, pages: dict) -> str:
-    groups = []
-    for label, entries in NAV:
-        items = []
+    def items(entries: list) -> str:
+        out = []
         for e in entries:
-            if isinstance(e, tuple):
+            if isinstance(e, tuple) and not isinstance(e[1], list):
                 t, u = e
-                mark = '<span class="ext" aria-hidden="true">↗</span>' if is_external(u) else '<span class="ext" aria-hidden="true">↗</span>'
-                items.append(f'<li><a{link_attrs(u)}>{html.escape(t)}{mark}</a></li>')
-            else:
-                p = pages[e]
-                curr = ' aria-current="page"' if e == cur else ""
-                sub = ' class="sub"' if p.get("sub") else ""            # front matter sidebar_sub: true
-                soon = '<span class="soon">Soon</span>' if p.get("pending") else ""     # front matter status: pending
-                items.append(f'<li{sub}><a href="{url_for(e)}"{curr}>{html.escape(p["label"])}{soon}</a></li>')
-        groups.append(f'<details class="group" open><summary>{html.escape(label)}</summary><ul>{"".join(items)}</ul></details>')
-    return "".join(groups)
+                out.append(f'<li><a{link_attrs(u)}>{html.escape(t)}<span class="ext" aria-hidden="true">↗</span></a></li>')
+                continue
+            slug, kids = (e, None) if isinstance(e, str) else e
+            p = pages[slug]
+            curr = ' aria-current="page"' if slug == cur else ""
+            soon = '<span class="soon">Soon</span>' if p.get("pending") else ""     # front matter status: pending
+            sub = f"<ul>{items(kids)}</ul>" if kids else ""
+            out.append(f'<li><a href="{url_for(slug)}"{curr}>{html.escape(p["label"])}{soon}</a>{sub}</li>')
+        return "".join(out)
+    return "".join(f'<details class="group" open><summary>{html.escape(label)}</summary><ul>{items(entries)}</ul></details>'
+                   for label, entries in NAV)
 
 
 def toc_html(toc: list[tuple[int, str, str]], title: str) -> str:
@@ -828,7 +841,7 @@ def page_html(slug: str, p: dict, pages: dict, order: list[str]) -> str:
 
 
 def build(check: bool = False) -> int:
-    order = [e for _, entries in NAV for e in entries if isinstance(e, str)]
+    order = [s for _, entries in NAV for s in nav_slugs(entries)]
     built = order + [u for u in UNLISTED if u not in order]
     pages: dict[str, dict] = {}
     for slug in built:
@@ -840,7 +853,6 @@ def build(check: bool = False) -> int:
         pages[slug] = {
             "title": meta.get("title", slug or "FlexiTac Docs"),
             "label": meta.get("sidebar_label") or meta.get("title", slug),
-            "sub": str(meta.get("sidebar_sub", "")).lower() == "true",
             "pending": meta.get("status", "") == "pending",
             "description": meta.get("description", ""),
             "body": body, "toc": r.toc, "src": src, "sections": r.sections,
