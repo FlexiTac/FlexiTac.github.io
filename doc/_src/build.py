@@ -49,7 +49,7 @@ BASE = "/doc/"
 SITE = "https://flexitac.github.io"
 EDIT_BASE = "https://github.com/FlexiTac/FlexiTac.github.io/edit/main/doc/_src/pages/"
 ISSUE_URL = "https://github.com/FlexiTac/FlexiTac.github.io/issues/new"
-ASSET_VERSION = "20261127a"
+ASSET_VERSION = "20261127b"
 
 # --------------------------------------------------------------------------------------------
 # Navigation: the one place that decides page order (sidebar, prev/next).

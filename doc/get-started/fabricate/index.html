@@ -16,8 +16,8 @@
 <link rel="icon" type="image/svg+xml" href="/static/images/favicon.svg">
 <link rel="apple-touch-icon" href="/static/images/apple-touch-icon.png">
 <script>try{var t=localStorage.getItem("ft-docs-theme");if(t==="light"||t==="dark")document.documentElement.dataset.theme=t}catch(e){}</script>
-<link rel="stylesheet" href="/doc/assets/docs.css?v=20261127a">
-<script src="/doc/assets/docs.js?v=20261127a" defer></script>
+<link rel="stylesheet" href="/doc/assets/docs.css?v=20261127b">
+<script src="/doc/assets/docs.js?v=20261127b" defer></script>
 </head>
 <body>
 <a class="skip" href="#content">Skip to content</a>
@@ -95,7 +95,7 @@
 <div class="figs">
 <figure><a class="zoom" href="/doc/assets/img/fab-step3-polyimide.webp"><img src="/doc/assets/img/fab-step3-polyimide.webp" alt="Placing the sensor stack on a strip of polyimide tape" loading="lazy"></a><figcaption>Place the stack on the tape.</figcaption></figure>
 <figure><a class="zoom" href="/doc/assets/img/fab-step3-sealed.webp"><img src="/doc/assets/img/fab-step3-sealed.webp" alt="Folding the polyimide tape around the sensor edges" loading="lazy"></a><figcaption>Fold the tape around the edges.</figcaption></figure>
-</div></li><li id="connect-to-the-reading-board"><p class="step-title">Connect to the reading board</p><p>Insert each sensor's <strong>gold fingers</strong> into an FFC connector (extender), then run a flat flexible cable from each connector to the reading board. The wider gold-finger end takes the 32-pin connector and cable, and the narrower one takes the 16-pin connector and cable.</p>
+</div></li><li id="connect-to-the-reading-board"><p class="step-title">Connect to the reading board</p><p>Insert each sensor's <strong>gold fingers</strong> into an FFC connector (extender), then run a flat flexible cable from each connector to the reading board. The wider gold-finger end takes the 40-pin extender (or the 32-pin AliExpress one) and the 32-pin cable. The narrower one takes the 20-pin extender (or the 16-pin one) and the 16-pin cable.</p>
 <div class="figs">
 <figure><a class="zoom" href="/doc/assets/img/fab-step4-parts.webp"><img src="/doc/assets/img/fab-step4-parts.webp" alt="The sealed sensor with the reading board, two flat flexible cables and FFC connectors" loading="lazy"></a><figcaption>Sealed sensor, reading board, flat cables and connectors.</figcaption></figure>
 <figure><a class="zoom" href="/doc/assets/img/fab-step4-insert.webp"><img src="/doc/assets/img/fab-step4-insert.webp" alt="Inserting the FPC gold fingers into a connector" loading="lazy"></a><figcaption>Insert the gold fingers into the connector.</figcaption></figure>
@@ -103,7 +103,7 @@
 <figure><a class="zoom" href="/doc/assets/img/fab-step4-connected.webp"><img src="/doc/assets/img/fab-step4-connected.webp" alt="Finished sensor connected through two flat cables to the reading board" loading="lazy"></a><figcaption>Done: the sensor is connected to the reading board.</figcaption></figure>
 </div></li></ol>
 <h2 id="tips-for-a-good-sensor"><a class="anchor" href="#tips-for-a-good-sensor" aria-hidden="true" tabindex="-1">#</a>Tips for a good sensor</h2>
-<ul><li><strong>Fully seat the gold fingers.</strong> Push each FPC end all the way into its connector, straight and not skewed. A finger that's half-seated or off by one pin is the most common cause of dead or swapped rows.</li><li><strong>Mind the cable orientation.</strong> FFC contacts are on one side only. If a whole sensor reads nothing, check that each cable's contacts face the connector contacts at both ends.</li><li><strong>The Adafruit extenders need practice.</strong> They're compact but take careful alignment. The AliExpress extenders (BOM #12) are bulkier but easier to install.</li><li><strong>Keep the Velostat covering every crossing.</strong> Taxels outside the film won't respond. An off-center film shows up as a dead edge on the heatmap.</li><li><strong>Make a few at once.</strong> Sensors are consistent enough that spares are interchangeable, and having one makes it easy to tell a bad sensor from a bad board.</li></ul>
+<ul><li><strong>Fully seat the gold fingers.</strong> Push each FPC end all the way into its connector, straight and not skewed. The Adafruit extenders are wider than the gold fingers, so push the fingers against one side of the opening as you insert them; the side keeps them square. A finger that's half-seated, skewed or off by one pin is the most common cause of dead, swapped or <a href="/doc/get-started/troubleshooting/#short">shorted rows</a>.</li><li><strong>Mind the cable orientation.</strong> FFC contacts are on one side only. If a whole sensor reads nothing, check that each cable's contacts face the connector contacts at both ends.</li><li><strong>The Adafruit extenders need practice.</strong> They're compact but take careful alignment. The AliExpress extenders (BOM #12) are bulkier but easier to install.</li><li><strong>Keep the Velostat covering every crossing.</strong> Taxels outside the film won't respond. An off-center film shows up as a dead edge on the heatmap.</li><li><strong>Make a few at once.</strong> Sensors are consistent enough that spares are interchangeable, and having one makes it easy to tell a bad sensor from a bad board.</li></ul>
 <aside class="aside note" aria-label="How long does a sensor last?"><p class="aside-title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg>How long does a sensor last?</p><div class="aside-body"><p>In the authors' experience, sensors stay consistent for about a year of use without significant degradation. Some teams have collected thousands of demonstrations without breaking one. If a sensor is damaged, replace it. Swapping in a new sensor typically doesn't noticeably affect performance.</p></div></aside>
 <h2 id="next"><a class="anchor" href="#next" aria-hidden="true" tabindex="-1">#</a>Next</h2>
 <p>Your sensor is wired to the reading board. Now <a href="/doc/get-started/stream/">stream the sensor</a>.</p>
@@ -112,7 +112,7 @@
           <div class="meta">
             <a href="https://github.com/FlexiTac/FlexiTac.github.io/edit/main/doc/_src/pages/get-started/fabricate.md" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16v4Zm9-13 4 4"/></svg>Edit page</a>
             <a href="https://github.com/FlexiTac/FlexiTac.github.io/issues/new?title=Docs:+Fabricate+a+sensor&amp;labels=documentation" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg>Report a problem</a>
-            <span class="updated">Last updated: <time datetime="2026-11-25">Nov 25, 2026</time></span>
+            <span class="updated">Last updated: <time datetime="2026-11-27">Nov 27, 2026</time></span>
           </div>
           <nav class="pager" aria-label="Pagination"><a class="prev" href="/doc/get-started/order-parts/" rel="prev"><span>Previous</span><strong>Order parts</strong></a><a class="next" href="/doc/get-started/stream/" rel="next"><span>Next</span><strong>Stream sensor</strong></a></nav>
         </footer>

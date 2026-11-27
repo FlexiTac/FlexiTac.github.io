@@ -72,8 +72,8 @@ Prices and links are the ones in the Fabrication Guide. A quantity like 0.05 mea
 | 7 | Flexible flat cable, 32-pin | 1 | $5.09 (5-pack) | [Amazon](https://a.co/d/0aJnyShh) |
 | 8 | Flexible flat cable, 16-pin | 1 | $6.09 (5-pack) | [Amazon](https://www.amazon.com/dp/B07RWF5D83) |
 | 9 | Mini-USB cable (must carry data) | 1 | $11.99 (2-pack) | [Amazon](https://www.amazon.com/dp/B091SQKMQK) |
-| 10 | 20-pin FFC extender | 1 | $0.95 | [Adafruit 4523](https://www.adafruit.com/product/4523) |
-| 11 | 40-pin FFC extender | 1 | $0.95 | [Adafruit 5203](https://www.adafruit.com/product/5203) |
+| 10 | 20-pin FFC extender | 1 | $0.95 | [Adafruit 5203](https://www.adafruit.com/product/5203) |
+| 11 | 40-pin FFC extender | 1 | $0.95 | [Adafruit 4523](https://www.adafruit.com/product/4523) |
 | 12 | FFC extender, easy-install alternative to #10–11 | 2 | $0.55–0.88 | [AliExpress](https://www.aliexpress.us/item/3256801662408481.html) |
 
 :::note[Which FFC extenders?]

@@ -142,7 +142,11 @@ To decline, close the issue with a short, kind note. Papers and projects that do
   `tools/isaac_sample.py` in a [FlexiTac-IsaacSim-Simulation](https://github.com/binghao-huang/FlexiTac-IsaacSim-Simulation)
   environment (main branch: Isaac Sim 6.2 + Isaac Lab 3.0; see the script's docstring). It replays one bundled
   plug–socket demonstration; the pictures and the depth behind the camera points come from the env's RTX camera, and
-  the cloud is cropped just above the table top. The page shows frame 63.
+  the cloud is cropped just above the table top. The page shows frame 94.
+- *Troubleshooting* has an animation of gold fingers going into a 20-pin FFC extender, `doc/assets/ffc.js`
+  (`<div class="ffc">`; the page loads the script itself). It works out which finger touches which contact from
+  its own drawing, so the result it reports always matches the picture. Its clip, `trouble-ffc-short.mp4`, is
+  the plot window cut from a phone video, steadied by following the heatmap from frame to frame.
   `python3 doc/_src/tools/tactile_svg.py 63 2` redraws the 2D map figure from the same data, and
   `doc/assets/img/isaac-frame.webp` is the viewer's still image for readers without JavaScript.
 - A photo already cut out onto pure black becomes a transparent cut-out with

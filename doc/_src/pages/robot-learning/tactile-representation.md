@@ -32,7 +32,7 @@ Settle two things before you record:
 
 ## 3D: tactile points {#3d}
 
-[3D-ViTac](https://binghao-huang.github.io/3D-ViTac/) (CoRL 2024) places every taxel in space, in the same frame as the camera's points, so the fingers, the contacts and the objects are in one picture. [VT-Refine](https://binghao-huang.github.io/vt_refine/) (CoRL 2025) uses the same representation with the 12 × 32 pads on the two-armed ALOHA robot. The viewer below shows it on a clean, simulated frame: one of the plug–socket demonstrations bundled with [FlexiTac's Isaac Sim simulation](/doc/simulation/#isaac-sim), replayed on ALOHA with UMI-style fingers and a FlexiTac pad on each of its four fingers. The camera sits beside the table, on the same side as VT-Refine's, and the inset is its picture.
+[3D-ViTac](https://binghao-huang.github.io/3D-ViTac/) (CoRL 2024) puts every taxel in the same 3D frame as the camera's points, so fingers, contacts and objects share one point cloud. [VT-Refine](https://binghao-huang.github.io/vt_refine/) (CoRL 2025) does the same on the two-armed ALOHA robot. The viewer shows one plug–socket demonstration from [FlexiTac's Isaac Sim simulation](/doc/simulation/#isaac-sim), with a pad on each of ALOHA's four fingers.
 
 <div class="pcv" data-sample="/doc/assets/data/isaac-aloha" data-frame="94" data-label="One frame of a simulated plug–socket insertion as a point cloud: the camera's points and the four pads' tactile points" data-pads="Left arm, left finger|Left arm, right finger|Right arm, left finger|Right arm, right finger" data-joints="Left arm: waist|Left arm: shoulder|Left arm: elbow|Left arm: forearm roll|Left arm: wrist angle|Left arm: wrist rotate|Left arm: left finger|Left arm: right finger|Right arm: waist|Right arm: shoulder|Right arm: elbow|Right arm: forearm roll|Right arm: wrist angle|Right arm: wrist rotate|Right arm: left finger|Right arm: right finger" data-joints-title="Proprioception: joint positions, scaled to −1…1"><img src="/doc/assets/img/isaac-frame.webp" alt="One frame of a simulated plug–socket insertion: the camera picture in a corner, grey camera points of the grippers, plug and socket, and four pads of tactile points with the pressed taxels in orange" width="1200" height="864" loading="lazy"></div>
 <script src="/doc/assets/pcv.js?v=20261126b" defer></script>
@@ -41,36 +41,21 @@ Settle two things before you record:
 ### How a frame is built {#build}
 
 :::steps
-#### Camera points
-The depth camera's image becomes 3D points, which are moved into the table's frame (its origin is the centre of the table). Points outside a box around the workspace are dropped, and 512 of the rest are kept. They carry no colour.
+#### Proprioception
+Read the 16 joint positions of both arms and grippers: per arm, 6 joints and 2 fingers. They do two jobs. Forward kinematics turns them into each pad's pose, which the next step needs, and they go to the policy as an input of their own, through a small MLP. (That is the design in both papers. VT-Refine's released ALOHA config leaves this input out and uses the cloud alone.)
 
 #### Tactile points
-Each taxel has a fixed spot on its pad: a 12 × 32 grid, 2 mm apart. Forward kinematics turns the robot's joint positions into each pad's pose at that moment, and moving the grid by that pose puts every taxel in the table's frame. Each tactile point carries its reading. Untouched taxels stay, with a reading of 0, so there are always 4 × 384 = 1,536 of them, and they also show where the fingers are.
+Each taxel has a fixed spot on its pad: a 12 × 32 grid, 2 mm apart. Moving the grid by its pad's pose puts every taxel in the table's frame (its origin is the centre of the table). Each tactile point carries its reading. Untouched taxels stay, with a reading of 0, so there are always 4 × 384 = 1,536 of them, and they also show where the fingers are.
+
+#### Camera points
+The depth camera's image becomes 3D points in the same table frame. Points outside a box around the workspace are dropped, and 512 of the rest are kept. They carry no colour.
 
 #### One point cloud
 Both sets go into one cloud of 2,048 points. Each point has five numbers: x, y, z, the reading (0 for camera points), and a flag that tells the two kinds apart (0 for the camera, 1 for touch).
 
-#### Proprioception
-The 16 joint positions of both arms and grippers go in beside the cloud, through a small MLP. (That is the design in both papers. VT-Refine's released ALOHA config leaves it out and uses the cloud alone.)
-
 #### Encoder and policy
 A PointNet runs the same small network on every point, then keeps the maximum of each feature over all points, so the order of the points doesn't matter. With the joint features, the result conditions a Diffusion Policy. In VT-Refine it sees the last two frames, predicts the next 16 steps of target joint positions, runs 8 of them, then looks again. 3D-ViTac uses PointNet++.
 :::
-
-Joint positions are used twice: once to place the tactile points, and once as an input of their own.
-
-### Why 3D {#why}
-
-3D-ViTac compared the two representations with the same point-cloud vision, on four two-armed tasks. Its pads were the earlier 16 × 16 sensor (FlexiTac-V1). Success rates over 20 trials:
-
-| Task | Tactile images (CNN) | Tactile points |
-| --- | --- | --- |
-| Egg steaming | 0.70 | 0.85 |
-| Fruit preparation | 0.65 | 0.80 |
-| Hex key collection | 0.50 | 0.90 |
-| Sandwich serving | 0.65 | 0.85 |
-
-From the [3D-ViTac paper](https://arxiv.org/abs/2410.24091), Table 1 ("PC w/ Tactile Image" against "PC w/ Tactile Points"). With the camera points alone, the same policy scored 0.45 to 0.65.
 
 ### In simulation {#sim}
 

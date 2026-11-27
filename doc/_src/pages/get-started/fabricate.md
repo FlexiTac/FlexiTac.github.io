@@ -79,7 +79,7 @@ Lay out a strip of polyimide tape and seal the border of the stack. This doesn't
 </div>
 
 #### Connect to the reading board
-Insert each sensor's **gold fingers** into an FFC connector (extender), then run a flat flexible cable from each connector to the reading board. The wider gold-finger end takes the 32-pin connector and cable, and the narrower one takes the 16-pin connector and cable.
+Insert each sensor's **gold fingers** into an FFC connector (extender), then run a flat flexible cable from each connector to the reading board. The wider gold-finger end takes the 40-pin extender (or the 32-pin AliExpress one) and the 32-pin cable. The narrower one takes the 20-pin extender (or the 16-pin one) and the 16-pin cable.
 
 <div class="figs">
 <figure><a class="zoom" href="/doc/assets/img/fab-step4-parts.webp"><img src="/doc/assets/img/fab-step4-parts.webp" alt="The sealed sensor with the reading board, two flat flexible cables and FFC connectors" loading="lazy"></a><figcaption>Sealed sensor, reading board, flat cables and connectors.</figcaption></figure>
@@ -91,7 +91,7 @@ Insert each sensor's **gold fingers** into an FFC connector (extender), then run
 
 ## Tips for a good sensor
 
-- **Fully seat the gold fingers.** Push each FPC end all the way into its connector, straight and not skewed. A finger that's half-seated or off by one pin is the most common cause of dead or swapped rows.
+- **Fully seat the gold fingers.** Push each FPC end all the way into its connector, straight and not skewed. The Adafruit extenders are wider than the gold fingers, so push the fingers against one side of the opening as you insert them; the side keeps them square. A finger that's half-seated, skewed or off by one pin is the most common cause of dead, swapped or [shorted rows](/doc/get-started/troubleshooting/#short).
 - **Mind the cable orientation.** FFC contacts are on one side only. If a whole sensor reads nothing, check that each cable's contacts face the connector contacts at both ends.
 - **The Adafruit extenders need practice.** They're compact but take careful alignment. The AliExpress extenders (BOM #12) are bulkier but easier to install.
 - **Keep the Velostat covering every crossing.** Taxels outside the film won't respond. An off-center film shows up as a dead edge on the heatmap.
