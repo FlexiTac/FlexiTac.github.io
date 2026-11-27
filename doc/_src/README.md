@@ -31,6 +31,7 @@ internal link, anchor or image is broken. Run it before opening a pull request.
    ---
    title: Page title
    sidebar_label: Short label   # optional
+   status: pending              # optional: a placeholder page, tagged "Soon" in the sidebar
    description: One sentence shown under the title, in search results and in link previews.
    ---
    ```
@@ -74,11 +75,47 @@ Text, code, images…
 #### FlexiTac-Gen | /flexitac-gen/ | cube
 Short description.
 :::
+
+:::cards[flow]                      ← big numbered icon steps joined by arrows
+#### Design | /flexitac-gen/ | grid
+<p>Text under a step turns it into a small card that opens on click (the link stays as the fallback).</p>
+#### Build | /doc/get-started/ | layers
+:::
 ````
 
 To nest one container in another, give the outer one more colons (`::::caution` … `::::`).
 Icons: rocket, cpu, layers, wrench, cart, bolt, wave, lifebuoy, compass, robot, cube, book, users,
-github, sim, check. Raw HTML lines also pass through unchanged.
+github, sim, check, grid, sliders, code, net. Raw HTML lines also pass through unchanged.
+
+`layout: splash` in the front matter drops the "On this page" column and widens the page. Only the docs
+home uses it.
+
+`:::timeline` followed by `:::` (no body) inserts the homepage timeline: `build.py` reads it from the
+`#timeline` section of `/index.html` (poster, short title, venue pill and link of each work). To add a work,
+add it to the homepage timeline, then rebuild the docs; `--check` reports the docs as stale until you do.
+
+## Feature a community robot
+
+Visitors submit robots through the **Share your robot** issue form
+([`.github/ISSUE_TEMPLATE/share-your-robot.yml`](../../.github/ISSUE_TEMPLATE/share-your-robot.yml)), linked from
+the docs home. Submissions get the `community-build` label. Nothing reaches the site until a maintainer adds it:
+
+1. **Review** the issue. Check that it's really built with FlexiTac, that both permission boxes are ticked, that the
+   photo works as a tile, and that the credit is right. Ask in the thread if anything is missing.
+2. **Approve** by adding the robot. Save the photo as WebP, about 800 px wide and cropped to 16:9, in
+   `doc/assets/community/`. Then add a block inside `:::community` in `pages/index.md`, oldest first:
+
+   ```markdown
+   #### FlexiTac on a Robotiq 2F-85 | https://their-project.example/ | /doc/assets/community/robotiq-2f85.webp
+   Jane Doe, Example Robotics Lab
+   ```
+
+   The robots appear as a "Community" row under the timeline.
+3. **Publish**: rebuild, then commit with `Feature <robot> (closes #<issue>)`, so the issue closes and the
+   contributor is notified.
+
+To decline, close the issue with a short, kind note. Papers and projects that don't fit here can go to
+[Awesome FlexiTac](https://github.com/binghao-huang/Awesome-FlexiTac/blob/main/CONTRIBUTING.md).
 
 ## Writing guidelines
 
@@ -90,6 +127,10 @@ github, sim, check. Raw HTML lines also pass through unchanged.
 - **Credit and licenses.** Keep authors' credit and each project's license. Images need
   permission from whoever owns them.
 - Store images as WebP, at most 1400 px wide, in `doc/assets/img/`.
+- Short clips go in `doc/assets/video/` as H.264 MP4 (keep each under about 1.5 MB), with a WebP poster in
+  `doc/assets/img/`. Write them as `<video src=… poster=… muted loop playsinline preload="none" data-inview>`:
+  `docs.js` plays them only while they're on screen, and shows controls instead for readers who prefer
+  reduced motion. See the samples on *Data collection* (`<figure class="sample">`).
 - Draw layouts and diagrams as SVG with a transparent background, and show them with `<div class="figs drawing">`
   (no frame, a soft shadow, works in both themes). The FPC layouts on *Order parts* come from
   `tools/fpc_svg.py`, which draws them from Learn FlexiTac's Gerber-traced geometry:

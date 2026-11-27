@@ -352,6 +352,109 @@
     if (reset) reset.addEventListener("click", function () { if (mv) view(); });
   });
 
+  /* GitHub card: refresh the FlexiTac repo's star and fork counts, exactly as the homepage does (same cache key,
+     so a tab coming from the homepage reuses its numbers). The page ships with the homepage's counts. ---------- */
+  (function () {
+    var REPO = "FlexiTac/FlexiTac", KEY = "gh-stats:" + REPO, TTL = 60 * 60 * 1000;
+    if (!document.querySelector("[data-gh-badge]")) return;
+    function fmt(n) { return n >= 1000 ? (n / 1000).toFixed(n >= 10000 ? 0 : 1).replace(/\.0$/, "") + "k" : String(n); }
+    function apply(s) {
+      document.querySelectorAll("[data-gh-stars]").forEach(function (el) { el.textContent = fmt(s.stars); });
+      document.querySelectorAll("[data-gh-forks]").forEach(function (el) { el.textContent = fmt(s.forks); });
+      document.querySelectorAll("[data-gh-badge]").forEach(function (el) {
+        el.setAttribute("aria-label", "FlexiTac on GitHub: " + s.stars + " stars, " + s.forks + " forks");
+      });
+    }
+    try {
+      var cached = JSON.parse(sessionStorage.getItem(KEY) || "null");
+      if (cached && Date.now() - cached.at < TTL) { apply(cached); return; }
+    } catch (e) {}
+    if (!window.fetch) return;
+    fetch("https://api.github.com/repos/" + REPO, { headers: { Accept: "application/vnd.github+json" } })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (d) {
+        if (!d || typeof d.stargazers_count !== "number") return;
+        var s = { stars: d.stargazers_count, forks: d.forks_count, at: Date.now() };
+        apply(s);
+        try { sessionStorage.setItem(KEY, JSON.stringify(s)); } catch (e) {}
+      })
+      .catch(function () {});
+  })();
+
+  /* Flow steps with a card: the click opens the card (its caret on the step's icon) instead of the link -------- */
+  document.querySelectorAll(".flow a[data-flow-card]").forEach(function (a) {
+    var card = document.getElementById(a.getAttribute("aria-controls"));
+    var li = a.parentNode, row = li.parentNode;
+    if (!card) return;
+    function place() {
+      var lr = li.getBoundingClientRect(), rr = row.getBoundingClientRect();
+      var w = card.offsetWidth, mid = lr.left + lr.width / 2;
+      var left = Math.max(rr.left, Math.min(mid - w / 2, rr.right - w));
+      card.style.left = (left - lr.left) + "px";
+      card.style.setProperty("--caret", (mid - left) + "px");
+    }
+    function show(on) {
+      card.hidden = !on;
+      a.setAttribute("aria-expanded", on ? "true" : "false");
+      if (on) place();
+    }
+    a.addEventListener("click", function (e) { e.preventDefault(); show(card.hidden); });
+    card.querySelector(".flow-card-close").addEventListener("click", function () { show(false); a.focus(); });
+    document.addEventListener("click", function (e) {
+      if (!card.hidden && !card.contains(e.target) && !a.contains(e.target)) show(false);
+    });
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && !card.hidden) { show(false); a.focus(); }
+    });
+    window.addEventListener("resize", function () { if (!card.hidden) place(); });
+  });
+
+  /* Timeline lanes: edge fades and the ‹ › buttons appear only while a lane has more to scroll ---------- */
+  document.querySelectorAll(".tl-row").forEach(function (row) {
+    var lane = row.querySelector(".tl-lane"), nav = row.querySelector(".tl-nav");
+    if (!lane) return;
+    var btns = nav ? nav.querySelectorAll("button") : [];
+    function update() {
+      var max = lane.scrollWidth - lane.clientWidth, x = lane.scrollLeft;
+      lane.classList.toggle("fade-l", x > 4);
+      lane.classList.toggle("fade-r", x < max - 4);
+      if (nav) {
+        nav.hidden = max <= 4;
+        btns[0].disabled = x <= 4;
+        btns[1].disabled = x >= max - 4;
+      }
+    }
+    Array.prototype.forEach.call(btns, function (b) {
+      b.addEventListener("click", function () {
+        lane.scrollBy({ left: +b.dataset.dir * lane.clientWidth * 0.8, behavior: "smooth" });
+      });
+    });
+    lane.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
+    update();
+  });
+
+  // Sample clips (<video data-inview>): muted loops that play only while on screen. With reduced
+  // motion, or if the browser refuses to autoplay, they show their controls instead.
+  var clips = document.querySelectorAll("video[data-inview]");
+  if (clips.length) {
+    var still = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (still || !("IntersectionObserver" in window)) {
+      Array.prototype.forEach.call(clips, function (v) { v.controls = true; });
+    } else {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+          var v = en.target;
+          if (en.isIntersecting) {
+            var p = v.play();
+            if (p && p.catch) p.catch(function () { v.controls = true; });
+          } else if (!v.paused) v.pause();
+        });
+      }, { rootMargin: "120px 0px" });
+      Array.prototype.forEach.call(clips, function (v) { io.observe(v); });
+    }
+  }
+
   document.addEventListener("keydown", function (e) {
     var tag = (e.target.tagName || "").toLowerCase();
     var typing = tag === "input" || tag === "textarea" || e.target.isContentEditable;

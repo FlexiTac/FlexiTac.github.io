@@ -23,6 +23,11 @@ Markdown subset (see doc/_src/README.md for examples):
                   :::tabs    (each "#### Label" starts a tab; tabs with equal labels sync)
                   :::cards   (each "#### Title | /link/ | icon" starts a card)
                   :::cards[path]  (the same cards as a numbered route, in order)
+                  :::timeline   (empty: the homepage's timeline, read from /index.html at build time)
+                  :::community  (approved community robots: "#### Name | link | /image" + a credit line each)
+                  :::cards[flow]  (numbered icon steps joined by arrows: "#### Title | /link/ | icon";
+                                   text under a step becomes a card that opens on click)
+  front matter    layout: splash  (no "On this page" column, a wider page: the docs home)
                   Close with ":::".  Use more colons (::::) for the outer of two nested containers.
 """
 from __future__ import annotations
@@ -44,7 +49,7 @@ BASE = "/doc/"
 SITE = "https://flexitac.github.io"
 EDIT_BASE = "https://github.com/FlexiTac/FlexiTac.github.io/edit/main/doc/_src/pages/"
 ISSUE_URL = "https://github.com/FlexiTac/FlexiTac.github.io/issues/new"
-ASSET_VERSION = "20261123"
+ASSET_VERSION = "20261126"
 
 # --------------------------------------------------------------------------------------------
 # Navigation: the one place that decides page order (sidebar, prev/next).
@@ -61,7 +66,13 @@ NAV = [
         "get-started/next-steps",
     ]),
     ("Learning with FlexiTac", [
-        "robot-learning",
+        "robot-learning/data-collection",
+        "robot-learning/tactile-representation",
+        "robot-learning/imitation-learning",
+        "robot-learning/vla",
+        "robot-learning/reinforcement-learning",
+        "robot-learning/pretraining",
+        "robot-learning/world-models",
     ]),
     ("FlexiTac in Simulation", [
         "simulation",
@@ -76,6 +87,11 @@ NAV = [
 ]
 # Pages that are built and searchable but not in the sidebar or the prev/next chain; link to them from other pages.
 UNLISTED = ["resources", "get-started/pyflexitac"]
+# Retired pages: their old address forwards to the page that took over their content (keeps old links and
+# search results working). Slug -> (new slug, {old #anchor: new #anchor, or a /doc/ path for one that moved page}).
+REDIRECTS = {"robot-learning": ("robot-learning/data-collection", {
+    "#leflexitac": "#teleoperation", "#touch-in-the-wild": "#umi", "#mount": "#tips", "#choose": "",
+    "#research": "/doc/robot-learning/tactile-representation/#3d-vitac"})}
 
 # --------------------------------------------------------------------------------------------
 # Inline Markdown
@@ -207,13 +223,17 @@ ICONS = {
     "wave": '<path d="M2 12h3l3-8 4 16 3-10 2 2h5"/>',
     "lifebuoy": '<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><path d="m5.6 5.6 3.6 3.6m5.6 5.6 3.6 3.6m0-12.8-3.6 3.6m-5.6 5.6-3.6 3.6"/>',
     "compass": '<circle cx="12" cy="12" r="9"/><path d="m15.5 8.5-2 5-5 2 2-5 5-2Z"/>',
-    "robot": '<rect x="4" y="8" width="16" height="11" rx="3"/><path d="M12 4v4M9 13h.01M15 13h.01M2 13v2m20-2v2"/>',
+    "robot": '<path d="M12 3.2v3.3"/><circle cx="12" cy="2.6" r=".9" fill="currentColor" stroke="none"/><rect x="5" y="6.5" width="14" height="10.5" rx="3.2"/><circle cx="9.4" cy="11.6" r="1.25" fill="currentColor" stroke="none"/><circle cx="14.6" cy="11.6" r="1.25" fill="currentColor" stroke="none"/><path d="M2.8 10.2v3.4M21.2 10.2v3.4M9 20.8h6M12 17v3.8"/>',
     "cube": '<path d="m12 2 9 5v10l-9 5-9-5V7l9-5Z"/><path d="m3 7 9 5 9-5M12 12v10"/>',
     "book": '<path d="M4 4h6a3 3 0 0 1 3 3v13a2 2 0 0 0-2-2H4V4Zm16 0h-6a3 3 0 0 0-3 3v13a2 2 0 0 1 2-2h7V4Z"/>',
     "users": '<circle cx="9" cy="8" r="3.5"/><path d="M2 20c0-3.5 3-6 7-6s7 2.5 7 6M16 4.5a3.5 3.5 0 0 1 0 7M18 14c2.5.5 4 2.8 4 6"/>',
     "github": '<path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 0 0-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/>',
     "sim": '<rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4M7 12l3-3 2 2 4-4"/>',
     "check": '<path d="m5 12 5 5L20 7"/>',
+    "grid": '<rect x="3.5" y="5" width="17" height="14" rx="1.5"/><path d="M3.5 9.67h17M3.5 14.33h17M7.75 5v14M12 5v14M16.25 5v14"/>',
+    "sliders": '<path d="M4 6h9m4 0h3M4 12h3m4 0h9M4 18h11m4 0h1"/><circle cx="15" cy="6" r="2"/><circle cx="9" cy="12" r="2"/><circle cx="17" cy="18" r="2"/>',
+    "code": '<path d="m8 7-5 5 5 5m8-10 5 5-5 5M13.5 5l-3 14"/>',
+    "net": '<path stroke-width="1" d="M4 4.5 12 8M4 4.5 12 16M4 12l8-4M4 12l8 4M4 19.5 12 8M4 19.5 12 16M12 8l8 4M12 16l8-4"/><g fill="currentColor" stroke="none"><circle cx="4" cy="4.5" r="2"/><circle cx="4" cy="12" r="2"/><circle cx="4" cy="19.5" r="2"/><circle cx="12" cy="8" r="2"/><circle cx="12" cy="16" r="2"/><circle cx="20" cy="12" r="2"/></g>',
 }
 
 
@@ -267,7 +287,7 @@ class Renderer:
                 i += 1; continue
 
             # Container :::kind[title]
-            m = re.match(r"^(:{3,})(note|tip|caution|danger|steps|tabs|cards)(?:\[(.*)\])?\s*$", stripped)
+            m = re.match(r"^(:{3,})(note|tip|caution|danger|steps|tabs|cards|timeline|community)(?:\[(.*)\])?\s*$", stripped)
             if m:
                 fence = m.group(1)
                 j, depth, body = i + 1, 0, []
@@ -478,6 +498,49 @@ class Renderer:
                 btns.append(f'<button role="tab" id="tab-{g}-{k}" aria-controls="panel-{g}-{k}" aria-selected="{sel}" tabindex="{0 if k == 0 else -1}" data-label="{html.escape(plain(label), quote=True)}">{inline(label)}</button>')
                 panels.append(f'<div role="tabpanel" id="panel-{g}-{k}" aria-labelledby="tab-{g}-{k}"{"" if k == 0 else " hidden"}>{self.render(rest)}</div>')
             return f'<div class="tabs" data-sync="{sync}"><div role="tablist">{"".join(btns)}</div>{"".join(panels)}</div>'
+        if kind == "timeline":
+            return timeline_html()
+        if kind == "community":
+            # Approved community robots, one "#### Name | link | /image" block each with a one-line credit under it.
+            # Renders as one more timeline row ("Community"); with no entries it renders nothing.
+            tiles = []
+            for head, rest in self.split_h4(body):
+                bits = [b.strip() for b in head.split("|")]
+                t, href, img = (bits + ["", ""])[:3]
+                self._text(t)
+                credit = " ".join(l.strip() for l in rest if l.strip() and not l.strip().startswith("<!--"))
+                inner = (f'<span class="tl-media"><img src="{html.escape(img, quote=True)}" alt="" loading="lazy" decoding="async"></span>'
+                         f'<span class="tl-title">{inline(t)}</span>'
+                         + (f'<span class="tl-credit">{inline(credit)}</span>' if credit else ""))
+                tiles.append(f'<li class="tl-tile"><a{link_attrs(href)}>{inner}</a></li>' if href
+                             else f'<li class="tl-tile"><span>{inner}</span></li>')
+            if not tiles:
+                return ""
+            return ('<div class="tl tl-community"><div class="tl-row"><div class="tl-label"><p class="tl-year">Community</p>'
+                    '<div class="tl-nav" hidden><button type="button" data-dir="-1" aria-label="Scroll back">‹</button>'
+                    '<button type="button" data-dir="1" aria-label="Scroll forward">›</button></div></div>'
+                    '<div class="tl-lane" role="region" aria-label="Community robots" tabindex="0"><ol class="tl-items">'
+                    f'<li class="tl-node"><ul class="tl-tiles">{"".join(tiles)}</ul></li></ol></div></div></div>')
+        if kind == "cards" and (title or "").strip() == "flow":
+            # :::cards[flow] = big icon steps joined by arrows; each "#### Title | link | icon", no body
+            # A step with text under its heading opens that text as a small card instead of following the link
+            # (the link stays as the no-JavaScript fallback).
+            steps = []
+            for k, (head, rest) in enumerate(self.split_h4(body), 1):
+                bits = [b.strip() for b in head.split("|")]
+                t, href, ic = (bits + ["", ""])[:3]
+                self._text(t)
+                inner = (f'<span class="flow-icon">{icon(ic)}</span>'
+                         f'<span class="flow-step" aria-hidden="true">{k:02d}</span><span class="flow-label">{inline(t)}</span>')
+                card, attrs = "", ""
+                if any(l.strip() for l in rest):
+                    cid = f"flow-card-{k}"
+                    attrs = f' data-flow-card aria-haspopup="dialog" aria-expanded="false" aria-controls="{cid}"'
+                    card = (f'<div class="flow-card" id="{cid}" role="dialog" aria-label="{html.escape(plain(t), quote=True)}" hidden>'
+                            f'{self.render(rest)}<button type="button" class="flow-card-close" aria-label="Close">'
+                            '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>')
+                steps.append(f'<li><a{link_attrs(href)}{attrs}>{inner}</a>{card}</li>' if href else f'<li><span>{inner}</span>{card}</li>')
+            return f'<ol class="flow">{"".join(steps)}</ol>'
         if kind == "cards":
             # :::cards[path] = an ordered route: an <ol>, each card numbered in place of its icon
             path = (title or "").strip() == "path"
@@ -551,8 +614,78 @@ def fmt_date(iso: str) -> str:
 LOGO = ('<svg class="logo" viewBox="0 0 40 40" aria-hidden="true"><rect x="2.5" y="2.5" width="35" height="35" rx="7" class="logo-plate"/>'
         '<path d="M13 9v22M20 9v22M27 9v22" class="logo-sense"/><path d="M9 15.5h22M9 24.5h22" class="logo-drive"/>'
         '<circle cx="20" cy="24.5" r="3.4" class="logo-dot"/></svg>')
-GH_SVG = ('<svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0a8 8 0 0 0-2.53 15.59c.4.07.55-.17.55-.38v-1.33c-2.23.48-2.7-1.07-2.7-1.07-.36-.93-.89-1.17-.89-1.17-.73-.5.05-.49.05-.49.8.06 1.23.83 1.23.83.72 1.22 1.88.87 2.33.66.07-.52.28-.87.5-1.07-1.78-.2-3.65-.89-3.65-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.6 7.6 0 0 1 4 0c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.28.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48v2.2c0 .21.15.46.55.38A8 8 0 0 0 8 0Z"/></svg>')
+# GitHub card in the header, the same as the homepage's (logo, name, live star and fork counts).
+GH_LOGO = '<svg class="gh-logo" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"/></svg>'
+GH_STAR = '<svg class="gh-icon" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.751.751 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Zm0 2.445L6.615 5.5a.75.75 0 0 1-.564.41l-3.097.45 2.24 2.184a.75.75 0 0 1 .216.664l-.528 3.084 2.769-1.456a.75.75 0 0 1 .698 0l2.77 1.456-.53-3.084a.75.75 0 0 1 .216-.664l2.24-2.183-3.096-.45a.75.75 0 0 1-.564-.41L8 2.694Z"/></svg>'
+GH_FORK = '<svg class="gh-icon" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M5 5.372v.878c0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75v-.878a2.25 2.25 0 1 1 1.5 0v.878a2.25 2.25 0 0 1-2.25 2.25h-1.5v2.128a2.251 2.251 0 1 1-1.5 0V8.5h-1.5A2.25 2.25 0 0 1 3.5 6.25v-.878a2.25 2.25 0 1 1 1.5 0ZM5 3.25a.75.75 0 1 0-1.5 0 .75.75 0 0 0 1.5 0Zm6.75.75a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm-3 8.75a.75.75 0 1 0-1.5 0 .75.75 0 0 0 1.5 0Z"/></svg>'
+
+
+def gh_card() -> str:
+    """The homepage's GitHub card. Its starting counts are the homepage's; the page script refreshes them."""
+    home = (REPO / "index.html").read_text(encoding="utf-8")
+    stars = re.search(r"data-gh-stars>([^<]*)<", home)
+    forks = re.search(r"data-gh-forks>([^<]*)<", home)
+    st, fk = (stars.group(1) if stars else "–"), (forks.group(1) if forks else "–")
+    return (f'<a class="gh-card" href="https://github.com/FlexiTac/FlexiTac" target="_blank" rel="noopener" data-gh-badge '
+            f'aria-label="FlexiTac on GitHub: {st} stars, {fk} forks">{GH_LOGO}<span class="gh-text"><span class="gh-name">FlexiTac</span>'
+            f'<span class="gh-stats"><span>{GH_STAR}<span data-gh-stars>{st}</span></span>'
+            f'<span>{GH_FORK}<span data-gh-forks>{fk}</span></span></span></span></a>')
 DISCORD_SVG = ('<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M20.3 4.4A19.8 19.8 0 0 0 15.4 3l-.6 1.3a18.3 18.3 0 0 0-5.5 0L8.6 3a19.7 19.7 0 0 0-4.9 1.5C.6 9.1-.3 13.7.1 18.2a19.9 19.9 0 0 0 6 3l1.3-2a13 13 0 0 1-2-1l.5-.4a14.2 14.2 0 0 0 12.2 0l.5.4c-.6.4-1.3.7-2 1l1.3 2a19.8 19.8 0 0 0 6-3c.5-5.2-.9-9.8-3.6-13.8ZM8 15.4c-1.2 0-2.2-1.1-2.2-2.4s1-2.4 2.2-2.4 2.2 1.1 2.2 2.4-1 2.4-2.2 2.4Zm8 0c-1.2 0-2.2-1.1-2.2-2.4s1-2.4 2.2-2.4 2.2 1.1 2.2 2.4-1 2.4-2.2 2.4Z"/></svg>')
+
+
+def timeline_html() -> str:
+    """The homepage timeline (index.html, section#timeline) as compact year rows of poster tiles.
+
+    The homepage stays the one source of truth: add a node there, rebuild the docs, and it appears here too.
+    Only the poster, short title, venue pill and link of each work are used (no videos, no pop-ups).
+    """
+    page = (REPO / "index.html").read_text(encoding="utf-8")
+    a = page.index('<ol class="ft-tl-rows"')
+    sec = re.sub(r'<template class="ft-tl-detail">.*?</template>', "", page[a:page.index("</section>", a)], flags=re.S)
+    text = lambda h: html.unescape(re.sub(r"\s+", " ", re.sub(r"<[^>]+>", "", h))).strip()
+    rows, n_tiles = [], 0
+    for row in re.split(r'<li class="ft-tl-row[ "]', sec)[1:]:
+        year = text(re.search(r'<h3 class="ft-tl-yr"[^>]*>(.*?)</h3>', row, re.S).group(1))
+        nodes = []
+        for node in re.split(r'<li class="ft-tl-node ', row)[1:]:
+            kinds = node.split('"', 1)[0].split()
+            when = text(re.search(r"<time[^>]*>(.*?)</time>", node, re.S).group(1))
+            event = re.search(r'<span class="ft-tl-event">(.*?)</span>', node, re.S)
+            tiles = []
+            for card in re.split(r'<article class="ft-tl-card">', node)[1:]:
+                media = re.search(r'<div class="ft-tl-media([^"]*)">.*?(?:poster|src)="([^"]+)"', card, re.S)
+                link = re.search(r'class="ft-tl-title"><a[^>]*href="([^"]+)"[^>]*>(.*?)</a>', card, re.S)
+                if not (media and link):
+                    continue
+                fit = " ".join(c for c in media.group(1).split() if c in ("is-contain", "is-trim"))
+                pills = "".join(f'<span class="tl-pill">{html.escape(text(p))}</span>'
+                                for p in re.findall(r'<span class="ft-tl-pill[^"]*">(.*?)</span>', card, re.S))
+                src = "/" + media.group(2).lstrip("/")
+                href = html.unescape(link.group(1))
+                if not re.match(r"^(https?:|mailto:|/)", href):
+                    href = "/" + href                       # the homepage's own links are relative to the site root
+                tiles.append(f'<li class="tl-tile"><a{link_attrs(href)}>'
+                             f'<span class="tl-media {fit}"><img src="{html.escape(src, quote=True)}" alt="" loading="lazy" decoding="async"></span>'
+                             f'<span class="tl-title">{html.escape(text(link.group(2)))}</span>{pills}</a></li>')
+            if not tiles:
+                continue                                   # the "work begins" origin node has no tile
+            n_tiles += len(tiles)
+            label = html.escape(when) + (f' · {html.escape(text(event.group(1)))}' if event else "")
+            mark = " is-hollow" if "is-platform" in kinds else ""
+            nodes.append(f'<li class="tl-node{mark}"><p class="tl-when">{label}</p><ul class="tl-tiles">{"".join(tiles)}</ul></li>')
+        if nodes:
+            rows.append((year, nodes))
+    if n_tiles < 5:
+        raise SystemExit("timeline: found only %d works in index.html; did the homepage timeline markup change?" % n_tiles)
+    out = []
+    for k, (year, nodes) in enumerate(rows):
+        now = " is-now" if k == len(rows) - 1 else ""
+        out.append(f'<div class="tl-row{now}"><div class="tl-label"><p class="tl-year">{html.escape(year)}</p>'
+                   f'<div class="tl-nav" hidden><button type="button" data-dir="-1" aria-label="Scroll back">‹</button>'
+                   f'<button type="button" data-dir="1" aria-label="Scroll forward">›</button></div></div>'
+                   f'<div class="tl-lane" role="region" aria-label="{html.escape(year, quote=True)}" tabindex="0">'
+                   f'<ol class="tl-items">{"".join(nodes)}</ol></div></div>')
+    return f'<div class="tl">{"".join(out)}</div>'
 
 
 def sidebar(cur: str, pages: dict) -> str:
@@ -568,7 +701,8 @@ def sidebar(cur: str, pages: dict) -> str:
                 p = pages[e]
                 curr = ' aria-current="page"' if e == cur else ""
                 sub = ' class="sub"' if p.get("sub") else ""            # front matter sidebar_sub: true
-                items.append(f'<li{sub}><a href="{url_for(e)}"{curr}>{html.escape(p["label"])}</a></li>')
+                soon = '<span class="soon">Soon</span>' if p.get("pending") else ""     # front matter status: pending
+                items.append(f'<li{sub}><a href="{url_for(e)}"{curr}>{html.escape(p["label"])}{soon}</a></li>')
         groups.append(f'<details class="group" open><summary>{html.escape(label)}</summary><ul>{"".join(items)}</ul></details>')
     return "".join(groups)
 
@@ -594,7 +728,7 @@ def page_html(slug: str, p: dict, pages: dict, order: list[str]) -> str:
         pager += f'<a class="next" href="{url_for(next_s)}" rel="next"><span>Next</span><strong>{html.escape(pages[next_s]["label"])}</strong></a>'
     pager += "</nav>"
     src_rel = p["src"].relative_to(PAGES).as_posix()
-    toc = toc_html(p["toc"], title) if p["toc"] else ""
+    toc = toc_html(p["toc"], title) if p["toc"] and not p["splash"] else ""
     issue = f'{ISSUE_URL}?title={html.escape("Docs: " + title, quote=True).replace(" ", "+")}&amp;labels=documentation'
     full_title = "FlexiTac Docs" if slug == "" else f"{title} | FlexiTac Docs"
     canon = SITE + url_for(slug)
@@ -634,7 +768,7 @@ def page_html(slug: str, p: dict, pages: dict, order: list[str]) -> str:
   </button>
   <nav class="hlinks" aria-label="Site">
     <a class="txt" href="/">Home</a>
-    <a class="ico" href="https://github.com/FlexiTac/FlexiTac" target="_blank" rel="noopener" aria-label="GitHub">{GH_SVG}</a>
+    {gh_card()}
     <a class="ico" href="https://discord.gg/6gw887Vxms" target="_blank" rel="noopener" aria-label="Discord">{DISCORD_SVG}</a>
     <button class="ico theme" type="button" data-theme-toggle aria-label="Theme: auto" title="Theme: auto">
       <svg class="t-auto" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 4a8 8 0 0 1 0 16Z" fill="currentColor"/></svg>
@@ -651,7 +785,7 @@ def page_html(slug: str, p: dict, pages: dict, order: list[str]) -> str:
   </nav>
   <div class="main">
     {mobile_toc}
-    <div class="content-row">
+    <div class="content-row{' splash' if p['splash'] else ''}">
       <main id="content" class="content" tabindex="-1">
         <div class="hero" id="_top">
           <h1>{inline(title)}</h1>
@@ -707,9 +841,11 @@ def build(check: bool = False) -> int:
             "title": meta.get("title", slug or "FlexiTac Docs"),
             "label": meta.get("sidebar_label") or meta.get("title", slug),
             "sub": str(meta.get("sidebar_sub", "")).lower() == "true",
+            "pending": meta.get("status", "") == "pending",
             "description": meta.get("description", ""),
             "body": body, "toc": r.toc, "src": src, "sections": r.sections,
             "updated": last_updated(src),
+            "splash": meta.get("layout", "") == "splash",
         }
 
     outputs: dict[Path, str] = {}
@@ -723,6 +859,15 @@ def build(check: bool = False) -> int:
                 continue
             index.append({"p": p["title"], "h": s["h"], "u": url_for(slug) + ("" if s["a"] == "_top" else "#" + s["a"]),
                           "x": text[:600]})
+    for old, (new, anchors) in REDIRECTS.items():
+        to = url_for(new)
+        outputs[out_for(old)] = (
+            f'<!doctype html>\n<html lang="en"><head><meta charset="utf-8"><title>Moved | FlexiTac Docs</title>'
+            f'<meta name="robots" content="noindex"><link rel="canonical" href="{SITE}{to}">'
+            f'<meta http-equiv="refresh" content="0; url={to}">'
+            f'<script>var m = {json.dumps(anchors)}, h = location.hash, t = h in m ? m[h] : h;'
+            f'location.replace(t.charAt(0) === "/" ? t : "{to}" + t);</script></head>'
+            f'<body><p>This page moved to <a href="{to}">{html.escape(pages[new]["title"])}</a>.</p></body></html>\n')
     outputs[DOC / "assets" / "search-index.json"] = json.dumps(index, ensure_ascii=False, separators=(",", ":"))
 
     # Sitemap for search engines; the site's /robots.txt points here. Unlisted pages are public too, so they're in it.
@@ -750,7 +895,7 @@ def build(check: bool = False) -> int:
                 if not (target.exists() or (target / "index.html").exists()) and not href.startswith(("/learn",)):
                     problems.append(f"{slug or 'index'}: missing file {href}")
         for src in re.findall(r'src="(/[^"]+)"', pages[slug]["body"]):
-            if not (REPO / unquote(src.lstrip("/"))).exists():
+            if not (REPO / unquote(src.lstrip("/").split("?")[0])).exists():
                 problems.append(f"{slug or 'index'}: missing image {src}")
     for pr in problems:
         print("LINK:", pr, file=sys.stderr)

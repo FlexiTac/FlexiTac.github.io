@@ -8,8 +8,8 @@ You have a sensor streaming data. What comes next depends on your goal. Each sec
 ## Learn with touch {#learn}
 
 :::cards
-#### Learn on a real robot | /doc/robot-learning/ | robot
-Mount the sensor, collect visuo-tactile demonstrations and train policies, with LeFlexiTac on a low-cost arm or Touch in the Wild with a handheld gripper.
+#### Collect tactile data | /doc/robot-learning/data-collection/ | robot
+Mount the sensor and record visuo-tactile demonstrations, with LeFlexiTac on a low-cost arm or Touch in the Wild with a handheld gripper.
 
 #### Tactile simulation | /doc/simulation/ | sim
 Build the FlexiTac simulation in Isaac Sim, replay tactile trajectories and record demonstrations in the browser. Plus VT-Refine.

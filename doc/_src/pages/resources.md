@@ -40,7 +40,7 @@ The parts to buy (Velostat, laminating sheets, polyimide tape, cables, Arduino N
 | **Touch in the Wild** (NeurIPS 2025): handheld visuo-tactile data collection | [Project](https://binghao-huang.github.io/touch_in_the_wild/) · [Paper](https://arxiv.org/abs/2507.15062) · [Code](https://github.com/XinyueZhuXY/touch_in_the_wild) · [Data collection](https://github.com/XinyueZhuXY/touch_in_the_wild-data-collection) · [Gripper guide](https://docs.google.com/document/d/1Gxd2PzVo-sH_XbvnVw_r3eI5i3I3t0rr7JdhpN1PJMA/edit?tab=t.0#heading=h.dcjpnwh7wh40) · [Dataset](https://huggingface.co/datasets/binghaohuang-robot/touch_in_the_wild-dataset) · [Pretrained encoder](https://huggingface.co/xinyue-zhu/pretrained_mae) · [Video](https://www.youtube.com/watch?v=gMoedqqJ0Rg) |
 | **3D-ViTac** (CoRL 2024): the visuo-tactile point cloud | [Project](https://binghao-huang.github.io/3D-ViTac/) · [Paper](https://arxiv.org/abs/2410.24091) · [Training code](https://github.com/binghao-huang/3d-vitac-training-code) · [Video](https://www.youtube.com/watch?v=ZN3mHMNZC7Q) |
 
-How to use them: [Learn on a real robot](/doc/robot-learning/).
+How to use them: [Data collection](/doc/robot-learning/data-collection/), then the other [Learning with FlexiTac](/doc/robot-learning/imitation-learning/) pages.
 
 ## Simulation {#simulation}
 
@@ -75,4 +75,6 @@ How to use them: [Tactile simulation](/doc/simulation/).
 
 - The 3D sensor on the [Introduction](/doc/) is rendered from the V2 Gerbers on the UMI soft finger from [HandUMI](https://github.com/murobotics-ai/handumi-hw) (Apache-2.0), and shown with [model-viewer](https://modelviewer.dev/) (Apache-2.0).
 - The FPC drawings, the exploded view and the colours of the boards follow [Learn FlexiTac](/learn/).
+- The sample clips on [Data collection](/doc/robot-learning/data-collection/) come from the [LeFlexiTac](https://tna001-ai.github.io/LeFlexiTac/) and [Touch in the Wild](https://binghao-huang.github.io/touch_in_the_wild/) project pages.
+- The xArm render in the Introduction's Design card comes from the [FlexiTac-Gen](/flexitac-gen/) library: the gripper is UFACTORY's 3D model, and the sensor is the FlexiTac V2 design.
 - The FlexiTac hardware is © 2026 Columbia University, licensed under [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/). PyFlexiTac is MIT-licensed. Other projects carry their own licenses.

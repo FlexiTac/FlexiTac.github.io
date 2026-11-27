@@ -1,0 +1,81 @@
+name: Share your robot
+description: Show what you built with FlexiTac. We review every submission before featuring it on flexitac.github.io.
+title: "[Robot]: "
+labels: ["community-build"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for sharing your build! A maintainer reviews each submission and may ask a question or two in this thread.
+        **Nothing appears on the FlexiTac site until it's approved.** Approved robots are featured on the docs
+        (https://flexitac.github.io/doc/), with credit to you and a link to your project.
+
+        Note that this issue itself is public. If you'd rather share unpublished work privately first, ask on
+        [Discord](https://discord.gg/6gw887Vxms).
+  - type: input
+    id: name
+    attributes:
+      label: Robot or project name
+      description: A short name for the tile on the site.
+      placeholder: e.g. FlexiTac on a Robotiq 2F-85
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: What did you build?
+      description: Which robot, gripper or hand, how many sensors, and what you use touch for. Two to four sentences.
+    validations:
+      required: true
+  - type: dropdown
+    id: sensor
+    attributes:
+      label: Sensor
+      options:
+        - FlexiTac V2 (standard)
+        - Custom shape from FlexiTac-Gen
+        - Custom shape, my own design
+        - Modified or other
+    validations:
+      required: true
+  - type: dropdown
+    id: status
+    attributes:
+      label: Status
+      options:
+        - Tested on hardware in real tasks
+        - Working prototype
+        - Work in progress
+    validations:
+      required: true
+  - type: textarea
+    id: media
+    attributes:
+      label: Photo or video
+      description: >-
+        Drag in a photo (landscape works best) or a short video, or paste a link to one. This image becomes your tile
+        on the site. Only include people who agreed to be shown.
+    validations:
+      required: true
+  - type: textarea
+    id: links
+    attributes:
+      label: Links (optional)
+      description: Project page, paper, code, CAD or a mounting guide that others can reuse.
+  - type: input
+    id: credit
+    attributes:
+      label: Credit
+      description: How should we credit you? Name, team or lab, and an optional link.
+      placeholder: e.g. Jane Doe, Example Robotics Lab
+    validations:
+      required: true
+  - type: checkboxes
+    id: permission
+    attributes:
+      label: Permission
+      options:
+        - label: I took these photos and videos, or I have permission to share them.
+          required: true
+        - label: FlexiTac may show this submission on flexitac.github.io, with credit to me.
+          required: true

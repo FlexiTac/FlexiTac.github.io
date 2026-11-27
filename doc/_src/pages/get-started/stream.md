@@ -57,8 +57,8 @@ Add yourself to the `dialout` group once, then log out and back in: `sudo usermo
 #### PyFlexiTac | /doc/get-started/pyflexitac/ | wave
 Read frames in your own Python code, record datasets, run several sensors, check the signal, flash from the command line, and the wire protocol.
 
-#### Learn on a real robot | /doc/robot-learning/ | robot
-Mount the sensor on a gripper, collect demonstrations with touch and train a policy.
+#### Collect tactile data | /doc/robot-learning/data-collection/ | robot
+Mount the sensor on a gripper and record demonstrations with touch, then train a policy on them.
 
 #### Troubleshooting | /doc/get-started/troubleshooting/ | lifebuoy
 No port, no frames, a scrambled picture or dead rows, by symptom.

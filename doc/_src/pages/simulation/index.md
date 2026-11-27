@@ -108,7 +108,7 @@ Each finger has a pad with a 12 × 32 grid of taxels at 2 mm pitch, the same lay
 
 ## VT-Refine {#vt-refine}
 
-[VT-Refine](https://binghao-huang.github.io/vt_refine/) (CoRL 2025) trains bimanual assembly policies in three stages, from real to sim and back to real. It first trains a diffusion policy on about 30 real demonstrations per task. Each demonstration records FlexiTac pads on all four fingers together with a camera point cloud, the representation from [3D-ViTac](/doc/robot-learning/#research). Next it fine-tunes that policy in a simulated copy of the setup with large-scale, GPU-parallel reinforcement learning. Finally it moves the policy back to the real robot. The tasks are plug–socket insertions done in mid-air.
+[VT-Refine](https://binghao-huang.github.io/vt_refine/) (CoRL 2025) trains bimanual assembly policies in three stages, from real to sim and back to real. It first trains a diffusion policy on about 30 real demonstrations per task. Each demonstration records FlexiTac pads on all four fingers together with a camera point cloud, the representation from [3D-ViTac](/doc/robot-learning/tactile-representation/#3d-vitac). Next it fine-tunes that policy in a simulated copy of the setup with large-scale, GPU-parallel reinforcement learning. Finally it moves the policy back to the real robot. The tasks are plug–socket insertions done in mid-air.
 
 The repository has the simulation and training side: a Docker environment, the simulated environments with their tactile model, training configs, and a script that downloads about 909 MB of pre-training data. It does not include trained checkpoints or code for collecting data or running on a real robot.
 
