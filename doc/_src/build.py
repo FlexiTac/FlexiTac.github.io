@@ -49,7 +49,7 @@ BASE = "/doc/"
 SITE = "https://flexitac.github.io"
 EDIT_BASE = "https://github.com/FlexiTac/FlexiTac.github.io/edit/main/doc/_src/pages/"
 ISSUE_URL = "https://github.com/FlexiTac/FlexiTac.github.io/issues/new"
-ASSET_VERSION = "20261126"
+ASSET_VERSION = "20261126b"
 
 # --------------------------------------------------------------------------------------------
 # Navigation: the one place that decides page order (sidebar, prev/next).
@@ -91,7 +91,7 @@ UNLISTED = ["resources", "get-started/pyflexitac"]
 # search results working). Slug -> (new slug, {old #anchor: new #anchor, or a /doc/ path for one that moved page}).
 REDIRECTS = {"robot-learning": ("robot-learning/data-collection", {
     "#leflexitac": "#teleoperation", "#touch-in-the-wild": "#umi", "#mount": "#tips", "#choose": "",
-    "#research": "/doc/robot-learning/tactile-representation/#3d-vitac"})}
+    "#research": "/doc/robot-learning/tactile-representation/#3d"})}
 
 # --------------------------------------------------------------------------------------------
 # Inline Markdown

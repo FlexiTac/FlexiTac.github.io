@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://flexitac.github.io/doc/</loc><lastmod>2026-11-25</lastmod></url>
+  <url><loc>https://flexitac.github.io/doc/</loc><lastmod>2026-11-26</lastmod></url>
   <url><loc>https://flexitac.github.io/doc/get-started/</loc><lastmod>2026-11-25</lastmod></url>
   <url><loc>https://flexitac.github.io/doc/get-started/order-parts/</loc><lastmod>2026-11-25</lastmod></url>
   <url><loc>https://flexitac.github.io/doc/get-started/fabricate/</loc><lastmod>2026-11-25</lastmod></url>
-  <url><loc>https://flexitac.github.io/doc/get-started/stream/</loc><lastmod>2026-11-25</lastmod></url>
+  <url><loc>https://flexitac.github.io/doc/get-started/stream/</loc><lastmod>2026-11-26</lastmod></url>
   <url><loc>https://flexitac.github.io/doc/get-started/troubleshooting/</loc><lastmod>2026-11-25</lastmod></url>
-  <url><loc>https://flexitac.github.io/doc/get-started/next-steps/</loc><lastmod>2026-11-25</lastmod></url>
+  <url><loc>https://flexitac.github.io/doc/get-started/next-steps/</loc><lastmod>2026-11-26</lastmod></url>
   <url><loc>https://flexitac.github.io/doc/robot-learning/data-collection/</loc><lastmod>2026-11-26</lastmod></url>
   <url><loc>https://flexitac.github.io/doc/robot-learning/tactile-representation/</loc><lastmod>2026-11-26</lastmod></url>
   <url><loc>https://flexitac.github.io/doc/robot-learning/imitation-learning/</loc><lastmod>2026-11-26</lastmod></url>
@@ -14,7 +14,7 @@
   <url><loc>https://flexitac.github.io/doc/robot-learning/reinforcement-learning/</loc><lastmod>2026-11-26</lastmod></url>
   <url><loc>https://flexitac.github.io/doc/robot-learning/pretraining/</loc><lastmod>2026-11-26</lastmod></url>
   <url><loc>https://flexitac.github.io/doc/robot-learning/world-models/</loc><lastmod>2026-11-26</lastmod></url>
-  <url><loc>https://flexitac.github.io/doc/simulation/</loc><lastmod>2026-11-25</lastmod></url>
-  <url><loc>https://flexitac.github.io/doc/resources/</loc><lastmod>2026-11-25</lastmod></url>
+  <url><loc>https://flexitac.github.io/doc/simulation/</loc><lastmod>2026-11-26</lastmod></url>
+  <url><loc>https://flexitac.github.io/doc/resources/</loc><lastmod>2026-11-26</lastmod></url>
   <url><loc>https://flexitac.github.io/doc/get-started/pyflexitac/</loc><lastmod>2026-11-25</lastmod></url>
 </urlset>

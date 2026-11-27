@@ -135,5 +135,14 @@ To decline, close the issue with a short, kind note. Papers and projects that do
   (no frame, a soft shadow, works in both themes). The FPC layouts on *Order parts* come from
   `tools/fpc_svg.py`, which draws them from Learn FlexiTac's Gerber-traced geometry:
   `python3 doc/_src/tools/fpc_svg.py [path/to/learn_flexitac/flexitac-anatomy/shared/data]`.
+- *Tactile representation* has a point cloud viewer, `doc/assets/pcv.js`. The page loads the script itself, and
+  the viewer reads `doc/assets/data/isaac-aloha.{json,bin}` and its picture atlas `isaac-aloha-rgb.webp` (the JSON
+  describes the layout; each pad's points are stored column by column). They are recorded by
+  `tools/isaac_sample.py` in a [FlexiTac-IsaacSim-Simulation](https://github.com/binghao-huang/FlexiTac-IsaacSim-Simulation)
+  environment (main branch: Isaac Sim 6.2 + Isaac Lab 3.0; see the script's docstring). It replays one bundled
+  plug–socket demonstration; the pictures and the depth behind the camera points come from the env's RTX camera, and
+  the cloud is cropped just above the table top. The page shows frame 63.
+  `python3 doc/_src/tools/tactile_svg.py 63 2` redraws the 2D map figure from the same data, and
+  `doc/assets/img/isaac-frame.webp` is the viewer's still image for readers without JavaScript.
 - A photo already cut out onto pure black becomes a transparent cut-out with
   `python3 doc/_src/tools/cutout_black.py in.webp out.webp` (the reading boards: `reading-board-*-cut.webp`).

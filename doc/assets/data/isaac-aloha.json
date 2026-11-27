@@ -1,0 +1,37 @@
+{
+ "source": "FlexiTac-IsaacSim-Simulation (Isaac Sim 6.2, Isaac Lab 3.0): ALOHA with the UMI gripper, plug-socket episode 3 of dataset_train.npz, WarpSdf tactile sensors, RTX camera (RGB and depth)",
+ "frames": 129,
+ "nPc": 1024,
+ "nTac": 1536,
+ "joints": 16,
+ "rows": 12,
+ "cols": 32,
+ "unit": 0.0005,
+ "origin": [
+  -0.085138,
+  -0.12456,
+  0.01163
+ ],
+ "hz": 30.0,
+ "normalOffset": 0.0029,
+ "camera": {
+  "pos": [
+   -0.4,
+   0.0,
+   0.33
+  ],
+  "target": [
+   0.0,
+   0.0,
+   0.1
+  ],
+  "fovy": 36.259
+ },
+ "rgb": {
+  "src": "/doc/assets/data/isaac-aloha-rgb.webp",
+  "cols": 10,
+  "w": 256,
+  "h": 192
+ },
+ "layout": "uint16 camera points [frames][nPc][3], uint16 tactile points [frames][nTac][3] (origin + value * unit, metres), uint8 readings [frames][nTac], pad to 4, float32 joints [frames][16] scaled to -1..1 by the dataset normalizer"
+}
