@@ -344,3 +344,40 @@ main.lib { --lib-gutter:clamp(24px,5vw,76px); --lib-gap:20px; display:block; max
 @media (max-width:899px) { .lib-detail-showcase .lib-frame { width:100%; max-width:440px; justify-self:center; } .lib-detail-showcase .lib-info > * { order:0; } }
 .lib-detail-showcase .lib-badge { margin-bottom:-8px; }
 .lib-showcase-detail { margin-top:-8px; font-size:15px; line-height:1.4; color:var(--text-2); text-wrap:pretty; }
+
+/* The touch panel (the user's request of 2026-11-26: "在robo三维旋转图下方有一片区域是空白的 ... 做一个robot finger的正视图，
+   然后显示你可以用鼠标来touch,同时并排放置heatmap图 ... 注意对称，左侧都是visualization,右侧是各种参数"; library.js touchPanel,
+   cad/library_touch.js): under the 3D view's frame a frame of its own with two square panes side by side, the finger's
+   front view (pressed with the pointer: a crosshair, no scrolling from a touch on it) and the heatmap, light boxes as
+   the picture's in both schemes, at one scale; the facts' column spans both rows.  Below 900 px (one column) the panel
+   comes after the facts, so Open in Gen by Surface stays in a phone's first screen.  Its press hint as the drag hint
+   (the hand, its label, its fade at the first press), a tap in place of the sway: the page's second motion of its own,
+   off under reduced motion. */
+.lib-detail-body.has-touch { grid-template-rows:auto 1fr; row-gap:16px; }
+.lib-detail-body.has-touch > .lib-frame:first-child { grid-column:1; grid-row:1; }
+.lib-detail-body.has-touch > .lib-touch { grid-column:1; grid-row:2; align-self:start; }
+.lib-detail-body.has-touch > .lib-info { grid-column:2; grid-row:1 / span 2; }
+.lib-touch { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:6px; }
+.lib-touch[hidden] { display:none; }
+.lib-touch-pane { position:relative; aspect-ratio:1; border-radius:var(--r-md); background:#f5f5f7; overflow:hidden; }
+.lib-touch-canvas { display:block; width:100%; height:100%; }
+.lib-touch-front { container:lib-touch / inline-size; cursor:crosshair; touch-action:none; -webkit-user-select:none; user-select:none; }
+.lib-touch-front:focus-visible { outline:2px solid var(--focus); outline-offset:2px; }
+.lib-tap { position:absolute; left:0; right:0; bottom:calc(var(--lib-hint) * 12 / 44); z-index:1; display:flex; flex-direction:column; align-items:center; gap:2px; width:max-content;
+  margin:0 auto; pointer-events:none; opacity:0; transition:opacity .2s ease; --lib-hint:clamp(26px,13cqw,40px); }
+.lib-tap svg { display:block; width:auto; height:var(--lib-hint); aspect-ratio:84 / 44; overflow:visible; filter:drop-shadow(0 0 1px rgba(255,255,255,.9)) drop-shadow(0 1px 2px rgba(0,0,0,.22)); }
+.lib-tap .lib-drag-hand,.lib-tap .lib-drag-crease { transform-box:view-box; transform-origin:38px 6px; }
+.lib-tap-ring { fill:none; stroke:#1d1d1f; stroke-width:1.5; opacity:0; transform-box:fill-box; transform-origin:center; }
+.lib-touch.is-drawn .lib-tap { opacity:1; }
+.lib-touch.is-drawn .lib-tap .lib-drag-hand,.lib-touch.is-drawn .lib-tap .lib-drag-crease { animation:lib-tap-press 2.4s ease-in-out infinite; }
+.lib-touch.is-drawn .lib-tap-ring { animation:lib-tap-ring 2.4s ease-out infinite; }
+.lib-tap.is-used { opacity:0; transition:opacity .4s ease .3s; }
+.lib-tap.is-used .lib-drag-hand,.lib-tap.is-used .lib-drag-crease,.lib-tap.is-used .lib-tap-ring { animation:none; }
+@keyframes lib-tap-press { 0%, 30%, 70%, 100% { transform:translateY(0) scale(1); } 45%, 55% { transform:translateY(2px) scale(.94); } }
+@keyframes lib-tap-ring { 0%, 44% { opacity:0; transform:scale(.4); } 50% { opacity:.8; transform:scale(.6); } 90%, 100% { opacity:0; transform:scale(2.2); } }
+@container lib-touch (max-width:199px) { .lib-tap .lib-drag-label { display:none; } }
+@media (prefers-reduced-motion: reduce) { .lib-tap,.lib-tap.is-used { transition:none; }
+  .lib-touch.is-drawn .lib-tap .lib-drag-hand,.lib-touch.is-drawn .lib-tap .lib-drag-crease,.lib-touch.is-drawn .lib-tap-ring { animation:none; } }
+@media (max-width:899px) { .lib-detail-body.has-touch { grid-template-rows:none; }
+  .lib-detail-body.has-touch > .lib-frame:first-child,.lib-detail-body.has-touch > .lib-touch,.lib-detail-body.has-touch > .lib-info { grid-column:auto; grid-row:auto; }
+  .lib-detail-body.has-touch > .lib-touch { order:1; } }

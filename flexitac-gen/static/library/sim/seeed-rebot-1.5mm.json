@@ -1,0 +1,213 @@
+{
+ "format": "rss-flexitac-sensor/v1",
+ "id": "seeed-rebot-1.5mm",
+ "part": "seeed-rebot",
+ "source": "FlexiTac-Gen Library seeed-rebot-1.5mm (Seeed reBot DevArm), build surface-32x20-4453d7d4a0af",
+ "mesh_sha256": "56f349cadcf7bab472ed454f02d2013b603cfafe95bd7a25298aeb3e025fa81b",
+ "build_id": "surface-32x20-4453d7d4a0af",
+ "pitch_mm": 1.5,
+ "rows": 32,
+ "cols": 20,
+ "taxels": 354,
+ "row_spans": [
+  [
+   10,
+   11
+  ],
+  [
+   10,
+   11
+  ],
+  [
+   10,
+   11
+  ],
+  [
+   9,
+   12
+  ],
+  [
+   9,
+   12
+  ],
+  [
+   9,
+   12
+  ],
+  [
+   8,
+   13
+  ],
+  [
+   8,
+   13
+  ],
+  [
+   8,
+   13
+  ],
+  [
+   8,
+   13
+  ],
+  [
+   7,
+   14
+  ],
+  [
+   7,
+   14
+  ],
+  [
+   7,
+   14
+  ],
+  [
+   6,
+   15
+  ],
+  [
+   6,
+   15
+  ],
+  [
+   6,
+   15
+  ],
+  [
+   5,
+   16
+  ],
+  [
+   5,
+   16
+  ],
+  [
+   5,
+   16
+  ],
+  [
+   4,
+   17
+  ],
+  [
+   4,
+   17
+  ],
+  [
+   4,
+   17
+  ],
+  [
+   3,
+   18
+  ],
+  [
+   3,
+   18
+  ],
+  [
+   3,
+   18
+  ],
+  [
+   2,
+   19
+  ],
+  [
+   2,
+   19
+  ],
+  [
+   2,
+   19
+  ],
+  [
+   2,
+   19
+  ],
+  [
+   1,
+   20
+  ],
+  [
+   1,
+   20
+  ],
+  [
+   1,
+   20
+  ]
+ ],
+ "lattice_mm": {
+  "origin": [
+   -14.25,
+   -39.317241,
+   0.0
+  ],
+  "row_step": [
+   -0.0,
+   1.5,
+   -0.0
+  ],
+  "col_step": [
+   1.5,
+   0.0,
+   -0.0
+  ],
+  "normal": [
+   0.0,
+   0.0,
+   -1.0
+  ]
+ },
+ "face_mm": [
+  [
+   0.2237,
+   -41.939,
+   -0.0
+  ],
+  [
+   -0.2237,
+   -41.939,
+   -0.0
+  ],
+  [
+   -1.3197,
+   -40.9892,
+   -0.0
+  ],
+  [
+   -19.207,
+   15.6854,
+   -0.0
+  ],
+  [
+   -19.207,
+   22.8704,
+   -0.0
+  ],
+  [
+   19.207,
+   22.8704,
+   -0.0
+  ],
+  [
+   19.207,
+   15.6854,
+   -0.0
+  ],
+  [
+   1.3197,
+   -40.9892,
+   -0.0
+  ]
+ ],
+ "flat_within_mm": 0.0,
+ "use": {
+  "for": "simulation",
+  "simulator": "RoboSimStudio (FlexiTac films)",
+  "load": "rss.flexitac(sensor=\"<this file>\")",
+  "note": "The film carries this sensor's taxels only, on the robot hand whose finger is this part (matched by mesh_sha256); a part no hand carries is refused. Taxel size and layout are this build's."
+ }
+}

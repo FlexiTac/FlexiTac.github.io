@@ -1,0 +1,131 @@
+{
+ "format": "rss-flexitac-sensor/v1",
+ "id": "widowx-250-3mm",
+ "part": "widowx-250",
+ "source": "FlexiTac-Gen Library widowx-250-3mm (WidowX 250), build surface-9x9-bad0f3f1d596",
+ "mesh_sha256": "6a459bd4ef07eb5c4687e258bd9564004e741437e2e668af7ed31964567d8f90",
+ "build_id": "surface-9x9-bad0f3f1d596",
+ "pitch_mm": 3.0,
+ "rows": 9,
+ "cols": 9,
+ "taxels": 75,
+ "row_spans": [
+  [
+   2,
+   8
+  ],
+  [
+   2,
+   8
+  ],
+  [
+   2,
+   8
+  ],
+  [
+   1,
+   9
+  ],
+  [
+   1,
+   9
+  ],
+  [
+   1,
+   9
+  ],
+  [
+   1,
+   9
+  ],
+  [
+   1,
+   9
+  ],
+  [
+   1,
+   9
+  ]
+ ],
+ "lattice_mm": {
+  "origin": [
+   -41.7501,
+   13.952888,
+   11.999999
+  ],
+  "row_step": [
+   3.0,
+   -0.0,
+   -0.0
+  ],
+  "col_step": [
+   -0.0,
+   -0.0,
+   -3.0
+  ],
+  "normal": [
+   0.0,
+   1.0,
+   0.0
+  ]
+ },
+ "face_mm": [
+  [
+   -12.0,
+   13.9529,
+   5.0
+  ],
+  [
+   -16.0,
+   13.9529,
+   5.0
+  ],
+  [
+   -16.0,
+   13.9529,
+   -5.0
+  ],
+  [
+   -12.0,
+   13.9529,
+   -5.0
+  ],
+  [
+   -12.0,
+   13.9529,
+   -14.5
+  ],
+  [
+   -42.3108,
+   13.9529,
+   -12.7971
+  ],
+  [
+   -43.15,
+   13.9529,
+   -12.1011
+  ],
+  [
+   -43.15,
+   13.9529,
+   12.1011
+  ],
+  [
+   -42.3108,
+   13.9529,
+   12.7971
+  ],
+  [
+   -12.0,
+   13.9529,
+   14.5
+  ]
+ ],
+ "flat_within_mm": 0.0,
+ "use": {
+  "for": "simulation",
+  "simulator": "RoboSimStudio (FlexiTac films)",
+  "load": "rss.flexitac(sensor=\"<this file>\")",
+  "note": "The film carries this sensor's taxels only, on the robot hand whose finger is this part (matched by mesh_sha256); a part no hand carries is refused. Taxel size and layout are this build's."
+ }
+}

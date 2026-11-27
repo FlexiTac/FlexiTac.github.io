@@ -481,9 +481,13 @@
     // Closing the window goes to where its gripper is on the grid: the UMI finger's shelf, another gripper's card (the
     // page's back link's address, 2026-11-06; the window's X since 2026-11-15).
     state.place = placeOf(home);
+    // Under the 3D view the touch panel (touchPanel: the finger's front view to press and the heatmap beside it), the
+    // page's visualisations on the left and its facts on the right (the user's request of 2026-11-26).
+    const panel = touchPanel(id);
     $("libDetail").replaceChildren(
-      el("div", {className: "lib-detail-body"},
+      el("div", {className: panel ? "lib-detail-body has-touch" : "lib-detail-body"},
         gallery(variant),
+        panel,
         el("div", {className: "lib-info"},
           el("h2", {className: "lib-detail-title", id: "libDetailTitle", tabindex: "-1"}, whole(title)),
           // The separator joined to the word before it (a no-break space): a line may end with it, never start with
@@ -496,6 +500,12 @@
             orderFacts(variant.rows, variant.columns)),
           el("a", {className: "lib-open", href: `gen.html?part=${encodeURIComponent(id)}`}, "Open in Gen by Surface"),
           downloads,
+          // For simulation (tools/library_sim.py, surface.simulation): the sensor as RoboSimStudio loads it.
+          el("p", {className: "lib-links lib-sim"},
+            el("a", {href: `${BASE}sim/${id}.json`, download: `${id}.sim.json`, "data-export": "simulation",
+              title: `For simulation: RoboSimStudio loads it as rss.flexitac(sensor="${id}.sim.json") on the robot hand whose finger is this part`},
+            "Simulation config (JSON)"),
+            " · for simulation: ", el("code", {}, `rss.flexitac(sensor="${id}.sim.json")`)),
           el("p", {className: "lib-links"},
             el("a", {href: BASE + mesh.file, download: mesh.name}, `Part STL (${bytesText(mesh.bytes)})`), " · ",
             // (NOASSERTION: a source that states no licence, its text the project's note; 2026-11-16, the LeFlexiTac.  With
@@ -743,6 +753,78 @@
       mode: drawn ? drawn.mode : state.picture, drawn_mode: drawn ? drawn.drawn_mode : null, moved: drawn ? drawn.moved : false,
       gripper: drawn ? drawn.gripper : Boolean(variant?.view?.scene), offset: drawn ? drawn.offset : null, buffer: drawn ? drawn.buffer : null,
       ms: drawn ? drawn.ms : null, stage: drawn ? drawn.stage : null});
+  }
+
+  // -- the touch panel -----------------------------------------------------------------------------------------------
+  // The user's request of 2026-11-26 ("在robo三维旋转图下方有一片区域是空白的 ... 做一个robot finger的正视图，然后显示你可以用
+  // 鼠标来touch,同时并排放置heatmap图 ... 注意对称，左侧都是visualization,右侧是各种参数"): under a sensor's 3D view, in a
+  // frame of its own, the finger's front view the visitor presses (a pointer, or the arrow keys and Space) and the
+  // sensor's readings beside it, viridis, each taxel where it lies (./cad/library_touch.js: from the fit and the part's
+  // STL the 3D view loads too, canvas 2D, no WebGL); the same press on every pitch of a gripper, so its pitches' pages
+  // show what each resolves.  A press hint as the 3D view's drag hint (touchHint), faded at the first press on a
+  // gripper's page.  None on the showcase's page (no fit), with Save-Data, on the shots tool's page or once the module
+  // has failed to load; the frame shown once drawn and taken away if its files do not load.
+  const touch = {load: null, view: null, off: false, page: null, used: false};
+
+  function touchPanel(id) {
+    if (PROBE === "shoot" || navigator.connection?.saveData || touch.off || typeof ResizeObserver !== "function") return null;
+    const variant = state.index.variants[id];
+    const part = state.index.parts[variant.part];
+    const page = pageOf(id);
+    if (page !== touch.page) {
+      touch.page = page;
+      touch.used = false;
+    }
+    const hint = touch.used ? null : touchHint();
+    const front = el("div", {className: "lib-touch-pane lib-touch-front", tabindex: 0, role: "group", "aria-label": `${variant.label}: the finger seen from the front`,
+      "aria-describedby": "libTouchHint"},
+    el("span", {className: "lib-live-hint", id: "libTouchHint"}, "Press on the finger, or use the arrow keys and Space, to touch the sensor; the heatmap beside it shows each taxel's reading."),
+    hint);
+    const heat = el("div", {className: "lib-touch-pane lib-touch-heat", role: "img", "aria-label": `${variant.label}: each taxel's reading, dark to bright`});
+    const frame = el("div", {className: "lib-frame lib-touch", hidden: true}, front, heat);
+    touch.view?.clear();
+    touch.view = null;
+    if (!touch.load) touch.load = import("./cad/library_touch.js");
+    touch.load.then(module => {
+      // (A page drawn again before the module came, a pitch chosen: this frame is no longer on the page.)
+      if (!frame.isConnected) return false;
+      const view = module.createTouchView(front, heat, {onUse: () => {
+        touch.used = true;
+        hint?.classList.add("is-used");
+      }, onDraw: PROBE === null ? null : drawn => {
+        // ?probe: the panel's state for the checks, <pre id="libTouchState" hidden> as the view's libViewState.
+        let node = $("libTouchState");
+        if (!node) {
+          node = el("pre", {id: "libTouchState", hidden: true});
+          document.body.append(node);
+        }
+        node.textContent = JSON.stringify(drawn);
+      }});
+      touch.view = view;
+      frame.hidden = false;
+      return view.show({base: BASE, id, variant, part, siblings: (part.variants || [id]).map(other => state.index.variants[other]).filter(Boolean),
+        scene: variant.view?.scene || null, rules: "scenes/scenes.json"});
+    }, error => {
+      touch.off = true;
+      throw error;
+    }).then(drawn => {
+      if (drawn !== false) frame.classList.add("is-drawn");
+    }).catch(() => {
+      // A file that did not load, or a sensor not laid on its face: no panel on this page.
+      frame.remove();
+      frame.closest(".lib-detail-body")?.classList.remove("has-touch");
+    });
+    return frame;
+  }
+
+  function touchHint() {
+    // The 3D view's hint's hand (dragHint), pressing, over "Press to touch", at the bottom centre of the front view.
+    const drawing = svg("svg", {viewBox: "0 0 84 44", "aria-hidden": "true", focusable: "false"});
+    drawing.append(svg("circle", {class: "lib-tap-ring", cx: "37.6", cy: "6", r: "5"}),
+      svg("path", {class: "lib-drag-hand", d: "M34.5 29.5V5.2a3.1 3.1 0 0 1 6.2 0V16a2.8 2.8 0 0 1 5.6 0v1.6a2.8 2.8 0 0 1 5.6 0v2.2a2.6 2.6 0 0 1 5.2 0v8.4"
+        + "c0 7.4-4.4 12.6-11 12.6h-3.4c-3.4 0-5.9-1.3-7.9-3.9l-5.6-7.3a2.75 2.75 0 0 1 4.1-3.6Z"}),
+      svg("path", {class: "lib-drag-crease", d: "M40.7 16v6.4M46.3 17.6v5.6M51.9 19.8v4.6"}));
+    return el("span", {className: "lib-tap", "aria-hidden": "true"}, drawing, el("span", {className: "lib-drag-label"}, "Press to touch"));
   }
 
   function renderDownloads(box, id) {

@@ -1,0 +1,223 @@
+{
+ "format": "rss-flexitac-sensor/v1",
+ "id": "makermods-metal-3mm",
+ "part": "makermods-metal",
+ "source": "FlexiTac-Gen Library makermods-metal-3mm (MakerMods Metal Arm), build surface-22x8-dbe5c6b7f941",
+ "mesh_sha256": "f480c8fb9fbe5027ce0741436cd3c60c77702c2eec2b80d87f5829c4adca5925",
+ "build_id": "surface-22x8-dbe5c6b7f941",
+ "pitch_mm": 3.0,
+ "rows": 22,
+ "cols": 8,
+ "taxels": 124,
+ "row_spans": [
+  [
+   4,
+   5
+  ],
+  [
+   4,
+   5
+  ],
+  [
+   4,
+   5
+  ],
+  [
+   3,
+   6
+  ],
+  [
+   3,
+   6
+  ],
+  [
+   3,
+   6
+  ],
+  [
+   3,
+   6
+  ],
+  [
+   3,
+   6
+  ],
+  [
+   3,
+   6
+  ],
+  [
+   2,
+   7
+  ],
+  [
+   2,
+   7
+  ],
+  [
+   2,
+   7
+  ],
+  [
+   2,
+   7
+  ],
+  [
+   2,
+   7
+  ],
+  [
+   1,
+   8
+  ],
+  [
+   1,
+   8
+  ],
+  [
+   1,
+   8
+  ],
+  [
+   1,
+   8
+  ],
+  [
+   1,
+   8
+  ],
+  [
+   1,
+   8
+  ],
+  [
+   1,
+   8
+  ],
+  [
+   1,
+   8
+  ]
+ ],
+ "lattice_mm": {
+  "origin": [
+   0.88376,
+   -10.499964,
+   78.136818
+  ],
+  "row_step": [
+   -0.266057,
+   -2e-06,
+   -2.98485
+  ],
+  "col_step": [
+   -2.8e-05,
+   3.0,
+   3e-06
+  ],
+  "normal": [
+   0.99592,
+   3.3e-05,
+   -0.090242
+  ]
+ },
+ "face_mm": [
+  [
+   -0.5,
+   4.0,
+   80.0
+  ],
+  [
+   -0.5,
+   -4.0,
+   80.0
+  ],
+  [
+   -0.5,
+   -8.2294,
+   56.7383
+  ],
+  [
+   -0.6083,
+   -8.6924,
+   54.1917
+  ],
+  [
+   -0.7008,
+   -8.8594,
+   53.2733
+  ],
+  [
+   -2.3998,
+   -11.5161,
+   38.6615
+  ],
+  [
+   -2.7106,
+   -11.8788,
+   35.9891
+  ],
+  [
+   -3.0238,
+   -12.0,
+   33.2949
+  ],
+  [
+   -5.2992,
+   -12.0,
+   13.7267
+  ],
+  [
+   -5.4498,
+   -12.0,
+   11.9971
+  ],
+  [
+   -5.4498,
+   12.0,
+   11.9971
+  ],
+  [
+   -5.2992,
+   12.0,
+   13.7267
+  ],
+  [
+   -3.0238,
+   12.0,
+   33.2949
+  ],
+  [
+   -2.7106,
+   11.8788,
+   35.9891
+  ],
+  [
+   -2.3998,
+   11.5161,
+   38.6615
+  ],
+  [
+   -0.7008,
+   8.8594,
+   53.2733
+  ],
+  [
+   -0.5142,
+   8.3972,
+   55.8152
+  ],
+  [
+   -0.5,
+   8.2294,
+   56.7383
+  ]
+ ],
+ "flat_within_mm": 1.386,
+ "use": {
+  "for": "simulation",
+  "simulator": "RoboSimStudio (FlexiTac films)",
+  "load": "rss.flexitac(sensor=\"<this file>\")",
+  "note": "The film carries this sensor's taxels only, on the robot hand whose finger is this part (matched by mesh_sha256); a part no hand carries is refused. Taxel size and layout are this build's."
+ }
+}

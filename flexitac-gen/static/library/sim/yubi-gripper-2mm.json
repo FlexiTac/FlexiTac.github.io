@@ -1,0 +1,97 @@
+{
+ "format": "rss-flexitac-sensor/v1",
+ "id": "yubi-gripper-2mm",
+ "part": "yubi-gripper",
+ "source": "FlexiTac-Gen Library yubi-gripper-2mm (YUBI Gripper), build surface-8x7-b41763f570bd",
+ "mesh_sha256": "36e029e3fe2590711014823c6b75b0c403b0c0a59315d565b4625318f2a46466",
+ "build_id": "surface-8x7-b41763f570bd",
+ "pitch_mm": 2.0,
+ "rows": 8,
+ "cols": 7,
+ "taxels": 40,
+ "row_spans": [
+  [
+   3,
+   5
+  ],
+  [
+   3,
+   5
+  ],
+  [
+   2,
+   6
+  ],
+  [
+   2,
+   6
+  ],
+  [
+   2,
+   6
+  ],
+  [
+   2,
+   6
+  ],
+  [
+   1,
+   7
+  ],
+  [
+   1,
+   7
+  ]
+ ],
+ "lattice_mm": {
+  "origin": [
+   1.28198,
+   26.081617,
+   6.035457
+  ],
+  "row_step": [
+   1.990591,
+   -0.0,
+   -0.193776
+  ],
+  "col_step": [
+   0.0,
+   -2.0,
+   0.0
+  ],
+  "normal": [
+   -0.096888,
+   0.0,
+   -0.995295
+  ]
+ },
+ "face_mm": [
+  [
+   0.0,
+   16.6036,
+   6.1603
+  ],
+  [
+   0.0,
+   23.5596,
+   6.1603
+  ],
+  [
+   16.7092,
+   28.596,
+   4.5337
+  ],
+  [
+   16.7092,
+   11.5672,
+   4.5337
+  ]
+ ],
+ "flat_within_mm": 0.0,
+ "use": {
+  "for": "simulation",
+  "simulator": "RoboSimStudio (FlexiTac films)",
+  "load": "rss.flexitac(sensor=\"<this file>\")",
+  "note": "The film carries this sensor's taxels only, on the robot hand whose finger is this part (matched by mesh_sha256); a part no hand carries is refused. Taxel size and layout are this build's."
+ }
+}

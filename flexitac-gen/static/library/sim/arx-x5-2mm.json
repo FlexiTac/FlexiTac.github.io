@@ -1,0 +1,208 @@
+{
+ "format": "rss-flexitac-sensor/v1",
+ "id": "arx-x5-2mm",
+ "part": "arx-x5",
+ "source": "FlexiTac-Gen Library arx-x5-2mm (ARX X5), build surface-32x25-b2efd64d84ca",
+ "mesh_sha256": "5cf0e92353f4f5787b086eb518ff1d529ea41eb07502cdc3a2979766ccdd3018",
+ "build_id": "surface-32x25-b2efd64d84ca",
+ "pitch_mm": 2.0,
+ "rows": 32,
+ "cols": 25,
+ "taxels": 424,
+ "row_spans": [
+  [
+   10,
+   14
+  ],
+  [
+   10,
+   14
+  ],
+  [
+   10,
+   14
+  ],
+  [
+   10,
+   15
+  ],
+  [
+   10,
+   15
+  ],
+  [
+   9,
+   16
+  ],
+  [
+   9,
+   16
+  ],
+  [
+   9,
+   16
+  ],
+  [
+   9,
+   17
+  ],
+  [
+   9,
+   17
+  ],
+  [
+   8,
+   17
+  ],
+  [
+   8,
+   18
+  ],
+  [
+   8,
+   18
+  ],
+  [
+   8,
+   18
+  ],
+  [
+   8,
+   19
+  ],
+  [
+   8,
+   19
+  ],
+  [
+   7,
+   20
+  ],
+  [
+   7,
+   20
+  ],
+  [
+   7,
+   20
+  ],
+  [
+   7,
+   21
+  ],
+  [
+   7,
+   21
+  ],
+  [
+   6,
+   21
+  ],
+  [
+   6,
+   22
+  ],
+  [
+   6,
+   22
+  ],
+  [
+   6,
+   22
+  ],
+  [
+   6,
+   23
+  ],
+  [
+   5,
+   23
+  ],
+  [
+   5,
+   24
+  ],
+  [
+   4,
+   24
+  ],
+  [
+   3,
+   24
+  ],
+  [
+   2,
+   25
+  ],
+  [
+   1,
+   25
+  ]
+ ],
+ "lattice_mm": {
+  "origin": [
+   69.244575,
+   8.899922,
+   38.792958
+  ],
+  "row_step": [
+   -1.978624,
+   0.0,
+   -0.279894
+  ],
+  "col_step": [
+   -0.000135,
+   -2.0,
+   0.001765
+  ],
+  "normal": [
+   -0.136599,
+   0.0,
+   0.990626
+  ]
+ },
+ "face_mm": [
+  [
+   1.0,
+   -43.6,
+   28.9
+  ],
+  [
+   56.0,
+   -23.5643,
+   37.35
+  ],
+  [
+   71.0,
+   -18.1,
+   37.35
+  ],
+  [
+   71.0,
+   -8.1,
+   37.35
+  ],
+  [
+   56.0,
+   -5.2363,
+   37.35
+  ],
+  [
+   16.0,
+   2.4,
+   31.2045
+  ],
+  [
+   1.0,
+   17.4,
+   28.9
+  ]
+ ],
+ "flat_within_mm": 1.4702,
+ "use": {
+  "for": "simulation",
+  "simulator": "RoboSimStudio (FlexiTac films)",
+  "load": "rss.flexitac(sensor=\"<this file>\")",
+  "note": "The film carries this sensor's taxels only, on the robot hand whose finger is this part (matched by mesh_sha256); a part no hand carries is refused. Taxel size and layout are this build's."
+ }
+}

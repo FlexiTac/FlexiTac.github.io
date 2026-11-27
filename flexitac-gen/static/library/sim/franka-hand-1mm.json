@@ -1,0 +1,189 @@
+{
+ "format": "rss-flexitac-sensor/v1",
+ "id": "franka-hand-1mm",
+ "part": "franka-hand",
+ "source": "FlexiTac-Gen Library franka-hand-1mm (Franka Hand), build surface-16x17-798e1ad9ba88",
+ "mesh_sha256": "3ac26349fc85ab971b81696e31ac88955f45d065ddc1254de376fea9d89b6c2c",
+ "build_id": "surface-16x17-798e1ad9ba88",
+ "pitch_mm": 1.0,
+ "rows": 16,
+ "cols": 17,
+ "taxels": 258,
+ "row_spans": [
+  [
+   3,
+   14
+  ],
+  [
+   2,
+   16
+  ],
+  [
+   2,
+   16
+  ],
+  [
+   2,
+   16
+  ],
+  [
+   2,
+   16
+  ],
+  [
+   2,
+   17
+  ],
+  [
+   1,
+   17
+  ],
+  [
+   1,
+   17
+  ],
+  [
+   1,
+   17
+  ],
+  [
+   1,
+   17
+  ],
+  [
+   1,
+   17
+  ],
+  [
+   1,
+   17
+  ],
+  [
+   1,
+   17
+  ],
+  [
+   1,
+   17
+  ],
+  [
+   1,
+   17
+  ],
+  [
+   1,
+   17
+  ]
+ ],
+ "lattice_mm": {
+  "origin": [
+   -8.008188,
+   -0.064194,
+   52.495636
+  ],
+  "row_step": [
+   0.00023,
+   0.001417,
+   -0.99999
+  ],
+  "col_step": [
+   0.999986,
+   0.000136,
+   0.000227
+  ],
+  "normal": [
+   0.000145,
+   -1.0,
+   -0.000977
+  ]
+ },
+ "face_mm": [
+  [
+   -7.818,
+   -0.04,
+   51.918
+  ],
+  [
+   -8.709,
+   -0.01,
+   49.939
+  ],
+  [
+   -8.758,
+   -0.029,
+   47.272
+  ],
+  [
+   -8.759,
+   -0.03,
+   42.724
+  ],
+  [
+   -8.772,
+   0.028,
+   36.264
+  ],
+  [
+   -2.274,
+   -0.037,
+   36.25
+  ],
+  [
+   2.27,
+   -0.034,
+   36.249
+  ],
+  [
+   8.763,
+   0.011,
+   36.266
+  ],
+  [
+   8.759,
+   -0.029,
+   42.728
+  ],
+  [
+   8.757,
+   -0.03,
+   47.272
+  ],
+  [
+   8.675,
+   -0.007,
+   50.319
+  ],
+  [
+   7.075,
+   -0.019,
+   52.769
+  ],
+  [
+   4.843,
+   -0.017,
+   53.717
+  ],
+  [
+   2.269,
+   -0.036,
+   53.746
+  ],
+  [
+   -2.268,
+   -0.036,
+   53.746
+  ],
+  [
+   -5.692,
+   0.011,
+   53.604
+  ]
+ ],
+ "flat_within_mm": 0.0522,
+ "use": {
+  "for": "simulation",
+  "simulator": "RoboSimStudio (FlexiTac films)",
+  "load": "rss.flexitac(sensor=\"<this file>\")",
+  "note": "The film carries this sensor's taxels only, on the robot hand whose finger is this part (matched by mesh_sha256); a part no hand carries is refused. Taxel size and layout are this build's."
+ }
+}

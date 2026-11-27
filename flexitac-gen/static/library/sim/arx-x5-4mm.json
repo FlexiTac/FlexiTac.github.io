@@ -1,0 +1,148 @@
+{
+ "format": "rss-flexitac-sensor/v1",
+ "id": "arx-x5-4mm",
+ "part": "arx-x5",
+ "source": "FlexiTac-Gen Library arx-x5-4mm (ARX X5), build surface-17x13-a03eb604d85b",
+ "mesh_sha256": "5cf0e92353f4f5787b086eb518ff1d529ea41eb07502cdc3a2979766ccdd3018",
+ "build_id": "surface-17x13-a03eb604d85b",
+ "pitch_mm": 4.0,
+ "rows": 17,
+ "cols": 13,
+ "taxels": 117,
+ "row_spans": [
+  [
+   6,
+   8
+  ],
+  [
+   6,
+   8
+  ],
+  [
+   6,
+   8
+  ],
+  [
+   6,
+   9
+  ],
+  [
+   6,
+   9
+  ],
+  [
+   6,
+   9
+  ],
+  [
+   5,
+   10
+  ],
+  [
+   5,
+   10
+  ],
+  [
+   5,
+   11
+  ],
+  [
+   5,
+   11
+  ],
+  [
+   5,
+   11
+  ],
+  [
+   4,
+   12
+  ],
+  [
+   4,
+   12
+  ],
+  [
+   4,
+   12
+  ],
+  [
+   3,
+   13
+  ],
+  [
+   2,
+   13
+  ],
+  [
+   1,
+   13
+  ]
+ ],
+ "lattice_mm": {
+  "origin": [
+   67.76053,
+   10.899922,
+   38.584043
+  ],
+  "row_step": [
+   -3.956816,
+   0.0,
+   -0.565453
+  ],
+  "col_step": [
+   -0.000546,
+   -4.0,
+   0.007146
+  ],
+  "normal": [
+   -0.140289,
+   0.0,
+   0.990111
+  ]
+ },
+ "face_mm": [
+  [
+   1.0,
+   -43.6,
+   28.9
+  ],
+  [
+   56.0,
+   -23.5643,
+   37.35
+  ],
+  [
+   71.0,
+   -18.1,
+   37.35
+  ],
+  [
+   71.0,
+   -8.1,
+   37.35
+  ],
+  [
+   56.0,
+   -5.2363,
+   37.35
+  ],
+  [
+   16.0,
+   2.4,
+   31.2045
+  ],
+  [
+   1.0,
+   17.4,
+   28.9
+  ]
+ ],
+ "flat_within_mm": 1.2878,
+ "use": {
+  "for": "simulation",
+  "simulator": "RoboSimStudio (FlexiTac films)",
+  "load": "rss.flexitac(sensor=\"<this file>\")",
+  "note": "The film carries this sensor's taxels only, on the robot hand whose finger is this part (matched by mesh_sha256); a part no hand carries is refused. Taxel size and layout are this build's."
+ }
+}

@@ -2907,6 +2907,8 @@ function renderDownloads() {
   const ready = downloadsReady();
   ["cadSaveMap", "cadSaveCsv", "cadSaveWrap"].forEach(id => { $(id).disabled = !ready; });
   $("cadSavePlacement").disabled = !ready || !placementDocument();
+  // For simulation (surface.simulation): none for a grid of one row or one column.
+  $("cadSaveSim").disabled = !ready || !cad.map.simulation;
   $("cadDownloadNote").textContent = ready ? `Build ${cad.map.build_id}: every file name starts with the build id.${placementDocument() ? "" : " No placement document describes this build: fit again to save one."}`
     : cad.map && cad.stale ? `Disabled: the form no longer matches build ${cad.map.build_id}. Regenerate first.`
       : "Downloads are enabled for a mapped build that matches the form.";
@@ -2961,10 +2963,11 @@ function download(kind) {
     const placement = placementDocument();
     if (placement) saveBlob(`${id}-surface-placement.json`, `${JSON.stringify(placement, null, 2)}\n`, "application/json");
   } else if (kind === "map") {
-    const {wrap_svg: _wrap, ...body} = map;
+    const {wrap_svg: _wrap, simulation: _sim, ...body} = map;
     saveBlob(`${id}-taxel-map.json`, `${JSON.stringify(body, null, 2)}\n`, "application/json");
   } else if (kind === "csv") saveBlob(`${id}-taxel-map.csv`, csvText(map), "text/csv");
   else if (kind === "wrap") saveBlob(`${id}-wrap-template.svg`, map.wrap_svg, "image/svg+xml");
+  else if (kind === "sim" && map.simulation) saveBlob(`${id}-sim.json`, `${JSON.stringify(map.simulation, null, 2)}\n`, "application/json");
 }
 
 // -- samples (gen.html #samplePalette; the user's request of 2026-11-06) ----------------------------------------
@@ -3248,6 +3251,7 @@ function wire() {
   $("cadSaveMap").addEventListener("click", () => download("map"));
   $("cadSaveCsv").addEventListener("click", () => download("csv"));
   $("cadSaveWrap").addEventListener("click", () => download("wrap"));
+  $("cadSaveSim").addEventListener("click", () => download("sim"));
   $("cadProbe").addEventListener("input", updateProbe);
   $("cadPick").addEventListener("change", event => pickSurface(event.target.value));
   document.querySelectorAll("[data-go]").forEach(button => button.addEventListener("click", () => goTo($(button.dataset.go))));
