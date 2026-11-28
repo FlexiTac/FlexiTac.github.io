@@ -371,6 +371,7 @@ html[data-theme="dark"] .theme .t-dark { display: block; }
 .figs { display: grid; grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr)); gap: 1rem; margin: 1.5rem 0 1.75rem; }
 .figs figure { margin: 0; }
 .figs.cols-3 { grid-template-columns: repeat(3, 1fr); }
+.figs.cols-2 { grid-template-columns: repeat(2, 1fr); }
 .figs.gallery img { aspect-ratio: 4 / 3; object-fit: contain; background: #fff; }
 .figs.contain img { object-fit: contain; aspect-ratio: 4 / 3; padding: .5rem; background: #0b0b0c; }
 /* exploded view with numbered markers (Fabricate a sensor) */
@@ -644,6 +645,39 @@ html[data-theme="dark"] .theme .t-dark { display: block; }
   border-left: 7px solid var(--arrow); border-top: 4.5px solid transparent; border-bottom: 4.5px solid transparent;
 }
 
+/* A flow step's subtitle (its tool or role), the Optional tag, and a side branch drawn under the row */
+.flow-sub { margin-top: .2rem; font-size: .85rem; line-height: 1.3; color: var(--muted); text-align: center; }
+.flow-tag { position: absolute; top: calc(100% + .45rem); left: 50%; transform: translateX(-50%); white-space: nowrap; padding: .08rem .55rem; border: 1px dashed var(--line-strong); border-radius: 999px; font-size: .7rem; font-weight: 600; color: var(--muted); }
+.md .flow-wrap ol.flow { margin-bottom: 0; }
+.flow-branch {
+  --nt: .5rem; --nh: 3.3rem; --nw: 12rem; --arrow: color-mix(in srgb, var(--muted) 55%, var(--bg));
+  position: relative; height: calc(var(--nt) + var(--nh)); margin-top: .4rem;
+}
+.flow-branch > span[aria-hidden] { position: absolute; pointer-events: none; }
+.fb-in {                                          /* dashed: down from step A, one turn, into the branch's left side */
+  left: var(--from); top: 0; width: calc(var(--mid) - var(--nw) / 2 - var(--from) - 8px); height: calc(var(--nt) + var(--nh) / 2 + .75px);
+  border-left: 1.5px dashed var(--arrow); border-bottom: 1.5px dashed var(--arrow); border-bottom-left-radius: 6px;
+}
+.fb-in::after { content: ""; position: absolute; right: -7px; bottom: -3.75px; border-left: 7px solid var(--arrow); border-top: 4.5px solid transparent; border-bottom: 4.5px solid transparent; }
+.fb-out {                                         /* solid: out of the branch's right side, up into step B */
+  left: calc(var(--mid) + var(--nw) / 2); width: calc(var(--to) - var(--mid) - var(--nw) / 2 + .75px); top: 7px; height: calc(var(--nt) + var(--nh) / 2 - 7px + .75px);
+  border-right: 1.5px solid var(--arrow); border-bottom: 1.5px solid var(--arrow); border-bottom-right-radius: 6px;
+}
+.fb-out::after { content: ""; position: absolute; right: -3.75px; top: -7px; border-bottom: 7px solid var(--arrow); border-left: 4.5px solid transparent; border-right: 4.5px solid transparent; }
+.fb-node {
+  position: absolute; left: calc(var(--mid) - var(--nw) / 2); top: var(--nt); width: var(--nw); height: var(--nh);
+  display: flex; align-items: center; justify-content: center; padding: 0 .75rem;
+  border: 1px solid var(--line); border-radius: 1rem; background: linear-gradient(180deg, var(--bg-raised), var(--bg-soft));
+  box-shadow: var(--tile-shadow); color: var(--text); text-decoration: none;
+  transition: border-color .18s ease, box-shadow .18s ease, transform .18s ease;
+}
+.fb-text { display: flex; flex-direction: column; align-items: center; line-height: 1.25; text-align: center; }
+.fb-text .flow-sub { margin-top: .1rem; white-space: nowrap; }
+.fb-node .flow-label { font-size: 1rem; }
+a.fb-node:hover { border-color: var(--accent-line); color: var(--text); transform: translateY(-2px); box-shadow: var(--tile-shadow), var(--shadow); }
+a.fb-node:hover .flow-label { color: var(--accent); }
+.md p.flow-note { margin: .9rem 0 2.25rem; text-align: center; font-size: .85rem; color: var(--muted); }
+
 /* A flow step's card (a step with text under it): opens under the step, its caret on the step's icon */
 .flow-card {
   position: absolute; z-index: 30; top: calc(100% + .9rem); left: 0; width: min(19rem, calc(100vw - 2rem));
@@ -794,6 +828,20 @@ html[data-theme="dark"] .theme .t-dark { display: block; }
 .md p.pcv-cap { margin: .6rem 0 1.5rem; font-size: .86rem; line-height: 1.55; color: var(--muted); }
 .md p.pcv-cap b { color: var(--text-2); font-weight: 600; }
 .figure.tmap img { border: 0; background: none; border-radius: 0; }
+/* Tactile representation: the two choices side by side, each with its facts */
+.rep2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .75rem; margin: 1.25rem 0 .5rem; }
+.rep2-card { display: flex; flex-direction: column; padding: .8rem .9rem .9rem; border: 1px solid var(--line); border-radius: var(--r-lg); background: var(--bg-raised); }
+.rep2-img { display: block; margin: 0 0 .7rem; }
+.rep2 img { display: block; width: 100%; height: 7.5rem; object-fit: contain; border: 0; border-radius: var(--r); background: var(--bg-soft); }
+.md .rep2 dd { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.md a.rep2-h { font-size: 1.02rem; font-weight: 650; color: var(--text); text-decoration: none; }
+.md a.rep2-h:hover { color: var(--accent); }
+.rep2 i { font-style: normal; font-size: .88rem; font-weight: 600; color: var(--accent); }
+.md .rep2-card p { margin: .35rem 0 0; font-size: .88rem; line-height: 1.45; color: var(--text-2); }
+.md .rep2 dl { display: grid; grid-template-columns: 5.6rem minmax(0, 1fr); gap: .3rem .6rem; margin: .75rem 0 0; padding: .7rem 0 0; border-top: 1px solid var(--line); font-size: .84rem; line-height: 1.4; }
+.md .rep2 dt { margin: 0; font-weight: 600; color: var(--muted); }
+.md .rep2 dd { margin: 0; color: var(--text-2); }
+.md p.rep2-note { margin: 0 0 1.25rem; font-size: .82rem; color: var(--muted); }
 .pcv.failed > img { display: block !important; }
 
 /* Sample data clips: looping, muted videos (docs.js plays them while on screen) */
@@ -915,6 +963,61 @@ html[data-theme="dark"] .theme .t-dark { display: block; }
 @media (prefers-reduced-motion: reduce) { .tl-media img { transition: none; } }
 .tl-credit { display: block; margin-top: .2rem; font-size: .75rem; line-height: 1.35; color: var(--muted); }
 .tl-community { margin-top: 1.4rem; }
+/* The Learning overview's panel: data sources ↓ representation ↓ learning, then research workflows */
+.lpanel { margin: 1.5rem 0 .6rem; padding: 1.25rem 1.25rem 1.1rem; border: 1px solid var(--line); border-radius: var(--r-lg); background: var(--bg-soft); }
+.md .lpanel h2 { margin: 0 0 .7rem; padding: 0; font-size: 1.02rem; font-weight: 650; }
+.md .lpanel hr { margin: 1.4rem 0 1.2rem; }
+.lp-row3, .lp-grid2 { display: grid; gap: .6rem; }
+.lp-row3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.lp-grid2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.lp-row3 a, .lp-grid2 a {
+  display: block; padding: .7rem .9rem; border: 1px solid var(--line); border-radius: var(--r);
+  background: var(--bg-raised); color: var(--text); text-decoration: none; transition: border-color .15s ease;
+}
+.lp-row3 a { text-align: center; }
+.lp-row3 a:hover, .lp-grid2 a:hover { border-color: var(--accent-line); }
+.lp-row3 b, .lp-grid2 b { display: block; font-size: .95rem; font-weight: 600; }
+.lp-row3 a:hover b, .lp-grid2 a:hover b { color: var(--accent); }
+.lp-row3 a > span, .lp-grid2 a > span { display: block; margin-top: .15rem; font-size: .86rem; color: var(--muted); }
+.md p.lp-down { margin: .5rem 0; text-align: center; font-size: 1.1rem; line-height: 1; color: var(--muted); }
+.lp-rep { margin: .9rem 0; text-align: center; }
+.lp-rep-h { font-size: 1.05rem; font-weight: 650; color: var(--text); text-decoration: none; }
+.lp-rep-h:hover { color: var(--accent); }
+.md .lp-rep p { margin: .3rem 0 0; font-size: .92rem; color: var(--muted); }
+.lp-rep p a { color: var(--muted); text-decoration: none; }
+.lp-rep p a:hover { color: var(--accent); text-decoration: underline; }
+.md ul.lp-flows { display: grid; gap: .35rem; margin: 0; padding: 0; list-style: none; }
+.md .lp-flows li { margin: 0; }
+.lp-flows a { display: flex; align-items: center; gap: .8rem; padding: .45rem .5rem; border-radius: var(--r); color: var(--text); text-decoration: none; }
+.lp-flows a:hover { background: var(--bg-raised); }
+.lp-ic { display: grid; place-items: center; flex: none; width: 2rem; height: 2rem; color: var(--muted); }
+.lp-ic .icon { width: 1.25rem; height: 1.25rem; }
+.lp-flows b { display: block; font-size: 1rem; font-weight: 650; }
+.lp-flows a:hover b, .lp-flows a:hover .lp-ic { color: var(--accent); }
+.lp-flows a > span > span { display: block; font-size: .88rem; color: var(--muted); }
+.md p.lp-note { margin: 0 0 1.5rem; font-size: .82rem; color: var(--muted); }
+
+/* A page's jump list: small link boxes to its main sections */
+.md ul.jump { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .55rem; margin: 1.25rem 0 1.75rem; padding: 0; list-style: none; }
+.md .jump li { margin: 0; }
+.jump a { display: block; height: 100%; padding: .6rem .8rem; border: 1px solid var(--line); border-radius: var(--r); background: var(--bg-raised); color: var(--text); text-decoration: none; transition: border-color .15s ease; }
+.jump a:hover { border-color: var(--accent-line); }
+.jump b { display: block; font-size: .92rem; font-weight: 650; }
+.jump a:hover b { color: var(--accent); }
+.jump span { display: block; margin-top: .1rem; font-size: .8rem; color: var(--muted); }
+.md p.section-sub { margin: -.6rem 0 1.1rem; font-size: .95rem; color: var(--muted); }
+/* The 3D model beside a short note on the sensor */
+.intro-3d { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 2.25rem; align-items: center; margin: 0 0 2rem; }
+.intro-3d .figure { margin: 0; }
+.md .intro-3d h2 { margin: 0 0 .5rem; padding: 0; font-size: 1.35rem; }
+.md .intro-3d-text p { margin: 0; color: var(--text-2); }
+.md ul.intro-3d-list { display: grid; gap: .5rem; margin: 1.1rem 0 0; padding: 0; list-style: none; }
+.md .intro-3d-list li { margin: 0; }
+.intro-3d-list a { display: block; padding: .15rem 0 .15rem .85rem; border-left: 2px solid var(--accent-line); color: var(--text); text-decoration: none; }
+.intro-3d-list a:hover { border-left-color: var(--accent); }
+.intro-3d-list b { display: block; font-size: .95rem; font-weight: 650; }
+.intro-3d-list a:hover b { color: var(--accent); }
+.intro-3d-list span { display: block; font-size: .85rem; color: var(--muted); }
 .tl-community .tl-items::before { display: none; }
 
 /* Share your robot (docs home): an empty slot that reads as the next tile, plus how submissions work */
@@ -942,6 +1045,7 @@ html[data-theme="dark"] .theme .t-dark { display: block; }
 }
 .share-steps li:not(:last-child)::after { content: ""; width: 1.4rem; height: 1px; margin-left: .15rem; background: var(--line-strong); }
 .md .share .actions { margin: 0; }
+.md p.more.contrib { margin: .85rem 0 0; }
 
 /* Stat row */
 .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr)); gap: .75rem; margin: 1.25rem 0 1.75rem; }
@@ -980,6 +1084,18 @@ html[data-theme="dark"] .theme .t-dark { display: block; }
 .pager .prev span::before { content: "← "; }
 .pager .next { text-align: right; grid-column: 2; }
 .pager .next span::after { content: " →"; }
+/* A fork (FLOW in build.py): the next page depends on an answer, e.g. "Is your sensor working?" */
+.pager .fork { grid-column: 1 / -1; order: -1; padding: 1rem 1.1rem 1.1rem; border: 1px solid var(--line); border-radius: var(--r-lg); background: var(--bg-soft); }
+.pager .fork-q { margin: 0 0 .8rem; font-size: 1.02rem; font-weight: 650; color: var(--text); }
+.pager .fork-row { display: grid; grid-template-columns: 2.75rem minmax(0, 1fr); gap: .75rem; align-items: start; }
+.pager .fork-row + .fork-row { margin-top: .65rem; }
+.pager .fork-tag { margin-top: .7rem; padding: .15rem 0; border-radius: 999px; text-align: center; font-size: .75rem; font-weight: 700; }
+.pager .yes .fork-tag { color: var(--tk-s); background: color-mix(in srgb, var(--tk-s) 13%, transparent); }
+.pager .no .fork-tag { color: var(--caution); background: var(--caution-bg); }
+.pager .fork-opts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .6rem; }
+.pager .fork-opts a { padding: .65rem .85rem; }
+.pager .fork-opts strong { font-size: .98rem; }
+.pager .fork-opts span { font-size: .78rem; line-height: 1.35; }
 .site-foot { padding: 2.5rem 2.5rem 2rem; text-align: center; }
 .site-foot p { margin: 0 auto; max-width: 48rem; font-size: .8rem; color: var(--muted); border-top: 1px solid var(--line); padding-top: 1.5rem; }
 .site-foot a { color: inherit; }
@@ -1074,9 +1190,19 @@ html[data-theme="dark"] .theme .t-dark { display: block; }
   .updated { margin-left: 0; width: 100%; }
   .pager { grid-template-columns: 1fr; }
   .pager .next { grid-column: 1; }
+  .pager .fork-row { grid-template-columns: 1fr; gap: .4rem; }
+  .pager .fork-tag { justify-self: start; margin: 0; padding: .15rem .6rem; }
+  .pager .fork-opts { grid-template-columns: 1fr; }
   .md h2 { font-size: 1.4rem; }
   .figs.cols-3 { grid-template-columns: 1fr 1fr; }
   .md ol.flow { --fi: 3.5rem; --gap: .3rem; margin: 0 0 1.75rem; }
+  .flow-sub { font-size: .72rem; }
+  .flow-tag { font-size: .62rem; padding: .05rem .4rem; }
+  .flow-branch { --nt: .4rem; --nh: 3.6rem; --nw: 8.5rem; }
+  .fb-text .flow-sub { white-space: normal; }
+  .fb-node { padding: 0 .45rem; border-radius: .9rem; }
+  .fb-node .flow-label { font-size: .9rem; }
+  .md p.flow-note { margin-bottom: 1.75rem; font-size: .78rem; }
   .flow-icon { border-radius: .9rem; margin-bottom: .6rem; }
   .flow-label { font-size: .92rem; }
   .flow-step { font-size: .62rem; margin-bottom: .3rem; }
@@ -1102,6 +1228,14 @@ html[data-theme="dark"] .theme .t-dark { display: block; }
   .share { grid-template-columns: 1fr; gap: 1.1rem; padding: 1.1rem; }
   .md .share-slot { aspect-ratio: auto; height: 7.5rem; }
   .content-row.splash .cards { grid-template-columns: 1fr; }
+  .intro-3d { grid-template-columns: 1fr; gap: 1.25rem; }
+  .md ul.jump { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .lpanel { padding: 1rem .85rem; }
+  .lp-row3 { grid-template-columns: 1fr; }
+  .rep2 { grid-template-columns: 1fr; }
+  .lp-row3 a, .lp-grid2 a { padding: .6rem .7rem; }
+  .lp-row3 b, .lp-grid2 b { font-size: .86rem; }
+  .lp-row3 a > span, .lp-grid2 a > span { font-size: .76rem; }
 }
 @media (min-width: 50.01rem) { .scrim { display: none !important; } }
 @media print {

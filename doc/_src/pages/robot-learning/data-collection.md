@@ -7,10 +7,23 @@ A tactile demonstration records what the sensor feels, what the camera sees and 
 
 <div class="modes">
 <a class="mode" href="#teleoperation"><img src="/static/images/lerobot.jpg" alt="A FlexiTac sensor on the moving jaw of an SO-101 arm, with its flat cable" width="635" height="635" loading="lazy"><span class="mode-body"><span class="mode-title">Teleoperation</span><span class="mode-text">Drive a robot arm and record from the robot itself. One sensor, on the moving jaw.</span></span></a>
-<a class="mode" href="#umi"><img src="/static/images/umi.jpg" alt="The Touch in the Wild handheld gripper: a GoPro fish-eye camera on top, a FlexiTac sensor on each orange soft finger, and the reading boards" width="897" height="900" loading="lazy"><span class="mode-body"><span class="mode-title">UMI data</span><span class="mode-text">Hold the gripper and do the task yourself, anywhere, no robot needed. A sensor on each finger.</span></span></a>
+<a class="mode" href="#umi"><img src="/static/images/umi.jpg" alt="The Touch in the Wild handheld gripper: a GoPro fish-eye camera on top, a FlexiTac sensor on each orange soft finger, and the reading boards" width="897" height="900" loading="lazy"><span class="mode-body"><span class="mode-title">UMI data</span><span class="mode-text">Hold the gripper and do the task yourself, anywhere, no robot needed. A sensor on each finger. Needs its own firmware.</span></span></a>
 </div>
 
+:::cards
+#### Simulation | /doc/simulation/ | sim
+A third source: generate visuo-tactile demonstrations in Isaac Sim, without physical hardware.
+:::
+
 **New to robot learning?** Start with teleoperation. It is the lowest-cost setup and uses the sensor exactly as these docs set it up.
+
+## What each source records {#outputs}
+
+| Source | What you get | Format |
+| --- | --- | --- |
+| Teleoperation (LeFlexiTac) | A LeRobot dataset: the tactile map, camera and joint states of each frame, at 30 fps | [LeFlexiTac docs](https://tna001-ai.github.io/LeFlexiTac/docs.html#reproduction) |
+| Handheld UMI (Touch in the Wild) | GoPro video and tactile JSON logs recorded with ROS 2, aligned by a SLAM pipeline into one `dataset.zarr.zip` | [README: SLAM pipeline](https://github.com/XinyueZhuXY/touch_in_the_wild#creating-a-dataset-with-the-slam-pipeline) |
+| Simulation (Isaac Sim) | One `.npz` per demonstration: the four pads' tactile maps, camera images, joint states and actions | [Its keys and shapes](/doc/simulation/#web) |
 
 ## Teleoperation {#teleoperation}
 
@@ -50,10 +63,14 @@ Then train [ACT or Diffusion Policy](/doc/robot-learning/imitation-learning/#lef
 
 You hold a [UMI](https://github.com/real-stanford/universal_manipulation_interface)-style gripper and do the task yourself, indoors or outdoors, with no robot. A GoPro on the gripper records vision, and a FlexiTac sensor on each soft finger records touch. The open setup is [Touch in the Wild](https://binghao-huang.github.io/touch_in_the_wild/) (NeurIPS 2025). Its authors used it to collect more than 2,700 demonstrations across 43 tasks in 12 environments.
 
+:::caution[Before you build: it needs different firmware]
+Touch in the Wild reads the boards with its own code, not PyFlexiTac: a ROS 2 node while recording, and serial readers when running a policy. Both expect the older **text** output, 16 lines of 32 numbers per frame. The firmware in [Stream the sensor](/doc/get-started/stream/#flash) sends **binary** frames instead, so a board flashed from these docs won't work with Touch in the Wild as it is, and its repositories don't include matching firmware. Ask in its [issues](https://github.com/XinyueZhuXY/touch_in_the_wild/issues) or on the [Discord](https://discord.gg/6gw887Vxms) before you build.
+:::
+
 <dl class="facts">
 <dt>Gripper</dt><dd>The UMI handheld gripper with Touch in the Wild's modifications, and a GoPro Hero&nbsp;9</dd>
 <dt>Sensors</dt><dd>Two standard FlexiTac sensors (32&nbsp;×&nbsp;12), one on each soft finger</dd>
-<dt>Reader</dt><dd>ROS 2 Humble on Ubuntu 22.04, with older text-format firmware (see the caution below)</dd>
+<dt>Reader</dt><dd>ROS 2 Humble on Ubuntu 22.04, with older text-format firmware (see the caution above)</dd>
 <dt>Output</dt><dd>GoPro video and tactile streams, turned into a training dataset by a SLAM pipeline</dd>
 <dt>Shared data</dt><dd>The <a href="https://huggingface.co/datasets/binghaohuang-robot/touch_in_the_wild-dataset" target="_blank" rel="noopener">Touch in the Wild dataset</a>. The pretraining set alone is about 88 GB.</dd>
 </dl>
@@ -81,16 +98,16 @@ Record the tactile streams with ROS 2 while the GoPro films. [Data collection pr
 Run the SLAM pipeline on the session folder. [README: SLAM pipeline](https://github.com/XinyueZhuXY/touch_in_the_wild#creating-a-dataset-with-the-slam-pipeline)
 :::
 
-:::caution[It needs different firmware]
-Touch in the Wild reads the boards with its own code, not PyFlexiTac: a ROS 2 node while recording, and serial readers when running a policy. Both expect the older **text** output, 16 lines of 32 numbers per frame. The firmware in [Stream the sensor](/doc/get-started/stream/#flash) sends **binary** frames instead, so a board flashed from these docs won't work with Touch in the Wild as it is, and its repositories don't include matching firmware. Ask in its [issues](https://github.com/XinyueZhuXY/touch_in_the_wild/issues) or on the [Discord](https://discord.gg/6gw887Vxms) before you build.
-:::
-
 Next, [pretrain the visuo-tactile encoder](/doc/robot-learning/pretraining/#touch-in-the-wild) or start from the released one, then train a [Diffusion Policy](/doc/robot-learning/imitation-learning/#touch-in-the-wild).
 
 ## Good data, either way {#tips}
 
+- **Check every session before you record.** Run `flexitac-stream` or the heatmap and press each sensor: every row and column should respond. A dead row can't be fixed in data you've already recorded.
 - **Mount on something slightly soft,** such as a fin-ray finger, so contact spreads over several taxels.
 - **Keep the cable still at the connector.** Route the flat cable so it doesn't flex while the gripper moves.
-- **Calibrate after mounting.** The mount itself changes the resting baseline.
-- **Keep touch in sync.** LeFlexiTac records touch into the same dataset frames as the camera and joints, so train and run a policy at the frame rate you recorded at. Touch in the Wild shows a QR code to the camera before each demonstration to line up video and touch. In your own setup, record with PyFlexiTac's `sensor.read()` so no frame is skipped, and keep each frame's `timestamp_s` ([Read frames in Python](/doc/get-started/pyflexitac/#python)).
+- **Redo the baseline calibration after mounting.** The mount itself changes the resting baseline.
+- **In your own code, record `raw` and the baseline,** not only `normalized`: it is scaled per frame and hides how hard the contact is ([why](/doc/get-started/pyflexitac/#normalized)).
+- **Keep touch in sync.** LeFlexiTac records touch into the same dataset frames as the camera and joints, so train and run a policy at the frame rate you recorded at. Touch in the Wild shows a QR code to the camera before each demonstration to line up video and touch. In your own setup, record with PyFlexiTac's `sensor.read()`, which returns every received frame in order, and keep each frame's `timestamp_s` ([Read frames in Python](/doc/get-started/pyflexitac/#python)). It's host time, so USB delay is part of it.
+- **Choose the tactile rate once.** The sensor streams around 100 fps, and a dataset usually samples it at the camera's rate: LeFlexiTac records at 30 fps. Either take the newest frame at each step (`read_latest()`) or keep every frame (`read()`) and resample later, but don't mix the two.
+- **Look at a few episodes before you record many.** Play the tactile maps back next to the video: contact should appear when the gripper closes, and no taxel should stay stuck.
 - **Another gripper?** [FlexiTac-Gen](/flexitac-gen/) designs a sensor that fits it.

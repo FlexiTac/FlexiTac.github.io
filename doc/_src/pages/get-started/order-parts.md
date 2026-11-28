@@ -5,8 +5,8 @@ description: Design files, the bill of materials, and the manufacturer settings 
 
 You need three things for a FlexiTac-V2 setup: the **two sensor FPCs** and the **reading board** from a PCB manufacturer, plus a few **off-the-shelf parts** (Arduino Nano, cables, consumables). Fabrication takes 1–2 weeks including shipping, so order everything at once.
 
-:::note[Source of truth]
-This page summarizes the [FlexiTac Hardware Fabrication Guide](https://docs.google.com/document/d/1bvz6AL7BUkhj4Dj7n9DFXTjnGIX4-ziN8-smiCKpVZU/edit?usp=sharing) (March 2026). If anything here disagrees with the guide, follow the guide, and please [report it](https://github.com/FlexiTac/FlexiTac.github.io/issues/new?title=Docs:+Order+parts&labels=documentation) so we can fix this page.
+:::note
+Adapted from the [FlexiTac Hardware Fabrication Guide](https://docs.google.com/document/d/1bvz6AL7BUkhj4Dj7n9DFXTjnGIX4-ziN8-smiCKpVZU/edit?usp=sharing) (Google Docs, March 2026).
 :::
 
 ## Design files {#design-files}
@@ -34,10 +34,10 @@ Order the **32 × 16 board**. According to the Fabrication Guide, this board is 
 <figure><a class="zoom" href="/doc/assets/img/reading-board-32x32-cut.webp"><img src="/doc/assets/img/reading-board-32x32-cut.webp" alt="FlexiTac 32 × 32 reading board" loading="lazy"></a><figcaption>32 × 32 reading board (development)</figcaption></figure>
 </div>
 
-| Board | Reads | Connectors | Use it for |
-| --- | --- | --- | --- |
-| **32 × 16** | Up to 32 lines on one side and 16 on the other | 32-pin + 16-pin FFC | FlexiTac-V2, and custom sensors that fit within 32 × 16 |
-| **32 × 32** | Up to 32 lines on each side | 32-pin + 32-pin FFC | Larger custom sensors and development. Its firmware isn't covered by these docs yet. |
+| Board | Status | Reads | Connectors | Use it for |
+| --- | --- | --- | --- | --- |
+| **32 × 16** | **Recommended**: the firmware and PyFlexiTac support it | Up to 32 lines on one side and 16 on the other | 32-pin + 16-pin FFC | FlexiTac-V2, and custom sensors that fit within 32 × 16 |
+| **32 × 32** | **Development**: design files only, firmware not in these docs yet | Up to 32 lines on each side | 32-pin + 32-pin FFC | Larger custom sensors, if you're ready to adapt the firmware |
 
 If you designed a custom sensor with [FlexiTac-Gen](/flexitac-gen/), the app tells you which board fits it.
 
@@ -47,34 +47,39 @@ FPCs are cheap at quantity: about **$2.57 per top + bottom pair at 100 units**. 
 
 ## Bill of materials {#bom}
 
-Prices and links are the ones in the Fabrication Guide. A quantity like 0.05 means one roll or sheet covers about 20 sensors.
+Prices and links are from the Fabrication Guide. **Price** is what you pay for the **Purchase**; **Per sensor** or **Per setup** is the share one build uses, since a roll or pack lasts many sensors.
 
-### Sensor: about $4 each
+### Sensor
 
-| # | Part | Qty per sensor | Price | Where |
-| ---: | --- | ---: | ---: | --- |
-| 1 | **Top and bottom FPC** (key component) | 1 pair | $2.5 | PCB manufacturer, [see below](#order-the-fpcs) |
-| 2 | Polyimide tape (4 in × 108 ft) | 0.01 | $21.98 | [Amazon](https://www.amazon.com/dp/B07N4QTXWS) |
-| 3 | Pressure-sensitive conductive sheet (Velostat / Linqstat) | 0.05 | $4.95 | [Adafruit 1361](https://www.adafruit.com/product/1361) |
-| 4 | Adhesive laminating sheets | 0.01 | $6.29 | [Amazon](https://a.co/d/02y7MDdy) |
+| # | Part | Purchase | Price | Per sensor | Where |
+| ---: | --- | --- | ---: | ---: | --- |
+| 1 | **Top and bottom FPC** (key component) | A batch, one pair per sensor | Quoted per order | ~$2.57 at 100 units | PCB manufacturer, [see below](#order-the-fpcs) |
+| 2 | Polyimide tape | 1 roll, 4 in × 108 ft: ~100 sensors | $21.98 | ~$0.22 | [Amazon](https://www.amazon.com/dp/B07N4QTXWS) |
+| 3 | Pressure-sensitive conductive sheet (Velostat / Linqstat) | 1 sheet: ~20 sensors | $4.95 | ~$0.25 | [Adafruit 1361](https://www.adafruit.com/product/1361) |
+| 4 | Adhesive laminating sheets | 1 pack: ~100 sensors | $6.29 | ~$0.06 | [Amazon](https://a.co/d/02y7MDdy) |
+| | **Per sensor** | | | **~$3.10** | The guide budgets ~$4. |
 
-### Reading board: about $30
+The FPC price drops with quantity: ~$2.57 a pair is the 100-unit price, and a first order of 5–10 costs more per sensor.
 
-| # | Part | Qty | Price | Where |
-| ---: | --- | ---: | ---: | --- |
-| 5 | **Reading board PCB** (key component) | 1 | $5 | PCB manufacturer, [see below](#order-the-reading-board) |
-| 6 | Arduino Nano | 1 | $25.10 | [Amazon](https://www.amazon.com/dp/B0097AU5OU) |
+### Reading board
 
-### Cables and connectors: about $10
+| # | Part | Purchase | Price | Per setup | Where |
+| ---: | --- | --- | ---: | ---: | --- |
+| 5 | **Reading board PCB**, assembled (key component) | 5 boards, one quote | Quoted per order | ~$5 | PCB manufacturer, [see below](#order-the-reading-board) |
+| 6 | Arduino Nano | 1 | $25.10 | $25.10 | [Amazon](https://www.amazon.com/dp/B0097AU5OU) |
+| | **Per setup** | | | **~$30** | |
 
-| # | Part | Qty | Price | Where |
-| ---: | --- | ---: | ---: | --- |
-| 7 | Flexible flat cable, 32-pin | 1 | $5.09 (5-pack) | [Amazon](https://a.co/d/0aJnyShh) |
-| 8 | Flexible flat cable, 16-pin | 1 | $6.09 (5-pack) | [Amazon](https://www.amazon.com/dp/B07RWF5D83) |
-| 9 | Mini-USB cable (must carry data) | 1 | $11.99 (2-pack) | [Amazon](https://www.amazon.com/dp/B091SQKMQK) |
-| 10 | 20-pin FFC extender | 1 | $0.95 | [Adafruit 5203](https://www.adafruit.com/product/5203) |
-| 11 | 40-pin FFC extender | 1 | $0.95 | [Adafruit 4523](https://www.adafruit.com/product/4523) |
-| 12 | FFC extender, easy-install alternative to #10–11 | 2 | $0.55–0.88 | [AliExpress](https://www.aliexpress.us/item/3256801662408481.html) |
+### Cables and connectors
+
+| # | Part | Purchase | Price | Per setup | Where |
+| ---: | --- | --- | ---: | ---: | --- |
+| 7 | Flexible flat cable, 32-pin | 5-pack | $5.09 | ~$1.02 | [Amazon](https://a.co/d/0aJnyShh) |
+| 8 | Flexible flat cable, 16-pin | 5-pack | $6.09 | ~$1.22 | [Amazon](https://www.amazon.com/dp/B07RWF5D83) |
+| 9 | Mini-USB cable (must carry data) | 2-pack | $11.99 | ~$6.00 | [Amazon](https://www.amazon.com/dp/B091SQKMQK) |
+| 10 | 20-pin FFC extender | 1 | $0.95 | $0.95 | [Adafruit 5203](https://www.adafruit.com/product/5203) |
+| 11 | 40-pin FFC extender | 1 | $0.95 | $0.95 | [Adafruit 4523](https://www.adafruit.com/product/4523) |
+| 12 | FFC extender, easy-install alternative to #10–11 | 2 (16-pin and 32-pin) | $0.55–0.88 each | $1.10–1.76 | [AliExpress](https://www.aliexpress.us/item/3256801662408481.html) |
+| | **Per setup** | | | **~$10** | With #10–11 |
 
 :::note[Which FFC extenders?]
 The Adafruit extenders (#10, #11) used in the video are compact but need careful alignment and some practice to install. The AliExpress extenders (#12) are easier to install, although bulkier. On AliExpress, select the **16-pin** and **32-pin** variants.
@@ -115,7 +120,17 @@ Upload the reading board's Gerber (`Gerber_16_32.zip` for the 32 × 16 board). K
 ![Quote form for the 32 × 16 reading board on FR-4](/doc/assets/img/order-pcba.webp "The 32 × 16 reading board in the quote form.")
 
 #### Upload the BOM and pick-and-place files
-Upload `BOM_05mm_FFC_16_32_1mux_4sr_2025-11-01.csv` and `PickAndPlace_PCB_05mm_FFC_16_32_1mux_4sr_2025-11-01.csv`. Check that every component is in stock. If a part is out of stock, choose an equivalent before you continue.
+Upload `BOM_05mm_FFC_16_32_1mux_4sr_2025-11-01.csv` and `PickAndPlace_PCB_05mm_FFC_16_32_1mux_4sr_2025-11-01.csv`. Check that every component is in stock. If one isn't, replace it with a part of the same function **and the same package**, so it fits the footprint on the board:
+
+| Designator | In the BOM | An acceptable replacement |
+| --- | --- | --- |
+| FPC1 | FFC05001-16SBB124W5M (LCSC C2856801) | 16-pin FFC connector, 0.5 mm pitch, surface-mount, with the same land pattern (compare the datasheets) |
+| FPC2 | THD0515-32CL-SN (LCSC C283153) | 32-pin FFC connector, 0.5 mm pitch, surface-mount, with the same land pattern |
+| U2–U5 | SN74HC595NSR | Any 74HC595 8-bit shift register in the 5.3 mm-wide SOP-16 package. The common 3.9 mm SOIC-16 doesn't fit. |
+| U6 | CD74HC4067M96 | Any 74HC4067 16-channel analog multiplexer in the 7.5 mm-wide SOIC-24 package |
+| R1 | 1206W4F1002T5E | 10 kΩ resistor, 1206 package |
+
+Not sure a replacement fits? Ask on [Discord](https://discord.gg/6gw887Vxms) or [open an issue](https://github.com/FlexiTac/FlexiTac/issues) in the hardware repository before you order.
 
 ![BOM and pick-and-place upload fields](/doc/assets/img/order-pcba-bom.webp "Upload the BOM and the pick-and-place (CPL) file.")
 

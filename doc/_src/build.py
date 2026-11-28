@@ -25,7 +25,7 @@ Markdown subset (see doc/_src/README.md for examples):
                   :::cards[path]  (the same cards as a numbered route, in order)
                   :::timeline   (empty: the homepage's timeline, read from /index.html at build time)
                   :::community  (approved community robots: "#### Name | link | /image" + a credit line each)
-                  :::cards[flow]  (numbered icon steps joined by arrows: "#### Title | /link/ | icon";
+                  :::cards[flow]  (numbered icon steps joined by arrows: "#### Title | /link/ | icon | subtitle | flags";
                                    text under a step becomes a card that opens on click)
   front matter    layout: splash  (no "On this page" column, a wider page: the docs home)
                   Close with ":::".  Use more colons (::::) for the outer of two nested containers.
@@ -50,10 +50,10 @@ BASE = "/doc/"
 SITE = "https://flexitac.github.io"
 EDIT_BASE = "https://github.com/FlexiTac/FlexiTac.github.io/edit/main/doc/_src/pages/"
 ISSUE_URL = "https://github.com/FlexiTac/FlexiTac.github.io/issues/new"
-ASSET_VERSION = "20261127d"
+ASSET_VERSION = "20261127r"
 
 # --------------------------------------------------------------------------------------------
-# Navigation: the one place that decides page order (sidebar, prev/next).
+# Navigation: the one place that decides page order (sidebar, and prev/next unless FLOW below says otherwise).
 # Internal entries are page slugs ("" is the docs home); external entries are (label, url).
 # (slug, [child slugs]) lists a page with subpages, which the sidebar nests under it.
 # --------------------------------------------------------------------------------------------
@@ -65,10 +65,12 @@ NAV = [
             "get-started/fabricate",
             "get-started/stream",
         ]),
+        "get-started/pyflexitac",
+        "get-started/customize",
         "get-started/troubleshooting",
-        "get-started/next-steps",
     ]),
     ("Learning with FlexiTac", [
+        "robot-learning",
         "robot-learning/data-collection",
         "robot-learning/tactile-representation",
         "robot-learning/imitation-learning",
@@ -81,6 +83,8 @@ NAV = [
         "simulation",
     ]),
     ("Ecosystem", [
+        "resources",
+        "contributing",
         ("FlexiTac homepage", "/"),
         ("FlexiTac-Gen", "/flexitac-gen/"),
         ("LeFlexiTac", "https://tna001-ai.github.io/LeFlexiTac/docs.html"),
@@ -89,12 +93,41 @@ NAV = [
     ]),
 ]
 # Pages that are built and searchable but not in the sidebar or the prev/next chain; link to them from other pages.
-UNLISTED = ["resources", "get-started/pyflexitac"]
+UNLISTED: list = []
+# Previous/next follow NAV, except where the reader's next step depends on how the task went rather than on sidebar
+# order. Slug -> {"prev": link or None, "next": link or None, "fork": (question, [(kind, answer, [links])])}.
+# A link is a slug, or (slug or "slug#anchor", title, note); the note replaces "Previous"/"Next" above the title.
+# A fork replaces "next" with a choice: Stream ends with "Is your sensor working?", not with the next sidebar page.
+FLOW = {
+    "get-started/stream": {"fork": ("Is your sensor working?", [
+        ("yes", "Yes", [("get-started/pyflexitac", "Python SDK", "Read frames in your own code"),
+                        ("robot-learning/data-collection", "Collect data", "Put the sensor on a robot"),
+                        ("get-started/customize", "Customize", "Fit a sensor to your own gripper")]),
+        ("no", "No", [("get-started/troubleshooting", "Troubleshooting", "Find the fault by its symptom")]),
+    ])},
+    # Troubleshooting leads back to the signal check, whichever page sent the reader there.
+    "get-started/troubleshooting": {"prev": None,
+                                    "next": ("get-started/stream#first-signal", "Stream sensor", "Fixed? Check the signal again")},
+    # The branches of the fork go back to Stream; a custom sensor goes on to be ordered and built like the standard one.
+    "get-started/pyflexitac": {"prev": "get-started/stream",
+                               "next": ("robot-learning/data-collection", "Data collection", "Next: put it on a robot")},
+    "get-started/customize": {"prev": "get-started/stream",
+                              "next": ("get-started/order-parts#order-the-fpcs", "Order parts", "Next: order the FPCs")},
+    # Learning starts from a working sensor, not from Troubleshooting (its sidebar neighbour).
+    "robot-learning": {"prev": "get-started/stream"},
+}
 # Retired pages: their old address forwards to the page that took over their content (keeps old links and
 # search results working). Slug -> (new slug, {old #anchor: new #anchor, or a /doc/ path for one that moved page}).
-REDIRECTS = {"robot-learning": ("robot-learning/data-collection", {
-    "#leflexitac": "#teleoperation", "#touch-in-the-wild": "#umi", "#mount": "#tips", "#choose": "",
-    "#research": "/doc/robot-learning/tactile-representation/#3d"})}
+# The "" key is where the bare old address goes.
+# (robot-learning, retired 2026-11-26 and a redirect to data-collection since, is the Learning overview again from
+# 2026-11-27; its page forwards the retired page's old anchors itself.)
+REDIRECTS = {
+    # Next steps became the last section of Stream the sensor on 2026-11-27; its sharing list went to Contributing and
+    # its citation to the docs home.
+    "get-started/next-steps": ("get-started/stream", {"": "#next-steps", "#learn": "#next-steps",
+                                                      "#customize": "#next-steps", "#share": "/doc/contributing/",
+                                                      "#cite": "/doc/#cite"}),
+}
 
 # --------------------------------------------------------------------------------------------
 # Inline Markdown
@@ -525,16 +558,27 @@ class Renderer:
                     '<div class="tl-lane" role="region" aria-label="Community robots" tabindex="0"><ol class="tl-items">'
                     f'<li class="tl-node"><ul class="tl-tiles">{"".join(tiles)}</ul></li></ol></div></div></div>')
         if kind == "cards" and (title or "").strip() == "flow":
-            # :::cards[flow] = big icon steps joined by arrows; each "#### Title | link | icon", no body
-            # A step with text under its heading opens that text as a small card instead of following the link
-            # (the link stays as the no-JavaScript fallback).
-            steps = []
-            for k, (head, rest) in enumerate(self.split_h4(body), 1):
+            # :::cards[flow] = big icon steps joined by arrows: "#### Title | link | icon | subtitle | flags".
+            # The subtitle (a tool or a role) shows under the label. Flags: "optional" adds an Optional tag; "branch A-B"
+            # makes the step a side branch drawn under the row: a dashed line from step A into its left side, a solid one
+            # from its right side up into step B (Simulate: from Build into Learn). A step with text under its heading opens that text as a small card instead of
+            # following the link (the link stays as the no-JavaScript fallback).
+            steps, branch = [], ""
+            for head, rest in self.split_h4(body):
                 bits = [b.strip() for b in head.split("|")]
-                t, href, ic = (bits + ["", ""])[:3]
-                self._text(t)
+                t, href, ic, sub, flags = (bits + ["", "", "", ""])[:5]
+                self._text(" ".join(x for x in (t, sub) if x))
+                subline = f'<span class="flow-sub">{inline(sub)}</span>' if sub else ""
+                m = re.match(r"branch\s+(\d+)-(\d+)$", flags)
+                if m:
+                    a, z = int(m.group(1)), int(m.group(2))
+                    branch = (t, href, ic, subline, a, z)
+                    continue
+                k = len(steps) + 1
+                tag = '<span class="flow-tag">Optional</span>' if flags == "optional" else ""
                 inner = (f'<span class="flow-icon">{icon(ic)}</span>'
-                         f'<span class="flow-step" aria-hidden="true">{k:02d}</span><span class="flow-label">{inline(t)}</span>')
+                         f'<span class="flow-step" aria-hidden="true">{k:02d}</span><span class="flow-label">{inline(t)}</span>'
+                         f'{subline}{tag}')
                 card, attrs = "", ""
                 if any(l.strip() for l in rest):
                     cid = f"flow-card-{k}"
@@ -543,7 +587,18 @@ class Renderer:
                             f'{self.render(rest)}<button type="button" class="flow-card-close" aria-label="Close">'
                             '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>')
                 steps.append(f'<li><a{link_attrs(href)}{attrs}>{inner}</a>{card}</li>' if href else f'<li><span>{inner}</span>{card}</li>')
-            return f'<ol class="flow">{"".join(steps)}</ol>'
+            row = f'<ol class="flow">{"".join(steps)}</ol>'
+            if not branch:
+                return row
+            t, href, ic, subline, a, z = branch
+            n = len(steps)
+            pos = lambda i: f"{(i - .5) / n * 100:.3f}%"        # the centre of step i's column
+            node = f'<span class="fb-text"><span class="flow-label">{inline(t)}</span>{subline}</span>'
+            return (f'<div class="flow-wrap">{row}<div class="flow-branch" style="--from:{pos(a)};--to:{pos(z)};--mid:{pos((a + z) / 2)}">'
+                    '<span class="fb-in" aria-hidden="true"></span>'
+                    '<span class="fb-out" aria-hidden="true"></span>'
+                    + (f'<a class="fb-node"{link_attrs(href)}>{node}</a>' if href else f'<span class="fb-node">{node}</span>')
+                    + '</div></div>')
         if kind == "cards":
             # :::cards[path] = an ordered route: an <ol>, each card numbered in place of its icon
             path = (title or "").strip() == "path"
@@ -728,19 +783,43 @@ def toc_html(toc: list[tuple[int, str, str]], title: str) -> str:
     return "<ul>" + "".join(rows) + "</ul>"
 
 
+def flow_link(link, pages: dict) -> tuple[str, str, str | None]:
+    """A FLOW or NAV link -> (href, title, note)."""
+    target, title, note = (link, None, None) if isinstance(link, str) else link
+    s, _, anchor = target.partition("#")
+    return url_for(s) + ("#" + anchor if anchor else ""), title or pages[s]["label"], note
+
+
+def pager_html(slug: str, pages: dict, order: list[str]) -> str:
+    """Previous/next at the foot of a page: NAV order, or the page's FLOW entry."""
+    k = order.index(slug) if slug in order else None
+    flow = FLOW.get(slug, {})
+    prev = flow.get("prev", order[k - 1] if k else None)
+    nxt = flow.get("next", order[k + 1] if k is not None and k + 1 < len(order) else None)
+    out = '<nav class="pager" aria-label="Pagination">'
+    if prev is not None:
+        href, title, note = flow_link(prev, pages)
+        out += f'<a class="prev" href="{href}" rel="prev"><span>{html.escape(note or "Previous")}</span><strong>{html.escape(title)}</strong></a>'
+    else:
+        out += "<span></span>"
+    if "fork" in flow:
+        question, branches = flow["fork"]
+        rows = []
+        for kind, answer, links in branches:
+            opts = "".join(f'<a href="{h}"><strong>{html.escape(t)}</strong><span>{html.escape(n or "")}</span></a>'
+                           for h, t, n in (flow_link(l, pages) for l in links))
+            rows.append(f'<div class="fork-row {kind}"><span class="fork-tag">{html.escape(answer)}</span>'
+                        f'<div class="fork-opts">{opts}</div></div>')
+        out += f'<div class="fork"><p class="fork-q">{html.escape(question)}</p>{"".join(rows)}</div>'
+    elif nxt is not None:
+        href, title, note = flow_link(nxt, pages)
+        out += f'<a class="next" href="{href}" rel="next"><span>{html.escape(note or "Next")}</span><strong>{html.escape(title)}</strong></a>'
+    return out + "</nav>"
+
+
 def page_html(slug: str, p: dict, pages: dict, order: list[str]) -> str:
     title, desc = p["title"], p["description"]
-    k = order.index(slug) if slug in order else None
-    prev_s = order[k - 1] if k else None
-    next_s = order[k + 1] if k is not None and k + 1 < len(order) else None
-    pager = '<nav class="pager" aria-label="Pagination">'
-    if prev_s is not None:
-        pager += f'<a class="prev" href="{url_for(prev_s)}" rel="prev"><span>Previous</span><strong>{html.escape(pages[prev_s]["label"])}</strong></a>'
-    else:
-        pager += "<span></span>"
-    if next_s is not None:
-        pager += f'<a class="next" href="{url_for(next_s)}" rel="next"><span>Next</span><strong>{html.escape(pages[next_s]["label"])}</strong></a>'
-    pager += "</nav>"
+    pager = pager_html(slug, pages, order)
     src_rel = p["src"].relative_to(PAGES).as_posix()
     toc = toc_html(p["toc"], title) if p["toc"] and not p["splash"] else ""
     issue = f'{ISSUE_URL}?title={html.escape("Docs: " + title, quote=True).replace(" ", "+")}&amp;labels=documentation'
@@ -1030,11 +1109,12 @@ def llms_files(pages: dict, built: list[str]) -> tuple[str, str]:
         slugs = nav_slugs(entries)
         if slugs:
             idx.append(f"## {group}\n\n" + "\n".join(entry(s) for s in slugs) + "\n")
-    idx.append("## Reference\n\n" + "\n".join(entry(s) for s in UNLISTED) + "\n")
+    if UNLISTED:
+        idx.append("## Reference\n\n" + "\n".join(entry(s) for s in UNLISTED) + "\n")
     idx.append("## Optional\n\n" + "\n".join(f"- [{n}]({SITE + u if u.startswith('/') else u}): {d}"
                                              for n, u, d in LLMS_LINKS) + "\n")
     full = (f"# FlexiTac Developer Handbook: full text\n\n> {LLMS_SUMMARY}\n\nEvery page of {SITE}{BASE} as Markdown, "
-            f"in sidebar order (the reference pages last). The page index is {SITE}/llms.txt.\n\n")
+            f"in sidebar order (unlisted pages last). The page index is {SITE}/llms.txt.\n\n")
     full += "\n\n---\n\n".join(page_markdown(s, pages[s]) for s in built)
     return "\n".join(idx), full
 
@@ -1075,7 +1155,7 @@ def build(check: bool = False) -> int:
         outputs[out_for(old)] = (
             f'<!doctype html>\n<html lang="en"><head><meta charset="utf-8"><title>Moved | FlexiTac Docs</title>'
             f'<meta name="robots" content="noindex"><link rel="canonical" href="{SITE}{to}">'
-            f'<meta http-equiv="refresh" content="0; url={to}">'
+            f'<meta http-equiv="refresh" content="0; url={to}{anchors.get("", "")}">'
             f'<script>var m = {json.dumps(anchors)}, h = location.hash, t = h in m ? m[h] : h;'
             f'location.replace(t.charAt(0) === "/" ? t : "{to}" + t);</script></head>'
             f'<body><p>This page moved to <a href="{to}">{html.escape(pages[new]["title"])}</a>.</p></body></html>\n')
@@ -1090,6 +1170,14 @@ def build(check: bool = False) -> int:
     # Internal link check: every /doc/... link and #anchor must resolve.
     anchors = {url_for(s): {h[1] for h in pages[s]["toc"]} | set(re.findall(r'id="([^"]+)"', pages[s]["body"])) | {"_top"} for s in built}
     problems = []
+    for slug, flow in FLOW.items():     # FLOW's pager links
+        links = [flow.get("prev"), flow.get("next")] + [l for _, _, ls in flow.get("fork", ("", []))[1] for l in ls]
+        for l in filter(None, links):
+            s, _, frag = (l if isinstance(l, str) else l[0]).partition("#")
+            if s not in built:
+                problems.append(f"FLOW {slug}: no page {s}")
+            elif frag and frag not in anchors[url_for(s)]:
+                problems.append(f"FLOW {slug}: missing anchor {s}#{frag}")
     for slug in built:
         for href in re.findall(r'href="([^"]+)"', pages[slug]["body"]):
             href = html.unescape(href)

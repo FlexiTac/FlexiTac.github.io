@@ -3,20 +3,39 @@ title: Tactile representation
 description: Give touch to a policy as a 2D map per pad, or as 3D tactile points in one point cloud with the camera's, shown on a simulated two-armed demonstration.
 ---
 
-Every FlexiTac frame is a grid of numbers, one per taxel: 12 rows by 32 columns on a standard sensor. Before a policy can learn from it, you choose how to represent it. There are two ways, and the difference is whether touch knows *where* it happens.
+Every FlexiTac frame is a grid of numbers, one per taxel: 12 rows by 32 columns on a standard sensor ([why 12 × 32 and not 32 × 12](/doc/get-started/#array-shape)). Before a policy can learn from it, you choose how to represent it. There are two ways, and the difference is whether touch knows *where* it happens.
 
-| | 2D tactile map | 3D tactile points |
-| --- | --- | --- |
-| **The policy gets** | One 12 × 32 map per pad | Every taxel as a 3D point with its reading, in one point cloud with the camera's points |
-| **You need** | Only the sensor | Where each pad sits on the robot, its joint positions and a depth camera |
-| **Encoder** | An MLP or a small CNN | A point-cloud network such as PointNet |
-| **Used by** | [LeFlexiTac](https://tna001-ai.github.io/LeFlexiTac/), [Touch in the Wild](https://binghao-huang.github.io/touch_in_the_wild/) | [3D-ViTac](https://binghao-huang.github.io/3D-ViTac/), [VT-Refine](https://binghao-huang.github.io/vt_refine/) |
+<div class="rep2">
+<div class="rep2-card">
+<a class="rep2-img" href="#2d"><img src="/doc/assets/img/tactile-map.svg" alt="" width="732" height="264" loading="lazy"></a>
+<a class="rep2-h" href="#2d">2D tactile maps</a>
+<i>Local contact patterns</i>
+<p>A fixed sensor layout, CNN encoders, and the easiest way into imitation learning.</p>
+<dl>
+<dt>Policy gets</dt><dd>One 12 × 32 map per pad</dd>
+<dt>Encoder</dt><dd>MLP or small CNN</dd>
+<dt>Used by</dt><dd><a href="https://tna001-ai.github.io/LeFlexiTac/" target="_blank" rel="noopener">LeFlexiTac</a>, <a href="https://binghao-huang.github.io/touch_in_the_wild/" target="_blank" rel="noopener">Touch in the Wild</a></dd>
+</dl>
+</div>
+<div class="rep2-card">
+<a class="rep2-img" href="#3d"><img src="/doc/assets/img/rep-3d-points.webp" alt="" width="690" height="490" loading="lazy"></a>
+<a class="rep2-h" href="#3d">3D tactile points</a>
+<i>Spatially grounded contact</i>
+<p>Geometric reasoning, visuo-tactile fusion, and manipulation across poses.</p>
+<dl>
+<dt>Policy gets</dt><dd>One 3D point per taxel</dd>
+<dt>Encoder</dt><dd>PointNet or similar</dd>
+<dt>Used by</dt><dd><a href="https://binghao-huang.github.io/3D-ViTac/" target="_blank" rel="noopener">3D-ViTac</a>, <a href="https://binghao-huang.github.io/vt_refine/" target="_blank" rel="noopener">VT-Refine</a></dd>
+</dl>
+</div>
+</div>
+<p class="rep2-note">A conceptual guide. Which works better for your task still has to be tested on it.</p>
 
 ## 2D: a map per pad {#2d}
 
 The firmware sends each frame as `uint8[12][32]`, row by row ([PyFlexiTac](/doc/get-started/pyflexitac/#python)). Subtract each taxel's resting baseline and scale, and every reading lies between 0 and 1. Keep the numbers on their grid, colour them by value, and the array is an image:
 
-<figure class="figure tmap"><img src="/doc/assets/img/tactile-map.svg" alt="A 12 by 32 grid of readings, mostly 0; the pressed taxels form a slanted band at one end of the pad" width="732" height="264"><figcaption>One pad at one moment: 384 readings on its 12 × 32 grid (row, column). The pressed taxels form a band where the plug lies across the pad. From the simulated demonstration below (right arm, left finger), at the same moment as its 3D view; the simulator reports force divided by 10 N.</figcaption></figure>
+<figure class="figure tmap"><img src="/doc/assets/img/tactile-map.svg" alt="A 12 by 32 grid of readings, mostly 0; the pressed taxels form a slanted band at one end of the pad" width="732" height="264"><figcaption><span class="sample-tag">Simulated</span>One pad at one moment: 384 readings on its 12 × 32 grid (row, column). The pressed taxels form a band where the plug lies across the pad. From the simulated demonstration below (right arm, left finger), at the same moment as its 3D view; the simulator reports force divided by 10 N.</figcaption></figure>
 
 A policy can take the map in two ways:
 
@@ -25,10 +44,10 @@ A policy can take the map in two ways:
 
 Settle two things before you record:
 
-- **How you normalize.** PyFlexiTac's `normalized` divides each frame by its own peak once there is contact, so it keeps the shape of a contact but not how hard it is ([details](/doc/get-started/pyflexitac/#python)). LeFlexiTac records these maps, and VT-Refine uses the same kind of rule: each pad is scaled by its own peak once it is pressed. If force matters, record `raw` and the baseline too. Either way, normalize the same way in training and on the robot.
+- **How you normalize.** PyFlexiTac's `normalized` divides each frame by its own peak once there is contact, so it keeps the shape of a contact but not how hard it is ([details](/doc/get-started/pyflexitac/#normalized)). LeFlexiTac records these maps, and VT-Refine uses the same kind of rule: each pad is scaled by its own peak once it is pressed. If force matters, record `raw` and the baseline too. Either way, normalize the same way in training and on the robot.
 - **Which pad is which.** Keep the pads in a fixed order and orientation. Touch in the Wild stores its two pads side by side, as one 12 × 64 map per frame.
 
-**What a map can't tell the policy is where the pad is.** The same line of contact means something different when the gripper is turned or the object is higher, and the policy has to work that out from the joint angles. 3D tactile points put it in the data.
+**A map doesn't say where the pad is.** The same line of contact means something different when the gripper is turned or the object is higher. Given the joint angles and the pad's fixed mounting, a policy can still infer where the contact is, but it has to learn that from data. 3D tactile points put it in the data.
 
 ## 3D: tactile points {#3d}
 
@@ -36,7 +55,7 @@ Settle two things before you record:
 
 <div class="pcv" data-sample="/doc/assets/data/isaac-aloha" data-frame="94" data-label="One frame of a simulated plug–socket insertion as a point cloud: the camera's points and the four pads' tactile points" data-pads="Left arm, left finger|Left arm, right finger|Right arm, left finger|Right arm, right finger" data-joints="Left arm: waist|Left arm: shoulder|Left arm: elbow|Left arm: forearm roll|Left arm: wrist angle|Left arm: wrist rotate|Left arm: left finger|Left arm: right finger|Right arm: waist|Right arm: shoulder|Right arm: elbow|Right arm: forearm roll|Right arm: wrist angle|Right arm: wrist rotate|Right arm: left finger|Right arm: right finger" data-joints-title="Proprioception: joint positions, scaled to −1…1"><img src="/doc/assets/img/isaac-frame.webp" alt="One frame of a simulated plug–socket insertion: the camera picture in a corner, grey camera points of the grippers, plug and socket, and four pads of tactile points with the pressed taxels in orange" width="1200" height="864" loading="lazy"></div>
 <script src="/doc/assets/pcv.js?v=20261126b" defer></script>
-<p class="pcv-cap">The right arm holds the plug over the socket in the left hand. <b>Inset:</b> the camera's picture. <b>Grey:</b> the points the same camera sees, 1,024 of them here so they read clearly (VT-Refine keeps 512). <b>Purple to yellow:</b> the four pads' 1,536 tactile points, colored by reading on the viridis scale (purple where nothing presses). On the right, the same readings as 2D maps; below, the joint positions the policy also gets. Drag to turn it, <b>Camera view</b> goes back to the camera, and play runs the demonstration at its recorded 30 frames a second.</p>
+<p class="pcv-cap"><span class="sample-tag">Simulated</span>The right arm holds the plug over the socket in the left hand. <b>Inset:</b> the camera's picture. <b>Grey:</b> the points the same camera sees, 1,024 of them here so they read clearly (VT-Refine keeps 512). <b>Purple to yellow:</b> the four pads' 1,536 tactile points, colored by reading on the viridis scale (purple where nothing presses). On the right, the same readings as 2D maps; below, the joint positions the policy also gets. Drag to turn it, <b>Camera view</b> goes back to the camera, and play runs the demonstration at its recorded 30 frames a second.</p>
 
 ### How a frame is built {#build}
 
@@ -83,6 +102,7 @@ To get the 2D maps back from this data, or to build the five-channel cloud yours
 import numpy as np
 
 d = np.load("train.npz")                    # plain arrays; no pickle needed
+t = 0                                        # a step: any index below len(d["actions"])
 pc, tac = d["point_cloud"][t], d["tactile_points"][t]   # (3, 512), (4, 1536)
 
 # 2D: each pad's 384 points are stored column by column
@@ -96,3 +116,16 @@ cloud = np.concatenate([
 ```
 
 The data is about 909 MB, under CC BY-NC 4.0. Download it with `data/fetch_vt-refine_data.sh` from the [VT-Refine repository](https://github.com/NVlabs/vt-refine).
+
+## Next {#next}
+
+:::cards
+#### Train with 2D tactile maps | /doc/robot-learning/imitation-learning/#leflexitac | grid
+LeFlexiTac: ACT and Diffusion Policy, with a small CNN on each map.
+
+#### Train with 3D tactile points | /doc/simulation/#vt-refine | layers
+VT-Refine, and 3D-ViTac's [training code](https://github.com/binghao-huang/3d-vitac-training-code).
+
+#### Learn tactile features from large datasets | /doc/robot-learning/pretraining/ | net
+Touch in the Wild's visuo-tactile MAE, pretrained on its released data.
+:::

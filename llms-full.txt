@@ -2,29 +2,29 @@
 
 > FlexiTac is an open-source, full-stack platform for tactile robotics: flexible, low-cost tactile sensors (FPC-based, 32 x 12 taxels per pad), their reading boards and firmware, Python tools, real-robot data collection and robot learning with touch, and tactile simulation in NVIDIA Isaac Sim.
 
-Every page of https://flexitac.github.io/doc/ as Markdown, in sidebar order (the reference pages last). The page index is https://flexitac.github.io/llms.txt.
+Every page of https://flexitac.github.io/doc/ as Markdown, in sidebar order (unlisted pages last). The page index is https://flexitac.github.io/llms.txt.
 
 # Build with FlexiTac
 
 URL: https://flexitac.github.io/doc/
 
-> An open-source platform for tactile robotics, from flexible sensor design to robot learning.
+> An open-source platform for tactile robotics, built around thin, flexible and scalable tactile sensors.
 
-Build your first sensor, customize it for your robot, and bring touch into your learning pipeline.
+From sensor design and fabrication to tactile data, simulation and robot learning.
 
-[Quickstart](https://flexitac.github.io/doc/get-started/) [Explore FlexiTac](https://flexitac.github.io/)
+[Quickstart](https://flexitac.github.io/doc/get-started/) [Research overview](https://flexitac.github.io/)
 
-1. [Design](https://flexitac.github.io/flexitac-gen/)
+1. [Design FlexiTac-Gen Optional](https://flexitac.github.io/flexitac-gen/)
    ![Render of FlexiTac sensors on both soft fingers of an xArm gripper, with one finger's sensor layers peeled apart](https://flexitac.github.io/doc/assets/img/flexitac-xarm.webp)
    **FlexiTac on xArm**
    Design a sensor that fits your own robot.
    [Open FlexiTac-Gen](https://flexitac.github.io/flexitac-gen/)
-2. [Build](https://flexitac.github.io/doc/get-started/)
+2. [Build Sensor + reader](https://flexitac.github.io/doc/get-started/)
    ![Exploded view of a FlexiTac-V2 sensor: two laminating sheets, the top FPC, the black Velostat film and the bottom FPC](https://flexitac.github.io/doc/assets/img/flexitac-exploded-card.webp)
    **Build a sensor**
-   Two flexible PCBs around a pressure-sensitive film. Under 3 minutes and about $4 in materials.
+   Two flexible PCBs around a pressure-sensitive film, under 3 minutes and about $4 in materials. A small reading board streams it over USB.
    [Start building](https://flexitac.github.io/doc/get-started/)
-3. [Integrate](https://flexitac.github.io/doc/robot-learning/data-collection/)
+3. [Integrate Robot and data](https://flexitac.github.io/doc/robot-learning/data-collection/)
    ![A FlexiTac sensor on the moving jaw of an SO-101 arm](https://flexitac.github.io/static/images/lerobot.jpg)
    *Teleoperation*
    ![The Touch in the Wild handheld gripper with a FlexiTac sensor on each soft finger](https://flexitac.github.io/static/images/umi.jpg)
@@ -32,7 +32,7 @@ Build your first sensor, customize it for your robot, and bring touch into your 
    **Mount it and collect data**
    Teleoperate a robot with LeFlexiTac, or collect UMI data by hand with Touch in the Wild.
    [Data collection](https://flexitac.github.io/doc/robot-learning/data-collection/)
-4. [Learn](https://flexitac.github.io/doc/robot-learning/imitation-learning/)
+4. [Learn Robot policies](https://flexitac.github.io/doc/robot-learning/)
    **Learn with touch**
    Collect tactile data and train policies, on real robots or in simulation.
    - [Data collection](https://flexitac.github.io/doc/robot-learning/data-collection/)
@@ -42,11 +42,23 @@ Build your first sensor, customize it for your robot, and bring touch into your 
    - [Reinforcement learning](https://flexitac.github.io/doc/robot-learning/reinforcement-learning/)
    - [Pretraining](https://flexitac.github.io/doc/robot-learning/pretraining/)
    - [World models](https://flexitac.github.io/doc/robot-learning/world-models/)
-   [Start learning](https://flexitac.github.io/doc/robot-learning/imitation-learning/)
+   [Start learning](https://flexitac.github.io/doc/robot-learning/)
+
+[Simulate No hardware required](https://flexitac.github.io/doc/simulation/)
+
+With the standard sensor, skip Design. Simulation needs no hardware, so you can also start there.
 
 ![Render of a FlexiTac sensor on the orange UMI soft fin-ray finger. The outer FPC and the black Velostat film peel back from the inner FPC; both FPC tails run out flat to the side, and the clear laminating sheets peel away with the stack.](https://flexitac.github.io/doc/assets/img/flexitac-umi-sandwich.webp?v=20261127)
 
 *A FlexiTac sensor on a UMI soft finger, peeled apart.*
+
+## Touch that fits your robot
+
+A thin, flexible tactile array that follows the surface of your gripper, rigid or soft.
+
+- [**Flexible PCBs** Electrodes printed on two 0.2 mm FPCs](https://flexitac.github.io/doc/get-started/order-parts/)
+- [**Pressure-sensitive film** Velostat, sealed between them](https://flexitac.github.io/doc/get-started/fabricate/)
+- [**Custom geometry** Fitted to your gripper with FlexiTac-Gen](https://flexitac.github.io/doc/get-started/customize/)
 
 **[Hardware](https://flexitac.github.io/doc/get-started/fabricate/)**
 
@@ -56,7 +68,7 @@ Fabricate and assemble your sensor.
 
 Design sensors for your robot.
 
-**[Robot learning](https://flexitac.github.io/doc/robot-learning/data-collection/)**
+**[Robot learning](https://flexitac.github.io/doc/robot-learning/)**
 
 Collect data and train with touch.
 
@@ -68,9 +80,11 @@ Every repository, design file, paper and dataset: [All resources →](https://fl
 
 ---
 
-## Built by the community
+## A growing tactile ecosystem
 
-[Explore & contribute](https://binghao-huang.github.io/Awesome-FlexiTac/)
+[Full timeline](https://flexitac.github.io/#timeline)
+
+From early research to open-source tools and real-world adoption.
 
 2023–24
 
@@ -121,6 +135,28 @@ Built FlexiTac into your own gripper, hand or robot? Send it in. We review every
 
 [Submit your robot](https://github.com/FlexiTac/FlexiTac.github.io/issues/new?template=share-your-robot.yml) [Ask on Discord](https://discord.gg/6gw887Vxms)
 
+Other ways to help: list your paper, improve these docs or report a bug. [Contributing →](https://flexitac.github.io/doc/contributing/)
+
+---
+
+## Cite FlexiTac
+
+If FlexiTac helps your research, please cite:
+
+*flexitac.bib*
+
+```bibtex
+@article{huang2026flexitac,
+  title   = {FlexiTac: A Low-Cost, Open-Source, Scalable Tactile
+             Sensing Solution for Robotic Systems},
+  author  = {Huang, Binghao and Li, Yunzhu},
+  journal = {arXiv preprint arXiv:2604.28156},
+  year    = {2026}
+}
+```
+
+If you use PyFlexiTac or LeFlexiTac, please also cite those projects. Their citations are in their READMEs.
+
 
 ---
 
@@ -131,6 +167,16 @@ URL: https://flexitac.github.io/doc/get-started/
 > The whole path from ordering parts to a live tactile heatmap, with time, cost and the commands you'll run.
 
 This guide walks you through building one **FlexiTac-V2** sensor (32 × 12 taxels), connecting it to a **32 × 16 reading board**, and streaming it live to a heatmap on your computer. This is the standard setup: the fabrication guide, the firmware and PyFlexiTac all default to it. Each step links to a detailed page.
+
+**[Starting from scratch](https://flexitac.github.io/doc/get-started/order-parts/)**
+
+Order, assemble and stream. Follow the three steps below, starting with Order parts.
+
+**[Already have a sensor](https://flexitac.github.io/doc/get-started/stream/)**
+
+Flash the reading board and read tactile data in Stream the sensor.
+
+No hardware yet? [Explore tactile simulation →](https://flexitac.github.io/doc/simulation/)
 
 ![A FlexiTac sensor on an orange UMI soft gripper finger standing upright. Its two tails reach out to the left and end in two small FFC extenders side by side; two white flat cables with blue ends hang straight down from them, bend onto the table and run to the green 32 x 16 reading board, where an Arduino Nano sits in two sockets.](https://flexitac.github.io/doc/assets/img/build-setup.webp)
 
@@ -154,19 +200,19 @@ This guide walks you through building one **FlexiTac-V2** sensor (32 × 12 taxel
 
 > **Need a different shape or size?**
 >
-> Generate the two FPCs for your own gripper or fingertip with [FlexiTac-Gen](https://flexitac.github.io/flexitac-gen/). It also tells you which reading board fits your design. Ordering and fabrication work the same way. Flash and read it with your sensor's rows and columns, as described in [Match the reader to the firmware](https://flexitac.github.io/doc/get-started/pyflexitac/#rows). Designs that need the 32 × 32 board aren't covered by these docs yet.
+> Generate the two FPCs for your own gripper or fingertip with [FlexiTac-Gen](https://flexitac.github.io/flexitac-gen/), as shown in [Customize a sensor](https://flexitac.github.io/doc/get-started/customize/). It also tells you which reading board fits your design. Ordering and fabrication work the same way. Flash and read it with your sensor's rows and columns, as described in [Match the reader to the firmware](https://flexitac.github.io/doc/get-started/pyflexitac/#rows). Both reading boards, 32 × 16 and 32 × 32, are in [Which reading board?](https://flexitac.github.io/doc/get-started/order-parts/#which-board)
 
 ## At a glance
 
 **< 3 min** to fabricate one sensor
 
-**~$4** materials per sensor
+**~$4** materials per sensor, at 100 units
 
 **~$30** reading board + Arduino Nano
 
 **1–2 weeks** FPC / PCB lead time
 
-Costs are the estimates from the [Hardware Fabrication Guide](https://docs.google.com/document/d/1bvz6AL7BUkhj4Dj7n9DFXTjnGIX4-ziN8-smiCKpVZU/edit?usp=sharing) (March 2026). Cables, connectors and consumables add roughly $10.
+Costs are the estimates from the [Hardware Fabrication Guide](https://docs.google.com/document/d/1bvz6AL7BUkhj4Dj7n9DFXTjnGIX4-ziN8-smiCKpVZU/edit?usp=sharing) (March 2026). The FPCs in the ~$4 are about $2.57 per top + bottom pair, the price at 100 units: a first order of 5–10 sensors costs more per sensor. Cables, connectors and consumables add roughly $10.
 
 ### What you need
 
@@ -195,6 +241,10 @@ No soldering is needed to fabricate the sensor itself. You can have the reading 
    ```
    [Stream the sensor →](https://flexitac.github.io/doc/get-started/stream/)
 
+> **32 × 12 or 12 × 32?**
+>
+> Both name the same 384 taxels. The pad is **32 × 12**: 32 electrodes on the bottom FPC cross 12 on the top FPC. The firmware and PyFlexiTac read it as **12 × 32** frames: 12 rows, the lines on the reading board's 16-pin connector, of 32 columns, the lines on its 32-pin connector. In code, `frame.raw` has shape `(12, 32)`.
+
 ## Already have an assembled sensor?
 
 If someone handed you a working sensor and reading board, these four commands are the entire setup:
@@ -203,20 +253,26 @@ If someone handed you a working sensor and reading board, these four commands ar
 
 ```bash
 pip install "flexitac[examples]"      # Python 3.11+
-flexitac-flash                        # needs arduino-cli; or use the Arduino IDE
+flexitac-flash                        # or flash from the Arduino IDE
 flexitac-find-port                    # which /dev/tty* is the sensor
 flexitac-heatmap --port /dev/ttyUSB0  # press the pad
 ```
 
 ## You're done when…
 
-- `flexitac-stream` ([Check the signal](https://flexitac.github.io/doc/get-started/pyflexitac/#stream)) reports a steady frame rate (about **100+ fps** for a 32 × 12 sensor).
+- `flexitac-stream` ([Check the signal](https://flexitac.github.io/doc/get-started/pyflexitac/#stream)) reports a steady frame rate: around **100 fps** with the default firmware, depending on your computer.
 - `raw_max` changes when you press the sensor, and isn't stuck at 0 or 255.
 - A bright spot in `flexitac-heatmap` follows your fingertip across **every** row and column.
 
 > **Stuck?**
 >
 > Most first-time problems are a serial permission, a cable that only charges, or firmware and reader disagreeing on the number of rows. [Troubleshooting](https://flexitac.github.io/doc/get-started/troubleshooting/) covers each of these by symptom. You can also ask on the [Discord](https://discord.gg/6gw887Vxms).
+
+## Next
+
+**[Learn with touch](https://flexitac.github.io/doc/robot-learning/)**
+
+Your sensor works. Record demonstrations with touch, represent it for a policy and train, on a real robot or in simulation.
 
 
 ---
@@ -229,9 +285,9 @@ URL: https://flexitac.github.io/doc/get-started/order-parts/
 
 You need three things for a FlexiTac-V2 setup: the **two sensor FPCs** and the **reading board** from a PCB manufacturer, plus a few **off-the-shelf parts** (Arduino Nano, cables, consumables). Fabrication takes 1–2 weeks including shipping, so order everything at once.
 
-> **Source of truth**
+> **Note**
 >
-> This page summarizes the [FlexiTac Hardware Fabrication Guide](https://docs.google.com/document/d/1bvz6AL7BUkhj4Dj7n9DFXTjnGIX4-ziN8-smiCKpVZU/edit?usp=sharing) (March 2026). If anything here disagrees with the guide, follow the guide, and please [report it](https://github.com/FlexiTac/FlexiTac.github.io/issues/new?title=Docs:+Order+parts&labels=documentation) so we can fix this page.
+> Adapted from the [FlexiTac Hardware Fabrication Guide](https://docs.google.com/document/d/1bvz6AL7BUkhj4Dj7n9DFXTjnGIX4-ziN8-smiCKpVZU/edit?usp=sharing) (Google Docs, March 2026).
 
 ## Design files
 
@@ -264,10 +320,10 @@ Order the **32 × 16 board**. According to the Fabrication Guide, this board is 
 
 *32 × 32 reading board (development)*
 
-| Board | Reads | Connectors | Use it for |
-|---|---|---|---|
-| **32 × 16** | Up to 32 lines on one side and 16 on the other | 32-pin + 16-pin FFC | FlexiTac-V2, and custom sensors that fit within 32 × 16 |
-| **32 × 32** | Up to 32 lines on each side | 32-pin + 32-pin FFC | Larger custom sensors and development. Its firmware isn't covered by these docs yet. |
+| Board | Status | Reads | Connectors | Use it for |
+|---|---|---|---|---|
+| **32 × 16** | **Recommended**: the firmware and PyFlexiTac support it | Up to 32 lines on one side and 16 on the other | 32-pin + 16-pin FFC | FlexiTac-V2, and custom sensors that fit within 32 × 16 |
+| **32 × 32** | **Development**: design files only, firmware not in these docs yet | Up to 32 lines on each side | 32-pin + 32-pin FFC | Larger custom sensors, if you're ready to adapt the firmware |
 
 If you designed a custom sensor with [FlexiTac-Gen](https://flexitac.github.io/flexitac-gen/), the app tells you which board fits it.
 
@@ -277,34 +333,39 @@ If you designed a custom sensor with [FlexiTac-Gen](https://flexitac.github.io/f
 
 ## Bill of materials
 
-Prices and links are the ones in the Fabrication Guide. A quantity like 0.05 means one roll or sheet covers about 20 sensors.
+Prices and links are from the Fabrication Guide. **Price** is what you pay for the **Purchase**; **Per sensor** or **Per setup** is the share one build uses, since a roll or pack lasts many sensors.
 
-### Sensor: about $4 each
+### Sensor
 
-| # | Part | Qty per sensor | Price | Where |
-|---|---|---|---|---|
-| 1 | **Top and bottom FPC** (key component) | 1 pair | $2.5 | PCB manufacturer, [see below](https://flexitac.github.io/doc/get-started/order-parts/#order-the-fpcs) |
-| 2 | Polyimide tape (4 in × 108 ft) | 0.01 | $21.98 | [Amazon](https://www.amazon.com/dp/B07N4QTXWS) |
-| 3 | Pressure-sensitive conductive sheet (Velostat / Linqstat) | 0.05 | $4.95 | [Adafruit 1361](https://www.adafruit.com/product/1361) |
-| 4 | Adhesive laminating sheets | 0.01 | $6.29 | [Amazon](https://a.co/d/02y7MDdy) |
+| # | Part | Purchase | Price | Per sensor | Where |
+|---|---|---|---|---|---|
+| 1 | **Top and bottom FPC** (key component) | A batch, one pair per sensor | Quoted per order | ~$2.57 at 100 units | PCB manufacturer, [see below](https://flexitac.github.io/doc/get-started/order-parts/#order-the-fpcs) |
+| 2 | Polyimide tape | 1 roll, 4 in × 108 ft: ~100 sensors | $21.98 | ~$0.22 | [Amazon](https://www.amazon.com/dp/B07N4QTXWS) |
+| 3 | Pressure-sensitive conductive sheet (Velostat / Linqstat) | 1 sheet: ~20 sensors | $4.95 | ~$0.25 | [Adafruit 1361](https://www.adafruit.com/product/1361) |
+| 4 | Adhesive laminating sheets | 1 pack: ~100 sensors | $6.29 | ~$0.06 | [Amazon](https://a.co/d/02y7MDdy) |
+|  | **Per sensor** |  |  | **~$3.10** | The guide budgets ~$4. |
 
-### Reading board: about $30
+The FPC price drops with quantity: ~$2.57 a pair is the 100-unit price, and a first order of 5–10 costs more per sensor.
 
-| # | Part | Qty | Price | Where |
-|---|---|---|---|---|
-| 5 | **Reading board PCB** (key component) | 1 | $5 | PCB manufacturer, [see below](https://flexitac.github.io/doc/get-started/order-parts/#order-the-reading-board) |
-| 6 | Arduino Nano | 1 | $25.10 | [Amazon](https://www.amazon.com/dp/B0097AU5OU) |
+### Reading board
 
-### Cables and connectors: about $10
+| # | Part | Purchase | Price | Per setup | Where |
+|---|---|---|---|---|---|
+| 5 | **Reading board PCB**, assembled (key component) | 5 boards, one quote | Quoted per order | ~$5 | PCB manufacturer, [see below](https://flexitac.github.io/doc/get-started/order-parts/#order-the-reading-board) |
+| 6 | Arduino Nano | 1 | $25.10 | $25.10 | [Amazon](https://www.amazon.com/dp/B0097AU5OU) |
+|  | **Per setup** |  |  | **~$30** |  |
 
-| # | Part | Qty | Price | Where |
-|---|---|---|---|---|
-| 7 | Flexible flat cable, 32-pin | 1 | $5.09 (5-pack) | [Amazon](https://a.co/d/0aJnyShh) |
-| 8 | Flexible flat cable, 16-pin | 1 | $6.09 (5-pack) | [Amazon](https://www.amazon.com/dp/B07RWF5D83) |
-| 9 | Mini-USB cable (must carry data) | 1 | $11.99 (2-pack) | [Amazon](https://www.amazon.com/dp/B091SQKMQK) |
-| 10 | 20-pin FFC extender | 1 | $0.95 | [Adafruit 5203](https://www.adafruit.com/product/5203) |
-| 11 | 40-pin FFC extender | 1 | $0.95 | [Adafruit 4523](https://www.adafruit.com/product/4523) |
-| 12 | FFC extender, easy-install alternative to #10–11 | 2 | $0.55–0.88 | [AliExpress](https://www.aliexpress.us/item/3256801662408481.html) |
+### Cables and connectors
+
+| # | Part | Purchase | Price | Per setup | Where |
+|---|---|---|---|---|---|
+| 7 | Flexible flat cable, 32-pin | 5-pack | $5.09 | ~$1.02 | [Amazon](https://a.co/d/0aJnyShh) |
+| 8 | Flexible flat cable, 16-pin | 5-pack | $6.09 | ~$1.22 | [Amazon](https://www.amazon.com/dp/B07RWF5D83) |
+| 9 | Mini-USB cable (must carry data) | 2-pack | $11.99 | ~$6.00 | [Amazon](https://www.amazon.com/dp/B091SQKMQK) |
+| 10 | 20-pin FFC extender | 1 | $0.95 | $0.95 | [Adafruit 5203](https://www.adafruit.com/product/5203) |
+| 11 | 40-pin FFC extender | 1 | $0.95 | $0.95 | [Adafruit 4523](https://www.adafruit.com/product/4523) |
+| 12 | FFC extender, easy-install alternative to #10–11 | 2 (16-pin and 32-pin) | $0.55–0.88 each | $1.10–1.76 | [AliExpress](https://www.aliexpress.us/item/3256801662408481.html) |
+|  | **Per setup** |  |  | **~$10** | With #10–11 |
 
 > **Which FFC extenders?**
 >
@@ -338,7 +399,15 @@ Have the manufacturer assemble the board (PCBA) so the components arrive already
    [![Quote form for the 32 × 16 reading board on FR-4](https://flexitac.github.io/doc/assets/img/order-pcba.webp)](https://flexitac.github.io/doc/assets/img/order-pcba.webp)
    *The 32 × 16 reading board in the quote form.*
 2. **Upload the BOM and pick-and-place files**
-   Upload `BOM_05mm_FFC_16_32_1mux_4sr_2025-11-01.csv` and `PickAndPlace_PCB_05mm_FFC_16_32_1mux_4sr_2025-11-01.csv`. Check that every component is in stock. If a part is out of stock, choose an equivalent before you continue.
+   Upload `BOM_05mm_FFC_16_32_1mux_4sr_2025-11-01.csv` and `PickAndPlace_PCB_05mm_FFC_16_32_1mux_4sr_2025-11-01.csv`. Check that every component is in stock. If one isn't, replace it with a part of the same function **and the same package**, so it fits the footprint on the board:
+   | Designator | In the BOM | An acceptable replacement |
+   |---|---|---|
+   | FPC1 | FFC05001-16SBB124W5M (LCSC C2856801) | 16-pin FFC connector, 0.5 mm pitch, surface-mount, with the same land pattern (compare the datasheets) |
+   | FPC2 | THD0515-32CL-SN (LCSC C283153) | 32-pin FFC connector, 0.5 mm pitch, surface-mount, with the same land pattern |
+   | U2–U5 | SN74HC595NSR | Any 74HC595 8-bit shift register in the 5.3 mm-wide SOP-16 package. The common 3.9 mm SOIC-16 doesn't fit. |
+   | U6 | CD74HC4067M96 | Any 74HC4067 16-channel analog multiplexer in the 7.5 mm-wide SOIC-24 package |
+   | R1 | 1206W4F1002T5E | 10 kΩ resistor, 1206 package |
+   Not sure a replacement fits? Ask on [Discord](https://discord.gg/6gw887Vxms) or [open an issue](https://github.com/FlexiTac/FlexiTac/issues) in the hardware repository before you order.
    [![BOM and pick-and-place upload fields](https://flexitac.github.io/doc/assets/img/order-pcba-bom.webp)](https://flexitac.github.io/doc/assets/img/order-pcba-bom.webp)
    *Upload the BOM and the pick-and-place (CPL) file.*
 3. **Review the placement**
@@ -426,14 +495,15 @@ Steps 1 and 2 below build exactly this stack: each FPC on its own laminating she
    *Fold the tape around the edges.*
 4. **Connect to the reading board**
    Insert each sensor's **gold fingers** into an FFC connector (extender), then run a flat flexible cable from each connector to the reading board. The wider gold-finger end takes the 40-pin extender (or the 32-pin AliExpress one) and the 32-pin cable. The narrower one takes the 20-pin extender (or the 16-pin one) and the 16-pin cable.
+   Push the gold fingers in **straight**, against one side of the opening. A crooked insert shorts two lines into one: [this animation](https://flexitac.github.io/doc/get-started/troubleshooting/#ffc-insert) shows the right way.
    [![The sealed sensor with the reading board, two flat flexible cables and FFC connectors](https://flexitac.github.io/doc/assets/img/fab-step4-parts.webp)](https://flexitac.github.io/doc/assets/img/fab-step4-parts.webp)
-   *Sealed sensor, reading board, flat cables and connectors.*
+   *The parts to connect.*
    [![Inserting the FPC gold fingers into a connector](https://flexitac.github.io/doc/assets/img/fab-step4-insert.webp)](https://flexitac.github.io/doc/assets/img/fab-step4-insert.webp)
    *Insert the gold fingers into the connector.*
    [![Attaching a flat flexible cable to the connector](https://flexitac.github.io/doc/assets/img/fab-step4-cable.webp)](https://flexitac.github.io/doc/assets/img/fab-step4-cable.webp)
    *Attach the flat cable.*
    [![Finished sensor connected through two flat cables to the reading board](https://flexitac.github.io/doc/assets/img/fab-step4-connected.webp)](https://flexitac.github.io/doc/assets/img/fab-step4-connected.webp)
-   *Done: the sensor is connected to the reading board.*
+   *Done: connected to the reading board.*
 
 ## Tips for a good sensor
 
@@ -447,6 +517,13 @@ Steps 1 and 2 below build exactly this stack: each FPC on its own laminating she
 >
 > In the authors' experience, sensors stay consistent for about a year of use without significant degradation. Some teams have collected thousands of demonstrations without breaking one. If a sensor is damaged, replace it. Swapping in a new sensor typically doesn't noticeably affect performance.
 
+## Check before you stream
+
+- Both FPCs' copper electrodes face the Velostat.
+- The Velostat covers the whole electrode area.
+- The two FPCs are aligned, with no visible wrinkles.
+- Gold fingers and flat cables sit straight and all the way in.
+
 ## Next
 
 Your sensor is wired to the reading board. Now [stream the sensor](https://flexitac.github.io/doc/get-started/stream/).
@@ -458,7 +535,7 @@ Your sensor is wired to the reading board. Now [stream the sensor](https://flexi
 
 URL: https://flexitac.github.io/doc/get-started/stream/
 
-> Flash the reading board from the Arduino IDE, then watch a live heatmap follow your finger. That's a working sensor.
+> Flash the reading board from the Arduino IDE, then watch a live heatmap follow your finger. That's a working sensor. Then learn with it, simulate it, customize it, and share and cite what you build.
 
 The Arduino Nano on the reading board runs a small sketch that scans the sensor and streams frames over USB. Flash it once, then watch a bright spot follow your finger on a live heatmap. That's a working sensor.
 
@@ -488,27 +565,458 @@ The Arduino Nano on the reading board runs a small sketch that scans the sensor 
    ```bash
    flexitac-heatmap --port /dev/ttyUSB0
    ```
-   Don't touch the sensor for the first second, while it measures each taxel's resting level. Then press with a fingertip and drag it slowly across the pad.
+   Don't touch the sensor for the first second: PyFlexiTac runs a **baseline calibration**, measuring each taxel's resting level. Then press with a fingertip and drag it slowly across the pad.
+
+*Working sensor: The live heatmap follows the press, in real time.*
+
+What a working sensor shows:
+
+- **No contact:** the whole map is dark and steady.
+- **Light touch:** a small patch lights up under your fingertip.
+- **Sliding:** the patch moves with your finger.
+- **Release:** the map goes dark again.
 
 **A bright spot that follows your finger across every row and column means your sensor works.** If a row or column never lights up, see [Dead rows or columns](https://flexitac.github.io/doc/get-started/troubleshooting/#dead-rows).
+
+> **A working sensor isn't a force sensor yet**
+>
+> The check above is **signal validation**: every taxel responds. The step before it is **baseline calibration**: PyFlexiTac removes each taxel's resting offset. Neither is **force calibration**, which maps readings to newtons. FlexiTac doesn't provide that, so treat readings as relative.
 
 > **`Permission denied` on Linux?**
 >
 > Add yourself to the `dialout` group once, then log out and back in: `sudo usermod -aG dialout "$USER"`. More in [Serial port permissions](https://flexitac.github.io/doc/get-started/pyflexitac/#permissions).
 
+## Your FlexiTac is ready
+
+Your sensor is now streaming tactile data. Choose what you want to do next.
+
+**[Develop with Python](https://flexitac.github.io/doc/get-started/pyflexitac/)**
+
+Read and record tactile frames.
+
+**[Collect robot data](https://flexitac.github.io/doc/robot-learning/data-collection/)**
+
+Mount it and record demonstrations.
+
+**[Customize your sensor](https://flexitac.github.io/doc/get-started/customize/)**
+
+Design one for another gripper.
+
+**[Explore simulation](https://flexitac.github.io/doc/simulation/)**
+
+Generate virtual tactile data.
+
+Something isn't working? [Troubleshooting →](https://flexitac.github.io/doc/get-started/troubleshooting/)
+
+> **Share your build**
+>
+> Got it working? Share a short video of your sensor with us on [Discord](https://discord.gg/6gw887Vxms). Once it's on a robot, [send it in](https://flexitac.github.io/doc/contributing/#robot) to be featured on these docs.
+
+
+---
+
+# PyFlexiTac
+
+URL: https://flexitac.github.io/doc/get-started/pyflexitac/
+
+> The Python SDK for tactile sensing and data acquisition. Install it, read and record frames, run several sensors, configure custom sensors, and read the wire protocol.
+
+[PyFlexiTac](https://github.com/WT-MM/PyFlexiTac) is the `flexitac` Python package (MIT-licensed, maintained by Wesley Maa). [Stream the sensor](https://flexitac.github.io/doc/get-started/stream/) already used it for the live heatmap. This page covers the rest. Its README is the source of truth for every option.
+
+- [**Install & stream** Install, check the signal](https://flexitac.github.io/doc/get-started/pyflexitac/#install)
+- [**Read frames in Python** Frames, fields, timing](https://flexitac.github.io/doc/get-started/pyflexitac/#python)
+- [**Record tactile data** A short dataset to disk](https://flexitac.github.io/doc/get-started/pyflexitac/#record)
+- [**Use multiple sensors** One port per board](https://flexitac.github.io/doc/get-started/pyflexitac/#multiple)
+- [**Configure custom sensors** Rows, columns, firmware](https://flexitac.github.io/doc/get-started/pyflexitac/#rows)
+- [**Wire protocol** Write your own reader](https://flexitac.github.io/doc/get-started/pyflexitac/#wire-protocol)
+
+## Install
+
+PyFlexiTac needs **Python 3.11 or newer**.
+
+```bash
+python3 -m venv .venv && source .venv/bin/activate
+# [examples] adds matplotlib for the heatmap
+pip install "flexitac[examples]"
+```
+
+```bash
+uv venv && source .venv/bin/activate
+uv pip install "flexitac[examples]"
+```
+
+```bash
+git clone https://github.com/WT-MM/PyFlexiTac.git
+cd PyFlexiTac
+uv sync --extra examples     # or: pip install -e ".[examples]"
+```
+
+This installs four commands: `flexitac-find-port`, `flexitac-heatmap`, `flexitac-stream` and `flexitac-flash`.
+
+## Check the signal
+
+`flexitac-stream` prints the frame rate and signal statistics. It tells you whether the board, the firmware and the reader agree.
+
+```bash
+flexitac-stream --port /dev/ttyUSB0 --frames 3000
+```
+
+*Expected output*
+
+```
+frame=    10 fps=  85.3 raw_max=104 norm_max=0.000
+frame=    20 fps=  87.1 raw_max=109 norm_max=0.123
+```
+
+> **Don't touch the sensor for the first second**
+>
+> On its first read, PyFlexiTac runs a **baseline calibration**: it collects 30 frames and stores each taxel's median as the baseline. If you press the sensor during it, that pressure becomes part of the "zero."
+
+| Field | Healthy | If not |
+|---|---|---|
+| `fps` | Steady, around **100** for a 12 × 32 sensor (it depends on your computer) | `0` or `TimeoutError`: the board isn't sending FlexiTac frames at this baud rate. See [No frames](https://flexitac.github.io/doc/get-started/troubleshooting/#no-frames). About half the expected rate: the reader expects more rows than the firmware sends. See [Scrambled heatmap](https://flexitac.github.io/doc/get-started/troubleshooting/#scrambled). |
+| `raw_max` | Between 0 and 255, and **changes when you press** | Stuck at 0 or 255: a wiring or connector problem, not a flashing problem. |
+| `norm_max` | Near 0 at rest, rises toward **1.0** on contact | Never rises: check the Velostat and the connectors. |
+
+If some rows seem dead, add `--per-row`. It prints each row's mean baseline once, then each row's `raw_max` every 20 frames. Press along a column and check that every row responds.
+
+## Serial port permissions
+
+Add yourself to the `dialout` group once, then **log out and back in**:
+
+```bash
+sudo usermod -aG dialout "$USER"
+```
+
+As a quick, temporary workaround (until the next replug), you can loosen permissions on the device instead:
+
+```bash
+sudo chmod a+rw /dev/ttyUSB0
+```
+
+Serial permissions are usually handled automatically. If you still get `Permission denied`:
+
+```bash
+sudo chmod a+rw /dev/tty.usbserial-*
+```
+
+## Read frames in Python
+
+*hello_flexitac.py*
+
+```python
+from flexitac import FlexiTacSensor
+
+# rows=12, cols=32 by default; the first read calibrates
+with FlexiTacSensor("/dev/ttyUSB0") as sensor:
+    for frame in sensor:
+        print(frame.seq, frame.raw.max(), frame.normalized.max())
+```
+
+Each `frame` is a `FlexiTacFrame`:
+
+| Field | Type | Meaning |
+|---|---|---|
+| `seq` | `int` | Count of frames this reader has returned. It's kept on the host, so it doesn't reveal frames that were lost or skipped. |
+| `timestamp_s` | `float` | **Host** time when PyFlexiTac finished parsing the frame (`time.time()`), not when the board sampled it. USB and buffering add latency and jitter. |
+| `raw` | `uint8[rows, cols]` | Values exactly as sent by the firmware |
+| `normalized` | `float32[rows, cols]` | Baseline-subtracted, thresholded and scaled to 0–1 |
+
+Useful methods and options:
+
+- `sensor.read()` returns the next complete frame from the receive buffer, in order. Use it when you're **recording**. It never skips a frame it has received, but it can't promise none were lost before: if your loop reads more slowly than the sensor sends, PyFlexiTac keeps only the newest 50,000 unread bytes (about 130 frames at 12 × 32).
+- `sensor.read_latest()` discards queued frames and returns the newest one. Use it for **live control or visualization**, so you never lag behind the sensor.
+- `sensor.calibrate()` redoes the baseline calibration, for example after mounting the sensor or changing the load at rest.
+- `FlexiTacSensor(port, rows=…, cols=…, baud=…, init_frames=30, threshold=25.0, noise_scale=30.0, baseline=None)`. Pass `baseline=` with a saved array, or a scalar such as `20.0`, to skip the startup baseline calibration.
+
+> **`normalized` is scaled per frame**
+>
+> When contact is detected, `normalized` divides by that frame's own peak, so the strongest taxel is always 1.0. That's ideal for visualization, but it hides how hard the contact is. For learning, record `raw` together with the baseline (`sensor.baseline`) and normalize consistently yourself. Readings aren't force-calibrated: turning them into newtons takes your own force calibration.
+
+### Record a short dataset
+
+*record.py*
+
+```python
+import numpy as np
+from flexitac import FlexiTacSensor
+
+with FlexiTacSensor("/dev/ttyUSB0") as sensor:
+    sensor.calibrate()          # don't touch the sensor here
+    frames, stamps = [], []
+    for _ in range(1000):       # about 10 s at ~100 fps
+        f = sensor.read()       # the next frame, in order
+        frames.append(f.raw)
+        stamps.append(f.timestamp_s)
+
+np.savez_compressed("tactile.npz", raw=np.stack(frames),
+                    t=np.array(stamps), baseline=sensor.baseline)
+```
+
+### More than one sensor
+
+Each reading board is its own USB serial device. For a two-finger gripper, open one `FlexiTacSensor` per port (find each with `flexitac-find-port`) and read them in parallel threads, or call `read_latest()` on each in your control loop.
+
+The streams **aren't synchronized**: each board scans on its own clock, and frames reach the host with their own USB delays. To combine them, pair frames by `timestamp_s` (nearest in time) and allow for jitter.
+
+## Flash from the command line
+
+`flexitac-flash` puts the same sketch on the board as the Arduino IDE path, without opening the IDE, and can generate it for a custom sensor size.
+
+1. **Install arduino-cli and the AVR core**
+   `flexitac-flash` compiles and uploads with [`arduino-cli`](https://arduino.github.io/arduino-cli/latest/installation/).
+   ```bash
+   brew install arduino-cli
+   arduino-cli core update-index
+   arduino-cli core install arduino:avr
+   ```
+   ```bash
+   curl -fsSL https://raw.githubusercontent.com/arduino/arduino-cli/master/install.sh | sh
+   # the script installs into ./bin — move it onto your PATH, e.g.:
+   sudo mv bin/arduino-cli /usr/local/bin/
+   arduino-cli core update-index
+   arduino-cli core install arduino:avr
+   ```
+2. **Plug in the board and flash**
+   With exactly one Arduino connected, `flexitac-flash` finds the port and the board type on its own:
+   ```bash
+   flexitac-flash
+   ```
+   The defaults are for the standard V2 sensor: `--rows 12 --cols 32 --baud 2000000 --mux-offset 4`, meaning 12 rows wired to multiplexer channels 4–15. For a custom sensor, pass its geometry:
+   ```bash
+   flexitac-flash --rows 16 --cols 32 --mux-offset 0
+   ```
+
+> **Board not detected?**
+>
+> Many Arduino Nano clones (CH340 USB chip) don't report a board type, so auto-detection fails with `no Arduino board detected`. Pass the port and board explicitly:
+>
+>
+>
+> ```bash
+> flexitac-flash --port /dev/ttyUSB0 --fqbn arduino:avr:nano
+>
+> # older Nanos and many clones use the old bootloader:
+> flexitac-flash --port /dev/ttyUSB0 \
+>     --fqbn arduino:avr:nano:cpu=atmega328old
+> ```
+
+## Match the reader to the firmware
+
+**The reader must use the same rows and columns as the firmware.** If they don't match, the reader splits the byte stream in the wrong places and the heatmap comes out cut off or scrambled ([what each mismatch looks like](https://flexitac.github.io/doc/get-started/troubleshooting/#scrambled)).
+
+| Firmware | Frame | Read with |
+|---|---|---|
+| PyFlexiTac's sketch, from the Arduino IDE or `flexitac-flash` (the default) | 12 × 32 | The defaults |
+| A custom size: `flexitac-flash --rows R --cols C --mux-offset M` | R × C | `--rows R --cols C` |
+| `32_16_fast.ino` from the [hardware repo](https://github.com/FlexiTac/FlexiTac) | 16 × 32; rows 0–3 stay near zero on a V2 sensor | `--rows 16 --cols 32` |
+
+To build a custom size from the Arduino IDE instead, change `ROW_COUNT`, `COLUMN_COUNT` and `MUX_CHANNEL_OFFSET` at the top of the sketch before uploading. Custom sensors must fit the 32 × 16 board (up to 16 rows and 32 columns); the 32 × 32 board's firmware isn't covered by these docs yet. The hardware repo also includes `fast_32_16.py`, a standalone OpenCV viewer for `32_16_fast.ino`.
+
+## Wire protocol
+
+If you're writing your own reader, for a robot middleware, a microcontroller or another language, here is the whole protocol. For every frame, the firmware sends a two-byte start marker, then selects each **row** through a 16-channel analog multiplexer, steps through each **column** with shift registers, and reads each crossing with the Nano's 10-bit ADC, scaled to one byte.
+
+| Field | Value |
+|---|---|
+| Transport | USB serial, **2,000,000 baud**, 8N1 |
+| Start marker | 2 bytes: `0xAA 0x55` |
+| Payload | `rows × cols` bytes, unsigned 8-bit, row-major (row 0 first, columns 0…cols−1) |
+| Value | ADC reading ÷ 4 (10-bit → 8-bit). Higher values mean more pressure. |
+| Frame rate | Continuous, with no text formatting; around 100 fps for 12 × 32, depending on the host |
+| Integrity | No checksum, no sequence number, no length field |
+
+So a reader can't detect a dropped or corrupted frame. If bytes are lost, it can lock onto a `0xAA 0x55` pair inside the payload and return a misaligned frame before it finds a real marker again. Number frames and timestamp them yourself on the host.
+
+A minimal reader with `pyserial` and NumPy:
+
+*read_raw.py*
+
+```python
+import numpy as np
+import serial
+
+ROWS, COLS = 12, 32                 # must match the firmware you flashed
+MARKER, N = b"\xaa\x55", ROWS * COLS
+
+with serial.Serial("/dev/ttyUSB0", 2_000_000, timeout=0.05) as ser:
+    buf = bytearray()
+    while True:
+        buf += ser.read(4096)
+        i = buf.find(MARKER)
+        if i < 0:
+            del buf[:-1]            # keep a possible half marker
+            continue
+        if len(buf) < i + 2 + N:
+            continue                # wait for the rest of the frame
+        start = i + 2
+        frame = np.frombuffer(buf[start : start + N], dtype=np.uint8)
+        frame = frame.reshape(ROWS, COLS)
+        del buf[: start + N]
+        print(frame.max())
+```
+
+> **Note**
+>
+> Readings are raw. Each taxel has its own resting level, so subtract a **baseline**, such as the per-taxel median of the first ~30 frames taken while nothing touches the sensor, before you threshold or normalize. `FlexiTacSensor` does this for you.
+
+
+---
+
+# Customize a sensor
+
+URL: https://flexitac.github.io/doc/get-started/customize/
+
+> Take a ready-made sensor from FlexiTac-Gen's Library, or fit one to your own gripper's 3D model in the browser, with the default settings or your own.
+
+[FlexiTac-Gen](https://flexitac.github.io/flexitac-gen/) generates the two FPCs of a FlexiTac sensor for a gripper, fingertip or hand other than the standard pad. It runs entirely in your browser: your 3D model is never uploaded. The first visit downloads about 7 MB. There are three ways in, from least to most work:
+
+1. **[Library](https://flexitac.github.io/doc/get-started/customize/#library):** a sensor already fitted to a known gripper. Pick a pitch and download.
+2. **[Gen by Surface](https://flexitac.github.io/doc/get-started/customize/#gen-by-surface):** load your own part, click the face and its base edge, press **Generate sensor**. The default settings do the rest.
+3. **[Advanced Customization](https://flexitac.github.io/doc/get-started/customize/#advanced):** set the pitch, the electrode width, the number of rows and columns and the tails yourself.
+
+Each way ends with the same two Gerber ZIPs, which you then [order, build and read](https://flexitac.github.io/doc/get-started/customize/#order) like the standard sensor.
+
+## Start from the Library
+
+[![The FlexiTac-Gen Library: the original FlexiTac on xArm card, then the first row of gripper cards](https://flexitac.github.io/doc/assets/img/gen-library.webp)](https://flexitac.github.io/doc/assets/img/gen-library.webp)
+
+*The Library, FlexiTac-Gen's first page.*
+
+1. **Find your gripper**
+   Open [FlexiTac-Gen](https://flexitac.github.io/flexitac-gen/). The Library comes first. The top card is the original, hand-designed FlexiTac on the xArm gripper. Below it are 18 grippers and hands (LeFlexiTac, Robotiq 2F-85, Franka Hand, WidowX 250 and more), each fitted at four pitches, and the UMI fin-ray finger in six shapes, from straight to pointed.
+2. **Pick a pitch**
+   Click a card. Its page shows the sensor on the part, which you can turn and switch between **Exploded** and **Assembled**. The **Pitch** switch gives the same finger at its other pitches. The list below gives the sensor's rows × columns and taxel count, its field and tails, and the reading board it needs.
+   [![A Library sensor's page: the UMI Fin-Ray Gripper at 2 mm pitch, 32 rows × 12 columns, with its downloads](https://flexitac.github.io/doc/assets/img/gen-library-sensor.webp)](https://flexitac.github.io/doc/assets/img/gen-library-sensor.webp)
+   *The UMI fin-ray finger at 2 mm: the same 32 × 12 grid as the standard sensor.*
+3. **Download**
+   **Top FPC Gerber ZIP** and **Bottom FPC Gerber ZIP** are the two boards to order. **Reading board** links the board's own ZIP. **Part STL** is the finger the sensor was fitted to.
+
+> **Almost right?**
+>
+> **Open in Gen by Surface** loads that sensor into the generator, already built, so you can change it from there with [Advanced Customization](https://flexitac.github.io/doc/get-started/customize/#advanced).
+
+## Fit a sensor to your own part
+
+Switch to **Gen by Surface** in the header, or press **Design your own** in the Library. The guide on the left has three steps: **Load your gripper**, **Generate the sensor**, **Send to manufacture**. The example here is the part it opens with, the UMI soft gripper finger.
+
+1. **Load your part**
+   Gen by Surface opens with the UMI finger already loaded and its sensor already built. To follow along on it, press **Clear** in the tools on the left of the 3D view. For your own gripper, press **Choose File** or drag an STL onto the 3D view. **File details** shows the unit it was read in, which should be millimetres. **Try a sample** has eight more parts to practice on.
+2. **Click the face the sensor goes on**
+   With **Select a surface** (tool 1, left of the 3D view), click the finger's flat contact face. It turns orange. Flat, creased and singly curved faces work, such as cylinders, cones and extrusions. On a doubly curved face, such as a fingertip's dome, the click selects the largest patch a flat sheet can cover with less than 1 % stretch.
+3. **Select the base edge**
+   The base edge is the edge both tails leave the sensor across, on their way to the reading board. Choose **Base edge** (tool 2) and click the gripper's bottom edge: on the UMI finger, the short edge at the mounting end, by the screw holes. It turns red. Choose it yourself: before the fit, **Auto** marks a long side. You can also pick the edge from the list under **Advanced Customization → Base edge**, here **Side 0 · 25.8 mm**.
+   [![Gen by Surface with the UMI soft gripper finger: its contact face selected in orange, the base edge in red along the short edge at the mounting end, the Base edge tool active, and Generate sensor ready below the 3D view](https://flexitac.github.io/doc/assets/img/gen-surface-base-edge.webp)](https://flexitac.github.io/doc/assets/img/gen-surface-base-edge.webp)
+   *The contact face (orange) and its base edge at the finger's mounting end (red).*
+4. **Press Generate sensor**
+   The defaults are set for a FlexiTac sensor:
+   - 2.0 mm pitch, with electrodes half the pitch wide.
+   - At most 32 rows and 32 columns.
+   - Taxels that fill the face's own shape, not only a rectangle.
+   - Both tails leaving across the base edge and ending together 20 mm past it.
+   After a few seconds the sensor appears on the part, together with previews of both FPCs and the stacked sensor. Turn it, or switch between **Exploded** and **Assembled**. On the UMI finger the defaults give **32 rows × 12 columns = 384 taxels** at 2.0 mm, at the fingertip: the same grid as the standard sensor.
+   [![The generated sensor for the UMI finger: the two FPCs stacked with the Velostat on the left, next to a quarter for scale, and the sensor exploded off the finger's contact face on the right](https://flexitac.github.io/doc/assets/img/gen-surface-sensor.webp)](https://flexitac.github.io/doc/assets/img/gen-surface-sensor.webp)
+   *The UMI finger's 32 × 12 sensor, stacked (left) and on the finger (right).*
+5. **Check and download**
+   **Design checks** must read "all checks pass". The downloads are blocked until they do. Then **Downloads** gives the **Top FPC Gerber ZIP** and the **Bottom FPC Gerber ZIP**, and names the reading board your sensor needs.
+   [![The Downloads card: Top FPC and Bottom FPC Gerber ZIP buttons, the fabrication guide link and the 32 × 16 reading board](https://flexitac.github.io/doc/assets/img/gen-downloads.webp)](https://flexitac.github.io/doc/assets/img/gen-downloads.webp)
+   *Step 3: the two Gerber ZIPs and the reading board.*
+
+## Advanced Customization
+
+Open **Advanced Customization** under **Generate sensor** to set the design yourself. Change the settings, press **Fit sensor to the surface**, pick one of the proposals, then press **Generate & validate**.
+
+[![The Advanced Customization panel for the UMI finger: Resolution with pitch, electrode fill, row traces, tail length and maximum rows and columns, More options below, and the flattened sensor on the right](https://flexitac.github.io/doc/assets/img/gen-advanced.webp)](https://flexitac.github.io/doc/assets/img/gen-advanced.webp)
+
+*Resolution and More options, with the UMI finger's flattened layout on the right.*
+
+**Base edge**, at the top of the panel, lists the same edges the **Base edge** tool picks from, with their lengths. **Edit border** (optional, in the tools on the left of the 3D view) lets you drag the outline the taxels must stay inside.
+
+Under **Resolution**:
+
+| Setting | Default | What it changes |
+|---|---|---|
+| **Pitch (mm)** | 2.0 (0.6–10) | Distance between taxels. A smaller pitch gives more taxels and finer resolution. |
+| **Electrode fill (width / pitch)** | 0.5 (0.05–0.95) | How wide each electrode is, as a fraction of the pitch. |
+| **Max rows**, **Max columns** | 32 each (1–64) | The largest grid the fit may use. |
+| **Row traces** | Both | The side of the field the row traces run down: **Both** (alternate sides, the narrowest tip), **Left**, **Right**, or **Straight channel**. |
+| **Tail past base edge (mm)** | 20 (6.5–72.5) | How far past the base edge the tails end. |
+
+Under **More options**:
+
+| Setting | Default | What it changes |
+|---|---|---|
+| **Objective** | Resolution (pitch) | **Resolution** fits the most taxels at your pitch. **Most taxels** may go down to **Smallest pitch**. **Largest sensing area** grows the field instead. |
+| **Edge margin (mm)** | 0 | Keeps the boards this far from the face's edge. |
+| **Fan-out traces (width / gap)** | Auto | 0.127 / 0.127 mm, or the 0.1016 / 0.1016 mm minimum for crowded designs. |
+| **Board rotation** | Auto (up to ±30°) | Lets the boards turn against the base edge when that fits more taxels. |
+| **Role mapping** | Auto (try both) | Which FPC lies on top. |
+| **Containment** | Field only | **Field only**: only the taxels must lie on the face, while traces and tails may run past its edges. **Whole board**: everything down to the tails stays on the face. |
+| **Reader** | None (1 per line) | Sizes the tails for a reading board's connectors, such as **32 × 16 (FlexiTac)**. |
+| **Placement** | Far from base edge | Where the field sits on the face when it doesn't fill it. |
+| **Strain limit** | 1 % on curved faces | How much stretch is allowed on a doubly curved face. **Strict 0.3 %** allows less. |
+| **Proposals** | 5 | How many layouts the fit returns. |
+
+**Fit sensor to the surface** lists its proposals, best first, up to the number set in **Proposals**. Each has its rows × columns, pitch, taxel count, how much of the face it covers and its tail lengths. Choose one and press **Generate & validate**.
+
+[![The Proposals table for the UMI finger: 32 × 12 and 12 × 32, both 384 taxels at 2.00 mm](https://flexitac.github.io/doc/assets/img/gen-proposals.webp)](https://flexitac.github.io/doc/assets/img/gen-proposals.webp)
+
+*The UMI finger's two proposals, best first.*
+
+> **A flat, rectangular pad?**
+>
+> Use **Rectangular** in the header instead. You type the rows, columns and pitch directly, and the same options sit under its own Advanced Customization.
+
+## Order, build and read it
+
+1. **Order the FPCs**
+   Upload each Gerber ZIP as in [Order the FPCs](https://flexitac.github.io/doc/get-started/order-parts/#order-the-fpcs). Each ZIP carries an `ORDER_NOTES.txt` with the settings it needs: a 0.2 mm flexible board, gold fingers 0.3 mm thick, and a polyimide stiffener under them.
+2. **Get the reading board it names**
+   FlexiTac-Gen names the board your sensor needs. The **32 × 16** board takes up to 32 lines on one FPC and 16 on the other, which covers most single-finger sensors. The **32 × 32** board takes up to 32 on each. Both boards' files and how to choose between them are in [Which reading board?](https://flexitac.github.io/doc/get-started/order-parts/#which-board)
+3. **Fabricate it**
+   Laminate, stack and seal it exactly as in [Fabricate a sensor](https://flexitac.github.io/doc/get-started/fabricate/). Insert each tail's gold fingers straight and [against one side](https://flexitac.github.io/doc/get-started/troubleshooting/#short) of its FFC extender.
+4. **Flash and stream it**
+   The firmware's **rows** are the lines on the board's 16-pin connector and its **columns** are those on the 32-pin connector, whatever FlexiTac-Gen calls them. A 32-row × 12-column Gen sensor is read as 12 × 32. Flash and read it with that size and its multiplexer offset, as in [Match the reader to the firmware](https://flexitac.github.io/doc/get-started/pyflexitac/#rows).
+
+> **Generated sensors fold their row pins**
+>
+> With **Row traces: Both**, the default and what every Library sensor uses, the row traces alternate sides. So the Row FPC's pins don't carry rows 1, 2, 3… in order but 1, 3, 5, … 6, 4, 2. The Row FPC ZIP's `ORDER_NOTES.txt` lists the row on every pin. Put that axis of the frame back in order in your code:
+>
+>
+>
+> *unfold.py*
+>
+> ```python
+> import numpy as np
+>
+> # From ORDER_NOTES.txt: the row on pin 1, 2, 3, … (32 rows here)
+> pin_rows = [1, 3, 5, 7, 9, 11, 13, 15,
+>             17, 19, 21, 23, 25, 27, 29, 31,
+>             32, 30, 28, 26, 24, 22, 20, 18,
+>             16, 14, 12, 10, 8, 6, 4, 2]
+> order = np.argsort(pin_rows)   # the pin of row 1, 2, 3, …
+>
+> # Here the Row FPC's 32 lines are the frame's columns
+> raw = frame.raw[:, order]
+> ```
+>
+>
+>
+> Then press once per row, from one end to the other: the bright spot should move one row at a time. On a sensor whose field isn't a full rectangle, the grid positions without a taxel always read 0.
+
 ## Next
 
-**[PyFlexiTac](https://flexitac.github.io/doc/get-started/pyflexitac/)**
+**[Order parts](https://flexitac.github.io/doc/get-started/order-parts/)**
 
-Read frames in your own Python code, record datasets, run several sensors, check the signal, flash from the command line, and the wire protocol.
+The ordering settings for the FPCs, the reading board and the parts list.
 
-**[Collect tactile data](https://flexitac.github.io/doc/robot-learning/data-collection/)**
+**[Fabricate a sensor](https://flexitac.github.io/doc/get-started/fabricate/)**
 
-Mount the sensor on a gripper and record demonstrations with touch, then train a policy on them.
+Laminate, stack and seal the two FPCs around the Velostat.
 
 **[Troubleshooting](https://flexitac.github.io/doc/get-started/troubleshooting/)**
 
-No port, no frames, a scrambled picture or dead rows, by symptom.
+Dead rows, a scrambled picture or no frames, by symptom.
 
 
 ---
@@ -519,7 +1027,17 @@ URL: https://flexitac.github.io/doc/get-started/troubleshooting/
 
 > Find your symptom, then work through the checks from most to least likely.
 
-Start with `flexitac-stream --port <port>`. Its output (fps, `raw_max`, `norm_max`) tells you which layer is failing:
+## What do you see?
+
+| Area | What you see | Go to |
+|---|---|---|
+| **USB, driver, permissions** | No serial port, `Permission denied`, a low frame rate | [No port](https://flexitac.github.io/doc/get-started/troubleshooting/#no-port) · [Permission denied](https://flexitac.github.io/doc/get-started/troubleshooting/#permission-denied) · [Low frame rate](https://flexitac.github.io/doc/get-started/troubleshooting/#low-fps) |
+| **Firmware, baud rate** | The upload fails; no frames, `fps=0` or `TimeoutError` | [Flashing fails](https://flexitac.github.io/doc/get-started/troubleshooting/#flash-fails) · [No frames](https://flexitac.github.io/doc/get-started/troubleshooting/#no-frames) |
+| **FFC, hardware connections** | Rows with gaps, dead rows or columns, `raw_max` stuck at 0 or 255 | [Rows with gaps](https://flexitac.github.io/doc/get-started/troubleshooting/#short) · [Dead rows](https://flexitac.github.io/doc/get-started/troubleshooting/#dead-rows) · [Stuck at 0 or 255](https://flexitac.github.io/doc/get-started/troubleshooting/#stuck) |
+| **Array shape, firmware mismatch** | A scrambled, shifted or slanted picture | [Scrambled or shifted](https://flexitac.github.io/doc/get-started/troubleshooting/#scrambled) |
+| **Baseline, mounting, signal quality** | Saturates, barely changes, or noisy and drifting at rest | [Saturates or flat](https://flexitac.github.io/doc/get-started/troubleshooting/#range) · [Noisy or drifting](https://flexitac.github.io/doc/get-started/troubleshooting/#noisy) |
+
+Not sure which? Run `flexitac-stream --port <port>`. Its output (fps, `raw_max`, `norm_max`) tells you which layer is failing:
 
 - **Frames arrive at full rate, but some taxels are dead, stuck or light up in the wrong place:** the sensor, its connectors or its cables. See [Hardware problems](https://flexitac.github.io/doc/get-started/troubleshooting/#hardware).
 - **No serial port, no frames, a failed upload, or a picture that's wrong across the whole sensor:** the reading board's firmware, the USB connection or the reader settings. See [Firmware and reading problems](https://flexitac.github.io/doc/get-started/troubleshooting/#firmware).
@@ -546,7 +1064,7 @@ The animation needs JavaScript. In short: push the gold fingers in straight, aga
 
 To fix it:
 
-1. **Open the connector.** Gently pry up its two ears and pull the gold fingers out.
+1. **Unplug the USB cable** so the board is off, then **open the connector**: gently pry up its two ears and pull the gold fingers out.
 2. **Insert the gold fingers against one side** of the opening, straight and all the way in, with the contacts facing up. Then push the ears back in.
 3. **Check the flat cable the same way** at the other end of the extender: straight, all the way in, contacts up, and against the same side as the fingers. It is narrower than its connector too.
 4. **Test.** Run `flexitac-stream --port <port>` and press one spot at a time. Each press should light up one patch.
@@ -557,7 +1075,7 @@ The 32-pin gold fingers and cable go into the [40-pin extender](https://www.adaf
 
 Run `flexitac-stream --port <port> --per-row` and press along a column. Then check:
 
-- **Gold fingers fully and squarely seated** in each FFC extender, pushed against one side of the opening (see [above](https://flexitac.github.io/doc/get-started/troubleshooting/#short)). Re-seat both ends and both cables.
+- **Gold fingers fully and squarely seated** in each FFC extender, pushed against one side of the opening (see [above](https://flexitac.github.io/doc/get-started/troubleshooting/#short)). With the USB unplugged, re-seat both ends and both cables.
 - **Cable orientation.** A cable inserted with its contacts facing the wrong way gives a whole dead side.
 - **Velostat coverage.** A dead band along one edge often means the film doesn't reach that edge.
 - **Lamination alignment.** If the top and bottom FPCs were offset when you stacked them, edge crossings may not overlap.
@@ -566,11 +1084,11 @@ Run `flexitac-stream --port <port> --per-row` and press along a column. Then che
 
 ### `raw_max` is stuck at 0 or 255
 
-A value that stays flat at either end of the range points to a **wiring problem**, such as a disconnected or [shorted](https://flexitac.github.io/doc/get-started/troubleshooting/#short) line, not a flashing problem. Re-seat the connectors and inspect the gold fingers and cables for damage.
+A value that stays flat at either end of the range usually points to a **connection problem**, such as a disconnected or [shorted](https://flexitac.github.io/doc/get-started/troubleshooting/#short) line. With the USB unplugged, re-seat the connectors and inspect the gold fingers and cables for damage. If that doesn't help, the fault can also be on the board: re-flash the firmware, then try the sensor on another board to rule out the board and its Nano.
 
 ### The signal saturates or barely changes
 
-- **Saturates under light touch:** the sensor may be pre-loaded by its mount, or the baseline was captured under load. Re-calibrate at rest.
+- **Saturates under light touch:** the sensor may be pre-loaded by its mount, or the baseline was captured under load. Redo the baseline calibration at rest.
 - **Barely changes under firm pressure:** check that the Velostat is present and centered, and that the polyimide seal isn't holding the layers apart. Make sure you're reading the right port, and not another device.
 
 ## Firmware and reading problems
@@ -586,7 +1104,7 @@ These come from the reading board's firmware, the USB connection or how the read
   # expect e.g. "ch341-uart converter now attached to ttyUSB0"
   sudo dmesg -w
   ```
-- On Linux, **`brltty` can grab CH340 devices.** If the port appears and immediately disappears, removing that package (`sudo apt remove brltty`) is a common fix.
+- On Linux, **`brltty` can grab CH340 devices.** It's accessibility software for braille displays. If the port appears and immediately disappears, check `sudo dmesg` for brltty taking the device. Only if it does, and you don't use a braille display, consider removing it (`sudo apt remove brltty`).
 
 ### Permission denied
 
@@ -631,13 +1149,13 @@ See [Match the reader to the firmware](https://flexitac.github.io/doc/get-starte
 
 ### Noisy or drifting at rest
 
-- **Re-calibrate with nothing touching the sensor.** If the sensor was pressed during the first ~30 frames, the baseline is wrong. Call `sensor.calibrate()` or restart the stream.
-- **Mounting changes the baseline.** Bending or pre-loading the sensor onto a curved finger raises its resting values. Calibrate after mounting, not before.
+- **Redo the baseline calibration with nothing touching the sensor.** If the sensor was pressed during the first ~30 frames, the baseline is wrong. Call `sensor.calibrate()` or restart the stream.
+- **Mounting changes the baseline.** Bending or pre-loading the sensor onto a curved finger raises its resting values. Run the baseline calibration after mounting, not before.
 - **Expect small fluctuations.** `normalized` hides readings below the threshold (default 25 counts above baseline). If you work with `raw`, apply your own threshold or temporal filter. The hardware repo's `fast_32_16.py` uses an exponential filter with α = 0.2.
 
 ### Low frame rate
 
-About 100+ fps is expected for 12 × 32 at 2 Mbaud. Lower rates usually come from a slow USB hub, a very busy host, or a visualizer that renders every frame. For live use, call `read_latest()` so rendering never falls behind.
+With PyFlexiTac's default firmware (12 × 32 frames at 2,000,000 baud), expect around 100 fps or more. That's a reference, not a pass/fail threshold: your computer, USB and visualizer change it. Much lower rates usually come from a slow USB hub, a very busy host, or a visualizer that renders every frame. For live use, call `read_latest()` so rendering never falls behind.
 
 ## FAQ
 
@@ -659,73 +1177,40 @@ The hardware is licensed [CC BY-NC 4.0](https://creativecommons.org/licenses/by-
 
 ## Still stuck?
 
-Ask on the [FlexiTac Discord](https://discord.gg/6gw887Vxms), or open an issue in the repository that owns the problem:
+Ask on the [FlexiTac Discord](https://discord.gg/6gw887Vxms), or open an issue in the repository that owns the problem. [Report a bug](https://flexitac.github.io/doc/contributing/#code) lists which repository owns what, and what a report anyone can act on includes.
 
-| Problem with | Open an issue in |
-|---|---|
-| Sensor design, reading board, `32_16_fast.ino` | [FlexiTac/FlexiTac](https://github.com/FlexiTac/FlexiTac/issues) |
-| `flexitac-*` commands, the Python API, `flexitac-flash` firmware | [WT-MM/PyFlexiTac](https://github.com/WT-MM/PyFlexiTac/issues) |
-| These docs | [FlexiTac/FlexiTac.github.io](https://github.com/FlexiTac/FlexiTac.github.io/issues) |
-
-A report anyone can act on includes: sensor version or geometry, reading board (32 × 16 or 32 × 32), which firmware you flashed and its settings, OS and Python version, the exact command you ran, the full output, and a photo of the connections.
+Solved a problem that isn't on this page, on Discord or on your own? Add it as a new case, with what you saw, the cause and the fix. You describe it best, so [send the change yourself](https://flexitac.github.io/doc/contributing/#docs).
 
 
 ---
 
-# Next steps
+# Learning with FlexiTac
 
-URL: https://flexitac.github.io/doc/get-started/next-steps/
+URL: https://flexitac.github.io/doc/robot-learning/
 
-> Learn on a real robot or in simulation, customize the sensor, and share and cite what you build.
+> From tactile observations to contact-aware robot policies.
 
-You have a sensor streaming data. What comes next depends on your goal. Each section below points to the page or project that owns that part of the ecosystem.
+These pages take you from a working sensor to a policy that uses touch. Each topic starts from open code that already runs with FlexiTac. You need a sensor whose heatmap follows your finger, as at the end of the [Quickstart](https://flexitac.github.io/doc/get-started/).
 
-## Learn with touch
+## Data sources
 
-**[Collect tactile data](https://flexitac.github.io/doc/robot-learning/data-collection/)**
+[**Teleoperation** LeFlexiTac](https://flexitac.github.io/doc/robot-learning/data-collection/#teleoperation) [**Handheld UMI** Touch in the Wild](https://flexitac.github.io/doc/robot-learning/data-collection/#umi) [**Simulation** Isaac Sim](https://flexitac.github.io/doc/simulation/)
 
-Mount the sensor and record visuo-tactile demonstrations, with LeFlexiTac on a low-cost arm or Touch in the Wild with a handheld gripper.
+[Tactile representation](https://flexitac.github.io/doc/robot-learning/tactile-representation/)
 
-**[Tactile simulation](https://flexitac.github.io/doc/simulation/)**
+[2D tactile maps](https://flexitac.github.io/doc/robot-learning/tactile-representation/#2d) · [3D tactile points](https://flexitac.github.io/doc/robot-learning/tactile-representation/#3d) · [Multimodal features](https://flexitac.github.io/doc/robot-learning/tactile-representation/#2d)
 
-Build the FlexiTac simulation in Isaac Sim, replay tactile trajectories and record demonstrations in the browser. Plus VT-Refine.
+[**Imitation learning** ACT · Diffusion Policy](https://flexitac.github.io/doc/robot-learning/imitation-learning/) [**VLA** Pi0.5 · SmolVLA](https://flexitac.github.io/doc/robot-learning/vla/) [**Reinforcement learning** VT-Refine](https://flexitac.github.io/doc/simulation/#vt-refine) [**Pretraining** Visuo-tactile MAE](https://flexitac.github.io/doc/robot-learning/pretraining/)
 
-## Customize the sensor
+---
 
-**[FlexiTac-Gen](https://flexitac.github.io/flexitac-gen/)**
+## Choose a research workflow
 
-Generate the two FPCs of a FlexiTac sensor for your own gripper, fingertip or hand, in the browser. Pick a preset or fit to a surface of your STL part, choose the resolution, and download manufacturing files. The [source and docs](https://github.com/FlexiTac/FlexiTac/tree/main/flexitac-gen) are in the hardware repo.
+- [**Train your first tactile policy** LeFlexiTac · SO-101 · ACT](https://flexitac.github.io/doc/robot-learning/data-collection/#teleoperation)
+- [**Work with existing tactile datasets** Touch in the Wild · VT-Refine](https://flexitac.github.io/doc/robot-learning/pretraining/#touch-in-the-wild)
+- [**Learn with simulated touch** Isaac Sim · RL fine-tuning](https://flexitac.github.io/doc/simulation/)
 
-**[Learn FlexiTac](https://flexitac.github.io/learn/)**
-
-An interactive course on how a resistive tactile array senses, how it's scanned, and what the numbers mean. Useful before you change the hardware.
-
-## Share what you build
-
-FlexiTac grows through the people who build with it. Whatever you made, a mount, a fix or a whole robot, it helps the next person.
-
-- **Fix or extend these docs.** Every page has an **Edit page** link. Tested a new sensor/board combination, or found a step that tripped you up? Send a pull request.
-- **Add your paper or project** to [Awesome FlexiTac](https://binghao-huang.github.io/Awesome-FlexiTac/) by [opening an issue or PR](https://github.com/binghao-huang/Awesome-FlexiTac/issues) (see its [contributing guide](https://github.com/binghao-huang/Awesome-FlexiTac/blob/main/CONTRIBUTING.md)).
-- **Show your build** on the [Discord](https://discord.gg/6gw887Vxms): photos, CAD for your mount, firmware settings and what didn't work are all welcome.
-- **Report bugs** in the repository that owns the code (see [Still stuck?](https://flexitac.github.io/doc/get-started/troubleshooting/#help)).
-- **Star** [FlexiTac on GitHub](https://github.com/FlexiTac/FlexiTac) so others can find it.
-
-## Cite FlexiTac
-
-If FlexiTac helps your research, please cite:
-
-*flexitac.bib*
-
-```bibtex
-@article{huang2026flexitac,
-  title   = {FlexiTac: A Low-Cost, Open-Source, Scalable Tactile Sensing Solution for Robotic Systems},
-  author  = {Huang, Binghao and Li, Yunzhu},
-  journal = {arXiv preprint arXiv:2604.28156},
-  year    = {2026}
-}
-```
-
-If you use PyFlexiTac or LeFlexiTac, please also cite those projects. Their citations are in their READMEs.
+A concept map: not every data source, representation and learning method combine directly.
 
 
 ---
@@ -738,7 +1223,19 @@ URL: https://flexitac.github.io/doc/robot-learning/data-collection/
 
 A tactile demonstration records what the sensor feels, what the camera sees and what the gripper does, all at the same moments. There are two ways to collect one.
 
+**[Simulation](https://flexitac.github.io/doc/simulation/)**
+
+A third source: generate visuo-tactile demonstrations in Isaac Sim, without physical hardware.
+
 **New to robot learning?** Start with teleoperation. It is the lowest-cost setup and uses the sensor exactly as these docs set it up.
+
+## What each source records
+
+| Source | What you get | Format |
+|---|---|---|
+| Teleoperation (LeFlexiTac) | A LeRobot dataset: the tactile map, camera and joint states of each frame, at 30 fps | [LeFlexiTac docs](https://tna001-ai.github.io/LeFlexiTac/docs.html#reproduction) |
+| Handheld UMI (Touch in the Wild) | GoPro video and tactile JSON logs recorded with ROS 2, aligned by a SLAM pipeline into one `dataset.zarr.zip` | [README: SLAM pipeline](https://github.com/XinyueZhuXY/touch_in_the_wild#creating-a-dataset-with-the-slam-pipeline) |
+| Simulation (Isaac Sim) | One `.npz` per demonstration: the four pads' tactile maps, camera images, joint states and actions | [Its keys and shapes](https://flexitac.github.io/doc/simulation/#web) |
 
 ## Teleoperation
 
@@ -768,9 +1265,13 @@ Then train [ACT or Diffusion Policy](https://flexitac.github.io/doc/robot-learni
 
 You hold a [UMI](https://github.com/real-stanford/universal_manipulation_interface)-style gripper and do the task yourself, indoors or outdoors, with no robot. A GoPro on the gripper records vision, and a FlexiTac sensor on each soft finger records touch. The open setup is [Touch in the Wild](https://binghao-huang.github.io/touch_in_the_wild/) (NeurIPS 2025). Its authors used it to collect more than 2,700 demonstrations across 43 tasks in 12 environments.
 
+> **Before you build: it needs different firmware**
+>
+> Touch in the Wild reads the boards with its own code, not PyFlexiTac: a ROS 2 node while recording, and serial readers when running a policy. Both expect the older **text** output, 16 lines of 32 numbers per frame. The firmware in [Stream the sensor](https://flexitac.github.io/doc/get-started/stream/#flash) sends **binary** frames instead, so a board flashed from these docs won't work with Touch in the Wild as it is, and its repositories don't include matching firmware. Ask in its [issues](https://github.com/XinyueZhuXY/touch_in_the_wild/issues) or on the [Discord](https://discord.gg/6gw887Vxms) before you build.
+
 - **Gripper:** The UMI handheld gripper with Touch in the Wild's modifications, and a GoPro Hero 9
 - **Sensors:** Two standard FlexiTac sensors (32 × 12), one on each soft finger
-- **Reader:** ROS 2 Humble on Ubuntu 22.04, with older text-format firmware (see the caution below)
+- **Reader:** ROS 2 Humble on Ubuntu 22.04, with older text-format firmware (see the caution above)
 - **Output:** GoPro video and tactile streams, turned into a training dataset by a SLAM pipeline
 - **Shared data:** The [Touch in the Wild dataset](https://huggingface.co/datasets/binghaohuang-robot/touch_in_the_wild-dataset). The pretraining set alone is about 88 GB.
 
@@ -791,18 +1292,18 @@ Workbench
 4. **Turn the recordings into a dataset**
    Run the SLAM pipeline on the session folder. [README: SLAM pipeline](https://github.com/XinyueZhuXY/touch_in_the_wild#creating-a-dataset-with-the-slam-pipeline)
 
-> **It needs different firmware**
->
-> Touch in the Wild reads the boards with its own code, not PyFlexiTac: a ROS 2 node while recording, and serial readers when running a policy. Both expect the older **text** output, 16 lines of 32 numbers per frame. The firmware in [Stream the sensor](https://flexitac.github.io/doc/get-started/stream/#flash) sends **binary** frames instead, so a board flashed from these docs won't work with Touch in the Wild as it is, and its repositories don't include matching firmware. Ask in its [issues](https://github.com/XinyueZhuXY/touch_in_the_wild/issues) or on the [Discord](https://discord.gg/6gw887Vxms) before you build.
-
 Next, [pretrain the visuo-tactile encoder](https://flexitac.github.io/doc/robot-learning/pretraining/#touch-in-the-wild) or start from the released one, then train a [Diffusion Policy](https://flexitac.github.io/doc/robot-learning/imitation-learning/#touch-in-the-wild).
 
 ## Good data, either way
 
+- **Check every session before you record.** Run `flexitac-stream` or the heatmap and press each sensor: every row and column should respond. A dead row can't be fixed in data you've already recorded.
 - **Mount on something slightly soft,** such as a fin-ray finger, so contact spreads over several taxels.
 - **Keep the cable still at the connector.** Route the flat cable so it doesn't flex while the gripper moves.
-- **Calibrate after mounting.** The mount itself changes the resting baseline.
-- **Keep touch in sync.** LeFlexiTac records touch into the same dataset frames as the camera and joints, so train and run a policy at the frame rate you recorded at. Touch in the Wild shows a QR code to the camera before each demonstration to line up video and touch. In your own setup, record with PyFlexiTac's `sensor.read()` so no frame is skipped, and keep each frame's `timestamp_s` ([Read frames in Python](https://flexitac.github.io/doc/get-started/pyflexitac/#python)).
+- **Redo the baseline calibration after mounting.** The mount itself changes the resting baseline.
+- **In your own code, record `raw` and the baseline,** not only `normalized`: it is scaled per frame and hides how hard the contact is ([why](https://flexitac.github.io/doc/get-started/pyflexitac/#normalized)).
+- **Keep touch in sync.** LeFlexiTac records touch into the same dataset frames as the camera and joints, so train and run a policy at the frame rate you recorded at. Touch in the Wild shows a QR code to the camera before each demonstration to line up video and touch. In your own setup, record with PyFlexiTac's `sensor.read()`, which returns every received frame in order, and keep each frame's `timestamp_s` ([Read frames in Python](https://flexitac.github.io/doc/get-started/pyflexitac/#python)). It's host time, so USB delay is part of it.
+- **Choose the tactile rate once.** The sensor streams around 100 fps, and a dataset usually samples it at the camera's rate: LeFlexiTac records at 30 fps. Either take the newest frame at each step (`read_latest()`) or keep every frame (`read()`) and resample later, but don't mix the two.
+- **Look at a few episodes before you record many.** Play the tactile maps back next to the video: contact should appear when the gripper closes, and no taxel should stay stuck.
 - **Another gripper?** [FlexiTac-Gen](https://flexitac.github.io/flexitac-gen/) designs a sensor that fits it.
 
 
@@ -814,14 +1315,25 @@ URL: https://flexitac.github.io/doc/robot-learning/tactile-representation/
 
 > Give touch to a policy as a 2D map per pad, or as 3D tactile points in one point cloud with the camera's, shown on a simulated two-armed demonstration.
 
-Every FlexiTac frame is a grid of numbers, one per taxel: 12 rows by 32 columns on a standard sensor. Before a policy can learn from it, you choose how to represent it. There are two ways, and the difference is whether touch knows *where* it happens.
+Every FlexiTac frame is a grid of numbers, one per taxel: 12 rows by 32 columns on a standard sensor ([why 12 × 32 and not 32 × 12](https://flexitac.github.io/doc/get-started/#array-shape)). Before a policy can learn from it, you choose how to represent it. There are two ways, and the difference is whether touch knows *where* it happens.
 
-|  | 2D tactile map | 3D tactile points |
-|---|---|---|
-| **The policy gets** | One 12 × 32 map per pad | Every taxel as a 3D point with its reading, in one point cloud with the camera's points |
-| **You need** | Only the sensor | Where each pad sits on the robot, its joint positions and a depth camera |
-| **Encoder** | An MLP or a small CNN | A point-cloud network such as PointNet |
-| **Used by** | [LeFlexiTac](https://tna001-ai.github.io/LeFlexiTac/), [Touch in the Wild](https://binghao-huang.github.io/touch_in_the_wild/) | [3D-ViTac](https://binghao-huang.github.io/3D-ViTac/), [VT-Refine](https://binghao-huang.github.io/vt_refine/) |
+  [2D tactile maps](https://flexitac.github.io/doc/robot-learning/tactile-representation/#2d) *Local contact patterns*
+
+A fixed sensor layout, CNN encoders, and the easiest way into imitation learning.
+
+- **Policy gets:** One 12 × 32 map per pad
+- **Encoder:** MLP or small CNN
+- **Used by:** [LeFlexiTac](https://tna001-ai.github.io/LeFlexiTac/), [Touch in the Wild](https://binghao-huang.github.io/touch_in_the_wild/)
+
+  [3D tactile points](https://flexitac.github.io/doc/robot-learning/tactile-representation/#3d) *Spatially grounded contact*
+
+Geometric reasoning, visuo-tactile fusion, and manipulation across poses.
+
+- **Policy gets:** One 3D point per taxel
+- **Encoder:** PointNet or similar
+- **Used by:** [3D-ViTac](https://binghao-huang.github.io/3D-ViTac/), [VT-Refine](https://binghao-huang.github.io/vt_refine/)
+
+A conceptual guide. Which works better for your task still has to be tested on it.
 
 ## 2D: a map per pad
 
@@ -829,7 +1341,7 @@ The firmware sends each frame as `uint8[12][32]`, row by row ([PyFlexiTac](https
 
 ![A 12 by 32 grid of readings, mostly 0; the pressed taxels form a slanted band at one end of the pad](https://flexitac.github.io/doc/assets/img/tactile-map.svg)
 
-*One pad at one moment: 384 readings on its 12 × 32 grid (row, column). The pressed taxels form a band where the plug lies across the pad. From the simulated demonstration below (right arm, left finger), at the same moment as its 3D view; the simulator reports force divided by 10 N.*
+*Simulated: One pad at one moment: 384 readings on its 12 × 32 grid (row, column). The pressed taxels form a band where the plug lies across the pad. From the simulated demonstration below (right arm, left finger), at the same moment as its 3D view; the simulator reports force divided by 10 N.*
 
 A policy can take the map in two ways:
 
@@ -838,10 +1350,10 @@ A policy can take the map in two ways:
 
 Settle two things before you record:
 
-- **How you normalize.** PyFlexiTac's `normalized` divides each frame by its own peak once there is contact, so it keeps the shape of a contact but not how hard it is ([details](https://flexitac.github.io/doc/get-started/pyflexitac/#python)). LeFlexiTac records these maps, and VT-Refine uses the same kind of rule: each pad is scaled by its own peak once it is pressed. If force matters, record `raw` and the baseline too. Either way, normalize the same way in training and on the robot.
+- **How you normalize.** PyFlexiTac's `normalized` divides each frame by its own peak once there is contact, so it keeps the shape of a contact but not how hard it is ([details](https://flexitac.github.io/doc/get-started/pyflexitac/#normalized)). LeFlexiTac records these maps, and VT-Refine uses the same kind of rule: each pad is scaled by its own peak once it is pressed. If force matters, record `raw` and the baseline too. Either way, normalize the same way in training and on the robot.
 - **Which pad is which.** Keep the pads in a fixed order and orientation. Touch in the Wild stores its two pads side by side, as one 12 × 64 map per frame.
 
-**What a map can't tell the policy is where the pad is.** The same line of contact means something different when the gripper is turned or the object is higher, and the policy has to work that out from the joint angles. 3D tactile points put it in the data.
+**A map doesn't say where the pad is.** The same line of contact means something different when the gripper is turned or the object is higher. Given the joint angles and the pad's fixed mounting, a policy can still infer where the contact is, but it has to learn that from data. 3D tactile points put it in the data.
 
 ## 3D: tactile points
 
@@ -849,7 +1361,7 @@ Settle two things before you record:
 
 ![One frame of a simulated plug–socket insertion: the camera picture in a corner, grey camera points of the grippers, plug and socket, and four pads of tactile points with the pressed taxels in orange](https://flexitac.github.io/doc/assets/img/isaac-frame.webp)
 
-The right arm holds the plug over the socket in the left hand. **Inset:** the camera's picture. **Grey:** the points the same camera sees, 1,024 of them here so they read clearly (VT-Refine keeps 512). **Purple to yellow:** the four pads' 1,536 tactile points, colored by reading on the viridis scale (purple where nothing presses). On the right, the same readings as 2D maps; below, the joint positions the policy also gets. Drag to turn it, **Camera view** goes back to the camera, and play runs the demonstration at its recorded 30 frames a second.
+Simulated: The right arm holds the plug over the socket in the left hand. **Inset:** the camera's picture. **Grey:** the points the same camera sees, 1,024 of them here so they read clearly (VT-Refine keeps 512). **Purple to yellow:** the four pads' 1,536 tactile points, colored by reading on the viridis scale (purple where nothing presses). On the right, the same readings as 2D maps; below, the joint positions the policy also gets. Drag to turn it, **Camera view** goes back to the camera, and play runs the demonstration at its recorded 30 frames a second.
 
 ### How a frame is built
 
@@ -890,6 +1402,7 @@ To get the 2D maps back from this data, or to build the five-channel cloud yours
 import numpy as np
 
 d = np.load("train.npz")                    # plain arrays; no pickle needed
+t = 0                                        # a step: any index below len(d["actions"])
 pc, tac = d["point_cloud"][t], d["tactile_points"][t]   # (3, 512), (4, 1536)
 
 # 2D: each pad's 384 points are stored column by column
@@ -903,6 +1416,20 @@ cloud = np.concatenate([
 ```
 
 The data is about 909 MB, under CC BY-NC 4.0. Download it with `data/fetch_vt-refine_data.sh` from the [VT-Refine repository](https://github.com/NVlabs/vt-refine).
+
+## Next
+
+**[Train with 2D tactile maps](https://flexitac.github.io/doc/robot-learning/imitation-learning/#leflexitac)**
+
+LeFlexiTac: ACT and Diffusion Policy, with a small CNN on each map.
+
+**[Train with 3D tactile points](https://flexitac.github.io/doc/simulation/#vt-refine)**
+
+VT-Refine, and 3D-ViTac's [training code](https://github.com/binghao-huang/3d-vitac-training-code).
+
+**[Learn tactile features from large datasets](https://flexitac.github.io/doc/robot-learning/pretraining/)**
+
+Touch in the Wild's visuo-tactile MAE, pretrained on its released data.
 
 
 ---
@@ -1182,6 +1709,7 @@ How to use them: [Tactile simulation](https://flexitac.github.io/doc/simulation/
 |---|---|
 | [Awesome FlexiTac](https://binghao-huang.github.io/Awesome-FlexiTac/) | Papers and projects built with flexible tactile arrays ([add yours](https://github.com/binghao-huang/Awesome-FlexiTac/blob/main/CONTRIBUTING.md)) |
 | [Discord](https://discord.gg/6gw887Vxms) | Questions, help and builds |
+| [Contributing](https://flexitac.github.io/doc/contributing/) | How to share your robot, list your paper, improve these docs or report a bug |
 | [WeChat](https://flexitac.github.io/static/images/qr.jpg) | The WeChat group's QR code |
 
 ## Third-party tools and references
@@ -1209,235 +1737,82 @@ How to use them: [Tactile simulation](https://flexitac.github.io/doc/simulation/
 
 ---
 
-# PyFlexiTac
+# Contributing
 
-URL: https://flexitac.github.io/doc/get-started/pyflexitac/
+URL: https://flexitac.github.io/doc/contributing/
 
-> Use the sensor from Python with PyFlexiTac. Check the signal, read and record frames, run several sensors, flash from the command line, and read the wire protocol.
+> Share your robot, list your paper, improve these docs or the code, and report bugs. Where each contribution goes and what it needs.
 
-[PyFlexiTac](https://github.com/WT-MM/PyFlexiTac) is the `flexitac` Python package (MIT-licensed, maintained by Wesley Maa). [Stream the sensor](https://flexitac.github.io/doc/get-started/stream/) already used it for the live heatmap. This page covers the rest. Its README is the source of truth for every option.
+FlexiTac grows through the people who build with it. Whatever you made, a mount, a fix or a whole robot, it helps the next person. Each kind of contribution goes to the project that owns it:
 
-## Install
-
-PyFlexiTac needs **Python 3.11 or newer**.
-
-```bash
-python3 -m venv .venv && source .venv/bin/activate
-# [examples] adds matplotlib for the heatmap
-pip install "flexitac[examples]"
-```
-
-```bash
-uv venv && source .venv/bin/activate
-uv pip install "flexitac[examples]"
-```
-
-```bash
-git clone https://github.com/WT-MM/PyFlexiTac.git
-cd PyFlexiTac
-uv sync --extra examples     # or: pip install -e ".[examples]"
-```
-
-This installs four commands: `flexitac-find-port`, `flexitac-heatmap`, `flexitac-stream` and `flexitac-flash`.
-
-## Check the signal
-
-`flexitac-stream` prints the frame rate and signal statistics. It tells you whether the board, the firmware and the reader agree.
-
-```bash
-flexitac-stream --port /dev/ttyUSB0 --frames 3000
-```
-
-*Expected output*
-
-```
-frame=    10 fps=  85.3 raw_max=104 norm_max=0.000
-frame=    20 fps=  87.1 raw_max=109 norm_max=0.123
-```
-
-> **Don't touch the sensor for the first second**
->
-> On its first read, PyFlexiTac **calibrates**: it collects 30 frames and stores each taxel's median as the baseline. If you press the sensor during calibration, that pressure becomes part of the "zero."
-
-| Field | Healthy | If not |
-|---|---|---|
-| `fps` | Settles near **100+** for a 12 × 32 sensor | `0` or `TimeoutError`: the board isn't sending FlexiTac frames at this baud rate. See [No frames](https://flexitac.github.io/doc/get-started/troubleshooting/#no-frames). About half the expected rate: the reader expects more rows than the firmware sends. See [Scrambled heatmap](https://flexitac.github.io/doc/get-started/troubleshooting/#scrambled). |
-| `raw_max` | Between 0 and 255, and **changes when you press** | Stuck at 0 or 255: a wiring or connector problem, not a flashing problem. |
-| `norm_max` | Near 0 at rest, rises toward **1.0** on contact | Never rises: check the Velostat and the connectors. |
-
-If some rows seem dead, add `--per-row`. It prints each row's mean baseline once, then each row's `raw_max` every 20 frames. Press along a column and check that every row responds.
-
-## Serial port permissions
-
-Add yourself to the `dialout` group once, then **log out and back in**:
-
-```bash
-sudo usermod -aG dialout "$USER"
-```
-
-As a quick, temporary workaround (until the next replug), you can loosen permissions on the device instead:
-
-```bash
-sudo chmod a+rw /dev/ttyUSB0
-```
-
-Serial permissions are usually handled automatically. If you still get `Permission denied`:
-
-```bash
-sudo chmod a+rw /dev/tty.usbserial-*
-```
-
-## Read frames in Python
-
-*hello_flexitac.py*
-
-```python
-from flexitac import FlexiTacSensor
-
-# rows=12, cols=32 by default; the first read calibrates
-with FlexiTacSensor("/dev/ttyUSB0") as sensor:
-    for frame in sensor:
-        print(frame.seq, frame.raw.max(), frame.normalized.max())
-```
-
-Each `frame` is a `FlexiTacFrame`:
-
-| Field | Type | Meaning |
-|---|---|---|
-| `seq` | `int` | Frame counter since the sensor was opened |
-| `timestamp_s` | `float` | Host time when the frame was read (`time.time()`) |
-| `raw` | `uint8[rows, cols]` | Values exactly as sent by the firmware |
-| `normalized` | `float32[rows, cols]` | Baseline-subtracted, thresholded and scaled to 0–1 |
-
-Useful methods and options:
-
-- `sensor.read()` returns the next frame in order. Use it when you're **recording** data and don't want to skip any.
-- `sensor.read_latest()` discards queued frames and returns the newest one. Use it for **live control or visualization**, so you never lag behind the sensor.
-- `sensor.calibrate()` re-captures the baseline, for example after mounting the sensor or changing the load at rest.
-- `FlexiTacSensor(port, rows=…, cols=…, baud=…, init_frames=30, threshold=25.0, noise_scale=30.0, baseline=None)`. Pass `baseline=` with a saved array, or a scalar such as `20.0`, to skip startup calibration.
-
-> **`normalized` is scaled per frame**
->
-> When contact is detected, `normalized` divides by that frame's own peak, so the strongest taxel is always 1.0. That's ideal for visualization, but it hides absolute force. For learning or force estimation, record `raw` together with the baseline (`sensor.baseline`) and normalize consistently yourself.
-
-### Record a short dataset
-
-*record.py*
-
-```python
-import numpy as np
-from flexitac import FlexiTacSensor
-
-with FlexiTacSensor("/dev/ttyUSB0") as sensor:
-    sensor.calibrate()          # don't touch the sensor here
-    frames, stamps = [], []
-    for _ in range(1000):       # about 10 s at ~100 fps
-        f = sensor.read()       # in order, no dropped frames
-        frames.append(f.raw)
-        stamps.append(f.timestamp_s)
-
-np.savez_compressed("tactile.npz", raw=np.stack(frames),
-                    t=np.array(stamps), baseline=sensor.baseline)
-```
-
-### More than one sensor
-
-Each reading board is its own USB serial device. For a two-finger gripper, open one `FlexiTacSensor` per port (find each with `flexitac-find-port`) and read them in parallel threads, or call `read_latest()` on each in your control loop.
-
-## Flash from the command line
-
-`flexitac-flash` puts the same sketch on the board as the Arduino IDE path, without opening the IDE, and can generate it for a custom sensor size.
-
-1. **Install arduino-cli and the AVR core**
-   `flexitac-flash` compiles and uploads with [`arduino-cli`](https://arduino.github.io/arduino-cli/latest/installation/).
-   ```bash
-   brew install arduino-cli
-   arduino-cli core update-index
-   arduino-cli core install arduino:avr
-   ```
-   ```bash
-   curl -fsSL https://raw.githubusercontent.com/arduino/arduino-cli/master/install.sh | sh
-   # the script installs into ./bin — move it onto your PATH, e.g.:
-   sudo mv bin/arduino-cli /usr/local/bin/
-   arduino-cli core update-index
-   arduino-cli core install arduino:avr
-   ```
-2. **Plug in the board and flash**
-   With exactly one Arduino connected, `flexitac-flash` finds the port and the board type on its own:
-   ```bash
-   flexitac-flash
-   ```
-   The defaults are for the standard V2 sensor: `--rows 12 --cols 32 --baud 2000000 --mux-offset 4`, meaning 12 rows wired to multiplexer channels 4–15. For a custom sensor, pass its geometry:
-   ```bash
-   flexitac-flash --rows 16 --cols 32 --mux-offset 0
-   ```
-
-> **Board not detected?**
->
-> Many Arduino Nano clones (CH340 USB chip) don't report a board type, so auto-detection fails with `no Arduino board detected`. Pass the port and board explicitly:
->
->
->
-> ```bash
-> flexitac-flash --port /dev/ttyUSB0 --fqbn arduino:avr:nano
->
-> # older Nanos and many clones use the old bootloader:
-> flexitac-flash --port /dev/ttyUSB0 \
->     --fqbn arduino:avr:nano:cpu=atmega328old
-> ```
-
-## Match the reader to the firmware
-
-**The reader must use the same rows and columns as the firmware.** If they don't match, the reader splits the byte stream in the wrong places and the heatmap comes out cut off or scrambled ([what each mismatch looks like](https://flexitac.github.io/doc/get-started/troubleshooting/#scrambled)).
-
-| Firmware | Frame | Read with |
-|---|---|---|
-| PyFlexiTac's sketch, from the Arduino IDE or `flexitac-flash` (the default) | 12 × 32 | The defaults |
-| A custom size: `flexitac-flash --rows R --cols C --mux-offset M` | R × C | `--rows R --cols C` |
-| `32_16_fast.ino` from the [hardware repo](https://github.com/FlexiTac/FlexiTac) | 16 × 32; rows 0–3 stay near zero on a V2 sensor | `--rows 16 --cols 32` |
-
-To build a custom size from the Arduino IDE instead, change `ROW_COUNT`, `COLUMN_COUNT` and `MUX_CHANNEL_OFFSET` at the top of the sketch before uploading. Custom sensors must fit the 32 × 16 board (up to 16 rows and 32 columns); the 32 × 32 board's firmware isn't covered by these docs yet. The hardware repo also includes `fast_32_16.py`, a standalone OpenCV viewer for `32_16_fast.ino`.
-
-## Wire protocol
-
-If you're writing your own reader, for a robot middleware, a microcontroller or another language, here is the whole protocol. For every frame, the firmware sends a two-byte start marker, then selects each **row** through a 16-channel analog multiplexer, steps through each **column** with shift registers, and reads each crossing with the Nano's 10-bit ADC, scaled to one byte.
-
-| Field | Value |
+| You want to | Go to |
 |---|---|
-| Transport | USB serial, **2,000,000 baud**, 8N1 |
-| Start marker | 2 bytes: `0xAA 0x55` |
-| Payload | `rows × cols` bytes, unsigned 8-bit, row-major (row 0 first, columns 0…cols−1) |
-| Value | ADC reading ÷ 4 (10-bit → 8-bit). Higher values mean more pressure. |
-| Frame rate | Continuous, with no text formatting; about 100+ fps for 12 × 32 |
+| Ask a question or show work in progress | [Discord](https://discord.gg/6gw887Vxms) |
+| Show a robot you built with FlexiTac | [Share your robot](https://flexitac.github.io/doc/contributing/#robot) |
+| List your paper or project | [Add your paper](https://flexitac.github.io/doc/contributing/#papers) |
+| Fix a page or add what you tested | [Improve these docs](https://flexitac.github.io/doc/contributing/#docs) |
+| Report a bug or improve the code | [Report a bug](https://flexitac.github.io/doc/contributing/#code) |
 
-A minimal reader with `pyserial` and NumPy:
+## Share your robot
 
-*read_raw.py*
+Built FlexiTac into your own gripper, hand or robot? Send it in with the [Share your robot](https://github.com/FlexiTac/FlexiTac.github.io/issues/new?template=share-your-robot.yml) form.
 
-```python
-import numpy as np
-import serial
+1. **Submit**
+   The form asks for a name, two to four sentences on what you built, which sensor (the standard V2, one from FlexiTac-Gen or your own design), how far along it is, a photo or short video, and how to credit you. A landscape photo works best: it becomes your tile. Links to your project page, paper, code or CAD are optional.
+2. **We review**
+   A maintainer checks every submission and may ask a question or two in the issue thread. Nothing appears on the site before it's approved.
+3. **Featured**
+   Approved robots appear in the Community row under [A growing tactile ecosystem](https://flexitac.github.io/doc/#ecosystem) on the docs home, with credit to you and a link to your project.
 
-ROWS, COLS = 12, 32                 # must match the firmware you flashed
-MARKER, N = b"\xaa\x55", ROWS * COLS
+The submission is a public GitHub issue. To share unpublished work privately first, ask on [Discord](https://discord.gg/6gw887Vxms).
 
-with serial.Serial("/dev/ttyUSB0", 2_000_000, timeout=0.05) as ser:
-    buf = bytearray()
-    while True:
-        buf += ser.read(4096)
-        i = buf.find(MARKER)
-        if i < 0:
-            del buf[:-1]            # keep a possible half marker
-            continue
-        if len(buf) < i + 2 + N:
-            continue                # wait for the rest of the frame
-        start = i + 2
-        frame = np.frombuffer(buf[start : start + N], dtype=np.uint8)
-        frame = frame.reshape(ROWS, COLS)
-        del buf[: start + N]
-        print(frame.max())
-```
+## Add your paper or project
 
-> **Note**
->
-> Readings are raw. Each taxel has its own resting level, so subtract a **baseline**, such as the per-taxel median of the first ~30 frames taken while nothing touches the sensor, before you threshold or normalize. `FlexiTacSensor` does this for you.
+[Awesome FlexiTac](https://binghao-huang.github.io/Awesome-FlexiTac/) lists the papers and projects built with flexible tactile arrays. Add yours by [opening an issue or pull request](https://github.com/binghao-huang/Awesome-FlexiTac/issues), as its [contributing guide](https://github.com/binghao-huang/Awesome-FlexiTac/blob/main/CONTRIBUTING.md) describes.
+
+## Improve these docs
+
+Tested a new sensor/board combination, found a step that tripped you up, or solved a problem on Discord that [Troubleshooting](https://flexitac.github.io/doc/get-started/troubleshooting/) doesn't cover? Every page has an **Edit page** link at the bottom. It opens the page's Markdown on GitHub, where you can propose your change as a pull request.
+
+For bigger changes, such as a new page or images, work in a clone of [FlexiTac/FlexiTac.github.io](https://github.com/FlexiTac/FlexiTac.github.io):
+
+1. **Edit the Markdown**
+   The pages are in `doc/_src/pages/`. A new page also needs its slug in `NAV` at the top of `doc/_src/build.py`, which sets the sidebar order.
+2. **Rebuild and check**
+   ```bash
+   # Python 3.9+, standard library only
+   python3 doc/_src/build.py
+   # Fails on stale HTML or a broken link, anchor or image
+   python3 doc/_src/build.py --check
+   ```
+3. **Preview**
+   From the repository root, run `python3 -m http.server 8000` and open `http://localhost:8000/doc/`.
+4. **Open a pull request**
+   Commit both the Markdown and the generated HTML.
+
+The [docs source README](https://github.com/FlexiTac/FlexiTac.github.io/blob/main/doc/_src/README.md) lists the Markdown you can use, and how to store images and videos. Three rules matter most:
+
+- **One source of truth.** These docs cover the getting-started path and link out. Detailed procedures stay in the repository that owns them: summarize them here and link the original.
+- **Only verified facts.** Version numbers, pin counts, frame sizes and prices come from a linked source or from something you tested. Say how you tested it.
+- **Credit and licenses.** Keep the authors' credit and each project's license. Images need permission from whoever owns them.
+
+## Report a bug or improve the code
+
+Not sure where a problem comes from? Ask on [Discord](https://discord.gg/6gw887Vxms) first. Otherwise open an issue, or send a pull request, in the repository that owns the code:
+
+| Problem with | Repository |
+|---|---|
+| Sensor design, reading board, `32_16_fast.ino`, FlexiTac-Gen | [FlexiTac/FlexiTac](https://github.com/FlexiTac/FlexiTac/issues) |
+| `flexitac-*` commands, the Python API, `flexitac-flash` firmware | [WT-MM/PyFlexiTac](https://github.com/WT-MM/PyFlexiTac/issues) |
+| LeFlexiTac: teleoperation and training on the SO-100/101 | [TNA001-AI/lerobot_tactile](https://github.com/TNA001-AI/lerobot_tactile/issues) |
+| Touch in the Wild | [XinyueZhuXY/touch_in_the_wild](https://github.com/XinyueZhuXY/touch_in_the_wild/issues) |
+| The Isaac Sim tactile simulation | [binghao-huang/FlexiTac-IsaacSim-Simulation](https://github.com/binghao-huang/FlexiTac-IsaacSim-Simulation/issues) |
+| These docs | [FlexiTac/FlexiTac.github.io](https://github.com/FlexiTac/FlexiTac.github.io/issues) |
+
+A report anyone can act on includes: sensor version or geometry, reading board (32 × 16 or 32 × 32), which firmware you flashed and its settings, OS and Python version, the exact command you ran, the full output, and a photo of the connections.
+
+## Stay in touch
+
+- **[Discord](https://discord.gg/6gw887Vxms):** questions, help, and builds in progress.
+- **WeChat:** the group's [QR code](https://flexitac.github.io/static/images/qr.jpg).
+- **Star** [FlexiTac on GitHub](https://github.com/FlexiTac/FlexiTac) so others can find it.

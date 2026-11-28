@@ -1,7 +1,7 @@
 ---
 title: Stream the sensor
 sidebar_label: Stream sensor
-description: Flash the reading board from the Arduino IDE, then watch a live heatmap follow your finger. That's a working sensor.
+description: Flash the reading board from the Arduino IDE, then watch a live heatmap follow your finger. That's a working sensor. Then learn with it, simulate it, customize it, and share and cite what you build.
 ---
 
 The Arduino Nano on the reading board runs a small sketch that scans the sensor and streams frames over USB. Flash it once, then watch a bright spot follow your finger on a live heatmap. That's a working sensor.
@@ -42,24 +42,51 @@ It asks you to unplug the board and reports the port that disappeared, such as `
 flexitac-heatmap --port /dev/ttyUSB0
 ```
 
-Don't touch the sensor for the first second, while it measures each taxel's resting level. Then press with a fingertip and drag it slowly across the pad.
+Don't touch the sensor for the first second: PyFlexiTac runs a **baseline calibration**, measuring each taxel's resting level. Then press with a fingertip and drag it slowly across the pad.
 :::
 
+<figure class="sample">
+<video src="/doc/assets/video/first-light.mp4" poster="/doc/assets/img/first-light.webp" width="960" height="540" muted loop playsinline preload="none" data-inview aria-label="A fingertip presses and slides on a FlexiTac sensor; on the screen behind it, a bright patch in the live heatmap follows the finger while the rest of the map stays dark"></video>
+<figcaption><span class="sample-tag">Working sensor</span>The live heatmap follows the press, in real time.</figcaption>
+</figure>
+
+What a working sensor shows:
+
+- **No contact:** the whole map is dark and steady.
+- **Light touch:** a small patch lights up under your fingertip.
+- **Sliding:** the patch moves with your finger.
+- **Release:** the map goes dark again.
+
 **A bright spot that follows your finger across every row and column means your sensor works.** If a row or column never lights up, see [Dead rows or columns](/doc/get-started/troubleshooting/#dead-rows).
+
+:::note[A working sensor isn't a force sensor yet]
+The check above is **signal validation**: every taxel responds. The step before it is **baseline calibration**: PyFlexiTac removes each taxel's resting offset. Neither is **force calibration**, which maps readings to newtons. FlexiTac doesn't provide that, so treat readings as relative.
+:::
 
 :::tip[`Permission denied` on Linux?]
 Add yourself to the `dialout` group once, then log out and back in: `sudo usermod -aG dialout "$USER"`. More in [Serial port permissions](/doc/get-started/pyflexitac/#permissions).
 :::
 
-## Next {#next}
+## Your FlexiTac is ready {#next-steps}
+
+Your sensor is now streaming tactile data. Choose what you want to do next.
 
 :::cards
-#### PyFlexiTac | /doc/get-started/pyflexitac/ | wave
-Read frames in your own Python code, record datasets, run several sensors, check the signal, flash from the command line, and the wire protocol.
+#### Develop with Python | /doc/get-started/pyflexitac/ | code
+Read and record tactile frames.
 
-#### Collect tactile data | /doc/robot-learning/data-collection/ | robot
-Mount the sensor on a gripper and record demonstrations with touch, then train a policy on them.
+#### Collect robot data | /doc/robot-learning/data-collection/ | robot
+Mount it and record demonstrations.
 
-#### Troubleshooting | /doc/get-started/troubleshooting/ | lifebuoy
-No port, no frames, a scrambled picture or dead rows, by symptom.
+#### Customize your sensor | /doc/get-started/customize/ | cube
+Design one for another gripper.
+
+#### Explore simulation | /doc/simulation/ | sim
+Generate virtual tactile data.
+:::
+
+Something isn't working? [Troubleshooting →](/doc/get-started/troubleshooting/)
+
+:::tip[Share your build]
+Got it working? Share a short video of your sensor with us on [Discord](https://discord.gg/6gw887Vxms). Once it's on a robot, [send it in](/doc/contributing/#robot) to be featured on these docs.
 :::

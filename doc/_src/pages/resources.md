@@ -57,6 +57,7 @@ How to use them: [Tactile simulation](/doc/simulation/).
 | --- | --- |
 | [Awesome FlexiTac](https://binghao-huang.github.io/Awesome-FlexiTac/) | Papers and projects built with flexible tactile arrays ([add yours](https://github.com/binghao-huang/Awesome-FlexiTac/blob/main/CONTRIBUTING.md)) |
 | [Discord](https://discord.gg/6gw887Vxms) | Questions, help and builds |
+| [Contributing](/doc/contributing/) | How to share your robot, list your paper, improve these docs or report a bug |
 | [WeChat](/static/images/qr.jpg) | The WeChat group's QR code |
 
 ## Third-party tools and references {#third-party}

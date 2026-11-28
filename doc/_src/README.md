@@ -41,6 +41,11 @@ internal link, anchor or image is broken. Run it before opening a pull request.
    `("parent-slug", ["child-slug", ...])`, as Quickstart does with its three steps. A page that
    should be reachable only through links goes in `UNLISTED` instead.
 
+   Previous/next follow `NAV` unless the page is in `FLOW`, just below it. `FLOW` is for pages where the
+   reader's next step depends on how the task went, not on sidebar order. *Stream sensor*, for example, ends with
+   "Is your sensor working?" (Yes: Python SDK, Collect data, Customize; No: Troubleshooting), and
+   *Troubleshooting* leads back to the signal check. `--check` also checks `FLOW`'s links.
+
 `build.py` also writes `doc/sitemap.xml` with every page. The site's `/robots.txt` allows all
 crawlers and points them to it, so search engines find the docs even without a homepage link.
 
@@ -84,10 +89,11 @@ Short description.
 :::
 
 :::cards[flow]                      ← big numbered icon steps joined by arrows
-#### Design | /flexitac-gen/ | grid
+#### Design | /flexitac-gen/ | grid | FlexiTac-Gen | optional     ← subtitle shown under the label; an Optional tag
 <p>Text under a step turns it into a small card that opens on click (the link stays as the fallback).</p>
-#### Build | /doc/get-started/ | layers
-:::
+#### Build | /doc/get-started/ | layers | Sensor + reader
+#### Simulate | /doc/simulation/ | sim | No hardware required | branch 2-4
+:::                                 ← "branch A-B": a side step under the row, dashed from step A, into step B
 ````
 
 To nest one container in another, give the outer one more colons (`::::caution` … `::::`).
@@ -145,6 +151,8 @@ To decline, close the issue with a short, kind note. Papers and projects that do
 - *Quickstart*'s "What you'll build" figure (the whole setup and the pad, with numbered markers) is rendered in
   Blender like the exploded view: `~/website/blender/flexitac-umi` (`system.py`, `pad.py`, then `build_web.py`,
   which rewrites the `<div class="build" id="build-figure">` block in `get-started/index.md`).
+- *Tactile representation*'s 3D card picture, `img/rep-3d-points.webp`, is drawn from the viewer's sample data by
+  `tools/rep3d_thumb.py` (transparent, so it works in both themes).
 - *Tactile representation* has a point cloud viewer, `doc/assets/pcv.js`. The page loads the script itself, and
   the viewer reads `doc/assets/data/isaac-aloha.{json,bin}` and its picture atlas `isaac-aloha-rgb.webp` (the JSON
   describes the layout; each pad's points are stored column by column). They are recorded by

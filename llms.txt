@@ -6,16 +6,18 @@ The FlexiTac Developer Handbook is at https://flexitac.github.io/doc/. Every pag
 
 ## Get Started
 
-- [Build with FlexiTac](https://flexitac.github.io/doc/): An open-source platform for tactile robotics, from flexible sensor design to robot learning.
+- [Build with FlexiTac](https://flexitac.github.io/doc/): An open-source platform for tactile robotics, built around thin, flexible and scalable tactile sensors.
 - [Quickstart](https://flexitac.github.io/doc/get-started/): The whole path from ordering parts to a live tactile heatmap, with time, cost and the commands you'll run.
 - [Order parts](https://flexitac.github.io/doc/get-started/order-parts/): Design files, the bill of materials, and the manufacturer settings for the FPCs and the reading board.
 - [Fabricate a sensor](https://flexitac.github.io/doc/get-started/fabricate/): Turn two FPCs, a piece of Velostat and some tape into a working FlexiTac-V2 sensor in under three minutes.
-- [Stream the sensor](https://flexitac.github.io/doc/get-started/stream/): Flash the reading board from the Arduino IDE, then watch a live heatmap follow your finger. That's a working sensor.
+- [Stream the sensor](https://flexitac.github.io/doc/get-started/stream/): Flash the reading board from the Arduino IDE, then watch a live heatmap follow your finger. That's a working sensor. Then learn with it, simulate it, customize it, and share and cite what you build.
+- [PyFlexiTac](https://flexitac.github.io/doc/get-started/pyflexitac/): The Python SDK for tactile sensing and data acquisition. Install it, read and record frames, run several sensors, configure custom sensors, and read the wire protocol.
+- [Customize a sensor](https://flexitac.github.io/doc/get-started/customize/): Take a ready-made sensor from FlexiTac-Gen's Library, or fit one to your own gripper's 3D model in the browser, with the default settings or your own.
 - [Troubleshooting & FAQ](https://flexitac.github.io/doc/get-started/troubleshooting/): Find your symptom, then work through the checks from most to least likely.
-- [Next steps](https://flexitac.github.io/doc/get-started/next-steps/): Learn on a real robot or in simulation, customize the sensor, and share and cite what you build.
 
 ## Learning with FlexiTac
 
+- [Learning with FlexiTac](https://flexitac.github.io/doc/robot-learning/): From tactile observations to contact-aware robot policies.
 - [Data collection](https://flexitac.github.io/doc/robot-learning/data-collection/): Two ways to record touch together with vision and actions, by teleoperation or with a handheld UMI gripper.
 - [Tactile representation](https://flexitac.github.io/doc/robot-learning/tactile-representation/): Give touch to a policy as a 2D map per pad, or as 3D tactile points in one point cloud with the camera's, shown on a simulated two-armed demonstration.
 - [Imitation learning with touch](https://flexitac.github.io/doc/robot-learning/imitation-learning/) (in progress): ACT and Diffusion Policy.
@@ -28,10 +30,10 @@ The FlexiTac Developer Handbook is at https://flexitac.github.io/doc/. Every pag
 
 - [Tactile simulation](https://flexitac.github.io/doc/simulation/): Simulate FlexiTac pads in NVIDIA Isaac Sim, then replay tactile trajectories and record visuo-tactile demonstrations in the browser. Plus VT-Refine, the sim fine-tuning research behind it.
 
-## Reference
+## Ecosystem
 
 - [All resources](https://flexitac.github.io/doc/resources/): Every repository, guide, design file, paper, dataset and tool these docs build on, in one place.
-- [PyFlexiTac](https://flexitac.github.io/doc/get-started/pyflexitac/): Use the sensor from Python with PyFlexiTac. Check the signal, read and record frames, run several sensors, flash from the command line, and read the wire protocol.
+- [Contributing](https://flexitac.github.io/doc/contributing/): Share your robot, list your paper, improve these docs or the code, and report bugs. Where each contribution goes and what it needs.
 
 ## Optional
 

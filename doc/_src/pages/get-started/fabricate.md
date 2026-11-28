@@ -81,11 +81,13 @@ Lay out a strip of polyimide tape and seal the border of the stack. This doesn't
 #### Connect to the reading board
 Insert each sensor's **gold fingers** into an FFC connector (extender), then run a flat flexible cable from each connector to the reading board. The wider gold-finger end takes the 40-pin extender (or the 32-pin AliExpress one) and the 32-pin cable. The narrower one takes the 20-pin extender (or the 16-pin one) and the 16-pin cable.
 
-<div class="figs">
-<figure><a class="zoom" href="/doc/assets/img/fab-step4-parts.webp"><img src="/doc/assets/img/fab-step4-parts.webp" alt="The sealed sensor with the reading board, two flat flexible cables and FFC connectors" loading="lazy"></a><figcaption>Sealed sensor, reading board, flat cables and connectors.</figcaption></figure>
+Push the gold fingers in **straight**, against one side of the opening. A crooked insert shorts two lines into one: [this animation](/doc/get-started/troubleshooting/#ffc-insert) shows the right way.
+
+<div class="figs cols-2">
+<figure><a class="zoom" href="/doc/assets/img/fab-step4-parts.webp"><img src="/doc/assets/img/fab-step4-parts.webp" alt="The sealed sensor with the reading board, two flat flexible cables and FFC connectors" loading="lazy"></a><figcaption>The parts to connect.</figcaption></figure>
 <figure><a class="zoom" href="/doc/assets/img/fab-step4-insert.webp"><img src="/doc/assets/img/fab-step4-insert.webp" alt="Inserting the FPC gold fingers into a connector" loading="lazy"></a><figcaption>Insert the gold fingers into the connector.</figcaption></figure>
 <figure><a class="zoom" href="/doc/assets/img/fab-step4-cable.webp"><img src="/doc/assets/img/fab-step4-cable.webp" alt="Attaching a flat flexible cable to the connector" loading="lazy"></a><figcaption>Attach the flat cable.</figcaption></figure>
-<figure><a class="zoom" href="/doc/assets/img/fab-step4-connected.webp"><img src="/doc/assets/img/fab-step4-connected.webp" alt="Finished sensor connected through two flat cables to the reading board" loading="lazy"></a><figcaption>Done: the sensor is connected to the reading board.</figcaption></figure>
+<figure><a class="zoom" href="/doc/assets/img/fab-step4-connected.webp"><img src="/doc/assets/img/fab-step4-connected.webp" alt="Finished sensor connected through two flat cables to the reading board" loading="lazy"></a><figcaption>Done: connected to the reading board.</figcaption></figure>
 </div>
 :::
 
@@ -100,6 +102,13 @@ Insert each sensor's **gold fingers** into an FFC connector (extender), then run
 :::note[How long does a sensor last?]
 In the authors' experience, sensors stay consistent for about a year of use without significant degradation. Some teams have collected thousands of demonstrations without breaking one. If a sensor is damaged, replace it. Swapping in a new sensor typically doesn't noticeably affect performance.
 :::
+
+## Check before you stream {#check}
+
+- [ ] Both FPCs' copper electrodes face the Velostat.
+- [ ] The Velostat covers the whole electrode area.
+- [ ] The two FPCs are aligned, with no visible wrinkles.
+- [ ] Gold fingers and flat cables sit straight and all the way in.
 
 ## Next
 
