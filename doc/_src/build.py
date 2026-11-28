@@ -38,6 +38,7 @@ import json
 import re
 import subprocess
 import sys
+from html.parser import HTMLParser
 from pathlib import Path
 from urllib.parse import unquote
 
@@ -840,6 +841,204 @@ def page_html(slug: str, p: dict, pages: dict, order: list[str]) -> str:
 """
 
 
+# --------------------------------------------------------------------------------------------
+# For AI agents: /llms.txt (an index of the pages, https://llmstxt.org) and /llms-full.txt (every page as Markdown).
+# Both sit at the site root and are plain .txt, which GitHub Pages serves as-is. (No per-page .md copies: Jekyll
+# would render an index.md over the page's index.html.)
+# --------------------------------------------------------------------------------------------
+class _Markdown(HTMLParser):
+    """A rendered page body back to plain Markdown: text, headings, lists, tables, code, links and image alt
+    text. Icons, copy buttons, figure markers and anything aria-hidden are left out."""
+    VOID = {"img", "br", "hr", "input", "source", "wbr", "col", "area", "embed", "track", "meta", "link"}
+    SKIP_TAGS = {"svg", "script", "style", "button", "video", "template", "noscript", "canvas"}
+    SKIP_CLASSES = {"xmark", "xdimt", "tl-nav", "v3d-bar", "modes"}
+    BOLD_P = {"step-title", "aside-title", "card-title", "flow-card-title"}
+
+    def __init__(self, page_url: str):
+        super().__init__(convert_charrefs=True)
+        self.page_url = page_url
+        self.stack = [{"tag": "", "buf": []}]
+        self.skip_tag, self.skip_depth, self.pre = "", 0, 0
+
+    def url(self, u: str) -> str:
+        if u.startswith("#"):
+            return SITE + self.page_url + u
+        return SITE + u if u.startswith("/") and not u.startswith("//") else u
+
+    def out(self, s: str) -> None:
+        self.stack[-1]["buf"].append(s)
+
+    def out_inline(self, s: str) -> None:
+        """Inline siblings with no whitespace between them (a stat's number and label, a tile's title and venue,
+        two buttons) would run together: keep a space."""
+        buf = self.stack[-1]["buf"]
+        prev = next((x for x in reversed(buf) if x), "")
+        if prev and s and (prev[-1].isalnum() or prev[-1] in ")]*") and (s[0].isalnum() or s[0] in "[*"):
+            s = " " + s
+        buf.append(s)
+
+    def handle_starttag(self, tag, attrs):
+        a = dict(attrs)
+        if self.skip_depth:
+            self.skip_depth += tag == self.skip_tag and tag not in self.VOID
+            return
+        cls = set((a.get("class") or "").split())
+        if tag in self.SKIP_TAGS or cls & self.SKIP_CLASSES or a.get("aria-hidden") == "true":
+            if tag not in self.VOID:
+                self.skip_tag, self.skip_depth = tag, 1
+            return
+        if tag == "img":
+            if a.get("alt"):
+                self.out(f"\n\n![{a['alt']}]({self.url(a.get('src', ''))})\n\n")
+        elif tag == "br":
+            self.out("\n")
+        elif tag == "hr":
+            self.out("\n\n---\n\n")
+        elif tag not in self.VOID:
+            if tag == "pre":
+                self.pre += 1
+            self.stack.append({"tag": tag, "a": a, "cls": cls, "buf": [], "rows": [], "cells": [], "n": 0})
+
+    def handle_startendtag(self, tag, attrs):
+        self.handle_starttag(tag, attrs)
+        if tag not in self.VOID:
+            self.handle_endtag(tag)
+
+    def handle_endtag(self, tag):
+        if self.skip_depth:
+            if tag == self.skip_tag:
+                self.skip_depth -= 1
+            return
+        if tag in self.VOID or not any(f["tag"] == tag for f in self.stack[1:]):
+            return
+        while True:
+            f = self.stack.pop()
+            self.close(f)
+            if f["tag"] == tag:
+                break
+
+    def handle_data(self, data):
+        if not self.skip_depth:
+            self.out(data if self.pre else re.sub(r"\s+", " ", data))
+
+    @staticmethod
+    def flat(s: str) -> str:
+        return re.sub(r"\s+", " ", s).strip()
+
+    def close(self, f: dict) -> None:
+        t, tag, cls = "".join(f["buf"]), f["tag"], f["cls"]
+        parent = self.stack[-1]
+        if tag == "pre":
+            self.pre -= 1
+            lang = f["a"].get("data-lang", "")
+            self.out(f"\n\n```{'' if lang in ('', 'text') else lang}\n{t.strip(chr(10))}\n```\n\n")
+        elif self.pre:
+            self.out(t)                                             # spans inside a code block: text only
+        elif tag in ("strong", "b"):
+            self.out_inline(f"**{t.strip()}**" if t.strip() else t)
+        elif tag in ("em", "i"):
+            self.out_inline(f"*{t.strip()}*" if t.strip() else t)
+        elif tag == "code":
+            self.out(f"`{t.strip()}`")
+        elif tag == "a":
+            href, text = f["a"].get("href", ""), t.strip()
+            self.out_inline(f"[{text}]({self.url(href)})" if href and text else t)
+        elif tag in ("h2", "h3", "h4", "h5"):
+            self.out(f"\n\n{'#' * int(tag[1])} {self.flat(t)}\n\n")
+        elif tag == "p":
+            text = self.flat(t)
+            if text:
+                self.out(f"\n\n**{text}**\n\n" if cls & self.BOLD_P and "**" not in text else f"\n\n{text}\n\n")
+        elif tag == "figcaption":
+            if self.flat(t):
+                self.out(f"\n\n*{self.flat(t)}*\n\n")
+        elif tag == "li":
+            body = re.sub(r"\n\s*\n+", "\n", t.strip())
+            parent["n"] += 1
+            mark = f"{parent['n']}. " if parent["tag"] == "ol" else "- "
+            lines = body.split("\n")
+            self.out("\n" + mark + lines[0] + "".join("\n" + " " * len(mark) + ln for ln in lines[1:]))
+        elif tag in ("ol", "ul", "dl"):
+            self.out("\n\n" + t.strip("\n") + "\n\n")
+        elif tag == "dt":
+            self.out(f"\n- **{self.flat(t)}:** ")
+        elif tag == "dd":
+            self.out(self.flat(t))
+        elif tag == "aside":
+            body = re.sub(r"\n{3,}", "\n\n", t.strip())
+            self.out("\n\n" + "\n".join("> " + ln if ln else ">" for ln in body.split("\n")) + "\n\n")
+        elif tag in ("td", "th"):
+            parent["cells"].append(self.flat(t).replace("|", "\\|"))
+        elif tag == "tr":
+            table = next((g for g in reversed(self.stack) if g["tag"] == "table"), None)
+            if table is not None:
+                table["rows"].append(f["cells"])
+        elif tag == "table":
+            rows = f["rows"]
+            if rows:
+                md = ["| " + " | ".join(r) + " |" for r in rows]
+                md.insert(1, "|" + "---|" * len(rows[0]))
+                self.out("\n\n" + "\n".join(md) + "\n\n")
+        elif tag in ("thead", "tbody"):
+            pass
+        elif "sample-tag" in cls:                                   # a clip's "Example" / "Sample" tag
+            self.out(f"{self.flat(t)}: ")
+        elif tag in ("div", "figure", "section", "details", "summary", "blockquote"):
+            self.out("\n\n" + t + "\n\n")
+        else:
+            self.out_inline(t)
+
+    def markdown(self) -> str:
+        while len(self.stack) > 1:
+            self.close(self.stack.pop())
+        s = "".join(self.stack[0]["buf"])
+        s = re.sub(r"[ \t]+\n", "\n", s)
+        s = re.sub(r"\n (?=\S)", "\n", s)                     # one stray space from the whitespace between blocks
+        return re.sub(r"\n{3,}", "\n\n", s).strip() + "\n"
+
+
+def page_markdown(slug: str, p: dict) -> str:
+    conv = _Markdown(url_for(slug))
+    conv.feed(p["body"])
+    title = p["title"] + (" (in progress)" if p["pending"] else "")
+    return f"# {title}\n\nURL: {SITE}{url_for(slug)}\n\n> {p['description']}\n\n{conv.markdown()}"
+
+
+LLMS_SUMMARY = ("FlexiTac is an open-source, full-stack platform for tactile robotics: flexible, low-cost tactile "
+                "sensors (FPC-based, 32 x 12 taxels per pad), their reading boards and firmware, Python tools, "
+                "real-robot data collection and robot learning with touch, and tactile simulation in NVIDIA Isaac Sim.")
+LLMS_LINKS = [
+    ("FlexiTac homepage", "/", "the paper, videos and the community timeline"),
+    ("FlexiTac-Gen", "/flexitac-gen/", "generate custom sensor FPCs for your own gripper or fingertip"),
+    ("Hardware repository", "https://github.com/FlexiTac/FlexiTac", "Gerber files, firmware and the bill of materials"),
+    ("PyFlexiTac", "https://github.com/WT-MM/PyFlexiTac", "the Python package (pip install flexitac)"),
+    ("FlexiTac-IsaacSim-Simulation", "https://github.com/binghao-huang/FlexiTac-IsaacSim-Simulation",
+     "tactile simulation in Isaac Sim 6.2 / Isaac Lab 3.0"),
+    ("LeFlexiTac", "https://tna001-ai.github.io/LeFlexiTac/docs.html", "FlexiTac on LeRobot SO-100/101 arms"),
+    ("Awesome FlexiTac", "https://binghao-huang.github.io/Awesome-FlexiTac/", "papers and projects that use FlexiTac"),
+]
+
+
+def llms_files(pages: dict, built: list[str]) -> tuple[str, str]:
+    def entry(s: str) -> str:
+        p = pages[s]
+        return f"- [{p['title']}]({SITE}{url_for(s)}){' (in progress)' if p['pending'] else ''}: {p['description']}"
+    idx = [f"# FlexiTac\n\n> {LLMS_SUMMARY}\n",
+           f"The FlexiTac Developer Handbook is at {SITE}{BASE}. Every page is static HTML. The full text of all of "
+           f"them, as Markdown, is at {SITE}/llms-full.txt.\n"]
+    for group, entries in NAV:
+        slugs = nav_slugs(entries)
+        if slugs:
+            idx.append(f"## {group}\n\n" + "\n".join(entry(s) for s in slugs) + "\n")
+    idx.append("## Reference\n\n" + "\n".join(entry(s) for s in UNLISTED) + "\n")
+    idx.append("## Optional\n\n" + "\n".join(f"- [{n}]({SITE + u if u.startswith('/') else u}): {d}"
+                                             for n, u, d in LLMS_LINKS) + "\n")
+    full = (f"# FlexiTac Developer Handbook: full text\n\n> {LLMS_SUMMARY}\n\nEvery page of {SITE}{BASE} as Markdown, "
+            f"in sidebar order (the reference pages last). The page index is {SITE}/llms.txt.\n\n")
+    full += "\n\n---\n\n".join(page_markdown(s, pages[s]) for s in built)
+    return "\n".join(idx), full
+
+
 def build(check: bool = False) -> int:
     order = [s for _, entries in NAV for s in nav_slugs(entries)]
     built = order + [u for u in UNLISTED if u not in order]
@@ -886,6 +1085,7 @@ def build(check: bool = False) -> int:
     urls = "".join(f"  <url><loc>{SITE}{url_for(s)}</loc><lastmod>{pages[s]['updated']}</lastmod></url>\n" for s in built)
     outputs[DOC / "sitemap.xml"] = ('<?xml version="1.0" encoding="UTF-8"?>\n'
                                     '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + urls + "</urlset>\n")
+    outputs[REPO / "llms.txt"], outputs[REPO / "llms-full.txt"] = llms_files(pages, built)
 
     # Internal link check: every /doc/... link and #anchor must resolve.
     anchors = {url_for(s): {h[1] for h in pages[s]["toc"]} | set(re.findall(r'id="([^"]+)"', pages[s]["body"])) | {"_top"} for s in built}

@@ -44,6 +44,12 @@ internal link, anchor or image is broken. Run it before opening a pull request.
 `build.py` also writes `doc/sitemap.xml` with every page. The site's `/robots.txt` allows all
 crawlers and points them to it, so search engines find the docs even without a homepage link.
 
+For AI agents it also writes two files at the site root, following [llmstxt.org](https://llmstxt.org):
+`/llms.txt` lists every page with its description, and `/llms-full.txt` holds all pages as
+Markdown, converted from the rendered HTML (`_Markdown` in build.py). The summary and the outside
+links in `llms.txt` are `LLMS_SUMMARY` and `LLMS_LINKS`. There are no per-page `.md` copies:
+GitHub Pages runs Jekyll, which would render an `index.md` over the page's `index.html`.
+
 ## Markdown you can use
 
 Standard Markdown (`##`/`###` headings, lists, tables, links, images, fenced code), plus:

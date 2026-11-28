@@ -1,0 +1,44 @@
+# FlexiTac
+
+> FlexiTac is an open-source, full-stack platform for tactile robotics: flexible, low-cost tactile sensors (FPC-based, 32 x 12 taxels per pad), their reading boards and firmware, Python tools, real-robot data collection and robot learning with touch, and tactile simulation in NVIDIA Isaac Sim.
+
+The FlexiTac Developer Handbook is at https://flexitac.github.io/doc/. Every page is static HTML. The full text of all of them, as Markdown, is at https://flexitac.github.io/llms-full.txt.
+
+## Get Started
+
+- [Build with FlexiTac](https://flexitac.github.io/doc/): An open-source platform for tactile robotics, from flexible sensor design to robot learning.
+- [Quickstart](https://flexitac.github.io/doc/get-started/): The whole path from ordering parts to a live tactile heatmap, with time, cost and the commands you'll run.
+- [Order parts](https://flexitac.github.io/doc/get-started/order-parts/): Design files, the bill of materials, and the manufacturer settings for the FPCs and the reading board.
+- [Fabricate a sensor](https://flexitac.github.io/doc/get-started/fabricate/): Turn two FPCs, a piece of Velostat and some tape into a working FlexiTac-V2 sensor in under three minutes.
+- [Stream the sensor](https://flexitac.github.io/doc/get-started/stream/): Flash the reading board from the Arduino IDE, then watch a live heatmap follow your finger. That's a working sensor.
+- [Troubleshooting & FAQ](https://flexitac.github.io/doc/get-started/troubleshooting/): Find your symptom, then work through the checks from most to least likely.
+- [Next steps](https://flexitac.github.io/doc/get-started/next-steps/): Learn on a real robot or in simulation, customize the sensor, and share and cite what you build.
+
+## Learning with FlexiTac
+
+- [Data collection](https://flexitac.github.io/doc/robot-learning/data-collection/): Two ways to record touch together with vision and actions, by teleoperation or with a handheld UMI gripper.
+- [Tactile representation](https://flexitac.github.io/doc/robot-learning/tactile-representation/): Give touch to a policy as a 2D map per pad, or as 3D tactile points in one point cloud with the camera's, shown on a simulated two-armed demonstration.
+- [Imitation learning with touch](https://flexitac.github.io/doc/robot-learning/imitation-learning/) (in progress): ACT and Diffusion Policy.
+- [VLA with touch](https://flexitac.github.io/doc/robot-learning/vla/) (in progress): Integrating touch into VLA models.
+- [Reinforcement learning with touch](https://flexitac.github.io/doc/robot-learning/reinforcement-learning/) (in progress): Tactile simulation and sim-to-real refinement.
+- [Pretraining with touch](https://flexitac.github.io/doc/robot-learning/pretraining/) (in progress): Learning tactile representations from large datasets.
+- [World models with touch](https://flexitac.github.io/doc/robot-learning/world-models/) (in progress): Predicting contact and its effects.
+
+## FlexiTac in Simulation
+
+- [Tactile simulation](https://flexitac.github.io/doc/simulation/): Simulate FlexiTac pads in NVIDIA Isaac Sim, then replay tactile trajectories and record visuo-tactile demonstrations in the browser. Plus VT-Refine, the sim fine-tuning research behind it.
+
+## Reference
+
+- [All resources](https://flexitac.github.io/doc/resources/): Every repository, guide, design file, paper, dataset and tool these docs build on, in one place.
+- [PyFlexiTac](https://flexitac.github.io/doc/get-started/pyflexitac/): Use the sensor from Python with PyFlexiTac. Check the signal, read and record frames, run several sensors, flash from the command line, and read the wire protocol.
+
+## Optional
+
+- [FlexiTac homepage](https://flexitac.github.io/): the paper, videos and the community timeline
+- [FlexiTac-Gen](https://flexitac.github.io/flexitac-gen/): generate custom sensor FPCs for your own gripper or fingertip
+- [Hardware repository](https://github.com/FlexiTac/FlexiTac): Gerber files, firmware and the bill of materials
+- [PyFlexiTac](https://github.com/WT-MM/PyFlexiTac): the Python package (pip install flexitac)
+- [FlexiTac-IsaacSim-Simulation](https://github.com/binghao-huang/FlexiTac-IsaacSim-Simulation): tactile simulation in Isaac Sim 6.2 / Isaac Lab 3.0
+- [LeFlexiTac](https://tna001-ai.github.io/LeFlexiTac/docs.html): FlexiTac on LeRobot SO-100/101 arms
+- [Awesome FlexiTac](https://binghao-huang.github.io/Awesome-FlexiTac/): papers and projects that use FlexiTac
