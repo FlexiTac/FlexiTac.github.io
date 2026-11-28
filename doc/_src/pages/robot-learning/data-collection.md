@@ -6,8 +6,8 @@ description: Two ways to record touch together with vision and actions, by teleo
 A tactile demonstration records what the sensor feels, what the camera sees and what the gripper does, all at the same moments. There are two ways to collect one.
 
 <div class="modes">
-<a class="mode" href="#teleoperation"><img src="/static/images/lerobot.jpg" alt="A FlexiTac sensor on the moving jaw of an SO-101 arm, with its flat cable" width="635" height="635" loading="lazy"><span class="mode-body"><span class="mode-title">Teleoperation</span><span class="mode-text">Drive a robot arm and record from the robot itself. One sensor, on the moving jaw.</span></span></a>
-<a class="mode" href="#umi"><img src="/static/images/umi.jpg" alt="The Touch in the Wild handheld gripper: a GoPro fish-eye camera on top, a FlexiTac sensor on each orange soft finger, and the reading boards" width="897" height="900" loading="lazy"><span class="mode-body"><span class="mode-title">UMI data</span><span class="mode-text">Hold the gripper and do the task yourself, anywhere, no robot needed. A sensor on each finger. Needs its own firmware.</span></span></a>
+<a class="mode" href="#teleoperation"><img src="/doc/assets/img/mode-teleop.webp" alt="Teleoperation with LeFlexiTac: the follower arm holds a pen it lifted from a bag, the screen shows its tactile map lit up, and on the right a hand drives the leader arm" width="960" height="720" loading="lazy"><span class="mode-body"><span class="mode-title">Teleoperation</span><span class="mode-text">Drive a robot arm and record from the robot itself. One sensor, on the moving jaw.</span></span></a>
+<a class="mode" href="#umi"><img src="/doc/assets/img/mode-umi.webp" alt="The Touch in the Wild handheld gripper: a GoPro fish-eye camera on top, a FlexiTac sensor on each orange soft finger, and the reading boards" width="960" height="720" loading="lazy"><span class="mode-body"><span class="mode-title">UMI data</span><span class="mode-text">Hold the gripper and do the task yourself, anywhere, no robot needed. A sensor on each finger. Needs its own firmware.</span></span></a>
 </div>
 
 :::cards
